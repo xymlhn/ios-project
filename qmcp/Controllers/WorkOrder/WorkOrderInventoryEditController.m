@@ -61,8 +61,10 @@
 
 -(void)loadData
 {
-    _itemSnapshot = [ItemSnapshot searchWithId:[super workOrderStepCode]];
-    _workOrder = [WorkOrder searchWithId:[super workOrderCode]];
+    NSString *itemWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderStepCode];
+    _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+   _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     if(_itemSnapshot.attachments != nil){
         _attachments = _itemSnapshot.attachments;
     }else{

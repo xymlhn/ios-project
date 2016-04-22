@@ -74,7 +74,8 @@
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    WorkOrder *workOrder = [WorkOrder searchWithId:[super workOrderCode]];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    WorkOrder *workOrder = [WorkOrder searchWithWhere:workWhere][0];
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
     [[WorkOrderManager getInstance]postWorkOrderStep:workOrder andStep:steps];

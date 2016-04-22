@@ -58,7 +58,8 @@
 
 -(void)loadData
 {
-    _workOrder = [WorkOrder searchWithId:[super workOrderCode]];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     [self setText:_workOrder];
 }
 

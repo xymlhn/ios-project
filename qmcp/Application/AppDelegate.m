@@ -10,7 +10,6 @@
 #import "UIColor+Util.h"
 #import "RootViewController.h"
 #import "Config.h"
-#import <Bugly/CrashReporter.h>
 #import "GisViewController.h"
 #import "WorkOrderManager.h"
 #import "LoginViewController.h"
@@ -26,8 +25,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     /************第三方插件配置 **************/
-    
-    [[CrashReporter sharedInstance] installWithAppId:@"900013853"];
+
 
     /************ 控件外观设置 **************/
     NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};

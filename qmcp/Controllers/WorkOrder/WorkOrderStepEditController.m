@@ -38,8 +38,11 @@
 
 -(void)loadData
 {
-    _step= [WorkOrderStep searchWithId:[super workOrderStepCode]];
-    _workOrder = [WorkOrder searchWithId:[super workOrderCode]];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
+    NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",super.workOrderStepCode];
+    _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
+
     _attachments = _step.attachments;
     if(!_attachments)
     {

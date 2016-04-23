@@ -111,14 +111,14 @@
     //[self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([self.delegate respondsToSelector:@selector(reportSignImage:)]) {
+        if (self.doneBlock) {
             UIImage *image = [_signView getSignatureImage];
             if(image){
-                [self.delegate reportSignImage:image];
+                self.doneBlock(image);
             }
         }
     });
-    
+
 }
 
 

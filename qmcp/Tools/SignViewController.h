@@ -8,16 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SignView<NSObject>
-
-- (void)reportSignImage:(UIImage *)image;
-
-@end
 @interface SignViewController : UIViewController
 
-/**
- *  代理方法传递数据
- */
-@property (nonatomic,weak)id <SignView>delegate;
+@property (copy, nonatomic) void(^doneBlock)(UIImage *signImage);
+
++ (instancetype) doneBlock:(void(^)(UIImage *signImage))block;
 
 @end

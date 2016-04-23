@@ -9,6 +9,7 @@
 #import "SideMenuCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
+#import "Header.h"
 @interface SideMenuCell()
 @property (strong, nonatomic)  UILabel *icon;
 @property (strong, nonatomic)  UILabel *content;

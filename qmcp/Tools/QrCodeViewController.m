@@ -124,14 +124,23 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
         //调用代理对象的协议方法来实现数据传递
         [self dismissViewControllerAnimated:YES completion:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self.delegate respondsToSelector:@selector(reportQrCodeResult:)]) {
-                [self.delegate reportQrCodeResult:result];
+            if (self.doneBlock) {
+                self.doneBlock(result);
             }
         });
     [self stopReading];
     }
     return;
 }
+
++(instancetype)doneBlock:(void (^)(NSString *))block{
+    
+    QrCodeViewController *vc = [[QrCodeViewController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
 - (void)createTimer
 {
     _timer=[NSTimer scheduledTimerWithTimeInterval:2.2 target:self selector:@selector(moveUpAndDownLine) userInfo:nil repeats:YES];
@@ -194,16 +203,6 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     labIntroudction.textColor=[UIColor whiteColor];
     labIntroudction.text=@"将二维码对准方框，即可自动扫描";
     [downView addSubview:labIntroudction];
-    
-    //取消button
-    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelButton.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:DARKCOLOR_ALPHA];
-    cancelButton.frame =CGRectMake(0, 90, VIEW_WIDTH, 40);
-    cancelButton.titleLabel.font =[UIFont systemFontOfSize:15.0];
-    cancelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-    [cancelButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
-    [downView addSubview:cancelButton];
     
     //用于开关灯操作的button
     _lightButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -284,11 +283,6 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     }
 }
 
-//取消button
-- (void)cancelAction{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

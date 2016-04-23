@@ -18,7 +18,7 @@
 #import "WorkOrderManager.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
-@interface SideMenuController ()<QrCodeImageView,ScanImageView>
+@interface SideMenuController ()
 
 @end
 
@@ -72,18 +72,21 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch (indexPath.row) {
         case 0: {
             if([Config getQuickScan]){
-                ScanViewController *scanViewController =  [ScanViewController new];
-                scanViewController.delegate = self;
+                ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
+                    [weakSelf handleResult:textValue];
+                }];
                 [self setContentViewController:scanViewController];
             }else{
-                QrCodeViewController *qrCodeViewController = [QrCodeViewController new];
-                qrCodeViewController.delegate = self;
-                [self presentViewController:qrCodeViewController animated:YES completion:nil];
+                QrCodeViewController *qrCodeViewController = [QrCodeViewController doneBlock:^(NSString *textValue) {
+                    [weakSelf handleResult:textValue];
+                }];
+                [self setContentViewController:qrCodeViewController];
             }
             break;
         }

@@ -60,14 +60,10 @@
     
     _scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)
     {
-        //调用代理对象的协议方法来实现数据传递
-        //[self dismissViewControllerAnimated:YES completion:nil];
         [self.navigationController popViewControllerAnimated:YES];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self.delegate respondsToSelector:@selector(reportScanResult:)]) {
-                [self.delegate reportScanResult:_scanText.text];
-            }
-        });
+        if (self.doneBlock) {
+            self.doneBlock(_scanText.text);
+        }
         
         return [RACSignal empty];
     }];
@@ -88,4 +84,11 @@
     return text.length > 0;
 }
 
++(instancetype)doneBlock:(void (^)(NSString *))block{
+    
+    ScanViewController *vc = [[ScanViewController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
 @end

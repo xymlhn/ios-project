@@ -8,18 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol QrCodeImageView<NSObject>
-
-- (void)reportQrCodeResult:(NSString *)result;
-
-@end
-
 @interface QrCodeViewController : UIViewController
 
-/**
- *  代理方法传递数据
- */
-@property (nonatomic,weak)id <QrCodeImageView>delegate;
+@property (copy, nonatomic) void(^doneBlock)(NSString *textValue);
 
++ (instancetype) doneBlock:(void(^)(NSString *textValue))block;
 
 @end

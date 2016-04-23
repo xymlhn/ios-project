@@ -18,8 +18,7 @@
 #import "SignViewController.h"
 #import "Attachment.h"
 #import "Utils.h"
-@interface WorkOrderInventoryController ()<UITableViewDataSource,UITableViewDelegate,
-                                            QrCodeImageView,ScanImageView,SignView>
+@interface WorkOrderInventoryController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *itemSnapshotList;
 @property WorkOrderInventoryView *inventoryView;
@@ -53,24 +52,26 @@
 }
 - (void)addBtnClick:(UITapGestureRecognizer *)recognizer
 {
+    __weak typeof(self) weakSelf = self;
     if([Config getQuickScan]){
-        ScanViewController *info = [ScanViewController new];
-        info.hidesBottomBarWhenPushed = YES;
-        info.delegate = self;
-        [self.navigationController pushViewController:info animated:YES];
+        ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
+            [weakSelf handleResult:textValue];
+        }];
+        [self.navigationController pushViewController:scanViewController animated:YES];
     }else{
-        QrCodeViewController *info = [QrCodeViewController new];
-        info.hidesBottomBarWhenPushed = YES;
-        info.delegate = self;
-        [self presentViewController:info animated:YES completion:nil];
+        QrCodeViewController *info = [QrCodeViewController doneBlock:^(NSString *textValue) {
+            [weakSelf handleResult:textValue];
+        }];
+        [self.navigationController pushViewController:info animated:YES];
     }
 }
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    SignViewController *signController = [SignViewController new];
-    signController.hidesBottomBarWhenPushed = YES;
-    signController.delegate = self;
+     __weak typeof(self) weakSelf = self;
+    SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
+        [weakSelf reportSignImage:signImage];
+    }];
     [self.navigationController pushViewController:signController animated:YES];
     
 }
@@ -90,17 +91,6 @@
         attachment.path = [Utils saveImage:image andName:attachment.key];
         [attachment saveToDB];
     }
-}
-
-#pragma mark code
-- (void)reportQrCodeResult:(NSString *)result
-{
-    [self handleResult:result];
-}
-
-- (void)reportScanResult:(NSString *)result
-{
-    [self handleResult:result];
 }
 
 -(void)handleResult:(NSString *)result

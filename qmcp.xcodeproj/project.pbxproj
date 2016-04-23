@@ -220,6 +220,7 @@
 		24948B411CC2375900DE8946 /* SalesOrderBind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderBind.m; sourceTree = "<group>"; };
 		24986CD21CC3202100CE0CB5 /* SalesOrderConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderConfirm.h; sourceTree = "<group>"; };
 		24986CD31CC3202100CE0CB5 /* SalesOrderConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderConfirm.m; sourceTree = "<group>"; };
+		24992CFC1CCB1F7800CFF9BD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		24A2B4451CB4EDB3006E29DB /* PJRSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJRSignatureView.h; sourceTree = "<group>"; };
 		24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJRSignatureView.m; sourceTree = "<group>"; };
 		24A2B4481CB4F725006E29DB /* WorkOrderInventoryEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryEditController.h; sourceTree = "<group>"; };
@@ -515,6 +516,7 @@
 				244517AF1CA03F400085CC16 /* AppDelegate.h */,
 				244517B01CA03F400085CC16 /* AppDelegate.m */,
 				244517B11CA03F400085CC16 /* OSCAPI.h */,
+				24992CFC1CCB1F7800CFF9BD /* Header.h */,
 			);
 			path = Application;
 			sourceTree = "<group>";

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface SideMenuCell : UITableViewCell
 
 /**
@@ -19,4 +18,5 @@
 -(void)setContent:(NSString *)content andIcon:(NSString *)icon;
 
 + (instancetype)SideMenuCellWithTableView:(UITableView *)tableView;
+
 @end

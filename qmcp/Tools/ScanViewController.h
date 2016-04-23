@@ -8,17 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol ScanImageView<NSObject>
-
-- (void)reportScanResult:(NSString *)result;
-
-@end
-
 @interface ScanViewController : UIViewController
 
-/**
- *  代理方法传递数据
- */
-@property (nonatomic,weak)id <ScanImageView>delegate;
+@property (copy, nonatomic) void(^doneBlock)(NSString *textValue);
+
++ (instancetype) doneBlock:(void(^)(NSString *textValue))block;
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "SettingViewCell.h"
+#import "Header.h"
 
 @implementation SettingViewCell
 
@@ -45,14 +46,14 @@
     [self.contentView addSubview:_jsText];
     [_jsText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.left.equalTo(self.contentView.mas_left).with.offset(10);
+        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
     }];
     
     _jsSwitch = [UISwitch new];
     [self.contentView addSubview:_jsSwitch];
     [_jsSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
     }];
 }
 

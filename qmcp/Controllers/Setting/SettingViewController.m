@@ -13,8 +13,6 @@
 
 @property(nonatomic,strong)UITableView *tableView;
 
-@property(nonatomic,strong)NSArray *switchArr;
-@property (nonatomic, copy) NSArray *contentArr;
 @end
 
 @implementation SettingViewController
@@ -23,16 +21,13 @@
 -(void)initView
 {
     _tableView = [UITableView new];
-    _tableView.rowHeight = 100;
-    _tableView.separatorStyle = NO;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor themeColor];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.view.backgroundColor = [UIColor colorWithWhite:0.918 alpha:1.000];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.view.mas_top).with.offset(0);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-40);
+        make.edges.equalTo(self.view);
     }];
 }
 -(void)bindListener
@@ -42,16 +37,25 @@
 }
 -(void)loadData
 {
-    _switchArr = @[[NSNumber numberWithBool:[Config getSound]],[NSNumber numberWithBool:[Config getVibre]]
-                   ,[NSNumber numberWithBool:[Config getQuickScan]]];
-    
-    _contentArr = @[@"声音",@"震动",@"快速扫描"];
+                                                                                                                       
 }
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 3;
+#pragma mark TableM
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSInteger row = 0;
+    switch (section) {
+        case 0:
+            row = 2;
+            break;
+        case 1:
+            row = 1;
+            break;
+    }
+    return row;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,14 +63,41 @@
     return 45;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, 20)];
+    headerView.backgroundColor = [UIColor colorWithWhite:0.918 alpha:1.000];
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SettingViewCell *cell = [SettingViewCell cellWithTableView:tableView];
     cell.backgroundColor = [UIColor clearColor];
-    NSInteger row = indexPath.row;
-    [cell initSetting:[_switchArr[row] boolValue] andText:_contentArr[row]];
-    cell.jsSwitch.tag = row;
+    switch (indexPath.section) {
+        case 0:
+            switch (indexPath.row) {
+                case 0:
+                    [cell initSetting:[Config getSound] andText:@"声音"];
+                    
+                    break;
+                case 1:
+                    [cell initSetting:[Config getSound] andText:@"震动"];
+                    break;
+            }
+            break;
+        case 1:
+           [cell initSetting:[Config getSound] andText:@"快速扫描"];
+            break;
+    }
+
+    cell.jsSwitch.tag = indexPath.section * 10 + indexPath.row;
     [cell.jsSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 -(void)switchAction:(id)sender
@@ -80,7 +111,7 @@
         case 1:
             [Config setVibre:switchButton.on];
             break;
-        case 2:
+        case 10:
             [Config setQuickScan:switchButton.on];
             break;
         default:

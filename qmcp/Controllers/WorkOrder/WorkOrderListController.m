@@ -16,6 +16,8 @@
 #import "WorkOrderListCell.h"
 #import "Masonry.h"
 #import "Config.h"
+#import "Header.h"
+#import "UITableView+Common.h"
 @interface WorkOrderListController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *workOrderList;
 @property (nonatomic, assign) WorkOrderStatus status;
@@ -50,10 +52,7 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.view.mas_top).with.offset(-10);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.bottom.equalTo(self.view.mas_bottom);
+        make.edges.equalTo(self.view);
     }];
     
     //注册通知
@@ -111,6 +110,7 @@
     cell.topView.tag = row;
     [cell.middleView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
     [cell.topView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
+    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
     //3 返回
     return cell;
 }

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PchHeader.h"
+#import "UITableView+Common.h"
 @interface BaseViewController : UIViewController
 
 @end

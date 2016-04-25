@@ -78,49 +78,23 @@
     }];
 }
 
--(void)login:(UIViewController *)viewController userName:(NSString *)userName password:(NSString *)password{
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在登录";
-    hub.userInteractionEnabled = NO;
-
-    
+-(void)login:(NSString *)userName password:(NSString *)password andBlock:(void (^)(id data, NSError *error))block{
     // 请求参数
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
     [manager POST:URLString parameters:dic progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
-        // 字典转模型
-        CZAccount *account = [CZAccount accountWithDict:responseObject];
-        if(account.isAuthenticated){
-            [Config saveOwnAccount:userName andPassword:password];
-            [Config saveLoginStatus:true];
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"登录成功"];
-            [hub hide:YES afterDelay:0.2];
-            UIStoryboard *discoverSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            RootViewController *discoverNav = [discoverSB instantiateViewControllerWithIdentifier:@"Nav"];
-            [viewController presentViewController:discoverNav animated:YES completion:nil];
-        }else{
-            
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = [NSString stringWithFormat:@"账号或密码错误"];
-            
-            [hub hide:YES afterDelay:1];
-        }
+        
+        block(responseObject,nil);
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
-        hub.mode = MBProgressHUDModeCustomView;
-        hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-        hub.labelText = [NSString stringWithFormat:@"网络错误"];
-        [hub hide:YES afterDelay:1];
+        
+        block(nil,error);
     }];
 }
 
 
--(void) logout:(UIViewController *)viewController
+-(void) logoutWithBlock:(void (^)(NSDictionary *data, NSError *error))block
 {
 
     // 请求参数
@@ -129,34 +103,23 @@
     
     [HttpUtil post:URLString param:dic finish:^(NSDictionary *obj, NSError *error) {
         if (error == nil) {
-            [Config setInitSetting];
-            LoginViewController *loginNav = [LoginViewController new];
-            [viewController presentViewController:loginNav animated:YES completion:nil];
+            block(obj,nil);
 
         }else{
-             NSLog(@"登出失败!!!");
+            block(nil,error);
         }
     }];
 }
 
--(void) getServerTime
+-(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSError *error))block
 {
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在对比服务器时间";
-    hub.userInteractionEnabled = NO;
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SERVER_TIME];
-
-
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
         if (error == nil) {
-            NSLog(@"fuck");
-            [hub hide:YES];
+            block(obj,nil);
         }else{
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = [NSString stringWithFormat:@"错误：%@",@"fuck"];
-            [hub hide:YES afterDelay:1];;
+            block(nil,error);
         }
     }];
 }

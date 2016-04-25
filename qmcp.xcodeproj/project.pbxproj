@@ -215,6 +215,7 @@
 		248A5DBE1C85C3C30095A4FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		248A5DC11C85C3C30095A4FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		248A5DC31C85C3C30095A4FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		248E2A4B1CCE482E00D72459 /* PchHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PchHeader.h; sourceTree = "<group>"; };
 		248EA7A51CAF873000B4D775 /* WorkOrderStepEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepEditController.h; sourceTree = "<group>"; };
 		248EA7A61CAF873000B4D775 /* WorkOrderStepEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepEditController.m; sourceTree = "<group>"; };
 		24902D741CC3882D00607659 /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
@@ -227,8 +228,6 @@
 		24948B411CC2375900DE8946 /* SalesOrderBind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderBind.m; sourceTree = "<group>"; };
 		24986CD21CC3202100CE0CB5 /* SalesOrderConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderConfirm.h; sourceTree = "<group>"; };
 		24986CD31CC3202100CE0CB5 /* SalesOrderConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderConfirm.m; sourceTree = "<group>"; };
-		24992CFC1CCB1F7800CFF9BD /* PchHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PchHeader.h; sourceTree = "<group>"; };
-		24992CFC1CCB1F7800CFF9BD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		2499B85D1CCB9D3D003FC604 /* UITableView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Common.h"; sourceTree = "<group>"; };
 		2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Common.m"; sourceTree = "<group>"; };
 		24A2B4451CB4EDB3006E29DB /* PJRSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJRSignatureView.h; sourceTree = "<group>"; };
@@ -552,10 +551,10 @@
 		24F135241C86979C00645F92 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				248E2A4B1CCE482E00D72459 /* PchHeader.h */,
 				244517AF1CA03F400085CC16 /* AppDelegate.h */,
 				244517B01CA03F400085CC16 /* AppDelegate.m */,
 				244517B11CA03F400085CC16 /* OSCAPI.h */,
-				24992CFC1CCB1F7800CFF9BD /* PchHeader.h */,
 			);
 			path = Application;
 			sourceTree = "<group>";

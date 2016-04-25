@@ -43,10 +43,6 @@
    
     /************ 登录状态设置 **************/
     if (![Config getLoginStatus]) {
-        //UIStoryboard *login = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-       // LoginViewController *loginNav = [login instantiateViewControllerWithIdentifier:@"Nav"];
-       // LoginViewController *loginNav = [LoginViewController new];
-       // self.window.rootViewController= loginNav;
         IntroductionViewController *intro = [IntroductionViewController new];
         self.window.rootViewController = intro;
         

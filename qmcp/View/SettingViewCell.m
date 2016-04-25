@@ -7,7 +7,7 @@
 //
 
 #import "SettingViewCell.h"
-#import "Header.h"
+#import "PchHeader.h"
 
 @implementation SettingViewCell
 

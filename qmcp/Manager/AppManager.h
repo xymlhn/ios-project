@@ -18,7 +18,7 @@
  *
  *  @param viewController 当前控制器
  */
--(void) logout:(UIViewController *)viewController;
+-(void) logoutWithBlock:(void (^)(NSDictionary *data, NSError *error))block;
 /**
  *  系统登入
  *
@@ -26,9 +26,9 @@
  *  @param userName       用户名
  *  @param password       密码
  */
--(void) login:(UIViewController *)viewController userName:(NSString *)userName password:(NSString *)password;
+-(void) login:(NSString *)userName password:(NSString *)password andBlock:(void (^)(id data, NSError *error))block;
 
--(void) getServerTime;
+-(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSError *error))block;
 
 -(BOOL) handleHeader:(NSURLSessionDataTask *) session;
 

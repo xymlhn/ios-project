@@ -12,6 +12,9 @@
 #import "Config.h"
 #import "AppManager.h"
 #import "SettingViewController.h"
+#import "Utils.h"
+#import "RootViewController.h"
+#import "CZAccount.h"
 @interface LoginViewController ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property LoginView *loginView;
@@ -157,7 +160,39 @@
 {
     NSString *username = _loginView.userNameText.text;
     NSString *password = _loginView.passWordText.text;
-    [[AppManager getInstance] login:self userName:username password:password];
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在登录";
+    hub.userInteractionEnabled = NO;
+    
+    [[AppManager getInstance] login:username password:password andBlock:^(id data, NSError *error) {
+        if(!error){
+            // 字典转模型
+            CZAccount *account = [CZAccount accountWithDict:data];
+            if(account.isAuthenticated){
+                [Config saveOwnAccount:username andPassword:password];
+                [Config saveLoginStatus:true];
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.labelText = [NSString stringWithFormat:@"登录成功"];
+                [hub hide:YES afterDelay:0.2];
+                UIStoryboard *discoverSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                RootViewController *discoverNav = [discoverSB instantiateViewControllerWithIdentifier:@"Nav"];
+                [self presentViewController:discoverNav animated:YES completion:nil];
+            }else{
+                
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.labelText = [NSString stringWithFormat:@"账号或密码错误"];
+                
+                [hub hide:YES afterDelay:1];
+            }
+        }else{
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = [NSString stringWithFormat:@"网络错误"];
+            [hub hide:YES afterDelay:1];
+        }
+    }];
 }
 
 @end

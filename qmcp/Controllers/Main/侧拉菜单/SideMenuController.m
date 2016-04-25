@@ -18,6 +18,7 @@
 #import "WorkOrderManager.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
+#import "Utils.h"
 @interface SideMenuController ()
 
 @end
@@ -102,7 +103,15 @@
             break;
         }
         case 3: {
-            [[AppManager getInstance] logout:self];
+            [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSError *error) {
+                if(!error){
+                    [Config setInitSetting];
+                    LoginViewController *loginNav = [LoginViewController new];
+                    [self presentViewController:loginNav animated:YES completion:nil];
+                }else{
+                    [Utils showHudTipStr:@"登出失败！"];
+                }
+            }];
             break;
         }
         default: break;

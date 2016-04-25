@@ -30,14 +30,6 @@
     [self loadData];
     
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    if(_isBack)
-    {
-        [self reloadView];
-    }
-    _isBack = true;
-}
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -56,7 +48,5 @@
 }
 
 -(void)saveData{}
-
--(void)reloadView{};
 
 @end

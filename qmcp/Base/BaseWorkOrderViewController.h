@@ -14,6 +14,6 @@
 
 @property(nonatomic, copy) NSString *workOrderCode;
 @property (nonatomic,copy) NSString *workOrderStepCode;
-@property (nonatomic, assign) bool isBack;
+@property (nonatomic, assign) bool isDelete;
 
 @end

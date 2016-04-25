@@ -9,7 +9,6 @@
 #import "WorkOrderStepEditController.h"
 #import "QuartzCore/QuartzCore.h"
 #import "UIColor+Util.h"
-#import "WorkOrderStep.h"
 #import "NSObject+LKDBHelper.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "Attachment.h"
@@ -72,7 +71,13 @@
     [self.view addGestureRecognizer:gesture];
 }
 
-
++(instancetype)doneBlock:(void (^)(WorkOrderStep *,bool isDelete))block{
+    
+    WorkOrderStepEditController *vc = [[WorkOrderStepEditController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
 
 -(void)deleteAttachment:(Attachment *)attachment
 {
@@ -101,8 +106,16 @@
 
 -(void)saveData
 {
-    _step.content = _editView.editText.text;
-    [_step updateToDB];
+    if (self.doneBlock) {
+        if(![super isDelete]){
+            _step.content = _editView.editText.text;
+            if([_step updateToDB]){
+                self.doneBlock(_step,[super isDelete]);
+            }
+        }else{
+            self.doneBlock(_step,[super isDelete]);
+        }
+    }
 }
 
 #pragma mark - click
@@ -132,12 +145,13 @@
 
 - (void)delBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    [_step deleteToDB];
-    
-    for (Attachment *attachment in _attachments) {
-        [self deleteAttachment:attachment];
+    if([_step deleteToDB]){
+        for (Attachment *attachment in _attachments) {
+            [self deleteAttachment:attachment];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        super.isDelete = YES;
     }
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UIImagePickerController

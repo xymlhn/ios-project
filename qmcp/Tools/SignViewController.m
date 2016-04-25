@@ -120,6 +120,12 @@
     });
 
 }
-
++(instancetype)doneBlock:(void (^)(UIImage *))block{
+    
+    SignViewController *vc = [[SignViewController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
 
 @end

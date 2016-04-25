@@ -49,11 +49,6 @@
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
 }
 
--(void)reloadView
-{
-    [self loadData];
-    [_stepView.tableView reloadData];
-}
 
 - (void)addBtnClick:(UITapGestureRecognizer *)recognizer
 {
@@ -65,9 +60,26 @@
     step.workOrderCode = [super workOrderCode];
     step.submitTime = [Utils formatDate:[NSDate new]];
     [step saveToDB];
-    WorkOrderStepEditController *info = [WorkOrderStepEditController new];
+    [self pushToWorkOrderStepEditController:step.id];
+}
+
+-(void)pushToWorkOrderStepEditController:(NSString *)stepId
+{
+     __weak typeof(self) weakSelf = self;
+    WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, bool isDelete) {
+        if(!isDelete){
+            [weakSelf.workOrderStepList addObject:step];
+        }else{
+            for (WorkOrderStep *temp in _workOrderStepList) {
+                if([temp.id isEqualToString:step.id]){
+                     [weakSelf.workOrderStepList removeObject:temp];
+                }
+            }
+        }
+        [weakSelf.stepView.tableView reloadData];
+    }];
     info.workOrderCode = [super workOrderCode];
-    info.workOrderStepCode = step.id;
+    info.workOrderStepCode = stepId;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -119,13 +131,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 {
-    WorkOrderStepEditController *info = [WorkOrderStepEditController new];
     WorkOrderStep *step = self.workOrderStepList[indexPath.row];
-    info.workOrderCode = [super workOrderCode];
-    info.workOrderStepCode = step.id;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-
+    [self pushToWorkOrderStepEditController:step.id];
 }
 
 

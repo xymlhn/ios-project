@@ -7,7 +7,10 @@
 //
 
 #import "BaseWorkOrderViewController.h"
-
+#import "WorkOrderStep.h"
 @interface WorkOrderStepEditController : BaseWorkOrderViewController
 
+@property (copy, nonatomic) void(^doneBlock)(WorkOrderStep *step,bool isDelete);
+
++ (instancetype) doneBlock:(void(^)(WorkOrderStep *step,bool isDelete))block;
 @end

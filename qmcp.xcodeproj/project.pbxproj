@@ -25,6 +25,8 @@
 		240F88BB1CC76A2600138F10 /* CommodityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88BA1CC76A2600138F10 /* CommodityItem.m */; };
 		240F88BE1CC76AD400138F10 /* CommodityProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88BD1CC76AD400138F10 /* CommodityProperty.m */; };
 		240F88C11CC76B6700138F10 /* PropertyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88C01CC76B6700138F10 /* PropertyManager.m */; };
+		24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */; };
+		24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E231CCE07DF00CF93B6 /* SMPageControl.m */; };
 		2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */; };
 		244517611CA03E5B0085CC16 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445175E1CA03E5B0085CC16 /* AppManager.m */; };
 		244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517601CA03E5B0085CC16 /* WorkOrderManager.m */; };
@@ -130,6 +132,10 @@
 		240F88BD1CC76AD400138F10 /* CommodityProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityProperty.m; sourceTree = "<group>"; };
 		240F88BF1CC76B6700138F10 /* PropertyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyManager.h; sourceTree = "<group>"; };
 		240F88C01CC76B6700138F10 /* PropertyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyManager.m; sourceTree = "<group>"; };
+		24233E1E1CCE063D00CF93B6 /* IntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionViewController.h; sourceTree = "<group>"; };
+		24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewController.m; sourceTree = "<group>"; };
+		24233E221CCE07DF00CF93B6 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
+		24233E231CCE07DF00CF93B6 /* SMPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPageControl.m; sourceTree = "<group>"; };
 		2433412B1CAB9B5A00825112 /* WorkOrderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepController.h; sourceTree = "<group>"; };
 		2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepController.m; sourceTree = "<group>"; };
 		2445175D1CA03E5B0085CC16 /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
@@ -220,7 +226,7 @@
 		24948B411CC2375900DE8946 /* SalesOrderBind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderBind.m; sourceTree = "<group>"; };
 		24986CD21CC3202100CE0CB5 /* SalesOrderConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderConfirm.h; sourceTree = "<group>"; };
 		24986CD31CC3202100CE0CB5 /* SalesOrderConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderConfirm.m; sourceTree = "<group>"; };
-		24992CFC1CCB1F7800CFF9BD /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		24992CFC1CCB1F7800CFF9BD /* PchHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PchHeader.h; sourceTree = "<group>"; };
 		24A2B4451CB4EDB3006E29DB /* PJRSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJRSignatureView.h; sourceTree = "<group>"; };
 		24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJRSignatureView.m; sourceTree = "<group>"; };
 		24A2B4481CB4F725006E29DB /* WorkOrderInventoryEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryEditController.h; sourceTree = "<group>"; };
@@ -296,6 +302,24 @@
 				240F88B71CC7597500138F10 /* CommodityTableView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		24233E1D1CCE05F500CF93B6 /* Introduce */ = {
+			isa = PBXGroup;
+			children = (
+				24233E1E1CCE063D00CF93B6 /* IntroductionViewController.h */,
+				24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */,
+			);
+			path = Introduce;
+			sourceTree = "<group>";
+		};
+		24233E211CCE07DF00CF93B6 /* SMPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				24233E221CCE07DF00CF93B6 /* SMPageControl.h */,
+				24233E231CCE07DF00CF93B6 /* SMPageControl.m */,
+			);
+			path = SMPageControl;
 			sourceTree = "<group>";
 		};
 		2433412E1CAB9F2000825112 /* cell */ = {
@@ -431,6 +455,7 @@
 		24B0324F1C881E46007506DD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				24233E211CCE07DF00CF93B6 /* SMPageControl */,
 				240F889B1CC71E4700138F10 /* LewPopupViewAnimationDrop.h */,
 				240F889C1CC71E4700138F10 /* LewPopupViewAnimationDrop.m */,
 				240F889D1CC71E4700138F10 /* LewPopupViewAnimationFade.h */,
@@ -516,7 +541,7 @@
 				244517AF1CA03F400085CC16 /* AppDelegate.h */,
 				244517B01CA03F400085CC16 /* AppDelegate.m */,
 				244517B11CA03F400085CC16 /* OSCAPI.h */,
-				24992CFC1CCB1F7800CFF9BD /* Header.h */,
+				24992CFC1CCB1F7800CFF9BD /* PchHeader.h */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -524,6 +549,7 @@
 		24F135281C8697B100645F92 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				24233E1D1CCE05F500CF93B6 /* Introduce */,
 				24A685611CC4C72600663858 /* Help */,
 				24EAD1E71CC0D9E900444A9D /* SalesOrder */,
 				24AEEE291CBA8788003C6C2E /* Setting */,
@@ -804,6 +830,7 @@
 				246B0AC01CB4B3BF0017E956 /* WorkOrderInventoryCell.m in Sources */,
 				2445177F1CA03E760085CC16 /* CZAccount.m in Sources */,
 				24A2B4471CB4EDB3006E29DB /* PJRSignatureView.m in Sources */,
+				24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */,
 				244517C11CA03F870085CC16 /* BaseWorkOrderViewController.m in Sources */,
 				240F88BE1CC76AD400138F10 /* CommodityProperty.m in Sources */,
 				24EAD1F41CC0DF4300444A9D /* SalesOrderBindCell.m in Sources */,
@@ -852,6 +879,7 @@
 				24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */,
 				24F359801CB3BE4300C0950B /* PhotoCell.m in Sources */,
 				244517801CA03E760085CC16 /* ItemSnapshot.m in Sources */,
+				24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */,
 				24020A5A1CB7471C00D4EA96 /* WorkOrderStepView.m in Sources */,
 				246B0AC31CB4B66D0017E956 /* WorkOrderInventoryController.m in Sources */,
 				24948B421CC2375900DE8946 /* SalesOrderBind.m in Sources */,

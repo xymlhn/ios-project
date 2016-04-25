@@ -60,26 +60,44 @@
     step.workOrderCode = [super workOrderCode];
     step.submitTime = [Utils formatDate:[NSDate new]];
     [step saveToDB];
-    [self pushToWorkOrderStepEditController:step.id];
+    [self pushToWorkOrderStepEditController:step.id andType:SaveTypeAdd];
 }
 
--(void)pushToWorkOrderStepEditController:(NSString *)stepId
+-(void)pushToWorkOrderStepEditController:(NSString *)stepId andType:(SaveType)type
 {
      __weak typeof(self) weakSelf = self;
-    WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, bool isDelete) {
-        if(!isDelete){
-            [weakSelf.workOrderStepList addObject:step];
-        }else{
-            for (WorkOrderStep *temp in _workOrderStepList) {
-                if([temp.id isEqualToString:step.id]){
-                     [weakSelf.workOrderStepList removeObject:temp];
+    WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, SaveType type) {
+        
+        switch (type) {
+            case SaveTypeAdd:
+                [weakSelf.workOrderStepList addObject:step];
+                break;
+            case SaveTypeUpdate:
+                for (WorkOrderStep *temp in _workOrderStepList) {
+                    if([temp.id isEqualToString:step.id]){
+                        temp.content = step.content;
+                        temp.attachments = step.attachments;
+                        break;
+                    }
                 }
-            }
+
+                break;
+            case SaveTypeDelete:
+                for (WorkOrderStep *temp in _workOrderStepList) {
+                    if([temp.id isEqualToString:step.id]){
+                        [weakSelf.workOrderStepList removeObject:temp];
+                        break;
+                    }
+                }
+                break;
+            default:
+                break;
         }
         [weakSelf.stepView.tableView reloadData];
     }];
     info.workOrderCode = [super workOrderCode];
     info.workOrderStepCode = stepId;
+    info.type = type;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -132,7 +150,7 @@
 
 {
     WorkOrderStep *step = self.workOrderStepList[indexPath.row];
-    [self pushToWorkOrderStepEditController:step.id];
+    [self pushToWorkOrderStepEditController:step.id andType:SaveTypeUpdate];
 }
 
 

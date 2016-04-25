@@ -22,49 +22,21 @@
 #import "Utils.h"
 #import "PickupItemSignature.h"
 #import "Config.h"
-static WorkOrderManager *sharedObj = nil; //第一步：静态实例，并初始化。
+
 @interface WorkOrderManager()
 
 @property(nonatomic,strong)NSMutableArray *workOrders;
 
 @end
 @implementation WorkOrderManager
-+ (WorkOrderManager*) getInstance  //第二步：实例构造检查静态实例是否为nil
-{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        sharedObj = [[self alloc] init];
-    });
-    
-    return sharedObj;
-}
 
-+ (id) allocWithZone:(NSZone *)zone
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        sharedObj = [super allocWithZone:zone];
++ (WorkOrderManager *)getInstance {
+    static WorkOrderManager *shared_manager = nil;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        shared_manager = [[self alloc] init];
     });
-    return sharedObj;
-}
-- (id)init
-{
-    static id obj = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        if((obj = [super init]) != nil)
-        {
-           
-        }
-    });
-    self = obj;
-    
-    return self;
-}
-- (id) copyWithZone:(NSZone *)zone
-{
-    return sharedObj;
+    return shared_manager;
 }
 
 -(void)getAllWorkOrder:(NSString *)dateStr{

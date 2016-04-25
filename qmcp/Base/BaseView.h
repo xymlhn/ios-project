@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "Masonry.h"
 #import "UIColor+Util.h"
+#import "PchHeader.h"
 @interface BaseView : NSObject
 
 - (void)initView:(UIView *)rootView;

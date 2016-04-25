@@ -71,7 +71,7 @@
     [self.view addGestureRecognizer:gesture];
 }
 
-+(instancetype)doneBlock:(void (^)(WorkOrderStep *,bool isDelete))block{
++(instancetype)doneBlock:(void (^)(WorkOrderStep *,SaveType type))block{
     
     WorkOrderStepEditController *vc = [[WorkOrderStepEditController alloc] init];
     vc.doneBlock = block;
@@ -107,14 +107,27 @@
 -(void)saveData
 {
     if (self.doneBlock) {
-        if(![super isDelete]){
-            _step.content = _editView.editText.text;
-            if([_step updateToDB]){
-                self.doneBlock(_step,[super isDelete]);
-            }
-        }else{
-            self.doneBlock(_step,[super isDelete]);
+        
+        switch ([super type]) {
+            case SaveTypeAdd:
+                _step.content = _editView.editText.text;
+                if([_step updateToDB]){
+                    self.doneBlock(_step,SaveTypeAdd);
+                }
+                break;
+            case SaveTypeUpdate:
+                _step.content = _editView.editText.text;
+                if([_step updateToDB]){
+                    self.doneBlock(_step,SaveTypeUpdate);
+                }
+                break;
+            case SaveTypeDelete:
+                self.doneBlock(_step,SaveTypeDelete);
+                break;
+            default:
+                break;
         }
+
     }
 }
 
@@ -150,7 +163,7 @@
             [self deleteAttachment:attachment];
         }
         [self.navigationController popViewControllerAnimated:YES];
-        super.isDelete = YES;
+        super.type = SaveTypeDelete;
     }
 }
 

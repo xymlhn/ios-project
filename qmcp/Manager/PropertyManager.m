@@ -17,7 +17,6 @@
 #import "CommodityItem.h"
 #import "CommodityProperty.h"
 
-static PropertyManager *sharedObj = nil; //第一步：静态实例，并初始化。
 NSString * const kCommodityItem = @"commodityItem";
 NSString * const kCommodityProperty = @"commodityProperty";
 @interface PropertyManager()
@@ -27,51 +26,24 @@ NSString * const kCommodityProperty = @"commodityProperty";
 
 @end
 @implementation PropertyManager
-+ (PropertyManager*) getInstance  //第二步：实例构造检查静态实例是否为nil
-{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        sharedObj = [[self alloc] init];
-    });
-    
-    return sharedObj;
-}
 
-+ (id) allocWithZone:(NSZone *)zone
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        sharedObj = [super allocWithZone:zone];
-    });
-    return sharedObj;
-}
-- (id)init
-{
-    static id obj = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        if((obj = [super init]) != nil)
++ (PropertyManager *)getInstance {
+    static PropertyManager *shared_manager = nil;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        shared_manager = [[self alloc] init];
+        shared_manager.commodityItemArr = [[TMCache sharedCache] objectForKey:kCommodityItem];
+        if(shared_manager.commodityItemArr == nil)
         {
-            _commodityItemArr = [[TMCache sharedCache] objectForKey:kCommodityItem];
-            if(_commodityItemArr == nil)
-            {
-                _commodityItemArr = [NSArray new];
-            }
-            _commodityPropertyDict = [[TMCache sharedCache] objectForKey:kCommodityProperty];
-            if(_commodityPropertyDict == nil)
-            {
-                _commodityPropertyDict = [NSDictionary new];
-            }
+            shared_manager.commodityItemArr = [NSArray new];
+        }
+        shared_manager.commodityPropertyDict = [[TMCache sharedCache] objectForKey:kCommodityProperty];
+        if(shared_manager.commodityPropertyDict == nil)
+        {
+            shared_manager.commodityPropertyDict = [NSDictionary new];
         }
     });
-    self = obj;
-    
-    return self;
-}
-- (id) copyWithZone:(NSZone *)zone
-{
-    return sharedObj;
+    return shared_manager;
 }
 
 -(void)getCommodityItem:(NSString *)lastupdateTime

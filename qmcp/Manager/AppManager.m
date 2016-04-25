@@ -24,39 +24,15 @@
 #import "AppDelegate.h"
 #import "GisViewController.h"
 #import "LoginViewController.h"
-static AppManager *sharedObj = nil; //第一步：静态实例，并初始化。
 @implementation AppManager
 
-+ (AppManager*) getInstance  //第二步：实例构造检查静态实例是否为nil
-{
-    
-    if (!sharedObj)
-    {
-        sharedObj=[[super allocWithZone:NULL]init];
-    }
- 
-    return sharedObj;
-}
-
-+ (id) allocWithZone:(NSZone *)zone
-{
-    if (sharedObj == nil) {
-        sharedObj = [super allocWithZone:zone];
-        return sharedObj;
-    }
-
-    return nil;
-}
-- (id)init
-{
-    if (self = [super init]) {
-        sharedObj = [[AppManager alloc]init];
-    }
-    return self;
-}
-- (id) copyWithZone:(NSZone *)zone
-{
-    return self;
++ (AppManager *)getInstance {
+    static AppManager *shared_manager = nil;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        shared_manager = [[self alloc] init];
+    });
+    return shared_manager;
 }
 
 -(BOOL)handleHeader:(NSURLSessionDataTask *) session

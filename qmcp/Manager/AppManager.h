@@ -8,16 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MBProgressHUD+Util.h"
-
-typedef NS_ENUM(NSInteger, ExceptionType) {
-    ExceptionTypeNotLogin = 10,
-    ExceptionTypeNoPermission = 20,
-    ExceptionTypeNOUrl = 30,
-    ExceptionTypeCommon = 100,
-    ExceptionTypeSalesOrderStatus = 10000,
-    ExceptionTypeWorkOrderStatus = 10001,
-    
-};
+#import "PchHeader.h"
 
 @interface AppManager : NSObject
 

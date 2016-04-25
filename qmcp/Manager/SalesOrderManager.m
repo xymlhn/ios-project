@@ -19,7 +19,6 @@
 #import "TMCache.h"
 #import "MBProgressHUD.h"
 
-static SalesOrderManager *sharedObj = nil; //第一步：静态实例，并初始化。
 NSString * const kBind = @"bind";
 NSString * const kConfirm = @"confirm";
 
@@ -31,51 +30,24 @@ NSString * const kConfirm = @"confirm";
 
 @end
 @implementation SalesOrderManager
-+ (SalesOrderManager*) getInstance  //第二步：实例构造检查静态实例是否为nil
-{
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        sharedObj = [[self alloc] init];
-    });
-    
-    return sharedObj;
-}
 
-+ (id) allocWithZone:(NSZone *)zone
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        sharedObj = [super allocWithZone:zone];
-    });
-    return sharedObj;
-}
-- (id)init
-{
-    static id obj = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
-        if((obj = [super init]) != nil)
++ (SalesOrderManager *)getInstance {
+    static SalesOrderManager *shared_manager = nil;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        shared_manager = [[self alloc] init];
+        shared_manager.bindDict = [[TMCache sharedCache] objectForKey:kBind];
+        if(shared_manager.bindDict == nil)
         {
-            _bindDict = [[TMCache sharedCache] objectForKey:kBind];
-            if(_bindDict == nil)
-            {
-                _bindDict = [NSMutableDictionary new];
-            }
-            _grabDict = [[TMCache sharedCache] objectForKey:kConfirm];
-            if(_grabDict == nil)
-            {
-                _grabDict = [NSMutableDictionary new];
-            }
+            shared_manager.bindDict = [NSMutableDictionary new];
+        }
+        shared_manager.grabDict = [[TMCache sharedCache] objectForKey:kConfirm];
+        if(shared_manager.grabDict == nil)
+        {
+            shared_manager.grabDict = [NSMutableDictionary new];
         }
     });
-    self = obj;
-    
-    return self;
-}
-- (id) copyWithZone:(NSZone *)zone
-{
-    return sharedObj;
+    return shared_manager;
 }
 
 -(void)getSalesOrderBind:(NSString *)lastupdateTime

@@ -54,6 +54,18 @@
     [(MBProgressHUD *)recognizer.view hide:YES];
 }
 
++ (void)showHudTipStr:(NSString *)tipStr{
+    if (tipStr && tipStr.length > 0) {
+        MBProgressHUD *hud = [Utils createHUD];
+        hud.mode = MBProgressHUDModeText;
+        hud.detailsLabelFont = [UIFont boldSystemFontOfSize:15.0];
+        hud.detailsLabelText = tipStr;
+        hud.margin = 10.f;
+        hud.removeFromSuperViewOnHide = YES;
+        [hud hide:YES afterDelay:1.0];
+    }
+}
+
 + (UIImage *)createQRCodeFromString:(NSString *)string
 {
     NSData *stringData = [string dataUsingEncoding:NSUTF8StringEncoding];

@@ -47,4 +47,6 @@
 +(void)showImage:(UIImage *)image;
 
 +(NSString *)saveImage:(UIImage *)image andName:(NSString *)name;
+
++ (void)showHudTipStr:(NSString *)tipStr;
 @end

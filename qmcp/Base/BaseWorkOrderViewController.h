@@ -10,10 +10,11 @@
 #import "Masonry.h"
 #import "NSObject+LKDBHelper.h"
 #import "UIColor+Util.h"
+#import "PchHeader.h"
 @interface BaseWorkOrderViewController : UIViewController
 
 @property(nonatomic, copy) NSString *workOrderCode;
 @property (nonatomic,copy) NSString *workOrderStepCode;
-@property (nonatomic, assign) bool isDelete;
+@property (nonatomic, assign) SaveType type;
 
 @end

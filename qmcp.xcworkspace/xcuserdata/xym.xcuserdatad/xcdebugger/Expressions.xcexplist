@@ -3,6 +3,25 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[WorkOrderStepEditController saveData]:WorkOrderStepEditController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__69-[WorkOrderStepController pushToWorkOrderStepEditController:andType:]_block_invoke:WorkOrderStepController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_workOrderStepList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[IntroductionViewController configureViews]:IntroductionViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tipsDict">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__61-[WorkOrderStepController pushToWorkOrderStepEditController:]_block_invoke:WorkOrderStepController.m">
          <PersistentStrings>
             <PersistentString
@@ -11,7 +30,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[WorkOrderStepEditController saveData]:WorkOrderStepEditController.m">
+         contextName = "-[IntroductionViewController configureTipAndTitleViewAnimations]:IntroductionViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self numberOfPages]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

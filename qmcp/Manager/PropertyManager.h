@@ -17,4 +17,6 @@
 -(void)getCommodityProperty:(NSString *)lastupdateTime;
 
 -(BOOL)isExistProperty:(NSString *)code;
+
+-(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode;
 @end

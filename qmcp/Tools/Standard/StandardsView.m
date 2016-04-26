@@ -175,7 +175,7 @@
                                    self.priceLab.frame.size.width, 30);
     self.goodNum.textColor = [UIColor blackColor];
     self.goodNum.font = [UIFont systemFontOfSize:14];
-    self.goodNum.text =@"库存";// [NSString stringWithFormat:@"库存%@件",dicGoodsDetail[@"goods_storage"]];
+    //self.goodNum.text =@"库存";// [NSString stringWithFormat:@"库存%@件",dicGoodsDetail[@"goods_storage"]];
     [tempView addSubview:self.goodNum];
     
     
@@ -413,9 +413,9 @@
 
 -(UIView*)topView{
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    
+    //Todo ui框架有问题
     NSLog(@"window.subviews = %d",window.subviews.count);
-    return  window.subviews[0];
+    return  window.subviews[window.subviews.count -1];
 }
 
 - (void)show {

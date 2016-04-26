@@ -20,8 +20,11 @@
 #import "CommodityTableView.h"
 #import "SettingViewCell.h"
 #import "Config.h"
+#import "StandardsView.h"
+#import "PropertyManager.h"
+#import "CommodityProperty.h"
 
-@interface WorkOrderInventoryEditController ()<UIImagePickerControllerDelegate,UICollectionViewDataSource,
+@interface WorkOrderInventoryEditController ()<UIImagePickerControllerDelegate,UICollectionViewDataSource,StandardsViewDelegate,
                                                 UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) WorkOrder *workOrder;
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
@@ -87,11 +90,63 @@
 - (void)carIconClick:(UITapGestureRecognizer *)recognizer
 {
     
-    LewPopupViewAnimationSlide *animation = [[LewPopupViewAnimationSlide alloc]init];
-    animation.type = LewPopupViewAnimationSlideTypeBottomBottom;
-    [self lew_presentPopupView:_pop animation:animation dismissed:^{
-        NSLog(@"动画结束");
-    }];
+}
+-(StandardsView *)buildStandardView:(UIImage *)img
+{
+    StandardsView *standview = [[StandardsView alloc] init];
+    standview.delegate = self;
+    
+    standview.mainImgView.image = img;
+    standview.mainImgView.backgroundColor = [UIColor whiteColor];
+    standview.priceLab.text = @"¥100.0";
+    standview.tipLab.text = @"请选择规格";
+    
+    standview.customBtns = @[@"确定",@"取消"];
+    NSArray *array = [[PropertyManager getInstance] getCommodityPropertyByCommodityCode:@"10-015"];
+    NSMutableArray *titleArr = [NSMutableArray new];
+    for (CommodityProperty *property in array) {
+        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
+        for (NSString *str in property.propertyContent) {
+            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:@"100" andStandClassName:str];
+            [tempClassInfoArr addObject:tempClassInfo1];
+        }
+        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
+        [titleArr addObject:tempModel];
+    }
+    
+    standview.standardArr = titleArr;
+    return standview;
+}
+
+#pragma mark - standardView  delegate
+//点击自定义按键
+-(void)StandardsView:(StandardsView *)standardView CustomBtnClickAction:(UIButton *)sender
+{
+    if (sender.tag == 0) {
+        //将商品图片抛到指定点
+        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:1.6 andHeight:150 andScale:20];
+    }
+    else
+    {
+        [standardView dismiss];
+    }
+}
+
+//点击规格代理
+-(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andSelectID:(NSString *)selectID andStandName:(NSString *)standName andIndex:(NSInteger)index
+{
+    
+}
+//设置自定义btn的属性
+-(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn
+{
+    if (btn.tag == 0) {
+        btn.backgroundColor = [UIColor yellowColor];
+    }
+    else if (btn.tag == 1)
+    {
+        btn.backgroundColor = [UIColor orangeColor];
+    }
 }
 
 #pragma mark - UIImagePickerController
@@ -159,7 +214,7 @@
         default:
             break;
     }
-}\
+}
 
 #pragma mark -UICollectionViewDataSource
 
@@ -222,9 +277,18 @@
         [Utils showImage:cell.image.image];
     }else{
         CommoditySnapshot *commodity = _commodities[indexPath.row];
+        if([[PropertyManager getInstance] isExistProperty:commodity.commodityCode]){
+            StandardsView *mystandardsView = [self buildStandardView:[UIImage imageNamed:@"intro_icon_0"]];
+            mystandardsView.showAnimationType = StandsViewShowAnimationShowFrombelow;
+            mystandardsView.dismissAnimationType = StandsViewDismissAnimationDisFrombelow;
+            [mystandardsView show];
+        }else{
+            
+        }
     }
     
 }
+
 
 
 @end

@@ -67,7 +67,10 @@ NSString * const kCommodityProperty = @"commodityProperty";
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
         if (!error) {
             [Config setCommodityProperty:[Utils formatDate:[NSDate new]]];
-            _commodityPropertyDict = obj;
+            if(obj != nil){
+                [[TMCache sharedCache] setObject:obj forKey:kCommodityProperty];
+                _commodityPropertyDict = obj;
+            }
 
         }else{
             [self getCommodityProperty:[Config getCommodityProperty]];
@@ -112,6 +115,18 @@ NSString * const kCommodityProperty = @"commodityProperty";
         }
     }
     return commodityItem;
+}
+
+-(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode
+{
+    NSArray *arr = [NSArray new];
+    for (NSString *key in _commodityPropertyDict) {
+        if([key isEqualToString:commodityCode]){
+            arr = [CommodityProperty mj_objectArrayWithKeyValuesArray:_commodityPropertyDict[key]];
+        }
+    }
+    return arr;
+
 }
 
 

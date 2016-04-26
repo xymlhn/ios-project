@@ -3,15 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[WorkOrderStepEditController saveData]:WorkOrderStepEditController.m">
-      </ContextState>
-      <ContextState
          contextName = "__69-[WorkOrderStepController pushToWorkOrderStepEditController:andType:]_block_invoke:WorkOrderStepController.m">
          <PersistentStrings>
             <PersistentString
                value = "_workOrderStepList">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WorkOrderInventoryEditController carIconClick:]:WorkOrderInventoryEditController.m">
       </ContextState>
       <ContextState
          contextName = "-[IntroductionViewController configureViews]:IntroductionViewController.m">
@@ -22,12 +22,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__61-[WorkOrderStepController pushToWorkOrderStepEditController:]_block_invoke:WorkOrderStepController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[weakSelf.workOrderStepList removeObject:step]">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "__40-[PropertyManager getCommodityProperty:]_block_invoke:PropertyManager.m">
       </ContextState>
       <ContextState
          contextName = "-[IntroductionViewController configureTipAndTitleViewAnimations]:IntroductionViewController.m">
@@ -36,6 +31,20 @@
                value = "[self numberOfPages]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[PropertyManager getCommodityPropertyByCommodityCode:]:PropertyManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "__61-[WorkOrderStepController pushToWorkOrderStepEditController:]_block_invoke:WorkOrderStepController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[weakSelf.workOrderStepList removeObject:step]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WorkOrderStepEditController saveData]:WorkOrderStepEditController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

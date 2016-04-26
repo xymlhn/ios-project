@@ -80,6 +80,7 @@
 		24ABAFCA1CCF35950089F779 /* StandarsAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC41CCF35950089F779 /* StandarsAdd@2x.png */; };
 		24ABAFCB1CCF35950089F779 /* StandarsDel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC51CCF35950089F779 /* StandarsDel@2x.png */; };
 		24ABAFCC1CCF35950089F779 /* ThrowLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC71CCF35950089F779 /* ThrowLineTool.m */; };
+		24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFCE1CCF39990089F779 /* CommodityTableView.m */; };
 		24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE271CBA8385003C6C2E /* SettingViewCell.m */; };
 		24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */; };
 		24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D49D2E1CB54370003213C9 /* ScanViewController.m */; };
@@ -243,6 +244,8 @@
 		24ABAFC51CCF35950089F779 /* StandarsDel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StandarsDel@2x.png"; sourceTree = "<group>"; };
 		24ABAFC61CCF35950089F779 /* ThrowLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowLineTool.h; sourceTree = "<group>"; };
 		24ABAFC71CCF35950089F779 /* ThrowLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowLineTool.m; sourceTree = "<group>"; };
+		24ABAFCD1CCF39990089F779 /* CommodityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityTableView.h; sourceTree = "<group>"; };
+		24ABAFCE1CCF39990089F779 /* CommodityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityTableView.m; sourceTree = "<group>"; };
 		24AEEE261CBA8385003C6C2E /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCell.h; sourceTree = "<group>"; };
 		24AEEE271CBA8385003C6C2E /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCell.m; sourceTree = "<group>"; };
 		24AEEE2A1CBA87D9003C6C2E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 		24020A541CB7429300D4EA96 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24ABAFCD1CCF39990089F779 /* CommodityTableView.h */,
+				24ABAFCE1CCF39990089F779 /* CommodityTableView.m */,
 				2499B8601CCB9D83003FC604 /* common */,
 				24020A551CB7431500D4EA96 /* WorkOrderInfoView.h */,
 				24020A561CB7431500D4EA96 /* WorkOrderInfoView.m */,
@@ -883,6 +888,7 @@
 				240F88971CC71E0100138F10 /* UIViewController+LewPopupViewController.m in Sources */,
 				244517861CA03E8A0085CC16 /* GisViewController.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
+				24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */,
 				240F88A51CC71E4700138F10 /* LewPopupViewAnimationFade.m in Sources */,
 				24F359761CB3B2B400C0950B /* Attachment.m in Sources */,
 				24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */,

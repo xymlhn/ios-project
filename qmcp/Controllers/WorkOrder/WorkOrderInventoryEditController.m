@@ -23,6 +23,7 @@
 #import "StandardsView.h"
 #import "PropertyManager.h"
 #import "CommodityProperty.h"
+#import "PropertyChoose.h"
 
 @interface WorkOrderInventoryEditController ()<UIImagePickerControllerDelegate,UICollectionViewDataSource,StandardsViewDelegate,
                                                 UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UIGestureRecognizerDelegate>
@@ -33,9 +34,9 @@
 
 @property (nonatomic, strong) NSMutableArray *commodities;
 @property (nonatomic, strong) CommodityTableView *pop;
-
+@property (nonatomic, strong) NSString *chooseCommodityCode;
 @property(nonatomic,strong)NSArray *switchArr;
-@property (nonatomic, copy) NSArray *contentArr;
+@property (nonatomic, strong) NSArray *contentArr;
 
 @end
 
@@ -91,63 +92,7 @@
 {
     
 }
--(StandardsView *)buildStandardView:(UIImage *)img
-{
-    StandardsView *standview = [[StandardsView alloc] init];
-    standview.delegate = self;
-    
-    standview.mainImgView.image = img;
-    standview.mainImgView.backgroundColor = [UIColor whiteColor];
-    standview.priceLab.text = @"¥100.0";
-    standview.tipLab.text = @"请选择规格";
-    
-    standview.customBtns = @[@"确定",@"取消"];
-    NSArray *array = [[PropertyManager getInstance] getCommodityPropertyByCommodityCode:@"10-015"];
-    NSMutableArray *titleArr = [NSMutableArray new];
-    for (CommodityProperty *property in array) {
-        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
-        for (NSString *str in property.propertyContent) {
-            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:@"100" andStandClassName:str];
-            [tempClassInfoArr addObject:tempClassInfo1];
-        }
-        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
-        [titleArr addObject:tempModel];
-    }
-    
-    standview.standardArr = titleArr;
-    return standview;
-}
 
-#pragma mark - standardView  delegate
-//点击自定义按键
--(void)StandardsView:(StandardsView *)standardView CustomBtnClickAction:(UIButton *)sender
-{
-    if (sender.tag == 0) {
-        //将商品图片抛到指定点
-        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:1.6 andHeight:150 andScale:20];
-    }
-    else
-    {
-        [standardView dismiss];
-    }
-}
-
-//点击规格代理
--(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andSelectID:(NSString *)selectID andStandName:(NSString *)standName andIndex:(NSInteger)index
-{
-    
-}
-//设置自定义btn的属性
--(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn
-{
-    if (btn.tag == 0) {
-        btn.backgroundColor = [UIColor yellowColor];
-    }
-    else if (btn.tag == 1)
-    {
-        btn.backgroundColor = [UIColor orangeColor];
-    }
-}
 
 #pragma mark - UIImagePickerController
 
@@ -278,7 +223,8 @@
     }else{
         CommoditySnapshot *commodity = _commodities[indexPath.row];
         if([[PropertyManager getInstance] isExistProperty:commodity.commodityCode]){
-            StandardsView *mystandardsView = [self buildStandardView:[UIImage imageNamed:@"intro_icon_0"]];
+            _chooseCommodityCode = commodity.commodityCode;
+            StandardsView *mystandardsView = [self buildStandardView:commodity.commodityCode];
             mystandardsView.showAnimationType = StandsViewShowAnimationShowFrombelow;
             mystandardsView.dismissAnimationType = StandsViewDismissAnimationDisFrombelow;
             [mystandardsView show];
@@ -289,6 +235,70 @@
     
 }
 
+-(StandardsView *)buildStandardView:(NSString *)commodityCode
+{
+    [[PropertyManager getInstance] releaseData];
+    StandardsView *standview = [[StandardsView alloc] init];
+    standview.delegate = self;
+    standview.mainImgView.image = [UIImage imageNamed:@"intro_icon_0"];
+    standview.mainImgView.backgroundColor = [UIColor whiteColor];
+    standview.priceLab.text = @"¥100.0";
+    standview.tipLab.text = @"请选择规格";
+    [PropertyManager getInstance].currentCommodityCode = commodityCode;
+    standview.customBtns = @[@"确定",@"取消"];
+    NSArray *array = [[PropertyManager getInstance] getCommodityPropertyByCommodityCode:commodityCode];
+    NSMutableArray *titleArr = [NSMutableArray new];
+    int i = 100;
+    for (CommodityProperty *property in array) {
+        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
+        for (NSString *str in property.propertyContent) {
+            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:[NSString stringWithFormat:@"%d",i ] andStandClassName:str];
+            [tempClassInfoArr addObject:tempClassInfo1];
+            i++;
+        }
+        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
+        [titleArr addObject:tempModel];
+    }
+    
+    standview.standardArr = titleArr;
+    return standview;
+}
+
+#pragma mark - standardView  delegate
+//点击自定义按键
+-(void)StandardsView:(StandardsView *)standardView CustomBtnClickAction:(UIButton *)sender
+{
+    if (sender.tag == 0) {
+        //将商品图片抛到指定点
+        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:1.6 andHeight:150 andScale:20];
+        PropertyChoose *choose = [PropertyChoose new];
+        choose.code = _chooseCommodityCode;
+        choose.itemProperties = @"";
+        choose.price = @"";
+    }
+    else
+    {
+        [standardView dismiss];
+    }
+}
+
+//点击规格代理
+-(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andStandName:(NSString *)standName andStandandClassName:(NSString *)standClassName andIndex:(NSInteger)index
+{
+    int order = (int)index;
+    [[PropertyManager getInstance] addCommodityChoose:order propertyName:standName andPropertyContent:standClassName];
+}
+//设置自定义btn的属性
+-(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn
+{
+    if (btn.tag == 0) {
+        btn.backgroundColor = [UIColor yellowColor];
+    }
+    else if (btn.tag == 1)
+    {
+        btn.backgroundColor = [UIColor orangeColor];
+    }
+}
 
 
 @end

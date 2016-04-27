@@ -11,6 +11,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[StandardsView standardBtnClick:]:StandardsView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.standardBtnArr">
+            </PersistentString>
+            <PersistentString
+               value = "self.standardBtnDict">
+            </PersistentString>
+            <PersistentString
+               value = "tempBtn.tag">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[WorkOrderInventoryEditController carIconClick:]:WorkOrderInventoryEditController.m">
       </ContextState>
       <ContextState
@@ -33,6 +47,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[StandardsView tableView:cellForRowAtIndexPath:]:StandardsView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.standardArr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[PropertyManager getCommodityPropertyByCommodityCode:]:PropertyManager.m">
       </ContextState>
       <ContextState
@@ -42,6 +64,9 @@
                value = "[weakSelf.workOrderStepList removeObject:step]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WorkOrderInventoryEditController buildStandardView:]:WorkOrderInventoryEditController.m">
       </ContextState>
       <ContextState
          contextName = "-[WorkOrderStepEditController saveData]:WorkOrderStepEditController.m">

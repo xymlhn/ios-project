@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PropertyManager : NSObject
+@property (nonatomic, copy) NSString *currentCommodityCode;
 
 + (PropertyManager*) getInstance;
 
@@ -19,4 +20,8 @@
 -(BOOL)isExistProperty:(NSString *)code;
 
 -(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode;
+
+-(void)addCommodityChoose:(int) order propertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent;
+
+-(void)releaseData;
 @end

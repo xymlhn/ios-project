@@ -14,6 +14,8 @@
 		24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A5F1CB74AF700D4EA96 /* WorkOrderInventoryView.m */; };
 		24020A631CB74C1900D4EA96 /* WorkOrderInventoryEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */; };
 		2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402D9D01CA3D2C200DD3EB3 /* WorkOrderInfoController.m */; };
+		240E64071CD04EFD00E355A7 /* PropertyChoose.m in Sources */ = {isa = PBXBuildFile; fileRef = 240E64061CD04EFD00E355A7 /* PropertyChoose.m */; };
+		240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 240E64091CD0562F00E355A7 /* PropertyData.m */; };
 		240F88971CC71E0100138F10 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88961CC71E0100138F10 /* UIViewController+LewPopupViewController.m */; };
 		240F889A1CC71E1900138F10 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88991CC71E1900138F10 /* LewPopupBackgroundView.m */; };
 		240F88A41CC71E4700138F10 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F889C1CC71E4700138F10 /* LewPopupViewAnimationDrop.m */; };
@@ -114,6 +116,10 @@
 		24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryEditView.m; sourceTree = "<group>"; };
 		2402D9CF1CA3D2C200DD3EB3 /* WorkOrderInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInfoController.h; sourceTree = "<group>"; };
 		2402D9D01CA3D2C200DD3EB3 /* WorkOrderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInfoController.m; sourceTree = "<group>"; };
+		240E64051CD04EFD00E355A7 /* PropertyChoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyChoose.h; sourceTree = "<group>"; };
+		240E64061CD04EFD00E355A7 /* PropertyChoose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyChoose.m; sourceTree = "<group>"; };
+		240E64081CD0562F00E355A7 /* PropertyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyData.h; sourceTree = "<group>"; };
+		240E64091CD0562F00E355A7 /* PropertyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyData.m; sourceTree = "<group>"; };
 		240F88951CC71E0100138F10 /* UIViewController+LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LewPopupViewController.h"; sourceTree = "<group>"; };
 		240F88961CC71E0100138F10 /* UIViewController+LewPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LewPopupViewController.m"; sourceTree = "<group>"; };
 		240F88981CC71E1900138F10 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
@@ -690,6 +696,10 @@
 				240F88BA1CC76A2600138F10 /* CommodityItem.m */,
 				240F88BC1CC76AD400138F10 /* CommodityProperty.h */,
 				240F88BD1CC76AD400138F10 /* CommodityProperty.m */,
+				240E64051CD04EFD00E355A7 /* PropertyChoose.h */,
+				240E64061CD04EFD00E355A7 /* PropertyChoose.m */,
+				240E64081CD0562F00E355A7 /* PropertyData.h */,
+				240E64091CD0562F00E355A7 /* PropertyData.m */,
 			);
 			name = Model;
 			path = Models;
@@ -890,6 +900,7 @@
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
 				24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */,
 				240F88A51CC71E4700138F10 /* LewPopupViewAnimationFade.m in Sources */,
+				240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */,
 				24F359761CB3B2B400C0950B /* Attachment.m in Sources */,
 				24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */,
 				24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */,
@@ -910,6 +921,7 @@
 				24020A631CB74C1900D4EA96 /* WorkOrderInventoryEditView.m in Sources */,
 				24948B3F1CC235FC00DE8946 /* SalesOrderManager.m in Sources */,
 				2445177E1CA03E760085CC16 /* CommoditySnapshot.m in Sources */,
+				240E64071CD04EFD00E355A7 /* PropertyChoose.m in Sources */,
 				24FBB2121CB9D222009C77E7 /* AddressSnapshot.m in Sources */,
 				240F88C11CC76B6700138F10 /* PropertyManager.m in Sources */,
 				244517A11CA03EFC0085CC16 /* TitleBarView.m in Sources */,

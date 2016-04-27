@@ -39,6 +39,7 @@
 @property (nonatomic) NSMutableDictionary *standardBtnClickDict;//记录被按下的btn
 @property (nonatomic) UITableView *mainTableView;
 @property (nonatomic) NSMutableArray *standardBtnArr;
+@property (nonatomic) NSMutableDictionary *standardBtnDict;
 @property (nonatomic) UITextField *numberTextFied;
 //@property(nonatomic)UITextView *contentTextView;
 //@property(nonatomic)UILabel *holderLab;
@@ -300,7 +301,14 @@
     return _standardBtnArr;
 }
 
-
+-(NSMutableDictionary *)standardBtnDict
+{
+    if(_standardBtnDict == nil)
+    {
+        _standardBtnDict = [NSMutableDictionary new];
+    }
+    return _standardBtnDict;
+}
 
 - (CGRect)screenBounds
 {
@@ -365,9 +373,8 @@
 {
     sender.backgroundColor = [UIColor orangeColor];
     sender.selected = YES;
-    
-    NSArray *tempArr = self.standardBtnArr[(sender.tag & 0x0000ffff)/100 ];
-    
+    NSNumber *key = [NSNumber numberWithInteger:(sender.tag & 0x0000ffff)/100 ];
+    NSArray *tempArr = self.standardBtnDict[key];//self.standardBtnArr[(sender.tag & 0x0000ffff)/100 ];
     for (UIButton *tempBtn in tempArr) {
         if(tempBtn.tag == sender.tag)
         {
@@ -378,12 +385,12 @@
         tempBtn.selected = NO;
     }
     NSString *tagStr = [NSString stringWithFormat:@"%ld",(unsigned long)(sender.tag & 0xffff0000)>>16];
-    
+    NSString *title = sender.currentTitle;
     [self.standardBtnClickDict setObject:tagStr forKey:[NSString stringWithFormat:@"%ld",(sender.tag & 0x0000ffff)/100]];
     
-    if([self.delegate respondsToSelector:@selector(Standards:SelectBtnClick:andSelectID:andStandName:andIndex:)])
+    if([self.delegate respondsToSelector:@selector(Standards:SelectBtnClick:andStandName:andStandandClassName:andIndex:)])
     {
-        [self.delegate Standards:self SelectBtnClick:sender andSelectID:tagStr andStandName:self.standardArr[(sender.tag & 0x0000ffff)/100].standardName andIndex:(sender.tag & 0x0000ffff)/100];
+        [self.delegate Standards:self SelectBtnClick:sender andStandName:self.standardArr[(sender.tag & 0x0000ffff)/100].standardName andStandandClassName:title andIndex:(sender.tag & 0x0000ffff)/100];
     }
 
 }
@@ -891,7 +898,8 @@
                 
                 
             }
-            
+            NSNumber *key = [NSNumber numberWithInteger:indexPath.row];
+            [self.standardBtnDict setObject:tempArr forKey:key];
             [self.standardBtnArr addObject:tempArr];
         }
         else

@@ -31,13 +31,15 @@
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderInventoryEditView *inventoryEditView;
-
 @property (nonatomic, strong) NSMutableArray *commodities;
 @property (nonatomic, strong) CommodityTableView *pop;
 @property (nonatomic, strong) NSString *chooseCommodityCode;
-@property(nonatomic,strong)NSArray *switchArr;
+@property (nonatomic, strong) NSArray *switchArr;
 @property (nonatomic, strong) NSArray *contentArr;
-
+@property (nonatomic, strong) StandardsView *mystandardsView;
+@property (nonatomic, assign) bool isChoose;
+@property (nonatomic, strong) PropertyChoose *propertyChoose;
+@property (nonatomic, strong) NSMutableArray *chooseCommodityArr;
 @end
 
 @implementation WorkOrderInventoryEditController
@@ -49,6 +51,8 @@
     _pop = [CommodityTableView defaultPopupView];
     _pop.tableView.delegate = self;
     _pop.tableView.dataSource = self;
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(priceUpdate:) name:@"priceUpdate" object:nil];
 }
 
 -(void)bindListener
@@ -69,23 +73,28 @@
     _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
     NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
+    
+    _attachments = [NSMutableArray new];
     if(_itemSnapshot.attachments != nil){
-        _attachments = _itemSnapshot.attachments;
-    }else{
-        _attachments = [NSMutableArray new];
+        [_attachments addObjectsFromArray:_itemSnapshot.attachments];
     }
     
+    _commodities = [NSMutableArray new];
     if(_workOrder.commoditySnapshots != nil){
-        _commodities = _workOrder.commoditySnapshots;
+        [_commodities addObjectsFromArray:_workOrder.commoditySnapshots ];
         
-    }else{
-        _commodities = [NSMutableArray new];
+    }
+    
+    _chooseCommodityArr = [NSMutableArray new];
+    if(_itemSnapshot.commodities != nil){
+        [_chooseCommodityArr addObjectsFromArray: _itemSnapshot.commodities];
     }
     
     _switchArr = @[[NSNumber numberWithBool:[Config getSound]],[NSNumber numberWithBool:[Config getVibre]]
                    ,[NSNumber numberWithBool:[Config getQuickScan]]];
     
     _contentArr = @[@"声音",@"震动",@"快速扫描"];
+    _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
 }
 
 - (void)carIconClick:(UITapGestureRecognizer *)recognizer
@@ -224,15 +233,37 @@
         CommoditySnapshot *commodity = _commodities[indexPath.row];
         if([[PropertyManager getInstance] isExistProperty:commodity.commodityCode]){
             _chooseCommodityCode = commodity.commodityCode;
-            StandardsView *mystandardsView = [self buildStandardView:commodity.commodityCode];
-            mystandardsView.showAnimationType = StandsViewShowAnimationShowFrombelow;
-            mystandardsView.dismissAnimationType = StandsViewDismissAnimationDisFrombelow;
-            [mystandardsView show];
+            _mystandardsView = [self buildStandardView:commodity.commodityCode];
+            _mystandardsView.showAnimationType = StandsViewShowAnimationShowFrombelow;
+            _mystandardsView.dismissAnimationType = StandsViewDismissAnimationDisFrombelow;
+            [_mystandardsView show];
         }else{
-            
+            PropertyChoose *pc = [PropertyChoose new];
+            pc.name = commodity.commodityName;
+            pc.code = [[NSUUID UUID] UUIDString];
+            pc.price = commodity.price;
+            [_chooseCommodityArr addObject:pc];
         }
     }
     
+}
+
+- (void)priceUpdate:(NSNotification *)text{
+    _isChoose = [text.userInfo[@"flag"] boolValue];
+    if(_isChoose){
+        NSString *price = text.userInfo[@"price"];
+        NSString *itemProperties = text.userInfo[@"property"];
+        _mystandardsView.priceLab.text = [NSString stringWithFormat:@"价格:%@", price];
+        _mystandardsView.goodNum.text = [NSString stringWithFormat:@"%@", itemProperties];
+        _propertyChoose = [PropertyChoose new];
+        _propertyChoose.code = [[NSUUID UUID] UUIDString];
+        _propertyChoose.itemProperties = itemProperties;
+        _propertyChoose.price = [price floatValue];
+    }else{
+        _propertyChoose = nil;
+        _mystandardsView.priceLab.text = @"";
+        _mystandardsView.goodNum.text = @"";
+    }
 }
 
 -(StandardsView *)buildStandardView:(NSString *)commodityCode
@@ -242,7 +273,6 @@
     standview.delegate = self;
     standview.mainImgView.image = [UIImage imageNamed:@"intro_icon_0"];
     standview.mainImgView.backgroundColor = [UIColor whiteColor];
-    standview.priceLab.text = @"¥100.0";
     standview.tipLab.text = @"请选择规格";
     [PropertyManager getInstance].currentCommodityCode = commodityCode;
     standview.customBtns = @[@"确定",@"取消"];
@@ -269,12 +299,12 @@
 -(void)StandardsView:(StandardsView *)standardView CustomBtnClickAction:(UIButton *)sender
 {
     if (sender.tag == 0) {
+        if(_isChoose){
         //将商品图片抛到指定点
-        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:1.6 andHeight:150 andScale:20];
-        PropertyChoose *choose = [PropertyChoose new];
-        choose.code = _chooseCommodityCode;
-        choose.itemProperties = @"";
-        choose.price = @"";
+            [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:1.6 andHeight:150 andScale:20];
+            [_chooseCommodityArr addObject:_propertyChoose];
+            _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
+        }
     }
     else
     {
@@ -300,5 +330,8 @@
     }
 }
 
-
+-(void)saveData{
+    _itemSnapshot.commodities = _chooseCommodityArr;
+    [_itemSnapshot updateToDB];
+}
 @end

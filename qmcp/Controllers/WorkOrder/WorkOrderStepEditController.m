@@ -42,10 +42,10 @@
     NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",super.workOrderStepCode];
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
 
-    _attachments = _step.attachments;
+    _attachments = [NSMutableArray new];
     if(!_attachments)
     {
-        _attachments = [NSMutableArray new];
+        [_attachments addObjectsFromArray:_step.attachments];
     }
     _editView.titleText.text = _step.stepName;
     _editView.editText.text = _step.content;

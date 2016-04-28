@@ -31,8 +31,8 @@
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     //flowlaout的属性，横向滑动
     flowLayout1.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _photoTableView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 200, 320, 280) collectionViewLayout:flowLayout1];
-    _photoTableView.backgroundColor = [UIColor lightGrayColor];
+    _photoTableView = [[UICollectionView alloc] initWithFrame:rootView.bounds collectionViewLayout:flowLayout1];
+    _photoTableView.backgroundColor = [UIColor grayColor];
     [_photoTableView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
     [rootView addSubview:_photoTableView];
     
@@ -40,7 +40,7 @@
     UICollectionViewFlowLayout *flowLayout2 = [[UICollectionViewFlowLayout alloc] init];
     //flowlaout的属性，横向滑动
     flowLayout2.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _chooseTableView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 200, 320, 280) collectionViewLayout:flowLayout2];
+    _chooseTableView = [[UICollectionView alloc] initWithFrame:rootView.bounds collectionViewLayout:flowLayout2];
     _chooseTableView.backgroundColor = [UIColor lightGrayColor];
     [_chooseTableView registerClass:[CommodityCell class] forCellWithReuseIdentifier:@"commodityCell"];
     [rootView addSubview:_chooseTableView];
@@ -48,17 +48,18 @@
     [_photoTableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_chooseTableView.mas_bottom).with.offset(10);
         make.left.equalTo(rootView.mas_left).with.offset(5);
-        make.right.equalTo(rootView.mas_right).with.offset(5);
+        make.right.equalTo(rootView.mas_right).with.offset(-5);
         make.height.equalTo(@120);
     }];
     
     [_chooseTableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_remarkTextView.mas_bottom).with.offset(10);
         make.left.equalTo(rootView.mas_left).with.offset(5);
-        make.right.equalTo(rootView.mas_right).with.offset(5);
+        make.right.equalTo(rootView.mas_right).with.offset(-5);
         make.height.equalTo(@200);
     }];
 }
+
 -(void)initTopView:(UIView *)rootView
 {
     _titleLabel = [UILabel new];

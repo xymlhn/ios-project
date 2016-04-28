@@ -9,5 +9,8 @@
 #import "PropertyChoose.h"
 
 @implementation PropertyChoose
-
++ (NSString*)getPrimaryKey
+{
+    return @"code";
+}
 @end

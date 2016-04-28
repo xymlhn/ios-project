@@ -174,6 +174,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"commodityCode == %@",_currentCommodityCode];
     NSArray* conditionArr = [_commodityItemArr filteredArrayUsingPredicate:predicate];
     if([propertyDataArr count] == 0){
+        [self getCommodityPropertyArr:_currentCommodityCode];
         return;
     }
 
@@ -208,17 +209,84 @@ NSString * const kCommodityProperty = @"commodityProperty";
                 break;
         }
     }
-    
+    NSDictionary *dict;
     if([conditionArr count] == 1){
-        NSLog(@"succeed");
+        CommodityItem *item = conditionArr[0];
+        dict = @{@"flag":@YES,@"price":[NSNumber numberWithFloat:item.price],@"property":item.commodityItemName};
+        //创建一个消息对象
+       
     }else if ([conditionArr count] == 0){
-        NSLog(@"none");
+         dict = @{@"flag":@NO};
+
     }else{
-        NSLog(@"failed");
+         dict = @{@"flag":@NO};
     }
+    NSNotification * notice = [NSNotification notificationWithName:@"priceUpdate" object:nil userInfo:dict];
+    //发送消息
+    [[NSNotificationCenter defaultCenter]postNotification:notice];
+    //[self sortProperties:conditionArr];
 }
 
+-(void)sortProperties:(NSArray *)properties{
+    NSArray *commodityPropertyArr = [self getCommodityPropertyArr:_currentCommodityCode];
+    CommodityProperty *p1 = commodityPropertyArr.count > 0 ? commodityPropertyArr[0] : [CommodityProperty new];
+    CommodityProperty *p2 = commodityPropertyArr.count > 1 ? commodityPropertyArr[1] : [CommodityProperty new];
+    CommodityProperty *p3 = commodityPropertyArr.count > 2 ? commodityPropertyArr[2] : [CommodityProperty new];
+    CommodityProperty *p4 = commodityPropertyArr.count > 3 ? commodityPropertyArr[3] : [CommodityProperty new];
+    CommodityProperty *p5 = commodityPropertyArr.count > 4 ? commodityPropertyArr[4] : [CommodityProperty new];
+    CommodityProperty *p6 = commodityPropertyArr.count > 5 ? commodityPropertyArr[5] : [CommodityProperty new];
+    
+    NSMutableArray *arr1 = [NSMutableArray new];
+    NSMutableArray *arr2 = [NSMutableArray new];
+    NSMutableArray *arr3 = [NSMutableArray new];
+    NSMutableArray *arr4 = [NSMutableArray new];
+    NSMutableArray *arr5 = [NSMutableArray new];
+    NSMutableArray *arr6 = [NSMutableArray new];
+    
+    for (CommodityItem *item in properties) {
+        NSString *p1Value = item.p1;
+        NSString *p2Value = item.p2;
+        NSString *p3Value = item.p3;
+        NSString *p4Value = item.p4;
+        NSString *p5Value = item.p5;
+        NSString *p6Value = item.p6;
+        if(p1Value != nil && ![arr1 containsObject:p1Value]){
+            [arr1 addObject:p1Value];
+        }
+        if(p2Value != nil && ![arr2 containsObject:p2Value]){
+            [arr2 addObject:p2Value];
+        }
+        if(p3Value != nil && ![arr3 containsObject:p3Value]){
+            [arr3 addObject:p3Value];
+        }
+        if(p4Value != nil && ![arr4 containsObject:p4Value]){
+            [arr4 addObject:p4Value];
+        }
+        if(p5Value != nil && ![arr5 containsObject:p5Value]){
+            [arr5 addObject:p5Value];
+        }
+        if(p6Value != nil && ![arr6 containsObject:p6Value]){
+            [arr6 addObject:p6Value];
+        }
+    }
+    
+    [self compareArr:p1.propertyContent andArr2:arr1];
+    [self compareArr:p2.propertyContent andArr2:arr2];
+    [self compareArr:p3.propertyContent andArr2:arr3];
+    [self compareArr:p4.propertyContent andArr2:arr4];
+    [self compareArr:p5.propertyContent andArr2:arr5];
+    [self compareArr:p6.propertyContent andArr2:arr6];
+}
 
+-(void)compareArr:(NSMutableArray *)arr1 andArr2:(NSMutableArray *)arr2
+{
+    for (NSString *str in arr1) {
+        if(arr2.count == 0 || ![arr2 containsObject:str]){
+            [arr1 removeObject:str];
+            break;
+        }
+    }
+}
 
 
 

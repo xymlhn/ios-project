@@ -26,12 +26,12 @@
 
 @implementation WorkOrderInventoryController
 
+#pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
     _inventoryView = [WorkOrderInventoryView new];
     [_inventoryView initView:self.view];
 }
-
 
 -(void)bindListener
 {
@@ -50,6 +50,8 @@
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
 }
+
+#pragma mark - IBAction
 - (void)addBtnClick:(UITapGestureRecognizer *)recognizer
 {
     __weak typeof(self) weakSelf = self;

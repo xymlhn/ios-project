@@ -26,6 +26,7 @@
 
 @implementation WorkOrderStepController
 
+#pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
     _stepView = [WorkOrderStepView new];
@@ -49,7 +50,7 @@
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
 }
 
-
+#pragma mark - IBAction
 - (void)addBtnClick:(UITapGestureRecognizer *)recognizer
 {
     WorkOrderStep *step = [WorkOrderStep new];

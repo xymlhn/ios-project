@@ -57,6 +57,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
     return shared_manager;
 }
 
+#pragma mark - network
 -(void)getCommodityItem:(NSString *)lastupdateTime
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMMODITYITEM,lastupdateTime];
@@ -90,6 +91,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
     
 }
 
+#pragma mark - UIViewController
 -(NSArray *)getCommodityPropertyArr:(NSString *)code
 {
     NSArray *array = [NSArray new];
@@ -102,10 +104,17 @@ NSString * const kCommodityProperty = @"commodityProperty";
 
 -(BOOL)isExistProperty:(NSString *)code
 {
-    return [_commodityPropertyDict objectForKey:code] != nil && [self p_isExistCommodityItem:code];
+    return [_commodityPropertyDict objectForKey:code] != nil && [self isExistCommodityItem:code];
 }
 
--(BOOL)p_isExistCommodityItem:(NSString *)code{
+/**
+ *  commodityItemArr是否存在服务
+ *
+ *  @param code 服务code
+ *
+ *  @return bool
+ */
+-(BOOL)isExistCommodityItem:(NSString *)code{
     BOOL flag = false;
     for (CommodityItem *item in _commodityItemArr) {
         if([item.commodityCode isEqualToString:code])
@@ -116,18 +125,13 @@ NSString * const kCommodityProperty = @"commodityProperty";
     return flag;
 }
 
--(CommodityItem *)getCommodityItem_:(NSString *)commodityCode andCommodityItemCode:(NSString *)commodityItemCode{
-    CommodityItem *commodityItem = nil;
-    for(CommodityItem *item in _commodityItemArr){
-        if([commodityCode isEqualToString:item.commodityCode]){
-            if([commodityItemCode isEqualToString:commodityItemCode]){
-                commodityItem = item;
-            }
-        }
-    }
-    return commodityItem;
-}
-
+/**
+ *  根据服务code获取规格
+ *
+ *  @param commodityCode 服务code
+ *
+ *  @return 服务数组
+ */
 -(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode
 {
     NSArray *arr = [NSArray new];
@@ -138,11 +142,6 @@ NSString * const kCommodityProperty = @"commodityProperty";
     }
     return arr;
 
-}
-
--(void)releaseData{
-    [_commodityPropertyChooseDict removeAllObjects];
-    _currentCommodityCode = @"";
 }
 
 -(void)addCommodityChoose:(int) order propertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent{
@@ -157,18 +156,22 @@ NSString * const kCommodityProperty = @"commodityProperty";
     }
     [self handleChoose];
 }
-
+/**
+ *  处理已点击的规格
+ */
 -(void)handleChoose{
     [_propertyDataArr removeAllObjects];
     for (NSString *key in _commodityPropertyChooseDict) {
         [_propertyDataArr addObject:_commodityPropertyChooseDict[key]];
     }
-//    [_propertyDataArr sortedArrayUsingComparator:^NSComparisonResult(PropertyData *p1, PropertyData *p2){
-//        return p1.order > p2.order;
-//    }];
     [self findAvailableItemProperty:_propertyDataArr];
 }
 
+/**
+ *  查找可用服务规格
+ *
+ *  @param propertyDataArr 规格数组
+ */
 -(void)findAvailableItemProperty:(NSMutableArray *)propertyDataArr
 {
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"commodityCode == %@",_currentCommodityCode];
@@ -227,6 +230,11 @@ NSString * const kCommodityProperty = @"commodityProperty";
     //[self sortProperties:conditionArr];
 }
 
+/**
+ *  查找选择规格后的可选规格
+ *
+ *  @param properties 规格数组
+ */
 -(void)sortProperties:(NSArray *)properties{
     NSArray *commodityPropertyArr = [self getCommodityPropertyArr:_currentCommodityCode];
     CommodityProperty *p1 = commodityPropertyArr.count > 0 ? commodityPropertyArr[0] : [CommodityProperty new];
@@ -277,7 +285,12 @@ NSString * const kCommodityProperty = @"commodityProperty";
     [self compareArr:p5.propertyContent andArr2:arr5];
     [self compareArr:p6.propertyContent andArr2:arr6];
 }
-
+/**
+ *  比较规格进行删除
+ *
+ *  @param arr1 旧规格
+ *  @param arr2 筛选过后规格
+ */
 -(void)compareArr:(NSMutableArray *)arr1 andArr2:(NSMutableArray *)arr2
 {
     for (NSString *str in arr1) {
@@ -288,17 +301,9 @@ NSString * const kCommodityProperty = @"commodityProperty";
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+-(void)releaseData{
+    [_commodityPropertyChooseDict removeAllObjects];
+    _currentCommodityCode = @"";
+}
 
 @end

@@ -29,6 +29,7 @@
 
 @implementation WorkOrderStepEditController
 
+#pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
     _editView =[WorkOrderStepEditView new];
@@ -131,7 +132,7 @@
     }
 }
 
-#pragma mark - click
+#pragma mark - IBAction
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];

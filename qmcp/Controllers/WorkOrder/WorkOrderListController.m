@@ -35,6 +35,8 @@
     }
     return self;
 }
+
+#pragma mark - UIViewController
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,7 +70,7 @@
     }];
 }
 
-
+#pragma mark - Notification
 - (void)workOrderUpdate:(NSNotification *)text{
     [self.tableView.mj_header endRefreshing];
     [_workOrderList removeAllObjects];
@@ -88,6 +90,9 @@
     [self.tableView reloadData];
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - Table view data source
 
@@ -115,6 +120,7 @@
     return cell;
 }
 
+#pragma mark - IBAction
 - (void)pushInfoView:(UITapGestureRecognizer *)recognizer
 {
     WorkOrderInfoController *info = [WorkOrderInfoController new];
@@ -123,11 +129,5 @@
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
-
--(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
 
 @end

@@ -69,6 +69,9 @@
     
 }
 
+/**
+ *  处理所有的工单并派发到界面
+ */
 - (void)sortAllWorkOrder{
    _workOrders = [WorkOrder searchWithWhere:nil];
 
@@ -78,12 +81,8 @@
     NSPredicate* donePredicate = [NSPredicate predicateWithFormat:@"status >= %@",[NSNumber numberWithInt:(int)WorkOrderStatusCompleted]];
     NSArray* doneArr = [_workOrders filteredArrayUsingPredicate:donePredicate];
     NSDictionary *dic = @{@"default":_workOrders,@"progress":undoneArr,@"complete":doneArr};
-       //创建一个消息对象
     NSNotification * notice = [NSNotification notificationWithName:@"workOrderUpdate" object:nil userInfo:dic];
-    //发送消息
     [[NSNotificationCenter defaultCenter]postNotification:notice];
-    
-
 }
 
 -(void)getWorkOrderByItemCode:(NSString *)itemCode{
@@ -236,11 +235,8 @@
         if(!error){
             hub.labelText = [NSString stringWithFormat:@"上传数据成功"];
             [hub hide:YES afterDelay:1];
-             NSDictionary *dic = @{@"timeStamp":[NSNumber numberWithInt:timeStamp]};
-            //创建一个消息对象
+            NSDictionary *dic = @{@"timeStamp":[NSNumber numberWithInt:timeStamp]};
             NSNotification * notice = [NSNotification notificationWithName:@"timeStamp" object:nil userInfo:dic];
-
-            //发送消息
             [[NSNotificationCenter defaultCenter]postNotification:notice];
         }else{
             NSString *message = @"";

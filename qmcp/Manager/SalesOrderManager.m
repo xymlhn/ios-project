@@ -24,9 +24,9 @@ NSString * const kConfirm = @"confirm";
 
 @interface SalesOrderManager()
 
-@property(nonatomic,strong)NSMutableDictionary *bindDict;
+@property(nonatomic,strong)NSMutableDictionary *bindDict; //绑单  <NSString,SalesOrderSnapshot>
 
-@property(nonatomic,strong)NSMutableDictionary *grabDict;
+@property(nonatomic,strong)NSMutableDictionary *grabDict; //接单  <NSString,SalesOrderSnapshot>
 
 @end
 @implementation SalesOrderManager
@@ -76,10 +76,7 @@ NSString * const kConfirm = @"confirm";
                 [array addObject:_bindDict[compKey]];
             }
             NSDictionary *dict = @{@"salesOrderBind":array};
-            
-            //创建一个消息对象
             NSNotification * notice = [NSNotification notificationWithName:@"salesOrderBindUpdate" object:nil userInfo:dict];
-            //发送消息
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             
         }else{
@@ -152,6 +149,9 @@ NSString * const kConfirm = @"confirm";
     
 }
 
+/**
+ *  通知接单界面
+ */
 -(void)notifyGrabUIChange
 {
     NSMutableArray *array = [NSMutableArray new];
@@ -159,10 +159,7 @@ NSString * const kConfirm = @"confirm";
         [array addObject:_grabDict[compKey]];
     }
     NSDictionary *dict = @{@"salesOrderGrab":array};
-    
-    //创建一个消息对象
     NSNotification * notice = [NSNotification notificationWithName:@"salesOrderGrabUpdate" object:nil userInfo:dict];
-    //发送消息
     [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 

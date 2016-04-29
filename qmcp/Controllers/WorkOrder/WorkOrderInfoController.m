@@ -26,6 +26,7 @@
 
 @implementation WorkOrderInfoController
 
+#pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
     _infoView = [WorkOrderInfoView new];
@@ -33,11 +34,55 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(timeStamp:) name:@"timeStamp" object:nil];
 }
+-(void)bindListener
+{
+    _infoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        switch (_workOrder.type) {
+            case WorkOrderTypeOnsite:
+                switch (_workOrder.status) {
+                    case WorkOrderStatusAssigned:
+                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampAcknowledge time:[Utils formatDate:[NSDate new]]];
+                        break;
+                    case WorkOrderStatusAcknowledged:
+                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:
+                         WorkOrderTimeStampEnroute time:[Utils formatDate:[NSDate new]]];
+                        
+                        break;
+                    case WorkOrderStatusEnroute:
+                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:
+                         WorkOrderTimeStampOnsite time:[Utils formatDate:[NSDate new]]];
+                        
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case WorkOrderTypeInventory:
+                [self pushInventoryUI];
+                break;
+            case WorkOrderTypeService:
+                [self pushServiceUI];
+                break;
+            default:
+                break;
+        }
+        return [RACSignal empty];
+    }];
+    
+}
 
+-(void)loadData
+{
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
+    [self setText:_workOrder];
+}
+
+#pragma mark - Notification
 - (void)timeStamp:(NSNotification *)text{
     NSNumber *time = text.userInfo[@"timeStamp"];
     switch ([time integerValue]) {
-
+            
         case WorkOrderStatusAssigned:
             [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];// 添加文字
             _workOrder.status = WorkOrderStatusAcknowledged;
@@ -55,12 +100,8 @@
             break;
     }
 }
-
--(void)loadData
-{
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
-    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
-    [self setText:_workOrder];
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)setText:(WorkOrder *)workOrder
@@ -114,44 +155,7 @@
     
 }
 
--(void)bindListener
-{
-    _infoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        switch (_workOrder.type) {
-            case WorkOrderTypeOnsite:
-                switch (_workOrder.status) {
-                    case WorkOrderStatusAssigned:
-                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampAcknowledge time:[Utils formatDate:[NSDate new]]];
-                        break;
-                    case WorkOrderStatusAcknowledged:
-                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:
-                         WorkOrderTimeStampEnroute time:[Utils formatDate:[NSDate new]]];
-                       
-                        break;
-                    case WorkOrderStatusEnroute:
-                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:
-                         WorkOrderTimeStampOnsite time:[Utils formatDate:[NSDate new]]];
-                
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case WorkOrderTypeInventory:
-                [self pushInventoryUI];
-                break;
-            case WorkOrderTypeService:
-                [self pushServiceUI];
-                break;
-            default:
-                break;
-        }
-        return [RACSignal empty];
-    }];
-
-}
-
-
+#pragma mark - IBAction
 -(void)pushServiceUI
 {
     WorkOrderStepController *info = [WorkOrderStepController new];

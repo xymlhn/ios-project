@@ -29,10 +29,25 @@
  */
 - (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps;
 
+/**
+ *  更新时间戳
+ *
+ *  @param workOrderCode 工单code
+ *  @param timeStamp     时间戳枚举
+ *  @param time          时间
+ */
 -(void)updateTimeStamp :(NSString *)workOrderCode timeStamp:(WorkOrderTimeStamp)timeStamp time:(NSString *)time;
 
--(void)postPickUpItem;
-
+/**
+ *  根据工单code获取工单
+ *
+ *  @param itemCode 工单code
+ */
 -(void)getWorkOrderByItemCode:(NSString *)itemCode;
+
+/**
+ *  上传取件数据
+ */
+-(void)postPickUpItem;
 
 @end

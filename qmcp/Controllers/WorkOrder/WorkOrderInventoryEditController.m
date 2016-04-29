@@ -44,6 +44,7 @@
 
 @implementation WorkOrderInventoryEditController
 
+#pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
      _inventoryEditView = [WorkOrderInventoryEditView new];
@@ -95,6 +96,11 @@
     
     _contentArr = @[@"声音",@"震动",@"快速扫描"];
     _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
+}
+
+-(void)saveData{
+    _itemSnapshot.commodities = _chooseCommodityArr;
+    [_itemSnapshot updateToDB];
 }
 
 - (void)carIconClick:(UITapGestureRecognizer *)recognizer
@@ -248,6 +254,7 @@
     
 }
 
+#pragma mark - Notification
 - (void)priceUpdate:(NSNotification *)text{
     _isChoose = [text.userInfo[@"flag"] boolValue];
     if(_isChoose){
@@ -266,32 +273,8 @@
     }
 }
 
--(StandardsView *)buildStandardView:(NSString *)commodityCode
-{
-    [[PropertyManager getInstance] releaseData];
-    StandardsView *standview = [[StandardsView alloc] init];
-    standview.delegate = self;
-    standview.mainImgView.image = [UIImage imageNamed:@"intro_icon_0"];
-    standview.mainImgView.backgroundColor = [UIColor whiteColor];
-    standview.tipLab.text = @"请选择规格";
-    [PropertyManager getInstance].currentCommodityCode = commodityCode;
-    standview.customBtns = @[@"确定",@"取消"];
-    NSArray *array = [[PropertyManager getInstance] getCommodityPropertyByCommodityCode:commodityCode];
-    NSMutableArray *titleArr = [NSMutableArray new];
-    int i = 100;
-    for (CommodityProperty *property in array) {
-        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
-        for (NSString *str in property.propertyContent) {
-            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:[NSString stringWithFormat:@"%d",i ] andStandClassName:str];
-            [tempClassInfoArr addObject:tempClassInfo1];
-            i++;
-        }
-        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
-        [titleArr addObject:tempModel];
-    }
-    
-    standview.standardArr = titleArr;
-    return standview;
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - standardView  delegate
@@ -330,8 +313,32 @@
     }
 }
 
--(void)saveData{
-    _itemSnapshot.commodities = _chooseCommodityArr;
-    [_itemSnapshot updateToDB];
+-(StandardsView *)buildStandardView:(NSString *)commodityCode
+{
+    [[PropertyManager getInstance] releaseData];
+    StandardsView *standview = [[StandardsView alloc] init];
+    standview.delegate = self;
+    standview.mainImgView.image = [UIImage imageNamed:@"intro_icon_0"];
+    standview.mainImgView.backgroundColor = [UIColor whiteColor];
+    standview.tipLab.text = @"请选择规格";
+    [PropertyManager getInstance].currentCommodityCode = commodityCode;
+    standview.customBtns = @[@"确定",@"取消"];
+    NSArray *array = [[PropertyManager getInstance] getCommodityPropertyByCommodityCode:commodityCode];
+    NSMutableArray *titleArr = [NSMutableArray new];
+    int i = 100;
+    for (CommodityProperty *property in array) {
+        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
+        for (NSString *str in property.propertyContent) {
+            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:[NSString stringWithFormat:@"%d",i ] andStandClassName:str];
+            [tempClassInfoArr addObject:tempClassInfo1];
+            i++;
+        }
+        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
+        [titleArr addObject:tempModel];
+    }
+    
+    standview.standardArr = titleArr;
+    return standview;
 }
+
 @end

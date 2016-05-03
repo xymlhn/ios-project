@@ -19,14 +19,17 @@
 #import "TMCache.h"
 #import "MBProgressHUD.h"
 
-NSString * const kBind = @"bind";
-NSString * const kConfirm = @"confirm";
+NSString *const kBindCache = @"bind";
+NSString *const kConfirmCache = @"confirm";
+
+NSString *const kSalesOrderBindNotification = @"salesOrderBindUpdate";
+NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
 
 @interface SalesOrderManager()
 
-@property(nonatomic,strong)NSMutableDictionary *bindDict; //绑单  <NSString,SalesOrderSnapshot>
+@property(nonatomic,strong)NSMutableDictionary<NSString *,SalesOrderSnapshot *> *bindDict; //绑单
 
-@property(nonatomic,strong)NSMutableDictionary *grabDict; //接单  <NSString,SalesOrderSnapshot>
+@property(nonatomic,strong)NSMutableDictionary<NSString *,SalesOrderSnapshot *> *grabDict; //接单
 
 @end
 @implementation SalesOrderManager
@@ -36,12 +39,12 @@ NSString * const kConfirm = @"confirm";
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
-        shared_manager.bindDict = [[TMCache sharedCache] objectForKey:kBind];
+        shared_manager.bindDict = [[TMCache sharedCache] objectForKey:kBindCache];
         if(shared_manager.bindDict == nil)
         {
             shared_manager.bindDict = [NSMutableDictionary new];
         }
-        shared_manager.grabDict = [[TMCache sharedCache] objectForKey:kConfirm];
+        shared_manager.grabDict = [[TMCache sharedCache] objectForKey:kConfirmCache];
         if(shared_manager.grabDict == nil)
         {
             shared_manager.grabDict = [NSMutableDictionary new];
@@ -66,17 +69,14 @@ NSString * const kConfirm = @"confirm";
                 }
                 
                 for (SalesOrderSnapshot *salesOrder in salesOrderBind.unbound) {
-                    [_bindDict setValue:salesOrder forKey:salesOrder.code];
+                    _bindDict[salesOrder.code] = salesOrder;
                 }
-                [[TMCache sharedCache] setObject:_bindDict forKey:kBind];
+                [[TMCache sharedCache] setObject:_bindDict forKey:kBindCache];
                 
             }
-            NSMutableArray *array = [NSMutableArray new];
-            for(NSString *compKey in _bindDict) {
-                [array addObject:_bindDict[compKey]];
-            }
-            NSDictionary *dict = @{@"salesOrderBind":array};
-            NSNotification * notice = [NSNotification notificationWithName:@"salesOrderBindUpdate" object:nil userInfo:dict];
+
+            NSDictionary *dict = @{@"salesOrderBind":[_bindDict allValues]};
+            NSNotification * notice = [NSNotification notificationWithName:kSalesOrderBindNotification object:nil userInfo:dict];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             
         }else{
@@ -101,9 +101,9 @@ NSString * const kConfirm = @"confirm";
                 }
                 
                 for (SalesOrderSnapshot *salesOrder in salesOrderConfirm.unconfirmed) {
-                    [_grabDict setValue:salesOrder forKey:salesOrder.code];
+                    _grabDict[salesOrderConfirm.unconfirmed] = salesOrder;
                 }
-                [[TMCache sharedCache] setObject:_grabDict forKey:kConfirm];
+                [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
                 
             }
             
@@ -127,7 +127,7 @@ NSString * const kConfirm = @"confirm";
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSError *error) {
         if (!error) {
             [_grabDict removeObjectForKey:salesOrderCode];
-            [[TMCache sharedCache] setObject:_grabDict forKey:kConfirm];
+            [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
             [self notifyGrabUIChange];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
@@ -154,12 +154,8 @@ NSString * const kConfirm = @"confirm";
  */
 -(void)notifyGrabUIChange
 {
-    NSMutableArray *array = [NSMutableArray new];
-    for(NSString *compKey in _grabDict) {
-        [array addObject:_grabDict[compKey]];
-    }
-    NSDictionary *dict = @{@"salesOrderGrab":array};
-    NSNotification * notice = [NSNotification notificationWithName:@"salesOrderGrabUpdate" object:nil userInfo:dict];
+    NSDictionary *dict = @{@"salesOrderGrab":[_grabDict allValues]};
+    NSNotification * notice = [NSNotification notificationWithName:kSalesOrderGrabNotification object:nil userInfo:dict];
     [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 

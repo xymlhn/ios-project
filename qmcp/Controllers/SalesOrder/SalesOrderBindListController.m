@@ -52,7 +52,7 @@
     }];
     
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(salesOrderUpdate:) name:@"salesOrderBindUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(salesOrderUpdate:) name:kSalesOrderBindNotification  object:nil];
     
 }
 

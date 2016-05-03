@@ -58,7 +58,7 @@
     }];
     
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(workOrderUpdate:) name:@"workOrderUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(workOrderUpdate:) name:kWorkOrderUpdateNotification object:nil];
     
 }
 

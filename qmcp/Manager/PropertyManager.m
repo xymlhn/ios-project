@@ -22,11 +22,11 @@ NSString * const kCommodityItem = @"commodityItem";
 NSString * const kCommodityProperty = @"commodityProperty";
 @interface PropertyManager()
 
-@property (nonatomic, strong) NSMutableArray * commodityItemArr;
-@property (nonatomic, strong) NSDictionary * commodityPropertyDict;
+@property (nonatomic, strong) NSMutableArray<CommodityItem *> * commodityItemArr;
+@property (nonatomic, strong) NSDictionary<NSString *,CommodityProperty *> * commodityPropertyDict;
 
-@property (nonatomic, strong) NSMutableDictionary * commodityPropertyChooseDict;
-@property (nonatomic, strong) NSMutableArray *propertyDataArr;
+@property (nonatomic, strong) NSMutableDictionary<NSString *,PropertyData *> * commodityPropertyChooseDict;
+@property (nonatomic, strong) NSMutableArray<PropertyData *> *propertyDataArr;
 
 @end
 @implementation PropertyManager

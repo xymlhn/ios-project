@@ -53,7 +53,7 @@
     
     [self.window makeKeyAndVisible];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reLogin:) name:@"reLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reLogin:) name:kReloginNotification object:nil];
     return YES;
 }
 

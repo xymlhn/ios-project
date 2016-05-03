@@ -23,9 +23,10 @@
 #import "PickupItemSignature.h"
 #import "Config.h"
 
+NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
 @interface WorkOrderManager()
 
-@property(nonatomic,strong)NSMutableArray *workOrders;
+@property(nonatomic,strong)NSMutableArray<WorkOrder *> *workOrders;
 
 @end
 @implementation WorkOrderManager
@@ -81,7 +82,7 @@
     NSPredicate* donePredicate = [NSPredicate predicateWithFormat:@"status >= %@",[NSNumber numberWithInt:(int)WorkOrderStatusCompleted]];
     NSArray* doneArr = [_workOrders filteredArrayUsingPredicate:donePredicate];
     NSDictionary *dic = @{@"default":_workOrders,@"progress":undoneArr,@"complete":doneArr};
-    NSNotification * notice = [NSNotification notificationWithName:@"workOrderUpdate" object:nil userInfo:dic];
+    NSNotification * notice = [NSNotification notificationWithName:kWorkOrderUpdateNotification object:nil userInfo:dic];
     [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 

@@ -10,6 +10,9 @@
 
 @interface SalesOrderManager : NSObject
 
+extern NSString *const kSalesOrderBindNotification;
+extern NSString *const kSalesOrderGrabNotification;
+
 + (SalesOrderManager *) getInstance;
 
 /**

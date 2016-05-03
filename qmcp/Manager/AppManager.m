@@ -24,6 +24,8 @@
 #import "AppDelegate.h"
 #import "GisViewController.h"
 #import "LoginViewController.h"
+
+NSString *const kReloginNotification = @"reLogin";
 @implementation AppManager
 
 + (AppManager *)getInstance {
@@ -66,7 +68,7 @@
         if(account.isAuthenticated){
             if(isFirst){
                 //创建一个消息对象
-                NSNotification * notice = [NSNotification notificationWithName:@"reLogin" object:nil userInfo:nil];
+                NSNotification * notice = [NSNotification notificationWithName:kReloginNotification object:nil userInfo:nil];
                 //发送消息
                 [[NSNotificationCenter defaultCenter]postNotification:notice];
             }

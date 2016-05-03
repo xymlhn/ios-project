@@ -53,7 +53,7 @@
     }];
     
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(salesOrderUpdate:) name:@"salesOrderGrabUpdate" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(salesOrderUpdate:) name:kSalesOrderGrabNotification object:nil];
     
 }
 

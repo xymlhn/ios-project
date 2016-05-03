@@ -41,10 +41,7 @@
  * 设置自定义btn属性
  */
 -(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn;
-/**
- * 未设置自定义按钮时，点击确认按键的回调事件，设置了自定义btn则该delegate则无用
- */
--(void)Standards:(StandardsView *)standardView SureBtnClick:(NSString *)content;
+
 /**
  * 点击规格分类按键回调
  * @param sender 点击的按键
@@ -55,7 +52,7 @@
 -(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andStandName:(NSString *)standName andStandandClassName:(NSString *)standClassName andIndex:(NSInteger)index;
 
 
-
+@optional
 /**
  * 自定义出场动画 StandsBackViewAnimationType 需设置成StandsViewAnimationCustom
  */
@@ -64,6 +61,11 @@
  * 自定义消失动画 StandsBackViewAnimationType 需设置成StandsViewAnimationCustom
  */
 -(void)CustomDismissAnimation;
+
+/**
+ * 未设置自定义按钮时，点击确认按键的回调事件，设置了自定义btn则该delegate则无用
+ */
+-(void)Standards:(StandardsView *)standardView SureBtnClick:(NSString *)content;
 @end
 
 

@@ -16,12 +16,6 @@
 		2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402D9D01CA3D2C200DD3EB3 /* WorkOrderInfoController.m */; };
 		240E64071CD04EFD00E355A7 /* PropertyChoose.m in Sources */ = {isa = PBXBuildFile; fileRef = 240E64061CD04EFD00E355A7 /* PropertyChoose.m */; };
 		240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 240E64091CD0562F00E355A7 /* PropertyData.m */; };
-		240F88971CC71E0100138F10 /* UIViewController+LewPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88961CC71E0100138F10 /* UIViewController+LewPopupViewController.m */; };
-		240F889A1CC71E1900138F10 /* LewPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88991CC71E1900138F10 /* LewPopupBackgroundView.m */; };
-		240F88A41CC71E4700138F10 /* LewPopupViewAnimationDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F889C1CC71E4700138F10 /* LewPopupViewAnimationDrop.m */; };
-		240F88A51CC71E4700138F10 /* LewPopupViewAnimationFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F889E1CC71E4700138F10 /* LewPopupViewAnimationFade.m */; };
-		240F88A61CC71E4700138F10 /* LewPopupViewAnimationSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88A01CC71E4700138F10 /* LewPopupViewAnimationSlide.m */; };
-		240F88A71CC71E4700138F10 /* LewPopupViewAnimationSpring.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88A21CC71E4700138F10 /* LewPopupViewAnimationSpring.m */; };
 		240F88B51CC755C900138F10 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88B41CC755C900138F10 /* BaseViewController.m */; };
 		240F88BB1CC76A2600138F10 /* CommodityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88BA1CC76A2600138F10 /* CommodityItem.m */; };
 		240F88BE1CC76AD400138F10 /* CommodityProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88BD1CC76AD400138F10 /* CommodityProperty.m */; };
@@ -120,19 +114,6 @@
 		240E64061CD04EFD00E355A7 /* PropertyChoose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyChoose.m; sourceTree = "<group>"; };
 		240E64081CD0562F00E355A7 /* PropertyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyData.h; sourceTree = "<group>"; };
 		240E64091CD0562F00E355A7 /* PropertyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyData.m; sourceTree = "<group>"; };
-		240F88951CC71E0100138F10 /* UIViewController+LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LewPopupViewController.h"; sourceTree = "<group>"; };
-		240F88961CC71E0100138F10 /* UIViewController+LewPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LewPopupViewController.m"; sourceTree = "<group>"; };
-		240F88981CC71E1900138F10 /* LewPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupBackgroundView.h; sourceTree = "<group>"; };
-		240F88991CC71E1900138F10 /* LewPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupBackgroundView.m; sourceTree = "<group>"; };
-		240F889B1CC71E4700138F10 /* LewPopupViewAnimationDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationDrop.h; sourceTree = "<group>"; };
-		240F889C1CC71E4700138F10 /* LewPopupViewAnimationDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationDrop.m; sourceTree = "<group>"; };
-		240F889D1CC71E4700138F10 /* LewPopupViewAnimationFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationFade.h; sourceTree = "<group>"; };
-		240F889E1CC71E4700138F10 /* LewPopupViewAnimationFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationFade.m; sourceTree = "<group>"; };
-		240F889F1CC71E4700138F10 /* LewPopupViewAnimationSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSlide.h; sourceTree = "<group>"; };
-		240F88A01CC71E4700138F10 /* LewPopupViewAnimationSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSlide.m; sourceTree = "<group>"; };
-		240F88A11CC71E4700138F10 /* LewPopupViewAnimationSpring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewAnimationSpring.h; sourceTree = "<group>"; };
-		240F88A21CC71E4700138F10 /* LewPopupViewAnimationSpring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LewPopupViewAnimationSpring.m; sourceTree = "<group>"; };
-		240F88A31CC71E4700138F10 /* LewPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LewPopupViewController.h; sourceTree = "<group>"; };
 		240F88B31CC755C900138F10 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		240F88B41CC755C900138F10 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		240F88B91CC76A2600138F10 /* CommodityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityItem.h; sourceTree = "<group>"; };
@@ -499,17 +480,6 @@
 			children = (
 				24ABAFBF1CCF35950089F779 /* Standard */,
 				24233E211CCE07DF00CF93B6 /* SMPageControl */,
-				240F889B1CC71E4700138F10 /* LewPopupViewAnimationDrop.h */,
-				240F889C1CC71E4700138F10 /* LewPopupViewAnimationDrop.m */,
-				240F889D1CC71E4700138F10 /* LewPopupViewAnimationFade.h */,
-				240F889E1CC71E4700138F10 /* LewPopupViewAnimationFade.m */,
-				240F889F1CC71E4700138F10 /* LewPopupViewAnimationSlide.h */,
-				240F88A01CC71E4700138F10 /* LewPopupViewAnimationSlide.m */,
-				240F88A11CC71E4700138F10 /* LewPopupViewAnimationSpring.h */,
-				240F88A21CC71E4700138F10 /* LewPopupViewAnimationSpring.m */,
-				240F88A31CC71E4700138F10 /* LewPopupViewController.h */,
-				240F88981CC71E1900138F10 /* LewPopupBackgroundView.h */,
-				240F88991CC71E1900138F10 /* LewPopupBackgroundView.m */,
 				244517651CA03E640085CC16 /* Config.h */,
 				244517661CA03E640085CC16 /* Config.m */,
 				244517671CA03E640085CC16 /* HttpUtil.h */,
@@ -564,10 +534,8 @@
 		24F1351A1C86977E00645F92 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				240F88951CC71E0100138F10 /* UIViewController+LewPopupViewController.h */,
 				2499B85D1CCB9D3D003FC604 /* UITableView+Common.h */,
 				2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */,
-				240F88961CC71E0100138F10 /* UIViewController+LewPopupViewController.m */,
 				244517B31CA03F520085CC16 /* MBProgressHUD+Util.h */,
 				244517B41CA03F520085CC16 /* MBProgressHUD+Util.m */,
 				244517B51CA03F520085CC16 /* UIColor+Util.h */,
@@ -857,7 +825,6 @@
 			files = (
 				24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */,
 				244517821CA03E760085CC16 /* WorkOrder.m in Sources */,
-				240F88A71CC71E4700138F10 /* LewPopupViewAnimationSpring.m in Sources */,
 				24020A571CB7431500D4EA96 /* WorkOrderInfoView.m in Sources */,
 				244517BE1CA03F520085CC16 /* UIView+Util.m in Sources */,
 				248A5DB41C85C3C30095A4FB /* main.m in Sources */,
@@ -869,9 +836,7 @@
 				24020A5D1CB7491100D4EA96 /* WorkOrderStepEditView.m in Sources */,
 				24EAD1F11CC0DF3100444A9D /* SalesOrderGrabCell.m in Sources */,
 				24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */,
-				240F889A1CC71E1900138F10 /* LewPopupBackgroundView.m in Sources */,
 				24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */,
-				240F88A61CC71E4700138F10 /* LewPopupViewAnimationSlide.m in Sources */,
 				24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */,
 				2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */,
 				247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */,
@@ -889,17 +854,14 @@
 				248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */,
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */,
-				240F88A41CC71E4700138F10 /* LewPopupViewAnimationDrop.m in Sources */,
 				2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */,
 				24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */,
 				244517831CA03E760085CC16 /* WorkOrderStep.m in Sources */,
 				24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */,
 				24902D761CC3882D00607659 /* SignViewController.m in Sources */,
-				240F88971CC71E0100138F10 /* UIViewController+LewPopupViewController.m in Sources */,
 				244517861CA03E8A0085CC16 /* GisViewController.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
 				24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */,
-				240F88A51CC71E4700138F10 /* LewPopupViewAnimationFade.m in Sources */,
 				240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */,
 				24F359761CB3B2B400C0950B /* Attachment.m in Sources */,
 				24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */,

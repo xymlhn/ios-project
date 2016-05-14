@@ -30,14 +30,42 @@ extern NSString *const kReloginNotification;
  */
 -(void) login:(NSString *)userName password:(NSString *)password andBlock:(void (^)(id data, NSError *error))block;
 
+/**
+ *  获取服务器时间
+ *
+ *  @param block 时间与错误信息
+ */
 -(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSError *error))block;
 
+/**
+ *  处理服务器响应信息头
+ *
+ *  @param session session description
+ *
+ *  @return bool
+ */
 -(BOOL) handleHeader:(NSURLSessionDataTask *) session;
 
+/**
+ *  更新用户昵称
+ */
 -(void) updateNickName;
 
+/**
+ *  推送个推id
+ *
+ *  @param pushId id
+ */
 -(void) pushId:(NSString *)pushId;
 
+/**
+ *  重登录
+ *
+ *  @param userName 用户名
+ *  @param password 密码
+ *  @param isFirst  是否首次重登陆
+
+ */
 -(void)reLogin:(NSString *)userName password:(NSString *)password isFirst:(BOOL)isFirst;
 
 @end

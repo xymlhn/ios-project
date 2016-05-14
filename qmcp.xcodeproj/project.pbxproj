@@ -286,7 +286,6 @@
 			children = (
 				24ABAFCD1CCF39990089F779 /* CommodityTableView.h */,
 				24ABAFCE1CCF39990089F779 /* CommodityTableView.m */,
-				2499B8601CCB9D83003FC604 /* common */,
 				24020A551CB7431500D4EA96 /* WorkOrderInfoView.h */,
 				24020A561CB7431500D4EA96 /* WorkOrderInfoView.m */,
 				24020A581CB7471C00D4EA96 /* WorkOrderStepView.h */,
@@ -433,13 +432,6 @@
 				248A5DB31C85C3C30095A4FB /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2499B8601CCB9D83003FC604 /* common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = common;
 			sourceTree = "<group>";
 		};
 		24A685611CC4C72600663858 /* Help */ = {

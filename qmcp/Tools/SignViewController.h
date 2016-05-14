@@ -1,6 +1,6 @@
 //
 //  SignViewController.h
-//  qmcp
+//  签名
 //
 //  Created by 谢永明 on 16/4/17.
 //  Copyright © 2016年 inforshare. All rights reserved.

@@ -17,6 +17,7 @@
 #import "WorkOrderStepView.h"
 #import "Utils.h"
 #import "WorkOrderManager.h"
+#import "WorkOrderCameraController.h"
 @interface WorkOrderStepController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) NSMutableArray *workOrderStepList;
@@ -42,6 +43,9 @@
     
     _stepView.saveBtn.userInteractionEnabled = YES;
     [_stepView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
+    
+    _stepView.cameraBtn.userInteractionEnabled = YES;
+    [_stepView.cameraBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraBtnClick:)]];
 }
 
 -(void)loadData
@@ -51,6 +55,14 @@
 }
 
 #pragma mark - IBAction
+- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
+{
+    WorkOrderCameraController *info =[WorkOrderCameraController new];
+    info.workOrderCode = [super workOrderCode];
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
+
 - (void)addBtnClick:(UITapGestureRecognizer *)recognizer
 {
     WorkOrderStep *step = [WorkOrderStep new];

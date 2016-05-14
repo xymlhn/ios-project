@@ -10,6 +10,7 @@
 #import "WorkOrderManager.h"
 #import "Config.h"
 #import "PropertyManager.h"
+#import "CameraManager.h"
 
 @interface RootViewController ()
 
@@ -35,6 +36,7 @@
     [[WorkOrderManager getInstance] getAllWorkOrder:[Config getWorkOrderTime]];
     [[PropertyManager getInstance] getCommodityItem:[Config getCommodityItem]];
     [[PropertyManager getInstance] getCommodityProperty:[Config getCommodityProperty]];
+    [[CameraManager getInstance] getAllCamera];
 }
 
 - (void)didReceiveMemoryWarning {

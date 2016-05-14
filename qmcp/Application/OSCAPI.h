@@ -29,4 +29,7 @@
 #define OSCAPI_COMMODITYITEM            @"i/a/api/commodity/item?lastUpdateTime="
 #define OSCAPI_COMODITYPROPERTY         @"i/a/api/commodity/property?lastUpdateTime="
 #define OSCAPI_GETWORKORDERBYITEMCODE   @"i/a/api/workorder/item/"
+#define OSCAPI_ALL_CAMERA               @"i/a/api/camera/"
+#define OSCAPI_CURRENT_CAMERA           @"i/a/api/camera/"
+#define OSCAPI_CAMERA_SWITCH            @"i/a/api/camera/switch/"
 #endif

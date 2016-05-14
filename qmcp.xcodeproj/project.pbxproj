@@ -68,6 +68,10 @@
 		24948B421CC2375900DE8946 /* SalesOrderBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B411CC2375900DE8946 /* SalesOrderBind.m */; };
 		24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = 24986CD31CC3202100CE0CB5 /* SalesOrderConfirm.m */; };
 		2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */; };
+		249E49091CE6EFB80051C9C1 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E49081CE6EFB80051C9C1 /* CameraManager.m */; };
+		249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E490B1CE6F0D80051C9C1 /* CameraData.m */; };
+		249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E490E1CE6FA7A0051C9C1 /* WorkOrderCameraController.m */; };
+		249E49121CE700EE0051C9C1 /* WorkOrderCameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E49111CE700EE0051C9C1 /* WorkOrderCameraCell.m */; };
 		24A2B4471CB4EDB3006E29DB /* PJRSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */; };
 		24A2B44A1CB4F725006E29DB /* WorkOrderInventoryEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A2B4491CB4F725006E29DB /* WorkOrderInventoryEditController.m */; };
 		24A685641CC4C74B00663858 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A685631CC4C74B00663858 /* HelpViewController.m */; };
@@ -217,6 +221,14 @@
 		24986CD31CC3202100CE0CB5 /* SalesOrderConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderConfirm.m; sourceTree = "<group>"; };
 		2499B85D1CCB9D3D003FC604 /* UITableView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Common.h"; sourceTree = "<group>"; };
 		2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Common.m"; sourceTree = "<group>"; };
+		249E49071CE6EFB80051C9C1 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
+		249E49081CE6EFB80051C9C1 /* CameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraManager.m; sourceTree = "<group>"; };
+		249E490A1CE6F0D80051C9C1 /* CameraData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraData.h; sourceTree = "<group>"; };
+		249E490B1CE6F0D80051C9C1 /* CameraData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraData.m; sourceTree = "<group>"; };
+		249E490D1CE6FA7A0051C9C1 /* WorkOrderCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderCameraController.h; sourceTree = "<group>"; };
+		249E490E1CE6FA7A0051C9C1 /* WorkOrderCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderCameraController.m; sourceTree = "<group>"; };
+		249E49101CE700EE0051C9C1 /* WorkOrderCameraCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderCameraCell.h; sourceTree = "<group>"; };
+		249E49111CE700EE0051C9C1 /* WorkOrderCameraCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderCameraCell.m; sourceTree = "<group>"; };
 		24A2B4451CB4EDB3006E29DB /* PJRSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJRSignatureView.h; sourceTree = "<group>"; };
 		24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJRSignatureView.m; sourceTree = "<group>"; };
 		24A2B4481CB4F725006E29DB /* WorkOrderInventoryEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryEditController.h; sourceTree = "<group>"; };
@@ -337,6 +349,8 @@
 				246B0ABF1CB4B3BF0017E956 /* WorkOrderInventoryCell.m */,
 				24F0C1E71CC5E299005B3F98 /* CommodityCell.h */,
 				24F0C1E81CC5E299005B3F98 /* CommodityCell.m */,
+				249E49101CE700EE0051C9C1 /* WorkOrderCameraCell.h */,
+				249E49111CE700EE0051C9C1 /* WorkOrderCameraCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -365,6 +379,8 @@
 				24948B3E1CC235FC00DE8946 /* SalesOrderManager.m */,
 				240F88BF1CC76B6700138F10 /* PropertyManager.h */,
 				240F88C01CC76B6700138F10 /* PropertyManager.m */,
+				249E49071CE6EFB80051C9C1 /* CameraManager.h */,
+				249E49081CE6EFB80051C9C1 /* CameraManager.m */,
 				24B0324F1C881E46007506DD /* Tools */,
 			);
 			path = Manager;
@@ -386,6 +402,8 @@
 				246B0AC21CB4B66D0017E956 /* WorkOrderInventoryController.m */,
 				24A2B4481CB4F725006E29DB /* WorkOrderInventoryEditController.h */,
 				24A2B4491CB4F725006E29DB /* WorkOrderInventoryEditController.m */,
+				249E490D1CE6FA7A0051C9C1 /* WorkOrderCameraController.h */,
+				249E490E1CE6FA7A0051C9C1 /* WorkOrderCameraController.m */,
 			);
 			path = WorkOrder;
 			sourceTree = "<group>";
@@ -660,6 +678,8 @@
 				240E64061CD04EFD00E355A7 /* PropertyChoose.m */,
 				240E64081CD0562F00E355A7 /* PropertyData.h */,
 				240E64091CD0562F00E355A7 /* PropertyData.m */,
+				249E490A1CE6F0D80051C9C1 /* CameraData.h */,
+				249E490B1CE6F0D80051C9C1 /* CameraData.m */,
 			);
 			name = Model;
 			path = Models;
@@ -829,12 +849,14 @@
 				24EAD1F11CC0DF3100444A9D /* SalesOrderGrabCell.m in Sources */,
 				24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */,
 				24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */,
+				249E49091CE6EFB80051C9C1 /* CameraManager.m in Sources */,
 				24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */,
 				2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */,
 				247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */,
 				24020A531CB7419400D4EA96 /* BaseView.m in Sources */,
 				246B0AC01CB4B3BF0017E956 /* WorkOrderInventoryCell.m in Sources */,
 				2445177F1CA03E760085CC16 /* CZAccount.m in Sources */,
+				249E49121CE700EE0051C9C1 /* WorkOrderCameraCell.m in Sources */,
 				24A2B4471CB4EDB3006E29DB /* PJRSignatureView.m in Sources */,
 				24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */,
 				244517C11CA03F870085CC16 /* BaseWorkOrderViewController.m in Sources */,
@@ -846,6 +868,7 @@
 				248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */,
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */,
+				249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */,
 				2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */,
 				24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */,
 				244517831CA03E760085CC16 /* WorkOrderStep.m in Sources */,
@@ -853,6 +876,7 @@
 				24902D761CC3882D00607659 /* SignViewController.m in Sources */,
 				244517861CA03E8A0085CC16 /* GisViewController.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
+				249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */,
 				24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */,
 				240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */,
 				24F359761CB3B2B400C0950B /* Attachment.m in Sources */,

@@ -35,7 +35,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 
 -(void)setNeedOpenCamera:(CameraData *)needOpenCamera
 {
-    
+    _needOpenCamera = needOpenCamera;
 }
 -(void)getAllCamera{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_CAMERA];
@@ -64,7 +64,9 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             
         }else{
-            [self getAllCamera];
+            NSDictionary *dict = @{@"all_camera":_allCameraArr};
+            NSNotification * notice = [NSNotification notificationWithName:kCameraNotification object:nil userInfo:dict];
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
         }
     }];
 }
@@ -72,44 +74,42 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 -(void)switchCamera:(NSString *)workOrderCode cameraCode:(NSString *)cameraCode isOn:(bool)isOn needOpen:(bool)open{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_CAMERA_SWITCH];
     NSDictionary *jsonDict = @{@"workOrderCode":workOrderCode,@"cameraCode":cameraCode,@"turnOn":[NSNumber numberWithBool:isOn]};
-    NSString *json = [jsonDict mj_JSONString];
-    
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = isOn ? @"打开摄像头中..." : @"关闭摄像头";
-    hub.userInteractionEnabled = NO;
+    MBProgressHUD *hub = nil;
+    if(!open){
+        hub = [Utils createHUD];
+        hub.labelText = isOn ? @"打开摄像头中..." : @"关闭摄像头";
+        hub.userInteractionEnabled = NO;
+    }
 
-    [HttpUtil post:URLString json:json finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:jsonDict finish:^(NSDictionary *obj, NSError *error) {
         if (!error) {
             CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
             for(CameraData *cameraData in _allCameraArr){
                 if([cameraData.cameraCode isEqualToString:currentCamera.cameraCode]){
-                    cameraData.isChoose = YES;
+                    cameraData.isChoose = isOn;
                 }
             }
             NSDictionary *dict = @{@"all_camera":_allCameraArr};
             NSNotification * notice = [NSNotification notificationWithName:kCameraNotification object:nil userInfo:dict];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:isOn ?@"切换成功" :@"关闭成功"];
-            [hub hide:YES afterDelay:0.5];
-            if(!isOn && open){
-                [self switchCamera:workOrderCode cameraCode:_needOpenCamera.cameraCode isOn:YES needOpen:NO];
-            }
-        }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message = isOn ?@"切换失败": @"关闭失败";
+            if(!open){
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.labelText = [NSString stringWithFormat:isOn ?@"打开成功" :@"关闭成功"];
+                [hub hide:YES afterDelay:0.5];
             }else{
-                message = [obj valueForKey:@"message"];
+                 [self switchCamera:workOrderCode cameraCode:_needOpenCamera.cameraCode isOn:YES needOpen:NO];
             }
+
+        }else{
+            NSString *message = error.userInfo[@"message"];
             NSDictionary *dict = @{@"all_camera":_allCameraArr};
             NSNotification * notice = [NSNotification notificationWithName:kCameraNotification object:nil userInfo:dict];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = message;
-            [hub hide:YES afterDelay:0.5];
+            [hub hide:YES afterDelay:1.5];
         }
     }];
 }

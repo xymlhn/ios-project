@@ -91,13 +91,15 @@
 
 -(void)switchAction:(UISwitch*)switchButton
 {
-     //TODO 接口问题暂时
-    //return;
+    
     NSUInteger tag = switchButton.tag;
     CameraData *cameraData = _cameraArr[tag];
     if(!cameraData.isChoose){
         CameraData *current = [self getCurrentOnCamera];
-        if(current != nil){
+        if(current == nil){
+            [[CameraManager getInstance] switchCamera:[super workOrderCode] cameraCode:cameraData.cameraCode isOn:YES needOpen:NO];
+        }else{
+            [[CameraManager getInstance] setNeedOpenCamera:cameraData];
             [[CameraManager getInstance] switchCamera:[super workOrderCode] cameraCode:current.cameraCode isOn:NO needOpen:YES];
         }
     }else{

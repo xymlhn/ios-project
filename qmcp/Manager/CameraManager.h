@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class CameraData;
 @interface CameraManager : NSObject
 
 extern NSString *const kCameraNotification;
@@ -34,4 +34,6 @@ extern NSString *const kCameraNotification;
  *  @param ison          开关状态
  */
 -(void)switchCamera:(NSString *)workOrderCode cameraCode:(NSString *)cameraCode isOn:(bool)isOn needOpen:(bool)open;
+
+-(void)setNeedOpenCamera:(CameraData *)needOpenCamera;
 @end

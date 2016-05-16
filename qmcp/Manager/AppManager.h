@@ -68,4 +68,5 @@ extern NSString *const kReloginNotification;
  */
 -(void)reLogin:(NSString *)userName password:(NSString *)password isFirst:(BOOL)isFirst;
 
+-(void)updateNickName;
 @end

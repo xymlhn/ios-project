@@ -98,8 +98,9 @@
             break;
         }
         case 2: {
-            SettingViewController *setting = [SettingViewController new];
-            [self setContentViewController:setting];
+//            SettingViewController *setting = [SettingViewController new];
+//            [self setContentViewController:setting];
+            [[AppManager getInstance] updateNickName];
             break;
         }
         case 3: {

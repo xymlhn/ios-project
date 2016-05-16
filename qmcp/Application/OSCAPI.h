@@ -32,4 +32,9 @@
 #define OSCAPI_ALL_CAMERA               @"i/a/api/camera/"
 #define OSCAPI_CURRENT_CAMERA           @"i/a/api/camera/"
 #define OSCAPI_CAMERA_SWITCH            @"i/a/api/camera/switch/"
+
+#define OSCAPI_FORMTEMPLATE             @"i/a/api/salesorder/form/template?salesOrderCode="
+#define OSCAPI_FORMDATA                 @"i/a/api/salesorder/form/data?salesOrderCode="
+#define OSCAPI_SAVE_FORMDATA            @"i/a/api/salesorder/form/data"
+#define OSCAPI_DELETE_FORMDATA          @"i/a/api/salesorder/form/data/"
 #endif

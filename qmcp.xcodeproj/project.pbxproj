@@ -83,6 +83,10 @@
 		24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFCE1CCF39990089F779 /* CommodityTableView.m */; };
 		24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE271CBA8385003C6C2E /* SettingViewCell.m */; };
 		24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */; };
+		24C34F111CE9928400D945BE /* FormData.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F101CE9928400D945BE /* FormData.m */; };
+		24C34F141CE9931100D945BE /* FormTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F131CE9931100D945BE /* FormTemplate.m */; };
+		24C34F171CE9936F00D945BE /* FormTemplateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F161CE9936F00D945BE /* FormTemplateField.m */; };
+		24C34F1A1CE9956900D945BE /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F191CE9956900D945BE /* FormManager.m */; };
 		24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D49D2E1CB54370003213C9 /* ScanViewController.m */; };
 		24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */; };
 		24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1EC1CC0DA5D00444A9D /* SalesOrderBindListController.m */; };
@@ -249,6 +253,14 @@
 		24AEEE271CBA8385003C6C2E /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCell.m; sourceTree = "<group>"; };
 		24AEEE2A1CBA87D9003C6C2E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		24C34F0F1CE9928400D945BE /* FormData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormData.h; sourceTree = "<group>"; };
+		24C34F101CE9928400D945BE /* FormData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormData.m; sourceTree = "<group>"; };
+		24C34F121CE9931100D945BE /* FormTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTemplate.h; sourceTree = "<group>"; };
+		24C34F131CE9931100D945BE /* FormTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplate.m; sourceTree = "<group>"; };
+		24C34F151CE9936F00D945BE /* FormTemplateField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTemplateField.h; sourceTree = "<group>"; };
+		24C34F161CE9936F00D945BE /* FormTemplateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplateField.m; sourceTree = "<group>"; };
+		24C34F181CE9956900D945BE /* FormManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormManager.h; sourceTree = "<group>"; };
+		24C34F191CE9956900D945BE /* FormManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormManager.m; sourceTree = "<group>"; };
 		24D49D2D1CB54370003213C9 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		24D49D2E1CB54370003213C9 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		24EAD1E81CC0DA4300444A9D /* SalesOrderGrabListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabListController.h; sourceTree = "<group>"; };
@@ -373,6 +385,8 @@
 			children = (
 				2445175D1CA03E5B0085CC16 /* AppManager.h */,
 				2445175E1CA03E5B0085CC16 /* AppManager.m */,
+				24C34F181CE9956900D945BE /* FormManager.h */,
+				24C34F191CE9956900D945BE /* FormManager.m */,
 				2445175F1CA03E5B0085CC16 /* WorkOrderManager.h */,
 				244517601CA03E5B0085CC16 /* WorkOrderManager.m */,
 				24948B3D1CC235FC00DE8946 /* SalesOrderManager.h */,
@@ -680,6 +694,12 @@
 				240E64091CD0562F00E355A7 /* PropertyData.m */,
 				249E490A1CE6F0D80051C9C1 /* CameraData.h */,
 				249E490B1CE6F0D80051C9C1 /* CameraData.m */,
+				24C34F0F1CE9928400D945BE /* FormData.h */,
+				24C34F101CE9928400D945BE /* FormData.m */,
+				24C34F121CE9931100D945BE /* FormTemplate.h */,
+				24C34F131CE9931100D945BE /* FormTemplate.m */,
+				24C34F151CE9936F00D945BE /* FormTemplateField.h */,
+				24C34F161CE9936F00D945BE /* FormTemplateField.m */,
 			);
 			name = Model;
 			path = Models;
@@ -865,6 +885,7 @@
 				244517BD1CA03F520085CC16 /* UIImage+Util.m in Sources */,
 				244517B21CA03F400085CC16 /* AppDelegate.m in Sources */,
 				244517701CA03E640085CC16 /* QrCodeViewController.m in Sources */,
+				24C34F141CE9931100D945BE /* FormTemplate.m in Sources */,
 				248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */,
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */,
@@ -877,7 +898,9 @@
 				244517861CA03E8A0085CC16 /* GisViewController.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
 				249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */,
+				24C34F1A1CE9956900D945BE /* FormManager.m in Sources */,
 				24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */,
+				24C34F111CE9928400D945BE /* FormData.m in Sources */,
 				240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */,
 				24F359761CB3B2B400C0950B /* Attachment.m in Sources */,
 				24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */,
@@ -907,6 +930,7 @@
 				2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */,
 				244517A91CA03F190085CC16 /* SideMenuController.m in Sources */,
 				24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */,
+				24C34F171CE9936F00D945BE /* FormTemplateField.m in Sources */,
 				24A685641CC4C74B00663858 /* HelpViewController.m in Sources */,
 				24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */,
 				24F359801CB3BE4300C0950B /* PhotoCell.m in Sources */,

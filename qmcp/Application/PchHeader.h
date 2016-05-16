@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, SaveType) {
 };
 
 typedef NS_ENUM(NSInteger, ExceptionType) {
+    ExceptionTypeNone = 0,
     ExceptionTypeNotLogin = 10,
     ExceptionTypeNoPermission = 20,
     ExceptionTypeNOUrl = 30,

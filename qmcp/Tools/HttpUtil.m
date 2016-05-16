@@ -11,19 +11,19 @@
 #import "AppManager.h"
 @implementation HttpUtil
 
-+(void)post:(NSString *)urlpath json:(NSString *)dict finish:(void (^)(NSDictionary *, NSError *))cb
++(void)post:(NSString *)urlpath array:(NSArray *)arr finish:(void (^)(NSDictionary *, NSError *))cb
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     urlpath = [urlpath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    [manager POST:urlpath parameters:dict progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
+    [manager POST:urlpath parameters:arr progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
         if(![[AppManager getInstance] handleHeader:session]){
             NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             cb(obj ,nil);
         }else{
-            NSError *error = [[NSError alloc] init];
-            
+            NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
             cb(nil,error);
         }
         
@@ -44,8 +44,8 @@
             NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             cb(obj ,nil);
         }else{
-            NSError *error = [[NSError alloc] init];
-            
+            NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
             cb(nil,error);
         }
         
@@ -66,9 +66,9 @@
             NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             cb(obj ,nil);
         }else{
-            NSError *error = [[NSError alloc] init];
-             NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            cb(obj,error);
+            NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
+            cb(nil,error);
         }
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
@@ -94,7 +94,8 @@
             NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             cb(obj ,nil);
         }else{
-            NSError *error = [[NSError alloc] init];
+            NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
             cb(nil,error);
         }
 

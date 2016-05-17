@@ -79,6 +79,13 @@
     _saveBtn.textColor = [UIColor nameColor];
     [bottomView addSubview:_saveBtn];
     
+    _completeBtn = [UILabel new];
+    [_completeBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _completeBtn.text = @"";
+    _completeBtn.textAlignment = NSTextAlignmentCenter;
+    _completeBtn.textColor = [UIColor nameColor];
+    [bottomView addSubview:_completeBtn];
+    
     [_infoBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(bottomView).with.offset(0);
         make.centerY.equalTo(bottomView);
@@ -99,6 +106,12 @@
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.width.equalTo(_cameraBtn);
         make.left.equalTo(_cameraBtn.mas_right);
+        make.centerY.equalTo(bottomView);
+    }];
+    
+    [_completeBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.width.equalTo(_cameraBtn);
+        make.left.equalTo(_saveBtn.mas_right);
         make.right.equalTo(bottomView);
         make.centerY.equalTo(bottomView);
     }];

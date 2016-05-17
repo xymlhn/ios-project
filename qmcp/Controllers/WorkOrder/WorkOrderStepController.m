@@ -22,7 +22,7 @@
 
 @property (nonatomic, retain) NSMutableArray *workOrderStepList;
 @property (nonatomic, strong) WorkOrderStepView *stepView;
-
+@property (nonatomic, strong) WorkOrder *workOrder;
 @end
 
 @implementation WorkOrderStepController
@@ -46,12 +46,17 @@
     
     _stepView.cameraBtn.userInteractionEnabled = YES;
     [_stepView.cameraBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraBtnClick:)]];
+    
+    _stepView.completeBtn.userInteractionEnabled = YES;
+    [_stepView.completeBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(completeBtnClick:)]];
 }
 
 -(void)loadData
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    _workOrder = [WorkOrder searchWithWhere:workWhere][0];
 }
 
 #pragma mark - IBAction
@@ -117,12 +122,14 @@
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
-    WorkOrder *workOrder = [WorkOrder searchWithWhere:workWhere][0];
-    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
-    NSArray *steps = [WorkOrderStep searchWithWhere:where];
-    [[WorkOrderManager getInstance]postWorkOrderStep:workOrder andStep:steps];
+    [[WorkOrderManager getInstance]postWorkOrderStep:_workOrder andStep:_workOrderStepList isComplete:YES isCompleteAll:NO];
 }
+
+- (void)completeBtnClick:(UITapGestureRecognizer *)recognizer
+{
+    [[WorkOrderManager getInstance]postWorkOrderStep:_workOrder andStep:_workOrderStepList isComplete:YES isCompleteAll:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

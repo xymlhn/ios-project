@@ -111,7 +111,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     
 }
 
-- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps{
+- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps isComplete:(BOOL)isComplete isCompleteAll:(BOOL)isCompleteAll{
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
@@ -143,7 +143,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
                            [attachment updateToDB];
                            if(i == attachments.count)
                            {
-                               hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+                               hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
                                [hub hide:YES afterDelay:1];
                            }
                        }else{
@@ -164,6 +164,13 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
             {
                 hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
                 [hub hide:YES afterDelay:1];
+                
+                if(isComplete){
+                    [self updateTimeStamp:workOrder.code timeStamp:WorkOrderTimeStampComplete time:[Utils formatDate:[NSDate new]]];
+                    if(isCompleteAll){
+                        [self completeAllSteps:workOrder.code];
+                    }
+                }
             }
         }else{
             
@@ -177,9 +184,28 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = message;
             [hub hide:YES afterDelay:1];
+
+        }
+    }];
+}
+
+-(void)completeAllSteps:(NSString*)workOrderCode
+{
+    
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在完成所有步骤";
+    hub.userInteractionEnabled = NO;
+
+    NSDictionary *dict = @{@"workOrderCode":workOrderCode};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMPLTER_ALL_STEPS,workOrderCode];
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
+        if (!error) {
+            hub.labelText = [NSString stringWithFormat:@"提交成功"];
+            [hub hide:YES afterDelay:1];
+        }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = @"提交失败,请重试";
             [hub hide:YES afterDelay:1];
         }
     }];
@@ -215,9 +241,9 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     pick.pickupTime = [Utils formatDate:[NSDate new]];
     pick.signatureImageKey = @"b23f49bc-374c-4749-8229-c3c90d47b3de.jpg";
     pick.itemCodes = @[@"sf01"];
-    NSString *json = [pick mj_JSONString];
+
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_PICKUPITEM];
-    [HttpUtil post:URLString json:json finish:^(NSDictionary *obj,NSError *error){
+    [HttpUtil post:URLString param:pick finish:^(NSDictionary *obj,NSError *error){
         if (!error) {
            
         }else{

@@ -51,7 +51,8 @@
                     case WorkOrderStatusEnroute:
                         [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:
                          WorkOrderTimeStampOnsite time:[Utils formatDate:[NSDate new]]];
-                        
+                    case WorkOrderStatusOnSite:
+                        [self pushServiceUI];
                         break;
                     default:
                         break;
@@ -84,17 +85,17 @@
     switch ([time integerValue]) {
             
         case WorkOrderStatusAssigned:
-            [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];// 添加文字
+            [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
             _workOrder.status = WorkOrderStatusAcknowledged;
             [_workOrder saveToDB];
             break;
         case WorkOrderStatusAcknowledged:
-            [_infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];// 添加文字
+            [_infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
             _workOrder.status = WorkOrderStatusEnroute;
             [_workOrder saveToDB];
             break;
         default:
-            [_infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];// 添加文字
+            [_infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
             _workOrder.status = WorkOrderStatusOnSite;
             [_workOrder saveToDB];
             break;

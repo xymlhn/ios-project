@@ -137,7 +137,7 @@
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
-    [[WorkOrderManager getInstance]postWorkOrderStep:_workOrder andStep:steps];
+    [[WorkOrderManager getInstance]postWorkOrderStep:_workOrder andStep:steps isComplete:NO isCompleteAll:NO];
 }
 
 - (void)photoBtnClick:(UITapGestureRecognizer *)recognizer

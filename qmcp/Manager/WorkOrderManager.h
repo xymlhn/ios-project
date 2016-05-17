@@ -29,7 +29,14 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param workOrder 工单
  *  @param steps     工单步骤
  */
-- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps;
+- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps isComplete:(BOOL)isComplete isCompleteAll:(BOOL)isCompleteAll;
+
+/**
+ *  完成该订单所有的工单步骤,可以取件了
+ *
+ *  @param workOrderCode 工单code
+ */
+- (void)completeAllSteps:(NSString *)workOrderCode;
 
 /**
  *  更新时间戳

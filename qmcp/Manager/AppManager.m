@@ -128,10 +128,9 @@ NSString *const kReloginNotification = @"reLogin";
 
 -(void) updateNickName
 {
-    NSDictionary *dict = @{@"nickName":@"123465"};
     NSArray *arr = @[@"fuck"];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_NICKNAME];
-    [HttpUtil post:URLString json:arr finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:arr finish:^(NSDictionary *obj, NSError *error) {
         if (error == nil) {
             NSLog(@"success");
             

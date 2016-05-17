@@ -16,5 +16,5 @@
 @property (nonatomic,strong ) UILabel     *saveBtn;
 @property (nonatomic,strong ) UILabel     *infoBtn;
 @property (nonatomic,strong ) UILabel     *cameraBtn;
-
+@property (nonatomic,strong ) UILabel     *completeBtn;
 @end

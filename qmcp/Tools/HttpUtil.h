@@ -17,7 +17,7 @@
  *  @param dict    字典参数
  *  @param cb      回调
  */
-+(void) post:(NSString *)urlpath param:(NSDictionary *)dict finish:( void (^)(NSDictionary *obj, NSError *error))cb;
++(void) post:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))cb;
 
 
 /**
@@ -27,16 +27,8 @@
  *  @param dict    参数
  *  @param cb      回调
  */
-+(void) get:(NSString *)urlpath param:(NSDictionary *)dict finish:( void (^)(NSDictionary *obj, NSError *error))cb;
++(void) get:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))cb;
 
-/**
- *  post请求
- *
- *  @param urlpath 地址
- *  @param arr     数组参数
- *  @param cb      回调
- */
-+(void)post:(NSString *)urlpath array:(NSArray *)arr finish:(void (^)(NSDictionary *, NSError *))cb;
 
 /**
  *  上传文件

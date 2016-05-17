@@ -16,6 +16,7 @@
 #define OSCAPI_LOGOUT                   @"api/logout"
 #define OSCAPI_SERVER_TIME              @"a/api/servertime"
 #define OSCAPI_ALL_WORKORDER            @"i/a/api/workorder?lastUpdateTime="
+#define OSCAPI_COMPLTER_ALL_STEPS       @"i/a/api/workorder?lastUpdateTime="
 #define OSCAPI_POSTWORKORDERSTEP        @"i/a/api/workorder/"
 #define OSCAPI_PUSHID                   @"i/a/api/push/id/"
 #define OSCAPI_NICKNAME                 @"i/a/api/user/nickname"

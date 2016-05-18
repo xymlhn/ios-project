@@ -18,6 +18,7 @@
 #import "WorkOrderInfoView.h"
 #import "EnumUtil.h"
 #import "WorkOrderManager.h"
+#import "MBProgressHUD.h"
 @interface WorkOrderInfoController ()
 @property (nonatomic,strong)WorkOrderInfoView *infoView;
 @property (nonatomic,copy)WorkOrder *workOrder;
@@ -31,8 +32,6 @@
 {
     _infoView = [WorkOrderInfoView new];
     [_infoView initView:self.view];
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(timeStamp:) name:@"timeStamp" object:nil];
 }
 -(void)bindListener
 {
@@ -41,16 +40,14 @@
             case WorkOrderTypeOnsite:
                 switch (_workOrder.status) {
                     case WorkOrderStatusAssigned:
-                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampAcknowledge time:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampAcknowledge time:[Utils formatDate:[NSDate new]]];
                         break;
                     case WorkOrderStatusAcknowledged:
-                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:
-                         WorkOrderTimeStampEnroute time:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampEnroute time:[Utils formatDate:[NSDate new]]];
                         
                         break;
                     case WorkOrderStatusEnroute:
-                        [[WorkOrderManager getInstance] updateTimeStamp:[super workOrderCode] timeStamp:
-                         WorkOrderTimeStampOnsite time:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampOnsite time:[Utils formatDate:[NSDate new]]];
                     case WorkOrderStatusOnSite:
                         [self pushServiceUI];
                         break;
@@ -72,6 +69,54 @@
     
 }
 
+-(void)updateTimeStamp:(NSString *)workOrderCode timeStamp:(WorkOrderTimeStamp)timeStamp time:(NSString *)time{
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在提交数据";
+    hub.userInteractionEnabled = NO;
+    NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
+    [[WorkOrderManager getInstance] updateTimeStamp:URLString params:dict finish:^(NSDictionary *obj, NSError *error) {
+        if(!error){
+            hub.labelText = [NSString stringWithFormat:@"上传数据成功"];
+            [hub hide:YES afterDelay:1];
+            switch (weakSelf.workOrder.status) {
+                case WorkOrderStatusAssigned:
+                    [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
+                    _workOrder.status = WorkOrderStatusAcknowledged;
+                    [_workOrder saveToDB];
+                    break;
+                case WorkOrderStatusAcknowledged:
+                    [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
+                    _workOrder.status = WorkOrderStatusEnroute;
+                    [_workOrder saveToDB];
+                    break;
+                case WorkOrderStatusEnroute:
+                    [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
+                    _workOrder.status = WorkOrderStatusOnSite;
+                    [_workOrder saveToDB];
+                    break;
+                default:
+                    [weakSelf.infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
+                    _workOrder.status = WorkOrderStatusOnSite;
+                    [_workOrder saveToDB];
+                    break;
+            }
+        }else{
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"上传数据失败,请重试";
+            }else{
+                message = [obj valueForKey:@"message"];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:1];
+        }
+    }];
+  
+}
 -(void)loadData
 {
     NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
@@ -79,31 +124,6 @@
     [self setText:_workOrder];
 }
 
-#pragma mark - Notification
-- (void)timeStamp:(NSNotification *)text{
-    NSNumber *time = text.userInfo[@"timeStamp"];
-    switch ([time integerValue]) {
-            
-        case WorkOrderStatusAssigned:
-            [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-            _workOrder.status = WorkOrderStatusAcknowledged;
-            [_workOrder saveToDB];
-            break;
-        case WorkOrderStatusAcknowledged:
-            [_infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-            _workOrder.status = WorkOrderStatusEnroute;
-            [_workOrder saveToDB];
-            break;
-        default:
-            [_infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
-            _workOrder.status = WorkOrderStatusOnSite;
-            [_workOrder saveToDB];
-            break;
-    }
-}
--(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 -(void)setText:(WorkOrder *)workOrder
 {

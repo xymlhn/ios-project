@@ -166,7 +166,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
                 [hub hide:YES afterDelay:1];
                 
                 if(isComplete){
-                    [self updateTimeStamp:workOrder.code timeStamp:WorkOrderTimeStampComplete time:[Utils formatDate:[NSDate new]]];
+                    //[self updateTimeStamp:workOrder.code timeStamp:WorkOrderTimeStampComplete time:[Utils formatDate:[NSDate new]]];
                     if(isCompleteAll){
                         [self completeAllSteps:workOrder.code];
                     }
@@ -252,31 +252,9 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     }];
 }
 
--(void)updateTimeStamp :(NSString *)workOrderCode timeStamp:(WorkOrderTimeStamp)timeStamp time:(NSString *)time{
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在提交数据";
-    hub.userInteractionEnabled = NO;
-    NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP];
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSError *error) {
-        if(!error){
-            hub.labelText = [NSString stringWithFormat:@"上传数据成功"];
-            [hub hide:YES afterDelay:1];
-            NSDictionary *dic = @{@"timeStamp":[NSNumber numberWithInt:timeStamp]};
-            NSNotification * notice = [NSNotification notificationWithName:@"timeStamp" object:nil userInfo:dic];
-            [[NSNotificationCenter defaultCenter]postNotification:notice];
-        }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"上传数据失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
-            [hub hide:YES afterDelay:1];
-        }
+-(void)updateTimeStamp:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
+    [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
+        block(obj,error);
     }];
 }
 

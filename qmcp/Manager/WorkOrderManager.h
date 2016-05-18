@@ -39,13 +39,13 @@ extern NSString *const kWorkOrderUpdateNotification;
 - (void)completeAllSteps:(NSString *)workOrderCode;
 
 /**
- *  更新时间戳
+ *  更新
  *
  *  @param workOrderCode 工单code
- *  @param timeStamp     时间戳枚举
- *  @param time          时间
+ *  @param params        请求参数
+ *  @param block         回调
  */
--(void)updateTimeStamp :(NSString *)workOrderCode timeStamp:(WorkOrderTimeStamp)timeStamp time:(NSString *)time;
+-(void)updateTimeStamp:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  根据工单code获取工单

@@ -15,9 +15,9 @@
  *
  *  @param urlpath 地址
  *  @param dict    字典参数
- *  @param cb      回调
+ *  @param block      回调
  */
-+(void) post:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))cb;
++(void) post:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))block;
 
 
 /**
@@ -25,9 +25,9 @@
  *
  *  @param urlpath 地址
  *  @param dict    参数
- *  @param cb      回调
+ *  @param block      回调
  */
-+(void) get:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))cb;
++(void) get:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))block;
 
 
 /**
@@ -38,7 +38,9 @@
  *  @param name     接口名
  *  @param fileName 文件名
  *  @param dict     字典参数
- *  @param cb       回调
+ *  @param block       回调
  */
-+(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSError *))cb;
++(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSError *))block;
+
++(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSError *))block;
 @end

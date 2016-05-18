@@ -68,5 +68,5 @@ typedef NS_ENUM(NSInteger, WorkOrderTimeStamp) {
 
 @property (nonatomic, assign) BOOL isRead;
 
-
+@property (nonatomic, copy) NSString *userOpenId;
 @end

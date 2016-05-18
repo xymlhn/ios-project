@@ -9,7 +9,7 @@
 #ifndef iosapp_OSCAPI_h
 #define iosapp_OSCAPI_h
 
-//#define OSCAPI_ADDRESS             @"http://192.168.13.54:8080/"
+//#define OSCAPI_ADDRESS             @"http://192.168.13.25:8080/"
 //#define OSCAPI_ADDRESS             @"http://inforshare.vicp.cc:8003/"
 #define OSCAPI_ADDRESS                  @"http://www.efw365.com/"
 #define OSCAPI_LOGIN                    @"api/login"

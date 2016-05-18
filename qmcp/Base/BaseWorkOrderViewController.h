@@ -11,6 +11,9 @@
 #import "NSObject+LKDBHelper.h"
 #import "UIColor+Util.h"
 #import "PchHeader.h"
+#import "MBProgressHUD.h"
+#import "OSCAPI.h"
+#import "HttpUtil.h"
 @interface BaseWorkOrderViewController : UIViewController
 
 @property(nonatomic, copy) NSString *workOrderCode;

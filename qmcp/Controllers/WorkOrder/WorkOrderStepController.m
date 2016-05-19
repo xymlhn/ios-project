@@ -220,6 +220,8 @@
             [hub hide:YES afterDelay:1];
             weakSelf.workOrder.status = WorkOrderStatusCompleted;
             [weakSelf.workOrder saveToDB];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
         }else{
             NSString *message = @"";
             if(obj == nil){
@@ -244,7 +246,7 @@
     
     NSDictionary *dict = @{@"workOrderCode":workOrderCode};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMPLTER_ALL_STEPS,workOrderCode];
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
+    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
         if (!error) {
             hub.labelText = [NSString stringWithFormat:@"提交成功"];
             [hub hide:YES afterDelay:1];

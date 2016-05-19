@@ -153,7 +153,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     }];
 }
 - (void)postWorkOrderStep:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
-    [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
         block(obj,error);
     }];
 }

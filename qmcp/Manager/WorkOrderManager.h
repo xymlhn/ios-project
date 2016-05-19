@@ -61,4 +61,5 @@ extern NSString *const kWorkOrderUpdateNotification;
 
 -(void)postAttachment:(Attachment *)attachment finish:(void (^)(NSDictionary *, NSError *))block;
 
+- (void)sortAllWorkOrder;
 @end

@@ -122,12 +122,139 @@
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    [[WorkOrderManager getInstance]postWorkOrderStep:_workOrder andStep:_workOrderStepList isComplete:YES isCompleteAll:NO];
+    [self postWorkOrderStep:_workOrder andStep:_workOrderStepList isCompleteAll:NO];
 }
 
 - (void)completeBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    [[WorkOrderManager getInstance]postWorkOrderStep:_workOrder andStep:_workOrderStepList isComplete:YES isCompleteAll:YES];
+    [self postWorkOrderStep:_workOrder andStep:_workOrderStepList isCompleteAll:YES];
+}
+
+- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps isCompleteAll:(BOOL)isCompleteAll{
+    
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在上传工单步骤";
+    hub.userInteractionEnabled = NO;
+    NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
+    NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
+    [[WorkOrderManager getInstance] postWorkOrderStep:URLString params:dict finish:^(NSDictionary *obj,NSError *error){
+        if (!error) {
+            NSMutableArray *attachments = [NSMutableArray new];
+            for (WorkOrderStep *step in steps) {
+                for(Attachment *attachment in step.attachments)
+                {
+                    if(!attachment.isUpload){
+                        [attachments addObject:attachment];
+                    }
+                }
+                
+            }
+            if(attachments.count > 0){
+                int i= 0;
+                for(Attachment *attachment in attachments)
+                {
+                    i++;
+                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
+                    [[WorkOrderManager getInstance] postAttachment:attachment finish:^(NSDictionary *obj,NSError *error) {
+                        if (!error) {
+                            attachment.isUpload = YES;
+                            [attachment updateToDB];
+                            if(i == attachments.count)
+                            {
+                                hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                [hub hide:YES afterDelay:1];
+                            }
+                        }else{
+                            NSString *message = @"";
+                            if(obj == nil){
+                                message =@"上传工单附件失败,请重试";
+                            }else{
+                                message = [obj valueForKey:@"message"];
+                            }
+                            hub.mode = MBProgressHUDModeCustomView;
+                            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                            hub.labelText = message;
+                            [hub hide:YES afterDelay:1];
+                        }
+                    }];
+                }
+            }else
+            {
+                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+                [hub hide:YES afterDelay:1];
+            
+                [self updateTimeStamp:workOrder.code timeStamp:WorkOrderTimeStampComplete time:[Utils formatDate:[NSDate new]]];
+                if(isCompleteAll){
+                    [self completeAllSteps:workOrder.code];
+                }
+                
+            }
+        }else{
+            
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"上传工单步骤失败,请重试";
+            }else{
+                message = [obj valueForKey:@"message"];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:1];
+            
+        }
+    }];
+}
+
+-(void)updateTimeStamp:(NSString *)workOrderCode timeStamp:(WorkOrderTimeStamp)timeStamp time:(NSString *)time{
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在完成工单";
+    hub.userInteractionEnabled = NO;
+    NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
+    [[WorkOrderManager getInstance] updateTimeStamp:URLString params:dict finish:^(NSDictionary *obj, NSError *error) {
+        if(!error){
+            hub.labelText = [NSString stringWithFormat:@"完成工单成功"];
+            [hub hide:YES afterDelay:1];
+            weakSelf.workOrder.status = WorkOrderStatusCompleted;
+            [weakSelf.workOrder saveToDB];
+        }else{
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"完成工单失败,请重试";
+            }else{
+                message = [obj valueForKey:@"message"];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:1];
+        }
+    }];
+    
+}
+-(void)completeAllSteps:(NSString*)workOrderCode
+{
+    
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在完成所有步骤";
+    hub.userInteractionEnabled = NO;
+    
+    NSDictionary *dict = @{@"workOrderCode":workOrderCode};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMPLTER_ALL_STEPS,workOrderCode];
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
+        if (!error) {
+            hub.labelText = [NSString stringWithFormat:@"提交成功"];
+            [hub hide:YES afterDelay:1];
+        }else{
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = @"提交失败,请重试";
+            [hub hide:YES afterDelay:1];
+        }
+    }];
 }
 
 #pragma mark - Table view data source

@@ -111,113 +111,8 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     
 }
 
-- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps isComplete:(BOOL)isComplete isCompleteAll:(BOOL)isCompleteAll{
-    
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在上传工单步骤";
-    hub.userInteractionEnabled = NO;
-    NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
-    NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
-        if (!error) {
-            NSMutableArray *attachments = [NSMutableArray new];
-            for (WorkOrderStep *step in steps) {
-                for(Attachment *attachment in step.attachments)
-                {
-                    if(!attachment.isUpload){
-                        [attachments addObject:attachment];
-                    }
-                }
-                
-            }
-            if(attachments.count > 0){
-                int i= 0;
-                for(Attachment *attachment in attachments)
-                {
-                    i++;
-                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
-                   [self postAttachment:attachment finish:^(NSDictionary *obj,NSError *error) {
-                       if (!error) {
-                           attachment.isUpload = YES;
-                           [attachment updateToDB];
-                           if(i == attachments.count)
-                           {
-                               hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
-                               [hub hide:YES afterDelay:1];
-                           }
-                       }else{
-                           NSString *message = @"";
-                           if(obj == nil){
-                               message =@"上传工单附件失败,请重试";
-                           }else{
-                               message = [obj valueForKey:@"message"];
-                           }
-                           hub.mode = MBProgressHUDModeCustomView;
-                           hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                           hub.labelText = message;
-                           [hub hide:YES afterDelay:1];
-                       }
-                   }];
-                }
-            }else
-            {
-                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
-                [hub hide:YES afterDelay:1];
-                
-                if(isComplete){
-                    //[self updateTimeStamp:workOrder.code timeStamp:WorkOrderTimeStampComplete time:[Utils formatDate:[NSDate new]]];
-                    if(isCompleteAll){
-                        [self completeAllSteps:workOrder.code];
-                    }
-                }
-            }
-        }else{
-            
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"上传工单步骤失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
-            [hub hide:YES afterDelay:1];
-
-        }
-    }];
-}
-
--(void)completeAllSteps:(NSString*)workOrderCode
+-(void)postAttachment:(Attachment *)attachment finish:(void (^)(NSDictionary *, NSError *))block
 {
-    
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在完成所有步骤";
-    hub.userInteractionEnabled = NO;
-
-    NSDictionary *dict = @{@"workOrderCode":workOrderCode};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMPLTER_ALL_STEPS,workOrderCode];
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
-        if (!error) {
-            hub.labelText = [NSString stringWithFormat:@"提交成功"];
-            [hub hide:YES afterDelay:1];
-        }else{
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = @"提交失败,请重试";
-            [hub hide:YES afterDelay:1];
-        }
-    }];
-}
-
--(void)postAttachment:(Attachment *)attachment finish:(void (^)(NSDictionary *, NSError *))cb
-{
-    
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ATTACHMENT];
     NSDictionary *dict = @{@"storageType":[NSNumber numberWithInt:attachment.sort]};
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:attachment.path];;
@@ -231,7 +126,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
         data = UIImagePNGRepresentation(image);
     }
     
-    [HttpUtil postFile:URLString file:data name:@"data" fileName:attachment.key param:dict finish:cb];
+    [HttpUtil postFile:URLString file:data name:@"data" fileName:attachment.key param:dict finish:block];
 }
 
 - (void)postPickUpItem{
@@ -241,27 +136,34 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     pick.pickupTime = [Utils formatDate:[NSDate new]];
     pick.signatureImageKey = @"b23f49bc-374c-4749-8229-c3c90d47b3de.jpg";
     pick.itemCodes = @[@"sf01"];
-
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_PICKUPITEM];
     [HttpUtil post:URLString param:pick finish:^(NSDictionary *obj,NSError *error){
         if (!error) {
-           
+            
         }else{
             NSLog(@"提交失败");
         }
     }];
 }
 
--(void)updateTimeStamp:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
+-(void) updateTimeStamp:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
+    [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
+        block(obj,error);
+    }];
+}
+- (void)postWorkOrderStep:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
     [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
         block(obj,error);
     }];
 }
 
+-(void)completeAllSteps:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
 
-
-
-
-
+    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
+        block(obj,error);
+    }];
+}
 
 @end
+

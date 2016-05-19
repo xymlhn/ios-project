@@ -29,14 +29,14 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param workOrder 工单
  *  @param steps     工单步骤
  */
-- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps isComplete:(BOOL)isComplete isCompleteAll:(BOOL)isCompleteAll;
+- (void)postWorkOrderStep:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  完成该订单所有的工单步骤,可以取件了
  *
  *  @param workOrderCode 工单code
  */
-- (void)completeAllSteps:(NSString *)workOrderCode;
+- (void)completeAllSteps:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  更新
@@ -58,5 +58,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  上传取件数据
  */
 -(void)postPickUpItem;
+
+-(void)postAttachment:(Attachment *)attachment finish:(void (^)(NSDictionary *, NSError *))block;
 
 @end

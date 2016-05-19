@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 #import "OSCAPI.h"
 #import "HttpUtil.h"
+#import "MJExtension.h"
 @interface BaseWorkOrderViewController : UIViewController
 
 @property(nonatomic, copy) NSString *workOrderCode;

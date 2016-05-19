@@ -48,6 +48,7 @@
                         break;
                     case WorkOrderStatusEnroute:
                         [self updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampOnsite time:[Utils formatDate:[NSDate new]]];
+                        break;
                     case WorkOrderStatusOnSite:
                         [self pushServiceUI];
                         break;
@@ -83,23 +84,23 @@
             switch (weakSelf.workOrder.status) {
                 case WorkOrderStatusAssigned:
                     [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    _workOrder.status = WorkOrderStatusAcknowledged;
-                    [_workOrder saveToDB];
+                    weakSelf.workOrder.status = WorkOrderStatusAcknowledged;
+                    [weakSelf.workOrder saveToDB];
                     break;
                 case WorkOrderStatusAcknowledged:
-                    [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    _workOrder.status = WorkOrderStatusEnroute;
-                    [_workOrder saveToDB];
+                    [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
+                    weakSelf.workOrder.status = WorkOrderStatusEnroute;
+                    [weakSelf.workOrder saveToDB];
                     break;
                 case WorkOrderStatusEnroute:
-                    [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                    _workOrder.status = WorkOrderStatusOnSite;
-                    [_workOrder saveToDB];
+                    [weakSelf.infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
+                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
+                    [weakSelf.workOrder saveToDB];
                     break;
                 default:
                     [weakSelf.infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
-                    _workOrder.status = WorkOrderStatusOnSite;
-                    [_workOrder saveToDB];
+                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
+                    [weakSelf.workOrder saveToDB];
                     break;
             }
         }else{

@@ -93,21 +93,19 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
         if (!error) {
             [Config setSalesOrderGrabTime:[Utils formatDate:[NSDate new]]];
             SalesOrderConfirm *salesOrderConfirm = [SalesOrderConfirm mj_objectWithKeyValues:obj];
-            if(salesOrderConfirm.unconfirmed.count == 0){
-                
-            }else{
-                for (NSString *code in salesOrderConfirm.haveConfirmed) {
-                    [_grabDict removeObjectForKey:code];
-                }
-                
-                for (SalesOrderSnapshot *salesOrder in salesOrderConfirm.unconfirmed) {
-                    _grabDict[salesOrderConfirm.unconfirmed] = salesOrder;
-                }
-                [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
-                
+           
+            for (NSString *code in salesOrderConfirm.haveConfirmed) {
+                [_grabDict removeObjectForKey:code];
             }
             
-            [self notifyGrabUIChange];
+            for (SalesOrderSnapshot *salesOrder in salesOrderConfirm.unconfirmed) {
+                _grabDict[salesOrder.code] = salesOrder;
+            }
+            [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
+                
+            NSDictionary *dict = @{@"salesOrderGrab":[_grabDict allValues]};
+            NSNotification * notice = [NSNotification notificationWithName:kSalesOrderGrabNotification object:nil userInfo:dict];
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
             
         }else{
             [self getSalesOrderConfirm:[Config getSalesOrderGrabTime]];
@@ -116,47 +114,10 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
     
 }
 
--(void)grabSalesOrder:(NSString *)salesOrderCode
+-(void)removeGrabDictBySaleOrderCode:(NSString *)salesOrderCode
 {
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"抢单中...";
-    hub.userInteractionEnabled = NO;
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERGRAB,salesOrderCode];
-    NSDictionary *dict = @{@"grab":[NSNumber numberWithBool:YES]};
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSError *error) {
-        if (!error) {
-            [_grabDict removeObjectForKey:salesOrderCode];
-            [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
-            [self notifyGrabUIChange];
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"抢单成功"];
-            [hub hide:YES afterDelay:0.5];
-        }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"抢单失败";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
-            [hub hide:YES afterDelay:0.5];
-        }
-    }];
-    
-}
-
-/**
- *  通知接单界面
- */
--(void)notifyGrabUIChange
-{
-    NSDictionary *dict = @{@"salesOrderGrab":[_grabDict allValues]};
-    NSNotification * notice = [NSNotification notificationWithName:kSalesOrderGrabNotification object:nil userInfo:dict];
-    [[NSNotificationCenter defaultCenter]postNotification:notice];
+    [_grabDict removeObjectForKey:salesOrderCode];
+    [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
 }
 
 @end

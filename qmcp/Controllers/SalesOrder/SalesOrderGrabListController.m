@@ -19,6 +19,8 @@
 #import "SalesOrderManager.h"
 #import "Config.h"
 #import "ReactiveCocoa.h"
+#import "MBProgressHUD.h"
+#import "HttpUtil.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *salesOrderList;
@@ -92,7 +94,7 @@
     //2 设置cell内部的子控件
     SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[row];
     cell.grabBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [[SalesOrderManager getInstance] grabSalesOrder:salesOrderSnapshot.code];
+        [self grabSalesOrder:salesOrderSnapshot];
         return [RACSignal empty];
     }];
     cell.salesOrderSnapshot = salesOrderSnapshot;
@@ -106,5 +108,41 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+-(void)grabSalesOrder:(SalesOrderSnapshot *)salesOrderSnapshot
+{
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"抢单中...";
+    hub.userInteractionEnabled = NO;
+    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERGRAB,salesOrderSnapshot.code];
+    NSDictionary *dict = @{@"grab":[NSNumber numberWithBool:YES]};
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSError *error) {
+        if (!error) {
+            [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
+            [weakSelf.tableView reloadData];
+            [[SalesOrderManager getInstance]removeGrabDictBySaleOrderCode:salesOrderSnapshot.code];
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+            hub.labelText = [NSString stringWithFormat:@"抢单成功"];
+            [hub hide:YES afterDelay:0.5];
+        }else{
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"抢单失败";
+            }else{
+                message = [obj valueForKey:@"message"];
+                [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
+                [weakSelf.tableView reloadData];
+                [[SalesOrderManager getInstance]removeGrabDictBySaleOrderCode:salesOrderSnapshot.code];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:0.5];
+        }
+    }];
+    
+}
 
 @end

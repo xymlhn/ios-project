@@ -29,10 +29,7 @@ extern NSString *const kSalesOrderGrabNotification;
  */
 -(void)getSalesOrderConfirm:(NSString *)lastupdateTime;
 
-/**
- *  接单按钮点击进行接单
- *
- *  @param salesOrderCode 订单code
- */
--(void)grabSalesOrder:(NSString *)salesOrderCode;
+-(void)removeGrabDictBySaleOrderCode:(NSString *)salesOrderCode;
+
+
 @end

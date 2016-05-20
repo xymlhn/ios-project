@@ -137,9 +137,77 @@
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
-    //[[WorkOrderManager getInstance]postWorkOrderStep:_workOrder andStep:steps isComplete:NO isCompleteAll:NO];
+    [self postWorkOrderStep:_workOrder andStep:steps];
 }
-
+- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps{
+    
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在上传工单步骤";
+    hub.userInteractionEnabled = NO;
+    NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
+    NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
+    [[WorkOrderManager getInstance] postWorkOrderStep:URLString params:dict finish:^(NSDictionary *obj,NSError *error){
+        if (!error) {
+            NSMutableArray *attachments = [NSMutableArray new];
+            for (WorkOrderStep *step in steps) {
+                for(Attachment *attachment in step.attachments)
+                {
+                    if(!attachment.isUpload){
+                        [attachments addObject:attachment];
+                    }
+                }
+            }
+            if(attachments.count > 0){
+                int i= 0;
+                for(Attachment *attachment in attachments)
+                {
+                    i++;
+                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
+                    [[WorkOrderManager getInstance] postAttachment:attachment finish:^(NSDictionary *obj,NSError *error) {
+                        if (!error) {
+                            attachment.isUpload = YES;
+                            [attachment updateToDB];
+                            if(i == attachments.count)
+                            {
+                                hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                [hub hide:YES afterDelay:1];
+                            }
+                        }else{
+                            NSString *message = @"";
+                            if(obj == nil){
+                                message =@"上传工单附件失败,请重试";
+                            }else{
+                                message = [obj valueForKey:@"message"];
+                            }
+                            hub.mode = MBProgressHUDModeCustomView;
+                            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                            hub.labelText = message;
+                            [hub hide:YES afterDelay:1];
+                        }
+                    }];
+                }
+            }else
+            {
+                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+                [hub hide:YES afterDelay:1];
+            }
+        }else{
+            
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"上传工单步骤失败,请重试";
+            }else{
+                message = [obj valueForKey:@"message"];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:1];
+            
+        }
+    }];
+}
 - (void)photoBtnClick:(UITapGestureRecognizer *)recognizer
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

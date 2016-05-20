@@ -35,5 +35,11 @@ extern NSString *const kCameraNotification;
  */
 -(void)switchCamera:(NSString *)workOrderCode cameraCode:(NSString *)cameraCode isOn:(bool)isOn needOpen:(bool)open;
 
+
+/**
+ *  缓存需要打开的摄像头
+ *
+ *  @param needOpenCamera 摄像头model
+ */
 -(void)setNeedOpenCamera:(CameraData *)needOpenCamera;
 @end

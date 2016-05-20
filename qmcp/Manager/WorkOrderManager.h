@@ -59,7 +59,16 @@ extern NSString *const kWorkOrderUpdateNotification;
  */
 -(void)postPickUpItem;
 
+/**
+ *  提交附件
+ *
+ *  @param attachment 附件model
+ *  @param block      回调
+ */
 -(void)postAttachment:(Attachment *)attachment finish:(void (^)(NSDictionary *, NSError *))block;
 
+/**
+ *  从数据库获取工单显示
+ */
 - (void)sortAllWorkOrder;
 @end

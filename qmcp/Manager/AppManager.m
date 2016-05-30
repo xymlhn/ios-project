@@ -51,13 +51,13 @@ NSString *const kReloginNotification = @"reLogin";
             NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
             NSString *name = accountAndPassword? accountAndPassword[0] : @"";
             NSString *password = accountAndPassword? accountAndPassword[1] : @"";
-            [[AppManager getInstance] reLogin:name password:password isFirst:false];
+            [[AppManager getInstance] reLoginWithUserName:name andPassword:password isFirstLogin:false];
         }
     }
     return failure;
 }
 
--(void)reLogin:(NSString *)userName password:(NSString *)password isFirst:(BOOL)isFirst
+-(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password isFirstLogin:(BOOL)isFirst
 {
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
@@ -80,7 +80,7 @@ NSString *const kReloginNotification = @"reLogin";
     }];
 }
 
--(void)login:(NSString *)userName password:(NSString *)password andBlock:(void (^)(id data, NSError *error))block{
+-(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password andBlock:(void (^)(id data, NSError *error))block{
     // 请求参数
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];

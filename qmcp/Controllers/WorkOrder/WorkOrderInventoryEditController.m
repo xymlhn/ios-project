@@ -298,7 +298,7 @@
 -(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andStandName:(NSString *)standName andStandandClassName:(NSString *)standClassName andIndex:(NSInteger)index
 {
     int order = (int)index;
-    [[PropertyManager getInstance] addCommodityChoose:order propertyName:standName andPropertyContent:standClassName];
+    [[PropertyManager getInstance] appendCommodityChooseWithOrder:order andPropertyName:standName andPropertyContent:standClassName];
 }
 //设置自定义btn的属性
 -(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn

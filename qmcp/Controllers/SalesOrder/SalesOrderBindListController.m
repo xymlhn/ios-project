@@ -62,9 +62,9 @@
     {
         _salesOrderList = [NSMutableArray new];
     }
-    [[SalesOrderManager getInstance] getSalesOrderBind:[Config getSalesOrderBindTime]];
+    [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime]];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderBind:[Config getSalesOrderBindTime]];
+        [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime]];
     }];
 }
 

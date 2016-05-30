@@ -28,7 +28,7 @@ extern NSString *const kReloginNotification;
  *  @param userName       用户名
  *  @param password       密码
  */
--(void) login:(NSString *)userName password:(NSString *)password andBlock:(void (^)(id data, NSError *error))block;
+-(void) loginWithUserName:(NSString *)userName andPassword:(NSString *)password andBlock:(void (^)(id data, NSError *error))block;
 
 /**
  *  获取服务器时间
@@ -66,7 +66,7 @@ extern NSString *const kReloginNotification;
  *  @param isFirst  是否首次重登陆
 
  */
--(void)reLogin:(NSString *)userName password:(NSString *)password isFirst:(BOOL)isFirst;
+-(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password isFirstLogin:(BOOL)isFirst;
 
 
 @end

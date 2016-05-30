@@ -137,9 +137,9 @@
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
-    [self postWorkOrderStep:_workOrder andStep:steps];
+    [self postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
 }
-- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps{
+- (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepsArray:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
@@ -147,7 +147,7 @@
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
-    [[WorkOrderManager getInstance] postWorkOrderStep:URLString params:dict finish:^(NSDictionary *obj,NSError *error){
+    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSError *error){
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -164,7 +164,7 @@
                 {
                     i++;
                     hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
-                    [[WorkOrderManager getInstance] postAttachment:attachment finish:^(NSDictionary *obj,NSError *error) {
+                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSError *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];

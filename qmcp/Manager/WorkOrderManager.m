@@ -40,7 +40,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     return shared_manager;
 }
 
--(void)getAllWorkOrder:(NSString *)dateStr{
+-(void)getWorkOrderByLastUpdateTime:(NSString *)dateStr{
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_WORKORDER,dateStr];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -63,7 +63,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
             }
             
         }else{
-            [self getAllWorkOrder:[Config getWorkOrderTime]];
+            [self getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
         }
         [[WorkOrderManager getInstance] sortAllWorkOrder];
     }];
@@ -111,7 +111,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     
 }
 
--(void)postAttachment:(Attachment *)attachment finish:(void (^)(NSDictionary *, NSError *))block
+-(void)postAttachment:(Attachment *)attachment finishBlock:(void (^)(NSDictionary *, NSError *))block
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ATTACHMENT];
     NSDictionary *dict = @{@"storageType":[NSNumber numberWithInt:attachment.sort]};
@@ -147,18 +147,18 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     }];
 }
 
--(void) updateTimeStamp:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
+-(void) updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block{
     [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
         block(obj,error);
     }];
 }
-- (void)postWorkOrderStep:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
+- (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block{
     [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
         block(obj,error);
     }];
 }
 
--(void)completeAllSteps:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block{
+-(void)completeAllStepsWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block{
 
     [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
         block(obj,error);

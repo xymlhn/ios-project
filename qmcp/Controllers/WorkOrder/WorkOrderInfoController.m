@@ -40,14 +40,14 @@
             case WorkOrderTypeOnsite:
                 switch (_workOrder.status) {
                     case WorkOrderStatusAssigned:
-                        [self updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampAcknowledge time:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
                         break;
                     case WorkOrderStatusAcknowledged:
-                        [self updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampEnroute time:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                         
                         break;
                     case WorkOrderStatusEnroute:
-                        [self updateTimeStamp:[super workOrderCode] timeStamp:WorkOrderTimeStampOnsite time:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                         break;
                     case WorkOrderStatusOnSite:
                         [self pushServiceUI];
@@ -70,63 +70,15 @@
     
 }
 
--(void)updateTimeStamp:(NSString *)workOrderCode timeStamp:(WorkOrderTimeStamp)timeStamp time:(NSString *)time{
-    __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在提交数据";
-    hub.userInteractionEnabled = NO;
-    NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
-    [[WorkOrderManager getInstance] updateTimeStamp:URLString params:dict finish:^(NSDictionary *obj, NSError *error) {
-        if(!error){
-            hub.labelText = [NSString stringWithFormat:@"上传数据成功"];
-            [hub hide:YES afterDelay:1];
-            switch (weakSelf.workOrder.status) {
-                case WorkOrderStatusAssigned:
-                    [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusAcknowledged;
-                    [weakSelf.workOrder saveToDB];
-                    break;
-                case WorkOrderStatusAcknowledged:
-                    [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusEnroute;
-                    [weakSelf.workOrder saveToDB];
-                    break;
-                case WorkOrderStatusEnroute:
-                    [weakSelf.infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
-                    [weakSelf.workOrder saveToDB];
-                    break;
-                default:
-                    [weakSelf.infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
-                    [weakSelf.workOrder saveToDB];
-                    break;
-            }
-        }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"上传数据失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
-            [hub hide:YES afterDelay:1];
-        }
-    }];
-  
-}
 -(void)loadData
 {
     NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
-    [self setText:_workOrder];
+    [self setTextWithWorkOrder:_workOrder];
 }
 
 
--(void)setText:(WorkOrder *)workOrder
+-(void)setTextWithWorkOrder:(WorkOrder *)workOrder
 {
     _infoView.remarkText.text = workOrder.salesOrderSnapshot.remark;
     _infoView.serviceText.text = workOrder.salesOrderSnapshot.organizationName;
@@ -174,6 +126,62 @@
         }
         [_infoView.starBtn setTitle:title forState:UIControlStateNormal];
     }
+    
+}
+
+/**
+ *  更新工单时间戳
+ *
+ *  @param workOrderCode 工单code
+ *  @param timeStamp     TimeStamp枚举
+ *  @param time          date
+ */
+-(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStamp:(WorkOrderTimeStamp)timeStamp andDate:(NSString *)time{
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在提交数据";
+    hub.userInteractionEnabled = NO;
+    NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
+    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSError *error) {
+        if(!error){
+            hub.labelText = [NSString stringWithFormat:@"上传数据成功"];
+            [hub hide:YES afterDelay:1];
+            switch (weakSelf.workOrder.status) {
+                case WorkOrderStatusAssigned:
+                    [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
+                    weakSelf.workOrder.status = WorkOrderStatusAcknowledged;
+                    [weakSelf.workOrder saveToDB];
+                    break;
+                case WorkOrderStatusAcknowledged:
+                    [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
+                    weakSelf.workOrder.status = WorkOrderStatusEnroute;
+                    [weakSelf.workOrder saveToDB];
+                    break;
+                case WorkOrderStatusEnroute:
+                    [weakSelf.infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
+                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
+                    [weakSelf.workOrder saveToDB];
+                    break;
+                default:
+                    [weakSelf.infoView.starBtn setTitle:@"服务" forState:UIControlStateNormal];
+                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
+                    [weakSelf.workOrder saveToDB];
+                    break;
+            }
+        }else{
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"上传数据失败,请重试";
+            }else{
+                message = [obj valueForKey:@"message"];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:1];
+        }
+    }];
     
 }
 

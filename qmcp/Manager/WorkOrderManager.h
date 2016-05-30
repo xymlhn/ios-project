@@ -21,7 +21,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *
  *  @param dateStr 时间戳
  */
--(void) getAllWorkOrder:(NSString *) dateStr;
+-(void) getWorkOrderByLastUpdateTime:(NSString *) dateStr;
 
 /**
  *  上传工单步骤
@@ -29,14 +29,14 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param workOrder 工单
  *  @param steps     工单步骤
  */
-- (void)postWorkOrderStep:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block;
+- (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  完成该订单所有的工单步骤,可以取件了
  *
  *  @param workOrderCode 工单code
  */
-- (void)completeAllSteps:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block;
+- (void)completeAllStepsWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  更新
@@ -45,7 +45,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param params        请求参数
  *  @param block         回调
  */
--(void)updateTimeStamp:(NSString *)URLString params:(NSDictionary *)params finish:(void (^)(NSDictionary *, NSError *))block;
+-(void)updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  根据工单code获取工单
@@ -65,7 +65,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param attachment 附件model
  *  @param block      回调
  */
--(void)postAttachment:(Attachment *)attachment finish:(void (^)(NSDictionary *, NSError *))block;
+-(void)postAttachment:(Attachment *)attachment finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  从数据库获取工单显示

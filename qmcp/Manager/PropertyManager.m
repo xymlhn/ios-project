@@ -58,7 +58,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
 }
 
 #pragma mark - network
--(void)getCommodityItem:(NSString *)lastupdateTime
+-(void)getCommodityItemByLastUpdateTime:(NSString *)lastupdateTime
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMMODITYITEM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -67,13 +67,13 @@ NSString * const kCommodityProperty = @"commodityProperty";
             _commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:obj];
             
         }else{
-            [self getCommodityItem:[Config getCommodityItem]];
+            [self getCommodityItemByLastUpdateTime:[Config getCommodityItem]];
         }
     }];
     
 }
 
--(void)getCommodityProperty:(NSString *)lastupdateTime
+-(void)getCommodityPropertyByLastUpdateTime:(NSString *)lastupdateTime
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMODITYPROPERTY,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -85,7 +85,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
             }
 
         }else{
-            [self getCommodityProperty:[Config getCommodityProperty]];
+            [self getCommodityPropertyByLastUpdateTime:[Config getCommodityProperty]];
         }
     }];
     
@@ -144,7 +144,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
 
 }
 
--(void)addCommodityChoose:(int) order propertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent{
+-(void)appendCommodityChooseWithOrder:(int) order andPropertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent{
     
     PropertyData *data = [PropertyData new];
     data.order = order;
@@ -278,12 +278,12 @@ NSString * const kCommodityProperty = @"commodityProperty";
         }
     }
     
-    [self compareArr:p1.propertyContent andArr2:arr1];
-    [self compareArr:p2.propertyContent andArr2:arr2];
-    [self compareArr:p3.propertyContent andArr2:arr3];
-    [self compareArr:p4.propertyContent andArr2:arr4];
-    [self compareArr:p5.propertyContent andArr2:arr5];
-    [self compareArr:p6.propertyContent andArr2:arr6];
+    [self compareOldArray:p1.propertyContent withNewArray:arr1];
+    [self compareOldArray:p2.propertyContent withNewArray:arr2];
+    [self compareOldArray:p3.propertyContent withNewArray:arr3];
+    [self compareOldArray:p4.propertyContent withNewArray:arr4];
+    [self compareOldArray:p5.propertyContent withNewArray:arr5];
+    [self compareOldArray:p6.propertyContent withNewArray:arr6];
 }
 /**
  *  比较规格进行删除
@@ -291,7 +291,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
  *  @param arr1 旧规格
  *  @param arr2 筛选过后规格
  */
--(void)compareArr:(NSMutableArray *)arr1 andArr2:(NSMutableArray *)arr2
+-(void)compareOldArray:(NSMutableArray *)arr1 withNewArray:(NSMutableArray *)arr2
 {
     for (NSString *str in arr1) {
         if(arr2.count == 0 || ![arr2 containsObject:str]){

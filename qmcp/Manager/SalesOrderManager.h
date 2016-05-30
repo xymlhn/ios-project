@@ -20,14 +20,14 @@ extern NSString *const kSalesOrderGrabNotification;
  *
  *  @param lastupdateTime 时间
  */
--(void)getSalesOrderBind:(NSString *)lastupdateTime;
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime;
 
 /**
  *  获取接单数据
  *
  *  @param lastupdateTime 时间
  */
--(void)getSalesOrderConfirm:(NSString *)lastupdateTime;
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime;
 
 -(void)removeGrabDictBySaleOrderCode:(NSString *)salesOrderCode;
 

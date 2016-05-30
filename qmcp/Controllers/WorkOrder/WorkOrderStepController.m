@@ -39,7 +39,7 @@
     _stepView.tableView.delegate = self;
     _stepView.tableView.dataSource = self;
     _stepView.addBtn.userInteractionEnabled = YES;
-    [_stepView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addBtnClick:)]];
+    [_stepView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
     
     _stepView.saveBtn.userInteractionEnabled = YES;
     [_stepView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
@@ -68,7 +68,7 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
-- (void)addBtnClick:(UITapGestureRecognizer *)recognizer
+- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer
 {
     WorkOrderStep *step = [WorkOrderStep new];
     step.id = [[NSUUID UUID] UUIDString];
@@ -78,10 +78,10 @@
     step.workOrderCode = [super workOrderCode];
     step.submitTime = [Utils formatDate:[NSDate new]];
     [step saveToDB];
-    [self pushToWorkOrderStepEditController:step.id andType:SaveTypeAdd];
+    [self pushWorkOrderStepEditControllerWithWorkOrderStepId:step.id andType:SaveTypeAdd];
 }
 
--(void)pushToWorkOrderStepEditController:(NSString *)stepId andType:(SaveType)type
+-(void)pushWorkOrderStepEditControllerWithWorkOrderStepId:(NSString *)stepId andType:(SaveType)type
 {
      __weak typeof(self) weakSelf = self;
     WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, SaveType type) {
@@ -122,15 +122,15 @@
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    [self postWorkOrderStep:_workOrder andStep:_workOrderStepList isCompleteAll:NO];
+    [self postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList isCompleteAll:NO];
 }
 
 - (void)completeBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    [self postWorkOrderStep:_workOrder andStep:_workOrderStepList isCompleteAll:YES];
+    [self postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList isCompleteAll:YES];
 }
 
-- (void)postWorkOrderStep:(WorkOrder *)workOrder andStep:(NSArray *)steps isCompleteAll:(BOOL)isCompleteAll{
+- (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps isCompleteAll:(BOOL)isCompleteAll{
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
@@ -138,7 +138,7 @@
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
-    [[WorkOrderManager getInstance] postWorkOrderStep:URLString params:dict finish:^(NSDictionary *obj,NSError *error){
+    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSError *error){
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -156,7 +156,7 @@
                 {
                     i++;
                     hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
-                    [[WorkOrderManager getInstance] postAttachment:attachment finish:^(NSDictionary *obj,NSError *error) {
+                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSError *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
@@ -184,7 +184,7 @@
                 hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
                 [hub hide:YES afterDelay:1];
             
-                [self updateTimeStamp:workOrder.code timeStamp:WorkOrderTimeStampComplete time:[Utils formatDate:[NSDate new]]];
+                [self updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:WorkOrderTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
                 if(isCompleteAll){
                     [self completeAllSteps:workOrder.code];
                 }
@@ -207,14 +207,14 @@
     }];
 }
 
--(void)updateTimeStamp:(NSString *)workOrderCode timeStamp:(WorkOrderTimeStamp)timeStamp time:(NSString *)time{
+-(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(WorkOrderTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在完成工单";
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
-    [[WorkOrderManager getInstance] updateTimeStamp:URLString params:dict finish:^(NSDictionary *obj, NSError *error) {
+    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSError *error) {
         if(!error){
             hub.labelText = [NSString stringWithFormat:@"完成工单成功"];
             [hub hide:YES afterDelay:1];
@@ -299,7 +299,7 @@
 
 {
     WorkOrderStep *step = self.workOrderStepList[indexPath.row];
-    [self pushToWorkOrderStepEditController:step.id andType:SaveTypeUpdate];
+    [self pushWorkOrderStepEditControllerWithWorkOrderStepId:step.id andType:SaveTypeUpdate];
 }
 
 

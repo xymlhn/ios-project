@@ -18,14 +18,14 @@
  *
  *  @param lastupdateTime 时间
  */
--(void)getCommodityItem:(NSString *)lastupdateTime;
+-(void)getCommodityItemByLastUpdateTime:(NSString *)lastupdateTime;
 
 /**
  *  获取规格属性
  *
  *  @param lastupdateTime 时间
  */
--(void)getCommodityProperty:(NSString *)lastupdateTime;
+-(void)getCommodityPropertyByLastUpdateTime:(NSString *)lastupdateTime;
 
 /**
  *  服务是否存在规格
@@ -52,7 +52,7 @@
  *  @param propertyName    规格名称 (例:尺寸)
  *  @param propertyContent 规格描述 (例:XL,XXL)
  */
--(void)addCommodityChoose:(int) order propertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent;
+-(void)appendCommodityChooseWithOrder:(int)order andPropertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent;
 
 /**
  *  释放数据

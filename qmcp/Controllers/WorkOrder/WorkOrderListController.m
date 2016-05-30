@@ -66,7 +66,7 @@
 {
     _workOrderList = [NSMutableArray new];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[WorkOrderManager getInstance] getAllWorkOrder:[Config getWorkOrderTime]];
+        [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
     }];
 }
 

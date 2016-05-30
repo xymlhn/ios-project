@@ -53,7 +53,7 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
     return shared_manager;
 }
 
--(void)getSalesOrderBind:(NSString *)lastupdateTime
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERBIND,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -80,13 +80,13 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             
         }else{
-            [self getSalesOrderBind:[Config getSalesOrderBindTime]];
+            [self getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime]];
         }
     }];
 
 }
 
--(void)getSalesOrderConfirm:(NSString *)lastupdateTime
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERCONFIRM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -108,7 +108,7 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             
         }else{
-            [self getSalesOrderConfirm:[Config getSalesOrderGrabTime]];
+            [self getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime]];
         }
     }];
     

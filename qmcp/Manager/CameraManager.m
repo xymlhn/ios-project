@@ -48,7 +48,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
     }];
 }
 
--(void)getCurrentCamera:(NSString *)workOrderCode
+-(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_CAMERA,workOrderCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -71,7 +71,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
     }];
 }
 
--(void)switchCamera:(NSString *)workOrderCode cameraCode:(NSString *)cameraCode isOn:(bool)isOn needOpen:(bool)open{
+-(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode withCameraCode:(NSString *)cameraCode cameraStatus:(bool)isOn needOpen:(bool)open{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_CAMERA_SWITCH];
     NSDictionary *jsonDict = @{@"workOrderCode":workOrderCode,@"cameraCode":cameraCode,@"turnOn":[NSNumber numberWithBool:isOn]};
     MBProgressHUD *hub = nil;
@@ -98,7 +98,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
                 hub.labelText = [NSString stringWithFormat:isOn ?@"打开成功" :@"关闭成功"];
                 [hub hide:YES afterDelay:0.5];
             }else{
-                 [self switchCamera:workOrderCode cameraCode:_needOpenCamera.cameraCode isOn:YES needOpen:NO];
+                [self switchCameraByWorkOrderCode:workOrderCode withCameraCode:cameraCode cameraStatus:YES needOpen:NO];
             }
 
         }else{

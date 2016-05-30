@@ -164,7 +164,7 @@
     hub.labelText = @"正在登录";
     hub.userInteractionEnabled = NO;
     
-    [[AppManager getInstance] login:username password:password andBlock:^(id data, NSError *error) {
+    [[AppManager getInstance] loginWithUserName:username andPassword:password andBlock:^(id data, NSError *error) {
         if(!error){
             // 字典转模型
             CZAccount *account = [CZAccount accountWithDict:data];

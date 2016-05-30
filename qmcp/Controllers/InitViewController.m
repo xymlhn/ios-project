@@ -28,7 +28,7 @@
     NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
     NSString *name = accountAndPassword? accountAndPassword[0] : @"";
     NSString *password = accountAndPassword? accountAndPassword[1] : @"";
-    [[AppManager getInstance] reLogin:name password:password isFirst:true];
+    [[AppManager getInstance] reLoginWithUserName:name andPassword:password isFirstLogin:true];
 }
 
 @end

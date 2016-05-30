@@ -46,7 +46,7 @@
 -(void)loadData
 {
     _cameraArr = [NSMutableArray new];
-    [[CameraManager getInstance] getCurrentCamera:[super workOrderCode]];
+    [[CameraManager getInstance] getCurrentCameraByWorkOrderCode:[super workOrderCode]];
 }
 
 -(void)saveData{
@@ -97,13 +97,13 @@
     if(!cameraData.isChoose){
         CameraData *current = [self getCurrentOnCamera];
         if(current == nil){
-            [[CameraManager getInstance] switchCamera:[super workOrderCode] cameraCode:cameraData.cameraCode isOn:YES needOpen:NO];
+            [[CameraManager getInstance] switchCameraByWorkOrderCode:[super workOrderCode] withCameraCode:cameraData.cameraCode cameraStatus:YES needOpen:NO];
         }else{
             [[CameraManager getInstance] setNeedOpenCamera:cameraData];
-            [[CameraManager getInstance] switchCamera:[super workOrderCode] cameraCode:current.cameraCode isOn:NO needOpen:YES];
+            [[CameraManager getInstance] switchCameraByWorkOrderCode:[super workOrderCode] withCameraCode:current.cameraCode cameraStatus:NO needOpen:YES];
         }
     }else{
-        [[CameraManager getInstance] switchCamera:[super workOrderCode] cameraCode:cameraData.cameraCode isOn:NO needOpen:NO];
+        [[CameraManager getInstance] switchCameraByWorkOrderCode:[super workOrderCode] withCameraCode:cameraData.cameraCode cameraStatus:NO needOpen:NO];
     }
 }
 

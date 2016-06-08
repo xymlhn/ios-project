@@ -20,6 +20,9 @@
 		240F88BB1CC76A2600138F10 /* CommodityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88BA1CC76A2600138F10 /* CommodityItem.m */; };
 		240F88BE1CC76AD400138F10 /* CommodityProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88BD1CC76AD400138F10 /* CommodityProperty.m */; };
 		240F88C11CC76B6700138F10 /* PropertyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88C01CC76B6700138F10 /* PropertyManager.m */; };
+		24132AAC1D08016A005FDBDE /* WorkOrderFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24132AAB1D08016A005FDBDE /* WorkOrderFormController.m */; };
+		24132AAF1D0805D6005FDBDE /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24132AAE1D0805D6005FDBDE /* TextCell.m */; };
+		24132AB21D0806C9005FDBDE /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24132AB11D0806C9005FDBDE /* DateCell.m */; };
 		24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */; };
 		24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E231CCE07DF00CF93B6 /* SMPageControl.m */; };
 		2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */; };
@@ -130,6 +133,12 @@
 		240F88BD1CC76AD400138F10 /* CommodityProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityProperty.m; sourceTree = "<group>"; };
 		240F88BF1CC76B6700138F10 /* PropertyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyManager.h; sourceTree = "<group>"; };
 		240F88C01CC76B6700138F10 /* PropertyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyManager.m; sourceTree = "<group>"; };
+		24132AAA1D08016A005FDBDE /* WorkOrderFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderFormController.h; sourceTree = "<group>"; };
+		24132AAB1D08016A005FDBDE /* WorkOrderFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderFormController.m; sourceTree = "<group>"; };
+		24132AAD1D0805D6005FDBDE /* TextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCell.h; sourceTree = "<group>"; };
+		24132AAE1D0805D6005FDBDE /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
+		24132AB01D0806C9005FDBDE /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
+		24132AB11D0806C9005FDBDE /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		24233E1E1CCE063D00CF93B6 /* IntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionViewController.h; sourceTree = "<group>"; };
 		24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewController.m; sourceTree = "<group>"; };
 		24233E221CCE07DF00CF93B6 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
@@ -363,6 +372,10 @@
 				24F0C1E81CC5E299005B3F98 /* CommodityCell.m */,
 				249E49101CE700EE0051C9C1 /* WorkOrderCameraCell.h */,
 				249E49111CE700EE0051C9C1 /* WorkOrderCameraCell.m */,
+				24132AAD1D0805D6005FDBDE /* TextCell.h */,
+				24132AAE1D0805D6005FDBDE /* TextCell.m */,
+				24132AB01D0806C9005FDBDE /* DateCell.h */,
+				24132AB11D0806C9005FDBDE /* DateCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -418,6 +431,8 @@
 				24A2B4491CB4F725006E29DB /* WorkOrderInventoryEditController.m */,
 				249E490D1CE6FA7A0051C9C1 /* WorkOrderCameraController.h */,
 				249E490E1CE6FA7A0051C9C1 /* WorkOrderCameraController.m */,
+				24132AAA1D08016A005FDBDE /* WorkOrderFormController.h */,
+				24132AAB1D08016A005FDBDE /* WorkOrderFormController.m */,
 			);
 			path = WorkOrder;
 			sourceTree = "<group>";
@@ -901,10 +916,12 @@
 				24C34F1A1CE9956900D945BE /* FormManager.m in Sources */,
 				24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */,
 				24C34F111CE9928400D945BE /* FormData.m in Sources */,
+				24132AAF1D0805D6005FDBDE /* TextCell.m in Sources */,
 				240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */,
 				24F359761CB3B2B400C0950B /* Attachment.m in Sources */,
 				24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */,
 				24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */,
+				24132AB21D0806C9005FDBDE /* DateCell.m in Sources */,
 				244517981CA03ED60085CC16 /* RootViewController.m in Sources */,
 				24F0C1E91CC5E299005B3F98 /* CommodityCell.m in Sources */,
 				245A2B721CAA49F7009A7572 /* WorkOrderListController.m in Sources */,
@@ -930,6 +947,7 @@
 				2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */,
 				244517A91CA03F190085CC16 /* SideMenuController.m in Sources */,
 				24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */,
+				24132AAC1D08016A005FDBDE /* WorkOrderFormController.m in Sources */,
 				24C34F171CE9936F00D945BE /* FormTemplateField.m in Sources */,
 				24A685641CC4C74B00663858 /* HelpViewController.m in Sources */,
 				24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */,

@@ -10,8 +10,8 @@
 #define iosapp_OSCAPI_h
 
 //#define OSCAPI_ADDRESS             @"http://192.168.13.25:8080/"
-//#define OSCAPI_ADDRESS             @"http://inforshare.vicp.cc:8003/"
-#define OSCAPI_ADDRESS                  @"http://www.efw365.com/"
+#define OSCAPI_ADDRESS             @"http://inforshare.vicp.cc:8000/"
+//#define OSCAPI_ADDRESS                  @"http://www.efw365.com/"
 #define OSCAPI_LOGIN                    @"api/login"
 #define OSCAPI_LOGOUT                   @"api/logout"
 #define OSCAPI_SERVER_TIME              @"a/api/servertime"
@@ -33,9 +33,9 @@
 #define OSCAPI_ALL_CAMERA               @"i/a/api/camera/"
 #define OSCAPI_CURRENT_CAMERA           @"i/a/api/camera/"
 #define OSCAPI_CAMERA_SWITCH            @"i/a/api/camera/switch/"
-
 #define OSCAPI_FORMTEMPLATE             @"i/a/api/salesorder/form/template?salesOrderCode="
 #define OSCAPI_FORMDATA                 @"i/a/api/salesorder/form/data?salesOrderCode="
 #define OSCAPI_SAVE_FORMDATA            @"i/a/api/salesorder/form/data"
 #define OSCAPI_DELETE_FORMDATA          @"i/a/api/salesorder/form/data/"
+
 #endif

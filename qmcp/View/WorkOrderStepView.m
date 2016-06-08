@@ -65,12 +65,12 @@
     _addBtn.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:_addBtn];
    
-    _infoBtn = [UILabel new];
-    [_infoBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _infoBtn.text = @"";
-    _infoBtn.textColor = [UIColor nameColor];
-    _infoBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_infoBtn];
+    _formBtn = [UILabel new];
+    [_formBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _formBtn.text = @"";
+    _formBtn.textColor = [UIColor nameColor];
+    _formBtn.textAlignment = NSTextAlignmentCenter;
+    [bottomView addSubview:_formBtn];
     
     _saveBtn = [UILabel new];
     [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
@@ -86,14 +86,14 @@
     _completeBtn.textColor = [UIColor nameColor];
     [bottomView addSubview:_completeBtn];
     
-    [_infoBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_formBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(bottomView).with.offset(0);
         make.centerY.equalTo(bottomView);
     }];
     
     [_addBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_infoBtn);
-        make.left.equalTo(_infoBtn.mas_right);
+        make.width.equalTo(_formBtn);
+        make.left.equalTo(_formBtn.mas_right);
         make.centerY.equalTo(bottomView);
     }];
     

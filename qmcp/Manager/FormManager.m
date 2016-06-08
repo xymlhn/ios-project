@@ -14,6 +14,17 @@
 #import "Config.h"
 #import "Utils.h"
 #import "MBProgressHUD.h"
+#import "FormTemplateField.h"
+#import "FormTemplate.h"
+#import "FormData.h"
+
+@interface FormManager()
+
+@property (nonatomic, strong) NSMutableDictionary<NSString *,FormTemplate *> * formTemplateDict;
+@property (nonatomic, strong) NSMutableDictionary<NSString *,FormData *> * formDataDict;
+
+@end
+
 @implementation FormManager
 
 + (FormManager *)getInstance {
@@ -21,6 +32,10 @@
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
+        if(shared_manager.formTemplateDict == nil)
+        {
+            shared_manager.formTemplateDict = [NSMutableDictionary new];
+        }
     });
     return shared_manager;
 }
@@ -29,10 +44,13 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_FORMTEMPLATE,salesOrderCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
         if (!error) {
-            
-            
+            [_formTemplateDict removeAllObjects];
+            NSArray *array = [FormTemplate mj_objectArrayWithKeyValuesArray:obj];
+            for (FormTemplate *form in array) {
+                [_formTemplateDict setValue:form forKey:form.formTemplateId];
+            }
         }else{
-            [self getFormTemplate:salesOrderCode];
+            
         }
     }];
 }
@@ -41,10 +59,13 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_FORMDATA,salesOrderCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
         if (!error) {
-            
-            
+            [_formDataDict removeAllObjects];
+            NSArray *array = [FormData mj_objectArrayWithKeyValuesArray:obj];
+            for (FormData *form in array) {
+                [_formDataDict setValue:form forKey:form.formTemplateId];
+            }
         }else{
-            [self getFormTemplate:salesOrderCode];
+            
         }
     }];
 }

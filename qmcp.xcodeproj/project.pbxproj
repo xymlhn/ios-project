@@ -23,6 +23,8 @@
 		24132AAC1D08016A005FDBDE /* WorkOrderFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24132AAB1D08016A005FDBDE /* WorkOrderFormController.m */; };
 		24132AAF1D0805D6005FDBDE /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24132AAE1D0805D6005FDBDE /* TextCell.m */; };
 		24132AB21D0806C9005FDBDE /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24132AB11D0806C9005FDBDE /* DateCell.m */; };
+		241C23851D0D4B2000DAF9C7 /* FormTemplateBrife.m in Sources */ = {isa = PBXBuildFile; fileRef = 241C23841D0D4B2000DAF9C7 /* FormTemplateBrife.m */; };
+		241C238B1D0D61D900DAF9C7 /* WorkOrderFormsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241C238A1D0D61D900DAF9C7 /* WorkOrderFormsController.m */; };
 		24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */; };
 		24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E231CCE07DF00CF93B6 /* SMPageControl.m */; };
 		2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */; };
@@ -78,6 +80,8 @@
 		24A2B4471CB4EDB3006E29DB /* PJRSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */; };
 		24A2B44A1CB4F725006E29DB /* WorkOrderInventoryEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A2B4491CB4F725006E29DB /* WorkOrderInventoryEditController.m */; };
 		24A685641CC4C74B00663858 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A685631CC4C74B00663858 /* HelpViewController.m */; };
+		24AAF4221D0E8F360020356F /* FormTemplateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAF4211D0E8F360020356F /* FormTemplateCell.m */; };
+		24AAF4251D0EA4320020356F /* NSMutableArray+InsertArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAF4241D0EA4320020356F /* NSMutableArray+InsertArray.m */; };
 		24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC11CCF35950089F779 /* StandardModel.m */; };
 		24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC31CCF35950089F779 /* StandardsView.m */; };
 		24ABAFCA1CCF35950089F779 /* StandarsAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC41CCF35950089F779 /* StandarsAdd@2x.png */; };
@@ -139,6 +143,10 @@
 		24132AAE1D0805D6005FDBDE /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
 		24132AB01D0806C9005FDBDE /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
 		24132AB11D0806C9005FDBDE /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
+		241C23831D0D4B2000DAF9C7 /* FormTemplateBrife.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTemplateBrife.h; sourceTree = "<group>"; };
+		241C23841D0D4B2000DAF9C7 /* FormTemplateBrife.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplateBrife.m; sourceTree = "<group>"; };
+		241C23891D0D61D900DAF9C7 /* WorkOrderFormsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderFormsController.h; sourceTree = "<group>"; };
+		241C238A1D0D61D900DAF9C7 /* WorkOrderFormsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderFormsController.m; sourceTree = "<group>"; };
 		24233E1E1CCE063D00CF93B6 /* IntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionViewController.h; sourceTree = "<group>"; };
 		24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewController.m; sourceTree = "<group>"; };
 		24233E221CCE07DF00CF93B6 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
@@ -248,6 +256,10 @@
 		24A2B4491CB4F725006E29DB /* WorkOrderInventoryEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryEditController.m; sourceTree = "<group>"; };
 		24A685621CC4C74B00663858 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		24A685631CC4C74B00663858 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		24AAF4201D0E8F360020356F /* FormTemplateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTemplateCell.h; sourceTree = "<group>"; };
+		24AAF4211D0E8F360020356F /* FormTemplateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplateCell.m; sourceTree = "<group>"; };
+		24AAF4231D0EA4320020356F /* NSMutableArray+InsertArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+InsertArray.h"; sourceTree = "<group>"; };
+		24AAF4241D0EA4320020356F /* NSMutableArray+InsertArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+InsertArray.m"; sourceTree = "<group>"; };
 		24ABAFC01CCF35950089F779 /* StandardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardModel.h; sourceTree = "<group>"; };
 		24ABAFC11CCF35950089F779 /* StandardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardModel.m; sourceTree = "<group>"; };
 		24ABAFC21CCF35950089F779 /* StandardsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardsView.h; sourceTree = "<group>"; };
@@ -376,6 +388,8 @@
 				24132AAE1D0805D6005FDBDE /* TextCell.m */,
 				24132AB01D0806C9005FDBDE /* DateCell.h */,
 				24132AB11D0806C9005FDBDE /* DateCell.m */,
+				24AAF4201D0E8F360020356F /* FormTemplateCell.h */,
+				24AAF4211D0E8F360020356F /* FormTemplateCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -433,6 +447,8 @@
 				249E490E1CE6FA7A0051C9C1 /* WorkOrderCameraController.m */,
 				24132AAA1D08016A005FDBDE /* WorkOrderFormController.h */,
 				24132AAB1D08016A005FDBDE /* WorkOrderFormController.m */,
+				241C23891D0D61D900DAF9C7 /* WorkOrderFormsController.h */,
+				241C238A1D0D61D900DAF9C7 /* WorkOrderFormsController.m */,
 			);
 			path = WorkOrder;
 			sourceTree = "<group>";
@@ -583,6 +599,8 @@
 				244517B81CA03F520085CC16 /* UIImage+Util.m */,
 				244517B91CA03F520085CC16 /* UIView+Util.h */,
 				244517BA1CA03F520085CC16 /* UIView+Util.m */,
+				24AAF4231D0EA4320020356F /* NSMutableArray+InsertArray.h */,
+				24AAF4241D0EA4320020356F /* NSMutableArray+InsertArray.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -715,6 +733,8 @@
 				24C34F131CE9931100D945BE /* FormTemplate.m */,
 				24C34F151CE9936F00D945BE /* FormTemplateField.h */,
 				24C34F161CE9936F00D945BE /* FormTemplateField.m */,
+				241C23831D0D4B2000DAF9C7 /* FormTemplateBrife.h */,
+				241C23841D0D4B2000DAF9C7 /* FormTemplateBrife.m */,
 			);
 			name = Model;
 			path = Models;
@@ -915,11 +935,13 @@
 				249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */,
 				24C34F1A1CE9956900D945BE /* FormManager.m in Sources */,
 				24ABAFCF1CCF39990089F779 /* CommodityTableView.m in Sources */,
+				241C23851D0D4B2000DAF9C7 /* FormTemplateBrife.m in Sources */,
 				24C34F111CE9928400D945BE /* FormData.m in Sources */,
 				24132AAF1D0805D6005FDBDE /* TextCell.m in Sources */,
 				240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */,
 				24F359761CB3B2B400C0950B /* Attachment.m in Sources */,
 				24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */,
+				241C238B1D0D61D900DAF9C7 /* WorkOrderFormsController.m in Sources */,
 				24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */,
 				24132AB21D0806C9005FDBDE /* DateCell.m in Sources */,
 				244517981CA03ED60085CC16 /* RootViewController.m in Sources */,
@@ -946,6 +968,7 @@
 				24F359811CB3BE4300C0950B /* WorkOrderListCell.m in Sources */,
 				2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */,
 				244517A91CA03F190085CC16 /* SideMenuController.m in Sources */,
+				24AAF4251D0EA4320020356F /* NSMutableArray+InsertArray.m in Sources */,
 				24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */,
 				24132AAC1D08016A005FDBDE /* WorkOrderFormController.m in Sources */,
 				24C34F171CE9936F00D945BE /* FormTemplateField.m in Sources */,
@@ -960,6 +983,7 @@
 				244517611CA03E5B0085CC16 /* AppManager.m in Sources */,
 				240F88BB1CC76A2600138F10 /* CommodityItem.m in Sources */,
 				2445176F1CA03E640085CC16 /* HttpUtil.m in Sources */,
+				24AAF4221D0E8F360020356F /* FormTemplateCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

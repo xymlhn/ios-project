@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[WorkOrderFormsController tableView:numberOfRowsInSection:]:WorkOrderFormsController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FormManager tableField:]:FormManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "field.controlType == FormTemplateControlTypeTable">
+            </PersistentString>
+            <PersistentString
+               value = "field.controlType">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

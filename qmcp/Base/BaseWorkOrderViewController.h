@@ -15,6 +15,8 @@
 #import "OSCAPI.h"
 #import "HttpUtil.h"
 #import "MJExtension.h"
+#import "Utils.h"
+#import "WorkOrder.h"
 @interface BaseWorkOrderViewController : UIViewController
 
 @property(nonatomic, copy) NSString *workOrderCode;

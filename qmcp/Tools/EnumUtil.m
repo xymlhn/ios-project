@@ -44,4 +44,22 @@
     return str;
 }
 
++(NSString *)formSortString:(FormSort)type{
+    NSString *str = @"";
+    switch (type) {
+        case FormSortCreate:
+            str = @"创建";
+            break;
+        case FormSortUpdate:
+            str = @"编辑";
+            break;
+        case FormSortComplete:
+            str = @"完成";
+            break;
+        default:
+            break;
+    }
+    return str;
+}
+
 @end

@@ -18,7 +18,7 @@
 #import "Utils.h"
 #import "WorkOrderManager.h"
 #import "WorkOrderCameraController.h"
-#import "WorkOrderFormController.h"
+#import "WorkOrderFormsController.h"
 @interface WorkOrderStepController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) NSMutableArray *workOrderStepList;
@@ -73,7 +73,7 @@
 }
 - (void)formBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    WorkOrderFormController *info =[WorkOrderFormController new];
+    WorkOrderFormsController *info =[WorkOrderFormsController new];
     info.workOrderCode = [super workOrderCode];
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];

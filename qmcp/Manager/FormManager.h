@@ -7,24 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FormTemplateField.h"
 @class FormData;
 @interface FormManager : NSObject
 
 + (FormManager *) getInstance;
 
 /**
- *  根据订单code获取表单模板
+ *  根据订单code获取表单模板和表单数据
  *
- *  @param salesOrderCode code
+ *  @param salesOrderCode 订单code
  */
--(void)getFormTemplate:(NSString *)salesOrderCode;
-
-/**
- *  根据订单code获取表单数据
- *
- *  @param salesOrderCode code
- */
--(void)getFormData:(NSString *)salesOrderCode;
+-(void)getFormTemplateAndFormData:(NSString *)salesOrderCode finishBlock:(void (^)(NSMutableArray *, NSError *))block;
 
 /**
  *  保存表单数据
@@ -39,5 +33,14 @@
  *  @param formDataId 表单数据id
  */
 -(void)deleteFormData:(NSString *)formDataId;
+
+
+/**
+ *  获取展示模板
+ *
+ *  @param formTemplateId 模板id
+ */
+-(NSMutableArray<FormTemplateField *> *)formTemplateField:(NSString *)formTemplateId;
+
 
 @end

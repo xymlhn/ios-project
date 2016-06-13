@@ -10,11 +10,14 @@
 #import "SalesOrderSnapshot.h"
 #import "WorkOrder.h"
 #import "PchHeader.h"
+#import "FormTemplateBrife.h"
 
 @interface EnumUtil : NSObject
 
 +(NSString *)salesOrderTypeString:(SalesOrderType)type;
 
 +(NSString *)workOrderTypeString:(WorkOrderType)type;
+
++(NSString *)formSortString:(FormSort)type;
 
 @end

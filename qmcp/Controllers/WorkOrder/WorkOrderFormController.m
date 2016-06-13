@@ -45,21 +45,11 @@
 {
     NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
-    _workOrderFormList = [NSMutableArray new];
-    [[FormManager getInstance] getFormTemplate:_workOrder.salesOrderSnapshot.code];
-    [[FormManager getInstance] getFormData:_workOrder.salesOrderSnapshot.code];
-}
-
--(void)bindListener
-{
+    _workOrderFormList = [[FormManager getInstance]formTemplateField:_formTemplateId];
+    
     
 }
 
-
-
--(void)saveData{
-    
-}
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -83,6 +73,8 @@
             ((DateCell *)cell).field = field;
             break;
         default:
+            cell = [DateCell cellWithTableView:tableView];
+            ((DateCell *)cell).field = field;
             break;
     }
     

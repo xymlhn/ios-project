@@ -11,4 +11,6 @@
 
 @interface WorkOrderFormController : BaseWorkOrderViewController
 
+@property (nonatomic,copy)NSString *formTemplateId;
+
 @end

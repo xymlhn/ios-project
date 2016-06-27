@@ -21,6 +21,8 @@
 #import "ReactiveCocoa.h"
 #import "MBProgressHUD.h"
 #import "HttpUtil.h"
+#import "UITableView+Common.h"
+#import "PchHeader.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *salesOrderList;
@@ -99,6 +101,7 @@
     }];
     cell.salesOrderSnapshot = salesOrderSnapshot;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
     //3 返回
     return cell;
 }

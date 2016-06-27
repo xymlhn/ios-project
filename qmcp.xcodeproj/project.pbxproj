@@ -14,6 +14,7 @@
 		24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A5F1CB74AF700D4EA96 /* WorkOrderInventoryView.m */; };
 		24020A631CB74C1900D4EA96 /* WorkOrderInventoryEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */; };
 		2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402D9D01CA3D2C200DD3EB3 /* WorkOrderInfoController.m */; };
+		240C742B1D17918600245D5C /* WorkOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 240C742A1D17918600245D5C /* WorkOrderCell.m */; };
 		240E64071CD04EFD00E355A7 /* PropertyChoose.m in Sources */ = {isa = PBXBuildFile; fileRef = 240E64061CD04EFD00E355A7 /* PropertyChoose.m */; };
 		240E640A1CD0562F00E355A7 /* PropertyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 240E64091CD0562F00E355A7 /* PropertyData.m */; };
 		240F88B51CC755C900138F10 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240F88B41CC755C900138F10 /* BaseViewController.m */; };
@@ -103,7 +104,6 @@
 		24F0C1E91CC5E299005B3F98 /* CommodityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F0C1E81CC5E299005B3F98 /* CommodityCell.m */; };
 		24F359761CB3B2B400C0950B /* Attachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F359751CB3B2B400C0950B /* Attachment.m */; };
 		24F359801CB3BE4300C0950B /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F3597B1CB3BE4300C0950B /* PhotoCell.m */; };
-		24F359811CB3BE4300C0950B /* WorkOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F3597D1CB3BE4300C0950B /* WorkOrderListCell.m */; };
 		24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F3597F1CB3BE4300C0950B /* WorkOrderStepCell.m */; };
 		24FBB2121CB9D222009C77E7 /* AddressSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FBB2111CB9D222009C77E7 /* AddressSnapshot.m */; };
 		24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FBB2141CB9D2FA009C77E7 /* LoginView.m */; };
@@ -125,6 +125,8 @@
 		24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryEditView.m; sourceTree = "<group>"; };
 		2402D9CF1CA3D2C200DD3EB3 /* WorkOrderInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInfoController.h; sourceTree = "<group>"; };
 		2402D9D01CA3D2C200DD3EB3 /* WorkOrderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInfoController.m; sourceTree = "<group>"; };
+		240C74291D17918600245D5C /* WorkOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderCell.h; sourceTree = "<group>"; };
+		240C742A1D17918600245D5C /* WorkOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderCell.m; sourceTree = "<group>"; };
 		240E64051CD04EFD00E355A7 /* PropertyChoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyChoose.h; sourceTree = "<group>"; };
 		240E64061CD04EFD00E355A7 /* PropertyChoose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyChoose.m; sourceTree = "<group>"; };
 		240E64081CD0562F00E355A7 /* PropertyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyData.h; sourceTree = "<group>"; };
@@ -300,8 +302,6 @@
 		24F359751CB3B2B400C0950B /* Attachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Attachment.m; sourceTree = "<group>"; };
 		24F3597A1CB3BE4300C0950B /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		24F3597B1CB3BE4300C0950B /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
-		24F3597C1CB3BE4300C0950B /* WorkOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderListCell.h; sourceTree = "<group>"; };
-		24F3597D1CB3BE4300C0950B /* WorkOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderListCell.m; sourceTree = "<group>"; };
 		24F3597E1CB3BE4300C0950B /* WorkOrderStepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepCell.h; sourceTree = "<group>"; };
 		24F3597F1CB3BE4300C0950B /* WorkOrderStepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepCell.m; sourceTree = "<group>"; };
 		24FBB2101CB9D222009C77E7 /* AddressSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressSnapshot.h; sourceTree = "<group>"; };
@@ -374,8 +374,6 @@
 				24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */,
 				24F3597A1CB3BE4300C0950B /* PhotoCell.h */,
 				24F3597B1CB3BE4300C0950B /* PhotoCell.m */,
-				24F3597C1CB3BE4300C0950B /* WorkOrderListCell.h */,
-				24F3597D1CB3BE4300C0950B /* WorkOrderListCell.m */,
 				24F3597E1CB3BE4300C0950B /* WorkOrderStepCell.h */,
 				24F3597F1CB3BE4300C0950B /* WorkOrderStepCell.m */,
 				246B0ABE1CB4B3BF0017E956 /* WorkOrderInventoryCell.h */,
@@ -390,6 +388,8 @@
 				24132AB11D0806C9005FDBDE /* DateCell.m */,
 				24AAF4201D0E8F360020356F /* FormTemplateCell.h */,
 				24AAF4211D0E8F360020356F /* FormTemplateCell.m */,
+				240C74291D17918600245D5C /* WorkOrderCell.h */,
+				240C742A1D17918600245D5C /* WorkOrderCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -952,6 +952,7 @@
 				244517A71CA03F190085CC16 /* SideMenuCell.m in Sources */,
 				2445176E1CA03E640085CC16 /* Config.m in Sources */,
 				24A2B44A1CB4F725006E29DB /* WorkOrderInventoryEditController.m in Sources */,
+				240C742B1D17918600245D5C /* WorkOrderCell.m in Sources */,
 				244517811CA03E760085CC16 /* SalesOrderSnapshot.m in Sources */,
 				244517BC1CA03F520085CC16 /* UIColor+Util.m in Sources */,
 				24948B3C1CC1DE3600DE8946 /* EnumUtil.m in Sources */,
@@ -965,7 +966,6 @@
 				24FBB2121CB9D222009C77E7 /* AddressSnapshot.m in Sources */,
 				240F88C11CC76B6700138F10 /* PropertyManager.m in Sources */,
 				244517A11CA03EFC0085CC16 /* TitleBarView.m in Sources */,
-				24F359811CB3BE4300C0950B /* WorkOrderListCell.m in Sources */,
 				2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */,
 				244517A91CA03F190085CC16 /* SideMenuController.m in Sources */,
 				24AAF4251D0EA4320020356F /* NSMutableArray+InsertArray.m in Sources */,

@@ -18,6 +18,7 @@
 #import "Config.h"
 #import "PchHeader.h"
 #import "UITableView+Common.h"
+#import "WorkOrderCell.h"
 @interface WorkOrderListController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *workOrderList;
 @property (nonatomic, assign) WorkOrderStatus status;
@@ -47,7 +48,7 @@
 -(void)initView
 {
     _tableView = [UITableView new];
-    _tableView.rowHeight = 120;
+    _tableView.rowHeight = 100;
     _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
@@ -106,15 +107,12 @@
 {
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
-    WorkOrderListCell *cell = [WorkOrderListCell cellWithTableView:tableView];
+    WorkOrderCell *cell = [WorkOrderCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
     WorkOrder *workOrder = self.workOrderList[row];
     cell.workOrder = workOrder;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.middleView.tag = row;
-    cell.topView.tag = row;
-    [cell.middleView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
-    [cell.topView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
+    [cell.contentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
     [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
     //3 返回
     return cell;

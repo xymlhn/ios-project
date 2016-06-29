@@ -139,7 +139,7 @@
         
         if(workOrder.salesOrderSnapshot != nil){
             _commodityNameText.text = [workOrder.salesOrderSnapshot.commodityNames componentsJoinedByString:@","];;
-            _codeText.text = workOrder.salesOrderSnapshot.code;
+            _codeText.text = workOrder.code;
             _nameText.text = workOrder.salesOrderSnapshot.addressSnapshot.contacts;
             _phoneText.text = workOrder.salesOrderSnapshot.addressSnapshot.mobilePhone;
         }

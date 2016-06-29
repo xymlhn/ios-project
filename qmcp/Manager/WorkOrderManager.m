@@ -48,18 +48,17 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
             [Config setWorkOrderTime:[Utils formatDate:[NSDate new]]];
             WorkOrderGroup *workOrderGroup = [WorkOrderGroup mj_objectWithKeyValues:obj];
             if(workOrderGroup.unassign){
-                NSArray *unassignArray = workOrderGroup.unassign;
-                for (NSString *workOrderCode in unassignArray) {
+                [workOrderGroup.unassign enumerateObjectsUsingBlock:^(NSString *  _Nonnull workOrderCode, NSUInteger idx, BOOL * _Nonnull stop) {
                     NSString *where = [NSString stringWithFormat:@"code = '%@'",workOrderCode];
                     [WorkOrder deleteWithWhere:where];
-                }
+                }];
             }
             if(workOrderGroup.assign){
                 NSArray *assignArray = [WorkOrder mj_objectArrayWithKeyValuesArray:workOrderGroup.assign];
-                for (WorkOrder *order in assignArray) {
+                [assignArray enumerateObjectsUsingBlock:^(WorkOrder *  _Nonnull order, NSUInteger idx, BOOL * _Nonnull stop) {
                     order.salesOrderSnapshot.addressSnapshot.code = order.code;
                     [order saveToDB];
-                }
+                }];
             }
             
         }else{
@@ -93,7 +92,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_GETWORKORDERBYITEMCODE,itemCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
         if (!error) {
-            hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+            hub.labelText = [NSString stringWithFormat:@"扫描成功"];
             [hub hide:YES afterDelay:1];
         }else{
             NSString *message = @"";

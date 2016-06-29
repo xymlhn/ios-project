@@ -67,7 +67,7 @@
    
     _formBtn = [UILabel new];
     [_formBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _formBtn.text = @"";
+    _formBtn.text = @"";
     _formBtn.textColor = [UIColor nameColor];
     _formBtn.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:_formBtn];

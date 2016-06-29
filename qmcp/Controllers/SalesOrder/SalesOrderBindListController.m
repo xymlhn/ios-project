@@ -20,6 +20,7 @@
 #import "Config.h"
 #import "UITableView+Common.h"
 #import "PchHeader.h"
+#import "QrCodeBindController.h"
 @interface SalesOrderBindListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *salesOrderList;
@@ -52,9 +53,7 @@
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
-    
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(salesOrderUpdate:) name:kSalesOrderBindNotification  object:nil];
+
     
 }
 
@@ -64,16 +63,20 @@
     {
         _salesOrderList = [NSMutableArray new];
     }
-    [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime]];
+    [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+        [self refreshUIWithDict:dict];
+    }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime]];
+        [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+            [self refreshUIWithDict:dict];
+        }];
     }];
 }
 
-- (void)salesOrderUpdate:(NSNotification *)text{
+-(void)refreshUIWithDict:(NSDictionary *)dict{
     [self.tableView.mj_header endRefreshing];
     [_salesOrderList removeAllObjects];
-    [_salesOrderList addObjectsFromArray:text.userInfo[@"salesOrderBind"]];
+    [_salesOrderList addObjectsFromArray:[dict allValues]];
     [self.tableView reloadData];
 }
 
@@ -103,12 +106,30 @@
 {
     SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[indexPath.row];
     NSString *url = [NSString stringWithFormat:@"%@%@",OSCAPI_ADDRESS,salesOrderSnapshot.qrCodeUrl];
-    [Utils showQRCode:url];
+    QrCodeBindController *controller = [QrCodeBindController doneBlock:^(NSString *salesOrderCode) {
+        [_salesOrderList removeObject:salesOrderSnapshot];
+        [[SalesOrderManager getInstance] removeBindDictSalesOrderSnapshotByCode:salesOrderCode];
+        [self.tableView reloadData];
+    }];
+    controller.salesOrderCode = salesOrderSnapshot.code;
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    controller.qrCodeUrl = url;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        controller.providesPresentationContextTransitionStyle = YES;
+        controller.definesPresentationContext = YES;
+        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self.tabBarController presentViewController:controller animated:YES completion:nil];
+        
+    } else {
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self presentViewController:controller animated:NO completion:nil];
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
 }
 
 
 -(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 

@@ -22,9 +22,6 @@
 NSString *const kBindCache = @"bind";
 NSString *const kConfirmCache = @"confirm";
 
-NSString *const kSalesOrderBindNotification = @"salesOrderBindUpdate";
-NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
-
 @interface SalesOrderManager()
 
 @property(nonatomic,strong)NSMutableDictionary<NSString *,SalesOrderSnapshot *> *bindDict; //绑单
@@ -53,7 +50,14 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
     return shared_manager;
 }
 
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime
+-(void)removeBindDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode{
+    if(_bindDict[salesOrderCode] != nil){
+        [_bindDict removeObjectForKey:salesOrderCode];
+        [[TMCache sharedCache] setObject:_bindDict forKey:kBindCache];
+    }
+}
+
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSError *))block
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERBIND,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -75,18 +79,16 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
                 
             }
 
-            NSDictionary *dict = @{@"salesOrderBind":[_bindDict allValues]};
-            NSNotification * notice = [NSNotification notificationWithName:kSalesOrderBindNotification object:nil userInfo:dict];
-            [[NSNotificationCenter defaultCenter]postNotification:notice];
+            block(_bindDict,nil);
             
         }else{
-            [self getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime]];
+            block(nil,error);
         }
     }];
 
 }
 
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSError *))block
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERCONFIRM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
@@ -103,21 +105,21 @@ NSString *const kSalesOrderGrabNotification = @"salesOrderGrabUpdate";
             }
             [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
                 
-            NSDictionary *dict = @{@"salesOrderGrab":[_grabDict allValues]};
-            NSNotification * notice = [NSNotification notificationWithName:kSalesOrderGrabNotification object:nil userInfo:dict];
-            [[NSNotificationCenter defaultCenter]postNotification:notice];
+            block(_grabDict,nil);
             
         }else{
-            [self getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime]];
+            block(nil,error);
         }
     }];
     
 }
 
--(void)removeGrabDictBySaleOrderCode:(NSString *)salesOrderCode
+-(void)removeGrabDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode
 {
-    [_grabDict removeObjectForKey:salesOrderCode];
-    [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
+    if(_grabDict[salesOrderCode] != nil){
+        [_grabDict removeObjectForKey:salesOrderCode];
+        [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
+    }
 }
 
 @end

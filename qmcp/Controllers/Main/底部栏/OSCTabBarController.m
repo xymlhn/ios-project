@@ -52,7 +52,7 @@
     hotNewsViewCtl.view.backgroundColor = [UIColor themeColor];
     blogViewCtl.view.backgroundColor = [UIColor themeColor];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor navigationbarColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
 
 }
 
@@ -122,13 +122,21 @@
     viewController.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigationbar-sidebar"]
                                                                                         style:UIBarButtonItemStylePlain
                                                                                        target:self action:@selector(onClickMenuButton)];
-    
+    viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigationbar-sidebar"]
+                                                                                        style:UIBarButtonItemStylePlain
+                                                                                       target:self action:@selector(onClickSearchButton)];
     return navigationController;
 }
 
 - (void)onClickMenuButton
 {
     [self.sideMenuViewController presentLeftMenuViewController];
+}
+
+
+//TODO: 搜索系统
+-(void)onClickSearchButton{
+    
 }
 
 @end

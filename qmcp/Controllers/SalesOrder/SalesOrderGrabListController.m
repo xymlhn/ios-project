@@ -55,9 +55,7 @@
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
-    
-    //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(salesOrderUpdate:) name:kSalesOrderGrabNotification object:nil];
+
     
 }
 
@@ -67,16 +65,20 @@
     {
         _salesOrderList = [NSMutableArray new];
     }
-    [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime]];
+    [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+        [self salesOrderUpdate:dict];
+    }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime]];
+        [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+            [self salesOrderUpdate:dict];
+        }];
     }];
 }
 
-- (void)salesOrderUpdate:(NSNotification *)text{
+- (void)salesOrderUpdate:(NSDictionary *)dict{
     [self.tableView.mj_header endRefreshing];
     [_salesOrderList removeAllObjects];
-    [_salesOrderList addObjectsFromArray:text.userInfo[@"salesOrderGrab"]];
+    [_salesOrderList addObjectsFromArray:[dict allValues]];
     [self.tableView reloadData];
 }
 
@@ -108,7 +110,7 @@
 
 
 -(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 -(void)grabSalesOrder:(SalesOrderSnapshot *)salesOrderSnapshot
@@ -124,7 +126,7 @@
         if (!error) {
             [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
             [weakSelf.tableView reloadData];
-            [[SalesOrderManager getInstance]removeGrabDictBySaleOrderCode:salesOrderSnapshot.code];
+            [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"抢单成功"];
@@ -137,7 +139,7 @@
                 message = [obj valueForKey:@"message"];
                 [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
                 [weakSelf.tableView reloadData];
-                [[SalesOrderManager getInstance]removeGrabDictBySaleOrderCode:salesOrderSnapshot.code];
+                [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
             }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];

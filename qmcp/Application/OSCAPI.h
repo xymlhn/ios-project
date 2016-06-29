@@ -10,8 +10,8 @@
 #define iosapp_OSCAPI_h
 
 //#define OSCAPI_ADDRESS             @"http://192.168.13.25:8080/"
-#define OSCAPI_ADDRESS             @"http://inforshare.vicp.cc:8000/"
-//#define OSCAPI_ADDRESS                  @"http://www.efw365.com/"
+//#define OSCAPI_ADDRESS             @"http://inforshare.vicp.cc:8000/"
+#define OSCAPI_ADDRESS                  @"http://www.efw365.com/"
 #define OSCAPI_LOGIN                    @"api/login"
 #define OSCAPI_LOGOUT                   @"api/logout"
 #define OSCAPI_SERVER_TIME              @"a/api/servertime"

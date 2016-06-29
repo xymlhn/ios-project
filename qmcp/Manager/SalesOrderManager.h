@@ -10,9 +10,6 @@
 
 @interface SalesOrderManager : NSObject
 
-extern NSString *const kSalesOrderBindNotification;
-extern NSString *const kSalesOrderGrabNotification;
-
 + (SalesOrderManager *) getInstance;
 
 /**
@@ -20,16 +17,27 @@ extern NSString *const kSalesOrderGrabNotification;
  *
  *  @param lastupdateTime 时间
  */
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime;
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  获取接单数据
  *
  *  @param lastupdateTime 时间
  */
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime;
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
--(void)removeGrabDictBySaleOrderCode:(NSString *)salesOrderCode;
+/**
+ *  根据订单code删除接单字典中salesOrder
+ *
+ *  @param salesOrderCode 订单code
+ */
+-(void)removeGrabDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode;
 
+/**
+ *  根据订单code删除绑单字典中salesOrder
+ *
+ *  @param salesOrderCode 订单code
+ */
+-(void)removeBindDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode;
 
 @end

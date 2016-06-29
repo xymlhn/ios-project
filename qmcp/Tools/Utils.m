@@ -40,7 +40,6 @@
     MBProgressHUD *HUD = [Utils createHUD];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.color = [UIColor whiteColor];
-    
     HUD.labelText = @"扫一扫上面的二维码";
     HUD.labelFont = [UIFont systemFontOfSize:13];
     HUD.labelColor = [UIColor grayColor];

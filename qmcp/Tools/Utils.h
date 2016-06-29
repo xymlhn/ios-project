@@ -49,4 +49,6 @@
 +(NSString *)saveImage:(UIImage *)image andName:(NSString *)name;
 
 + (void)showHudTipStr:(NSString *)tipStr;
+
++ (UIImage *)createQRCodeFromString:(NSString *)string;
 @end

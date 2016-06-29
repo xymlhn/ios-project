@@ -60,6 +60,8 @@
 		246B0AC01CB4B3BF0017E956 /* WorkOrderInventoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246B0ABF1CB4B3BF0017E956 /* WorkOrderInventoryCell.m */; };
 		246B0AC31CB4B66D0017E956 /* WorkOrderInventoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246B0AC21CB4B66D0017E956 /* WorkOrderInventoryController.m */; };
 		246ED6FC1CC8993F00DC0D8D /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246ED6FB1CC8993F00DC0D8D /* InitViewController.m */; };
+		247092661D23942E00EBADB3 /* QrCodeBindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092651D23942E00EBADB3 /* QrCodeBindController.m */; };
+		247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092681D2397E400EBADB3 /* QrCodeBindView.m */; };
 		24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24759F4C1CB9FB4700306E5C /* LoginViewController.m */; };
 		247D31D81C8D7C040048DD38 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247D31D71C8D7C040048DD38 /* CoreData.framework */; };
 		247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EE90B1CBF3974008A3674 /* PickupItemSignature.m */; };
@@ -217,6 +219,10 @@
 		246B0AC21CB4B66D0017E956 /* WorkOrderInventoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryController.m; sourceTree = "<group>"; };
 		246ED6FA1CC8993F00DC0D8D /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitViewController.h; sourceTree = "<group>"; };
 		246ED6FB1CC8993F00DC0D8D /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitViewController.m; sourceTree = "<group>"; };
+		247092641D23942E00EBADB3 /* QrCodeBindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeBindController.h; sourceTree = "<group>"; };
+		247092651D23942E00EBADB3 /* QrCodeBindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeBindController.m; sourceTree = "<group>"; };
+		247092671D2397E400EBADB3 /* QrCodeBindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeBindView.h; sourceTree = "<group>"; };
+		247092681D2397E400EBADB3 /* QrCodeBindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeBindView.m; sourceTree = "<group>"; };
 		24759F4B1CB9FB4700306E5C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		24759F4C1CB9FB4700306E5C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		247D31D71C8D7C040048DD38 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -345,6 +351,8 @@
 				24FBB2141CB9D2FA009C77E7 /* LoginView.m */,
 				24AEEE261CBA8385003C6C2E /* SettingViewCell.h */,
 				24AEEE271CBA8385003C6C2E /* SettingViewCell.m */,
+				247092671D2397E400EBADB3 /* QrCodeBindView.h */,
+				247092681D2397E400EBADB3 /* QrCodeBindView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -571,6 +579,8 @@
 				24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */,
 				24EAD1EB1CC0DA5D00444A9D /* SalesOrderBindListController.h */,
 				24EAD1EC1CC0DA5D00444A9D /* SalesOrderBindListController.m */,
+				247092641D23942E00EBADB3 /* QrCodeBindController.h */,
+				247092651D23942E00EBADB3 /* QrCodeBindController.m */,
 			);
 			path = SalesOrder;
 			sourceTree = "<group>";
@@ -924,6 +934,7 @@
 				248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */,
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */,
+				247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */,
 				249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */,
 				2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */,
 				24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */,
@@ -978,6 +989,7 @@
 				244517801CA03E760085CC16 /* ItemSnapshot.m in Sources */,
 				24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */,
 				24020A5A1CB7471C00D4EA96 /* WorkOrderStepView.m in Sources */,
+				247092661D23942E00EBADB3 /* QrCodeBindController.m in Sources */,
 				246B0AC31CB4B66D0017E956 /* WorkOrderInventoryController.m in Sources */,
 				24948B421CC2375900DE8946 /* SalesOrderBind.m in Sources */,
 				244517611CA03E5B0085CC16 /* AppManager.m in Sources */,

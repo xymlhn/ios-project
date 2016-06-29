@@ -8,12 +8,10 @@
 
 #import "WorkOrderListController.h"
 #import "NSObject+LKDBHelper.h"
-#import "WorkOrderListCell.h"
 #import "UIColor+Util.h"
 #import "WorkOrderManager.h"
 #import "MJRefresh.h"
 #import "WorkOrderInfoController.h"
-#import "WorkOrderListCell.h"
 #import "Masonry.h"
 #import "Config.h"
 #import "PchHeader.h"
@@ -48,7 +46,7 @@
 -(void)initView
 {
     _tableView = [UITableView new];
-    _tableView.rowHeight = 100;
+    _tableView.rowHeight = 80;
     _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;

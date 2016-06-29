@@ -6,8 +6,8 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "BaseWorkOrderViewController.h"
+#import "BaseViewController.h"
 
-@interface LoginViewController : BaseWorkOrderViewController
+@interface LoginViewController : BaseViewController
 
 @end

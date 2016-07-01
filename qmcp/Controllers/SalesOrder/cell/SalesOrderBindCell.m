@@ -16,7 +16,7 @@
 //创建自定义可重用的cell对象
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *reuseId = @"gb";
+    static NSString *reuseId = @"SalesOrderBindCell";
     SalesOrderBindCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
         cell = [[SalesOrderBindCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];

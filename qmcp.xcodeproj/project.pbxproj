@@ -59,13 +59,15 @@
 		245A2B721CAA49F7009A7572 /* WorkOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A2B711CAA49F7009A7572 /* WorkOrderListController.m */; };
 		246B0AC01CB4B3BF0017E956 /* WorkOrderInventoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246B0ABF1CB4B3BF0017E956 /* WorkOrderInventoryCell.m */; };
 		246B0AC31CB4B66D0017E956 /* WorkOrderInventoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246B0AC21CB4B66D0017E956 /* WorkOrderInventoryController.m */; };
-		246ED6FC1CC8993F00DC0D8D /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246ED6FB1CC8993F00DC0D8D /* InitViewController.m */; };
 		247092661D23942E00EBADB3 /* QrCodeBindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092651D23942E00EBADB3 /* QrCodeBindController.m */; };
 		247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092681D2397E400EBADB3 /* QrCodeBindView.m */; };
 		24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24759F4C1CB9FB4700306E5C /* LoginViewController.m */; };
 		247D31D81C8D7C040048DD38 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247D31D71C8D7C040048DD38 /* CoreData.framework */; };
 		247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EE90B1CBF3974008A3674 /* PickupItemSignature.m */; };
 		24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 24836CFE1CB7F05A00B58DBD /* WorkOrderGroup.m */; };
+		2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2489B3AA1D260EDA00725C9F /* InitViewController.m */; };
+		2489B3AF1D260F6100725C9F /* PickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2489B3AE1D260F6100725C9F /* PickupViewController.m */; };
+		2489B3B21D260FEC00725C9F /* PickupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2489B3B11D260FEC00725C9F /* PickupView.m */; };
 		248A5DB41C85C3C30095A4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A5DB31C85C3C30095A4FB /* main.m */; };
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248A5DC21C85C3C30095A4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DC01C85C3C30095A4FB /* LaunchScreen.storyboard */; };
@@ -217,8 +219,6 @@
 		246B0ABF1CB4B3BF0017E956 /* WorkOrderInventoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryCell.m; sourceTree = "<group>"; };
 		246B0AC11CB4B66D0017E956 /* WorkOrderInventoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryController.h; sourceTree = "<group>"; };
 		246B0AC21CB4B66D0017E956 /* WorkOrderInventoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryController.m; sourceTree = "<group>"; };
-		246ED6FA1CC8993F00DC0D8D /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitViewController.h; sourceTree = "<group>"; };
-		246ED6FB1CC8993F00DC0D8D /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitViewController.m; sourceTree = "<group>"; };
 		247092641D23942E00EBADB3 /* QrCodeBindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeBindController.h; sourceTree = "<group>"; };
 		247092651D23942E00EBADB3 /* QrCodeBindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeBindController.m; sourceTree = "<group>"; };
 		247092671D2397E400EBADB3 /* QrCodeBindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeBindView.h; sourceTree = "<group>"; };
@@ -230,6 +230,12 @@
 		247EE90B1CBF3974008A3674 /* PickupItemSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupItemSignature.m; sourceTree = "<group>"; };
 		24836CFD1CB7F05A00B58DBD /* WorkOrderGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderGroup.h; sourceTree = "<group>"; };
 		24836CFE1CB7F05A00B58DBD /* WorkOrderGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderGroup.m; sourceTree = "<group>"; };
+		2489B3A91D260EDA00725C9F /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitViewController.h; sourceTree = "<group>"; };
+		2489B3AA1D260EDA00725C9F /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitViewController.m; sourceTree = "<group>"; };
+		2489B3AD1D260F6100725C9F /* PickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupViewController.h; sourceTree = "<group>"; };
+		2489B3AE1D260F6100725C9F /* PickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupViewController.m; sourceTree = "<group>"; };
+		2489B3B01D260FEC00725C9F /* PickupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupView.h; sourceTree = "<group>"; };
+		2489B3B11D260FEC00725C9F /* PickupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupView.m; sourceTree = "<group>"; };
 		248A5DAF1C85C3C30095A4FB /* e服务365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e服务365.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		248A5DB31C85C3C30095A4FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		248A5DBE1C85C3C30095A4FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -353,6 +359,8 @@
 				24AEEE271CBA8385003C6C2E /* SettingViewCell.m */,
 				247092671D2397E400EBADB3 /* QrCodeBindView.h */,
 				247092681D2397E400EBADB3 /* QrCodeBindView.m */,
+				2489B3B01D260FEC00725C9F /* PickupView.h */,
+				2489B3B11D260FEC00725C9F /* PickupView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -459,6 +467,24 @@
 				241C238A1D0D61D900DAF9C7 /* WorkOrderFormsController.m */,
 			);
 			path = WorkOrder;
+			sourceTree = "<group>";
+		};
+		2489B3A81D260E8C00725C9F /* Init */ = {
+			isa = PBXGroup;
+			children = (
+				2489B3A91D260EDA00725C9F /* InitViewController.h */,
+				2489B3AA1D260EDA00725C9F /* InitViewController.m */,
+			);
+			path = Init;
+			sourceTree = "<group>";
+		};
+		2489B3AC1D260F1D00725C9F /* Pickup */ = {
+			isa = PBXGroup;
+			children = (
+				2489B3AD1D260F6100725C9F /* PickupViewController.h */,
+				2489B3AE1D260F6100725C9F /* PickupViewController.m */,
+			);
+			path = Pickup;
 			sourceTree = "<group>";
 		};
 		248A5DA61C85C3C30095A4FB = {
@@ -629,6 +655,7 @@
 		24F135281C8697B100645F92 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2489B3AC1D260F1D00725C9F /* Pickup */,
 				24233E1D1CCE05F500CF93B6 /* Introduce */,
 				24A685611CC4C72600663858 /* Help */,
 				24EAD1E71CC0D9E900444A9D /* SalesOrder */,
@@ -637,8 +664,7 @@
 				247D31CB1C8D75DD0048DD38 /* WorkOrder */,
 				24F135571C86BDFE00645F92 /* Login */,
 				24F135301C8697C100645F92 /* Main */,
-				246ED6FA1CC8993F00DC0D8D /* InitViewController.h */,
-				246ED6FB1CC8993F00DC0D8D /* InitViewController.m */,
+				2489B3A81D260E8C00725C9F /* Init */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -902,12 +928,15 @@
 			files = (
 				24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */,
 				244517821CA03E760085CC16 /* WorkOrder.m in Sources */,
+				2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */,
 				24020A571CB7431500D4EA96 /* WorkOrderInfoView.m in Sources */,
 				244517BE1CA03F520085CC16 /* UIView+Util.m in Sources */,
 				248A5DB41C85C3C30095A4FB /* main.m in Sources */,
 				244517A01CA03EFC0085CC16 /* SwipableViewController.m in Sources */,
 				244517BB1CA03F520085CC16 /* MBProgressHUD+Util.m in Sources */,
+				2489B3AF1D260F6100725C9F /* PickupViewController.m in Sources */,
 				2445179F1CA03EFC0085CC16 /* HorizonalTableViewController.m in Sources */,
+				2489B3B21D260FEC00725C9F /* PickupView.m in Sources */,
 				244517AC1CA03F220085CC16 /* OSCTabBarController.m in Sources */,
 				24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */,
 				24020A5D1CB7491100D4EA96 /* WorkOrderStepEditView.m in Sources */,
@@ -967,7 +996,6 @@
 				244517811CA03E760085CC16 /* SalesOrderSnapshot.m in Sources */,
 				244517BC1CA03F520085CC16 /* UIColor+Util.m in Sources */,
 				24948B3C1CC1DE3600DE8946 /* EnumUtil.m in Sources */,
-				246ED6FC1CC8993F00DC0D8D /* InitViewController.m in Sources */,
 				244517711CA03E640085CC16 /* Utils.m in Sources */,
 				24ABAFCC1CCF35950089F779 /* ThrowLineTool.m in Sources */,
 				24020A631CB74C1900D4EA96 /* WorkOrderInventoryEditView.m in Sources */,

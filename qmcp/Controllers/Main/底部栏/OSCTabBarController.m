@@ -122,7 +122,7 @@
     viewController.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigationbar-sidebar"]
                                                                                         style:UIBarButtonItemStylePlain
                                                                                        target:self action:@selector(onClickMenuButton)];
-    viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigationbar-sidebar"]
+    viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"]
                                                                                         style:UIBarButtonItemStylePlain
                                                                                        target:self action:@selector(onClickSearchButton)];
     return navigationController;

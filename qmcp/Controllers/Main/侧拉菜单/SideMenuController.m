@@ -19,6 +19,7 @@
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
 #import "Utils.h"
+#import "PickupViewController.h"
 @interface SideMenuController ()
 
 @end
@@ -92,15 +93,14 @@
             break;
         }
         case 1: {
-            LoginViewController *view = [LoginViewController new];
+            PickupViewController *view = [PickupViewController new];
             [self setContentViewController:view];
             
             break;
         }
         case 2: {
-//            SettingViewController *setting = [SettingViewController new];
-//            [self setContentViewController:setting];
-            [[AppManager getInstance] updateNickName];
+            SettingViewController *setting = [SettingViewController new];
+            [self setContentViewController:setting];
             break;
         }
         case 3: {

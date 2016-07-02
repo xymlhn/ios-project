@@ -71,4 +71,13 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  从数据库获取工单显示
  */
 - (void)sortAllWorkOrder;
+
+/**
+ *  根据code查找工单
+ *
+ *  @param code 工单code
+ *
+ *  @return 工单
+ */
+-(WorkOrder *)findWorkOrderByCode:(NSString *)code;
 @end

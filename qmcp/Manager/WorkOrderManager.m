@@ -73,7 +73,13 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
  *  处理所有的工单并派发到界面
  */
 - (void)sortAllWorkOrder{
-   _workOrders = [WorkOrder searchWithWhere:nil];
+    _workOrders = [WorkOrder searchWithWhere:nil];
+    
+    [_workOrders sortUsingComparator:^NSComparisonResult(WorkOrder *  _Nonnull obj1, WorkOrder *  _Nonnull obj2) {
+        int a1 = [[obj1.code componentsSeparatedByString:@"-"][1] intValue];
+        int a2 = [[obj2.code componentsSeparatedByString:@"-"][1] intValue];
+        return a1 < a2;
+    }];
 
     NSPredicate* undonePredicate = [NSPredicate predicateWithFormat:@"status < %@",[NSNumber numberWithInt:(int)WorkOrderStatusCompleted]];
     NSArray* undoneArr = [_workOrders filteredArrayUsingPredicate:undonePredicate];
@@ -83,6 +89,17 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     NSDictionary *dic = @{@"default":_workOrders,@"progress":undoneArr,@"complete":doneArr};
     NSNotification * notice = [NSNotification notificationWithName:kWorkOrderUpdateNotification object:nil userInfo:dic];
     [[NSNotificationCenter defaultCenter]postNotification:notice];
+}
+
+-(WorkOrder *)findWorkOrderByCode:(NSString *)code{
+    __block WorkOrder *workOrder;
+    [_workOrders enumerateObjectsUsingBlock:^(WorkOrder * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if([obj.code isEqualToString:code]){
+            *stop = YES;
+            workOrder = obj;
+        }
+    }];
+    return workOrder;
 }
 
 -(void)getWorkOrderByItemCode:(NSString *)itemCode{

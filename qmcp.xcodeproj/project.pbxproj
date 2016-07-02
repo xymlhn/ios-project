@@ -99,6 +99,9 @@
 		24C34F141CE9931100D945BE /* FormTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F131CE9931100D945BE /* FormTemplate.m */; };
 		24C34F171CE9936F00D945BE /* FormTemplateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F161CE9936F00D945BE /* FormTemplateField.m */; };
 		24C34F1A1CE9956900D945BE /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F191CE9956900D945BE /* FormManager.m */; };
+		24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB411D275B15007A9BF6 /* SearchView.m */; };
+		24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB451D275BA0007A9BF6 /* SearchViewController.m */; };
+		24CDDB491D27883B007A9BF6 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB481D27883B007A9BF6 /* HistoryViewController.m */; };
 		24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D49D2E1CB54370003213C9 /* ScanViewController.m */; };
 		24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */; };
 		24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1EC1CC0DA5D00444A9D /* SalesOrderBindListController.m */; };
@@ -296,6 +299,12 @@
 		24C34F161CE9936F00D945BE /* FormTemplateField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplateField.m; sourceTree = "<group>"; };
 		24C34F181CE9956900D945BE /* FormManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormManager.h; sourceTree = "<group>"; };
 		24C34F191CE9956900D945BE /* FormManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormManager.m; sourceTree = "<group>"; };
+		24CDDB401D275B15007A9BF6 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		24CDDB411D275B15007A9BF6 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
+		24CDDB441D275BA0007A9BF6 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		24CDDB451D275BA0007A9BF6 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		24CDDB471D27883B007A9BF6 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		24CDDB481D27883B007A9BF6 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		24D49D2D1CB54370003213C9 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		24D49D2E1CB54370003213C9 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		24EAD1E81CC0DA4300444A9D /* SalesOrderGrabListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabListController.h; sourceTree = "<group>"; };
@@ -361,6 +370,8 @@
 				247092681D2397E400EBADB3 /* QrCodeBindView.m */,
 				2489B3B01D260FEC00725C9F /* PickupView.h */,
 				2489B3B11D260FEC00725C9F /* PickupView.m */,
+				24CDDB401D275B15007A9BF6 /* SearchView.h */,
+				24CDDB411D275B15007A9BF6 /* SearchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -588,6 +599,17 @@
 			path = ../Tools;
 			sourceTree = "<group>";
 		};
+		24CDDB431D275B6F007A9BF6 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				24CDDB441D275BA0007A9BF6 /* SearchViewController.h */,
+				24CDDB451D275BA0007A9BF6 /* SearchViewController.m */,
+				24CDDB471D27883B007A9BF6 /* HistoryViewController.h */,
+				24CDDB481D27883B007A9BF6 /* HistoryViewController.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		24DD86941C8EB6DF00390EBF /* Gis */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,6 +677,7 @@
 		24F135281C8697B100645F92 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				24CDDB431D275B6F007A9BF6 /* Search */,
 				2489B3AC1D260F1D00725C9F /* Pickup */,
 				24233E1D1CCE05F500CF93B6 /* Introduce */,
 				24A685611CC4C72600663858 /* Help */,
@@ -828,7 +851,7 @@
 				TargetAttributes = {
 					248A5DAE1C85C3C30095A4FB = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = G65BL8U2C9;
+						DevelopmentTeam = BESGN79JZM;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -926,6 +949,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */,
 				24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */,
 				244517821CA03E760085CC16 /* WorkOrder.m in Sources */,
 				2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */,
@@ -987,9 +1011,11 @@
 				244517981CA03ED60085CC16 /* RootViewController.m in Sources */,
 				24F0C1E91CC5E299005B3F98 /* CommodityCell.m in Sources */,
 				245A2B721CAA49F7009A7572 /* WorkOrderListController.m in Sources */,
+				24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */,
 				24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */,
 				240F88B51CC755C900138F10 /* BaseViewController.m in Sources */,
 				244517A71CA03F190085CC16 /* SideMenuCell.m in Sources */,
+				24CDDB491D27883B007A9BF6 /* HistoryViewController.m in Sources */,
 				2445176E1CA03E640085CC16 /* Config.m in Sources */,
 				24A2B44A1CB4F725006E29DB /* WorkOrderInventoryEditController.m in Sources */,
 				240C742B1D17918600245D5C /* WorkOrderCell.m in Sources */,

@@ -1,15 +1,14 @@
 //
-//  PickupView.m
+//  SearchView.m
 //  qmcp
 //
-//  Created by 谢永明 on 16/7/1.
+//  Created by 谢永明 on 16/7/2.
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "PickupView.h"
+#import "SearchView.h"
 
-@implementation PickupView
-
+@implementation SearchView
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
@@ -22,10 +21,11 @@
     }];
     
     _searchBar = [UISearchBar new];
+    _searchBar.placeholder = @"请输入";
     [containView addSubview:_searchBar];
     
     _tableView = [UITableView new];
-    _tableView.rowHeight = 100;
+    _tableView.rowHeight = 80;
     _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     [containView addSubview:_tableView];

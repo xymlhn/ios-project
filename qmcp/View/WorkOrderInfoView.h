@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BaseView.h"
+#import "WorkOrder.h"
 
 @interface WorkOrderInfoView : BaseView
 
@@ -38,5 +39,15 @@
 @property (nonatomic,strong) UILabel  *remarkText;
 
 @property (nonatomic,strong) UIButton *starBtn;
+
+@property (nonatomic,strong ) UILabel     *stepBtn;
+@property (nonatomic,strong ) UILabel     *saveBtn;
+@property (nonatomic,strong ) UILabel     *formBtn;
+@property (nonatomic,strong ) UILabel     *cameraBtn;
+@property (nonatomic,strong ) UILabel     *inventoryBtn;
+@property (nonatomic,strong ) UILabel     *qrCodeBtn;
+
+@property (nonatomic,strong) WorkOrder *workOrder;
+@property (nonatomic,strong) UIView *view;
 
 @end

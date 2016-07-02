@@ -121,9 +121,10 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
         } else {
             NSLog(@"不是二维码");
         }
-        //调用代理对象的协议方法来实现数据传递
-        [self dismissViewControllerAnimated:YES completion:nil];
+       
         dispatch_async(dispatch_get_main_queue(), ^{
+            //调用代理对象的协议方法来实现数据传递
+            [self.navigationController popViewControllerAnimated:YES];
             if (self.doneBlock) {
                 self.doneBlock(result);
             }

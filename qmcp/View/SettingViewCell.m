@@ -19,7 +19,7 @@
 //创建自定义可重用的cell对象
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *reuseId = @"gb";
+    static NSString *reuseId = @"SettingViewCell";
     SettingViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
         cell = [[SettingViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];

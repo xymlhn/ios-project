@@ -44,7 +44,7 @@
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
 
     _attachments = [NSMutableArray new];
-    if(!_attachments)
+    if(_step.attachments.count > 0)
     {
         [_attachments addObjectsFromArray:_step.attachments];
     }
@@ -107,8 +107,9 @@
 
 -(void)saveData
 {
+    
     if (self.doneBlock) {
-        
+    
         switch ([super type]) {
             case SaveTypeAdd:
                 _step.content = _editView.editText.text;
@@ -130,6 +131,7 @@
         }
 
     }
+    
 }
 
 #pragma mark - IBAction
@@ -210,6 +212,7 @@
 }
 - (void)photoBtnClick:(UITapGestureRecognizer *)recognizer
 {
+    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self showOkayCancelAlert];
     } else {

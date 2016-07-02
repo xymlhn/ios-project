@@ -26,12 +26,22 @@
     _imageView = [UIImageView new];
     [alphaView addSubview:_imageView];
     
+    UILabel *tips = [UILabel new];
+    tips.font = [UIFont systemFontOfSize:12];//
+    tips.text = @"扫一扫绑定订单";
+    tips.textColor = [UIColor blackColor];
+    [alphaView addSubview:tips];
+    [tips mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerX.equalTo(alphaView.mas_centerX);
+        make.top.equalTo(alphaView.mas_top).with.offset(10);
+    }];
+    
     _confirmBtn = [UIButton new];
     [_confirmBtn setTitle:@"完成" forState:UIControlStateNormal];
     [_confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_confirmBtn.layer setMasksToBounds:YES];
     [_confirmBtn.layer setCornerRadius:5.0];
-    _confirmBtn.titleLabel.font = [UIFont systemFontOfSize: 18.0];
+    _confirmBtn.titleLabel.font = [UIFont systemFontOfSize: 15.0];
     [_confirmBtn setBackgroundColor: [UIColor nameColor]];
     [alphaView addSubview:_confirmBtn];
 
@@ -40,7 +50,7 @@
     [_cancelBtn.layer setMasksToBounds:YES];
     [_cancelBtn.layer setCornerRadius:5.0];
     [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _cancelBtn.titleLabel.font = [UIFont systemFontOfSize: 18.0];
+    _cancelBtn.titleLabel.font = [UIFont systemFontOfSize: 15.0];
     [_cancelBtn setBackgroundColor: [UIColor orangeColor]];
     [alphaView addSubview:_cancelBtn];
 
@@ -67,15 +77,15 @@
     [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(alphaView).with.offset(-20);
         make.right.equalTo(rootView.mas_centerX).with.offset(-20);
-        make.width.equalTo(@65);
-        make.height.equalTo(@35);
+        make.width.equalTo(@60);
+        make.height.equalTo(@32);
     }];
     
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(alphaView).with.offset(-20);
         make.left.equalTo(rootView.mas_centerX).with.offset(20);
-        make.width.equalTo(@65);
-        make.height.equalTo(@35);
+        make.width.equalTo(@60);
+        make.height.equalTo(@32);
     }];
 }
 

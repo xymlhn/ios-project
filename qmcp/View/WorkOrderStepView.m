@@ -32,31 +32,13 @@
 -(void)initBottomView:(UIView *)rootView
 {
     UIView *bottomView = [UIView new];
+    bottomView.backgroundColor = [UIColor whiteColor];
     [rootView addSubview:bottomView];
-    [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
-    }];
     
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
     [bottomView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(bottomView.mas_top).with.offset(0);
-        make.left.equalTo(bottomView.mas_left).with.offset(0);
-        make.right.equalTo(bottomView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
-    }];
     
-    _cameraBtn = [UILabel new];
-    [_cameraBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _cameraBtn.text = @"";
-    _cameraBtn.textColor = [UIColor nameColor];
-    _cameraBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_cameraBtn];
-   
     
     _addBtn = [UILabel new];
     [_addBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
@@ -65,12 +47,11 @@
     _addBtn.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:_addBtn];
    
-    _formBtn = [UILabel new];
-    [_formBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _formBtn.text = @"";
-    _formBtn.textColor = [UIColor nameColor];
-    _formBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_formBtn];
+    UILabel *addLabel = [UILabel new];
+    addLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    addLabel.text = @"步骤";
+    addLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:addLabel];
     
     _saveBtn = [UILabel new];
     [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
@@ -79,42 +60,51 @@
     _saveBtn.textColor = [UIColor nameColor];
     [bottomView addSubview:_saveBtn];
     
-    _completeBtn = [UILabel new];
-    [_completeBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _completeBtn.text = @"";
-    _completeBtn.textAlignment = NSTextAlignmentCenter;
-    _completeBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_completeBtn];
+    UILabel *saveLabel = [UILabel new];
+    saveLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    saveLabel.text = @"保存";
+    saveLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:saveLabel];
     
-    [_formBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(bottomView).with.offset(0);
-        make.centerY.equalTo(bottomView);
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
+        make.left.equalTo(rootView.mas_left).with.offset(0);
+        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@50);
     }];
     
+    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(bottomView.mas_top).with.offset(0);
+        make.left.equalTo(bottomView.mas_left).with.offset(0);
+        make.right.equalTo(bottomView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+   
     [_addBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_formBtn);
-        make.left.equalTo(_formBtn.mas_right);
-        make.centerY.equalTo(bottomView);
+        make.width.equalTo(_saveBtn);
+        make.left.equalTo(bottomView.mas_left);
+        make.right.equalTo(_saveBtn.mas_left);
+        make.top.equalTo(bottomView.mas_top).offset(3);
+    }];
+    [addLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_addBtn.mas_bottom);
+        make.centerX.equalTo(_addBtn.mas_centerX);
     }];
     
-    [_cameraBtn mas_makeConstraints:^(MASConstraintMaker *make){
+   
+    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.width.equalTo(_addBtn);
         make.left.equalTo(_addBtn.mas_right);
-        make.centerY.equalTo(bottomView);
+        make.right.equalTo(bottomView.mas_right);
+        make.top.equalTo(bottomView.mas_top).offset(3);
     }];
     
-    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_cameraBtn);
-        make.left.equalTo(_cameraBtn.mas_right);
-        make.centerY.equalTo(bottomView);
+    [saveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_saveBtn.mas_bottom);
+        make.centerX.equalTo(_saveBtn.mas_centerX);
     }];
+
     
-    [_completeBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_cameraBtn);
-        make.left.equalTo(_saveBtn.mas_right);
-        make.right.equalTo(bottomView);
-        make.centerY.equalTo(bottomView);
-    }];
 }
 
 @end

@@ -18,6 +18,7 @@
 -(void)initView{
     _pickView = [PickupView new];
     [_pickView initView:self.view];
+    self.navigationItem.title = @"取件";
 }
 
 -(void)bindListener{

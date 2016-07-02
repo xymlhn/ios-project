@@ -20,6 +20,7 @@
 #import "HelpViewController.h"
 #import "PropertyManager.h"
 #import "Config.h"
+#import "SearchViewController.h"
 @interface OSCTabBarController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     WorkOrderListController *newsViewCtl;
@@ -136,7 +137,15 @@
 
 //TODO: 搜索系统
 -(void)onClickSearchButton{
-    
+    SearchViewController *info = [SearchViewController new];
+    [self setContentViewController:info];
 }
 
+- (void)setContentViewController:(UIViewController *)viewController
+{
+    viewController.hidesBottomBarWhenPushed = YES;
+    UINavigationController *nav = (UINavigationController *)((UITabBarController *)self.sideMenuViewController.contentViewController).selectedViewController;
+    [nav pushViewController:viewController animated:YES];
+    [self.sideMenuViewController hideMenuViewController];
+}
 @end

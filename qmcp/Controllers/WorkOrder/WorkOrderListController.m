@@ -15,7 +15,6 @@
 #import "Masonry.h"
 #import "Config.h"
 #import "PchHeader.h"
-#import "UITableView+Common.h"
 #import "WorkOrderCell.h"
 @interface WorkOrderListController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *workOrderList;
@@ -47,7 +46,6 @@
 {
     _tableView = [UITableView new];
     _tableView.rowHeight = 80;
-    _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -110,20 +108,17 @@
     WorkOrder *workOrder = self.workOrderList[row];
     cell.workOrder = workOrder;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell.contentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
-    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
     //3 返回
     return cell;
 }
 
-#pragma mark - IBAction
-- (void)pushInfoView:(UITapGestureRecognizer *)recognizer
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkOrderInfoController *info = [WorkOrderInfoController new];
-    WorkOrder *workOrder = self.workOrderList[recognizer.view.tag];
+    WorkOrder *workOrder = self.workOrderList[indexPath.row];
     info.workOrderCode = workOrder.code;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
+
 
 @end

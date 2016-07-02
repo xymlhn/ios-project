@@ -21,7 +21,6 @@
 -(void)initView
 {
     _tableView = [UITableView new];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor themeColor];
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.918 alpha:1.000];

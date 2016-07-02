@@ -21,7 +21,7 @@
 #import "WorkOrderFormsController.h"
 @interface WorkOrderStepController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, retain) NSMutableArray *workOrderStepList;
+@property (nonatomic, retain) NSMutableArray<WorkOrderStep *> *workOrderStepList;
 @property (nonatomic, strong) WorkOrderStepView *stepView;
 @property (nonatomic, strong) WorkOrder *workOrder;
 @end
@@ -44,15 +44,7 @@
     
     _stepView.saveBtn.userInteractionEnabled = YES;
     [_stepView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
-    
-    _stepView.cameraBtn.userInteractionEnabled = YES;
-    [_stepView.cameraBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraBtnClick:)]];
-    
-    _stepView.completeBtn.userInteractionEnabled = YES;
-    [_stepView.completeBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(completeBtnClick:)]];
-    
-    _stepView.formBtn.userInteractionEnabled = YES;
-    [_stepView.formBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(formBtnClick:)]];
+
 }
 
 -(void)loadData
@@ -64,20 +56,7 @@
 }
 
 #pragma mark - IBAction
-- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    WorkOrderCameraController *info =[WorkOrderCameraController new];
-    info.workOrderCode = [super workOrderCode];
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-- (void)formBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    WorkOrderFormsController *info =[WorkOrderFormsController new];
-    info.workOrderCode = [super workOrderCode];
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
+
 - (void)appendBtnClick:(UITapGestureRecognizer *)recognizer
 {
     WorkOrderStep *step = [WorkOrderStep new];
@@ -91,6 +70,19 @@
     [self pushWorkOrderStepEditControllerWithWorkOrderStepId:step.id andType:SaveTypeAdd];
 }
 
+-(void)appendWorkOrder:(WorkOrderStep *)workOrderStep{
+    BOOL flag = NO;
+    for(int i = 0;i < [_workOrderStepList count];i++){
+        NSString *code = _workOrderStepList[i].id;
+        if([code isEqualToString:workOrderStep.id]){
+            flag = YES;
+        }
+    }
+    if(!flag){
+        [_workOrderStepList addObject:workOrderStep];
+    }
+}
+
 -(void)pushWorkOrderStepEditControllerWithWorkOrderStepId:(NSString *)stepId andType:(SaveType)type
 {
      __weak typeof(self) weakSelf = self;
@@ -98,7 +90,7 @@
         
         switch (type) {
             case SaveTypeAdd:
-                [weakSelf.workOrderStepList addObject:step];
+                [weakSelf appendWorkOrder:step];
                 break;
             case SaveTypeUpdate:
                 for (WorkOrderStep *temp in _workOrderStepList) {
@@ -135,10 +127,6 @@
     [self postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList isCompleteAll:NO];
 }
 
-- (void)completeBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    [self postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList isCompleteAll:YES];
-}
 
 - (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps isCompleteAll:(BOOL)isCompleteAll{
     
@@ -193,12 +181,6 @@
             {
                 hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
                 [hub hide:YES afterDelay:1];
-            
-                [self updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:WorkOrderTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
-                if(isCompleteAll){
-                    [self completeAllSteps:workOrder.code];
-                }
-                
             }
         }else{
             
@@ -213,58 +195,6 @@
             hub.labelText = message;
             [hub hide:YES afterDelay:1];
             
-        }
-    }];
-}
-
--(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(WorkOrderTimeStamp)timeStamp andDate:(NSString *)time{
-    __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在完成工单";
-    hub.userInteractionEnabled = NO;
-    NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
-    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSError *error) {
-        if(!error){
-            hub.labelText = [NSString stringWithFormat:@"完成工单成功"];
-            [hub hide:YES afterDelay:1];
-            weakSelf.workOrder.status = WorkOrderStatusCompleted;
-            [weakSelf.workOrder saveToDB];
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-            [[WorkOrderManager getInstance] sortAllWorkOrder];
-        }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"完成工单失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
-            [hub hide:YES afterDelay:1];
-        }
-    }];
-    
-}
--(void)completeAllSteps:(NSString*)workOrderCode
-{
-    
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在完成所有步骤";
-    hub.userInteractionEnabled = NO;
-    
-    NSDictionary *dict = @{@"workOrderCode":workOrderCode};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMPLTER_ALL_STEPS,workOrderCode];
-    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
-        if (!error) {
-            hub.labelText = [NSString stringWithFormat:@"提交成功"];
-            [hub hide:YES afterDelay:1];
-        }else{
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = @"提交失败,请重试";
-            [hub hide:YES afterDelay:1];
         }
     }];
 }

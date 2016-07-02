@@ -21,7 +21,6 @@
 #import "ReactiveCocoa.h"
 #import "MBProgressHUD.h"
 #import "HttpUtil.h"
-#import "UITableView+Common.h"
 #import "PchHeader.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -44,7 +43,6 @@
 {
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;
-    _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -103,7 +101,6 @@
     }];
     cell.salesOrderSnapshot = salesOrderSnapshot;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
     //3 返回
     return cell;
 }

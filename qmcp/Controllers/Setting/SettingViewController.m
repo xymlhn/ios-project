@@ -21,9 +21,7 @@
 -(void)initView
 {
     _tableView = [UITableView new];
-    _tableView.backgroundColor = [UIColor themeColor];
-    
-    self.view.backgroundColor = [UIColor colorWithWhite:0.918 alpha:1.000];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(self.view);
@@ -84,18 +82,17 @@
                     
                     break;
                 case 1:
-                    [cell initSetting:[Config getSound] andText:@"震动"];
+                    [cell initSetting:[Config getVibre] andText:@"震动"];
                     break;
             }
             break;
         case 1:
-           [cell initSetting:[Config getSound] andText:@"快速扫描"];
+           [cell initSetting:[Config getQuickScan] andText:@"快速扫描"];
             break;
     }
 
     cell.jsSwitch.tag = indexPath.section * 10 + indexPath.row;
     [cell.jsSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

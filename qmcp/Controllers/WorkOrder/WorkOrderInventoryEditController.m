@@ -23,9 +23,10 @@
 #import "PropertyManager.h"
 #import "CommodityProperty.h"
 #import "PropertyChoose.h"
-
-@interface WorkOrderInventoryEditController ()<UIImagePickerControllerDelegate,UICollectionViewDataSource,StandardsViewDelegate,
-                                                UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UIGestureRecognizerDelegate>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "ChooseViewController.h"
+@interface WorkOrderInventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,StandardsViewDelegate,
+                                                UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, strong) WorkOrder *workOrder;
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
 @property (nonatomic, strong) NSMutableArray *attachments;
@@ -65,6 +66,9 @@
     
     _inventoryEditView.carIcon.userInteractionEnabled = YES;
     [_inventoryEditView.carIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(carIconClick:)]];
+    
+    _inventoryEditView.photoIcon.userInteractionEnabled = YES;
+    [_inventoryEditView.photoIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoIconClick:)]];
 }
 
 -(void)loadData
@@ -104,9 +108,52 @@
 
 - (void)carIconClick:(UITapGestureRecognizer *)recognizer
 {
-    
+    ChooseViewController *controller = [ChooseViewController new];
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        controller.providesPresentationContextTransitionStyle = YES;
+        controller.definesPresentationContext = YES;
+        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self.tabBarController presentViewController:controller animated:YES completion:nil];
+        
+    } else {
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self presentViewController:controller animated:YES completion:nil];
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
 }
 
+- (void)photoIconClick:(UITapGestureRecognizer *)recognizer
+{
+    
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self showOkayCancelAlert];
+    } else {
+        UIImagePickerController *imagePickerController = [UIImagePickerController new];
+        imagePickerController.delegate = self;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.showsCameraControls = YES;
+        imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        imagePickerController.mediaTypes = @[(NSString *)kUTTypeImage];
+        
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }
+
+}
+
+- (void)showOkayCancelAlert {
+    NSString *title = NSLocalizedString(@"提示", nil);
+    NSString *message = NSLocalizedString(@"当前机器没有摄像头!", nil);
+    NSString *otherButtonTitle = NSLocalizedString(@"好的", nil);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+    }];
+    [alertController addAction:otherAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 #pragma mark - UIImagePickerController
 
@@ -248,6 +295,7 @@
             pc.code = [[NSUUID UUID] UUIDString];
             pc.price = commodity.price;
             [_chooseCommodityArr addObject:pc];
+            _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
         }
     }
     

@@ -21,4 +21,5 @@
 @property (nonatomic,strong) UILabel *numberLabel;
 
 @property (nonatomic,strong) UILabel *carIcon;
+@property (nonatomic,strong) UILabel *photoIcon;
 @end

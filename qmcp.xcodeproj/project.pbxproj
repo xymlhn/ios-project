@@ -87,6 +87,10 @@
 		24A685641CC4C74B00663858 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A685631CC4C74B00663858 /* HelpViewController.m */; };
 		24AAF4221D0E8F360020356F /* FormTemplateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAF4211D0E8F360020356F /* FormTemplateCell.m */; };
 		24AAF4251D0EA4320020356F /* NSMutableArray+InsertArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAF4241D0EA4320020356F /* NSMutableArray+InsertArray.m */; };
+		24AAFCF11D28DF2D00DAB3C9 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAFCF01D28DF2D00DAB3C9 /* ChooseView.m */; };
+		24AAFCF41D28DF8400DAB3C9 /* QrCodeIdentityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAFCF31D28DF8400DAB3C9 /* QrCodeIdentityView.m */; };
+		24AAFCF71D28E02000DAB3C9 /* QrCodeIdentityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAFCF61D28E02000DAB3C9 /* QrCodeIdentityController.m */; };
+		24AAFCFD1D28EEF800DAB3C9 /* ChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAFCFC1D28EEF800DAB3C9 /* ChooseViewController.m */; };
 		24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC11CCF35950089F779 /* StandardModel.m */; };
 		24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC31CCF35950089F779 /* StandardsView.m */; };
 		24ABAFCA1CCF35950089F779 /* StandarsAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC41CCF35950089F779 /* StandarsAdd@2x.png */; };
@@ -277,6 +281,14 @@
 		24AAF4211D0E8F360020356F /* FormTemplateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplateCell.m; sourceTree = "<group>"; };
 		24AAF4231D0EA4320020356F /* NSMutableArray+InsertArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+InsertArray.h"; sourceTree = "<group>"; };
 		24AAF4241D0EA4320020356F /* NSMutableArray+InsertArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+InsertArray.m"; sourceTree = "<group>"; };
+		24AAFCEF1D28DF2D00DAB3C9 /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
+		24AAFCF01D28DF2D00DAB3C9 /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
+		24AAFCF21D28DF8400DAB3C9 /* QrCodeIdentityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeIdentityView.h; sourceTree = "<group>"; };
+		24AAFCF31D28DF8400DAB3C9 /* QrCodeIdentityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeIdentityView.m; sourceTree = "<group>"; };
+		24AAFCF51D28E02000DAB3C9 /* QrCodeIdentityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeIdentityController.h; sourceTree = "<group>"; };
+		24AAFCF61D28E02000DAB3C9 /* QrCodeIdentityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeIdentityController.m; sourceTree = "<group>"; };
+		24AAFCFB1D28EEF800DAB3C9 /* ChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseViewController.h; sourceTree = "<group>"; };
+		24AAFCFC1D28EEF800DAB3C9 /* ChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseViewController.m; sourceTree = "<group>"; };
 		24ABAFC01CCF35950089F779 /* StandardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardModel.h; sourceTree = "<group>"; };
 		24ABAFC11CCF35950089F779 /* StandardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardModel.m; sourceTree = "<group>"; };
 		24ABAFC21CCF35950089F779 /* StandardsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardsView.h; sourceTree = "<group>"; };
@@ -372,6 +384,10 @@
 				2489B3B11D260FEC00725C9F /* PickupView.m */,
 				24CDDB401D275B15007A9BF6 /* SearchView.h */,
 				24CDDB411D275B15007A9BF6 /* SearchView.m */,
+				24AAFCEF1D28DF2D00DAB3C9 /* ChooseView.h */,
+				24AAFCF01D28DF2D00DAB3C9 /* ChooseView.m */,
+				24AAFCF21D28DF8400DAB3C9 /* QrCodeIdentityView.h */,
+				24AAFCF31D28DF8400DAB3C9 /* QrCodeIdentityView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -476,6 +492,10 @@
 				24132AAB1D08016A005FDBDE /* WorkOrderFormController.m */,
 				241C23891D0D61D900DAF9C7 /* WorkOrderFormsController.h */,
 				241C238A1D0D61D900DAF9C7 /* WorkOrderFormsController.m */,
+				24AAFCF51D28E02000DAB3C9 /* QrCodeIdentityController.h */,
+				24AAFCF61D28E02000DAB3C9 /* QrCodeIdentityController.m */,
+				24AAFCFB1D28EEF800DAB3C9 /* ChooseViewController.h */,
+				24AAFCFC1D28EEF800DAB3C9 /* ChooseViewController.m */,
 			);
 			path = WorkOrder;
 			sourceTree = "<group>";
@@ -949,7 +969,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24AAFCF41D28DF8400DAB3C9 /* QrCodeIdentityView.m in Sources */,
 				24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */,
+				24AAFCF11D28DF2D00DAB3C9 /* ChooseView.m in Sources */,
 				24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */,
 				244517821CA03E760085CC16 /* WorkOrder.m in Sources */,
 				2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */,
@@ -988,9 +1010,11 @@
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */,
 				247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */,
+				24AAFCF71D28E02000DAB3C9 /* QrCodeIdentityController.m in Sources */,
 				249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */,
 				2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */,
 				24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */,
+				24AAFCFD1D28EEF800DAB3C9 /* ChooseViewController.m in Sources */,
 				244517831CA03E760085CC16 /* WorkOrderStep.m in Sources */,
 				24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */,
 				24902D761CC3882D00607659 /* SignViewController.m in Sources */,

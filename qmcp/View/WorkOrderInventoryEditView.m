@@ -63,13 +63,13 @@
 -(void)initTopView:(UIView *)rootView
 {
     _titleLabel = [UILabel new];
-    _titleLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    _titleLabel.font = [UIFont systemFontOfSize:15];//采用系统默认文字设置大小
     _titleLabel.text = @"12305";
     _titleLabel.textColor = [UIColor blackColor];
     [rootView addSubview:_titleLabel];
     
     _remarkTextView = [UITextField new];
-    _remarkTextView.font = [UIFont systemFontOfSize:12];//
+    _remarkTextView.font = [UIFont systemFontOfSize:15];//
     _remarkTextView.textColor = [UIColor blackColor];
     _remarkTextView.placeholder=@"备注";
     _remarkTextView.borderStyle=UITextBorderStyleBezel;
@@ -88,45 +88,72 @@
     }];
 }
 
--(void)initBottomView:(UIView *)rootView{
+-(void)initBottomView:(UIView *)rootView
+{
+    UIView *bottomView = [UIView new];
     
-
+    [rootView addSubview:bottomView];
+    [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
+        make.left.equalTo(rootView.mas_left).with.offset(0);
+        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@40);
+    }];
     
-    _carIcon = [UILabel new];
-    [_carIcon setFont:[UIFont fontWithName:@"FontAwesome" size:18]];
-    _carIcon.text = @"";
-    _carIcon.layer.masksToBounds = YES;
-    _carIcon.backgroundColor = [UIColor nameColor];
-    _carIcon.layer.cornerRadius = 17.5;
-    _carIcon.textColor = [UIColor whiteColor];
-    _carIcon.textAlignment = NSTextAlignmentCenter;
-    [rootView addSubview:_carIcon];
+    UIView *codeBottomLine = [UIView new];
+    codeBottomLine.backgroundColor = [UIColor grayColor];
+    [bottomView addSubview:codeBottomLine];
+    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(bottomView.mas_top).with.offset(0);
+        make.left.equalTo(bottomView.mas_left).with.offset(0);
+        make.right.equalTo(bottomView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
     
     _numberLabel = [UILabel new];
-    _numberLabel.font = [UIFont systemFontOfSize:8];//采用系统默认文字设置大小
+    _numberLabel.font = [UIFont systemFontOfSize:9];
     _numberLabel.layer.masksToBounds = YES;
     _numberLabel.backgroundColor = [UIColor redColor];
-    _numberLabel.layer.cornerRadius = 6;
+    _numberLabel.layer.cornerRadius = 7.5;
     _numberLabel.text = @"12";
     _numberLabel.textAlignment = NSTextAlignmentCenter;
     _numberLabel.textColor = [UIColor whiteColor];
     [rootView addSubview:_numberLabel];
+    _carIcon = [UILabel new];
+    [_carIcon setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _carIcon.text = @"";
+    _carIcon.textColor = [UIColor nameColor];
+    _carIcon.textAlignment = NSTextAlignmentCenter;
+    [bottomView addSubview:_carIcon];
+    
+    _photoIcon = [UILabel new];
+    [_photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _photoIcon.text = @"";
+    _photoIcon.textAlignment = NSTextAlignmentCenter;
+    _photoIcon.textColor = [UIColor nameColor];
+    [bottomView addSubview:_photoIcon];
     
     
     [_carIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(@35);
-        make.height.equalTo(@35);
-        make.right.equalTo(rootView.mas_right).with.offset(-15);
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(-15);
+        make.top.equalTo(bottomView.mas_top).offset(3);
+        make.left.equalTo(bottomView.mas_left);
+        make.right.equalTo(_photoIcon.mas_left);
+        make.width.equalTo(_photoIcon);
     }];
     
+    [_photoIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(bottomView.mas_top).offset(3);
+        make.right.equalTo(bottomView.mas_right);
+        make.left.equalTo(_carIcon.mas_right);
+        make.width.equalTo(_carIcon.mas_width);
+    }];
     
     [_numberLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(@12);
-        make.height.equalTo(@12);
-        make.centerY.equalTo(_carIcon.mas_centerY).with.offset(-10);
-        make.left.equalTo(_carIcon.mas_right).with.offset(-10);
+        make.width.equalTo(@15);
+        make.height.equalTo(@15);
+        make.top.equalTo(_carIcon.mas_top).with.offset(0);
+        make.centerX.equalTo(_carIcon.mas_centerX).with.offset(20);
     }];
-
+    
 }
 @end

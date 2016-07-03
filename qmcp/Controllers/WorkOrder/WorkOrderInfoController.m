@@ -22,6 +22,7 @@
 #import "WorkOrderFormsController.h"
 #import "WorkOrderCameraController.h"
 #import "WorkOrderStep.h"
+#import "QrCodeIdentityController.h"
 @interface WorkOrderInfoController ()
 @property (nonatomic,strong)WorkOrderInfoView *infoView;
 @property (nonatomic,copy)WorkOrder *workOrder;
@@ -103,6 +104,9 @@
     
     _infoView.formBtn.userInteractionEnabled = YES;
     [_infoView.formBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(formBtnClick:)]];
+    
+    _infoView.qrCodeBtn.userInteractionEnabled = YES;
+    [_infoView.qrCodeBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrCodeBtnClick:)]];
 }
 
 
@@ -251,6 +255,24 @@
     [self showOkayCancelAlert];
 }
 
+-(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer
+{
+    QrCodeIdentityController *controller = [QrCodeIdentityController new];
+
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    controller.qrCodeUrl = _workOrder.qrCodeUrl;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        controller.providesPresentationContextTransitionStyle = YES;
+        controller.definesPresentationContext = YES;
+        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self.tabBarController presentViewController:controller animated:YES completion:nil];
+        
+    } else {
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self presentViewController:controller animated:NO completion:nil];
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+}
 - (void)completeBtnClick
 {
     [self showCompleteAlert];

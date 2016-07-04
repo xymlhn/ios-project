@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "PropertyChoose.h"
 
 @interface ChooseViewController : BaseViewController
-
+@property (nonatomic, strong) NSMutableArray<PropertyChoose *> *chooseCommodityArr;
 @end

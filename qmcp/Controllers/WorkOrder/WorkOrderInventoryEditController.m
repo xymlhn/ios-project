@@ -16,7 +16,6 @@
 #import "WorkOrderInventoryView.h"
 #import "CommodityCell.h"
 #import "Commodity.h"
-#import "CommodityTableView.h"
 #import "SettingViewCell.h"
 #import "Config.h"
 #import "StandardsView.h"
@@ -26,20 +25,17 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ChooseViewController.h"
 @interface WorkOrderInventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,StandardsViewDelegate,
-                                                UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
+                                                UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, strong) WorkOrder *workOrder;
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderInventoryEditView *inventoryEditView;
 @property (nonatomic, strong) NSMutableArray *commodities;
-@property (nonatomic, strong) CommodityTableView *pop;
 @property (nonatomic, strong) NSString *chooseCommodityCode;
-@property (nonatomic, strong) NSArray *switchArr;
-@property (nonatomic, strong) NSArray *contentArr;
 @property (nonatomic, strong) StandardsView *mystandardsView;
 @property (nonatomic, assign) bool isChoose;
 @property (nonatomic, strong) PropertyChoose *propertyChoose;
-@property (nonatomic, strong) NSMutableArray *chooseCommodityArr;
+@property (nonatomic, strong) NSMutableArray<PropertyChoose *> *chooseCommodityArr;
 @end
 
 @implementation WorkOrderInventoryEditController
@@ -49,9 +45,6 @@
 {
      _inventoryEditView = [WorkOrderInventoryEditView new];
     [_inventoryEditView initView:self.view];
-    _pop = [CommodityTableView defaultPopupView];
-    _pop.tableView.delegate = self;
-    _pop.tableView.dataSource = self;
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(priceUpdate:) name:@"priceUpdate" object:nil];
 }
@@ -93,11 +86,6 @@
     if(_itemSnapshot.commodities != nil){
         [_chooseCommodityArr addObjectsFromArray: _itemSnapshot.commodities];
     }
-    
-    _switchArr = @[[NSNumber numberWithBool:[Config getSound]],[NSNumber numberWithBool:[Config getVibre]]
-                   ,[NSNumber numberWithBool:[Config getQuickScan]]];
-    
-    _contentArr = @[@"声音",@"震动",@"快速扫描"];
     _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
 }
 
@@ -110,7 +98,7 @@
 {
     ChooseViewController *controller = [ChooseViewController new];
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
+    controller.chooseCommodityArr = _chooseCommodityArr;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         controller.providesPresentationContextTransitionStyle = YES;
         controller.definesPresentationContext = YES;
@@ -180,46 +168,6 @@
     }];
     
     
-}
-
-#pragma mark - Table view data source
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 3;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 45;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SettingViewCell *cell = [SettingViewCell cellWithTableView:tableView];
-    cell.backgroundColor = [UIColor clearColor];
-    NSInteger row = indexPath.row;
-    [cell initSetting:[_switchArr[row] boolValue] andText:_contentArr[row]];
-    cell.jsSwitch.tag = row;
-    [cell.jsSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    return cell;
-}
--(void)switchAction:(id)sender
-{
-    UISwitch *switchButton = (UISwitch*)sender;
-    NSUInteger tag = switchButton.tag;
-    switch (tag) {
-        case 0:
-            [Config setSound:switchButton.on];
-            break;
-        case 1:
-            [Config setVibre:switchButton.on];
-            break;
-        case 2:
-            [Config setQuickScan:switchButton.on];
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma mark -UICollectionViewDataSource

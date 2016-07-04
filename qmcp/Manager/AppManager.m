@@ -67,10 +67,10 @@ NSString *const kReloginNotification = @"reLogin";
         CZAccount *account = [CZAccount accountWithDict:responseObject];
         if(account.isAuthenticated){
             
-                //创建一个消息对象
-                NSNotification * notice = [NSNotification notificationWithName:kReloginNotification object:nil userInfo:nil];
-                //发送消息
-                [[NSNotificationCenter defaultCenter]postNotification:notice];
+            //创建一个消息对象
+            NSNotification * notice = [NSNotification notificationWithName:kReloginNotification object:nil userInfo:nil];
+            //发送消息
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
             
         }else{
             

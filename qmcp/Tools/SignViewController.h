@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface SignViewController : UIViewController
+@interface SignViewController : BaseViewController
 
 @property (copy, nonatomic) void(^doneBlock)(UIImage *signImage);
 

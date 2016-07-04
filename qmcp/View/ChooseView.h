@@ -10,4 +10,5 @@
 
 @interface ChooseView : BaseView
 @property (nonatomic,strong) UIView *baseView;
+@property (nonatomic,strong) UITableView *tableView;
 @end

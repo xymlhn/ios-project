@@ -32,7 +32,13 @@
         make.top.equalTo(rootView.mas_centerY);
     }];
     
-    
+    _tableView = [UITableView new];
+    _tableView.rowHeight = 80;
+    _tableView.backgroundColor = [UIColor themeColor];
+    [alphaView addSubview:_tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.edges.equalTo(alphaView);
+    }];
 
     
 }

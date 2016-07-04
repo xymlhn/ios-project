@@ -11,5 +11,6 @@
 
 @interface ChooseCommodityCell : UITableViewCell
 @property (nonatomic, strong) PropertyChoose *propertyChoose;
+@property (nonatomic, strong) UIButton *delBtn;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end

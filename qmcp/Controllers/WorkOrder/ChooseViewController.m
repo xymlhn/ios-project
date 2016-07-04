@@ -53,12 +53,15 @@
     //2 设置cell内部的子控件
     PropertyChoose *propertyChoose = self.chooseCommodityArr[row];
     cell.propertyChoose = propertyChoose;
+    cell.tag = row;
+    [cell.delBtn addTarget:self action:@selector(delBtnClick:) forControlEvents:UIControlEventTouchDown];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //3 返回
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(void)delBtnClick:(UIButton *)button{
+    [_chooseCommodityArr removeObjectAtIndex:button.tag];
+    [_chooseView.tableView reloadData];
 }
 @end

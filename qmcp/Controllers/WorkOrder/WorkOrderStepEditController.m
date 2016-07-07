@@ -135,7 +135,7 @@
 }
 
 #pragma mark - IBAction
-- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
+- (void)postWorkOrderStep
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];

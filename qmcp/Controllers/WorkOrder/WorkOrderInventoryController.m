@@ -56,7 +56,7 @@
 {
     __weak typeof(self) weakSelf = self;
     if([Config getQuickScan]){
-        ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
+        ScanViewController *scanViewController = [ScanViewController doneBlock:^(NSString *textValue) {
             [weakSelf handleResult:textValue];
         }];
         [self.navigationController pushViewController:scanViewController animated:YES];

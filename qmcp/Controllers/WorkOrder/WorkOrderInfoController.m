@@ -43,29 +43,28 @@
     _infoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         switch (_workOrder.type) {
             case WorkOrderTypeOnsite:
-                switch (_workOrder.status) {
-                    case WorkOrderStatusAssigned:
+                switch (_workOrder.onSiteStatus) {
+                    case OnSiteStatusWaiting:
                         [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
                         break;
-                    case WorkOrderStatusAcknowledged:
+                    case OnSiteStatusNotDepart:
                         [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                         
                         break;
-                    case WorkOrderStatusEnroute:
+                    case OnSiteStatusOnRoute:
                         [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                         break;
-                    case WorkOrderStatusOnSite:
-                        [self completeBtnClick];
-                        break;
+
                     default:
+                        [self showOkayCancelAlert];
                         break;
                 }
                 break;
             case WorkOrderTypeInventory:
-                [self completeBtnClick];
+                [self showOkayCancelAlert];
                 break;
             case WorkOrderTypeService:
-                [self completeBtnClick];
+                [self showOkayCancelAlert];
                 break;
             default:
                 break;
@@ -81,20 +80,11 @@
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
-    
-    if(_workOrder.type == WorkOrderTypeOnsite && _workOrder.status != WorkOrderStatusOnSite){
-        
-    }else{
-        _infoView.workOrder = _workOrder;
-
-    }
+    _infoView.workOrder = _workOrder;
     [self setTextWithWorkOrder:_workOrder];
     
     _infoView.stepBtn.userInteractionEnabled = YES;
     [_infoView.stepBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stepBtnClick:)]];
-    
-    _infoView.saveBtn.userInteractionEnabled = YES;
-    [_infoView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
     
     _infoView.cameraBtn.userInteractionEnabled = YES;
     [_infoView.cameraBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraBtnClick:)]];
@@ -128,14 +118,14 @@
          _infoView.typeText.text = [EnumUtil workOrderTypeString:workOrder.type];
         switch (workOrder.type) {
             case WorkOrderTypeOnsite:
-                switch (_workOrder.status) {
-                    case WorkOrderStatusAssigned:
+                switch (_workOrder.onSiteStatus) {
+                    case OnSiteStatusWaiting:
                         title = @"接收";
                         break;
-                    case WorkOrderStatusAcknowledged:
+                    case OnSiteStatusNotDepart:
                         title = @"出发";
                         break;
-                    case WorkOrderStatusEnroute:
+                    case OnSiteStatusOnRoute:
                         title = @"到达";
                         break;
                     default:
@@ -145,7 +135,6 @@
 
                 break;
             case WorkOrderTypeInventory:
-
                 title = @"完结";
                 break;
             case WorkOrderTypeService:
@@ -177,7 +166,7 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
     [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSError *error) {
         if(!error){
-            hub.labelText = [NSString stringWithFormat:@"上传数据成功"];
+            hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
             [hub hide:YES afterDelay:1];
             switch (weakSelf.workOrder.status) {
                 case WorkOrderStatusAssigned:
@@ -205,7 +194,7 @@
         }else{
             NSString *message = @"";
             if(obj == nil){
-                message =@"上传数据失败,请重试";
+                message =@"提交数据失败,请重试";
             }else{
                 message = [obj valueForKey:@"message"];
             }
@@ -221,6 +210,12 @@
 #pragma mark - IBAction
 -(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
 {
+    if(_workOrder.type == WorkOrderTypeOnsite){
+        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
+            return;
+        }
+    }
+    
     WorkOrderStepController *info = [WorkOrderStepController new];
     info.workOrderCode = [super workOrderCode];
     info.hidesBottomBarWhenPushed = YES;
@@ -229,6 +224,11 @@
 
 -(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer
 {
+    if(_workOrder.type == WorkOrderTypeOnsite){
+        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
+            return;
+        }
+    }
     WorkOrderInventoryController *info = [WorkOrderInventoryController new];
     info.workOrderCode = [super workOrderCode];
     info.hidesBottomBarWhenPushed = YES;
@@ -244,16 +244,17 @@
 }
 - (void)formBtnClick:(UITapGestureRecognizer *)recognizer
 {
+    if(_workOrder.type == WorkOrderTypeOnsite){
+        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
+            return;
+        }
+    }
     WorkOrderFormsController *info =[WorkOrderFormsController new];
     info.workOrderCode = [super workOrderCode];
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
 
-- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    [self showOkayCancelAlert];
-}
 
 -(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer
 {
@@ -273,32 +274,7 @@
         self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     }
 }
-- (void)completeBtnClick
-{
-    [self showCompleteAlert];
-}
 
-- (void)showCompleteAlert {
-    NSString *title = @"提示";
-    NSString *message = @"是否完成所有步骤？";
-    NSString *cancelButtonTitle = @"否";
-    NSString *otherButtonTitle = @"是";
-    __weak typeof(self) weakSelf = self;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }];
-    
-    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [weakSelf postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList isCompleteAll:YES];
-    }];
-    
-    // Add the actions.
-    [alertController addAction:cancelAction];
-    [alertController addAction:otherAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-}
 
 - (void)showOkayCancelAlert {
     NSString *title = @"提示";
@@ -312,7 +288,7 @@
     }];
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [weakSelf postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList isCompleteAll:NO];
+        [weakSelf postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList];
     }];
     
     // Add the actions.
@@ -322,7 +298,7 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps isCompleteAll:(BOOL)isCompleteAll{
+- (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
@@ -343,20 +319,12 @@
                 
             }
             if(attachments.count > 0){
-                int i= 0;
                 for(Attachment *attachment in attachments)
                 {
-                    i++;
-                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSError *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
-                            if(i == attachments.count)
-                            {
-                                hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
-                                [hub hide:YES afterDelay:1];
-                            }
                         }else{
                             NSString *message = @"";
                             if(obj == nil){
@@ -377,9 +345,6 @@
                 [hub hide:YES afterDelay:1];
                 
                 [self updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:WorkOrderTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
-                if(isCompleteAll){
-                    [self completeAllSteps:workOrder.code];
-                }
                 
             }
         }else{
@@ -429,25 +394,5 @@
     }];
     
 }
--(void)completeAllSteps:(NSString*)workOrderCode
-{
-    
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在完成所有步骤";
-    hub.userInteractionEnabled = NO;
-    
-    NSDictionary *dict = @{@"workOrderCode":workOrderCode};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMPLTER_ALL_STEPS,workOrderCode];
-    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj,NSError *error){
-        if (!error) {
-            hub.labelText = [NSString stringWithFormat:@"提交成功"];
-            [hub hide:YES afterDelay:1];
-        }else{
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = @"提交失败,请重试";
-            [hub hide:YES afterDelay:1];
-        }
-    }];
-}
+
 @end

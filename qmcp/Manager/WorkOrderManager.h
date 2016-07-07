@@ -31,12 +31,6 @@ extern NSString *const kWorkOrderUpdateNotification;
  */
 - (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
-/**
- *  完成该订单所有的工单步骤,可以取件了
- *
- *  @param workOrderCode 工单code
- */
-- (void)completeAllStepsWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  更新
@@ -51,8 +45,9 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  根据工单code获取工单
  *
  *  @param itemCode 工单code
+ *  @param block 回调
  */
--(void)getWorkOrderByItemCode:(NSString *)itemCode;
+-(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
 /**
  *  上传取件数据
@@ -80,4 +75,11 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @return 工单
  */
 -(WorkOrder *)findWorkOrderByCode:(NSString *)code;
+
+/**
+ *  根据工单code,获取工单
+ *
+ *  @param code 工单code
+ */
+-(void)getWorkOrderByCode:(NSString *)code;
 @end

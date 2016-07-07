@@ -30,6 +30,11 @@
 		24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E1F1CCE063D00CF93B6 /* IntroductionViewController.m */; };
 		24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 24233E231CCE07DF00CF93B6 /* SMPageControl.m */; };
 		24236A791D2A5EEF00994D89 /* ChooseCommodityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24236A781D2A5EEF00994D89 /* ChooseCommodityCell.m */; };
+		242EA1DA1D2E4C2E001E4291 /* PickupNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1D91D2E4C2E001E4291 /* PickupNoticeViewController.m */; };
+		242EA1DD1D2E4C86001E4291 /* PickupNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1DC1D2E4C86001E4291 /* PickupNoticeView.m */; };
+		242EA1E01D2E4CC1001E4291 /* ItemComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1DF1D2E4CC1001E4291 /* ItemComplete.m */; };
+		242EA1E31D2E544D001E4291 /* PickupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1E21D2E544D001E4291 /* PickupManager.m */; };
+		242EA1E71D2E578C001E4291 /* PickupNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1E61D2E578C001E4291 /* PickupNoticeCell.m */; };
 		2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */; };
 		244517611CA03E5B0085CC16 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445175E1CA03E5B0085CC16 /* AppManager.m */; };
 		244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517601CA03E5B0085CC16 /* WorkOrderManager.m */; };
@@ -169,6 +174,16 @@
 		24233E231CCE07DF00CF93B6 /* SMPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPageControl.m; sourceTree = "<group>"; };
 		24236A771D2A5EEF00994D89 /* ChooseCommodityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCommodityCell.h; sourceTree = "<group>"; };
 		24236A781D2A5EEF00994D89 /* ChooseCommodityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCommodityCell.m; sourceTree = "<group>"; };
+		242EA1D81D2E4C2E001E4291 /* PickupNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupNoticeViewController.h; sourceTree = "<group>"; };
+		242EA1D91D2E4C2E001E4291 /* PickupNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupNoticeViewController.m; sourceTree = "<group>"; };
+		242EA1DB1D2E4C86001E4291 /* PickupNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupNoticeView.h; sourceTree = "<group>"; };
+		242EA1DC1D2E4C86001E4291 /* PickupNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupNoticeView.m; sourceTree = "<group>"; };
+		242EA1DE1D2E4CC1001E4291 /* ItemComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemComplete.h; sourceTree = "<group>"; };
+		242EA1DF1D2E4CC1001E4291 /* ItemComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemComplete.m; sourceTree = "<group>"; };
+		242EA1E11D2E544D001E4291 /* PickupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupManager.h; sourceTree = "<group>"; };
+		242EA1E21D2E544D001E4291 /* PickupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupManager.m; sourceTree = "<group>"; };
+		242EA1E51D2E578C001E4291 /* PickupNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupNoticeCell.h; sourceTree = "<group>"; };
+		242EA1E61D2E578C001E4291 /* PickupNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupNoticeCell.m; sourceTree = "<group>"; };
 		2433412B1CAB9B5A00825112 /* WorkOrderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepController.h; sourceTree = "<group>"; };
 		2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepController.m; sourceTree = "<group>"; };
 		2445175D1CA03E5B0085CC16 /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
@@ -385,6 +400,8 @@
 				24AAFCF31D28DF8400DAB3C9 /* QrCodeIdentityView.m */,
 				2489B3B01D260FEC00725C9F /* PickupView.h */,
 				2489B3B11D260FEC00725C9F /* PickupView.m */,
+				242EA1DB1D2E4C86001E4291 /* PickupNoticeView.h */,
+				242EA1DC1D2E4C86001E4291 /* PickupNoticeView.m */,
 				24CDDB401D275B15007A9BF6 /* SearchView.h */,
 				24CDDB411D275B15007A9BF6 /* SearchView.m */,
 				24AAFCEF1D28DF2D00DAB3C9 /* ChooseView.h */,
@@ -411,6 +428,15 @@
 				24233E231CCE07DF00CF93B6 /* SMPageControl.m */,
 			);
 			path = SMPageControl;
+			sourceTree = "<group>";
+		};
+		242EA1E41D2E5751001E4291 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				242EA1E51D2E578C001E4291 /* PickupNoticeCell.h */,
+				242EA1E61D2E578C001E4291 /* PickupNoticeCell.m */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		2433412E1CAB9F2000825112 /* cell */ = {
@@ -470,6 +496,8 @@
 				240F88C01CC76B6700138F10 /* PropertyManager.m */,
 				249E49071CE6EFB80051C9C1 /* CameraManager.h */,
 				249E49081CE6EFB80051C9C1 /* CameraManager.m */,
+				242EA1E11D2E544D001E4291 /* PickupManager.h */,
+				242EA1E21D2E544D001E4291 /* PickupManager.m */,
 				24B0324F1C881E46007506DD /* Tools */,
 			);
 			path = Manager;
@@ -517,8 +545,11 @@
 		2489B3AC1D260F1D00725C9F /* Pickup */ = {
 			isa = PBXGroup;
 			children = (
+				242EA1E41D2E5751001E4291 /* Cell */,
 				2489B3AD1D260F6100725C9F /* PickupViewController.h */,
 				2489B3AE1D260F6100725C9F /* PickupViewController.m */,
+				242EA1D81D2E4C2E001E4291 /* PickupNoticeViewController.h */,
+				242EA1D91D2E4C2E001E4291 /* PickupNoticeViewController.m */,
 			);
 			path = Pickup;
 			sourceTree = "<group>";
@@ -819,6 +850,8 @@
 				24C34F161CE9936F00D945BE /* FormTemplateField.m */,
 				241C23831D0D4B2000DAF9C7 /* FormTemplateBrife.h */,
 				241C23841D0D4B2000DAF9C7 /* FormTemplateBrife.m */,
+				242EA1DE1D2E4CC1001E4291 /* ItemComplete.h */,
+				242EA1DF1D2E4CC1001E4291 /* ItemComplete.m */,
 			);
 			name = Model;
 			path = Models;
@@ -996,6 +1029,7 @@
 				24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */,
 				24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */,
 				249E49091CE6EFB80051C9C1 /* CameraManager.m in Sources */,
+				242EA1DD1D2E4C86001E4291 /* PickupNoticeView.m in Sources */,
 				24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */,
 				2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */,
 				247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */,
@@ -1004,8 +1038,10 @@
 				2445177F1CA03E760085CC16 /* CZAccount.m in Sources */,
 				249E49121CE700EE0051C9C1 /* WorkOrderCameraCell.m in Sources */,
 				24A2B4471CB4EDB3006E29DB /* PJRSignatureView.m in Sources */,
+				242EA1E71D2E578C001E4291 /* PickupNoticeCell.m in Sources */,
 				24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */,
 				244517C11CA03F870085CC16 /* BaseWorkOrderViewController.m in Sources */,
+				242EA1E01D2E4CC1001E4291 /* ItemComplete.m in Sources */,
 				240F88BE1CC76AD400138F10 /* CommodityProperty.m in Sources */,
 				24EAD1F41CC0DF4300444A9D /* SalesOrderBindCell.m in Sources */,
 				244517BD1CA03F520085CC16 /* UIImage+Util.m in Sources */,
@@ -1019,12 +1055,14 @@
 				24AAFCF71D28E02000DAB3C9 /* QrCodeIdentityController.m in Sources */,
 				249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */,
 				2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */,
+				242EA1E31D2E544D001E4291 /* PickupManager.m in Sources */,
 				24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */,
 				24AAFCFD1D28EEF800DAB3C9 /* ChooseViewController.m in Sources */,
 				244517831CA03E760085CC16 /* WorkOrderStep.m in Sources */,
 				24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */,
 				24902D761CC3882D00607659 /* SignViewController.m in Sources */,
 				244517861CA03E8A0085CC16 /* GisViewController.m in Sources */,
+				242EA1DA1D2E4C2E001E4291 /* PickupNoticeViewController.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
 				249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */,
 				24C34F1A1CE9956900D945BE /* FormManager.m in Sources */,

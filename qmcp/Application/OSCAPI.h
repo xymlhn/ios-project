@@ -15,8 +15,8 @@
 #define OSCAPI_LOGIN                    @"api/login"
 #define OSCAPI_LOGOUT                   @"api/logout"
 #define OSCAPI_SERVER_TIME              @"a/api/servertime"
+#define OSCAPI_WORKORDER                @"i/a/api/workorder/"
 #define OSCAPI_ALL_WORKORDER            @"i/a/api/workorder?lastUpdateTime="
-#define OSCAPI_COMPLTER_ALL_STEPS       @"i/a/api/workorder?lastUpdateTime="
 #define OSCAPI_POSTWORKORDERSTEP        @"i/a/api/workorder/"
 #define OSCAPI_PUSHID                   @"i/a/api/push/id/"
 #define OSCAPI_NICKNAME                 @"i/a/api/user/nickname"
@@ -37,5 +37,6 @@
 #define OSCAPI_FORMDATA                 @"i/a/api/salesorder/form/data?salesOrderCode="
 #define OSCAPI_SAVE_FORMDATA            @"i/a/api/salesorder/form/data"
 #define OSCAPI_DELETE_FORMDATA          @"i/a/api/salesorder/form/data/"
+#define OSCAPI_ITEM_COMPLETE            @"i/a/api/salesorder/itemcomplete/"
 
 #endif

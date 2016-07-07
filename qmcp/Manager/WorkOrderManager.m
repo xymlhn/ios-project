@@ -102,15 +102,22 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     return workOrder;
 }
 
--(void)getWorkOrderByItemCode:(NSString *)itemCode{
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在扫描获取工单";
-    hub.userInteractionEnabled = NO;
+-(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block{
+
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_GETWORKORDERBYITEMCODE,itemCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+        block(obj,error);
+    }];
+    
+}
+
+-(void)getWorkOrderByCode:(NSString *)code{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_WORKORDER,code];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
         if (!error) {
-            hub.labelText = [NSString stringWithFormat:@"扫描成功"];
-            [hub hide:YES afterDelay:1];
+            WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
+            [workOrder saveToDB];
+            [self sortAllWorkOrder];
         }else{
             NSString *message = @"";
             if(obj == nil){
@@ -118,10 +125,6 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
             }else{
                 message = [obj valueForKey:@"message"];
             }
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
-            [hub hide:YES afterDelay:1];
         }
     }];
     
@@ -174,12 +177,6 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     }];
 }
 
--(void)completeAllStepsWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block{
-
-    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
-        block(obj,error);
-    }];
-}
 
 @end
 

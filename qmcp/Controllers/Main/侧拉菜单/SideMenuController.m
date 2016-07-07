@@ -20,6 +20,9 @@
 #import "QrCodeViewController.h"
 #import "Utils.h"
 #import "PickupViewController.h"
+#import "WorkOrderInfoController.h"
+#import "PickupNoticeView.h"
+#import "PickupNoticeViewController.h"
 @interface SideMenuController ()
 
 @end
@@ -44,7 +47,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,7 +64,7 @@
     UIView *selectedBackground = [UIView new];
     selectedBackground.backgroundColor = [UIColor colorWithHex:0xCFCFCF];
     [cell setSelectedBackgroundView:selectedBackground];
-    [cell setContent:@[@"扫描取单", @"客户取件", @"设置", @"注销"][indexPath.row] andIcon:@[@"", @"", @"", @""][indexPath.row]];
+    [cell setContent:@[@"扫描取单", @"客户取件",@"完成物品", @"设置", @"注销"][indexPath.row] andIcon:@[@"", @"", @"",@"", @""][indexPath.row]];
 
     return cell;
 }
@@ -97,13 +100,17 @@
             [self setContentViewController:view];
             
             break;
+        }case 2: {
+            PickupNoticeViewController *view = [PickupNoticeViewController new];
+            [self setContentViewController:view];
+            break;
         }
-        case 2: {
+        case 3: {
             SettingViewController *setting = [SettingViewController new];
             [self setContentViewController:setting];
             break;
         }
-        case 3: {
+        case 4: {
             [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSError *error) {
                 if(!error){
                     [Config setInitSetting];
@@ -132,7 +139,44 @@
 
 -(void)handleResult:(NSString *)result
 {
-    [[WorkOrderManager getInstance] getWorkOrderByItemCode:result];
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"扫描中...";
+    hub.userInteractionEnabled = NO;
+    [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSError *error) {
+        if (!error) {
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+            hub.labelText = [NSString stringWithFormat:@"扫描成功"];
+            [hub hide:YES];
+            WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
+            [workOrder saveToDB];
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
+            [self pushWorkOrderInfoUI:workOrder.code];
+            
+        }else{
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"扫描失败";
+            }else{
+                message = [obj valueForKey:@"message"];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:0.5];
+        }
+    }];
+}
+/**
+ * 跳转到WorkOrderInfo界面
+ *
+ *  @param code 工单code
+ */
+-(void)pushWorkOrderInfoUI:(NSString *)code{
+    WorkOrderInfoController *info = [WorkOrderInfoController new];
+    info.workOrderCode = code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

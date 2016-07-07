@@ -43,7 +43,13 @@ typedef NS_ENUM(NSInteger, WorkOrderTimeStamp) {
     WorkOrderTimeStampResolved = 40,//解决时间
     WorkOrderTimeStampComplete = 50,//完成时间
 };
-
+typedef NS_ENUM(NSInteger, OnSiteStatus) {
+    OnSiteStatusNone = 0,//无
+    OnSiteStatusWaiting = 10,//未确认
+    OnSiteStatusNotDepart = 20,//未出发
+    OnSiteStatusOnRoute = 30,//已出发
+    OnSiteStatusArrived = 40,//已到场
+};
 @interface WorkOrder : NSObject
 
 @property (nonatomic, copy) NSString *title;
@@ -65,6 +71,8 @@ typedef NS_ENUM(NSInteger, WorkOrderTimeStamp) {
 @property (nonatomic, assign) WorkOrderType type;
 
 @property (nonatomic, assign) WorkOrderStatus status;
+
+@property (nonatomic, assign) OnSiteStatus onSiteStatus;
 
 @property (nonatomic, assign) BOOL isRead;
 

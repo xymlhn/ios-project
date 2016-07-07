@@ -22,6 +22,11 @@
 #import "MBProgressHUD.h"
 #import "HttpUtil.h"
 #import "PchHeader.h"
+#import "WorkOrder.h"
+#import "NSObject+LKDBHelper.h"
+#import "MJExtension.h"
+#import "WorkOrderManager.h"
+#import "WorkOrderInfoController.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *salesOrderList;
@@ -127,7 +132,12 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"抢单成功"];
-            [hub hide:YES afterDelay:0.5];
+            [hub hide:YES];
+            WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
+            [workOrder saveToDB];
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
+            [self pushWorkOrderInfoUI:workOrder.code];
+            
         }else{
             NSString *message = @"";
             if(obj == nil){
@@ -146,5 +156,15 @@
     }];
     
 }
-
+/**
+ * 跳转到WorkOrderInfo界面
+ *
+ *  @param code 工单code
+ */
+-(void)pushWorkOrderInfoUI:(NSString *)code{
+    WorkOrderInfoController *info = [WorkOrderInfoController new];
+    info.workOrderCode = code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
 @end

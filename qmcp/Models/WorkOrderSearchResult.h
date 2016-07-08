@@ -16,7 +16,7 @@
 @property (nonatomic,copy) NSString *salesOrderCode;
 @property (nonatomic,copy) NSString *salesOrderCreationTime;
 @property (nonatomic,assign) BOOL *dispatchToMeFlag;
-@property (nonatomic,assign) WorkOrderStatus *status;
+@property (nonatomic, assign) WorkOrderStatus status;
 @property (nonatomic, assign) WorkOrderType type;
 
 

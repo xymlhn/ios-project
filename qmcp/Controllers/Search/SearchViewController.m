@@ -73,12 +73,7 @@
     NSString *result = searchBar.text;
     
     [self searchWorkOrderByCode:result andCondition:NO];
-    
-//    WorkOrder *workOrder = [[WorkOrderManager getInstance] findWorkOrderByCode:result];
-//    if(workOrder){
-//        [_workOrderList addObject:workOrder];
-//        [_searchView.tableView reloadData];
-//    }
+
 }
 
 //点击搜索框上的 取消按钮时 调用
@@ -153,18 +148,29 @@
     WorkOrderSearchResult *workOrderSearchResult = self.resultList[row];
     cell.workOrderSearchResult = workOrderSearchResult;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell.contentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
     //3 返回
     return cell;
 }
 
-#pragma mark - IBAction
-- (void)pushInfoView:(UITapGestureRecognizer *)recognizer
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    WorkOrderInfoController *info = [WorkOrderInfoController new];
-//    WorkOrder *workOrder = self.workOrderList[recognizer.view.tag];
-//    info.workOrderCode = workOrder.code;
-//    info.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:info animated:YES];
+    NSInteger row = indexPath.row;
+    WorkOrderSearchResult *workOrderSearchResult = self.resultList[row];
+    if(workOrderSearchResult.dispatchToMeFlag && workOrderSearchResult.status != WorkOrderStatusCompleted){
+        WorkOrder *workOrder = [[WorkOrderManager getInstance] findWorkOrderByCode:workOrderSearchResult.code];
+        [self pushInfoView:workOrder.code];
+    }else{
+        
+    }
+    
+    
+}
+
+- (void)pushInfoView:(NSString *)code
+{
+    WorkOrderInfoController *info = [WorkOrderInfoController new];
+    info.workOrderCode = code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 @end

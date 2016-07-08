@@ -76,5 +76,7 @@ typedef NS_ENUM(NSInteger, OnSiteStatus) {
 
 @property (nonatomic, assign) BOOL isRead;
 
+@property (nonatomic, assign) BOOL isFailed;
+
 @property (nonatomic, copy) NSString *userOpenId;
 @end

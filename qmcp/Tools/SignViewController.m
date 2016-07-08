@@ -55,6 +55,7 @@
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
+    [self dismissViewControllerAnimated:YES completion:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.doneBlock) {
             UIImage *image = [_signView.signatureView getSignatureImage];

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ScanViewController : UIViewController
+@interface ScanViewController : BaseViewController
 
 @property (copy, nonatomic) void(^doneBlock)(NSString *textValue);
 

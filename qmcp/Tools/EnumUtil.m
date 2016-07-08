@@ -62,4 +62,22 @@
     return str;
 }
 
++(NSString *)pickupStatusString:(PickupStatus)type{
+    NSString *str = @"";
+    switch (type) {
+        case PickupStatusUnPickup:
+            str = @"暂无";
+            break;
+        case PickupStatusWaitToPickup:
+            str = @"待取";
+            break;
+        case PickupStatusHasPickup:
+            str = @"已取";
+            break;
+        default:
+            break;
+    }
+    return str;
+}
+
 @end

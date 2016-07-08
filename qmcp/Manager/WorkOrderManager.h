@@ -49,10 +49,6 @@ extern NSString *const kWorkOrderUpdateNotification;
  */
 -(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
-/**
- *  上传取件数据
- */
--(void)postPickUpItem;
 
 /**
  *  提交附件

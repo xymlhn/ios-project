@@ -44,13 +44,12 @@
 -(void)initView{
     _contentText = [UILabel new];
     _contentText.textColor = [UIColor whiteColor];
-    _contentText.textAlignment = NSTextAlignmentCenter;
+    _contentText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
     [self.contentView addSubview:_contentText];
     
     [_contentText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.contentView.mas_width);
-        make.height.equalTo(@60);
-        make.left.equalTo(self.contentView.mas_left).with.offset(0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(10);
         make.centerY.equalTo(self.contentView.mas_centerY);
     }];
 }

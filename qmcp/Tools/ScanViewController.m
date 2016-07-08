@@ -7,78 +7,47 @@
 //
 
 #import "ScanViewController.h"
-#import "Masonry.h"
 #import "ReactiveCocoa.h"
-#import "UIColor+Util.h"
+#import "ScanView.h"
 @interface ScanViewController ()
-@property (nonatomic, strong) UITextField *scanText;
-@property (nonatomic, strong) UIButton *scanBtn;
 
+@property(nonatomic,strong) ScanView *scanView;
 
 @end
 
 @implementation ScanViewController
 
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    UIView *containView = [UIView new];
-    [self.view addSubview:containView];
-    [containView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.view.mas_top).with.offset(100);
-        make.centerX.equalTo(self.view.mas_centerX);
-        make.width.equalTo(@200);
-        make.height.equalTo(@50);
-    }];
-    
-    _scanText = [UITextField new];
-    _scanText.font = [UIFont systemFontOfSize:12];//
-    _scanText.textColor = [UIColor blackColor];
-    _scanText.placeholder=@"请输入二维码";
-    _scanText.borderStyle=UITextBorderStyleRoundedRect;
-    
-    _scanBtn = [UIButton new];
-    [_scanBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [_scanBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _scanBtn.titleLabel.font = [UIFont systemFontOfSize: 15.0];
-    [_scanBtn setBackgroundColor: [UIColor nameColor]];
-    [containView addSubview:_scanBtn];
-    [_scanBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(containView.mas_centerY);
-        make.width.equalTo(@50);
-        make.right.equalTo(containView.mas_right).with.offset(-10);
-    }];
 
-    [containView addSubview:_scanText];
-    [_scanText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(containView.mas_centerY);
-        make.right.equalTo(_scanBtn.mas_left).with.offset(-10);
-        make.width.equalTo(@150);
-       
-    }];
+-(void)loadData{
     
-    _scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-        if (self.doneBlock) {
-            self.doneBlock(_scanText.text);
-        }
-        
-        return [RACSignal empty];
-    }];
+}
+
+-(void)initView{
+    _scanView = [ScanView new];
+    [_scanView initView:self.view];
+}
+-(void)bindListener{
+    _scanView.scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)
+                            {
+                                [self.navigationController popViewControllerAnimated:YES];
+                                if (self.doneBlock) {
+                                    self.doneBlock(_scanView.scanText.text);
+                                }
+                                
+                                return [RACSignal empty];
+                            }];
     
-    RACSignal *validSignal = [self.scanText.rac_textSignal
-                                      map:^id(NSString *text) {
-                                          return @([self isValidText:text]);
-                                      }];
+    RACSignal *validSignal = [_scanView.scanText.rac_textSignal
+                              map:^id(NSString *text) {
+                                  return @([self isValidText:text]);
+                              }];
     
     [validSignal subscribeNext:^(NSNumber*signupActive){
-        self.scanBtn.backgroundColor = [signupActive boolValue] ? [UIColor nameColor] : [UIColor grayColor];
-        self.scanBtn.enabled =[signupActive boolValue];
+        _scanView.scanBtn.backgroundColor = [signupActive boolValue] ? [UIColor nameColor] : [UIColor grayColor];
+        _scanView.scanBtn.enabled =[signupActive boolValue];
     }];
-
 }
+
 -(BOOL)isValidText:(NSString *)text
 {
     return text.length > 0;

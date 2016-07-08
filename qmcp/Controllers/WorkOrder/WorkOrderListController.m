@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *workOrderList;
 @property (nonatomic, assign) WorkOrderStatus status;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) MBProgressHUD *hub;
 @end
 
 @implementation WorkOrderListController
@@ -53,7 +54,7 @@
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(self.view);
     }];
-    
+
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(workOrderUpdate:) name:kWorkOrderUpdateNotification object:nil];
     
@@ -61,6 +62,9 @@
 
 -(void)loadData
 {
+    _hub = [Utils createHUD];
+    _hub.labelText = @"加载中...";
+    _hub.userInteractionEnabled = NO;
     _workOrderList = [NSMutableArray new];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
@@ -69,14 +73,16 @@
 
 #pragma mark - Notification
 - (void)workOrderUpdate:(NSNotification *)text{
-    [self.tableView.mj_header endRefreshing];
     [_workOrderList removeAllObjects];
+    [_tableView.mj_header endRefreshing];
+    
+    _hub.mode = MBProgressHUDModeCustomView;
+    _hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+    _hub.labelText = [NSString stringWithFormat:@"加载成功"];
+    [_hub hide:YES];
     switch (_status) {
-        case WorkOrderStatusDefault:
-            [_workOrderList addObjectsFromArray:text.userInfo[@"default"]];
-            break;
         case WorkOrderStatusCompleted:
-            [_workOrderList addObjectsFromArray:text.userInfo[@"complete"]];
+            [_workOrderList addObjectsFromArray:text.userInfo[@"failed"]];
             break;
         case WorkOrderStatusInProgress:
             [_workOrderList addObjectsFromArray:text.userInfo[@"progress"]];

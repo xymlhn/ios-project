@@ -9,6 +9,8 @@
 #import "PickupManager.h"
 #import "OSCAPI.h"
 #import "HttpUtil.h"
+#import "PickupSignature.h"
+#import "MJExtension.h"
 
 @implementation PickupManager
 
@@ -28,5 +30,21 @@
         block(obj,error);
     }];
     
+}
+
+-(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block{
+
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_PICKUPITEM,itemCode];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+        block(obj,error);
+    }];
+}
+
+-(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(void (^)(NSDictionary *, NSError *))block{
+    NSDictionary *obj = [pickupSignature mj_keyValues];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_PICKUPSIGNATURE];
+    [HttpUtil post:URLString param:obj finish:^(NSDictionary *obj, NSError *error) {
+        block(obj,error);
+    }];
 }
 @end

@@ -11,6 +11,13 @@
 @interface PickupView : BaseView
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UITableView *tableView;
-@property(nonatomic,strong) UIButton *qrButton;
-@property(nonatomic,strong) UIButton *signButton;
+@property(nonatomic,strong) UILabel *qrButton;
+@property(nonatomic,strong) UILabel *signButton;
+
+@property(nonatomic,strong) UILabel *codeText;
+@property(nonatomic,strong) UILabel *nameText;
+@property(nonatomic,strong) UILabel *phoneText;
+
+
+@property(nonatomic,strong) UIView *headView;
 @end

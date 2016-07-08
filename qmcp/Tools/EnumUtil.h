@@ -11,6 +11,7 @@
 #import "WorkOrder.h"
 #import "PchHeader.h"
 #import "FormTemplateBrife.h"
+#import "PickupItem.h"
 
 @interface EnumUtil : NSObject
 
@@ -20,4 +21,5 @@
 
 +(NSString *)formSortString:(FormSort)type;
 
++(NSString *)pickupStatusString:(PickupStatus)type;
 @end

@@ -81,12 +81,12 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
         return a1 < a2;
     }];
 
-    NSPredicate* undonePredicate = [NSPredicate predicateWithFormat:@"status < %@",[NSNumber numberWithInt:(int)WorkOrderStatusCompleted]];
+    NSPredicate* undonePredicate = [NSPredicate predicateWithFormat:@"failed == %@",[NSNumber numberWithBool:NO]];
     NSArray* undoneArr = [_workOrders filteredArrayUsingPredicate:undonePredicate];
     
-    NSPredicate* donePredicate = [NSPredicate predicateWithFormat:@"status >= %@",[NSNumber numberWithInt:(int)WorkOrderStatusCompleted]];
-    NSArray* doneArr = [_workOrders filteredArrayUsingPredicate:donePredicate];
-    NSDictionary *dic = @{@"default":_workOrders,@"progress":undoneArr,@"complete":doneArr};
+    NSPredicate* failedPredicate = [NSPredicate predicateWithFormat:@"failed == %@",[NSNumber numberWithBool:YES]];
+    NSArray* failedArr = [_workOrders filteredArrayUsingPredicate:failedPredicate];
+    NSDictionary *dic = @{@"progress":undoneArr,@"failed":failedArr};
     NSNotification * notice = [NSNotification notificationWithName:kWorkOrderUpdateNotification object:nil userInfo:dic];
     [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
@@ -146,24 +146,6 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     }
     
     [HttpUtil postFile:URLString file:data name:@"data" fileName:attachment.key param:dict finish:block];
-}
-
-- (void)postPickUpItem{
-    
-    PickupItemSignature *pick = [PickupItemSignature new];
-    pick.salesOrderCode = @"10102-739";
-    pick.pickupTime = [Utils formatDate:[NSDate new]];
-    pick.signatureImageKey = @"b23f49bc-374c-4749-8229-c3c90d47b3de.jpg";
-    pick.itemCodes = @[@"sf01"];
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_PICKUPITEM];
-    [HttpUtil post:URLString param:pick finish:^(NSDictionary *obj,NSError *error){
-        if (!error) {
-            
-        }else{
-            NSLog(@"提交失败");
-        }
-    }];
 }
 
 -(void) updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block{

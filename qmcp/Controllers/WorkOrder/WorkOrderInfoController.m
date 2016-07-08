@@ -166,6 +166,9 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
     [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSError *error) {
         if(!error){
+            weakSelf.workOrder.isFailed = NO;
+            [weakSelf.workOrder saveToDB];
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
             hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
             [hub hide:YES afterDelay:1];
             switch (weakSelf.workOrder.status) {
@@ -192,6 +195,9 @@
                     break;
             }
         }else{
+            weakSelf.workOrder.isFailed = YES;
+            [weakSelf.workOrder saveToDB];
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
             NSString *message = @"";
             if(obj == nil){
                 message =@"提交数据失败,请重试";
@@ -299,7 +305,7 @@
 }
 
 - (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps{
-    
+    __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
     hub.userInteractionEnabled = NO;
@@ -326,6 +332,9 @@
                             attachment.isUpload = YES;
                             [attachment updateToDB];
                         }else{
+                            weakSelf.workOrder.isFailed = YES;
+                            [weakSelf.workOrder saveToDB];
+                            [[WorkOrderManager getInstance] sortAllWorkOrder];
                             NSString *message = @"";
                             if(obj == nil){
                                 message =@"上传工单附件失败,请重试";
@@ -348,7 +357,9 @@
                 
             }
         }else{
-            
+            weakSelf.workOrder.isFailed = YES;
+            [weakSelf.workOrder saveToDB];
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
             NSString *message = @"";
             if(obj == nil){
                 message =@"上传工单步骤失败,请重试";
@@ -364,6 +375,7 @@
     }];
 }
 
+
 -(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(WorkOrderTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
@@ -375,11 +387,14 @@
         if(!error){
             hub.labelText = [NSString stringWithFormat:@"完结工单成功"];
             [hub hide:YES afterDelay:1];
-            weakSelf.workOrder.status = WorkOrderStatusCompleted;
-            [weakSelf.workOrder saveToDB];
+
+            [weakSelf.workOrder deleteToDB];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
         }else{
+            weakSelf.workOrder.isFailed = YES;
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
+            [weakSelf.workOrder saveToDB];
             NSString *message = @"";
             if(obj == nil){
                 message =@"完结工单失败,请重试";

@@ -82,7 +82,7 @@ NSString *const kConfirmCache = @"confirm";
             block(_bindDict,nil);
             
         }else{
-            block(nil,error);
+            block(obj,error);
         }
     }];
 
@@ -108,7 +108,7 @@ NSString *const kConfirmCache = @"confirm";
             block(_grabDict,nil);
             
         }else{
-            block(nil,error);
+            block(obj,error);
         }
     }];
     

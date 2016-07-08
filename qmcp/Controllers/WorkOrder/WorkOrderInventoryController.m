@@ -74,7 +74,6 @@
     SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
         [weakSelf reportSignImage:signImage];
     }];
-    //[self.navigationController pushViewController:signController animated:YES];
     [self presentViewController:signController animated: YES completion:nil];
     
 }

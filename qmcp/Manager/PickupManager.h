@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PickupSignature.h"
 
 @interface PickupManager : NSObject
 
@@ -20,4 +21,19 @@
  */
 -(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block;
 
+/**
+ *  获取待取物品信息
+ *
+ *  @param itemCode 物品code
+ *  @param block    回调
+ */
+-(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block;
+
+/**
+ *  提交取件物品
+ *
+ *  @param pickupSignature model
+ *  @param block           回调
+ */
+-(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(void (^)(NSDictionary *, NSError *))block;
 @end

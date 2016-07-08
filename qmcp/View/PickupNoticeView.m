@@ -33,8 +33,7 @@
     [containView addSubview:_qrButton];
 
     _tableView = [UITableView new];
-    _tableView.rowHeight = 100;
-    _tableView.separatorStyle = NO;
+    _tableView.rowHeight = 30;
     _tableView.backgroundColor = [UIColor themeColor];
     [containView addSubview:_tableView];
     

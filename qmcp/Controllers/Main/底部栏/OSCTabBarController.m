@@ -25,7 +25,6 @@
 {
     WorkOrderListController *newsViewCtl;
     WorkOrderListController *hotNewsViewCtl;
-    WorkOrderListController *blogViewCtl;
     
     SalesOrderBindListController *bindViewCtl;
     SalesOrderGrabListController *grabViewCtl;
@@ -51,7 +50,6 @@
     
     newsViewCtl.view.backgroundColor = [UIColor themeColor];
     hotNewsViewCtl.view.backgroundColor = [UIColor themeColor];
-    blogViewCtl.view.backgroundColor = [UIColor themeColor];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
 
@@ -63,14 +61,13 @@
     
     newsViewCtl = [[WorkOrderListController alloc]  initWithStatus:WorkOrderStatusInProgress];
     hotNewsViewCtl = [[WorkOrderListController alloc] initWithStatus:WorkOrderStatusCompleted];
-    blogViewCtl = [[WorkOrderListController alloc]  initWithStatus:WorkOrderStatusDefault];
     
     grabViewCtl = [SalesOrderGrabListController new];
     bindViewCtl = [SalesOrderBindListController new];
  
     SwipableViewController *workOrderSVC = [[SwipableViewController alloc] initWithTitle:@"工单"
-                                                                       andSubTitles:@[@"未完成", @"已完成", @"全部"]
-                                                                     andControllers:@[newsViewCtl, hotNewsViewCtl, blogViewCtl]
+                                                                       andSubTitles:@[@"未完成", @"待上传",]
+                                                                     andControllers:@[newsViewCtl, hotNewsViewCtl]
                                                                         underTabbar:YES];
     SwipableViewController *saleOrderSVC = [[SwipableViewController alloc] initWithTitle:@"订单"
                                                                        andSubTitles:@[@"抢单", @"绑定"]

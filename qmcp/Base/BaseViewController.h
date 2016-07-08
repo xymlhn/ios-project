@@ -12,7 +12,7 @@
 #import "UIColor+Util.h"
 #import "Masonry.h"
 #import "Utils.h"
-
+#import "NSObject+LKDBHelper.h"
 @interface BaseViewController : UIViewController
 
 @end

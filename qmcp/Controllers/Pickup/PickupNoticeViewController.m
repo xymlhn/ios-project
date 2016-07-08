@@ -17,7 +17,7 @@
 #import "MJExtension.h"
 #import "PickupNoticeCell.h"
 
-@interface PickupNoticeViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface PickupNoticeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 @property (nonatomic,strong) PickupNoticeView *pickupNoticeView;
 @property (nonatomic,strong) NSMutableArray<ItemComplete *> *array;
 @end
@@ -36,6 +36,8 @@
     
     _pickupNoticeView.tableView.delegate = self;
     _pickupNoticeView.tableView.dataSource = self;
+    
+    _pickupNoticeView.searchBar.delegate = self;
 }
 
 -(void)loadData{
@@ -50,6 +52,15 @@
 -(void)pushWorkOrderInfoUI:(UIViewController *)controller{
     controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [self handleResult:searchBar.text];
+    searchBar.text =  @"";
+    [searchBar resignFirstResponder];
 }
 
 
@@ -104,7 +115,7 @@
             hub.labelText = [NSString stringWithFormat:@"成功"];
             [hub hide:YES];
             ItemComplete *itemComplete = [ItemComplete mj_objectWithKeyValues:obj];
-            [weakSelf.array addObject:itemComplete];
+            [weakSelf.array insertObject:itemComplete atIndex:0];
             [weakSelf.pickupNoticeView.tableView reloadData];
         }else{
             NSString *message = @"";

@@ -39,5 +39,6 @@
 #define OSCAPI_SAVE_FORMDATA            @"i/a/api/salesorder/form/data"
 #define OSCAPI_DELETE_FORMDATA          @"i/a/api/salesorder/form/data/"
 #define OSCAPI_ITEM_COMPLETE            @"i/a/api/salesorder/itemcomplete/"
+#define OSCAPI_SEARCH                   @"i/a/api/workorder/search"
 
 #endif

@@ -78,4 +78,13 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param code 工单code
  */
 -(void)getWorkOrderByCode:(NSString *)code;
+
+/**
+ *  搜索工单
+ *
+ *  @param string    字符
+ *  @param condition 是否包含历史工单
+ *  @param block     回调
+ */
+-(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(void (^)(NSDictionary *, NSError *))block;
 @end

@@ -159,6 +159,12 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     }];
 }
 
+-(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(void (^)(NSDictionary *, NSError *))block{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@?includeHistory=%@&condition=%@", OSCAPI_ADDRESS,OSCAPI_SEARCH,[NSNumber numberWithBool:condition],string];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+        block(obj,error);
+    }];
+}
 
 @end
 

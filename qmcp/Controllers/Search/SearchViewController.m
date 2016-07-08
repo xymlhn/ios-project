@@ -12,10 +12,12 @@
 #import "WorkOrderManager.h"
 #import "WorkOrderCell.h"
 #import "WorkOrderInfoController.h"
+#import "WorkOrderSearchResult.h"
+#import "SearchViewCell.h"
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) SearchView *searchView;
 @property(nonatomic,strong) HistoryViewController *historyViewController;
-@property(nonatomic,strong) NSMutableArray<WorkOrder *> *workOrderList;
+@property(nonatomic,strong) NSMutableArray<WorkOrderSearchResult *> *resultList;
 @end
 
 @implementation SearchViewController
@@ -37,7 +39,7 @@
 }
 
 -(void)loadData{
-    _workOrderList = [NSMutableArray new];
+    _resultList = [NSMutableArray new];
 }
 
 #pragma mark UISearchBarDelegate
@@ -69,11 +71,14 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *result = searchBar.text;
-    WorkOrder *workOrder = [[WorkOrderManager getInstance] findWorkOrderByCode:result];
-    if(workOrder){
-        [_workOrderList addObject:workOrder];
-        [_searchView.tableView reloadData];
-    }
+    
+    [self searchWorkOrderByCode:result andCondition:NO];
+    
+//    WorkOrder *workOrder = [[WorkOrderManager getInstance] findWorkOrderByCode:result];
+//    if(workOrder){
+//        [_workOrderList addObject:workOrder];
+//        [_searchView.tableView reloadData];
+//    }
 }
 
 //点击搜索框上的 取消按钮时 调用
@@ -92,11 +97,50 @@
     [UIView commitAnimations];
 }
 
+-(void)searchWorkOrderByCode:(NSString *)string andCondition:(BOOL)condition{
+    
+    [_searchView.searchBar resignFirstResponder];
+    
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在搜索";
+    hub.userInteractionEnabled = NO;
+
+    [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSError *error) {
+        if(!error){
+            [weakSelf.resultList removeAllObjects];
+            NSArray<WorkOrderSearchResult *> *arr = [WorkOrderSearchResult mj_objectArrayWithKeyValuesArray:obj];
+            [weakSelf.resultList addObjectsFromArray:arr];
+            [weakSelf.searchView.tableView reloadData];
+            weakSelf.searchView.searchBar.text = @"";
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+            hub.labelText = [NSString stringWithFormat:@"搜索成功"];
+            [hub hide:YES];
+        }else{
+            [weakSelf.resultList removeAllObjects];
+            [weakSelf.searchView.tableView reloadData];
+            NSString *message = @"";
+            if(obj == nil){
+                message =@"搜索失败";
+            }else{
+                message = [obj valueForKey:@"message"];
+            }
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = message;
+            [hub hide:YES afterDelay:1];
+        }
+    }];
+
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.workOrderList.count;
+    return self.resultList.count;
 }
 
 //返回每行显示的cell
@@ -104,10 +148,10 @@
 {
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
-    WorkOrderCell *cell = [WorkOrderCell cellWithTableView:tableView];
+    SearchViewCell *cell = [SearchViewCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
-    WorkOrder *workOrder = self.workOrderList[row];
-    cell.workOrder = workOrder;
+    WorkOrderSearchResult *workOrderSearchResult = self.resultList[row];
+    cell.workOrderSearchResult = workOrderSearchResult;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell.contentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushInfoView:)]];
     //3 返回
@@ -117,10 +161,10 @@
 #pragma mark - IBAction
 - (void)pushInfoView:(UITapGestureRecognizer *)recognizer
 {
-    WorkOrderInfoController *info = [WorkOrderInfoController new];
-    WorkOrder *workOrder = self.workOrderList[recognizer.view.tag];
-    info.workOrderCode = workOrder.code;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
+//    WorkOrderInfoController *info = [WorkOrderInfoController new];
+//    WorkOrder *workOrder = self.workOrderList[recognizer.view.tag];
+//    info.workOrderCode = workOrder.code;
+//    info.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:info animated:YES];
 }
 @end

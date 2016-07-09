@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FormTemplateBrife.h"
 
-@interface FormTemplateCell : UITableViewCell
+@interface FormTemplateCell : UICollectionViewCell
 
 @property (nonatomic, strong) FormTemplateBrife *formTemplateBrife;
 @property (nonatomic, strong) UILabel *sort;
 @property (nonatomic, strong) UILabel *name;
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

@@ -38,7 +38,6 @@
     logoWordText.textColor = [UIColor whiteColor];
     [topView addSubview:logoWordText];
     [logoWordText mas_makeConstraints:^(MASConstraintMaker *make){
-       
         make.top.equalTo(logoIcon.mas_bottom).with.offset(15);
         make.centerX.equalTo(topView.mas_centerX);
     }];
@@ -49,28 +48,32 @@
     [userNameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(rootView.mas_left).with.offset(25);
         make.right.equalTo(rootView.mas_right).with.offset(-25);
-        make.height.equalTo(@30);
+        make.height.equalTo(@35);
         make.top.equalTo(logoWordText.mas_bottom).with.offset(30);
     }];
 
     UILabel *userIcon = [UILabel new];
-    [userIcon setFont:[UIFont fontWithName:@"FontAwesome" size:17]];
+    [userIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     userIcon.text = @"";
     userIcon.textColor = [UIColor blackColor];
     [userNameView addSubview:userIcon];
     [userIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(userNameView.mas_centerY);
         make.left.equalTo(userNameView.mas_left).with.offset(5);
+        make.width.equalTo(@20);
     }];
     _userNameText = [UITextField new];
+    _userNameText.clearButtonMode=UITextFieldViewModeWhileEditing;
     _userNameText.placeholder = @"请输入用户名";
-    _userNameText.font = [UIFont systemFontOfSize:14];
+    _userNameText.font = [UIFont systemFontOfSize:18];
     [_userNameText setAutocorrectionType:UITextAutocorrectionTypeNo];
     [_userNameText setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [userNameView addSubview:_userNameText];
     [_userNameText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(userIcon.mas_right).with.offset(5);
+        make.right.equalTo(userNameView.mas_right).with.offset(-5);
         make.centerY.equalTo(userNameView.mas_centerY);
+        make.height.mas_equalTo(30);
         
     }];
 
@@ -80,28 +83,32 @@
     [passwordView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(rootView.mas_left).with.offset(25);
         make.right.equalTo(rootView.mas_right).with.offset(-25);
-        make.height.equalTo(@30);
+        make.height.equalTo(@35);
         make.top.equalTo(userNameView.mas_bottom).with.offset(20);
     }];
     
     UILabel *paswordIcon = [UILabel new];
-    [paswordIcon setFont:[UIFont fontWithName:@"FontAwesome" size:17]];
+    [paswordIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     paswordIcon.text = @"";
     paswordIcon.textColor = [UIColor blackColor];
     [passwordView addSubview:paswordIcon];
     [paswordIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(passwordView.mas_centerY);
         make.left.equalTo(passwordView.mas_left).with.offset(5);
+        make.width.equalTo(@20);
     }];
     _passWordText = [UITextField new];
     _passWordText.placeholder = @"请输入密码";
+    _passWordText.clearButtonMode=UITextFieldViewModeWhileEditing;
     [_passWordText setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-    _passWordText.font = [UIFont systemFontOfSize:14];
+    _passWordText.font = [UIFont systemFontOfSize:18];
     _passWordText.secureTextEntry = YES;
     [passwordView addSubview:_passWordText];
     [_passWordText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(paswordIcon.mas_right).with.offset(5);
+        make.right.equalTo(passwordView.mas_right).with.offset(-5);
         make.centerY.equalTo(passwordView.mas_centerY);
+        make.height.mas_equalTo(30);
         
     }];
 

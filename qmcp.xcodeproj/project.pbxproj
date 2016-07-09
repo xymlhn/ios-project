@@ -107,6 +107,9 @@
 		24ABAFCA1CCF35950089F779 /* StandarsAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC41CCF35950089F779 /* StandarsAdd@2x.png */; };
 		24ABAFCB1CCF35950089F779 /* StandarsDel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC51CCF35950089F779 /* StandarsDel@2x.png */; };
 		24ABAFCC1CCF35950089F779 /* ThrowLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC71CCF35950089F779 /* ThrowLineTool.m */; };
+		24AC36EE1D30850300316301 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36ED1D30850300316301 /* UIView+Frame.m */; };
+		24AC36F11D3085E200316301 /* UISearchBar+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36F01D3085E200316301 /* UISearchBar+Common.m */; };
+		24AC36F41D30869100316301 /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36F31D30869100316301 /* UIImage+Common.m */; };
 		24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE271CBA8385003C6C2E /* SettingViewCell.m */; };
 		24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */; };
 		24B7DA201D2F6E5A00A0723C /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B7DA1F1D2F6E5A00A0723C /* ScanView.m */; };
@@ -332,6 +335,12 @@
 		24ABAFC51CCF35950089F779 /* StandarsDel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StandarsDel@2x.png"; sourceTree = "<group>"; };
 		24ABAFC61CCF35950089F779 /* ThrowLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowLineTool.h; sourceTree = "<group>"; };
 		24ABAFC71CCF35950089F779 /* ThrowLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowLineTool.m; sourceTree = "<group>"; };
+		24AC36EC1D30850300316301 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		24AC36ED1D30850300316301 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		24AC36EF1D3085E200316301 /* UISearchBar+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+Common.h"; sourceTree = "<group>"; };
+		24AC36F01D3085E200316301 /* UISearchBar+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+Common.m"; sourceTree = "<group>"; };
+		24AC36F21D30869100316301 /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
+		24AC36F31D30869100316301 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
 		24AEEE261CBA8385003C6C2E /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCell.h; sourceTree = "<group>"; };
 		24AEEE271CBA8385003C6C2E /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCell.m; sourceTree = "<group>"; };
 		24AEEE2A1CBA87D9003C6C2E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -738,6 +747,12 @@
 		24F1351A1C86977E00645F92 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				24AC36F21D30869100316301 /* UIImage+Common.h */,
+				24AC36F31D30869100316301 /* UIImage+Common.m */,
+				24AC36EF1D3085E200316301 /* UISearchBar+Common.h */,
+				24AC36F01D3085E200316301 /* UISearchBar+Common.m */,
+				24AC36EC1D30850300316301 /* UIView+Frame.h */,
+				24AC36ED1D30850300316301 /* UIView+Frame.m */,
 				2499B85D1CCB9D3D003FC604 /* UITableView+Common.h */,
 				2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */,
 				244517B31CA03F520085CC16 /* MBProgressHUD+Util.h */,
@@ -1064,6 +1079,7 @@
 				2489B3AF1D260F6100725C9F /* PickupViewController.m in Sources */,
 				24236A791D2A5EEF00994D89 /* ChooseCommodityCell.m in Sources */,
 				2445179F1CA03EFC0085CC16 /* HorizonalTableViewController.m in Sources */,
+				24AC36F11D3085E200316301 /* UISearchBar+Common.m in Sources */,
 				2489B3B21D260FEC00725C9F /* PickupView.m in Sources */,
 				244517AC1CA03F220085CC16 /* OSCTabBarController.m in Sources */,
 				24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */,
@@ -1097,6 +1113,7 @@
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */,
 				24B7DA231D2F929800A0723C /* WorkOrderSearchResult.m in Sources */,
+				24AC36EE1D30850300316301 /* UIView+Frame.m in Sources */,
 				247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */,
 				24AAFCF71D28E02000DAB3C9 /* QrCodeIdentityController.m in Sources */,
 				249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */,
@@ -1131,6 +1148,7 @@
 				24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */,
 				240F88B51CC755C900138F10 /* BaseViewController.m in Sources */,
 				244517A71CA03F190085CC16 /* SideMenuCell.m in Sources */,
+				24AC36F41D30869100316301 /* UIImage+Common.m in Sources */,
 				24CDDB491D27883B007A9BF6 /* HistoryViewController.m in Sources */,
 				2445176E1CA03E640085CC16 /* Config.m in Sources */,
 				24A2B44A1CB4F725006E29DB /* WorkOrderInventoryEditController.m in Sources */,

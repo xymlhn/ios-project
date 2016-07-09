@@ -46,7 +46,7 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在获取表单数据";
     hub.userInteractionEnabled = NO;
-    [[FormManager getInstance] getFormTemplateAndFormData:_workOrder.salesOrderSnapshot.code finishBlock:^(NSMutableArray *arr, NSError *error) {
+    [[FormManager getInstance] getFormTemplateAndFormData:_workOrder.salesOrderSnapshot.code finishBlock:^(NSMutableArray *arr, NSString *error) {
         if (error == nil) {
             hub.labelText = [NSString stringWithFormat:@"获取表单数据成功"];
             [hub hide:YES afterDelay:0.5];

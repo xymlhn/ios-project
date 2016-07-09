@@ -111,7 +111,7 @@
             break;
         }
         case 4: {
-            [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSError *error) {
+            [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSString *error) {
                 if(!error){
                     [Config setInitSetting];
                     LoginViewController *loginNav = [LoginViewController new];
@@ -142,7 +142,7 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"扫描中...";
     hub.userInteractionEnabled = NO;
-    [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSError *error) {
+    [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];

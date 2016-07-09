@@ -17,7 +17,7 @@
  *  @param dict    字典参数
  *  @param block      回调
  */
-+(void) post:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))block;
++(void) post:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSString *error))block;
 
 
 /**
@@ -27,7 +27,7 @@
  *  @param dict    参数
  *  @param block      回调
  */
-+(void) get:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSError *error))block;
++(void) get:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSString *error))block;
 
 
 /**
@@ -40,7 +40,7 @@
  *  @param dict     字典参数
  *  @param block       回调
  */
-+(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSError *))block;
++(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSString *))block;
 
-+(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSError *))block;
++(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSString *))block;
 @end

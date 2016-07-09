@@ -149,7 +149,7 @@
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
-    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSError *error){
+    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSString *error){
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -166,7 +166,7 @@
                 {
                     i++;
                     hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
-                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSError *error) {
+                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];

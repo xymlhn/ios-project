@@ -39,7 +39,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 }
 -(void)getAllCamera{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_CAMERA];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             _allCameraArr = [CameraData mj_objectArrayWithKeyValuesArray:obj];
         }else{
@@ -51,7 +51,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 -(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_CAMERA,workOrderCode];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
             for(CameraData *cameraData in _allCameraArr){
@@ -81,7 +81,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
         hub.userInteractionEnabled = NO;
     }
 
-    [HttpUtil post:URLString param:jsonDict finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:jsonDict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
             for(CameraData *cameraData in _allCameraArr){
@@ -102,13 +102,12 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
             }
 
         }else{
-            NSString *message = error.userInfo[@"message"];
             NSDictionary *dict = @{@"all_camera":_allCameraArr};
             NSNotification * notice = [NSNotification notificationWithName:kCameraNotification object:nil userInfo:dict];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1.5];
         }
     }];

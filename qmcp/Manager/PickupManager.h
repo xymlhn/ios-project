@@ -19,7 +19,7 @@
  *  @param itemCode 物品code
  *  @param block    回调
  */
--(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block;
+-(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block;
 
 /**
  *  获取待取物品信息
@@ -27,7 +27,7 @@
  *  @param itemCode 物品code
  *  @param block    回调
  */
--(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block;
+-(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block;
 
 /**
  *  提交取件物品
@@ -35,5 +35,5 @@
  *  @param pickupSignature model
  *  @param block           回调
  */
--(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(void (^)(NSDictionary *, NSError *))block;
+-(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(void (^)(NSDictionary *, NSString *))block;
 @end

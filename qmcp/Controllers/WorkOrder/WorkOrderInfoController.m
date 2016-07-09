@@ -164,7 +164,7 @@
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
-    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSError *error) {
+    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSString *error) {
         if(!error){
             weakSelf.workOrder.isFailed = NO;
             [weakSelf.workOrder saveToDB];
@@ -312,7 +312,7 @@
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
-    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSError *error){
+    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSString *error){
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -327,7 +327,7 @@
             if(attachments.count > 0){
                 for(Attachment *attachment in attachments)
                 {
-                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSError *error) {
+                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
@@ -383,7 +383,7 @@
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
-    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSError *error) {
+    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSString *error) {
         if(!error){
             hub.labelText = [NSString stringWithFormat:@"完结工单成功"];
             [hub hide:YES afterDelay:1];

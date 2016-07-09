@@ -29,7 +29,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param workOrder 工单
  *  @param steps     工单步骤
  */
-- (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block;
+- (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSString *))block;
 
 
 /**
@@ -39,7 +39,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param params        请求参数
  *  @param block         回调
  */
--(void)updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block;
+-(void)updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSString *))block;
 
 /**
  *  根据工单code获取工单
@@ -47,7 +47,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param itemCode 工单code
  *  @param block 回调
  */
--(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block;
+-(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block;
 
 
 /**
@@ -56,7 +56,7 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param attachment 附件model
  *  @param block      回调
  */
--(void)postAttachment:(Attachment *)attachment finishBlock:(void (^)(NSDictionary *, NSError *))block;
+-(void)postAttachment:(Attachment *)attachment finishBlock:(void (^)(NSDictionary *, NSString *))block;
 
 /**
  *  从数据库获取工单显示
@@ -86,5 +86,5 @@ extern NSString *const kWorkOrderUpdateNotification;
  *  @param condition 是否包含历史工单
  *  @param block     回调
  */
--(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(void (^)(NSDictionary *, NSError *))block;
+-(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(void (^)(NSDictionary *, NSString *))block;
 @end

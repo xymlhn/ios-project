@@ -66,7 +66,7 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
     hub.userInteractionEnabled = NO;
-    [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+    [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSString *error) {
         [self.tableView.mj_header beginRefreshing];
         if(error == nil){
             [weakSelf refreshUIWithDict:dict];
@@ -89,7 +89,7 @@
         
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+        [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSString *error) {
             [weakSelf refreshUIWithDict:dict];
         }];
     }];

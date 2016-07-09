@@ -61,7 +61,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
 -(void)getCommodityItemByLastUpdateTime:(NSString *)lastupdateTime
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMMODITYITEM,lastupdateTime];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setCommodityItem:[Utils formatDate:[NSDate new]]];
             _commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:obj];
@@ -76,7 +76,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
 -(void)getCommodityPropertyByLastUpdateTime:(NSString *)lastupdateTime
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMODITYPROPERTY,lastupdateTime];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setCommodityProperty:[Utils formatDate:[NSDate new]]];
             if(obj != nil){

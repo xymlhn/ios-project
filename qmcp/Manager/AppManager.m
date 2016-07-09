@@ -81,7 +81,7 @@ NSString *const kReloginNotification = @"reLogin";
     }];
 }
 
--(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password andBlock:(void (^)(id data, NSError *error))block{
+-(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password andBlock:(void (^)(id data, NSString *error))block{
     // 请求参数
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
@@ -92,19 +92,19 @@ NSString *const kReloginNotification = @"reLogin";
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
         
-        block(nil,error);
+        block(nil,@"");
     }];
 }
 
 
--(void) logoutWithBlock:(void (^)(NSDictionary *data, NSError *error))block
+-(void) logoutWithBlock:(void (^)(NSDictionary *data, NSString *error))block
 {
 
     // 请求参数
     NSDictionary *dic = @{};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGOUT];
     
-    [HttpUtil post:URLString param:dic finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             block(obj,nil);
 
@@ -114,11 +114,11 @@ NSString *const kReloginNotification = @"reLogin";
     }];
 }
 
--(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSError *error))block
+-(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSString *error))block
 {
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SERVER_TIME];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             block(obj,nil);
         }else{
@@ -131,7 +131,7 @@ NSString *const kReloginNotification = @"reLogin";
 {
     NSArray *arr = @[@"fuck"];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_NICKNAME];
-    [HttpUtil post:URLString param:arr finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:arr finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             NSLog(@"success");
             
@@ -145,7 +145,7 @@ NSString *const kReloginNotification = @"reLogin";
 {
     NSDictionary *dict = @{@"pushId":pushId};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_PUSHID];
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             NSLog(@"success");
             

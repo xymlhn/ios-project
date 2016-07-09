@@ -57,10 +57,10 @@ NSString *const kConfirmCache = @"confirm";
     }
 }
 
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSError *))block
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSString *))block
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERBIND,lastupdateTime];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setSaleOrderBindTime:[Utils formatDate:[NSDate new]]];
             SalesOrderBind *salesOrderBind = [SalesOrderBind mj_objectWithKeyValues:obj];
@@ -88,10 +88,10 @@ NSString *const kConfirmCache = @"confirm";
 
 }
 
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSError *))block
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSString *))block
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERCONFIRM,lastupdateTime];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setSalesOrderGrabTime:[Utils formatDate:[NSDate new]]];
             SalesOrderConfirm *salesOrderConfirm = [SalesOrderConfirm mj_objectWithKeyValues:obj];

@@ -43,9 +43,9 @@
 }
 
 
--(void)getFormTemplateAndFormData:(NSString *)salesOrderCode finishBlock:(void (^)(NSMutableArray *, NSError *))block{
+-(void)getFormTemplateAndFormData:(NSString *)salesOrderCode finishBlock:(void (^)(NSMutableArray *, NSString *))block{
     NSString *URLStringTemplate = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_FORMTEMPLATE,salesOrderCode];
-    [HttpUtil get:URLStringTemplate param:nil finish:^(NSDictionary *obj, NSError *error1) {
+    [HttpUtil get:URLStringTemplate param:nil finish:^(NSDictionary *obj, NSString *error1) {
         if (!error1) {
             [_formTemplateDict removeAllObjects];
             NSArray *array = [FormTemplate mj_objectArrayWithKeyValuesArray:obj];
@@ -54,7 +54,7 @@
                 [_formTemplateDict setValue:form forKey:form.formTemplateId];
             }
             NSString *URLStringData= [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_FORMDATA,salesOrderCode];
-            [HttpUtil get:URLStringData param:nil finish:^(NSDictionary *obj, NSError *error2) {
+            [HttpUtil get:URLStringData param:nil finish:^(NSDictionary *obj, NSString *error2) {
                 if (!error2) {
                     [_formDataDict removeAllObjects];
                     NSArray *array = [FormData mj_objectArrayWithKeyValuesArray:obj];
@@ -134,7 +134,7 @@
 }
 -(void)saveFormData:(NSMutableArray<FormData *> *)formDatas{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SAVE_FORMDATA];
-    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             
             
@@ -146,7 +146,7 @@
 
 -(void)deleteFormData:(NSString *)formDataId{
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_DELETE_FORMDATA,formDataId];
-    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             
             

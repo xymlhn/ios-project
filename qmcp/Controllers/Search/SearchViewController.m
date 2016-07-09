@@ -101,7 +101,7 @@
     hub.labelText = @"正在搜索";
     hub.userInteractionEnabled = NO;
 
-    [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSError *error) {
+    [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSString *error) {
         if(!error){
             [weakSelf.resultList removeAllObjects];
             NSArray<WorkOrderSearchResult *> *arr = [WorkOrderSearchResult mj_objectArrayWithKeyValuesArray:obj];

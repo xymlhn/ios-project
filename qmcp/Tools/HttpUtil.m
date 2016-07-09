@@ -11,7 +11,7 @@
 #import "AppManager.h"
 @implementation HttpUtil
 
-+(void)post:(NSString *)urlpath param:(id)dict finish:(void (^)(NSDictionary *, NSError *))block
++(void)post:(NSString *)urlpath param:(id)dict finish:(void (^)(NSDictionary *, NSString *))block
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -22,19 +22,17 @@
         if(![[AppManager getInstance] handleHeader:session]){
             
             block(obj ,nil);
-        }else{
-           
-            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
-            block(obj,error);
         }
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
         [[AppManager getInstance] handleHeader:task];
-        block(nil ,error);
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+        NSString *message = [content valueForKey:@"message"];
+        block(nil ,message);
     }];
 }
 
-+(void)get:(NSString *)urlpath param:(id)dict finish:(void (^)(NSDictionary *, NSError *))block
++(void)get:(NSString *)urlpath param:(id)dict finish:(void (^)(NSDictionary *, NSString *))block
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -44,18 +42,17 @@
         NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(![[AppManager getInstance] handleHeader:session]){
             block(obj ,nil);
-        }else{
-            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
-            block(obj,error);
         }
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
         [[AppManager getInstance] handleHeader:task];
-        block(nil ,error);
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+        NSString *message = [content valueForKey:@"message"];
+        block(nil ,message);
     }];
 }
 
-+(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSError *))block
++(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSString *))block
 {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -71,18 +68,18 @@
         NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(![[AppManager getInstance] handleHeader:task]){
             block(obj ,nil);
-        }else{
-            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
-            block(nil,error);
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
         [[AppManager getInstance] handleHeader:task];
-        block(nil ,error);
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+        NSString *message = [content valueForKey:@"message"];
+        block(nil ,message);
     }];
 }
 
-+(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSError *))block
++(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSString *))block
 {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -97,14 +94,13 @@
         NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(![[AppManager getInstance] handleHeader:task]){
             block(obj ,nil);
-        }else{
-            NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:obj];
-            block(obj,error);
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [[AppManager getInstance] handleHeader:task];
-        block(nil ,error);
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+        NSString *message = [content valueForKey:@"message"];
+        block(nil ,message);
     }];
 }
 

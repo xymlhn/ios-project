@@ -71,7 +71,7 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
     hub.userInteractionEnabled = NO;
-    [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+    [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSString *error) {
         if(error == nil){
             [self salesOrderUpdate:dict];
             hub.mode = MBProgressHUDModeCustomView;
@@ -93,7 +93,7 @@
         
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSError *error) {
+        [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSString *error) {
             [self salesOrderUpdate:dict];
         }];
     }];
@@ -145,7 +145,7 @@
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERGRAB,salesOrderSnapshot.code];
     NSDictionary *dict = @{@"grab":[NSNumber numberWithBool:YES]};
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
             [weakSelf.tableView reloadData];

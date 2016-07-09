@@ -18,7 +18,7 @@
  *
  *  @param salesOrderCode 订单code
  */
--(void)getFormTemplateAndFormData:(NSString *)salesOrderCode finishBlock:(void (^)(NSMutableArray *, NSError *))block;
+-(void)getFormTemplateAndFormData:(NSString *)salesOrderCode finishBlock:(void (^)(NSMutableArray *, NSString *))block;
 
 /**
  *  保存表单数据

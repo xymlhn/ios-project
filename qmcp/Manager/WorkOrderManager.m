@@ -43,7 +43,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
 -(void)getWorkOrderByLastUpdateTime:(NSString *)dateStr{
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_WORKORDER,dateStr];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setWorkOrderTime:[Utils formatDate:[NSDate new]]];
             WorkOrderGroup *workOrderGroup = [WorkOrderGroup mj_objectWithKeyValues:obj];
@@ -102,10 +102,10 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     return workOrder;
 }
 
--(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSError *))block{
+-(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block{
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_GETWORKORDERBYITEMCODE,itemCode];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         block(obj,error);
     }];
     
@@ -113,7 +113,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
 
 -(void)getWorkOrderByCode:(NSString *)code{
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_WORKORDER,code];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
             [workOrder saveToDB];
@@ -130,7 +130,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     
 }
 
--(void)postAttachment:(Attachment *)attachment finishBlock:(void (^)(NSDictionary *, NSError *))block
+-(void)postAttachment:(Attachment *)attachment finishBlock:(void (^)(NSDictionary *, NSString *))block
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ATTACHMENT];
     NSDictionary *dict = @{@"storageType":[NSNumber numberWithInt:attachment.sort]};
@@ -148,20 +148,20 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     [HttpUtil postFile:URLString file:data name:@"data" fileName:attachment.key param:dict finish:block];
 }
 
--(void) updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block{
-    [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
+-(void) updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSString *))block{
+    [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
         block(obj,error);
     }];
 }
-- (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSError *))block{
-    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSError *error) {
+- (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSString *))block{
+    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
         block(obj,error);
     }];
 }
 
--(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(void (^)(NSDictionary *, NSError *))block{
+-(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(void (^)(NSDictionary *, NSString *))block{
     NSString *URLString = [NSString stringWithFormat:@"%@%@?includeHistory=%@&condition=%@", OSCAPI_ADDRESS,OSCAPI_SEARCH,[NSNumber numberWithBool:condition],string];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSError *error) {
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         block(obj,error);
     }];
 }

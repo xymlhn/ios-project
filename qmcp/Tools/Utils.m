@@ -13,9 +13,10 @@
 
 + (MBProgressHUD *)createHUD
 {
-    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithWindow:window];
-    HUD.detailsLabelFont = [UIFont boldSystemFontOfSize:16];
+    HUD.labelFont = [UIFont boldSystemFontOfSize:12];
+ 
     [window addSubview:HUD];
     [HUD show:YES];
     HUD.removeFromSuperViewOnHide = YES;

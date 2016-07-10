@@ -22,6 +22,7 @@
     
     _searchBar = [UISearchBar new];
     _searchBar.placeholder = @"请输入";
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     [containView addSubview:_searchBar];
     
     _tableView = [UITableView new];

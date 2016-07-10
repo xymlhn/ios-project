@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "AppManager.h"
 #import "Config.h"
+#import "CZAccount.h"
 @interface InitViewController ()
 
 @end
@@ -20,7 +21,23 @@
     NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
     NSString *name = accountAndPassword? accountAndPassword[0] : @"";
     NSString *password = accountAndPassword? accountAndPassword[1] : @"";
-    [[AppManager getInstance] reLoginWithUserName:name andPassword:password isFirstLogin:true];
+    [[AppManager getInstance] reLoginWithUserName:name andPassword:password finishBlock:^(NSDictionary *data, NSString *error) {
+        NSDictionary *dict;
+        if(error == nil){
+            CZAccount *account = [CZAccount accountWithDict:data];
+            if(account.isAuthenticated){
+                dict = @{@"info":@"0"};
+            }else{
+                dict = @{@"info":@"1"};
+            }
+        }else{
+            dict = @{@"info":@"1"};
+        }
+        //创建一个消息对象
+        NSNotification * notice = [NSNotification notificationWithName:kReloginNotification object:nil userInfo:dict];
+        //发送消息
+        [[NSNotificationCenter defaultCenter]postNotification:notice];
+    }];
 }
 
 -(void)initView{

@@ -20,6 +20,7 @@
 
 -(void)initView
 {
+    self.title = @"设置";
     _tableView = [UITableView new];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];

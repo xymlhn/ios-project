@@ -40,7 +40,7 @@
 -(void)initView
 {
     _jsText = [UILabel new];
-    _jsText.font = [UIFont systemFontOfSize:12];//
+    _jsText.font = [UIFont systemFontOfSize:14];//
     _jsText.text = @"12305";
     _jsText.textColor = [UIColor blackColor];
     [self.contentView addSubview:_jsText];

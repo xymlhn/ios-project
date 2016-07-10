@@ -266,7 +266,8 @@
 
 - (void)loginBtnClicked{
     LoginViewController *loginNav = [LoginViewController new];
-    [self presentViewController:loginNav animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

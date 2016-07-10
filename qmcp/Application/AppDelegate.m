@@ -17,6 +17,7 @@
 #import "AppManager.h"
 #import "InitViewController.h"
 #import "IntroductionViewController.h"
+#import "Utils.h"
 @interface AppDelegate ()
 
 @end
@@ -44,6 +45,7 @@
     /************ 登录状态设置 **************/
     if (![Config getLoginStatus]) {
         IntroductionViewController *intro = [IntroductionViewController new];
+        
         self.window.rootViewController = intro;
         
     }else{
@@ -58,9 +60,18 @@
 }
 
 - (void)reLogin:(NSNotification *)text{
-    UIStoryboard *root = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    RootViewController *rootNav = [root instantiateViewControllerWithIdentifier:@"Nav"];
-    self.window.rootViewController= rootNav;
+
+    NSString *info = text.userInfo[@"info"];
+    if([info isEqualToString:@"0"]){
+        UIStoryboard *root = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        RootViewController *rootNav = [root instantiateViewControllerWithIdentifier:@"Nav"];
+        self.window.rootViewController= rootNav;
+    }else{
+        [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
+        LoginViewController *loginNav = [LoginViewController new];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
+        self.window.rootViewController = nav;
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

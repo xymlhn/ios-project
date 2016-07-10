@@ -47,6 +47,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"扫一扫";
     //初始化扫描界面
     [self setScanView];
     

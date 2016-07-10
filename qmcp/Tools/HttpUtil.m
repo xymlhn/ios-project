@@ -26,9 +26,17 @@
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
         [[AppManager getInstance] handleHeader:task];
-        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
-        NSString *message = [content valueForKey:@"message"];
-        block(nil ,message);
+        NSString *description = error.userInfo[@"NSLocalizedDescription"];
+        if(description == nil){
+        
+        
+            NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+            NSString *message = [content valueForKey:@"message"];
+            block(nil ,message);
+        }else{
+            block(nil,description);
+        }
+       
     }];
 }
 
@@ -46,9 +54,16 @@
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
         [[AppManager getInstance] handleHeader:task];
-        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
-        NSString *message = [content valueForKey:@"message"];
-        block(nil ,message);
+        NSString *description = error.userInfo[@"NSLocalizedDescription"];
+        if(description == nil){
+            
+            
+            NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+            NSString *message = [content valueForKey:@"message"];
+            block(nil ,message);
+        }else{
+            block(nil,description);
+        }
     }];
 }
 
@@ -73,9 +88,16 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 
         [[AppManager getInstance] handleHeader:task];
-        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
-        NSString *message = [content valueForKey:@"message"];
-        block(nil ,message);
+        NSString *description = error.userInfo[@"NSLocalizedDescription"];
+        if(description == nil){
+            
+            
+            NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+            NSString *message = [content valueForKey:@"message"];
+            block(nil ,message);
+        }else{
+            block(nil,description);
+        }
     }];
 }
 
@@ -98,9 +120,16 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [[AppManager getInstance] handleHeader:task];
-        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
-        NSString *message = [content valueForKey:@"message"];
-        block(nil ,message);
+        NSString *description = error.userInfo[@"NSLocalizedDescription"];
+        if(description == nil){
+            
+            
+            NSDictionary *content = [NSJSONSerialization JSONObjectWithData:[error.userInfo valueForKey:@"com.alamofire.serialization.response.error.data"]  options:NSJSONReadingMutableContainers error:nil];
+            NSString *message = [content valueForKey:@"message"];
+            block(nil ,message);
+        }else{
+            block(nil,description);
+        }
     }];
 }
 

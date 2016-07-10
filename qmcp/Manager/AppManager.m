@@ -51,48 +51,34 @@ NSString *const kReloginNotification = @"reLogin";
             NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
             NSString *name = accountAndPassword? accountAndPassword[0] : @"";
             NSString *password = accountAndPassword? accountAndPassword[1] : @"";
-            [[AppManager getInstance] reLoginWithUserName:name andPassword:password isFirstLogin:false];
+            [self reLoginWithUserName:name andPassword:password finishBlock:^(id data, NSString *error) {
+                if(error){
+                    [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
+                }
+            }];
         }
     }
     return failure;
 }
 
--(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password isFirstLogin:(BOOL)isFirst
+-(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(void (^)(id, NSString *))block
 {
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    [manager POST:URLString parameters:dic progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
-        CZAccount *account = [CZAccount accountWithDict:responseObject];
-        if(account.isAuthenticated){
-            if(isFirst){
-                //创建一个消息对象
-                NSNotification * notice = [NSNotification notificationWithName:kReloginNotification object:nil userInfo:nil];
-                //发送消息
-                [[NSNotificationCenter defaultCenter]postNotification:notice];
-            }
-            
-        }else{
-            
-        }
-    }failure:^(NSURLSessionDataTask * task, NSError * error){
-        
+
+    [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
+        block(obj,error);
     }];
+  
 }
 
--(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password andBlock:(void (^)(id data, NSString *error))block{
+-(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(void (^)(id data, NSString *error))block{
     // 请求参数
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:URLString parameters:dic progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
-        
-        block(responseObject,nil);
-        
-    }failure:^(NSURLSessionDataTask * task, NSError * error){
-        
-        block(nil,@"");
+
+    [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
+        block(obj,error);
     }];
 }
 

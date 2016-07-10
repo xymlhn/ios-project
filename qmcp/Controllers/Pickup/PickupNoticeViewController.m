@@ -112,7 +112,6 @@
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"成功"];
             [hub hide:YES];
             ItemComplete *itemComplete = [ItemComplete mj_objectWithKeyValues:obj];
             [weakSelf.array insertObject:itemComplete atIndex:0];
@@ -122,7 +121,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:0.5];
+            [hub hide:YES afterDelay:1.5];
         }
     }];
     

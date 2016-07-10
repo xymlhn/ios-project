@@ -102,6 +102,9 @@
     _passWordText.clearButtonMode=UITextFieldViewModeWhileEditing;
     [_passWordText setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _passWordText.font = [UIFont systemFontOfSize:18];
+    _passWordText.keyboardType = UIKeyboardAppearanceDefault;
+    _passWordText.returnKeyType = UIReturnKeyDone;
+    
     _passWordText.secureTextEntry = YES;
     [passwordView addSubview:_passWordText];
     [_passWordText mas_makeConstraints:^(MASConstraintMaker *make) {

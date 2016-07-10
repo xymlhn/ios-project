@@ -147,7 +147,6 @@
 {
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
-    hub.userInteractionEnabled = NO;
     __weak typeof(self) weakSelf = self;
     [[PickupManager getInstance] getPickupItemByCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
         if (!error) {
@@ -169,7 +168,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:2];
+            [hub hide:YES afterDelay:kDelayTime];
         }
     }];
     
@@ -195,7 +194,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:0.5];
+            [hub hide:YES afterDelay:kDelayTime];
         }
     }];
     

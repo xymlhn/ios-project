@@ -111,14 +111,24 @@
             break;
         }
         case 4: {
+            MBProgressHUD *hub = [Utils createHUD];
+            hub.labelText = @"登出中...";
+            hub.userInteractionEnabled = NO;
             [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSString *error) {
                 if(!error){
+                    hub.mode = MBProgressHUDModeCustomView;
+                    hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                    hub.labelText = [NSString stringWithFormat:@"登出成功"];
+                    [hub hide:YES];
                     [Config setInitSetting];
                     LoginViewController *loginNav = [LoginViewController new];
-                    [self presentViewController:loginNav animated:YES completion:nil];
+                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
+                    [self presentViewController:nav animated:YES completion:nil];
                 }else{
-                    [Utils showHudTipStr:@"登出失败！"];
-                }
+                    hub.mode = MBProgressHUDModeCustomView;
+                    hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                    hub.labelText = error;
+                    [hub hide:YES afterDelay:kDelayTime];                }
             }];
             break;
         }
@@ -154,16 +164,11 @@
             [self pushWorkOrderInfoUI:workOrder.code];
             
         }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"扫描失败";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
+
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
-            [hub hide:YES afterDelay:0.5];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kDelayTime];
         }
     }];
 }

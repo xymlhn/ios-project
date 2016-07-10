@@ -40,6 +40,13 @@
 {
     if(salesOrderSnapshot != nil){
         _typeText.text = [EnumUtil salesOrderTypeString:salesOrderSnapshot.type];
+        if(salesOrderSnapshot.type == SalesOrderTypeOnsite){
+            _typeText.backgroundColor = [UIColor nameColor];
+        }else if(salesOrderSnapshot.type == SalesOrderTypeShop){
+            _typeText.backgroundColor = [UIColor orangeColor];
+        }else{
+            _typeText.backgroundColor = [UIColor greenColor];
+        }
         _commodityNameText.text = [salesOrderSnapshot.commodityNames componentsJoinedByString:@","];;
         _codeText.text = salesOrderSnapshot.code;
         _nameText.text = salesOrderSnapshot.addressSnapshot.contacts;

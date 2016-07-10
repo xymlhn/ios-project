@@ -12,6 +12,7 @@
 typedef NS_ENUM(NSInteger, SalesOrderType) {
     SalesOrderTypeOnsite = 10,//上门
     SalesOrderTypeShop = 20,//到店
+    SalesOrderTypeUnknown = 30,//到店
 };
 
 @interface SalesOrderSnapshot : NSObject

@@ -22,7 +22,16 @@
 @end
 
 @implementation LoginViewController
-
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
 -(void)initView
 {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -130,11 +139,7 @@
     }
     return YES;
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-}
+
 -(void)loadData{}
 #pragma mark - 键盘操作
 
@@ -164,7 +169,7 @@
     hub.labelText = @"正在登录";
     hub.userInteractionEnabled = NO;
     
-    [[AppManager getInstance] loginWithUserName:username andPassword:password andBlock:^(id data, NSString *error) {
+    [[AppManager getInstance] loginWithUserName:username andPassword:password finishBlock:^(id data, NSString *error) {
         if(!error){
             // 字典转模型
             CZAccount *account = [CZAccount accountWithDict:data];
@@ -189,7 +194,7 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = [NSString stringWithFormat:@"网络错误"];
+            hub.labelText = error;
             [hub hide:YES afterDelay:1];
         }
     }];

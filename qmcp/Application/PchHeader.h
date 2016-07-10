@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, ExceptionType) {
 #ifndef Header_h
 #define Header_h
 
+#define kDelayTime 1.5
 #define kScreen_Bounds [UIScreen mainScreen].bounds
 #define kScreen_Height [UIScreen mainScreen].bounds.size.height
 #define kScreen_Width [UIScreen mainScreen].bounds.size.width

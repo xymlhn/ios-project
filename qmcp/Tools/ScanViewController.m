@@ -23,12 +23,14 @@
 }
 
 -(void)initView{
+    self.title = @"快速输入";
     _scanView = [ScanView new];
     [_scanView initView:self.view];
 }
 -(void)bindListener{
     _scanView.scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)
                             {
+                                [_scanView.scanText resignFirstResponder];
                                 [self.navigationController popViewControllerAnimated:YES];
                                 if (self.doneBlock) {
                                     self.doneBlock(_scanView.scanText.text);
@@ -46,6 +48,20 @@
         _scanView.scanBtn.backgroundColor = [signupActive boolValue] ? [UIColor nameColor] : [UIColor grayColor];
         _scanView.scanBtn.enabled =[signupActive boolValue];
     }];
+    
+    [_scanView.scanText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+}
+
+- (void)returnOnKeyboard:(UITextField *)sender
+{
+    [_scanView.scanText resignFirstResponder];
+    if(_scanView.scanText.text.length > 0){
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.doneBlock) {
+            self.doneBlock(_scanView.scanText.text);
+        }
+    }
+    
 }
 
 -(BOOL)isValidText:(NSString *)text

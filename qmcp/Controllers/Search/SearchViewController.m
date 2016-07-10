@@ -108,10 +108,21 @@
             [weakSelf.resultList addObjectsFromArray:arr];
             [weakSelf.searchView.tableView reloadData];
             weakSelf.searchView.searchBar.text = @"";
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"搜索成功"];
-            [hub hide:YES];
+            NSString *message;
+            if(arr.count == 0){
+                message = @"搜索不到工单";
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.labelText = message;
+                [hub hide:YES afterDelay:kDelayTime];
+            }else{
+                message = @"搜索成功";
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.labelText = message;
+                [hub hide:YES afterDelay:0.5];
+            }
+            
         }else{
             [weakSelf.resultList removeAllObjects];
             [weakSelf.searchView.tableView reloadData];

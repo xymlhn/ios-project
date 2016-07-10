@@ -88,7 +88,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = message;
-            [hub hide:YES afterDelay:0.5];
+            [hub hide:YES afterDelay:1.5];
         }
         
     }];
@@ -160,18 +160,14 @@
             [self pushWorkOrderInfoUI:workOrder.code];
             
         }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"抢单失败";
-            }else{
-                message = [obj valueForKey:@"message"];
-                [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
-                [weakSelf.tableView reloadData];
-                [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
-            }
+            
+            [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
+            [weakSelf.tableView reloadData];
+            [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
+            
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:0.5];
         }
     }];

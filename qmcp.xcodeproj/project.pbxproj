@@ -967,7 +967,7 @@
 				TargetAttributes = {
 					248A5DAE1C85C3C30095A4FB = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = BESGN79JZM;
+						DevelopmentTeam = G65BL8U2C9;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1295,7 +1295,7 @@
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp1;
 				PRODUCT_NAME = "e服务365";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1311,7 +1311,7 @@
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp1;
 				PRODUCT_NAME = "e服务365";
 				PROVISIONING_PROFILE = "";
 			};

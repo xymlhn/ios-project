@@ -14,6 +14,7 @@
 #import "WorkOrderInfoController.h"
 #import "WorkOrderSearchResult.h"
 #import "SearchViewCell.h"
+#import "Config.h"
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) SearchView *searchView;
 @property(nonatomic,strong) HistoryViewController *historyViewController;
@@ -72,7 +73,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *result = searchBar.text;
     
-    [self searchWorkOrderByCode:result andCondition:NO];
+    [self searchWorkOrderByCode:result andCondition:[Config getSearch]];
 
 }
 
@@ -112,13 +113,13 @@
             if(arr.count == 0){
                 message = @"搜索不到工单";
                 hub.mode = MBProgressHUDModeCustomView;
-                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                 hub.labelText = message;
                 [hub hide:YES afterDelay:kDelayTime];
             }else{
                 message = @"搜索成功";
                 hub.mode = MBProgressHUDModeCustomView;
-                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
                 hub.labelText = message;
                 [hub hide:YES afterDelay:0.5];
             }
@@ -126,15 +127,9 @@
         }else{
             [weakSelf.resultList removeAllObjects];
             [weakSelf.searchView.tableView reloadData];
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"搜索失败";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1];
         }
     }];

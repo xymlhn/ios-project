@@ -50,7 +50,7 @@
             row = 2;
             break;
         case 1:
-            row = 1;
+            row = 2;
             break;
     }
     return row;
@@ -88,7 +88,15 @@
             }
             break;
         case 1:
-           [cell initSetting:[Config getQuickScan] andText:@"快速扫描"];
+            switch (indexPath.row) {
+                case 0:
+                    [cell initSetting:[Config getQuickScan] andText:@"快速扫描"];
+                    
+                    break;
+                case 1:
+                    [cell initSetting:[Config getSearch] andText:@"搜索包含历史工单"];
+                    break;
+            }
             break;
     }
 
@@ -110,6 +118,9 @@
             break;
         case 10:
             [Config setQuickScan:switchButton.on];
+            break;
+        case 11:
+            [Config setSearch:switchButton.on];
             break;
         default:
             break;

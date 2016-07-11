@@ -51,6 +51,9 @@
 +(void)setQuickScan:(BOOL)on;
 +(BOOL)getQuickScan;
 
++(void)setSearch:(BOOL)on;
++(BOOL)getSearch;
+
 +(void)setSaleOrderBindTime:(NSString *)lastupdateTime;
 +(NSString *)getSalesOrderBindTime;
 

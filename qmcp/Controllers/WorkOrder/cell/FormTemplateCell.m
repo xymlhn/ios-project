@@ -40,16 +40,59 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    __weak typeof(self) weakSelf = self;
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(weakSelf.contentView.mas_centerY);
-        make.left.equalTo(weakSelf.contentView.mas_left).with.offset(kPaddingLeftWidth);
+        make.top.equalTo(self.contentView.mas_top).with.offset(5);
+        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
     }];
     
     [_sort mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_name.mas_centerY);
-        make.right.equalTo(weakSelf.contentView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.top.equalTo(_name.mas_bottom).with.offset(5);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
     }];
+    [self initBorderLine:self.contentView];
+}
+
+-(void)initBorderLine:(UIView *)view{
+    UIView *codeBottomLine = [UIView new];
+    codeBottomLine.backgroundColor = [UIColor grayColor];
+    [view addSubview:codeBottomLine];
+    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(view.mas_bottom).with.offset(0);
+        make.left.equalTo(view.mas_left).with.offset(0);
+        make.right.equalTo(view.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    UIView *topLine = [UIView new];
+    topLine.backgroundColor = [UIColor grayColor];
+    [view addSubview:topLine];
+    [topLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(view.mas_top).with.offset(0);
+        make.left.equalTo(view.mas_left).with.offset(0);
+        make.right.equalTo(view.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    UIView *leftLine = [UIView new];
+    leftLine.backgroundColor = [UIColor grayColor];
+    [view addSubview:leftLine];
+    [leftLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(view.mas_bottom).with.offset(0);
+        make.top.equalTo(view.mas_top);
+        make.left.equalTo(view.mas_left).with.offset(0);
+        make.width.mas_equalTo(@1);
+    }];
+    
+    UIView *rightLine = [UIView new];
+    rightLine.backgroundColor = [UIColor grayColor];
+    [view addSubview:rightLine];
+    [rightLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(view.mas_bottom).with.offset(0);
+        make.top.equalTo(view.mas_top);
+        make.right.equalTo(view.mas_right).with.offset(0);
+        make.width.mas_equalTo(@1);
+    }];
+
 }
 
 

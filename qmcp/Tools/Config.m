@@ -16,6 +16,7 @@ NSString * const kLogin = @"login";
 NSString * const kSound = @"sound";
 NSString * const kVibre = @"vibre";
 NSString * const kQuickScan = @"quickScan";
+NSString * const kSearch = @"search";
 NSString * const kSalesOrderBindTime = @"bindTime";
 NSString * const kSalesOrderGrabTime = @"grabTime";
 NSString * const kWorkOrderTime = @"workOrderTime";
@@ -102,6 +103,18 @@ NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     return [user boolForKey:kQuickScan];
+}
+
++(void)setSearch:(BOOL)on
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setBool:on forKey:kSearch];
+}
+
++(BOOL)getSearch
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    return [user boolForKey:kSearch];
 }
 
 +(void)setSaleOrderBindTime:(NSString *)lastupdateTime

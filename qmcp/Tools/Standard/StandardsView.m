@@ -489,8 +489,6 @@
         CGAffineTransform t ;
         if (self.GoodDetailView != nil) {
             t = self.GoodDetailView.transform;
-        }
-        if (self.GoodDetailView != nil) {
             CGAffineTransform tempTransform = CGAffineTransformScale(t, 1/GoodDetailScaleValue, 1/GoodDetailScaleValue);
             self.GoodDetailView.transform = tempTransform;
         }

@@ -24,18 +24,28 @@
 
 -(void)initView
 {
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumLineSpacing = 5;
-    layout.minimumInteritemSpacing = 5;
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    layout.estimatedItemSize = CGSizeMake(80, 50);
-    
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.view.center.y, self.view.frame.size.width, self.view.frame.size.height/15) collectionViewLayout:layout];
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
-    _collectionView.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    UIView *containView = [UIView new];
+    [containView setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:containView];
+    [containView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    //创建布局对象
+    UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
+    //flowlaout的属性，横向滑动
+    flowLayout1.scrollDirection = UICollectionViewScrollDirectionVertical;
+    _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout1];
+    _collectionView.backgroundColor = [UIColor whiteColor];
     [_collectionView registerClass:[FormTemplateCell class] forCellWithReuseIdentifier:@"FormTemplateCell"];
+    [containView addSubview:_collectionView];
+
+    [_collectionView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(containView.mas_top).with.offset(10);
+        make.left.equalTo(containView.mas_left).with.offset(5);
+        make.right.equalTo(containView.mas_right).with.offset(-5);
+        make.bottom.equalTo(containView.mas_bottom);
+    }];
     
     
 }
@@ -69,6 +79,10 @@
     }];
 }
 
+-(void)bindListener{
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+}
 
 #pragma mark -UICollectionViewDataSource
 
@@ -81,26 +95,22 @@
 //构建单元格
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-
-    static NSString *identify = @"cell";
+    static NSString *identify = @"FormTemplateCell";
     FormTemplateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     cell.formTemplateBrife = _workOrderFormList[indexPath.row];
     return cell;
-
-    
-    
 }
 
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(5, 5, 5, 5);
+    return UIEdgeInsetsMake(0, 0,0, 0);
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return CGSizeZero;
+//定义每个UICollectionView 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(150, 120);
 }
 
 //UICollectionView被选中时调用的方法

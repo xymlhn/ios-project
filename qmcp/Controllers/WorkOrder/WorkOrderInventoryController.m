@@ -31,6 +31,7 @@
 {
     _inventoryView = [WorkOrderInventoryView new];
     [_inventoryView initView:self.view];
+    self.title = @"清点";
 }
 
 -(void)bindListener

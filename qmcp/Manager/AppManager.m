@@ -42,7 +42,7 @@ NSString *const kReloginNotification = @"reLogin";
     NSHTTPURLResponse *response = (NSHTTPURLResponse *)session.response;
     NSDictionary *dic = response.allHeaderFields;
     
-    BOOL failure = [dic valueForKey:@"failure"];
+    Boolean failure = [dic valueForKey:@"failure"];
     if(failure){
         int type = [[dic valueForKey:@"exceptionType"] intValue];
         if (type != (int)ExceptionTypeNotLogin)  {

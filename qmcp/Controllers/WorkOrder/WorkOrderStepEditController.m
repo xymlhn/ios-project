@@ -34,6 +34,7 @@
 {
     _editView =[WorkOrderStepEditView new];
     [_editView initView:self.view];
+    self.title = @"步骤编辑";
 }
 
 -(void)loadData

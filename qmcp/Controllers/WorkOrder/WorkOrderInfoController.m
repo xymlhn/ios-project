@@ -36,6 +36,7 @@
 {
     _infoView = [WorkOrderInfoView new];
     [_infoView initView:self.view];
+    self.title = @"信息";
  
 }
 -(void)bindListener

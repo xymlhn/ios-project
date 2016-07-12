@@ -22,6 +22,8 @@
         if(![[AppManager getInstance] handleHeader:session]){
             
             block(obj ,nil);
+        }else{
+            block(obj,@"错误");
         }
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
@@ -50,6 +52,8 @@
         NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(![[AppManager getInstance] handleHeader:session]){
             block(obj ,nil);
+        }else{
+            block(obj,@"错误");
         }
         
     }failure:^(NSURLSessionDataTask * task, NSError * error){
@@ -83,6 +87,9 @@
         NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(![[AppManager getInstance] handleHeader:task]){
             block(obj ,nil);
+        }else
+        {
+            block(obj,@"错误");
         }
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -116,6 +123,8 @@
         NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(![[AppManager getInstance] handleHeader:task]){
             block(obj ,nil);
+        }else{
+            block(obj,@"错误");
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

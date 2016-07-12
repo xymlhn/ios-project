@@ -33,6 +33,7 @@
 {
     _stepView = [WorkOrderStepView new];
     [_stepView initView:self.view];
+    self.title = @"步骤";
 }
 
 -(void)bindListener

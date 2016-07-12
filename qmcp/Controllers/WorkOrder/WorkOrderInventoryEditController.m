@@ -45,6 +45,7 @@
 {
      _inventoryEditView = [WorkOrderInventoryEditView new];
     [_inventoryEditView initView:self.view];
+    self.title = @"清点编辑";
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(priceUpdate:) name:@"priceUpdate" object:nil];
 }
@@ -86,7 +87,7 @@
     if(_itemSnapshot.commodities != nil){
         [_chooseCommodityArr addObjectsFromArray: _itemSnapshot.commodities];
     }
-    _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
+    _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)_chooseCommodityArr.count];
 }
 
 -(void)saveData{
@@ -243,7 +244,7 @@
             pc.code = [[NSUUID UUID] UUIDString];
             pc.price = commodity.price;
             [_chooseCommodityArr addObject:pc];
-            _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
+            _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)_chooseCommodityArr.count];
         }
     }
     
@@ -281,7 +282,7 @@
         //将商品图片抛到指定点
             [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:1.6 andHeight:150 andScale:20];
             [_chooseCommodityArr addObject:_propertyChoose];
-            _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityArr.count];
+            _inventoryEditView.numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)_chooseCommodityArr.count];
         }
     }
     else

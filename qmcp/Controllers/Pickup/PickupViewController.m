@@ -32,7 +32,7 @@
 -(void)initView{
     _pickView = [PickupView new];
     [_pickView initView:self.view];
-    self.navigationItem.title = @"取件";
+    self.navigationItem.title = @"客户取件";
 }
 
 -(void)bindListener{

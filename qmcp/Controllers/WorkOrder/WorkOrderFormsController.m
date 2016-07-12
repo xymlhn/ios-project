@@ -24,6 +24,7 @@
 
 -(void)initView
 {
+    self.title = @"表单";
     self.view.backgroundColor = [UIColor whiteColor];
     UIView *containView = [UIView new];
     [containView setBackgroundColor:[UIColor whiteColor]];
@@ -63,12 +64,14 @@
         if (error == nil) {
             
             _workOrderFormList = arr;
+            NSString *success;
             if(_workOrderFormList.count == 0){
-                
+                success = @"当前工单暂无表单";
             }else{
+                success = @"获取表单数据成功";
                 [_collectionView reloadData];
             }
-            hub.labelText = [NSString stringWithFormat:@"获取表单数据成功"];
+            hub.labelText = success;
             [hub hide:YES afterDelay:0.5];
         }else{
             hub.mode = MBProgressHUDModeCustomView;

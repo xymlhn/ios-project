@@ -20,16 +20,18 @@
     if (self) {
         
         _name = [UILabel new];
-        _name.font = [UIFont systemFontOfSize:12];//
+        _name.font = [UIFont systemFontOfSize:12];
         _name.text = @"12305";
         _name.textColor = [UIColor blackColor];
         [self.contentView addSubview:_name];
         
         
         _sort = [UILabel new];
-        _sort.font = [UIFont systemFontOfSize:12];//
+        _sort.font = [UIFont systemFontOfSize:12];
         _sort.text = @"12305";
-        _sort.textColor = [UIColor blackColor];
+        _sort.textAlignment = NSTextAlignmentCenter;
+        _sort.backgroundColor = [UIColor nameColor];
+        _sort.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_sort];
         
     }
@@ -40,14 +42,29 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    
+    UILabel *icon = [UILabel new];
+    [icon setFont:[UIFont fontWithName:@"FontAwesome" size:25]];
+    icon.text = @"";
+    icon.textColor = [UIColor nameColor];
+    [self.contentView addSubview:icon];
+    
+    
+    [icon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(self.contentView.mas_top).with.offset(20);
+        make.right.equalTo(self.contentView.mas_centerX).with.offset(-20);
+    }];
+    
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.contentView.mas_top).with.offset(5);
-        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
+        make.top.equalTo(self.contentView.mas_top).with.offset(25);
+        make.left.equalTo(self.contentView.mas_centerX).with.offset(-10);
     }];
     
     [_sort mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_name.mas_bottom).with.offset(5);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.width.equalTo(@50);
+        make.height.equalTo(@30);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-20);
+        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(0);
     }];
     [self initBorderLine:self.contentView];
 }

@@ -23,6 +23,7 @@
 #pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
+    self.title = @"摄像头";
     _tableView = [UITableView new];
     _tableView.rowHeight = 45;
     _tableView.separatorStyle = NO;

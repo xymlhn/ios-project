@@ -36,7 +36,7 @@
     [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
     [[PropertyManager getInstance] getCommodityItemByLastUpdateTime:[Config getCommodityItem]];
     [[PropertyManager getInstance] getCommodityPropertyByLastUpdateTime:[Config getCommodityProperty]];
-    [[CameraManager getInstance] getAllCamera];
+    [[CameraManager getInstance] getAllSystemCamera];
 }
 
 - (void)didReceiveMemoryWarning {

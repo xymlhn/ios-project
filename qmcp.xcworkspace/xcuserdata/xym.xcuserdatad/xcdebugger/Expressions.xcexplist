@@ -58,5 +58,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "-[WorkOrderCameraController loadData]:WorkOrderCameraController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[CameraManager getInstance] getAllCameraData]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CameraData : NSObject
+@interface CameraData : NSObject<NSCopying>
 
 @property (nonatomic,copy) NSString *cameraCode;
 @property (nonatomic,copy) NSString *cameraLocation;
@@ -16,5 +16,6 @@
 @property (nonatomic,copy) NSString *rtmpUrl;
 @property (nonatomic,copy) NSString *m3u8Url;
 @property (nonatomic,assign) bool isChoose;
+
 
 @end

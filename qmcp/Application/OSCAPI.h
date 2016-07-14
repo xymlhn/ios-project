@@ -18,6 +18,7 @@
 #define OSCAPI_WORKORDER                @"i/a/api/workorder/"
 #define OSCAPI_ALL_WORKORDER            @"i/a/api/workorder?lastUpdateTime="
 #define OSCAPI_POSTWORKORDERSTEP        @"i/a/api/workorder/"
+#define OSCAPI_POSTWORKORDERINVENTORY   @"i/a/api/salesorder/item/"
 #define OSCAPI_PUSHID                   @"i/a/api/push/id/"
 #define OSCAPI_NICKNAME                 @"i/a/api/user/nickname"
 #define OSCAPI_TIMESTAMP                @"i/a/api/workorder/timestamp/"

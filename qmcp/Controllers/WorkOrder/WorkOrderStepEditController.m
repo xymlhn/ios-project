@@ -60,9 +60,6 @@
     [_editView.photoBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoBtnClick:)]];
     _editView.delBtn.userInteractionEnabled = YES;
     [_editView.delBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delBtnClick:)]];
-    _editView.saveBtn.userInteractionEnabled = YES;
-    [_editView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
-    
     _editView.collectionView.delegate = self;
     _editView.collectionView.dataSource = self;
     
@@ -149,8 +146,8 @@
     hub.userInteractionEnabled = NO;
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
-    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSString *error){
+
+    [[WorkOrderManager getInstance] postWorkOrderStepWithCode:workOrder.code andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -197,19 +194,15 @@
             }
         }else{
             
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"上传工单步骤失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1];
             
         }
+
     }];
+    
 }
 - (void)photoBtnClick:(UITapGestureRecognizer *)recognizer
 {

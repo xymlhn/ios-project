@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CameraData : NSObject<NSCopying>
+@interface CameraData : NSObject
 
 @property (nonatomic,copy) NSString *cameraCode;
 @property (nonatomic,copy) NSString *cameraLocation;

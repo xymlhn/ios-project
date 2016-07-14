@@ -80,6 +80,7 @@
             [hub hide:YES afterDelay:1];
         }
     }];
+    
 }
 
 -(void)bindListener{

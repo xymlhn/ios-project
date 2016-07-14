@@ -12,12 +12,10 @@
 
 -(void)initView:(UIView *)rootView
 {
+    rootView.backgroundColor = [UIColor whiteColor];
     _tableView = [UITableView new];
     _tableView.rowHeight = 50;
-    _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
-    
-    rootView.backgroundColor = [UIColor whiteColor];
     [rootView addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(rootView.mas_top).with.offset(0);

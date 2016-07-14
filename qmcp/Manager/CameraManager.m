@@ -19,7 +19,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 
 @interface CameraManager()
 @property (nonatomic, strong) NSMutableArray<CameraData *> *allCameraArr;
-
+@property (nonatomic, strong) NSDictionary *cameraDict;
 @end
 
 @implementation CameraManager
@@ -36,9 +36,11 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 
 - (NSMutableArray<CameraData *> *)getAllCameraData
 {
-    NSMutableDictionary *temp = [_allCameraArr mj_keyValues];
-    NSMutableArray<CameraData *> *arr = [CameraData mj_objectArrayWithKeyValuesArray:temp];
-    return arr;
+    if(!_cameraDict){
+        _cameraDict = [_allCameraArr mj_keyValues];
+    }
+
+    return [CameraData mj_objectArrayWithKeyValuesArray:_cameraDict];
 }
 
 
@@ -59,21 +61,21 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
     }];
 }
 
--(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode finishBlock:(void (^)(NSDictionary *, NSString *))block
+-(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode finishBlock:(CompletionHandler)completion
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_CAMERA,workOrderCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
 }
 
--(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode withCameraCode:(NSString *)cameraCode cameraStatus:(bool)isOn finishBlock:(void (^)(NSDictionary *, NSString *))block{
+-(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode withCameraCode:(NSString *)cameraCode cameraStatus:(bool)isOn finishBlock:(CompletionHandler)completion{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_CAMERA_SWITCH];
     NSDictionary *jsonDict = @{@"workOrderCode":workOrderCode,@"cameraCode":cameraCode,@"turnOn":[NSNumber numberWithBool:isOn]};
 
 
     [HttpUtil post:URLString param:jsonDict finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
 }
 

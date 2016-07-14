@@ -93,6 +93,18 @@
 -(void)saveData{
     _itemSnapshot.commodities = _chooseCommodityArr;
     [_itemSnapshot updateToDB];
+    
+    if (self.doneBlock) {
+        self.doneBlock(_itemSnapshot);
+    }
+}
+
++(instancetype)doneBlock:(void (^)(ItemSnapshot *))block{
+    
+    WorkOrderInventoryEditController *vc = [[WorkOrderInventoryEditController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
 }
 
 - (void)carIconClick:(UITapGestureRecognizer *)recognizer

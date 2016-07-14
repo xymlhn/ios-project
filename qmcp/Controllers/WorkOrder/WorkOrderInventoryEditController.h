@@ -7,7 +7,12 @@
 //
 
 #import "BaseWorkOrderViewController.h"
+#import "ItemSnapshot.h"
 
 @interface WorkOrderInventoryEditController : BaseWorkOrderViewController
+
+@property (copy, nonatomic) void(^doneBlock)(ItemSnapshot *item);
+
++ (instancetype) doneBlock:(void(^)(ItemSnapshot *item))block;
 
 @end

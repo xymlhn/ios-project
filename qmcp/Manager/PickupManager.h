@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PickupSignature.h"
+#import "PchHeader.h"
 
 @interface PickupManager : NSObject
 
@@ -19,7 +20,7 @@
  *  @param itemCode 物品code
  *  @param block    回调
  */
--(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block;
+-(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion;
 
 /**
  *  获取待取物品信息
@@ -27,7 +28,7 @@
  *  @param itemCode 物品code
  *  @param block    回调
  */
--(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block;
+-(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion;
 
 /**
  *  提交取件物品
@@ -35,5 +36,5 @@
  *  @param pickupSignature model
  *  @param block           回调
  */
--(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(void (^)(NSDictionary *, NSString *))block;
+-(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(CompletionHandler)completion;
 @end

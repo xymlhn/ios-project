@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, ExceptionType) {
     ExceptionTypeWorkOrderStatus = 10001,
     
 };
+typedef void(^CompletionHandler)(NSDictionary *dict, NSString *error);
 #ifndef Header_h
 #define Header_h
 

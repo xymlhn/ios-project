@@ -23,28 +23,28 @@
     return shared_manager;
 }
 
--(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block{
+-(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion{
     NSDictionary *dict = @{@"code":itemCode};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ITEM_COMPLETE];
     [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
     
 }
 
--(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block{
+-(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion{
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_PICKUPITEM,itemCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
 }
 
--(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(void (^)(NSDictionary *, NSString *))block{
+-(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(CompletionHandler)completion{
     NSDictionary *obj = [pickupSignature mj_keyValues];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_PICKUPSIGNATURE];
     [HttpUtil post:URLString param:obj finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
 }
 @end

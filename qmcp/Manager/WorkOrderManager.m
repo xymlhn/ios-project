@@ -102,11 +102,11 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     return workOrder;
 }
 
--(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(void (^)(NSDictionary *, NSString *))block{
+-(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion{
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_GETWORKORDERBYITEMCODE,itemCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
     
 }
@@ -130,7 +130,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     
 }
 
--(void)postAttachment:(Attachment *)attachment finishBlock:(void (^)(NSDictionary *, NSString *))block
+-(void)postAttachment:(Attachment *)attachment finishBlock:(CompletionHandler)completion
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ATTACHMENT];
     NSDictionary *dict = @{@"storageType":[NSNumber numberWithInt:attachment.sort]};
@@ -145,24 +145,35 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
         data = UIImagePNGRepresentation(image);
     }
     
-    [HttpUtil postFile:URLString file:data name:@"data" fileName:attachment.key param:dict finish:block];
+    [HttpUtil postFile:URLString file:data name:@"data" fileName:attachment.key param:dict finish:completion];
 }
 
--(void) updateTimeStampWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSString *))block{
+-(void) updateTimeStampWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,code];
     [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
-    }];
-}
-- (void)postWorkOrderStepWithURL:(NSString *)URLString andParams:(NSDictionary *)params finishBlock:(void (^)(NSDictionary *, NSString *))block{
-    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
 }
 
--(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(void (^)(NSDictionary *, NSString *))block{
+
+- (void)postWorkOrderStepWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,code];
+    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
+        completion(obj,error);
+    }];
+}
+
+-(void)postWorkOrderInventoryWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERINVENTORY,code];
+    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
+        completion(obj,error);
+    }];
+}
+
+-(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(CompletionHandler)completion{
     NSString *URLString = [NSString stringWithFormat:@"%@%@?includeHistory=%@&condition=%@", OSCAPI_ADDRESS,OSCAPI_SEARCH,[NSNumber numberWithBool:condition],string];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
 }
 

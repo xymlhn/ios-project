@@ -18,10 +18,12 @@
 #import "SignViewController.h"
 #import "Attachment.h"
 #import "Utils.h"
+#import "WorkOrderManager.h"
 @interface WorkOrderInventoryController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *itemSnapshotList;
-@property WorkOrderInventoryView *inventoryView;
+@property (nonatomic, strong) WorkOrderInventoryView *inventoryView;
+@property (nonatomic, strong) WorkOrder *workOrder;
 @end
 
 @implementation WorkOrderInventoryController
@@ -50,6 +52,8 @@
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    _workOrder = [WorkOrder searchWithWhere:workWhere][0];
 }
 
 #pragma mark - IBAction
@@ -93,11 +97,84 @@
         attachment.workOrderCode = [super workOrderCode];
         attachment.path = [Utils saveImage:image andName:attachment.key];
         [attachment saveToDB];
+        
+        _workOrder.salesOrderSnapshot.itemConfirmed = true;
+        _workOrder.signatureImageKey = attachment.key;
+        [_workOrder saveToDB];
+        
+        [self postWorkOrderInventoryWitCode:_workOrder.code];
+    }else{
+        [Utils showHudTipStr:@"请重新签名!"];
     }
+    
+}
+
+-(void)postWorkOrderInventoryWitCode:(NSString *)code{
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在上传清点数据";
+    hub.userInteractionEnabled = NO;
+    
+    NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_workOrder.salesOrderSnapshot.itemConfirmed],@"signatureImageKey":_workOrder.signatureImageKey,@"itemSnapshots":[ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList]};
+
+    [[WorkOrderManager getInstance] postWorkOrderInventoryWithCode:code andParams:inventoryDict finishBlock:^(NSDictionary *dict, NSString *error) {
+        if (!error) {
+            NSMutableArray *attachments = [NSMutableArray new];
+            for (ItemSnapshot *item in _itemSnapshotList) {
+                for(Attachment *attachment in item.attachments)
+                {
+                    if(!attachment.isUpload){
+                        [attachments addObject:attachment];
+                    }
+                }
+                
+            }
+            if(attachments.count > 0){
+                int i= 0;
+                for(Attachment *attachment in attachments)
+                {
+                    i++;
+                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
+                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
+                        if (!error) {
+                            attachment.isUpload = YES;
+                            [attachment updateToDB];
+                            if(i == attachments.count)
+                            {
+                                hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                [hub hide:YES afterDelay:1];
+                            }
+                        }else{
+                            NSString *message = @"";
+                            if(obj == nil){
+                                message =@"上传工单附件失败,请重试";
+                            }else{
+                                message = [obj valueForKey:@"message"];
+                            }
+                            hub.mode = MBProgressHUDModeCustomView;
+                            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                            hub.labelText = message;
+                            [hub hide:YES afterDelay:1];
+                        }
+                    }];
+                }
+            }else
+            {
+                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+                [hub hide:YES afterDelay:1];
+            }
+        }else{
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:1];
+            
+        }
+    }];
 }
 
 -(void)handleResult:(NSString *)result
 {
+    __weak typeof(self) weakSelf = self;
     ItemSnapshot *itemSnapshot = [ItemSnapshot new];
     itemSnapshot.salesOrderItemCode = [[NSUUID UUID] UUIDString];
     itemSnapshot.code = result;
@@ -105,9 +182,12 @@
     itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
     itemSnapshot.workOrderCode = [super workOrderCode];
     [itemSnapshot saveToDB];
-    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController new];
+    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(ItemSnapshot *item) {
+        [weakSelf.itemSnapshotList addObject:item];
+        [weakSelf.inventoryView.tableView reloadData];
+    }];
     info.workOrderCode = [super workOrderCode];
-    info.workOrderStepCode = itemSnapshot.salesOrderItemCode;
+    info.workOrderStepCode = itemSnapshot.code;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }

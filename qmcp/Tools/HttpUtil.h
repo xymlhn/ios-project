@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PchHeader.h"
 
 @interface HttpUtil : NSObject
 
@@ -17,7 +18,7 @@
  *  @param dict    字典参数
  *  @param block      回调
  */
-+(void) post:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSString *error))block;
++(void) post:(NSString *)urlpath param:(id)dict finish:(CompletionHandler)completion;
 
 
 /**
@@ -27,7 +28,7 @@
  *  @param dict    参数
  *  @param block      回调
  */
-+(void) get:(NSString *)urlpath param:(id)dict finish:( void (^)(NSDictionary *obj, NSString *error))block;
++(void) get:(NSString *)urlpath param:(id)dict finish:(CompletionHandler)completion;
 
 
 /**
@@ -40,7 +41,14 @@
  *  @param dict     字典参数
  *  @param block       回调
  */
-+(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSString *))block;
++(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(CompletionHandler)completion;
 
-+(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(void (^)(NSDictionary *, NSString *))block;
+/**
+ *  post FormData类型
+ *
+ *  @param urlpath    地址
+ *  @param dict       参数
+ *  @param completion 回调
+ */
++(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(CompletionHandler)completion;
 @end

@@ -57,7 +57,7 @@ NSString *const kConfirmCache = @"confirm";
     }
 }
 
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSString *))block
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERBIND,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -79,16 +79,16 @@ NSString *const kConfirmCache = @"confirm";
                 
             }
 
-            block(_bindDict,nil);
+            completion(_bindDict,nil);
             
         }else{
-            block(obj,error);
+            completion(obj,error);
         }
     }];
 
 }
 
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(void (^)(NSDictionary *, NSString *))block
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERCONFIRM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -105,10 +105,10 @@ NSString *const kConfirmCache = @"confirm";
             }
             [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
                 
-            block(_grabDict,nil);
+            completion(_grabDict,nil);
             
         }else{
-            block(obj,error);
+            completion(obj,error);
         }
     }];
     

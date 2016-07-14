@@ -20,7 +20,7 @@ extern NSString *const kReloginNotification;
  *
  *  @param viewController 当前控制器
  */
--(void) logoutWithBlock:(void (^)(NSDictionary *data, NSString *error))block;
+-(void) logoutWithBlock:(CompletionHandler)block;
 /**
  *  系统登入
  *
@@ -28,14 +28,14 @@ extern NSString *const kReloginNotification;
  *  @param userName       用户名
  *  @param password       密码
  */
--(void) loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(void (^)(id data, NSString *error))block;
+-(void) loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion;
 
 /**
  *  获取服务器时间
  *
  *  @param block 时间与错误信息
  */
--(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSString *error))block;
+-(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSString *error))completion;
 
 /**
  *  处理服务器响应信息头
@@ -66,7 +66,7 @@ extern NSString *const kReloginNotification;
  *  @param isFirst  是否首次重登陆
 
  */
--(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(void (^)(id data, NSString *error))block;
+-(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion;
 
 
 @end

@@ -164,8 +164,8 @@
     hub.labelText = @"正在提交数据";
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
-    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSString *error) {
+    
+    [[WorkOrderManager getInstance] updateTimeStampWithCode:workOrderCode andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
         if(!error){
             weakSelf.workOrder.isFailed = NO;
             [weakSelf.workOrder saveToDB];
@@ -199,18 +199,15 @@
             weakSelf.workOrder.isFailed = YES;
             [weakSelf.workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"提交数据失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
+           
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1];
         }
+
     }];
+    
     
 }
 
@@ -312,8 +309,8 @@
     hub.userInteractionEnabled = NO;
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_POSTWORKORDERSTEP,workOrder.code];
-    [[WorkOrderManager getInstance] postWorkOrderStepWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj,NSString *error){
+    
+    [[WorkOrderManager getInstance] postWorkOrderStepWithCode:workOrder.code andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -361,19 +358,15 @@
             weakSelf.workOrder.isFailed = YES;
             [weakSelf.workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"上传工单步骤失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1];
             
         }
+
     }];
+    
 }
 
 
@@ -383,12 +376,12 @@
     hub.labelText = @"正在完结工单";
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_TIMESTAMP,workOrderCode];
-    [[WorkOrderManager getInstance] updateTimeStampWithURL:URLString andParams:dict finishBlock:^(NSDictionary *obj, NSString *error) {
+     
+    [[WorkOrderManager getInstance] updateTimeStampWithCode:workOrderCode andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
         if(!error){
             hub.labelText = [NSString stringWithFormat:@"完结工单成功"];
             [hub hide:YES afterDelay:1];
-
+            
             [weakSelf.workOrder deleteToDB];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
@@ -396,18 +389,13 @@
             weakSelf.workOrder.isFailed = YES;
             [[WorkOrderManager getInstance] sortAllWorkOrder];
             [weakSelf.workOrder saveToDB];
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"完结工单失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1];
         }
     }];
+    
     
 }
 

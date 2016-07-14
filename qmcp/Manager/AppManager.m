@@ -61,24 +61,24 @@ NSString *const kReloginNotification = @"reLogin";
     return failure;
 }
 
--(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(void (^)(id, NSString *))block
+-(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion
 {
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
 
     [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
   
 }
 
--(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(void (^)(id data, NSString *error))block{
+-(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion{
     // 请求参数
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
 
     [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
-        block(obj,error);
+        completion(obj,error);
     }];
 }
 
@@ -100,15 +100,15 @@ NSString *const kReloginNotification = @"reLogin";
     }];
 }
 
--(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSString *error))block
+-(void) getServerTimeWithBlock:(CompletionHandler)completion
 {
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SERVER_TIME];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
-            block(obj,nil);
+            completion(obj,nil);
         }else{
-            block(nil,error);
+            completion(nil,error);
         }
     }];
 }

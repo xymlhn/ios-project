@@ -31,7 +31,7 @@ NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
     [self setSalesOrderGrabTime:@""];
     [self setCommodityProperty:@""];
     [self setCommodityItem:@""];
-    
+    [self setSearch:NO];
 }
 
 + (void)saveOwnAccount:(NSString *)account andPassword:(NSString *)password

@@ -14,7 +14,9 @@
 #import "SettingViewController.h"
 #import "Utils.h"
 #import "RootViewController.h"
-#import "CZAccount.h"
+#import "User.h"
+#import "MJExtension.h"
+#import "TMCache.h"
 @interface LoginViewController ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property LoginView *loginView;
@@ -172,7 +174,7 @@
     [[AppManager getInstance] loginWithUserName:username andPassword:password finishBlock:^(id data, NSString *error) {
         if(!error){
             // 字典转模型
-            CZAccount *account = [CZAccount accountWithDict:data];
+            User *account = [User mj_objectWithKeyValues:data];
             if(account.isAuthenticated){
                 [Config saveOwnAccount:username andPassword:password];
                 [Config saveLoginStatus:true];
@@ -180,6 +182,8 @@
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
                 hub.labelText = [NSString stringWithFormat:@"登录成功"];
                 [hub hide:YES afterDelay:0.2];
+                [[AppManager getInstance]setUser:account];
+                [[TMCache sharedCache] setObject:account forKey:@"user"];
                 UIStoryboard *discoverSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 RootViewController *discoverNav = [discoverSB instantiateViewControllerWithIdentifier:@"Nav"];
                 [self presentViewController:discoverNav animated:YES completion:nil];

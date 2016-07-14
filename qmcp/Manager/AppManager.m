@@ -10,13 +10,13 @@
 #import "Config.h"
 #import "AFHTTPSessionManager.h"
 #import "OSCAPI.h"
-#import "CZAccount.h"
+#import "User.h"
 #import "RootViewController.h"
 #import "Config.h"
 #import "Utils.h"
 #import "HttpUtil.h"
 #import "MJExtension.h"
-#import "CZAccount.h"
+#import "User.h"
 #import "WorkOrder.h"
 #import "SalesOrderSnapshot.h"
 #import "NSObject+LKDBHelper.h"
@@ -24,8 +24,13 @@
 #import "AppDelegate.h"
 #import "GisViewController.h"
 #import "LoginViewController.h"
+#import "TMCache.h"
 
 NSString *const kReloginNotification = @"reLogin";
+@interface AppManager()
+@property (nonatomic,strong) User* us;
+@property(nonatomic,strong)NSMutableArray<WorkOrder *> *workOrders;
+@end
 @implementation AppManager
 
 + (AppManager *)getInstance {
@@ -33,6 +38,7 @@ NSString *const kReloginNotification = @"reLogin";
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
+        shared_manager.us = [[TMCache sharedCache]objectForKey:@"user"];
     });
     return shared_manager;
 }
@@ -42,7 +48,7 @@ NSString *const kReloginNotification = @"reLogin";
     NSHTTPURLResponse *response = (NSHTTPURLResponse *)session.response;
     NSDictionary *dic = response.allHeaderFields;
     
-    Boolean failure = [dic valueForKey:@"failure"];
+    id failure = [dic valueForKey:@"failure"];
     if(failure){
         int type = [[dic valueForKey:@"exceptionType"] intValue];
         if (type != (int)ExceptionTypeNotLogin)  {
@@ -60,6 +66,16 @@ NSString *const kReloginNotification = @"reLogin";
     }
     return failure;
 }
+
+-(void)setUser:(User *)user
+{
+    _us = user;
+}
+-(User *)getUser{
+
+    return _us;
+}
+
 
 -(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion
 {

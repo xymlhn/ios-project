@@ -22,6 +22,8 @@
 #import "Utils.h"
 #import "PickupItemSignature.h"
 #import "Config.h"
+#import "AppManager.h"
+#import "User.h"
 
 NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
 @interface WorkOrderManager()
@@ -57,6 +59,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
                 NSArray *assignArray = [WorkOrder mj_objectArrayWithKeyValuesArray:workOrderGroup.assign];
                 [assignArray enumerateObjectsUsingBlock:^(WorkOrder *  _Nonnull order, NSUInteger idx, BOOL * _Nonnull stop) {
                     order.salesOrderSnapshot.addressSnapshot.code = order.code;
+                    order.userId = [[AppManager getInstance] getUser].userId;
                     [order saveToDB];
                 }];
             }
@@ -73,7 +76,9 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
  *  处理所有的工单并派发到界面
  */
 - (void)sortAllWorkOrder{
-    _workOrders = [WorkOrder searchWithWhere:nil];
+    User *user = [[AppManager getInstance] getUser];
+    NSString *workWhere = [NSString stringWithFormat:@"userId = '%@'",user.userId];
+    _workOrders = [WorkOrder searchWithWhere:workWhere];
     
     [_workOrders sortUsingComparator:^NSComparisonResult(WorkOrder *  _Nonnull obj1, WorkOrder *  _Nonnull obj2) {
         int a1 = [[obj1.code componentsSeparatedByString:@"-"][1] intValue];

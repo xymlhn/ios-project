@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CZAccount : NSObject
+@interface User : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *errorMessage;
 
@@ -23,8 +23,5 @@
 @property (nonatomic, assign) Boolean isAuthenticated;
 
 @property (nonatomic, assign) Boolean isExecuteSuccess;
-
-+ (instancetype)accountWithDict:(NSDictionary *)dict;
-
 
 @end

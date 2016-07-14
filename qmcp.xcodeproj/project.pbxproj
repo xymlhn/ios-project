@@ -43,7 +43,7 @@
 		244517701CA03E640085CC16 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445176A1CA03E640085CC16 /* QrCodeViewController.m */; };
 		244517711CA03E640085CC16 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445176C1CA03E640085CC16 /* Utils.m */; };
 		2445177E1CA03E760085CC16 /* CommoditySnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517731CA03E760085CC16 /* CommoditySnapshot.m */; };
-		2445177F1CA03E760085CC16 /* CZAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517751CA03E760085CC16 /* CZAccount.m */; };
+		2445177F1CA03E760085CC16 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517751CA03E760085CC16 /* User.m */; };
 		244517801CA03E760085CC16 /* ItemSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517771CA03E760085CC16 /* ItemSnapshot.m */; };
 		244517811CA03E760085CC16 /* SalesOrderSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517791CA03E760085CC16 /* SalesOrderSnapshot.m */; };
 		244517821CA03E760085CC16 /* WorkOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445177B1CA03E760085CC16 /* WorkOrder.m */; };
@@ -210,8 +210,8 @@
 		2445176C1CA03E640085CC16 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		244517721CA03E760085CC16 /* CommoditySnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommoditySnapshot.h; sourceTree = "<group>"; };
 		244517731CA03E760085CC16 /* CommoditySnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommoditySnapshot.m; sourceTree = "<group>"; };
-		244517741CA03E760085CC16 /* CZAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZAccount.h; sourceTree = "<group>"; };
-		244517751CA03E760085CC16 /* CZAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZAccount.m; sourceTree = "<group>"; };
+		244517741CA03E760085CC16 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		244517751CA03E760085CC16 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		244517761CA03E760085CC16 /* ItemSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemSnapshot.h; sourceTree = "<group>"; };
 		244517771CA03E760085CC16 /* ItemSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSnapshot.m; sourceTree = "<group>"; };
 		244517781CA03E760085CC16 /* SalesOrderSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderSnapshot.h; sourceTree = "<group>"; };
@@ -858,8 +858,8 @@
 			children = (
 				244517721CA03E760085CC16 /* CommoditySnapshot.h */,
 				244517731CA03E760085CC16 /* CommoditySnapshot.m */,
-				244517741CA03E760085CC16 /* CZAccount.h */,
-				244517751CA03E760085CC16 /* CZAccount.m */,
+				244517741CA03E760085CC16 /* User.h */,
+				244517751CA03E760085CC16 /* User.m */,
 				24FBB2101CB9D222009C77E7 /* AddressSnapshot.h */,
 				24FBB2111CB9D222009C77E7 /* AddressSnapshot.m */,
 				244517761CA03E760085CC16 /* ItemSnapshot.h */,
@@ -1095,7 +1095,7 @@
 				24020A531CB7419400D4EA96 /* BaseView.m in Sources */,
 				246517081D2F561A00F1E5D3 /* PickupSignature.m in Sources */,
 				246B0AC01CB4B3BF0017E956 /* WorkOrderInventoryCell.m in Sources */,
-				2445177F1CA03E760085CC16 /* CZAccount.m in Sources */,
+				2445177F1CA03E760085CC16 /* User.m in Sources */,
 				249E49121CE700EE0051C9C1 /* WorkOrderCameraCell.m in Sources */,
 				24A2B4471CB4EDB3006E29DB /* PJRSignatureView.m in Sources */,
 				242EA1E71D2E578C001E4291 /* PickupNoticeCell.m in Sources */,

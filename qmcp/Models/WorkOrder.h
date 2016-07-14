@@ -11,6 +11,7 @@
 #import "ItemSnapshot.h"
 #import "CommoditySnapshot.h"
 #import "AddressSnapshot.h"
+#import "User.h"
 typedef NS_ENUM(NSInteger, WorkOrderType) {
     WorkOrderTypeOnsite = 10,//上门
     WorkOrderTypeInventory = 20,//清点
@@ -79,4 +80,6 @@ typedef NS_ENUM(NSInteger, OnSiteStatus) {
 @property (nonatomic, assign) BOOL isFailed;
 
 @property (nonatomic, copy) NSString *userOpenId;
+
+@property (nonatomic, copy) NSString *userId;
 @end

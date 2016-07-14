@@ -40,10 +40,10 @@
          contextName = "__38+[HttpUtil postFormData:param:finish:]_block_invoke_3:HttpUtil.m">
       </ContextState>
       <ContextState
-         contextName = "__85-[WorkOrderStepController postWorkOrderStepWithWorkOrder:andStepArray:isCompleteAll:]_block_invoke:WorkOrderStepController.m">
+         contextName = "-[WorkOrderManager postWorkOrderInventoryWithCode:andParams:finishBlock:]:WorkOrderManager.m">
       </ContextState>
       <ContextState
-         contextName = "-[WorkOrderManager postWorkOrderInventoryWithCode:andParams:finishBlock:]:WorkOrderManager.m">
+         contextName = "__85-[WorkOrderStepController postWorkOrderStepWithWorkOrder:andStepArray:isCompleteAll:]_block_invoke:WorkOrderStepController.m">
       </ContextState>
       <ContextState
          contextName = "__30+[HttpUtil post:param:finish:]_block_invoke.23:HttpUtil.m">
@@ -69,6 +69,17 @@
          <PersistentStrings>
             <PersistentString
                value = "_scanView.scanText.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__36-[LoginViewController loginBtnClick]_block_invoke:LoginViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AppManager user]:AppManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.user">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

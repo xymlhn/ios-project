@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "MBProgressHUD+Util.h"
 #import "PchHeader.h"
+#import "User.h"
 
 @interface AppManager : NSObject
+
+
 
 extern NSString *const kReloginNotification;
 
@@ -68,5 +71,7 @@ extern NSString *const kReloginNotification;
  */
 -(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion;
 
+-(void)setUser:(User *)user;
+-(User *)getUser;
 
 @end

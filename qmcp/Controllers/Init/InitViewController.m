@@ -10,7 +10,8 @@
 #import "Masonry.h"
 #import "AppManager.h"
 #import "Config.h"
-#import "CZAccount.h"
+#import "User.h"
+#import "MJExtension.h"
 @interface InitViewController ()
 
 @end
@@ -24,7 +25,7 @@
     [[AppManager getInstance] reLoginWithUserName:name andPassword:password finishBlock:^(NSDictionary *data, NSString *error) {
         NSDictionary *dict;
         if(error == nil){
-            CZAccount *account = [CZAccount accountWithDict:data];
+            User *account = [User mj_objectWithKeyValues:data];
             if(account.isAuthenticated){
                 dict = @{@"info":@"0"};
             }else{

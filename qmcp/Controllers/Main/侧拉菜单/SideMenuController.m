@@ -23,6 +23,7 @@
 #import "WorkOrderInfoController.h"
 #import "PickupNoticeView.h"
 #import "PickupNoticeViewController.h"
+#import "TMCache.h"
 @interface SideMenuController ()
 
 @end
@@ -121,6 +122,10 @@
                     hub.labelText = [NSString stringWithFormat:@"登出成功"];
                     [hub hide:YES];
                     [Config setInitSetting];
+                    
+                    [[TMCache sharedCache]setObject:nil forKey:@"user"];
+                    [[AppManager getInstance] setUser:nil];
+                    
                     LoginViewController *loginNav = [LoginViewController new];
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
                     [self presentViewController:nav animated:YES completion:nil];

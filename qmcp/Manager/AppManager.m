@@ -27,6 +27,8 @@
 #import "TMCache.h"
 
 NSString *const kReloginNotification = @"reLogin";
+NSString *const kUserCache = @"user";
+
 @interface AppManager()
 @property (nonatomic,strong) User* us;
 @property(nonatomic,strong)NSMutableArray<WorkOrder *> *workOrders;
@@ -38,7 +40,7 @@ NSString *const kReloginNotification = @"reLogin";
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
-        shared_manager.us = [[TMCache sharedCache]objectForKey:@"user"];
+        shared_manager.us = [[TMCache sharedCache]objectForKey:kUserCache];
     });
     return shared_manager;
 }
@@ -65,6 +67,12 @@ NSString *const kReloginNotification = @"reLogin";
         }
     }
     return failure;
+}
+
+-(void)clearUserDataWhenLogout{
+    [Config setInitSetting];
+    [[TMCache sharedCache]setObject:nil forKey:kUserCache];
+    [[AppManager getInstance] setUser:nil];
 }
 
 -(void)setUser:(User *)user
@@ -99,7 +107,7 @@ NSString *const kReloginNotification = @"reLogin";
 }
 
 
--(void) logoutWithBlock:(void (^)(NSDictionary *data, NSString *error))block
+-(void)logoutWithBlock:(void (^)(NSDictionary *data, NSString *error))block
 {
 
     // 请求参数

@@ -1,26 +1,24 @@
 //
-//  DateCell.m
+//  TextCell.m
 //  qmcp
 //
 //  Created by 谢永明 on 16/6/8.
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "DateCell.h"
+#import "TextSingleCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
-#import "ActionSheetDatePicker.h"
-#import "Utils.h"
 
-@implementation DateCell
+@implementation TextSingleCell
 
 //创建自定义可重用的cell对象
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *reuseId = @"dateCell";
-    DateCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    static NSString *reuseId = @"textCell";
+    TextSingleCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
-        cell = [[DateCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
+        cell = [[TextSingleCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
     }
     cell.selectedBackgroundView.backgroundColor = [UIColor themeColor];
     return cell;
@@ -39,14 +37,13 @@
 -(void)initView{
     _name = [UILabel new];
     _name.font = [UIFont systemFontOfSize:12];
-    _name.text = @"输入框";
     _name.textColor = [UIColor blackColor];
     [self.contentView addSubview:_name];
     
-    _value = [UILabel new];
+    _value = [UITextField new];
     _value.font = [UIFont systemFontOfSize:12];
-    _value.text = @"输入框";
     _value.textColor = [UIColor blackColor];
+    _value.placeholder=@"请输入";
     [self.contentView addSubview:_value];
     
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
@@ -62,33 +59,22 @@
         make.height.equalTo(@20);
     }];
     
-    _value.userInteractionEnabled = YES;
-    [_value addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valueClick:)]];
-    
+    [_value addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
 }
 
-#pragma mark - IBAction
--(void)valueClick:(UITapGestureRecognizer *)recognizer
-{
-    NSDate *curDate = [NSDate new];
-    
-    ActionSheetDatePicker *picker = [[ActionSheetDatePicker alloc] initWithTitle:nil datePickerMode:UIDatePickerModeDate selectedDate:curDate doneBlock:^(ActionSheetDatePicker *picker, NSDate *selectedDate, id origin) {
-        NSString *str = [ Utils formatDate:selectedDate];
-        _value.text = str;
-    } cancelBlock:^(ActionSheetDatePicker *picker) {
-        
-    } origin:self.contentView];
-    [picker showActionSheetPicker];
+-(void)textFieldDidChange:(UITextField *)textField{
+    _field.defaultValue = textField.text;
 }
 
 //重写属性的setter方法，给子控件赋值
 - (void)setField:(FormTemplateField *)field
 {
     if(field != nil){
+        _field = field;
         _name.text = field.name;
         _value.text = field.defaultValue;
     }
 }
-
 
 @end

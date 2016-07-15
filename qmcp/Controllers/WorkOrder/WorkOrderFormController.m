@@ -10,10 +10,18 @@
 #import "UIColor+Util.h"
 #import "Masonry.h"
 #import "FormTemplateField.h"
-#import "TextCell.h"
+#import "TextSingleCell.h"
 #import "DateCell.h"
 #import "FormManager.h"
 #import "WorkOrder.h"
+#import "NumberCell.h"
+#import "LabelCell.h"
+#import "TextMultiCell.h"
+#import "DateTimeCell.h"
+#import "SelectCell.h"
+#import "CheckBoxCell.h"
+#import "HeaderCell.h"
+#import "FooterCell.h"
 
 @interface WorkOrderFormController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -29,7 +37,6 @@
 -(void)initView
 {
     _tableView = [UITableView new];
-    _tableView.rowHeight = 30;
     _tableView.separatorStyle = YES;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
@@ -47,9 +54,9 @@
     NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     _workOrderFormList = [[FormManager getInstance]formTemplateField:_formTemplateId];
-    
-    
+    [[FormManager getInstance] handleFormTable:_workOrderFormList formTemplateId:_formTemplateId];
 }
+
 
 #pragma mark - Table view data source
 
@@ -66,21 +73,102 @@
     UITableViewCell *cell;
     switch (field.controlType) {
         case FormTemplateControlTypeText:
-            cell = [TextCell cellWithTableView:tableView];
-            ((TextCell *)cell).field = field;
+            cell = [TextSingleCell cellWithTableView:tableView];
+            ((TextSingleCell *)cell).field = field;
             break;
         case FormTemplateControlTypeDate:
             cell = [DateCell cellWithTableView:tableView];
             ((DateCell *)cell).field = field;
             break;
+        case FormTemplateControlTypeNumber:
+            cell = [NumberCell cellWithTableView:tableView];
+            ((NumberCell *)cell).field = field;
+            break;
+        case FormTemplateControlTypePrice:
+            cell = [NumberCell cellWithTableView:tableView];
+            ((NumberCell *)cell).field = field;
+            break;
+        case FormTemplateControlTypeLabel:
+            cell = [LabelCell cellWithTableView:tableView];
+            ((LabelCell *)cell).field = field;
+            break;
+        case FormTemplateControlTypeTextArea:
+            cell = [TextMultiCell cellWithTableView:tableView];
+            ((TextMultiCell *)cell).field = field;
+            break;
+        case FormTemplateControlTypeDateTime:
+            cell = [DateTimeCell cellWithTableView:tableView];
+            ((DateTimeCell *)cell).field = field;
+            break;
+        case FormTemplateControlTypeSelect:
+            cell = [SelectCell cellWithTableView:tableView];
+            ((SelectCell *)cell).field = field;
+            break;
+        case FormTemplateControlTypeCheckBox:
+            cell = [CheckBoxCell cellWithTableView:tableView];
+            ((CheckBoxCell *)cell).field = field;
+            break;
+        case FormTemplateControlTypeHeader:
+            cell = [HeaderCell cellWithTableView:tableView];
+            ((HeaderCell *)cell).field = field;
+            break;
+            
+        case FormTemplateControlTypeFooter:
+            cell = [FooterCell cellWithTableView:tableView];
+            ((FooterCell *)cell).field = field;
+            break;
         default:
-            cell = [DateCell cellWithTableView:tableView];
-            ((DateCell *)cell).field = field;
+            cell = [TextMultiCell cellWithTableView:tableView];
+            ((TextMultiCell *)cell).field = field;
             break;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger row = indexPath.row;
+    FormTemplateField *field = _workOrderFormList[row];
+    switch (field.controlType) {
+        case FormTemplateControlTypeHeader:
+            return 30;
+            break;
+        case FormTemplateControlTypeFooter:
+            return 30;
+            break;
+        case FormTemplateControlTypeText:
+            return 50;
+            break;
+        case FormTemplateControlTypeDate:
+            return 50;
+            break;
+        case FormTemplateControlTypeNumber:
+            return 50;
+            break;
+        case FormTemplateControlTypePrice:
+            return 50;
+            break;
+        case FormTemplateControlTypeSelect:
+            return 50;
+            break;
+        case FormTemplateControlTypeCheckBox:
+            return 50;
+            break;
+        case FormTemplateControlTypeLabel:
+            return 100;
+            break;
+        case FormTemplateControlTypeTextArea:
+            return 100;
+            break;
+        case FormTemplateControlTypeDateTime:
+            return 50;
+            break;
+        default:
+            return 150;
+            break;
+    }
+
 }
 @end
 

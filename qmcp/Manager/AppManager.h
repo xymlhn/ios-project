@@ -71,7 +71,23 @@ extern NSString *const kReloginNotification;
  */
 -(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion;
 
+/**
+ *  设置当前用户
+ *
+ *  @param user 用户model
+ */
 -(void)setUser:(User *)user;
+
+/**
+ *  获取当前用户
+ *
+ *  @return 用户model
+ */
 -(User *)getUser;
+
+/**
+ *  退出时清理当前登录用户使用数据
+ */
+-(void)clearUserDataWhenLogout;
 
 @end

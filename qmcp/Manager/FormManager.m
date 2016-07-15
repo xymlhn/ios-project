@@ -70,12 +70,14 @@
                     }
                     NSMutableArray *brife = [NSMutableArray new];
                     for (FormTemplate *formTemplate in [_formTemplateDict allValues]) {
-                        FormTemplateBrife *formTemplateBrife = [FormTemplateBrife new];
-                        formTemplateBrife.key = formTemplate.formTemplateId;
-                        formTemplateBrife.name = formTemplate.formTemplateName;
-                        formTemplateBrife.formTemplateCode = formTemplate.formTemplateId;
-                        formTemplateBrife.formSort = [self getFormSort:formTemplate.formTemplateId];
-                        [brife addObject:formTemplateBrife];
+                        if(formTemplate.parentCode == nil){
+                            FormTemplateBrife *formTemplateBrife = [FormTemplateBrife new];
+                            formTemplateBrife.key = formTemplate.formTemplateId;
+                            formTemplateBrife.name = formTemplate.formTemplateName;
+                            formTemplateBrife.formTemplateCode = formTemplate.formTemplateId;
+                            formTemplateBrife.formSort = [self getFormSort:formTemplate.formTemplateId];
+                            [brife addObject:formTemplateBrife];
+                        }
                     }
                     block(brife,nil);
                     
@@ -88,6 +90,53 @@
             block(nil,error1);
         }
     }];
+}
+
+-(void)handleFormTable:(NSMutableArray<FormTemplateField *> *)formList formTemplateId:(NSString *)formTemplateId
+{
+    if(![self isExistsFormData:formTemplateId]){
+        int tableNumber = [self formTableNumber:formList];
+        for (int i = 0; i < tableNumber; i++) {
+            [self replaceFormTable:formList];
+        }
+    }else{
+        
+    }
+
+}
+
+-(void)replaceFormTable:(NSMutableArray<FormTemplateField *> *)formList{
+    for (int i = 0; i < formList.count; i++) {
+        FormTemplateField *field = formList[i];
+        if(field.controlType == FormTemplateControlTypeTable){
+            FormTemplateField *footer = [FormTemplateField new];
+            footer.controlType = FormTemplateControlTypeFooter;
+            footer.tableTemplateId = field.tableTemplateId;
+            
+            NSMutableArray<FormTemplateField *> *list = [self formTemplateField:field.tableTemplateId];
+            
+            FormTemplateField *header = [FormTemplateField new];
+
+            header.controlType = FormTemplateControlTypeHeader;
+            header.id = [[NSUUID UUID] UUIDString];
+            header.tableTemplateId = field.tableTemplateId;
+            header.templateFields = list;
+            
+            footer.id = header.id;
+            footer.tableTemplateId = field.tableTemplateId;
+
+            field.tempMap = [NSMutableDictionary new];
+            [field.tempMap setObject:list forKey:header.id];
+            [list insertObject:header atIndex:0];
+            
+            [formList replaceObjectAtIndex:i withObject:footer];
+            
+            NSRange range = NSMakeRange(i, [list count]);
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+            [formList insertObjects:list atIndexes:indexSet];
+            break;
+        }
+    }
 }
 
 /**
@@ -110,28 +159,41 @@
     return formSort;
 }
 
+/**
+ *  表单是否已经有数据
+ *
+ *  @param formTemplateId 表单id
+ *
+ *  @return boolean
+ */
+-(BOOL)isExistsFormData:(NSString *)formTemplateId{
+    if([_formDataDict objectForKey:formTemplateId] != nil){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+-(int)formTableNumber:(NSMutableArray<FormTemplateField *> *)formList{
+    int number = 0;
+    for (FormTemplateField *field in formList) {
+        if(field.controlType == FormTemplateControlTypeTable){
+            number++;
+        }
+    }
+    return number;
+}
+
 -(NSMutableArray<FormTemplateField *> *)formTemplateField:(NSString *)formTemplateId{
     NSMutableArray<FormTemplateField *> *array = [NSMutableArray new];
     if(_formTemplateDict[formTemplateId] != nil){
         FormTemplate *field = _formTemplateDict[formTemplateId];
-        array = field.fields;
+
+        array = [FormTemplateField mj_objectArrayWithKeyValuesArray:[field.fields mj_keyValues]];
     }
-    [self tableField:array];
     return array;
 }
 
--(void)tableField:(NSMutableArray<FormTemplateField *> *)formTemplateField{
-    for (int i = 0; i < [formTemplateField count]; i++) {
-        FormTemplateField *field = formTemplateField[i];
-        if(field.controlType == FormTemplateControlTypeTable){
-            //            FormTemplateField *footer = [FormTemplateField new];
-            //            footer.controlType = FormTemplateControlTypeFooter;
-            //            footer.id = field.id;
-            NSMutableArray<FormTemplateField *> *tableField = [self formTemplateField:field.id];
-            [formTemplateField insertArray:tableField atIndex:i];
-        }
-    }
-}
 -(void)saveFormData:(NSMutableArray<FormData *> *)formDatas{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SAVE_FORMDATA];
     [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {

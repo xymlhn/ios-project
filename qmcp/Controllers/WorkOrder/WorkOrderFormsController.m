@@ -11,6 +11,9 @@
 #import "FormManager.h"
 #import "FormTemplateCell.h"
 #import "WorkOrderFormController.h"
+#import "AbstractActionSheetPicker.h"
+#import "ActionSheetPicker.h"
+#import "Utils.h"
 
 @interface WorkOrderFormsController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;;
@@ -72,7 +75,7 @@
                 [_collectionView reloadData];
             }
             hub.labelText = success;
-            [hub hide:YES afterDelay:0.5];
+            [hub hide:YES afterDelay:0.2];
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -126,7 +129,6 @@
     info.formTemplateId = formTemplateBrife.formTemplateCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
-    
 }
 
 

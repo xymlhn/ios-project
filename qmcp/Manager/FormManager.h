@@ -42,5 +42,10 @@
  */
 -(NSMutableArray<FormTemplateField *> *)formTemplateField:(NSString *)formTemplateId;
 
-
+/**
+ *  处理带table的表单
+ *
+ *  @param formList 表单数据
+ */
+-(void)handleFormTable:(NSMutableArray<FormTemplateField* > *) formList formTemplateId:(NSString *)formTemplateId;
 @end

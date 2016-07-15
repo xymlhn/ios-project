@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FormTemplateField.h"
 
-@interface TextCell : UITableViewCell
+@interface TextSingleCell : UITableViewCell
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UITextField *value;
 @property (nonatomic, strong) FormTemplateField *field;

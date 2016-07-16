@@ -42,11 +42,19 @@
     _name.textColor = [UIColor blackColor];
     [self.contentView addSubview:_name];
     
+    UIView *containView = [UIView new];
+    containView.backgroundColor = [UIColor whiteColor];
+    containView.layer.borderColor = [UIColor grayColor].CGColor;
+    containView.layer.borderWidth = 1.0;
+    containView.layer.cornerRadius = 5.0;
+    containView.layer.masksToBounds = YES;
+    [self.contentView addSubview:containView];
+    
     _value = [UILabel new];
-    _value.font = [UIFont systemFontOfSize:12];
+    _value.font = [UIFont systemFontOfSize:13];
     _value.text = @"输入框";
     _value.textColor = [UIColor blackColor];
-    [self.contentView addSubview:_value];
+    [containView addSubview:_value];
     
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.contentView.mas_top).with.offset(5);
@@ -54,13 +62,20 @@
         make.right.equalTo(self.contentView.mas_right).with.offset(-10);
     }];
     
-    [_value mas_makeConstraints:^(MASConstraintMaker *make){
+    [containView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_name.mas_bottom).with.offset(5);
         make.left.equalTo(self.contentView.mas_left).with.offset(10);
         make.right.equalTo(self.contentView.mas_right).with.offset(-10);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
     
+    [_value mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(containView.mas_left).with.offset(10);
+        make.right.equalTo(containView.mas_right).with.offset(-10);
+        make.centerY.equalTo(containView.mas_centerY);
+        make.height.equalTo(@30);
+    }];
+
     _value.userInteractionEnabled = YES;
     [_value addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valueClick:)]];
     

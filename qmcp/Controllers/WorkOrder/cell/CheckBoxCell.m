@@ -9,6 +9,8 @@
 #import "CheckBoxCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
+#import "ActionSheetPicker.h"
+#import "CheckBoxViewController.h"
 
 @implementation CheckBoxCell
 
@@ -40,10 +42,18 @@
     _name.textColor = [UIColor blackColor];
     [self.contentView addSubview:_name];
     
+    UIView *containView = [UIView new];
+    containView.backgroundColor = [UIColor whiteColor];
+    containView.layer.borderColor = [UIColor grayColor].CGColor;
+    containView.layer.borderWidth = 1.0;
+    containView.layer.cornerRadius = 5.0;
+    containView.layer.masksToBounds = YES;
+    [self.contentView addSubview:containView];
+    
     _value = [UILabel new];
-    _value.font = [UIFont systemFontOfSize:12];
+    _value.font = [UIFont systemFontOfSize:13];
     _value.textColor = [UIColor blackColor];
-    [self.contentView addSubview:_value];
+    [containView addSubview:_value];
     
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.contentView.mas_top).with.offset(5);
@@ -51,13 +61,44 @@
         make.right.equalTo(self.contentView.mas_right).with.offset(-10);
     }];
     
-    [_value mas_makeConstraints:^(MASConstraintMaker *make){
+    [containView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_name.mas_bottom).with.offset(5);
         make.left.equalTo(self.contentView.mas_left).with.offset(10);
         make.right.equalTo(self.contentView.mas_right).with.offset(-10);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
     
+    [_value mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(containView.mas_left).with.offset(10);
+        make.right.equalTo(containView.mas_right).with.offset(-10);
+        make.centerY.equalTo(containView.mas_centerY);
+        make.height.equalTo(@30);
+    }];
+    _value.userInteractionEnabled = YES;
+    [_value addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valueClick:)]];
+    
+}
+
+#pragma mark - IBAction
+-(void)valueClick:(UITapGestureRecognizer *)recognizer
+{
+    CheckBoxViewController *controller = [CheckBoxViewController doneBlock:^(NSString *textValue) {
+        _value.text = textValue;
+    }];
+    controller.valueList = _field.valueList;
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        controller.providesPresentationContextTransitionStyle = YES;
+        controller.definesPresentationContext = YES;
+        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [_viewController.tabBarController presentViewController:controller animated:YES completion:nil];
+    } else {
+        _viewController.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [_viewController presentViewController:controller animated:NO completion:nil];
+        _viewController.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+ 
 }
 
 //重写属性的setter方法，给子控件赋值

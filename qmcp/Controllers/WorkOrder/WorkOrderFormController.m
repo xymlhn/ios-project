@@ -23,7 +23,7 @@
 #import "HeaderCell.h"
 #import "FooterCell.h"
 
-@interface WorkOrderFormController ()<UITableViewDataSource,UITableViewDelegate>
+@interface WorkOrderFormController ()<UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableArray<FormTemplateField* > *workOrderFormList;
 @property (nonatomic, strong) UITableView *tableView;
@@ -47,6 +47,18 @@
     }];
     self.title = @"表单编辑";
     
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    gesture.delegate = self;
+    [self.view addGestureRecognizer:gesture];
+    
+}
+
+- (void)hidenKeyboard
+{
+    [self.view endEditing:YES];
+
 }
 
 -(void)loadData
@@ -101,8 +113,11 @@
             ((DateTimeCell *)cell).field = field;
             break;
         case FormTemplateControlTypeSelect:
-            cell = [SelectCell cellWithTableView:tableView];
-            ((SelectCell *)cell).field = field;
+//            cell = [SelectCell cellWithTableView:tableView];
+//            ((SelectCell *)cell).field = field;
+            cell = [CheckBoxCell cellWithTableView:tableView];
+            ((CheckBoxCell *)cell).field = field;
+            ((CheckBoxCell *)cell).viewController = self;
             break;
         case FormTemplateControlTypeCheckBox:
             cell = [CheckBoxCell cellWithTableView:tableView];
@@ -138,22 +153,22 @@
             return 30;
             break;
         case FormTemplateControlTypeText:
-            return 50;
+            return 60;
             break;
         case FormTemplateControlTypeDate:
-            return 50;
+            return 60;
             break;
         case FormTemplateControlTypeNumber:
-            return 50;
+            return 60;
             break;
         case FormTemplateControlTypePrice:
-            return 50;
+            return 60;
             break;
         case FormTemplateControlTypeSelect:
-            return 50;
+            return 60;
             break;
         case FormTemplateControlTypeCheckBox:
-            return 50;
+            return 60;
             break;
         case FormTemplateControlTypeLabel:
             return 100;
@@ -162,7 +177,7 @@
             return 100;
             break;
         case FormTemplateControlTypeDateTime:
-            return 50;
+            return 60;
             break;
         default:
             return 150;

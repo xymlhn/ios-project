@@ -1,0 +1,55 @@
+//
+//  CheckCell.m
+//  qmcp
+//
+//  Created by 谢永明 on 16/7/16.
+//  Copyright © 2016年 inforshare. All rights reserved.
+//
+
+#import "CheckCell.h"
+#import "Masonry.h"
+#import "PchHeader.h"
+@implementation CheckCell
+
+//创建自定义可重用的cell对象
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    static NSString *reuseId = @"CheckCell";
+    CheckCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    if (cell == nil) {
+        cell = [[CheckCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
+    }
+    return cell;
+}
+
+
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self initView];
+    }
+    return self;
+}
+
+-(void)initView
+{
+    _jsText = [UILabel new];
+    _jsText.font = [UIFont systemFontOfSize:14];//
+    _jsText.text = @"12305";
+    _jsText.textColor = [UIColor blackColor];
+    [self.contentView addSubview:_jsText];
+    [_jsText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
+    }];
+    
+    _jsSwitch = [UISwitch new];
+    [self.contentView addSubview:_jsSwitch];
+    [_jsSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
+    }];
+}
+
+@end

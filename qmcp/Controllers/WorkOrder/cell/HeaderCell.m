@@ -34,6 +34,7 @@
 }
 
 -(void)initView{
+    self.contentView.backgroundColor = [UIColor selectCellSColor];
     _name = [UILabel new];
     _name.font = [UIFont systemFontOfSize:12];
     _name.textColor = [UIColor blackColor];

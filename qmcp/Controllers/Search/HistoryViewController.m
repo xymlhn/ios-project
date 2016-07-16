@@ -50,10 +50,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
     }
     
-    // Configure the cell...
-    NSUInteger row = [indexPath row];
-    cell.textLabel.text = @"down list";
-    
     return cell;
 }
 @end

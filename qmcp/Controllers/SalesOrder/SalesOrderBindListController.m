@@ -58,7 +58,6 @@
 
 -(void)loadData
 {
-    __weak typeof(self) weakSelf = self;
     if(_salesOrderList == nil)
     {
         _salesOrderList = [NSMutableArray new];
@@ -67,30 +66,23 @@
     hub.labelText = @"加载中...";
     hub.userInteractionEnabled = NO;
     [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSString *error) {
-        [self.tableView.mj_header beginRefreshing];
         if(error == nil){
-            [weakSelf refreshUIWithDict:dict];
+            [self refreshUIWithDict:dict];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"加载成功"];
             [hub hide:YES];
         }else{
-            NSString *message = @"";
-            if(dict == nil){
-                message =@"加载失败";
-            }else{
-                message = [dict valueForKey:@"message"];
-            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:0.5];
         }
         
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSString *error) {
-            [weakSelf refreshUIWithDict:dict];
+            [self refreshUIWithDict:dict];
         }];
     }];
 }

@@ -50,10 +50,11 @@
     containView.layer.masksToBounds = YES;
     [self.contentView addSubview:containView];
     
-    _value = [UILabel new];
+    _value = [UITextField new];
     _value.font = [UIFont systemFontOfSize:13];
-    _value.text = @"输入框";
+    _value.placeholder = @"请选择";
     _value.textColor = [UIColor blackColor];
+    _value.enabled = NO;
     [containView addSubview:_value];
     
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
@@ -76,8 +77,8 @@
         make.height.equalTo(@30);
     }];
 
-    _value.userInteractionEnabled = YES;
-    [_value addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valueClick:)]];
+    containView.userInteractionEnabled = YES;
+    [containView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valueClick:)]];
     
 }
 

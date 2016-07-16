@@ -31,6 +31,15 @@
 +(NSString *)formatDate:(NSDate *)date;
 
 /**
+ *  格式化时间输出格式为yyyy-mm-dd
+ *
+ *  @param date date时间
+ *
+ *  @return 时间字符串
+ */
++(NSString *)formatDateWithoutTime:(NSDate *)date;
+
+/**
  *  将格式为yyyy-MM-dd hh:mm:ss的时间转为NSDate
  *
  *  @param date 时间字符串

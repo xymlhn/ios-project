@@ -19,8 +19,6 @@
         _textView.backgroundColor = [UIColor redColor];
         _textView.backgroundColor = [UIColor whiteColor];
         _textView.textAlignment = NSTextAlignmentLeft;
-        //自动折行设置
-        _textView.lineBreakMode = UILineBreakModeWordWrap;
         _textView.numberOfLines = 0;
         [self addSubview:_textView];
         [_textView mas_makeConstraints:^(MASConstraintMaker *make){

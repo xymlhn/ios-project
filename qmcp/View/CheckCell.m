@@ -39,17 +39,22 @@
     _jsText.text = @"12305";
     _jsText.textColor = [UIColor blackColor];
     [self.contentView addSubview:_jsText];
-    [_jsText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(self.contentView.mas_centerY);
-        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
-    }];
     
     _jsSwitch = [UISwitch new];
     [self.contentView addSubview:_jsSwitch];
+    
     [_jsSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
     }];
+    
+    [_jsText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_jsSwitch.mas_left).with.offset(-kPaddingLeftWidth);
+    }];
+    
+
 }
 
 @end

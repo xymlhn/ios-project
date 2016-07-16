@@ -27,7 +27,6 @@
     
     _tableView = [UITableView new];
     _tableView.rowHeight = 80;
-    _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     [containView addSubview:_tableView];
     

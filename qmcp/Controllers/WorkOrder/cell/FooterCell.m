@@ -36,25 +36,25 @@
 
 -(void)initView{
     _name = [UILabel new];
-    _name.font = [UIFont systemFontOfSize:12];
+    _name.font = [UIFont systemFontOfSize:16];
     _name.textColor = [UIColor blackColor];
     _name.text = @"添加明细";
     [self.contentView addSubview:_name];
     
     _icon = [UILabel new];
-    [_icon setFont:[UIFont fontWithName:@"FontAwesome" size:12]];
+    [_icon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     _icon.text = @"";
     _icon.textColor = [UIColor nameColor];
     [self.contentView addSubview:_icon];
     
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.centerX.equalTo(self.contentView.mas_centerX);
+        make.centerX.equalTo(self.contentView.mas_centerX).with.offset(10);
     }];
     
     [_icon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.right.equalTo(_name.mas_left);
+        make.right.equalTo(_name.mas_left).with.offset(-5);
     }];
     
 }

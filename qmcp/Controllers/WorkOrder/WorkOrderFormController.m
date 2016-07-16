@@ -41,6 +41,7 @@
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(self.view);
@@ -113,15 +114,13 @@
             ((DateTimeCell *)cell).field = field;
             break;
         case FormTemplateControlTypeSelect:
-//            cell = [SelectCell cellWithTableView:tableView];
-//            ((SelectCell *)cell).field = field;
-            cell = [CheckBoxCell cellWithTableView:tableView];
-            ((CheckBoxCell *)cell).field = field;
-            ((CheckBoxCell *)cell).viewController = self;
+            cell = [SelectCell cellWithTableView:tableView];
+            ((SelectCell *)cell).field = field;
             break;
         case FormTemplateControlTypeCheckBox:
             cell = [CheckBoxCell cellWithTableView:tableView];
             ((CheckBoxCell *)cell).field = field;
+            ((CheckBoxCell *)cell).viewController = self;
             break;
         case FormTemplateControlTypeHeader:
             cell = [HeaderCell cellWithTableView:tableView];
@@ -147,10 +146,10 @@
     FormTemplateField *field = _workOrderFormList[row];
     switch (field.controlType) {
         case FormTemplateControlTypeHeader:
-            return 30;
+            return 40;
             break;
         case FormTemplateControlTypeFooter:
-            return 30;
+            return 40;
             break;
         case FormTemplateControlTypeText:
             return 60;

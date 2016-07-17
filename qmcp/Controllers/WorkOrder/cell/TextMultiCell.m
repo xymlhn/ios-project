@@ -9,6 +9,10 @@
 #import "TextMultiCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
+
+@interface TextMultiCell()<UITextViewDelegate>
+
+@end
 @implementation TextMultiCell
 
 //创建自定义可重用的cell对象
@@ -72,6 +76,12 @@
         make.height.equalTo(@60);
     }];
     
+    _value.delegate = self;
+    
+}
+
+-(void)textViewDidChange:(UITextView *)textView{
+    _field.trueValue = textView.text;
 }
 
 

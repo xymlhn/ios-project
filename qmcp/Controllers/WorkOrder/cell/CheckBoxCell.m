@@ -86,6 +86,7 @@
 {
     CheckBoxViewController *controller = [CheckBoxViewController doneBlock:^(NSString *textValue) {
         _value.text = textValue;
+        _field.trueValue = textValue;
     }];
     controller.valueList = _field.valueList;
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

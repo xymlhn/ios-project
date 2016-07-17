@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, FormTemplateControlType) {
 @property (nonatomic,copy) NSString *id;
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,copy) NSString *defaultValue;
+@property (nonatomic,copy) NSString *trueValue;
 @property (nonatomic,copy) NSString *remark;
 @property (nonatomic,copy) NSString *formDataId;
 @property (nonatomic,assign) FormTemplateControlType controlType;

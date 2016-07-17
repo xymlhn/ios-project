@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UILabel *name;
 @property (nonatomic, strong) UILabel *icon;
 @property (nonatomic, strong) FormTemplateField *field;
+@property (nonatomic, strong) UIView *containView;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

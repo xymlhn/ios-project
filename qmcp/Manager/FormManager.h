@@ -48,4 +48,14 @@
  *  @param formList 表单数据
  */
 -(void)handleFormTable:(NSMutableArray<FormTemplateField* > *) formList formTemplateId:(NSString *)formTemplateId;
+
+/**
+ *  添加表格
+ *
+ *  @param tableFormTemplateId 表格id
+ *
+ *  @return 表格数组
+ */
+-(NSMutableArray<FormTemplateField*> *)plusFormTemplate:(NSString *)tableFormTemplateId;
+
 @end

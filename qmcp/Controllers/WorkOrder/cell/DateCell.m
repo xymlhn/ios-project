@@ -91,6 +91,7 @@
     ActionSheetDatePicker *picker = [[ActionSheetDatePicker alloc] initWithTitle:nil datePickerMode:UIDatePickerModeDate selectedDate:curDate doneBlock:^(ActionSheetDatePicker *picker, NSDate *selectedDate, id origin) {
         NSString *str = [ Utils formatDateWithoutTime:selectedDate];
         _value.text = str;
+        _field.trueValue = str;
     } cancelBlock:^(ActionSheetDatePicker *picker) {
         
     } origin:self.contentView];

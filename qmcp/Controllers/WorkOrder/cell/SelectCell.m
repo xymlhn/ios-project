@@ -87,6 +87,7 @@
     ActionSheetStringPicker *picker = [[ActionSheetStringPicker alloc] initWithTitle:nil rows:_field.valueList initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         _field.defaultValue = selectedValue;
         _value.text = selectedValue;
+        _field.trueValue = selectedValue;
     } cancelBlock:^(ActionSheetStringPicker *picker) {
         
     } origin:self.contentView];

@@ -172,20 +172,20 @@
             [[WorkOrderManager getInstance] sortAllWorkOrder];
             hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
             [hub hide:YES afterDelay:1];
-            switch (weakSelf.workOrder.status) {
-                case WorkOrderStatusAssigned:
+            switch (weakSelf.workOrder.onSiteStatus) {
+                case OnSiteStatusWaiting:
                     [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusAcknowledged;
+                    weakSelf.workOrder.onSiteStatus = OnSiteStatusNotDepart;
                     [weakSelf.workOrder saveToDB];
                     break;
-                case WorkOrderStatusAcknowledged:
+                case OnSiteStatusNotDepart:
                     [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusEnroute;
+                    weakSelf.workOrder.onSiteStatus = OnSiteStatusOnRoute;
                     [weakSelf.workOrder saveToDB];
                     break;
-                case WorkOrderStatusEnroute:
+                case OnSiteStatusOnRoute:
                     [weakSelf.infoView.starBtn setTitle:@"完结" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
+                    weakSelf.workOrder.onSiteStatus = OnSiteStatusArrived;
                     [weakSelf.workOrder saveToDB];
                     [self loadData];
                     break;
@@ -295,7 +295,6 @@
         [weakSelf postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList];
     }];
     
-    // Add the actions.
     [alertController addAction:cancelAction];
     [alertController addAction:otherAction];
     
@@ -333,15 +332,9 @@
                             weakSelf.workOrder.isFailed = YES;
                             [weakSelf.workOrder saveToDB];
                             [[WorkOrderManager getInstance] sortAllWorkOrder];
-                            NSString *message = @"";
-                            if(obj == nil){
-                                message =@"上传工单附件失败,请重试";
-                            }else{
-                                message = [obj valueForKey:@"message"];
-                            }
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = message;
+                            hub.labelText = error;
                             [hub hide:YES afterDelay:1];
                         }
                     }];

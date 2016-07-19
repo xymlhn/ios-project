@@ -13,7 +13,7 @@
 
 @interface WorkOrderManager : NSObject
 
-extern NSString *const kWorkOrderUpdateNotification;
+extern NSString *const WorkOrderUpdateNotification;
 
 + (WorkOrderManager *) getInstance;
 

@@ -112,8 +112,6 @@
 		24AAFCFD1D28EEF800DAB3C9 /* ChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAFCFC1D28EEF800DAB3C9 /* ChooseViewController.m */; };
 		24ABAFC81CCF35950089F779 /* StandardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC11CCF35950089F779 /* StandardModel.m */; };
 		24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC31CCF35950089F779 /* StandardsView.m */; };
-		24ABAFCA1CCF35950089F779 /* StandarsAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC41CCF35950089F779 /* StandarsAdd@2x.png */; };
-		24ABAFCB1CCF35950089F779 /* StandarsDel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24ABAFC51CCF35950089F779 /* StandarsDel@2x.png */; };
 		24ABAFCC1CCF35950089F779 /* ThrowLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ABAFC71CCF35950089F779 /* ThrowLineTool.m */; };
 		24AC36EE1D30850300316301 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36ED1D30850300316301 /* UIView+Frame.m */; };
 		24AC36F11D3085E200316301 /* UISearchBar+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36F01D3085E200316301 /* UISearchBar+Common.m */; };
@@ -358,8 +356,6 @@
 		24ABAFC11CCF35950089F779 /* StandardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardModel.m; sourceTree = "<group>"; };
 		24ABAFC21CCF35950089F779 /* StandardsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardsView.h; sourceTree = "<group>"; };
 		24ABAFC31CCF35950089F779 /* StandardsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardsView.m; sourceTree = "<group>"; };
-		24ABAFC41CCF35950089F779 /* StandarsAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StandarsAdd@2x.png"; sourceTree = "<group>"; };
-		24ABAFC51CCF35950089F779 /* StandarsDel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StandarsDel@2x.png"; sourceTree = "<group>"; };
 		24ABAFC61CCF35950089F779 /* ThrowLineTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowLineTool.h; sourceTree = "<group>"; };
 		24ABAFC71CCF35950089F779 /* ThrowLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowLineTool.m; sourceTree = "<group>"; };
 		24AC36EC1D30850300316301 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -703,8 +699,6 @@
 				24ABAFC11CCF35950089F779 /* StandardModel.m */,
 				24ABAFC21CCF35950089F779 /* StandardsView.h */,
 				24ABAFC31CCF35950089F779 /* StandardsView.m */,
-				24ABAFC41CCF35950089F779 /* StandarsAdd@2x.png */,
-				24ABAFC51CCF35950089F779 /* StandarsDel@2x.png */,
 				24ABAFC61CCF35950089F779 /* ThrowLineTool.h */,
 				24ABAFC71CCF35950089F779 /* ThrowLineTool.m */,
 			);
@@ -1057,9 +1051,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24ABAFCA1CCF35950089F779 /* StandarsAdd@2x.png in Resources */,
 				244517971CA03ED60085CC16 /* Main.storyboard in Resources */,
-				24ABAFCB1CCF35950089F779 /* StandarsDel@2x.png in Resources */,
 				248A5DC21C85C3C30095A4FB /* LaunchScreen.storyboard in Resources */,
 				248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */,
 			);

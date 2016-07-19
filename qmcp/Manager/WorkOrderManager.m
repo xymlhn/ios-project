@@ -25,7 +25,7 @@
 #import "AppManager.h"
 #import "User.h"
 
-NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
+NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
 @interface WorkOrderManager()
 
 @property(nonatomic,strong)NSMutableArray<WorkOrder *> *workOrders;
@@ -92,7 +92,7 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
     NSPredicate* failedPredicate = [NSPredicate predicateWithFormat:@"failed == %@",[NSNumber numberWithBool:YES]];
     NSArray* failedArr = [_workOrders filteredArrayUsingPredicate:failedPredicate];
     NSDictionary *dic = @{@"progress":undoneArr,@"failed":failedArr};
-    NSNotification * notice = [NSNotification notificationWithName:kWorkOrderUpdateNotification object:nil userInfo:dic];
+    NSNotification * notice = [NSNotification notificationWithName:WorkOrderUpdateNotification object:nil userInfo:dic];
     [[NSNotificationCenter defaultCenter]postNotification:notice];
 }
 
@@ -123,13 +123,6 @@ NSString *const kWorkOrderUpdateNotification = @"workOrderUpdate";
             WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
             [workOrder saveToDB];
             [self sortAllWorkOrder];
-        }else{
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"扫描工单失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
         }
     }];
     

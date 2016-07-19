@@ -56,12 +56,17 @@
     
 }
 
--(void)loadData
-{
+-(NSMutableArray *)salesOrderList{
     if(_salesOrderList == nil)
     {
         _salesOrderList = [NSMutableArray new];
     }
+    return _salesOrderList;
+}
+
+-(void)loadData
+{
+    
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
     hub.userInteractionEnabled = NO;
@@ -89,8 +94,8 @@
 
 -(void)refreshUIWithDict:(NSDictionary *)dict{
     [self.tableView.mj_header endRefreshing];
-    [_salesOrderList removeAllObjects];
-    [_salesOrderList addObjectsFromArray:[dict allValues]];
+    [self.salesOrderList removeAllObjects];
+    [self.salesOrderList addObjectsFromArray:[dict allValues]];
     [self.tableView reloadData];
 }
 
@@ -120,7 +125,7 @@
     SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[indexPath.row];
     NSString *url = [NSString stringWithFormat:@"%@%@",OSCAPI_ADDRESS,salesOrderSnapshot.qrCodeUrl];
     QrCodeBindController *controller = [QrCodeBindController doneBlock:^(NSString *salesOrderCode) {
-        [_salesOrderList removeObject:salesOrderSnapshot];
+        [self.salesOrderList removeObject:salesOrderSnapshot];
         [[SalesOrderManager getInstance] removeBindDictSalesOrderSnapshotByCode:salesOrderCode];
         [self.tableView reloadData];
     }];

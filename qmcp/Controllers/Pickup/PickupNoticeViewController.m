@@ -19,7 +19,7 @@
 
 @interface PickupNoticeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 @property (nonatomic,strong) PickupNoticeView *pickupNoticeView;
-@property (nonatomic,strong) NSMutableArray<ItemComplete *> *array;
+@property (nonatomic,strong) NSMutableArray<ItemComplete *> *itemCompleteArray;
 @end
 
 @implementation PickupNoticeViewController
@@ -41,7 +41,14 @@
 }
 
 -(void)loadData{
-    _array = [NSMutableArray new];
+ 
+}
+
+-(NSMutableArray<ItemComplete *> *)itemCompleteArray{
+    if (_itemCompleteArray == nil) {
+        _itemCompleteArray = [NSMutableArray new];
+    }
+    return _itemCompleteArray;
 }
 
 /**
@@ -68,7 +75,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.array.count;
+    return self.itemCompleteArray.count;
 }
 
 //返回每行显示的cell
@@ -78,7 +85,7 @@
     //1 创建可重用的自定义的cell
     PickupNoticeCell *cell = [PickupNoticeCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
-    ItemComplete *itemComplete = self.array[row];
+    ItemComplete *itemComplete = self.itemCompleteArray[row];
     cell.itemComplete = itemComplete;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //3 返回
@@ -114,7 +121,7 @@
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             [hub hide:YES];
             ItemComplete *itemComplete = [ItemComplete mj_objectWithKeyValues:obj];
-            [weakSelf.array insertObject:itemComplete atIndex:0];
+            [weakSelf.itemCompleteArray insertObject:itemComplete atIndex:0];
             [weakSelf.pickupNoticeView.tableView reloadData];
         }else{
 

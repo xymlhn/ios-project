@@ -25,7 +25,7 @@
 #import "AppManager.h"
 @interface PickupViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) PickupView *pickView;
-@property (nonatomic,strong) NSMutableArray<PickupItem *> *array;
+@property (nonatomic,strong) NSMutableArray<PickupItem *> *pickupItemArray;
 @property (nonatomic,strong) PickupData *pickupData;
 @end
 
@@ -51,9 +51,16 @@
 }
 
 -(void)loadData{
-    _array = [NSMutableArray new];
+    
 }
 
+
+-(NSMutableArray<PickupItem *> *)pickupItemArray{
+    if(_pickupItemArray == nil){
+        _pickupItemArray = [NSMutableArray new];
+    }
+    return _pickupItemArray;
+}
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -67,14 +74,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.array.count;
+    return self.pickupItemArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
     PickupCell *cell = [PickupCell cellWithTableView:tableView];
-    PickupItem *pickupItem = self.array[row];
+    PickupItem *pickupItem = self.pickupItemArray[row];
     cell.pickupItem = pickupItem;
     
     [[AppManager getInstance]getImageUrlByKey:pickupItem.attachments[0].key andType:pickupItem.attachments[0].type finishBlock:^(NSDictionary *dict, NSString *error) {
@@ -130,7 +137,7 @@
         pickupSignature.pickupTime = [Utils formatDate:[NSDate new]];
         pickupSignature.signatureImageKey = attachment.key;
         NSMutableArray *arr = [NSMutableArray new];
-        for (PickupItem *item in _array) {
+        for (PickupItem *item in self.pickupItemArray) {
             if(item.isChoose){
                 [arr addObject:item.code];
             }
@@ -169,7 +176,7 @@
                 pickItem.attachments = attachments;
             }
             if(items.count > 0){
-                [weakSelf.array addObjectsFromArray:items];
+                [weakSelf.pickupItemArray addObjectsFromArray:items];
                 [weakSelf.pickView.tableView reloadData];
             }
             weakSelf.pickView.nameText.text = [NSString stringWithFormat:@"%@%@",@"客户名:",_pickupData.addressSnapshot.contacts] ;

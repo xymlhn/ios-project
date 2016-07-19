@@ -62,12 +62,17 @@
     
 }
 
--(void)loadData
-{
+//懒加载
+-(NSMutableArray *)salesOrderList{
     if(_salesOrderList == nil)
     {
         _salesOrderList = [NSMutableArray new];
     }
+    return _salesOrderList;
+}
+
+-(void)loadData
+{
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
     hub.userInteractionEnabled = NO;
@@ -79,15 +84,9 @@
             hub.labelText = [NSString stringWithFormat:@"加载成功"];
             [hub hide:YES];
         }else{
-            NSString *message = @"";
-            if(dict == nil){
-                message =@"抢单失败";
-            }else{
-                message = [dict valueForKey:@"message"];
-            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1.5];
         }
         
@@ -101,8 +100,8 @@
 
 - (void)salesOrderUpdate:(NSDictionary *)dict{
     [self.tableView.mj_header endRefreshing];
-    [_salesOrderList removeAllObjects];
-    [_salesOrderList addObjectsFromArray:[dict allValues]];
+    [self.salesOrderList removeAllObjects];
+    [self.salesOrderList addObjectsFromArray:[dict allValues]];
     [self.tableView reloadData];
 }
 

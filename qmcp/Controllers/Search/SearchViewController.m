@@ -40,7 +40,14 @@
 }
 
 -(void)loadData{
-    _resultList = [NSMutableArray new];
+    
+}
+
+-(NSMutableArray<WorkOrderSearchResult *> *)resultList{
+    if(_resultList == nil){
+        _resultList = [NSMutableArray new];
+    }
+    return _resultList;
 }
 
 #pragma mark UISearchBarDelegate

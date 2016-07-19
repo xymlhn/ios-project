@@ -12,7 +12,7 @@
 @interface CheckBoxCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *name;
-@property (nonatomic, strong) UILabel *value;
+@property (nonatomic, strong) UITextField *value;
 @property (nonatomic, strong) FormTemplateField *field;
 @property (nonatomic,weak) UIViewController *viewController;
 + (instancetype)cellWithTableView:(UITableView *)tableView;

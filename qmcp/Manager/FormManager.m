@@ -113,30 +113,43 @@
             footer.controlType = FormTemplateControlTypeFooter;
             footer.tableTemplateId = field.tableTemplateId;
             
-            NSMutableArray<FormTemplateField *> *list = [self formTemplateField:field.tableTemplateId];
+            NSMutableArray<FormTemplateField *> *tableList = [self formTemplateField:field.tableTemplateId];
             
             FormTemplateField *header = [FormTemplateField new];
 
             header.controlType = FormTemplateControlTypeHeader;
             header.id = [[NSUUID UUID] UUIDString];
             header.tableTemplateId = field.tableTemplateId;
-            header.templateFields = list;
+            header.templateFields = tableList;
             
             footer.id = header.id;
             footer.tableTemplateId = field.tableTemplateId;
 
             field.tempMap = [NSMutableDictionary new];
-            [field.tempMap setObject:list forKey:header.id];
-            [list insertObject:header atIndex:0];
+            [field.tempMap setObject:tableList forKey:header.id];
+            [tableList insertObject:header atIndex:0];
             
             [formList replaceObjectAtIndex:i withObject:footer];
             
-            NSRange range = NSMakeRange(i, [list count]);
+            NSRange range = NSMakeRange(i, [tableList count]);
             NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-            [formList insertObjects:list atIndexes:indexSet];
+            [formList insertObjects:tableList atIndexes:indexSet];
             break;
         }
     }
+}
+
+-(NSMutableArray<FormTemplateField*> *)plusFormTemplate:(NSString *)tableFormTemplateId{
+    NSMutableArray<FormTemplateField *> *tableList = [self formTemplateField:tableFormTemplateId];
+    
+    FormTemplateField *header = [FormTemplateField new];
+    
+    header.controlType = FormTemplateControlTypeHeader;
+    header.id = [[NSUUID UUID] UUIDString];
+    header.tableTemplateId = tableFormTemplateId;
+    header.templateFields = tableList;
+    [tableList insertObject:header atIndex:0];
+    return tableList;
 }
 
 /**
@@ -174,6 +187,13 @@
     }
 }
 
+/**
+ * 表单里面不同表格数量
+ *
+ *  @param formList 表单数组
+ *
+ *  @return int
+ */
 -(int)formTableNumber:(NSMutableArray<FormTemplateField *> *)formList{
     int number = 0;
     for (FormTemplateField *field in formList) {
@@ -188,11 +208,13 @@
     NSMutableArray<FormTemplateField *> *array = [NSMutableArray new];
     if(_formTemplateDict[formTemplateId] != nil){
         FormTemplate *field = _formTemplateDict[formTemplateId];
-
         array = [FormTemplateField mj_objectArrayWithKeyValuesArray:[field.fields mj_keyValues]];
     }
     return array;
 }
+
+
+
 
 -(void)saveFormData:(NSMutableArray<FormData *> *)formDatas{
     NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SAVE_FORMDATA];

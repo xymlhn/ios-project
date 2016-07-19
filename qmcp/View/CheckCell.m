@@ -50,6 +50,11 @@
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
+
+    [self.contentView addSubview:_jsText];
+    
+    _jsSwitch = [UISwitch new];
+    [self.contentView addSubview:_jsSwitch];
     
     [_jsSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(containView.mas_centerY);
@@ -58,10 +63,10 @@
     }];
     
     [_jsText mas_makeConstraints:^(MASConstraintMaker *make){
-        
         make.left.equalTo(containView.mas_left).with.offset(kPaddingLeftWidth);
         make.right.equalTo(_jsSwitch.mas_left);
         make.centerY.equalTo(containView.mas_centerY);
+
     }];
     
 

@@ -22,15 +22,19 @@
     _baseView.alpha = 0.2;
     [rootView addSubview:alphaView];
     
+    UIView *topView = [UIView new];
+    topView.backgroundColor = [UIColor whiteColor];
+    [alphaView addSubview:topView];
+    
     _cancelBtn = [UIButton new];
     [_cancelBtn setTitleColor:[UIColor nameColor] forState:UIControlStateNormal];
     [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-    [alphaView addSubview:_cancelBtn];
+    [topView addSubview:_cancelBtn];
     
     _confirmBtn = [UIButton new];
     [_confirmBtn setTitleColor:[UIColor nameColor] forState:UIControlStateNormal];
     [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [alphaView addSubview:_confirmBtn];
+    [topView addSubview:_confirmBtn];
     
     
     _tableView = [UITableView new];
@@ -49,16 +53,23 @@
         make.top.equalTo(rootView.mas_centerY);
     }];
     
-    [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(alphaView.mas_top).with.offset(10);
+    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(alphaView.mas_left).with.offset(10);
+        make.right.equalTo(alphaView.mas_right).with.offset(-10);
+        make.top.equalTo(alphaView.mas_top);
+        make.height.equalTo(@40);
+    }];
+    
+    [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(topView.mas_centerY);
+        make.left.equalTo(topView.mas_left);;
         make.width.equalTo(@40);
         make.height.equalTo(@20);
     }];
     
     [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(alphaView.mas_top).with.offset(10);
-        make.right.equalTo(alphaView.mas_right).with.offset(-10);
+        make.centerY.equalTo(topView.mas_centerY);
+        make.right.equalTo(topView.mas_right);;
         make.width.equalTo(@40);
         make.height.equalTo(@20);
     }];

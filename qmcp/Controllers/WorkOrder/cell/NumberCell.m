@@ -81,7 +81,7 @@
 }
 
 -(void)textFieldDidChange:(UITextField *)textField{
-    _field.defaultValue = textField.text;
+    _field.trueValue = textField.text;
 }
 
 //重写属性的setter方法，给子控件赋值

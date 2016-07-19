@@ -27,7 +27,9 @@
 
 @property (nonatomic, strong) NSMutableArray<FormTemplateField* > *workOrderFormList;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic,copy)WorkOrder *workOrder;
+@property (nonatomic, strong) WorkOrder *workOrder;
+@property (nonatomic, copy) NSString *currentPlusFormTemplateId;
+
 @end
 
 @implementation WorkOrderFormController
@@ -41,6 +43,7 @@
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(self.view);
@@ -115,7 +118,6 @@
         case FormTemplateControlTypeSelect:
             cell = [SelectCell cellWithTableView:tableView];
             ((SelectCell *)cell).field = field;
-       
             break;
         case FormTemplateControlTypeCheckBox:
             cell = [CheckBoxCell cellWithTableView:tableView];
@@ -130,6 +132,10 @@
         case FormTemplateControlTypeFooter:
             cell = [FooterCell cellWithTableView:tableView];
             ((FooterCell *)cell).field = field;
+            ((FooterCell *)cell).containView.tag = row;
+            _currentPlusFormTemplateId = field.tableTemplateId;
+            ((FooterCell *)cell).containView.userInteractionEnabled = YES;
+            [((FooterCell *)cell).containView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(containViewClick:)]];
             break;
         default:
             cell = [TextMultiCell cellWithTableView:tableView];
@@ -146,10 +152,10 @@
     FormTemplateField *field = _workOrderFormList[row];
     switch (field.controlType) {
         case FormTemplateControlTypeHeader:
-            return 30;
+            return 40;
             break;
         case FormTemplateControlTypeFooter:
-            return 30;
+            return 40;
             break;
         case FormTemplateControlTypeText:
             return 60;
@@ -183,6 +189,16 @@
             break;
     }
 
+}
+
+#pragma mark - IBAction
+-(void)containViewClick:(UITapGestureRecognizer *)recognizer{
+    NSMutableArray<FormTemplateField *> *tableList = [[FormManager getInstance] plusFormTemplate:_currentPlusFormTemplateId];
+    
+    NSRange range = NSMakeRange(recognizer.view.tag, [tableList count]);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.workOrderFormList insertObjects:tableList atIndexes:indexSet];
+    [self.tableView reloadData];
 }
 @end
 

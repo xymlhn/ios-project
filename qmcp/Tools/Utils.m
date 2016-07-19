@@ -100,6 +100,12 @@
     return [dateFormatter stringFromDate:date];
 }
 
++(NSString *)formatDateWithoutTime:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:date];
+}
+
 +(NSDate *)stringToDate:(NSString *)date
 {
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];

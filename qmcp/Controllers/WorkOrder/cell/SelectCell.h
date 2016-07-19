@@ -12,7 +12,7 @@
 @interface SelectCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *name;
-@property (nonatomic, strong) UILabel *value;
+@property (nonatomic, strong) UITextField *value;
 @property (nonatomic, strong) FormTemplateField *field;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 

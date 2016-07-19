@@ -49,9 +49,11 @@
     containView.layer.masksToBounds = YES;
     [self.contentView addSubview:containView];
     
-    _value = [UILabel new];
+    _value = [UITextField new];
     _value.font = [UIFont systemFontOfSize:13];
     _value.textColor = [UIColor blackColor];
+    _value.placeholder = @"请选择";
+    _value.enabled = NO;
     [containView addSubview:_value];
     
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
@@ -73,8 +75,8 @@
         make.centerY.equalTo(containView.mas_centerY);
         make.height.equalTo(@30);
     }];
-    _value.userInteractionEnabled = YES;
-    [_value addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valueClick:)]];
+    containView.userInteractionEnabled = YES;
+    [containView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(valueClick:)]];
     
 }
 
@@ -85,6 +87,7 @@
     ActionSheetStringPicker *picker = [[ActionSheetStringPicker alloc] initWithTitle:nil rows:_field.valueList initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
         _field.defaultValue = selectedValue;
         _value.text = selectedValue;
+        _field.trueValue = selectedValue;
     } cancelBlock:^(ActionSheetStringPicker *picker) {
         
     } origin:self.contentView];

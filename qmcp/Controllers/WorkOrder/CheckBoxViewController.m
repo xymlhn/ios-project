@@ -70,7 +70,8 @@
         }
     }
     if(value.length > 0){
-        [value deleteCharactersInRange:NSMakeRange([value length]-1, 1)];
+        [value deleteCharactersInRange:NSMakeRange(value.length-1, 1)];
+
     }
     return value;
 }
@@ -102,8 +103,10 @@
     //1 创建可重用的自定义的cell
     CheckCell *cell = [CheckCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
-    NSString *name = self.valueList[row];
-    cell.jsText.text = name;
+
+    cell.jsText.text = self.valueList[row];
+    NSNumber *status = self.statusList[row];
+    [cell.jsSwitch setOn:[status boolValue]];
     cell.jsSwitch.tag = row;
     [cell.jsSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
 

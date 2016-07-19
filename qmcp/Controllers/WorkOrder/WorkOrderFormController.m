@@ -37,7 +37,7 @@
 -(void)initView
 {
     _tableView = [UITableView new];
-    _tableView.separatorStyle = YES;
+    _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -113,15 +113,14 @@
             ((DateTimeCell *)cell).field = field;
             break;
         case FormTemplateControlTypeSelect:
-//            cell = [SelectCell cellWithTableView:tableView];
-//            ((SelectCell *)cell).field = field;
-            cell = [CheckBoxCell cellWithTableView:tableView];
-            ((CheckBoxCell *)cell).field = field;
-            ((CheckBoxCell *)cell).viewController = self;
+            cell = [SelectCell cellWithTableView:tableView];
+            ((SelectCell *)cell).field = field;
+       
             break;
         case FormTemplateControlTypeCheckBox:
             cell = [CheckBoxCell cellWithTableView:tableView];
             ((CheckBoxCell *)cell).field = field;
+            ((CheckBoxCell *)cell).viewController = self;
             break;
         case FormTemplateControlTypeHeader:
             cell = [HeaderCell cellWithTableView:tableView];
@@ -171,7 +170,7 @@
             return 60;
             break;
         case FormTemplateControlTypeLabel:
-            return 100;
+            return 120;
             break;
         case FormTemplateControlTypeTextArea:
             return 100;

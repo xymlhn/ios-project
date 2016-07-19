@@ -165,4 +165,15 @@ NSString *const kUserCache = @"user";
     }];
 }
 
+-(void)getImageUrlByKey:(NSString *)key andType:(int)type finishBlock:(CompletionHandler)completion{
+    NSArray *array = @[key];
+    NSString *jsonString = [array mj_JSONString];
+    NSDictionary *dic = @{ @"storageType":[NSNumber numberWithInt:type],@"attachmentNames":jsonString};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_IMAGEURL];
+    
+    [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
+        completion(obj,error);
+    }];
+}
+
 @end

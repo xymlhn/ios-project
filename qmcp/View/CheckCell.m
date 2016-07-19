@@ -34,22 +34,37 @@
 
 -(void)initView
 {
+    UIView *containView = [UIView new];
+    [self.contentView addSubview:containView];
+    
     _jsText = [UILabel new];
-    _jsText.font = [UIFont systemFontOfSize:14];//
+    _jsText.font = [UIFont systemFontOfSize:14];
     _jsText.text = @"12305";
     _jsText.textColor = [UIColor blackColor];
-    [self.contentView addSubview:_jsText];
-    [_jsText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(self.contentView.mas_centerY);
-        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
-    }];
+    _jsText.numberOfLines = 0;
+    [containView addSubview:_jsText];
     
     _jsSwitch = [UISwitch new];
-    [self.contentView addSubview:_jsSwitch];
-    [_jsSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.contentView.mas_centerY);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
+    [containView addSubview:_jsSwitch];
+    
+    [containView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
     }];
+    
+    [_jsSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(containView.mas_centerY);
+        make.right.equalTo(containView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.width.equalTo(@50);
+    }];
+    
+    [_jsText mas_makeConstraints:^(MASConstraintMaker *make){
+        
+        make.left.equalTo(containView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_jsSwitch.mas_left);
+        make.centerY.equalTo(containView.mas_centerY);
+    }];
+    
+
 }
 
 @end

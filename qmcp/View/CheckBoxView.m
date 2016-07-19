@@ -35,7 +35,7 @@
     
     _tableView = [UITableView new];
     _tableView.rowHeight = 50;
-    _tableView.backgroundColor = [UIColor themeColor];
+    _tableView.backgroundColor = [UIColor whiteColor];
     [alphaView addSubview:_tableView];
     
     [_baseView mas_makeConstraints:^(MASConstraintMaker *make) {

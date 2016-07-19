@@ -9,7 +9,7 @@
 #ifndef iosapp_OSCAPI_h
 #define iosapp_OSCAPI_h
 
-//#define OSCAPI_ADDRESS             @"http://192.168.13.25:8080/"
+//#define OSCAPI_ADDRESS             @"http://192.168.13.63:8080/"
 //#define OSCAPI_ADDRESS             @"http://inforshare.vicp.cc:8000/"
 #define OSCAPI_ADDRESS                  @"http://www.efw365.com/"
 #define OSCAPI_LOGIN                    @"api/login"
@@ -41,5 +41,5 @@
 #define OSCAPI_DELETE_FORMDATA          @"i/a/api/salesorder/form/data/"
 #define OSCAPI_ITEM_COMPLETE            @"i/a/api/salesorder/itemcomplete/"
 #define OSCAPI_SEARCH                   @"i/a/api/workorder/search"
-
+#define OSCAPI_IMAGEURL                 @"i/a/api/attachment/get"
 #endif

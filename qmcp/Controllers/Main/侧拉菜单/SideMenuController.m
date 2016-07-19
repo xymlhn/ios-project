@@ -205,7 +205,7 @@
     avatar.image = [UIImage imageNamed:@"default－portrait"];
 
     UILabel *nameLabel = [UILabel new];
-    nameLabel.text = @"fuck";
+    nameLabel.text = [[AppManager getInstance] getUser].userNickName;
     nameLabel.font = [UIFont boldSystemFontOfSize:20];
  
     nameLabel.textColor = [UIColor colorWithHex:0x696969];

@@ -63,16 +63,14 @@
 
 -(NSString *)handleChooseValue{
 
-    NSString *value = [NSString new];
+    NSMutableString *value = [NSMutableString new];
     for (int i = 0; i < self.statusList.count; i++) {
         if(self.statusList[i] == [NSNumber numberWithBool:YES]){
-            if(i == self.statusList.count -1){
-                value = [value stringByAppendingString:[NSString stringWithFormat:@"%@",_valueList[i]]];
-            }else{
-                value = [value stringByAppendingString:[NSString stringWithFormat:@"%@,",_valueList[i]]];
-            }
-            
+            [value appendString:[NSString stringWithFormat:@"%@,",_valueList[i]]];
         }
+    }
+    if(value.length > 0){
+        [value deleteCharactersInRange:NSMakeRange([value length]-1, 1)];
     }
     return value;
 }

@@ -86,7 +86,7 @@
         _value.text = textValue;
     }];
     controller.valueList = _field.valueList;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         controller.providesPresentationContextTransitionStyle = YES;

@@ -90,4 +90,15 @@ extern NSString *const kReloginNotification;
  */
 -(void)clearUserDataWhenLogout;
 
+/**
+ *  根据key获取图片url
+ *
+ *  @param key  key
+ *  @param type 存储类型
+ *
+ 
+ */
+-(void)getImageUrlByKey:(NSString *)key andType:(int)type finishBlock:(CompletionHandler)completion;
+
+
 @end

@@ -21,6 +21,8 @@
 #import "MJExtension.h"
 #import "PickupSignature.h"
 #import "Utils.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "AppManager.h"
 @interface PickupViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) PickupView *pickView;
 @property (nonatomic,strong) NSMutableArray<PickupItem *> *array;
@@ -74,6 +76,12 @@
     PickupCell *cell = [PickupCell cellWithTableView:tableView];
     PickupItem *pickupItem = self.array[row];
     cell.pickupItem = pickupItem;
+    
+    [[AppManager getInstance]getImageUrlByKey:pickupItem.attachments[0].key andType:pickupItem.attachments[0].type finishBlock:^(NSDictionary *dict, NSString *error) {
+        [cell.icon sd_setImageWithURL:[NSURL URLWithString:dict[pickupItem.attachments[0].key]]
+                     placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
+    }];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -155,7 +163,11 @@
             hub.labelText = [NSString stringWithFormat:@"加载成功"];
             [hub hide:YES];
             _pickupData = [PickupData mj_objectWithKeyValues:obj];
-            NSArray * items = [PickupItem mj_objectArrayWithKeyValuesArray:_pickupData.items];
+            NSArray<PickupItem *> * items = [PickupItem mj_objectArrayWithKeyValuesArray:_pickupData.items];
+            for (PickupItem *pickItem in items) {
+                NSArray *attachments = [Attachment mj_objectArrayWithKeyValuesArray:pickItem.attachments];
+                pickItem.attachments = attachments;
+            }
             if(items.count > 0){
                 [weakSelf.array addObjectsFromArray:items];
                 [weakSelf.pickView.tableView reloadData];

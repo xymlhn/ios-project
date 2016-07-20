@@ -37,7 +37,7 @@
     [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x15A230]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x15A230]} forState:UIControlStateSelected];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor navigationbarColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
     [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

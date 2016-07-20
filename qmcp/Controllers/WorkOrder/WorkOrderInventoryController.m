@@ -21,7 +21,7 @@
 #import "WorkOrderManager.h"
 @interface WorkOrderInventoryController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *itemSnapshotList;
+@property (nonatomic, strong) NSMutableArray<ItemSnapshot *> *itemSnapshotList;
 @property (nonatomic, strong) WorkOrderInventoryView *inventoryView;
 @property (nonatomic, strong) WorkOrder *workOrder;
 @end
@@ -113,8 +113,11 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传清点数据";
     hub.userInteractionEnabled = NO;
+
+    NSMutableArray *itemArray = [ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList];
     
-    NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_workOrder.salesOrderSnapshot.itemConfirmed],@"signatureImageKey":_workOrder.signatureImageKey,@"itemSnapshots":[ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList]};
+    NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_workOrder.salesOrderSnapshot.itemConfirmed],
+                                    @"signatureImageKey":_workOrder.signatureImageKey,@"itemSnapshots":itemArray};
 
     [[WorkOrderManager getInstance] postWorkOrderInventoryWithCode:code andParams:inventoryDict finishBlock:^(NSDictionary *dict, NSString *error) {
         if (!error) {
@@ -144,15 +147,10 @@
                                 [hub hide:YES afterDelay:1];
                             }
                         }else{
-                            NSString *message = @"";
-                            if(obj == nil){
-                                message =@"上传工单附件失败,请重试";
-                            }else{
-                                message = [obj valueForKey:@"message"];
-                            }
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = message;
+                            hub.labelText = error
+                            ;
                             [hub hide:YES afterDelay:1];
                         }
                     }];

@@ -59,7 +59,7 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
                 NSArray *assignArray = [WorkOrder mj_objectArrayWithKeyValuesArray:workOrderGroup.assign];
                 [assignArray enumerateObjectsUsingBlock:^(WorkOrder *  _Nonnull order, NSUInteger idx, BOOL * _Nonnull stop) {
                     order.salesOrderSnapshot.addressSnapshot.code = order.code;
-                    order.userId = [[AppManager getInstance] getUser].userId;
+                    order.userId = [[AppManager getInstance] getUser].userOpenId;
                     [order saveToDB];
                 }];
             }
@@ -77,7 +77,7 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
  */
 - (void)sortAllWorkOrder{
     User *user = [[AppManager getInstance] getUser];
-    NSString *workWhere = [NSString stringWithFormat:@"userId = '%@'",user.userId];
+    NSString *workWhere = [NSString stringWithFormat:@"userId = '%@'",user.userOpenId];
     _workOrders = [WorkOrder searchWithWhere:workWhere];
     
     [_workOrders sortUsingComparator:^NSComparisonResult(WorkOrder *  _Nonnull obj1, WorkOrder *  _Nonnull obj2) {

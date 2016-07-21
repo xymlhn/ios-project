@@ -9,6 +9,12 @@
 #import "ChooseView.h"
 
 @implementation ChooseView
+
++ (instancetype)chooseViewInstance:(UIView *)view{
+    ChooseView *chooseView = [ChooseView new];
+    [chooseView initView:view];
+    return chooseView;
+}
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor clearColor];

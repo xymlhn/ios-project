@@ -15,4 +15,6 @@
 
 @property (nonatomic,strong) UIButton *cancelBtn;
 @property (nonatomic,strong) UIButton *confirmBtn;
+
++ (instancetype)checkBoxViewInstance:(UIView *)view;
 @end

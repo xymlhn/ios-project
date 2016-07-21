@@ -9,6 +9,13 @@
 #import "SearchView.h"
 
 @implementation SearchView
+
++ (instancetype)searchViewInstance:(UIView *)view{
+    SearchView *searchView = [SearchView new];
+    [searchView initView:view];
+    return searchView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];

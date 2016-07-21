@@ -12,4 +12,6 @@
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UILabel *qrButton;
+
++ (instancetype)pickupNoticeViewInstance:(UIView *)view;
 @end

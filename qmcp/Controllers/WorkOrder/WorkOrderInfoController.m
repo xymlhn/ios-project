@@ -34,8 +34,7 @@
 #pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
-    _infoView = [WorkOrderInfoView new];
-    [_infoView initView:self.view];
+    _infoView = [WorkOrderInfoView workOrderInfoViewInstance:self.view];
     self.title = @"信息";
  
 }

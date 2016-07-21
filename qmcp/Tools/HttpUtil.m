@@ -20,7 +20,6 @@
     [manager POST:urlpath parameters:dict progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
         NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if(![[AppManager getInstance] handleHeader:session]){
-            
             completion(obj ,nil);
         }else{
             completion(obj,@"错误");

@@ -10,6 +10,12 @@
 
 @implementation LoginView
 
++ (instancetype)loginViewInstance:(UIView *)view{
+    LoginView *loginView = [LoginView new];
+    [loginView initView:view];
+    return loginView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];

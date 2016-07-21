@@ -12,4 +12,5 @@
 @property (nonatomic, strong) UITextField *scanText;
 @property (nonatomic, strong) UIButton *scanBtn;
 
++ (instancetype)scanViewInstance:(UIView *)view;
 @end

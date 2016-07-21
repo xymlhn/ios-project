@@ -17,7 +17,7 @@
 @property(nonatomic,strong) UILabel *codeText;
 @property(nonatomic,strong) UILabel *nameText;
 @property(nonatomic,strong) UILabel *phoneText;
-
-
 @property(nonatomic,strong) UIView *headView;
+
++ (instancetype)pickupViewInstance:(UIView *)view;
 @end

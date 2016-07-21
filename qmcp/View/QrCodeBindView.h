@@ -15,4 +15,6 @@
 @property (nonatomic,strong) UIButton *cancelBtn;
 @property (nonatomic,strong) UIView *baseView;
 @property (nonatomic,copy) NSString *qrCodeUrl;
+
++ (instancetype)qrCodeBindViewInstance:(UIView *)view;
 @end

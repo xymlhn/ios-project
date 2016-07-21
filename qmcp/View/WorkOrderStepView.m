@@ -10,6 +10,12 @@
 
 @implementation WorkOrderStepView
 
++ (instancetype)workOrderStepViewInstance:(UIView *)view{
+    WorkOrderStepView *workOrderStepView = [WorkOrderStepView new];
+    [workOrderStepView initView:view];
+    return workOrderStepView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     _tableView = [UITableView new];

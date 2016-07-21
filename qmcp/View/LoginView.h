@@ -15,4 +15,5 @@
 @property (nonatomic,strong) UIButton *loginBtn;
 @property (nonatomic,strong) UIButton *settingBtn;
 
++ (instancetype)loginViewInstance:(UIView *)view;
 @end

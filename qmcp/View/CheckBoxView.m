@@ -10,6 +10,12 @@
 
 @implementation CheckBoxView
 
++ (instancetype)checkBoxViewInstance:(UIView *)view{
+    CheckBoxView *checkBoxView = [CheckBoxView new];
+    [checkBoxView initView:view];
+    return checkBoxView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor clearColor];

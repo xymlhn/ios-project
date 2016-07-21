@@ -11,6 +11,12 @@
 
 @implementation WorkOrderStepEditView
 
++ (instancetype)workOrderStepEditViewInstance:(UIView *)view{
+    WorkOrderStepEditView *workOrderStepEditView = [WorkOrderStepEditView new];
+    [workOrderStepEditView initView:view];
+    return workOrderStepEditView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];

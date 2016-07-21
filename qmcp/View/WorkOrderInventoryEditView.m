@@ -11,6 +11,13 @@
 #import "CommodityCell.h"
 
 @implementation WorkOrderInventoryEditView
+
++ (instancetype)workOrderInventoryEditView:(UIView *)view{
+    WorkOrderInventoryEditView *workOrderInventoryEditView = [WorkOrderInventoryEditView new];
+    [workOrderInventoryEditView initView:view];
+    return workOrderInventoryEditView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];

@@ -16,4 +16,5 @@
 @property (nonatomic,strong) UILabel *clearBtn;
 @property (nonatomic,strong) UILabel *cancelBtn;
 
++ (instancetype)signViewInstance:(UIView *)view;
 @end

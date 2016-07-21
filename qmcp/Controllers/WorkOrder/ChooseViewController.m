@@ -16,8 +16,8 @@
 @implementation ChooseViewController
 
 -(void)initView{
-    _chooseView = [ChooseView new];
-    [_chooseView initView:self.view];
+    _chooseView = [ChooseView chooseViewInstance:self.view];
+
 }
 
 -(void)bindListener{

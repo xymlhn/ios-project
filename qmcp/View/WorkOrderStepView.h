@@ -14,4 +14,7 @@
 
 @property (nonatomic,strong ) UILabel     *addBtn;
 @property (nonatomic,strong ) UILabel     *saveBtn;
+
+
++ (instancetype)workOrderStepViewInstance:(UIView *)view;
 @end

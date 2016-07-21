@@ -15,8 +15,7 @@
 
 @implementation QrCodeIdentityController
 -(void)initView{
-    _qrCodeIdentityView = [QrCodeIdentityView new];
-    [_qrCodeIdentityView initView:self.view];
+    _qrCodeIdentityView = [QrCodeIdentityView qrCodeIdentityViewInstance:self.view];
     _qrCodeIdentityView.qrCodeUrl = _qrCodeUrl;
 }
 

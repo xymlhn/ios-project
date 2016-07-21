@@ -19,8 +19,7 @@
 
 
 -(void)initView{
-    _qrCodeBindView = [QrCodeBindView new];
-    [_qrCodeBindView initView:self.view];
+    _qrCodeBindView = [QrCodeBindView qrCodeBindViewInstance:self.view];
     _qrCodeBindView.qrCodeUrl = _qrCodeUrl;
 }
 

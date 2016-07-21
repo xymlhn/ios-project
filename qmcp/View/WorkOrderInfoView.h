@@ -47,7 +47,8 @@
 @property (nonatomic,strong ) UILabel     *inventoryBtn;
 @property (nonatomic,strong ) UILabel     *qrCodeBtn;
 
-@property (nonatomic,strong) WorkOrder *workOrder;
 @property (nonatomic,strong) UIView *view;
+@property (nonatomic,strong) WorkOrder *workOrder;
 
++ (instancetype)workOrderInfoViewInstance:(UIView *)view;
 @end

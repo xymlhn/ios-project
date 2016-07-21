@@ -364,16 +364,16 @@
 		24AC36F01D3085E200316301 /* UISearchBar+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+Common.m"; sourceTree = "<group>"; };
 		24AC36F21D30869100316301 /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
 		24AC36F31D30869100316301 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
-		24AEEE261CBA8385003C6C2E /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCell.h; sourceTree = "<group>"; };
-		24AEEE271CBA8385003C6C2E /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCell.m; sourceTree = "<group>"; };
+		24AEEE261CBA8385003C6C2E /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewCell.h; path = ../../../View/SettingViewCell.h; sourceTree = "<group>"; };
+		24AEEE271CBA8385003C6C2E /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewCell.m; path = ../../../View/SettingViewCell.m; sourceTree = "<group>"; };
 		24AEEE2A1CBA87D9003C6C2E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		24B398D31D3A37FB0067A528 /* CheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxView.h; sourceTree = "<group>"; };
 		24B398D41D3A37FB0067A528 /* CheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxView.m; sourceTree = "<group>"; };
-		24B398D61D3A39800067A528 /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxViewController.h; sourceTree = "<group>"; };
-		24B398D71D3A39800067A528 /* CheckBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxViewController.m; sourceTree = "<group>"; };
-		24B398D91D3A3B140067A528 /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCell.h; sourceTree = "<group>"; };
-		24B398DA1D3A3B140067A528 /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCell.m; sourceTree = "<group>"; };
+		24B398D61D3A39800067A528 /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckBoxViewController.h; path = ../Controllers/WorkOrder/CheckBoxViewController.h; sourceTree = "<group>"; };
+		24B398D71D3A39800067A528 /* CheckBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckBoxViewController.m; path = ../Controllers/WorkOrder/CheckBoxViewController.m; sourceTree = "<group>"; };
+		24B398D91D3A3B140067A528 /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckCell.h; path = ../View/CheckCell.h; sourceTree = "<group>"; };
+		24B398DA1D3A3B140067A528 /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckCell.m; path = ../View/CheckCell.m; sourceTree = "<group>"; };
 		24B7DA1E1D2F6E5A00A0723C /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
 		24B7DA1F1D2F6E5A00A0723C /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
 		24B7DA211D2F929800A0723C /* WorkOrderSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderSearchResult.h; sourceTree = "<group>"; };
@@ -451,8 +451,6 @@
 				24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */,
 				24FBB2131CB9D2FA009C77E7 /* LoginView.h */,
 				24FBB2141CB9D2FA009C77E7 /* LoginView.m */,
-				24AEEE261CBA8385003C6C2E /* SettingViewCell.h */,
-				24AEEE271CBA8385003C6C2E /* SettingViewCell.m */,
 				247092671D2397E400EBADB3 /* QrCodeBindView.h */,
 				247092681D2397E400EBADB3 /* QrCodeBindView.m */,
 				24AAFCF21D28DF8400DAB3C9 /* QrCodeIdentityView.h */,
@@ -471,8 +469,6 @@
 				24B7DA1F1D2F6E5A00A0723C /* ScanView.m */,
 				24B398D31D3A37FB0067A528 /* CheckBoxView.h */,
 				24B398D41D3A37FB0067A528 /* CheckBoxView.m */,
-				24B398D91D3A3B140067A528 /* CheckCell.h */,
-				24B398DA1D3A3B140067A528 /* CheckCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -511,6 +507,8 @@
 			children = (
 				24A2B4451CB4EDB3006E29DB /* PJRSignatureView.h */,
 				24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */,
+				24AEEE261CBA8385003C6C2E /* SettingViewCell.h */,
+				24AEEE271CBA8385003C6C2E /* SettingViewCell.m */,
 				24F3597A1CB3BE4300C0950B /* PhotoCell.h */,
 				24F3597B1CB3BE4300C0950B /* PhotoCell.m */,
 				24F3597E1CB3BE4300C0950B /* WorkOrderStepCell.h */,
@@ -612,8 +610,6 @@
 				24AAFCF61D28E02000DAB3C9 /* QrCodeIdentityController.m */,
 				24AAFCFB1D28EEF800DAB3C9 /* ChooseViewController.h */,
 				24AAFCFC1D28EEF800DAB3C9 /* ChooseViewController.m */,
-				24B398D61D3A39800067A528 /* CheckBoxViewController.h */,
-				24B398D71D3A39800067A528 /* CheckBoxViewController.m */,
 			);
 			path = WorkOrder;
 			sourceTree = "<group>";
@@ -733,6 +729,10 @@
 				24D49D2E1CB54370003213C9 /* ScanViewController.m */,
 				24902D741CC3882D00607659 /* SignViewController.h */,
 				24902D751CC3882D00607659 /* SignViewController.m */,
+				24B398D91D3A3B140067A528 /* CheckCell.h */,
+				24B398DA1D3A3B140067A528 /* CheckCell.m */,
+				24B398D61D3A39800067A528 /* CheckBoxViewController.h */,
+				24B398D71D3A39800067A528 /* CheckBoxViewController.m */,
 			);
 			name = Tools;
 			path = ../Tools;

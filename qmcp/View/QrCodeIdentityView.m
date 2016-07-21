@@ -11,6 +11,12 @@
 
 @implementation QrCodeIdentityView
 
++ (instancetype)qrCodeIdentityViewInstance:(UIView *)view{
+    QrCodeIdentityView *qrCodeIdentityView = [QrCodeIdentityView new];
+    [qrCodeIdentityView initView:view];
+    return qrCodeIdentityView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor clearColor];

@@ -25,8 +25,7 @@
 @implementation PickupNoticeViewController
 
 -(void)initView{
-    _pickupNoticeView = [PickupNoticeView new];
-    [_pickupNoticeView initView:self.view];
+    _pickupNoticeView = [PickupNoticeView pickupNoticeViewInstance:self.view];
     self.navigationItem.title = @"完成物品";
 }
 

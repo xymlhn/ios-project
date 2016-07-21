@@ -15,4 +15,5 @@
 @property (nonatomic,strong)UILabel *addBtn;
 @property (nonatomic,strong)UILabel *signBtn;
 
++ (instancetype)workOrderInventoryViewInstance:(UIView *)view;
 @end

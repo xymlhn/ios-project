@@ -22,8 +22,8 @@
 -(void)initView{
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"签名";
-    _signView = [SignView new];
-    [_signView initView:self.view];
+    _signView = [SignView signViewInstance:self.view];
+
 }
 
 -(void)loadData{

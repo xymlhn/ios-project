@@ -37,9 +37,7 @@
 -(void)initView
 {
     self.view.backgroundColor = [UIColor whiteColor];
-    _loginView = [LoginView new];
-    [_loginView initView:self.view];
-    
+    _loginView = [LoginView loginViewInstance:self.view];
     [self setUpSubviews];
     
     NSArray *accountAndPassword = [Config getOwnAccountAndPassword];

@@ -9,6 +9,13 @@
 #import "ScanView.h"
 
 @implementation ScanView
+
++ (instancetype)scanViewInstance:(UIView *)view{
+    ScanView *scanView = [ScanView new];
+    [scanView initView:view];
+    return scanView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];

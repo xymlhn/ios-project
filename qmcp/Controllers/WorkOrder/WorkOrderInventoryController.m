@@ -31,8 +31,7 @@
 #pragma mark - BaseWorkOrderViewController
 -(void)initView
 {
-    _inventoryView = [WorkOrderInventoryView new];
-    [_inventoryView initView:self.view];
+    _inventoryView = [WorkOrderInventoryView workOrderInventoryViewInstance:self.view];
     self.title = @"清点";
 }
 

@@ -7,10 +7,14 @@
 //
 
 #import "PickupView.h"
-@interface PickupView()
 
-@end
 @implementation PickupView
+
++ (instancetype)pickupViewInstance:(UIView *)view{
+    PickupView *pickupView = [PickupView new];
+    [pickupView initView:view];
+    return pickupView;
+}
 
 -(void)initView:(UIView *)rootView
 {

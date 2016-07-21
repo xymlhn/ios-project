@@ -18,8 +18,7 @@
 @implementation CheckBoxViewController
 
 -(void)initView{
-    _checkBoxView = [CheckBoxView new];
-    [_checkBoxView initView:self.view];
+    _checkBoxView = [CheckBoxView checkBoxViewInstance:self.view];
 
 }
 

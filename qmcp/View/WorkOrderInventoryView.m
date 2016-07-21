@@ -10,6 +10,12 @@
 
 @implementation WorkOrderInventoryView
 
++ (instancetype)workOrderInventoryViewInstance:(UIView *)view{
+    WorkOrderInventoryView *workOrderInventoryView = [WorkOrderInventoryView new];
+    [workOrderInventoryView initView:view];
+    return workOrderInventoryView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];

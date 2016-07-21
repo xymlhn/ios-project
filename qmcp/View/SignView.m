@@ -9,6 +9,13 @@
 #import "SignView.h"
 
 @implementation SignView
+
++ (instancetype)signViewInstance:(UIView *)view{
+    SignView *signView = [SignView new];
+    [signView initView:view];
+    return signView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     

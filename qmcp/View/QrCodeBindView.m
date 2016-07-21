@@ -11,6 +11,12 @@
 
 @implementation QrCodeBindView
 
++ (instancetype)qrCodeBindViewInstance:(UIView *)view{
+    QrCodeBindView *qrCodeBindView = [QrCodeBindView new];
+    [qrCodeBindView initView:view];
+    return qrCodeBindView;
+}
+
 -(void)initView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor clearColor];

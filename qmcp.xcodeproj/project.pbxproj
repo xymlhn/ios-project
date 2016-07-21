@@ -439,6 +439,22 @@
 		24020A541CB7429300D4EA96 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24FBB2131CB9D2FA009C77E7 /* LoginView.h */,
+				24FBB2141CB9D2FA009C77E7 /* LoginView.m */,
+				24CDDB401D275B15007A9BF6 /* SearchView.h */,
+				24CDDB411D275B15007A9BF6 /* SearchView.m */,
+				24AAFCEF1D28DF2D00DAB3C9 /* ChooseView.h */,
+				24AAFCF01D28DF2D00DAB3C9 /* ChooseView.m */,
+				240C8C001D29F9510063BD69 /* SignView.h */,
+				240C8C011D29F9510063BD69 /* SignView.m */,
+				24B7DA1E1D2F6E5A00A0723C /* ScanView.h */,
+				24B7DA1F1D2F6E5A00A0723C /* ScanView.m */,
+				2489B3B01D260FEC00725C9F /* PickupView.h */,
+				2489B3B11D260FEC00725C9F /* PickupView.m */,
+				242EA1DB1D2E4C86001E4291 /* PickupNoticeView.h */,
+				242EA1DC1D2E4C86001E4291 /* PickupNoticeView.m */,
+				24B398D31D3A37FB0067A528 /* CheckBoxView.h */,
+				24B398D41D3A37FB0067A528 /* CheckBoxView.m */,
 				24020A551CB7431500D4EA96 /* WorkOrderInfoView.h */,
 				24020A561CB7431500D4EA96 /* WorkOrderInfoView.m */,
 				24020A581CB7471C00D4EA96 /* WorkOrderStepView.h */,
@@ -449,26 +465,10 @@
 				24020A5F1CB74AF700D4EA96 /* WorkOrderInventoryView.m */,
 				24020A611CB74C1900D4EA96 /* WorkOrderInventoryEditView.h */,
 				24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */,
-				24FBB2131CB9D2FA009C77E7 /* LoginView.h */,
-				24FBB2141CB9D2FA009C77E7 /* LoginView.m */,
 				247092671D2397E400EBADB3 /* QrCodeBindView.h */,
 				247092681D2397E400EBADB3 /* QrCodeBindView.m */,
 				24AAFCF21D28DF8400DAB3C9 /* QrCodeIdentityView.h */,
 				24AAFCF31D28DF8400DAB3C9 /* QrCodeIdentityView.m */,
-				2489B3B01D260FEC00725C9F /* PickupView.h */,
-				2489B3B11D260FEC00725C9F /* PickupView.m */,
-				242EA1DB1D2E4C86001E4291 /* PickupNoticeView.h */,
-				242EA1DC1D2E4C86001E4291 /* PickupNoticeView.m */,
-				24CDDB401D275B15007A9BF6 /* SearchView.h */,
-				24CDDB411D275B15007A9BF6 /* SearchView.m */,
-				24AAFCEF1D28DF2D00DAB3C9 /* ChooseView.h */,
-				24AAFCF01D28DF2D00DAB3C9 /* ChooseView.m */,
-				240C8C001D29F9510063BD69 /* SignView.h */,
-				240C8C011D29F9510063BD69 /* SignView.m */,
-				24B7DA1E1D2F6E5A00A0723C /* ScanView.h */,
-				24B7DA1F1D2F6E5A00A0723C /* ScanView.m */,
-				24B398D31D3A37FB0067A528 /* CheckBoxView.h */,
-				24B398D41D3A37FB0067A528 /* CheckBoxView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -552,12 +552,12 @@
 		2445175C1CA03D770085CC16 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				244517BF1CA03F870085CC16 /* BaseWorkOrderViewController.h */,
-				244517C01CA03F870085CC16 /* BaseWorkOrderViewController.m */,
 				24020A511CB7419400D4EA96 /* BaseView.h */,
 				24020A521CB7419400D4EA96 /* BaseView.m */,
 				240F88B31CC755C900138F10 /* BaseViewController.h */,
 				240F88B41CC755C900138F10 /* BaseViewController.m */,
+				244517BF1CA03F870085CC16 /* BaseWorkOrderViewController.h */,
+				244517C01CA03F870085CC16 /* BaseWorkOrderViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";

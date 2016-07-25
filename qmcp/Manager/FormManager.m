@@ -121,7 +121,6 @@
             header.id = [[NSUUID UUID] UUIDString];
             header.tableTemplateId = field.tableTemplateId;
             header.templateFields = tableList;
-            
             footer.id = header.id;
             footer.tableTemplateId = field.tableTemplateId;
 

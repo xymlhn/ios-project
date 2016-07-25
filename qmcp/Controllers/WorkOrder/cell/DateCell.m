@@ -102,8 +102,13 @@
 - (void)setField:(FormTemplateField *)field
 {
     if(field != nil){
+        _field = field;
         _name.text = field.name;
-        _value.text = field.defaultValue;
+        if(field.trueValue != nil){
+            _value.text = field.trueValue;
+        }else{
+            _value.text = field.defaultValue;
+        }
     }
 }
 

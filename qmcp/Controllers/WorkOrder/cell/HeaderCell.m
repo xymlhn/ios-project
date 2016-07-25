@@ -60,4 +60,10 @@
     
 }
 
+-(void)setField:(FormTemplateField *)field{
+    if (field != nil) {
+        _field = field;
+    }
+}
+
 @end

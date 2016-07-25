@@ -22,11 +22,12 @@
 #import "CheckBoxCell.h"
 #import "HeaderCell.h"
 #import "FooterCell.h"
-
+#import "WorkOrderFormView.h"
+#import "ReactiveCocoa.h"
 @interface WorkOrderFormController ()<UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableArray<FormTemplateField* > *workOrderFormList;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) WorkOrderFormView *workOrderFormView;
 @property (nonatomic, strong) WorkOrder *workOrder;
 @property (nonatomic, copy) NSString *currentPlusFormTemplateId;
 
@@ -38,24 +39,50 @@
 
 -(void)initView
 {
-    _tableView = [UITableView new];
-    _tableView.separatorStyle = NO;
-    _tableView.backgroundColor = [UIColor themeColor];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = NO;
-    [self.view addSubview:_tableView];
-    [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.edges.equalTo(self.view);
-    }];
+    _workOrderFormView = [WorkOrderFormView viewInstance:self.view];
+
     self.title = @"表单编辑";
+    
+    
+}
+
+-(void)bindListener{
+    
+    _workOrderFormView.tableView.delegate = self;
+    _workOrderFormView.tableView.dataSource = self;
+    
+    _workOrderFormView.saveBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self saveBtnClick];
+        return [RACSignal empty];
+    }];
     
     //添加手势，点击屏幕其他区域关闭键盘的操作
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
     gesture.numberOfTapsRequired = 1;
     gesture.delegate = self;
     [self.view addGestureRecognizer:gesture];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGRect keyboardBounds = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, keyboardBounds.size.height, 0);
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+     _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, 0, 0);
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)hidenKeyboard
@@ -72,6 +99,11 @@
     [[FormManager getInstance] handleFormTable:_workOrderFormList formTemplateId:_formTemplateId];
 }
 
+#pragma mark IBAction
+
+-(void)saveBtnClick{
+    
+}
 
 #pragma mark - Table view data source
 
@@ -127,6 +159,9 @@
         case FormTemplateControlTypeHeader:
             cell = [HeaderCell cellWithTableView:tableView];
             ((HeaderCell *)cell).field = field;
+            ((HeaderCell *)cell).deleteBtn.tag = row;
+            ((HeaderCell *)cell).deleteBtn.userInteractionEnabled = YES;
+            [((HeaderCell *)cell).deleteBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteBtnClick:)]];
             break;
             
         case FormTemplateControlTypeFooter:
@@ -192,13 +227,21 @@
 }
 
 #pragma mark - IBAction
+
 -(void)containViewClick:(UITapGestureRecognizer *)recognizer{
     NSMutableArray<FormTemplateField *> *tableList = [[FormManager getInstance] plusFormTemplate:_currentPlusFormTemplateId];
     
     NSRange range = NSMakeRange(recognizer.view.tag, [tableList count]);
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
     [self.workOrderFormList insertObjects:tableList atIndexes:indexSet];
-    [self.tableView reloadData];
+    [_workOrderFormView.tableView reloadData];
+}
+
+-(void)deleteBtnClick:(UITapGestureRecognizer *)recognizer{
+    FormTemplateField *field = _workOrderFormList[recognizer.view.tag];
+
+    [self.workOrderFormList removeObjectsInArray:field.templateFields];
+    [_workOrderFormView.tableView reloadData];
 }
 @end
 

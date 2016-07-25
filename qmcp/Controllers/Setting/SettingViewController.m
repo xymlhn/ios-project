@@ -79,22 +79,22 @@
         case 0:
             switch (indexPath.row) {
                 case 0:
-                    [cell initSetting:[Config getSound] andText:@"声音"];
+                    [cell initSetting:[Config getSound] contentText:@"声音" icon:@""];
                     
                     break;
                 case 1:
-                    [cell initSetting:[Config getVibre] andText:@"震动"];
+                    [cell initSetting:[Config getVibre] contentText:@"震动" icon:@""];
                     break;
             }
             break;
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    [cell initSetting:[Config getQuickScan] andText:@"快速扫描"];
+                    [cell initSetting:[Config getQuickScan] contentText:@"快速扫描" icon:@""];
                     
                     break;
                 case 1:
-                    [cell initSetting:[Config getSearch] andText:@"搜索包含历史工单"];
+                    [cell initSetting:[Config getSearch] contentText:@"搜索包含历史工单" icon:@""];
                     break;
             }
             break;

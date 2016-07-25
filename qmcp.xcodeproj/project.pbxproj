@@ -92,6 +92,7 @@
 		248A5DC21C85C3C30095A4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DC01C85C3C30095A4FB /* LaunchScreen.storyboard */; };
 		248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248EA7A61CAF873000B4D775 /* WorkOrderStepEditController.m */; };
 		24902D761CC3882D00607659 /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24902D751CC3882D00607659 /* SignViewController.m */; };
+		2493FE141D4302E50094ADA2 /* WorkOrderFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */; };
 		24948B3C1CC1DE3600DE8946 /* EnumUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B3B1CC1DE3600DE8946 /* EnumUtil.m */; };
 		24948B3F1CC235FC00DE8946 /* SalesOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B3E1CC235FC00DE8946 /* SalesOrderManager.m */; };
 		24948B421CC2375900DE8946 /* SalesOrderBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B411CC2375900DE8946 /* SalesOrderBind.m */; };
@@ -316,6 +317,8 @@
 		248EA7A61CAF873000B4D775 /* WorkOrderStepEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepEditController.m; sourceTree = "<group>"; };
 		24902D741CC3882D00607659 /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
 		24902D751CC3882D00607659 /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
+		2493FE121D4302E50094ADA2 /* WorkOrderFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderFormView.h; sourceTree = "<group>"; };
+		2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderFormView.m; sourceTree = "<group>"; };
 		24948B3A1CC1DE3600DE8946 /* EnumUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumUtil.h; sourceTree = "<group>"; };
 		24948B3B1CC1DE3600DE8946 /* EnumUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumUtil.m; sourceTree = "<group>"; };
 		24948B3D1CC235FC00DE8946 /* SalesOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderManager.h; sourceTree = "<group>"; };
@@ -469,6 +472,8 @@
 				247092681D2397E400EBADB3 /* QrCodeBindView.m */,
 				24AAFCF21D28DF8400DAB3C9 /* QrCodeIdentityView.h */,
 				24AAFCF31D28DF8400DAB3C9 /* QrCodeIdentityView.m */,
+				2493FE121D4302E50094ADA2 /* WorkOrderFormView.h */,
+				2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -507,8 +512,6 @@
 			children = (
 				24A2B4451CB4EDB3006E29DB /* PJRSignatureView.h */,
 				24A2B4461CB4EDB3006E29DB /* PJRSignatureView.m */,
-				24AEEE261CBA8385003C6C2E /* SettingViewCell.h */,
-				24AEEE271CBA8385003C6C2E /* SettingViewCell.m */,
 				24F3597A1CB3BE4300C0950B /* PhotoCell.h */,
 				24F3597B1CB3BE4300C0950B /* PhotoCell.m */,
 				24F3597E1CB3BE4300C0950B /* WorkOrderStepCell.h */,
@@ -679,6 +682,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2493FE151D436C250094ADA2 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				24AEEE261CBA8385003C6C2E /* SettingViewCell.h */,
+				24AEEE271CBA8385003C6C2E /* SettingViewCell.m */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		24A685611CC4C72600663858 /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -704,6 +716,7 @@
 		24AEEE291CBA8788003C6C2E /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				2493FE151D436C250094ADA2 /* cell */,
 				24AEEE2A1CBA87D9003C6C2E /* SettingViewController.h */,
 				24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */,
 			);
@@ -1139,6 +1152,7 @@
 				242EA1DD1D2E4C86001E4291 /* PickupNoticeView.m in Sources */,
 				24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */,
 				2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */,
+				2493FE141D4302E50094ADA2 /* WorkOrderFormView.m in Sources */,
 				247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */,
 				24020A531CB7419400D4EA96 /* BaseView.m in Sources */,
 				246517081D2F561A00F1E5D3 /* PickupSignature.m in Sources */,

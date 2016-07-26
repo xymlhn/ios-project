@@ -8,7 +8,6 @@
 
 #import "SearchViewController.h"
 #import "SearchView.h"
-#import "HistoryViewController.h"
 #import "WorkOrderManager.h"
 #import "WorkOrderCell.h"
 #import "WorkOrderInfoController.h"
@@ -17,7 +16,6 @@
 #import "Config.h"
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) SearchView *searchView;
-@property(nonatomic,strong) HistoryViewController *historyViewController;
 @property(nonatomic,strong) NSMutableArray<WorkOrderSearchResult *> *resultList;
 @end
 
@@ -26,9 +24,6 @@
     _searchView = [SearchView searchViewInstance:self.view];
     _searchView.searchBar.delegate = self;
     self.navigationItem.title = @"搜索";
-    
-    _historyViewController = [[HistoryViewController alloc] initWithStyle:UITableViewStylePlain];
-    [_historyViewController.view setFrame:CGRectMake(30, 40, 200, 0)];
     
     _searchView.tableView.delegate = self;
     _searchView.tableView.dataSource = self;
@@ -91,18 +86,14 @@
 }
 
 - (void) setSearchControllerHidden:(BOOL)hidden {
-    NSInteger height = hidden ? 0: 180;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.2];
-    
-    [_historyViewController.view setFrame:CGRectMake(30, 36, 200, height)];
     [UIView commitAnimations];
 }
 
 -(void)searchWorkOrderByCode:(NSString *)string andCondition:(BOOL)condition{
     
     [_searchView.searchBar resignFirstResponder];
-    
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在搜索";

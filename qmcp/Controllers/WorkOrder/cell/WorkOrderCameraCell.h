@@ -13,6 +13,7 @@
 @property (nonatomic, strong) CameraData *cameraData;
 @property (nonatomic, strong) UISwitch *switchBtn;
 @property (nonatomic, strong) UILabel *name;
+@property (nonatomic, strong) UILabel *cameraIcon;
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

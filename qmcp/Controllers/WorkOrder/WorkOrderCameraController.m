@@ -127,7 +127,7 @@
                         _currentCamera = cameraData;
                     }
                 }
-
+                [self.tableView reloadData];
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
                 hub.labelText = @"打开摄像头成功";

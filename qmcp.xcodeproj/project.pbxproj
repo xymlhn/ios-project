@@ -131,7 +131,6 @@
 		24C34F1A1CE9956900D945BE /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F191CE9956900D945BE /* FormManager.m */; };
 		24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB411D275B15007A9BF6 /* SearchView.m */; };
 		24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB451D275BA0007A9BF6 /* SearchViewController.m */; };
-		24CDDB491D27883B007A9BF6 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB481D27883B007A9BF6 /* HistoryViewController.m */; };
 		24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D49D2E1CB54370003213C9 /* ScanViewController.m */; };
 		24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */; };
 		24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1EC1CC0DA5D00444A9D /* SalesOrderBindListController.m */; };
@@ -395,8 +394,6 @@
 		24CDDB411D275B15007A9BF6 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		24CDDB441D275BA0007A9BF6 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		24CDDB451D275BA0007A9BF6 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		24CDDB471D27883B007A9BF6 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
-		24CDDB481D27883B007A9BF6 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		24D49D2D1CB54370003213C9 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		24D49D2E1CB54370003213C9 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		24EAD1E81CC0DA4300444A9D /* SalesOrderGrabListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabListController.h; sourceTree = "<group>"; };
@@ -766,8 +763,6 @@
 				24B7DA241D2F93B200A0723C /* cell */,
 				24CDDB441D275BA0007A9BF6 /* SearchViewController.h */,
 				24CDDB451D275BA0007A9BF6 /* SearchViewController.m */,
-				24CDDB471D27883B007A9BF6 /* HistoryViewController.h */,
-				24CDDB481D27883B007A9BF6 /* HistoryViewController.m */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1213,7 +1208,6 @@
 				24B398D81D3A39800067A528 /* CheckBoxViewController.m in Sources */,
 				244517A71CA03F190085CC16 /* SideMenuCell.m in Sources */,
 				24AC36F41D30869100316301 /* UIImage+Common.m in Sources */,
-				24CDDB491D27883B007A9BF6 /* HistoryViewController.m in Sources */,
 				2445176E1CA03E640085CC16 /* Config.m in Sources */,
 				24A2B44A1CB4F725006E29DB /* WorkOrderInventoryEditController.m in Sources */,
 				240C742B1D17918600245D5C /* WorkOrderCell.m in Sources */,

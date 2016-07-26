@@ -37,7 +37,7 @@
 
 #pragma mark - UIViewController
 
--(void)initView
+-(void)setupView
 {
     _workOrderFormView = [WorkOrderFormView viewInstance:self.view];
 

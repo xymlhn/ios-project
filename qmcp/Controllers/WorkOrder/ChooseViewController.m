@@ -15,7 +15,7 @@
 @end
 @implementation ChooseViewController
 
--(void)initView{
+-(void)setupView{
     _chooseView = [ChooseView chooseViewInstance:self.view];
 
 }

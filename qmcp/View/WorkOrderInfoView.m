@@ -12,11 +12,11 @@
 
 + (instancetype)workOrderInfoViewInstance:(UIView *)view{
     WorkOrderInfoView *workOrderInfoView = [WorkOrderInfoView new];
-    [workOrderInfoView initView:view];
+    [workOrderInfoView setupView:view];
     return workOrderInfoView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
     _containView = [UIView new];

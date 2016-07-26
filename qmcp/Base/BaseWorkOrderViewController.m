@@ -25,7 +25,7 @@
         self.navigationItem.title = _workOrderCode;
     }
     self.view.backgroundColor = [UIColor whiteColor];
-    [self initView];
+    [self setupView];
     [self bindListener];
     [self loadData];
     
@@ -40,7 +40,7 @@
     [NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
 }
 
--(void)initView{
+-(void)setupView{
     [NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
 }
 -(void)bindListener{

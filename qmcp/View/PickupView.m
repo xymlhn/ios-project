@@ -12,11 +12,11 @@
 
 + (instancetype)pickupViewInstance:(UIView *)view{
     PickupView *pickupView = [PickupView new];
-    [pickupView initView:view];
+    [pickupView setupView:view];
     return pickupView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
     

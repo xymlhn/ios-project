@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface SalesOrderGrabListController : UIViewController
+@interface SalesOrderGrabListController : BaseViewController
 
 @end

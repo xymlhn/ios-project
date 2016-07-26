@@ -29,7 +29,7 @@
 @implementation WorkOrderInventoryController
 
 #pragma mark - BaseWorkOrderViewController
--(void)initView
+-(void)setupView
 {
     _inventoryView = [WorkOrderInventoryView workOrderInventoryViewInstance:self.view];
     self.title = @"清点";

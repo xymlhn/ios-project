@@ -32,7 +32,7 @@
 @implementation WorkOrderInfoController
 
 #pragma mark - BaseWorkOrderViewController
--(void)initView
+-(void)setupView
 {
     _infoView = [WorkOrderInfoView workOrderInfoViewInstance:self.view];
     self.title = @"信息";

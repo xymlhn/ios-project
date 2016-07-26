@@ -29,7 +29,7 @@
 @implementation WorkOrderStepController
 
 #pragma mark - BaseWorkOrderViewController
--(void)initView
+-(void)setupView
 {
     _stepView = [WorkOrderStepView workOrderStepViewInstance:self.view];
     self.title = @"步骤";

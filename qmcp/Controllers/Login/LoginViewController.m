@@ -34,7 +34,7 @@
     [super viewDidDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
--(void)initView
+-(void)setupView
 {
     self.view.backgroundColor = [UIColor whiteColor];
     _loginView = [LoginView loginViewInstance:self.view];

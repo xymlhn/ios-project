@@ -12,11 +12,11 @@
 
 + (instancetype)loginViewInstance:(UIView *)view{
     LoginView *loginView = [LoginView new];
-    [loginView initView:view];
+    [loginView setupView:view];
     return loginView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
     UIView *topView = [UIView new];

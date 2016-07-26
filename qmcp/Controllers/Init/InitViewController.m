@@ -18,6 +18,15 @@
 
 @implementation InitViewController
 
+-(void)setupView{
+    UIImageView *imageView = [UIImageView new];
+    imageView.image=[UIImage imageNamed:@"start(1242x2208)"];
+    [self.view addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+}
+
 -(void)loadData{
     NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
     NSString *name = accountAndPassword? accountAndPassword[0] : @"";
@@ -38,15 +47,6 @@
         NSNotification * notice = [NSNotification notificationWithName:kReloginNotification object:nil userInfo:dict];
         //发送消息
         [[NSNotificationCenter defaultCenter]postNotification:notice];
-    }];
-}
-
--(void)initView{
-    UIImageView *imageView = [UIImageView new];
-    imageView.image=[UIImage imageNamed:@"start(1242x2208)"];
-    [self.view addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
 }
 -(void)bindListener{

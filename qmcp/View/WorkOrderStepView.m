@@ -12,11 +12,11 @@
 
 + (instancetype)workOrderStepViewInstance:(UIView *)view{
     WorkOrderStepView *workOrderStepView = [WorkOrderStepView new];
-    [workOrderStepView initView:view];
+    [workOrderStepView setupView:view];
     return workOrderStepView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;

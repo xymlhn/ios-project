@@ -41,7 +41,7 @@
 @implementation WorkOrderInventoryEditController
 
 #pragma mark - BaseWorkOrderViewController
--(void)initView
+-(void)setupView
 {
      _inventoryEditView = [WorkOrderInventoryEditView workOrderInventoryEditView:self.view];
     self.title = @"清点编辑";

@@ -12,10 +12,10 @@
 
 + (instancetype)chooseViewInstance:(UIView *)view{
     ChooseView *chooseView = [ChooseView new];
-    [chooseView initView:view];
+    [chooseView setupView:view];
     return chooseView;
 }
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor clearColor];
     

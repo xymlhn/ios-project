@@ -25,7 +25,7 @@
 
 #pragma mark - UIViewController
 
--(void)initView
+-(void)setupView
 {
     self.title = @"表单";
     self.view.backgroundColor = [UIColor whiteColor];

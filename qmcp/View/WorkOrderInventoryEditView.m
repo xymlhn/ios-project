@@ -14,11 +14,11 @@
 
 + (instancetype)workOrderInventoryEditView:(UIView *)view{
     WorkOrderInventoryEditView *workOrderInventoryEditView = [WorkOrderInventoryEditView new];
-    [workOrderInventoryEditView initView:view];
+    [workOrderInventoryEditView setupView:view];
     return workOrderInventoryEditView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
     UIView *containView = [UIView new];

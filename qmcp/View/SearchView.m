@@ -12,11 +12,11 @@
 
 + (instancetype)searchViewInstance:(UIView *)view{
     SearchView *searchView = [SearchView new];
-    [searchView initView:view];
+    [searchView setupView:view];
     return searchView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
     

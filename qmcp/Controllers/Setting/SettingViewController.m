@@ -18,7 +18,7 @@
 @implementation SettingViewController
 
 
--(void)initView
+-(void)setupView
 {
     self.title = @"设置";
     _tableView = [UITableView new];

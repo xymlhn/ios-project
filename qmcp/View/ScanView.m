@@ -12,11 +12,11 @@
 
 + (instancetype)scanViewInstance:(UIView *)view{
     ScanView *scanView = [ScanView new];
-    [scanView initView:view];
+    [scanView setupView:view];
     return scanView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
     UIView *containView = [UIView new];

@@ -20,7 +20,7 @@
 @end
 
 @implementation SearchViewController
--(void)initView{
+-(void)setupView{
     _searchView = [SearchView searchViewInstance:self.view];
     _searchView.searchBar.delegate = self;
     self.navigationItem.title = @"搜索";

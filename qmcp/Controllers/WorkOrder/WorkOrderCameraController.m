@@ -22,7 +22,7 @@
 @implementation WorkOrderCameraController
 
 #pragma mark - BaseWorkOrderViewController
--(void)initView
+-(void)setupView
 {
     self.title = @"摄像头";
     _tableView = [UITableView new];

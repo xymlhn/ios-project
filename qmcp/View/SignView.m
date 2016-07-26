@@ -12,11 +12,11 @@
 
 + (instancetype)signViewInstance:(UIView *)view{
     SignView *signView = [SignView new];
-    [signView initView:view];
+    [signView setupView:view];
     return signView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     
     _signatureView = [[PJRSignatureView alloc] init];

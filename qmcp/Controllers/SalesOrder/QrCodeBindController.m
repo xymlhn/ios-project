@@ -18,7 +18,7 @@
 @implementation QrCodeBindController
 
 
--(void)initView{
+-(void)setupView{
     _qrCodeBindView = [QrCodeBindView qrCodeBindViewInstance:self.view];
     _qrCodeBindView.qrCodeUrl = _qrCodeUrl;
 }

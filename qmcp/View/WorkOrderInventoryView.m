@@ -12,11 +12,11 @@
 
 + (instancetype)workOrderInventoryViewInstance:(UIView *)view{
     WorkOrderInventoryView *workOrderInventoryView = [WorkOrderInventoryView new];
-    [workOrderInventoryView initView:view];
+    [workOrderInventoryView setupView:view];
     return workOrderInventoryView;
 }
 
--(void)initView:(UIView *)rootView
+-(void)setupView:(UIView *)rootView
 {
     rootView.backgroundColor = [UIColor whiteColor];
     _tableView = [UITableView new];

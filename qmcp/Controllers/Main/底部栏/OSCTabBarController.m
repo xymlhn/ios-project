@@ -79,7 +79,7 @@
     self.tabBar.translucent = NO;
     self.viewControllers = @[[self addNavigationItemForViewController:workOrderSVC],
                              [self addNavigationItemForViewController:saleOrderSVC],
-                             [self addNavigationItemForViewController:gis],
+                             [self addNavigationItemForViewController:help],
                              [self addNavigationItemForViewController:help]];
     
     NSArray *titles = @[@"工单",@"订单", @"地图", @"帮助"];

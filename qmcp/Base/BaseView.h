@@ -13,6 +13,6 @@
 #import "PchHeader.h"
 @interface BaseView : NSObject
 
-- (void)initView:(UIView *)rootView;
+- (void)setupView:(UIView *)rootView;
 
 @end

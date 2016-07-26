@@ -37,14 +37,8 @@
 
 @implementation SalesOrderGrabListController
 
--(void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self initView];
-    [self loadData];
-}
 
--(void)initView
+-(void)setupView
 {
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;

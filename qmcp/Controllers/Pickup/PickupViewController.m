@@ -31,7 +31,7 @@
 
 @implementation PickupViewController
 
--(void)initView{
+-(void)setupView{
     _pickView = [PickupView pickupViewInstance:self.view];
 
     self.navigationItem.title = @"客户取件";

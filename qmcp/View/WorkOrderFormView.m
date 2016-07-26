@@ -12,11 +12,11 @@
 
 + (instancetype)viewInstance:(UIView *)view{
     WorkOrderFormView *workOrderFormView = [WorkOrderFormView new];
-    [workOrderFormView initView:view];
+    [workOrderFormView setupView:view];
     return workOrderFormView;
 }
 
--(void)initView:(UIView *)rootView{
+-(void)setupView:(UIView *)rootView{
     _tableView = [UITableView new];
     _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];

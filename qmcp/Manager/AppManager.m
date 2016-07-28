@@ -9,7 +9,7 @@
 #import "AppManager.h"
 #import "Config.h"
 #import "AFHTTPSessionManager.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "User.h"
 #import "RootViewController.h"
 #import "Config.h"
@@ -88,7 +88,7 @@ NSString *const kUserCache = @"user";
 -(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion
 {
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGIN];
 
     [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
@@ -99,7 +99,7 @@ NSString *const kUserCache = @"user";
 -(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion{
     // 请求参数
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGIN];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGIN];
 
     [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
@@ -112,7 +112,7 @@ NSString *const kUserCache = @"user";
 
     // 请求参数
     NSDictionary *dic = @{};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_LOGOUT];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
     
     [HttpUtil post:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
@@ -127,7 +127,7 @@ NSString *const kUserCache = @"user";
 -(void) getServerTimeWithBlock:(CompletionHandler)completion
 {
 
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SERVER_TIME];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_SERVER_TIME];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             completion(obj,nil);
@@ -140,7 +140,7 @@ NSString *const kUserCache = @"user";
 -(void) updateNickName
 {
     NSArray *arr = @[@"fuck"];
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_NICKNAME];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_NICKNAME];
     [HttpUtil post:URLString param:arr finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             NSLog(@"success");
@@ -154,7 +154,7 @@ NSString *const kUserCache = @"user";
 -(void) pushId:(NSString *)pushId
 {
     NSDictionary *dict = @{@"pushId":pushId};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_PUSHID];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_PUSHID];
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             NSLog(@"success");
@@ -169,7 +169,7 @@ NSString *const kUserCache = @"user";
     NSArray *array = @[key];
     NSString *jsonString = [array mj_JSONString];
     NSDictionary *dic = @{ @"storageType":[NSNumber numberWithInt:type],@"attachmentNames":jsonString};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_IMAGEURL];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_IMAGEURL];
     
     [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);

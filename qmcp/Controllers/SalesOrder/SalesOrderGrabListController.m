@@ -15,7 +15,7 @@
 #import "SalesOrderSnapshot.h"
 #import "SalesOrderGrabCell.h"
 #import "Utils.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "SalesOrderManager.h"
 #import "Config.h"
 #import "ReactiveCocoa.h"
@@ -125,8 +125,8 @@
 }
 
 
--(void)dealloc {
-
+-(void)bindListener{
+    
 }
 
 -(void)grabSalesOrder:(SalesOrderSnapshot *)salesOrderSnapshot
@@ -136,7 +136,7 @@
     hub.labelText = @"抢单中...";
     hub.userInteractionEnabled = NO;
     
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERGRAB,salesOrderSnapshot.code];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERGRAB,salesOrderSnapshot.code];
     NSDictionary *dict = @{@"grab":[NSNumber numberWithBool:YES]};
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {

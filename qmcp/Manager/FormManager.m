@@ -7,7 +7,7 @@
 //
 
 #import "FormManager.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "HttpUtil.h"
 #import "NSObject+LKDBHelper.h"
 #import "MJExtension.h"
@@ -44,7 +44,7 @@
 
 
 -(void)getFormTemplateAndFormData:(NSString *)salesOrderCode finishBlock:(void (^)(NSMutableArray *, NSString *))block{
-    NSString *URLStringTemplate = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_FORMTEMPLATE,salesOrderCode];
+    NSString *URLStringTemplate = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_FORMTEMPLATE,salesOrderCode];
     [HttpUtil get:URLStringTemplate param:nil finish:^(NSDictionary *obj, NSString *error1) {
         if (!error1) {
             [_formTemplateDict removeAllObjects];
@@ -53,7 +53,7 @@
                 form.fields = [FormTemplateField mj_objectArrayWithKeyValuesArray:form.fields];
                 [_formTemplateDict setValue:form forKey:form.formTemplateId];
             }
-            NSString *URLStringData= [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_FORMDATA,salesOrderCode];
+            NSString *URLStringData= [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_FORMDATA,salesOrderCode];
             [HttpUtil get:URLStringData param:nil finish:^(NSDictionary *obj, NSString *error2) {
                 if (!error2) {
                     [_formDataDict removeAllObjects];
@@ -216,7 +216,7 @@
 
 
 -(void)saveFormData:(NSMutableArray<FormData *> *)formDatas{
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_SAVE_FORMDATA];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_SAVE_FORMDATA];
     [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             
@@ -228,7 +228,7 @@
 }
 
 -(void)deleteFormData:(NSString *)formDataId{
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_DELETE_FORMDATA,formDataId];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_DELETE_FORMDATA,formDataId];
     [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             

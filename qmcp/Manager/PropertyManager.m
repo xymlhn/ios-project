@@ -10,7 +10,7 @@
 #import "Config.h"
 #import "Utils.h"
 #import "TMCache.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "HttpUtil.h"
 #import "MJExtension.h"
 #import "Commodity.h"
@@ -60,7 +60,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
 #pragma mark - network
 -(void)getCommodityItemByLastUpdateTime:(NSString *)lastupdateTime
 {
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMMODITYITEM,lastupdateTime];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMMODITYITEM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setCommodityItem:[Utils formatDate:[NSDate new]]];
@@ -75,7 +75,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
 
 -(void)getCommodityPropertyByLastUpdateTime:(NSString *)lastupdateTime
 {
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_COMODITYPROPERTY,lastupdateTime];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMODITYPROPERTY,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setCommodityProperty:[Utils formatDate:[NSDate new]]];

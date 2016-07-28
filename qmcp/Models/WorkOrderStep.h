@@ -24,4 +24,6 @@
 
 @property (nonatomic, copy) NSString *stepName;
 
+@property (nonatomic, copy) NSString *userOpenId;
+
 @end

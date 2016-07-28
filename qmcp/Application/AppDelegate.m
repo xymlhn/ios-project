@@ -18,7 +18,10 @@
 #import "InitViewController.h"
 #import "IntroductionViewController.h"
 #import "Utils.h"
+
+int const databaseVersion = 3;
 @interface AppDelegate ()
+
 
 @end
 
@@ -27,7 +30,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     /************第三方插件配置 **************/
-
+    int currentDataBaseVersion = [Config getDatabaseVersion];
+    if(!( currentDataBaseVersion == 0)){
+        if(!(currentDataBaseVersion == databaseVersion)){
+            [self updateDataBase];
+            [Config setDatabaseVersion:databaseVersion];
+            [Config setInitSetting];
+        }
+    }else{
+        [Config setDatabaseVersion:databaseVersion];
+    }
 
     /************ 控件外观设置 **************/
     NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
@@ -57,6 +69,12 @@
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reLogin:) name:kReloginNotification object:nil];
     return YES;
+}
+
+
+-(void)updateDataBase{
+    LKDBHelper* globalHelper = [WorkOrder getUsingLKDBHelper];
+    [globalHelper dropAllTable];
 }
 
 - (void)reLogin:(NSNotification *)text{

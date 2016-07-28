@@ -7,7 +7,7 @@
 //
 
 #import "CameraManager.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "HttpUtil.h"
 #import "Utils.h"
 #import "CameraData.h"
@@ -45,7 +45,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 
 
 -(void)getAllSystemCamera{
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_CAMERA];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ALL_CAMERA];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             NSMutableArray<CameraData *> *arr = [CameraData mj_objectArrayWithKeyValuesArray:obj];
@@ -63,14 +63,14 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
 
 -(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode finishBlock:(CompletionHandler)completion
 {
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_ALL_CAMERA,workOrderCode];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_ALL_CAMERA,workOrderCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
     }];
 }
 
 -(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode withCameraCode:(NSString *)cameraCode cameraStatus:(bool)isOn finishBlock:(CompletionHandler)completion{
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_CAMERA_SWITCH];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_CAMERA_SWITCH];
     NSDictionary *jsonDict = @{@"workOrderCode":workOrderCode,@"cameraCode":cameraCode,@"turnOn":[NSNumber numberWithBool:isOn]};
 
 

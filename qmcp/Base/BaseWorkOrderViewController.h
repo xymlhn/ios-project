@@ -12,7 +12,7 @@
 #import "UIColor+Util.h"
 #import "PchHeader.h"
 #import "MBProgressHUD.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "HttpUtil.h"
 #import "MJExtension.h"
 #import "Utils.h"

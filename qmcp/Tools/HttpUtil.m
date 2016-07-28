@@ -33,6 +33,10 @@
         if(data != nil){
             NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSString *message = [content valueForKey:@"message"];
+            if (message == nil) {
+                message = @"服务器发生未知错误!";
+            }
+            
             completion(nil ,message);
         }else{
             completion(nil,description);
@@ -63,6 +67,9 @@
         if(data != nil){
             NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSString *message = [content valueForKey:@"message"];
+            if (message == nil) {
+                message = @"服务器发生未知错误!";
+            }
             completion(nil ,message);
         }else{
             completion(nil,description);
@@ -100,6 +107,9 @@
         if(data != nil){
             NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSString *message = [content valueForKey:@"message"];
+            if (message == nil) {
+                message = @"服务器发生未知错误!";
+            }
             completion(nil ,message);
         }else{
             completion(nil,description);
@@ -134,6 +144,9 @@
         if(data != nil){
             NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSString *message = [content valueForKey:@"message"];
+            if (message == nil) {
+                message = @"服务器发生未知错误!";
+            }
             completion(nil ,message);
         }else{
             completion(nil,description);

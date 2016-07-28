@@ -22,7 +22,7 @@
     
 }
 
--(void)initView{
+-(void)setupView{
     self.title = @"快速输入";
     _scanView = [ScanView scanViewInstance:self.view];
 }

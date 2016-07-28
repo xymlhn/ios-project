@@ -22,6 +22,7 @@ NSString * const kSalesOrderGrabTime = @"grabTime";
 NSString * const kWorkOrderTime = @"workOrderTime";
 NSString * const kCommodityItemTime = @"commodityItemTime";
 NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
+NSString * const kDatabaseVersion = @"databaseVersion";
 @implementation Config
 
 +(void)setInitSetting{
@@ -177,7 +178,18 @@ NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
 }
 
 
++(void)setDatabaseVersion:(int)version
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setInteger:version forKey:kDatabaseVersion];
+}
 
++(int)getDatabaseVersion
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSNumber *number = [user objectForKey:kDatabaseVersion];
+    return [number intValue];
+}
 
 
 

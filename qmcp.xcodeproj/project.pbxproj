@@ -81,7 +81,6 @@
 		247092661D23942E00EBADB3 /* QrCodeBindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092651D23942E00EBADB3 /* QrCodeBindController.m */; };
 		247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092681D2397E400EBADB3 /* QrCodeBindView.m */; };
 		24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24759F4C1CB9FB4700306E5C /* LoginViewController.m */; };
-		247D31D81C8D7C040048DD38 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247D31D71C8D7C040048DD38 /* CoreData.framework */; };
 		247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EE90B1CBF3974008A3674 /* PickupItemSignature.m */; };
 		24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 24836CFE1CB7F05A00B58DBD /* WorkOrderGroup.m */; };
 		2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2489B3AA1D260EDA00725C9F /* InitViewController.m */; };
@@ -264,7 +263,7 @@
 		244517AB1CA03F220085CC16 /* OSCTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSCTabBarController.m; sourceTree = "<group>"; };
 		244517AF1CA03F400085CC16 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		244517B01CA03F400085CC16 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		244517B11CA03F400085CC16 /* OSCAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSCAPI.h; sourceTree = "<group>"; };
+		244517B11CA03F400085CC16 /* QMCPAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMCPAPI.h; sourceTree = "<group>"; };
 		244517B31CA03F520085CC16 /* MBProgressHUD+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Util.h"; sourceTree = "<group>"; };
 		244517B41CA03F520085CC16 /* MBProgressHUD+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Util.m"; sourceTree = "<group>"; };
 		244517B51CA03F520085CC16 /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
@@ -428,7 +427,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				247D31D81C8D7C040048DD38 /* CoreData.framework in Frameworks */,
 				B2D13483BD053684D5A71B6F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -832,7 +830,7 @@
 				248E2A4B1CCE482E00D72459 /* PchHeader.h */,
 				244517AF1CA03F400085CC16 /* AppDelegate.h */,
 				244517B01CA03F400085CC16 /* AppDelegate.m */,
-				244517B11CA03F400085CC16 /* OSCAPI.h */,
+				244517B11CA03F400085CC16 /* QMCPAPI.h */,
 			);
 			path = Application;
 			sourceTree = "<group>";

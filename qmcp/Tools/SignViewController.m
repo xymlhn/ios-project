@@ -19,7 +19,7 @@
 
 @implementation SignViewController
 
--(void)initView{
+-(void)setupView{
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"签名";
     _signView = [SignView signViewInstance:self.view];

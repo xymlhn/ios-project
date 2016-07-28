@@ -8,7 +8,7 @@
 
 #import "HelpViewController.h"
 #import "Masonry.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "MBProgressHUD.h"
 #import "Utils.h"
 @interface HelpViewController ()<UIWebViewDelegate>
@@ -35,7 +35,7 @@
     }];
     _hub = [Utils createHUD];
     _hub.labelText = @"正在加载";
-    _hub.userInteractionEnabled = NO;    NSString *URLString = [NSString stringWithFormat:@"%@%@", OSCAPI_ADDRESS,OSCAPI_MANUAL];
+    _hub.userInteractionEnabled = NO;    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_MANUAL];
     NSURL* url = [NSURL URLWithString:URLString];//创建URL
     NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
     [_webView loadRequest:request];//加载

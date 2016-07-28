@@ -15,7 +15,7 @@
 #import "SalesOrderSnapshot.h"
 #import "SalesOrderBindCell.h"
 #import "Utils.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "SalesOrderManager.h"
 #import "Config.h"
 #import "PchHeader.h"
@@ -45,6 +45,10 @@
         make.bottom.equalTo(self.view.mas_bottom);
     }];
 
+    
+}
+
+-(void)bindListener{
     
 }
 
@@ -115,7 +119,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[indexPath.row];
-    NSString *url = [NSString stringWithFormat:@"%@%@",OSCAPI_ADDRESS,salesOrderSnapshot.qrCodeUrl];
+    NSString *url = [NSString stringWithFormat:@"%@%@",QMCPAPI_ADDRESS,salesOrderSnapshot.qrCodeUrl];
     QrCodeBindController *controller = [QrCodeBindController doneBlock:^(NSString *salesOrderCode) {
         [self.salesOrderList removeObject:salesOrderSnapshot];
         [[SalesOrderManager getInstance] removeBindDictSalesOrderSnapshotByCode:salesOrderCode];

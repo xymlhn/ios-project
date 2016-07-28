@@ -19,6 +19,7 @@
 #import "WorkOrderManager.h"
 #import "WorkOrderCameraController.h"
 #import "WorkOrderFormsController.h"
+#import "AppManager.h"
 @interface WorkOrderStepController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, retain) NSMutableArray<WorkOrderStep *> *workOrderStepList;
@@ -66,6 +67,7 @@
     step.stepName = [NSString stringWithFormat:@"步骤%lu",size];
     step.workOrderCode = [super workOrderCode];
     step.submitTime = [Utils formatDate:[NSDate new]];
+    step.userOpenId = [[AppManager getInstance] getUser].userOpenId;
     [step saveToDB];
     [self pushWorkOrderStepEditControllerWithWorkOrderStepId:step.id andType:SaveTypeAdd];
 }
@@ -136,8 +138,8 @@
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
     
-    [[WorkOrderManager getInstance] postWorkOrderStepWithCode:workOrder.code andParams:dict finishBlock:^(NSDictionary *dict, NSString *obj) {
-        if (!obj) {
+    [[WorkOrderManager getInstance] postWorkOrderStepWithCode:workOrder.code andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
+        if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
                 for(Attachment *attachment in step.attachments)
@@ -164,15 +166,9 @@
                                 [hub hide:YES afterDelay:1];
                             }
                         }else{
-                            NSString *message = @"";
-                            if(obj == nil){
-                                message =@"上传工单附件失败,请重试";
-                            }else{
-                                message = [obj valueForKey:@"message"];
-                            }
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = message;
+                            hub.labelText = error;
                             [hub hide:YES afterDelay:1];
                         }
                     }];
@@ -184,15 +180,9 @@
             }
         }else{
             
-            NSString *message = @"";
-            if(obj == nil){
-                message =@"上传工单步骤失败,请重试";
-            }else{
-                message = [obj valueForKey:@"message"];
-            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = message;
+            hub.labelText = error;
             [hub hide:YES afterDelay:1];
             
         }

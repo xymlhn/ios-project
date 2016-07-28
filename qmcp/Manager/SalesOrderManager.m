@@ -7,7 +7,7 @@
 //
 
 #import "SalesOrderManager.h"
-#import "OSCAPI.h"
+#import "QMCPAPI.h"
 #import "HttpUtil.h"
 #import "SalesOrderBind.h"
 #import "NSObject+LKDBHelper.h"
@@ -59,7 +59,7 @@ NSString *const kConfirmCache = @"confirm";
 
 -(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion
 {
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERBIND,lastupdateTime];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERBIND,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setSaleOrderBindTime:[Utils formatDate:[NSDate new]]];
@@ -90,7 +90,7 @@ NSString *const kConfirmCache = @"confirm";
 
 -(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion
 {
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", OSCAPI_ADDRESS,OSCAPI_SALESORDERCONFIRM,lastupdateTime];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCONFIRM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setSalesOrderGrabTime:[Utils formatDate:[NSDate new]]];

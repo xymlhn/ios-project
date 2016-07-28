@@ -29,28 +29,22 @@
 {
     self.title = @"表单";
     self.view.backgroundColor = [UIColor whiteColor];
-    UIView *containView = [UIView new];
-    [containView setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:containView];
-    [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
-    }];
-    //创建布局对象
-    UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
-    //flowlaout的属性，横向滑动
-    flowLayout1.scrollDirection = UICollectionViewScrollDirectionVertical;
-    _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout1];
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    [_collectionView registerClass:[FormTemplateCell class] forCellWithReuseIdentifier:@"FormTemplateCell"];
-    [containView addSubview:_collectionView];
 
-    [_collectionView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(containView.mas_top).with.offset(10);
-        make.left.equalTo(containView.mas_left).with.offset(5);
-        make.right.equalTo(containView.mas_right).with.offset(-5);
-        make.bottom.equalTo(containView.mas_bottom);
-    }];
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    CGFloat itemW = (kScreen_Width - 12 * 3) / 2;
+    CGFloat itemH = itemW * (175.0/284.0) + 10 +21 +5 +13 +5;
+    layout.itemSize = CGSizeMake(itemW, itemH);
+    layout.sectionInset = UIEdgeInsetsMake(20, 12, 20, 12);
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 20;
     
+    _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    _collectionView.backgroundColor = [UIColor clearColor];
+    [_collectionView registerClass:[FormTemplateCell class] forCellWithReuseIdentifier:@"FormTemplateCell"];
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+    _collectionView.layer.masksToBounds = NO;
+    [self.view addSubview:_collectionView];
     
 }
 
@@ -108,17 +102,6 @@
     return cell;
 }
 
-//定义每个UICollectionView 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0,0, 0);
-}
-
-//定义每个UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(150, 120);
-}
 
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

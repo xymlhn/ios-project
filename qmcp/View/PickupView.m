@@ -24,7 +24,7 @@
     [containView setBackgroundColor:[UIColor whiteColor]];
     [rootView addSubview:containView];
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView).with.insets(UIEdgeInsetsMake(64, 0, 0, 0));
+        make.edges.equalTo(rootView);
     }];
     
     _headView = [UIView new];

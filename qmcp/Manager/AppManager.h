@@ -100,5 +100,13 @@ extern NSString *const kReloginNotification;
  */
 -(void)getImageUrlByKey:(NSString *)key andType:(int)type finishBlock:(CompletionHandler)completion;
 
+/**
+ *  根据用户userOpenid获取图片url
+ *
+ *  @param userOpenId userOPenid
+ *  @param completion 回调
+ */
+-(void)getUserIconUrlByUserOpenId:(NSString *)userOpenId finishBlock:(CompletionHandler)completion;
+
 
 @end

@@ -63,6 +63,7 @@
 -(void)setField:(FormTemplateField *)field{
     if (field != nil) {
         _field = field;
+        _name.text = [NSString stringWithFormat:@"%@%lu",@"明细",_field.tempOrder];
     }
 }
 

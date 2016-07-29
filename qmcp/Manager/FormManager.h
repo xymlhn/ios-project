@@ -56,6 +56,6 @@
  *
  *  @return 表格数组
  */
--(NSMutableArray<FormTemplateField*> *)plusFormTemplate:(NSString *)tableFormTemplateId;
+-(NSMutableArray<FormTemplateField*> *)plusFormTemplate:(NSString *)tableFormTemplateId withOrder:(NSUInteger)order;
 
 @end

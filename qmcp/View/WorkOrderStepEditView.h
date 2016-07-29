@@ -13,7 +13,6 @@
 @property (nonatomic,strong) UILabel *titleText;
 @property (nonatomic,strong) UITextView *editText;
 @property (nonatomic,strong) UILabel *alwaysBtn;;
-@property (nonatomic,strong) UILabel *photoBtn;
 @property (nonatomic,strong) UILabel *saveBtn;
 @property (nonatomic,strong) UILabel *delBtn;
 @property (nonatomic,strong) UIView *containView;

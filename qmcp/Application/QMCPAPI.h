@@ -9,9 +9,9 @@
 #ifndef iosapp_QMCPAPI_h
 #define iosapp_QMCPAPI_h
 
-#define QMCPAPI_ADDRESS             @"http://192.168.13.63:8080/"
+//#define QMCPAPI_ADDRESS             @"http://192.168.13.63:8080/"
 //#define QMCPAPI_ADDRESS             @"http://inforshare.vicp.cc:8000/"
-//#define QMCPA.PI_ADDRESS                  @"http://www.efw365.com/"
+#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
 #define QMCPAPI_LOGIN                    @"api/login"
 #define QMCPAPI_LOGOUT                   @"api/logout"
 #define QMCPAPI_SERVER_TIME              @"a/api/servertime"
@@ -42,4 +42,5 @@
 #define QMCPAPI_ITEM_COMPLETE            @"i/a/api/salesorder/itemcomplete/"
 #define QMCPAPI_SEARCH                   @"i/a/api/workorder/search"
 #define QMCPAPI_IMAGEURL                 @"i/a/api/attachment/get"
+#define QMCPAPI_USERICONURL              @"i/a/api/user/info/portrait/"
 #endif

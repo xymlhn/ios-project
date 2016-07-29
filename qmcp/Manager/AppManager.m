@@ -176,4 +176,12 @@ NSString *const kUserCache = @"user";
     }];
 }
 
+-(void)getUserIconUrlByUserOpenId:(NSString *)userOpenId finishBlock:(CompletionHandler)completion{
+
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,userOpenId];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+        completion(obj,error);
+    }];
+}
+
 @end

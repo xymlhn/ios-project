@@ -25,7 +25,7 @@
     [_containView setBackgroundColor:[UIColor whiteColor]];
     [rootView addSubview:_containView];
     [_containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView).with.insets(UIEdgeInsetsMake(69, 5, 5, 5));
+        make.edges.equalTo(rootView).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
     }];
     _titleText = [UILabel new];
     _titleText.font = [UIFont systemFontOfSize:12];//
@@ -80,14 +80,16 @@
     }];
     
     //创建布局对象
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    //设置单元格的尺寸
-    flowLayout.itemSize = CGSizeMake(80, 80);
-    //flowlaout的属性，横向滑动
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 200, 320, 280) collectionViewLayout:flowLayout];
-    _collectionView.backgroundColor = [UIColor lightGrayColor];
-
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    CGFloat itemW = (kScreen_Width - 12 * 3) / 3;
+    CGFloat itemH = (kScreen_Width - 12 * 3) / 3;
+    layout.itemSize = CGSizeMake(itemW, itemH);
+    layout.sectionInset = UIEdgeInsetsMake(20, 12, 20, 12);
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 20;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    _collectionView = [[UICollectionView alloc] initWithFrame:rootView.bounds collectionViewLayout:layout];
+    _collectionView.backgroundColor = [UIColor grayColor];
     [rootView addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_editText.mas_bottom).with.offset(10);
@@ -95,7 +97,8 @@
         make.right.equalTo(_containView.mas_right).with.offset(0);
         make.height.equalTo(@120);
     }];
-    [_collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
+    [_collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];
+    
     [self initBottomView:rootView];
     
 }
@@ -127,13 +130,7 @@
     _delBtn.textAlignment = NSTextAlignmentCenter;
     _delBtn.textColor = [UIColor nameColor];
     [bottomView addSubview:_delBtn];
-    
-    _photoBtn = [UILabel new];
-    [_photoBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _photoBtn.text = @"";
-    _photoBtn.textAlignment = NSTextAlignmentCenter;
-    _photoBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_photoBtn];
+
 
     _saveBtn = [UILabel new];
     [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
@@ -147,18 +144,12 @@
         make.centerY.equalTo(bottomView.mas_centerY);
     }];
     
-    [_photoBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(_delBtn.mas_right);
-        make.width.equalTo(_delBtn);
-        make.centerY.equalTo(bottomView.mas_centerY);
-        
-    }];
     
    
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.right.equalTo(bottomView.mas_right);
-        make.left.equalTo(_photoBtn.mas_right);
-        make.width.equalTo(_photoBtn);
+        make.left.equalTo(_delBtn.mas_right);
+        make.width.equalTo(_delBtn);
         make.centerY.equalTo(bottomView.mas_centerY);
        
     }];

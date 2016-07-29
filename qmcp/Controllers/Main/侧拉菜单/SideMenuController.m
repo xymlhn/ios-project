@@ -24,6 +24,7 @@
 #import "PickupNoticeView.h"
 #import "PickupNoticeViewController.h"
 #import "TMCache.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface SideMenuController ()
 
 @end
@@ -198,12 +199,16 @@
     UIImageView *avatar = [UIImageView new];
     avatar.contentMode = UIViewContentModeScaleAspectFit;
     [avatar setCornerRadius:30];
+    avatar.image = [UIImage imageNamed:@"default－portrait"];
     avatar.userInteractionEnabled = YES;
     avatar.translatesAutoresizingMaskIntoConstraints = NO;
     [headerView addSubview:avatar];
+   
     
-    avatar.image = [UIImage imageNamed:@"default－portrait"];
-
+    [[AppManager getInstance] getUserIconUrlByUserOpenId:[[AppManager getInstance] getUser].userOpenId finishBlock:^(NSDictionary *dict, NSString *error) {
+        [avatar sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
+    }];
+    
     UILabel *nameLabel = [UILabel new];
     nameLabel.text = [[AppManager getInstance] getUser].userNickName;
     nameLabel.font = [UIFont boldSystemFontOfSize:20];

@@ -18,7 +18,7 @@
 #import "WorkOrderStepEditView.h"
 #import "PhotoCell.h"
 @interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-                                            UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate>
+                                            UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) WorkOrderStep *step;
 @property (nonatomic, strong) WorkOrder *workOrder;
@@ -44,29 +44,35 @@
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
 
     _attachments = [NSMutableArray new];
-    if(_step.attachments.count > 0)
-    {
-        [_attachments addObjectsFromArray:_step.attachments];
+    
+    [_attachments addObjectsFromArray:_step.attachments];
+    if(_attachments.count < 6){
+        Attachment *plusIcon = [Attachment new];
+        plusIcon.isPlus = true;
+        [_attachments insertObject:plusIcon atIndex:_attachments.count];
     }
+       
+    _editView.editText.delegate = self;
+    
     _editView.titleText.text = _step.stepName;
     _editView.editText.text = _step.content;
     
 }
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ 
+        [self hidenKeyboard];
+        return NO;
+    }
+    return YES;
+}
 
 -(void)bindListener
 {
-    _editView.photoBtn.userInteractionEnabled = YES;
-    [_editView.photoBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoBtnClick:)]];
     _editView.delBtn.userInteractionEnabled = YES;
     [_editView.delBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delBtnClick:)]];
     _editView.collectionView.delegate = self;
     _editView.collectionView.dataSource = self;
     
-    //添加手势，点击屏幕其他区域关闭键盘的操作
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
-    gesture.numberOfTapsRequired = 1;
-    gesture.delegate = self;
-    [self.view addGestureRecognizer:gesture];
 }
 
 +(instancetype)doneBlock:(void (^)(WorkOrderStep *,SaveType type))block{
@@ -203,7 +209,7 @@
     }];
     
 }
-- (void)photoBtnClick:(UITapGestureRecognizer *)recognizer
+- (void)plusBtnClick
 {
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -225,7 +231,8 @@
 {
     if([_step deleteToDB]){
         for (Attachment *attachment in _attachments) {
-            [self deleteAttachment:attachment];
+            if(!attachment.isPlus)
+                [self deleteAttachment:attachment];
         }
         [self.navigationController popViewControllerAnimated:YES];
         super.type = SaveTypeDelete;
@@ -270,34 +277,32 @@
 //构建单元格
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identify = @"cell";
+    static NSString *identify = @"PhotoCell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     Attachment *attachment = _attachments[indexPath.row];
-
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:attachment.path];
+    if(attachment.isPlus){
+        UIImage *image = [UIImage imageNamed:@"plus_photo.png"];
+        cell.image.image = image;
+    }else{
+        UIImage *image = [[UIImage alloc] initWithContentsOfFile:attachment.path];
+        cell.image.image = image;
+    }
     
-    cell.image.image = image;
     return cell;
     
-}
-
-//定义每个UICollectionView 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(5, 5, 5, 5);
-}
-
-//定义每个UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(96, 100);
 }
 
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCell * cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [Utils showImage:cell.image.image];
+    Attachment *attachment = _attachments[indexPath.row];
+    if(attachment.isPlus){
+        [self plusBtnClick];
+    }else{
+       [Utils showImage:cell.image.image];
+    }
+    
 }
 
 #pragma mark - 键盘操作

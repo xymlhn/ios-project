@@ -121,6 +121,7 @@
             header.id = [[NSUUID UUID] UUIDString];
             header.tableTemplateId = field.tableTemplateId;
             header.templateFields = tableList;
+            header.tempOrder = 1;
             footer.id = header.id;
             footer.tableTemplateId = field.tableTemplateId;
 
@@ -138,11 +139,11 @@
     }
 }
 
--(NSMutableArray<FormTemplateField*> *)plusFormTemplate:(NSString *)tableFormTemplateId{
+-(NSMutableArray<FormTemplateField*> *)plusFormTemplate:(NSString *)tableFormTemplateId withOrder:(NSUInteger)order{
     NSMutableArray<FormTemplateField *> *tableList = [self formTemplateField:tableFormTemplateId];
     
     FormTemplateField *header = [FormTemplateField new];
-    
+    header.tempOrder = order + 1;
     header.controlType = FormTemplateControlTypeHeader;
     header.id = [[NSUUID UUID] UUIDString];
     header.tableTemplateId = tableFormTemplateId;

@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, FormTemplateControlType) {
 @property (nonatomic,assign) bool onlyCreatorWrite;
 @property (nonatomic,strong) NSMutableArray<NSString *> *valueList;
 
+@property (nonatomic,assign) NSUInteger tempOrder;
 @property (nonatomic,copy) NSString *tableTemplateId;
 @property (nonatomic,strong) NSMutableDictionary<NSString *,NSArray<FormTemplateField *> *> *tempMap;
 @property (nonatomic,strong) NSMutableArray *templateFields;

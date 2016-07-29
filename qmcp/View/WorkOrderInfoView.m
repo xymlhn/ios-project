@@ -23,7 +23,7 @@
     [_containView setBackgroundColor:[UIColor whiteColor]];
     [rootView addSubview:_containView];
     [_containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView).with.insets(UIEdgeInsetsMake(69, 5, 5, 5));
+        make.edges.equalTo(rootView).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
     }];
     [self initCodeView];
     [self initUserView];

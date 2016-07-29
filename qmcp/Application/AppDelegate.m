@@ -51,7 +51,7 @@ int const databaseVersion = 3;
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
     [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
-    
+    [[UINavigationBar appearance] setTranslucent:NO];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    
     /************ 登录状态设置 **************/

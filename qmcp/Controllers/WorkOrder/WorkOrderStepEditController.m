@@ -179,15 +179,9 @@
                                 [hub hide:YES afterDelay:1];
                             }
                         }else{
-                            NSString *message = @"";
-                            if(obj == nil){
-                                message =@"上传工单附件失败,请重试";
-                            }else{
-                                message = [obj valueForKey:@"message"];
-                            }
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = message;
+                            hub.labelText = error;
                             [hub hide:YES afterDelay:1];
                         }
                     }];

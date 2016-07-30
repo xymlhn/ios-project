@@ -306,7 +306,23 @@
 -(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andStandName:(NSString *)standName andStandandClassName:(NSString *)standClassName andIndex:(NSInteger)index
 {
     int order = (int)index;
-    [[PropertyManager getInstance] appendCommodityChooseWithOrder:order andPropertyName:standName andPropertyContent:standClassName];
+    NSArray *commodityPropertyArr =[[PropertyManager getInstance] appendCommodityChooseWithOrder:order andPropertyName:standName andPropertyContent:standClassName];
+    NSMutableArray *titleArr = [NSMutableArray new];
+    int i = 100;
+    for (CommodityProperty *property in commodityPropertyArr) {
+        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
+        for (NSString *str in property.propertyContent) {
+            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:[NSString stringWithFormat:@"%d",i ] andStandClassName:str];
+            [tempClassInfoArr addObject:tempClassInfo1];
+            i++;
+        }
+        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
+        [titleArr addObject:tempModel];
+    }
+    
+    standardView.standardArr = titleArr;
+    [standardView standardsViewReload];
+    
 }
 //设置自定义btn的属性
 -(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn

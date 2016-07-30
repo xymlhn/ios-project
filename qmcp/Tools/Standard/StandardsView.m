@@ -15,10 +15,6 @@
 
 @interface StandardsView ()<ThrowLineToolDelegate>
 {
-//    UILabel *tipLab;
-//    UILabel *titleLab;
-//    UILabel *contentLab;
-    
     CGFloat _cellHeight;
     NSInteger _cellNum;
     
@@ -29,7 +25,6 @@
     UIView *coverView;
     UIView *showView;
     
-//    UIImageView *tempImgView;
     UIView *buyNumBackView;
     
     NSInteger tempImgViewtag;
@@ -41,8 +36,6 @@
 @property (nonatomic) NSMutableArray *standardBtnArr;
 @property (nonatomic) NSMutableDictionary *standardBtnDict;
 @property (nonatomic) UITextField *numberTextFied;
-//@property(nonatomic)UITextView *contentTextView;
-//@property(nonatomic)UILabel *holderLab;
 
 @end
 
@@ -97,12 +90,11 @@
     self.mainImgView.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.mainImgView.layer.borderWidth = 3;
     
-//    self.mainImgView.image = self.mainImg;
     self.mainImgView.center = CGPointMake(80, showView.frame.origin.y+self.mainImgView.frame.size.height/3);
     self.mainImgView.image = [UIImage imageNamed:@"landou_square_default.png"];
     
     self.mainImgView.contentMode = UIViewContentModeScaleAspectFit;
-//    self.mainImgView.alpha = 0;
+
     [self addSubview:self.mainImgView];
         /*默认按键*/
     cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, StandardViewHeight-44, StandardViewWidth/2, 44)];
@@ -113,7 +105,7 @@
     [cancelBtn addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [showView addSubview:cancelBtn];
     
-//
+
     sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(StandardViewWidth/2, StandardViewHeight-44, StandardViewWidth/2, 44)];
     sureBtn.tag = 1000 + 2;
     sureBtn.backgroundColor = ItemsBaseColor;
@@ -166,7 +158,7 @@
     
     self.priceLab.textColor = [UIColor redColor];
     self.priceLab.font = [UIFont systemFontOfSize:14];
-    self.priceLab.text =@"价格";// [NSString stringWithFormat:@"¥%@-%@",dicGoodsDetail[@"goods_price"],self.dictStandard[@"goods_marketprice"]];
+    self.priceLab.text =@"价格";
     
     [tempView addSubview:self.priceLab];
     
@@ -176,7 +168,6 @@
                                    self.priceLab.frame.size.width, 30);
     self.goodNum.textColor = [UIColor blackColor];
     self.goodNum.font = [UIFont systemFontOfSize:14];
-    //self.goodNum.text =@"库存";// [NSString stringWithFormat:@"库存%@件",dicGoodsDetail[@"goods_storage"]];
     [tempView addSubview:self.goodNum];
     
     
@@ -204,7 +195,6 @@
     _mainTableView.separatorColor =  [UIColor grayColor];
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _mainTableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    
     _mainTableView.tableFooterView = [[UIView alloc] init];
     
     _cellHeight = 100;
@@ -476,9 +466,6 @@
     showView.layer.anchorPoint = CGPointMake(0.5, 2.0);
     showView.frame = tempRect;//重设frame，重新计算center  因为anchorpoint的设置会导致center的改变
 
-//    tempRect = self.mainImgView.frame;
-//    self.mainImgView.layer.anchorPoint = CGPointMake(0.5, 2.0*(StandardViewHeight/100));
-//    self.mainImgView.frame = tempRect;//跟随mainimgview旋转
     CGPoint tempPoint = self.mainImgView.center;
     [UIView animateWithDuration:0.5 animations:^{
         self.mainImgView.center = CGPointMake(tempPoint.x, SCREEN_HEIGHT);
@@ -545,10 +532,6 @@
 -(void)ThrowGoodTo:(CGPoint)destPoint andDuration:(NSTimeInterval)duration andHeight:(CGFloat)height andScale:(CGFloat)Scale
 {
     
-//    if (height == 0) {
-//        height = 100;
-//    }
-    
     if(duration == 0)
     {
         duration = 1.6;
@@ -589,14 +572,7 @@
 
 -(void)viewSetHidden:(NSString *)tag
 {
-//    tempImgView.hidden = YES;
-
-    NSLog(@"tag = %@",tag);
-    
-//    tempImgView = self.tempImgViewArr[[tag intValue]];
-    
     for (UIImageView *tempImgView in self.tempImgViewArr) {
-//        UIImageView *tempImgView = self.tempImgViewArr[i];
         
         if (tempImgView.tag == [tag intValue]) {
             tempImgView.hidden = YES;
@@ -611,7 +587,7 @@
 ////抛物线结束
 - (void)animationDidFinish:(UIView *)view
 {
-//    [self.tempImgViewArr removeObject:view];
+
 }
 
 
@@ -839,7 +815,6 @@
             CGFloat Btnx = 0;//每个btn的起始位置
             Btnx += btnGap;
             
-    //        NSString *strID = [NSString stringWithFormat:@"%@",dicGoodsDetail[@"spec_name"][indexPath.row][@"id"]];
             NSArray<standardClassInfo *> *specArr = standardModel.standardClassInfo;
             
             NSMutableArray *tempArr = [NSMutableArray array];
@@ -1072,6 +1047,3 @@
 
 
 @end
-// 版权属于原作者
-// http://code4app.com (cn) http://code4app.net (en)
-// 发布代码于最专业的源码分享网站: Code4App.com

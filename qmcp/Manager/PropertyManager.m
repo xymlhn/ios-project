@@ -144,7 +144,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
 
 }
 
--(void)appendCommodityChooseWithOrder:(int) order andPropertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent{
+-(NSArray *)appendCommodityChooseWithOrder:(int) order andPropertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent{
     
     PropertyData *data = [PropertyData new];
     data.order = order;
@@ -154,17 +154,17 @@ NSString * const kCommodityProperty = @"commodityProperty";
     }else{
         [_commodityPropertyChooseDict setObject:data forKey:propertyName];
     }
-    [self handleChoose];
+    return [self handleChoose];
 }
 /**
  *  处理已点击的规格
  */
--(void)handleChoose{
+-(NSArray *)handleChoose{
     [_propertyDataArr removeAllObjects];
     for (NSString *key in _commodityPropertyChooseDict) {
         [_propertyDataArr addObject:_commodityPropertyChooseDict[key]];
     }
-    [self findAvailableItemProperty:_propertyDataArr];
+    return [self findAvailableItemProperty:_propertyDataArr];
 }
 
 /**
@@ -172,13 +172,13 @@ NSString * const kCommodityProperty = @"commodityProperty";
  *
  *  @param propertyDataArr 规格数组
  */
--(void)findAvailableItemProperty:(NSMutableArray *)propertyDataArr
+-(NSArray *)findAvailableItemProperty:(NSMutableArray *)propertyDataArr
 {
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"commodityCode == %@",_currentCommodityCode];
     NSArray* conditionArr = [_commodityItemArr filteredArrayUsingPredicate:predicate];
     if([propertyDataArr count] == 0){
         [self getCommodityPropertyArr:_currentCommodityCode];
-        return;
+        return nil;
     }
 
     for (PropertyData *propertyData in propertyDataArr) {
@@ -227,7 +227,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
     NSNotification * notice = [NSNotification notificationWithName:@"priceUpdate" object:nil userInfo:dict];
     //发送消息
     [[NSNotificationCenter defaultCenter]postNotification:notice];
-    //[self sortProperties:conditionArr];
+    return [self sortProperties:conditionArr];
 }
 
 /**
@@ -235,7 +235,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
  *
  *  @param properties 规格数组
  */
--(void)sortProperties:(NSArray *)properties{
+-(NSArray *)sortProperties:(NSArray *)properties{
     NSArray *commodityPropertyArr = [self getCommodityPropertyArr:_currentCommodityCode];
     CommodityProperty *p1 = commodityPropertyArr.count > 0 ? commodityPropertyArr[0] : [CommodityProperty new];
     CommodityProperty *p2 = commodityPropertyArr.count > 1 ? commodityPropertyArr[1] : [CommodityProperty new];
@@ -284,6 +284,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
     [self compareOldArray:p4.propertyContent withNewArray:arr4];
     [self compareOldArray:p5.propertyContent withNewArray:arr5];
     [self compareOldArray:p6.propertyContent withNewArray:arr6];
+    return commodityPropertyArr;
 }
 /**
  *  比较规格进行删除

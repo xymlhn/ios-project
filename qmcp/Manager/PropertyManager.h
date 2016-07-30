@@ -52,7 +52,7 @@
  *  @param propertyName    规格名称 (例:尺寸)
  *  @param propertyContent 规格描述 (例:XL,XXL)
  */
--(void)appendCommodityChooseWithOrder:(int)order andPropertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent;
+-(NSArray *)appendCommodityChooseWithOrder:(int)order andPropertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent;
 
 /**
  *  释放数据

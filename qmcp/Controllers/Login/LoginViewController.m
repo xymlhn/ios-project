@@ -190,7 +190,6 @@
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                 hub.labelText = [NSString stringWithFormat:@"账号或密码错误"];
-                
                 [hub hide:YES afterDelay:1];
             }
         }else{

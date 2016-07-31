@@ -36,10 +36,12 @@ NSString * const kCommodityProperty = @"commodityProperty";
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
-        shared_manager.commodityItemArr = [[TMCache sharedCache] objectForKey:kCommodityItem];
-        if(shared_manager.commodityItemArr == nil)
+        NSArray *tempCommodityArr = [[TMCache sharedCache] objectForKey:kCommodityItem];
+        if(tempCommodityArr == nil)
         {
             shared_manager.commodityItemArr = [NSMutableArray new];
+        }else{
+            shared_manager.commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:tempCommodityArr];
         }
         shared_manager.commodityPropertyDict = [[TMCache sharedCache] objectForKey:kCommodityProperty];
         if(shared_manager.commodityPropertyDict == nil)
@@ -64,7 +66,10 @@ NSString * const kCommodityProperty = @"commodityProperty";
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setCommodityItem:[Utils formatDate:[NSDate new]]];
-            _commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:obj];
+            if(obj != nil){
+                _commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:obj];
+                [[TMCache sharedCache] setObject:obj forKey:kCommodityItem];
+            }
             
         }else{
             [self getCommodityItemByLastUpdateTime:[Config getCommodityItem]];
@@ -116,7 +121,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
  */
 -(BOOL)isExistCommodityItem:(NSString *)code{
     BOOL flag = false;
-    for (CommodityItem *item in _commodityItemArr) {
+    for (CommodityItem *item in self.commodityItemArr) {
         if([item.commodityCode isEqualToString:code])
         {
             flag = true;

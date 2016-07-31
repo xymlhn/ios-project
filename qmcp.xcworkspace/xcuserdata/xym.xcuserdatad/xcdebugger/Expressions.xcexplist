@@ -12,6 +12,14 @@
          contextName = "-[WorkOrderManager postWorkOrderInventoryWithCode:andParams:finishBlock:]:WorkOrderManager.m">
       </ContextState>
       <ContextState
+         contextName = "-[PropertyManager isExistProperty:]:PropertyManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_commodityPropertyDict objectForKey:code]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__39-[ScanViewController returnOnKeyboard:]_block_invoke.121:ScanViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -79,6 +87,23 @@
       </ContextState>
       <ContextState
          contextName = "__36-[LoginViewController loginBtnClick]_block_invoke:LoginViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__30+[PropertyManager getInstance]_block_invoke:PropertyManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared_manager.commodityPropertyDict">
+            </PersistentString>
+            <PersistentString
+               value = "[[TMCache sharedCache] objectForKey:kCommodityProperty]">
+            </PersistentString>
+            <PersistentString
+               value = "[[TMCache sharedCache] objectForKey:kCommodityItem]">
+            </PersistentString>
+            <PersistentString
+               value = "shared_manager">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[AppManager user]:AppManager.m">

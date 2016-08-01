@@ -45,6 +45,7 @@
         make.bottom.equalTo(self.view.mas_bottom);
     }];
 
+    self.view = _tableView;
     
 }
 

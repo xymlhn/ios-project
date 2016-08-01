@@ -15,5 +15,5 @@
 @property (nonatomic,strong) UIButton *completeBtn;
 
 
-+ (instancetype)viewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

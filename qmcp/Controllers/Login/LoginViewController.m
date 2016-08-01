@@ -34,20 +34,26 @@
     [super viewDidDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
--(void)setupView
+-(void)loadView
 {
-    self.view.backgroundColor = [UIColor whiteColor];
-    _loginView = [LoginView loginViewInstance:self.view];
-    [self setUpSubviews];
-    
-    NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
-    _loginView.userNameText.text = accountAndPassword? accountAndPassword[0] : @"";
-    _loginView.passWordText.text = accountAndPassword? accountAndPassword[1] : @"";
-    [self validUsernameAndPassword];
+    _loginView = [LoginView new];
+    self.view = _loginView;
 }
 
 -(void)bindListener
 {
+    _loginView.userNameText.delegate = self;
+    _loginView.passWordText.delegate = self;
+    
+    [_loginView.userNameText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_loginView.passWordText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+
+    
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    gesture.delegate = self;
+    [self.view addGestureRecognizer:gesture];
     
     _loginView.loginBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self loginBtnClick];
@@ -116,21 +122,6 @@
     return text.length > 0;
 }
 
-- (void)setUpSubviews
-{
-    _loginView.userNameText.delegate = self;
-    _loginView.passWordText.delegate = self;
-    
-    [_loginView.userNameText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    [_loginView.passWordText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    
-    
-    //添加手势，点击屏幕其他区域关闭键盘的操作
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
-    gesture.numberOfTapsRequired = 1;
-    gesture.delegate = self;
-    [self.view addGestureRecognizer:gesture];
-}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
@@ -140,7 +131,12 @@
     return YES;
 }
 
--(void)loadData{}
+-(void)loadData{
+    NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
+    _loginView.userNameText.text = accountAndPassword? accountAndPassword[0] : @"";
+    _loginView.passWordText.text = accountAndPassword? accountAndPassword[1] : @"";
+    [self validUsernameAndPassword];
+}
 #pragma mark - 键盘操作
 
 - (void)hidenKeyboard

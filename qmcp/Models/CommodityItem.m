@@ -7,7 +7,9 @@
 //
 
 #import "CommodityItem.h"
+#import "MJExtension.h"
 
 @implementation CommodityItem
 
+MJCodingImplementation
 @end

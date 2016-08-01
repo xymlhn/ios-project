@@ -16,5 +16,5 @@
 @property (nonatomic,copy) NSString *qrCodeUrl;
 
 
-+ (instancetype)qrCodeIdentityViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

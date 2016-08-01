@@ -10,8 +10,4 @@
 
 @implementation BaseView
 
--(void)setupView:(UIView *)rootView{
-    [NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
-}
-
 @end

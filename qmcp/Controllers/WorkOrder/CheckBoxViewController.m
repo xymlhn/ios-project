@@ -17,9 +17,9 @@
 @end
 @implementation CheckBoxViewController
 
--(void)initView{
-    _checkBoxView = [CheckBoxView checkBoxViewInstance:self.view];
-
+-(void)loadView{
+    _checkBoxView = [CheckBoxView viewInstance];
+    self.view = _checkBoxView;
 }
 
 -(NSMutableArray<NSNumber *> *)statusList{

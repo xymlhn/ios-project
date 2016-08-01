@@ -32,9 +32,10 @@
 @implementation WorkOrderInfoController
 
 #pragma mark - BaseWorkOrderViewController
--(void)setupView
+-(void)loadView
 {
-    _infoView = [WorkOrderInfoView workOrderInfoViewInstance:self.view];
+    _infoView = [WorkOrderInfoView viewInstance];
+    self.view = _infoView;
     self.title = @"信息";
  
 }

@@ -10,31 +10,30 @@
 
 @implementation SignView
 
-+ (instancetype)signViewInstance:(UIView *)view{
++ (instancetype)signViewInstance{
     SignView *signView = [SignView new];
-    [signView setupView:view];
     return signView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
     _signatureView = [[PJRSignatureView alloc] init];
-    [rootView addSubview:_signatureView];
+    [self addSubview:_signatureView];
     
     [_signatureView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
     
-    [self initBottomView:rootView];
-    
+    [self initBottomView];
+    return self;
 }
 
--(void)initBottomView:(UIView *)rootView
+-(void)initBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
@@ -82,9 +81,9 @@
 
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@50);
     }];
     

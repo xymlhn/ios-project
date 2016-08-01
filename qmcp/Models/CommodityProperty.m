@@ -7,7 +7,10 @@
 //
 
 #import "CommodityProperty.h"
+#import "MJExtension.h"
 
 @implementation CommodityProperty
+
+MJCodingImplementation
 
 @end

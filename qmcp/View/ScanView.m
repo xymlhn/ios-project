@@ -10,21 +10,22 @@
 
 @implementation ScanView
 
-+ (instancetype)scanViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     ScanView *scanView = [ScanView new];
-    [scanView setupView:view];
     return scanView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    
+    self.backgroundColor = [UIColor whiteColor];
     UIView *containView = [UIView new];
-    [rootView addSubview:containView];
+    [self addSubview:containView];
     [containView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(rootView.mas_top).with.offset(100);
-        make.left.equalTo(rootView.mas_left).with.offset(10);
-        make.right.equalTo(rootView.mas_right).with.offset(-10);
+        make.top.equalTo(self.mas_top).with.offset(100);
+        make.left.equalTo(self.mas_left).with.offset(10);
+        make.right.equalTo(self.mas_right).with.offset(-10);
         make.height.equalTo(@50);
     }];
     
@@ -55,5 +56,8 @@
         make.left.equalTo(containView.mas_left).with.offset(10);
         
     }];
+
+    return self;
 }
+
 @end

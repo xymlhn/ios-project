@@ -20,13 +20,14 @@
 @end
 
 @implementation SearchViewController
--(void)setupView{
-    _searchView = [SearchView searchViewInstance:self.view];
+-(void)loadView{
+    _searchView = [SearchView viewInstance];
     _searchView.searchBar.delegate = self;
     self.navigationItem.title = @"搜索";
     
     _searchView.tableView.delegate = self;
     _searchView.tableView.dataSource = self;
+    self.view = _searchView;
 }
 
 -(void)bindListener{

@@ -19,5 +19,5 @@
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-+ (instancetype)workOrderStepEditViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

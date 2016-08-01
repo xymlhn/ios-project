@@ -11,8 +11,7 @@
 #import "Masonry.h"
 #import "UIColor+Util.h"
 #import "PchHeader.h"
-@interface BaseView : NSObject
+@interface BaseView : UIView
 
-- (void)setupView:(UIView *)rootView;
 
 @end

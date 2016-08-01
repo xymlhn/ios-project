@@ -16,5 +16,5 @@
 @property (nonatomic,strong ) UILabel     *saveBtn;
 
 
-+ (instancetype)workOrderStepViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

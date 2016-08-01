@@ -10,36 +10,38 @@
 
 @implementation WorkOrderStepView
 
-+ (instancetype)workOrderStepViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     WorkOrderStepView *workOrderStepView = [WorkOrderStepView new];
-    [workOrderStepView setupView:view];
+    
     return workOrderStepView;
 }
 
--(void)setupView:(UIView *)rootView
-{
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;
     _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
-    rootView.backgroundColor = [UIColor whiteColor];
-    [rootView addSubview:_tableView];
+    self.backgroundColor = [UIColor whiteColor];
+    [self addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(rootView.mas_top).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(-40);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-40);
     }];
-    [self initBottomView:rootView];
-
+    [self initBottomView];
+    
+    return self;
     
 }
 
--(void)initBottomView:(UIView *)rootView
+-(void)initBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
@@ -73,9 +75,9 @@
     [bottomView addSubview:saveLabel];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@50);
     }];
     

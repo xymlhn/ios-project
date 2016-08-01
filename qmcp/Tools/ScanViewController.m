@@ -22,9 +22,9 @@
     
 }
 
--(void)setupView{
+-(void)loadView{
     self.title = @"快速输入";
-    _scanView = [ScanView scanViewInstance:self.view];
+    _scanView = [ScanView viewInstance];
 }
 -(void)bindListener{
     _scanView.scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)

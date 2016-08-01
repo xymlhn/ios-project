@@ -68,7 +68,7 @@ NSString * const kCommodityProperty = @"commodityProperty";
             [Config setCommodityItem:[Utils formatDate:[NSDate new]]];
             if(obj != nil){
                 _commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:obj];
-                [[TMCache sharedCache] setObject:obj forKey:kCommodityItem];
+                [[TMCache sharedCache] setObject:_commodityItemArr forKey:kCommodityItem];
             }
             
         }else{
@@ -85,8 +85,9 @@ NSString * const kCommodityProperty = @"commodityProperty";
         if (!error) {
             [Config setCommodityProperty:[Utils formatDate:[NSDate new]]];
             if(obj != nil){
-                [[TMCache sharedCache] setObject:obj forKey:kCommodityProperty];
                 _commodityPropertyDict = obj;
+                [[TMCache sharedCache] setObject:_commodityPropertyDict forKey:kCommodityProperty];
+                
             }
 
         }else{

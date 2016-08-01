@@ -50,5 +50,5 @@
 @property (nonatomic,strong) UIView *view;
 @property (nonatomic,strong) WorkOrder *workOrder;
 
-+ (instancetype)workOrderInfoViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

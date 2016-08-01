@@ -12,5 +12,5 @@
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UITableView *tableView;
 
-+ (instancetype)searchViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

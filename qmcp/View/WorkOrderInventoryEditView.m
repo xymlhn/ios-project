@@ -12,98 +12,104 @@
 
 @implementation WorkOrderInventoryEditView
 
-+ (instancetype)workOrderInventoryEditView:(UIView *)view{
++ (instancetype)viewInstance{
     WorkOrderInventoryEditView *workOrderInventoryEditView = [WorkOrderInventoryEditView new];
-    [workOrderInventoryEditView setupView:view];
     return workOrderInventoryEditView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    self.backgroundColor = [UIColor whiteColor];
+   
+    self.backgroundColor = [UIColor whiteColor];
     UIView *containView = [UIView new];
     [containView setBackgroundColor:[UIColor whiteColor]];
-    [rootView addSubview:containView];
+    [self addSubview:containView];
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
-    [self initTopView:containView];
-    [self initTableView:containView];
-    [self initBottomView:containView];
+    [self initTopView];
+    [self initTableView];
+    [self initBottomView];
+
+    return self;
 }
 
--(void)initTableView:(UIView *)rootView
+
+
+-(void)initTableView
 {
     //创建布局对象
     UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
     //flowlaout的属性，横向滑动
     flowLayout1.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _photoTableView = [[UICollectionView alloc] initWithFrame:rootView.bounds collectionViewLayout:flowLayout1];
+    _photoTableView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout1];
     _photoTableView.backgroundColor = [UIColor grayColor];
     [_photoTableView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
-    [rootView addSubview:_photoTableView];
+    [self addSubview:_photoTableView];
     
     //创建布局对象
     UICollectionViewFlowLayout *flowLayout2 = [[UICollectionViewFlowLayout alloc] init];
     //flowlaout的属性，横向滑动
     flowLayout2.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _chooseTableView = [[UICollectionView alloc] initWithFrame:rootView.bounds collectionViewLayout:flowLayout2];
+    _chooseTableView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout2];
     _chooseTableView.backgroundColor = [UIColor lightGrayColor];
     [_chooseTableView registerClass:[CommodityCell class] forCellWithReuseIdentifier:@"commodityCell"];
-    [rootView addSubview:_chooseTableView];
+    [self addSubview:_chooseTableView];
     
     [_photoTableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_chooseTableView.mas_bottom).with.offset(10);
-        make.left.equalTo(rootView.mas_left).with.offset(5);
-        make.right.equalTo(rootView.mas_right).with.offset(-5);
+        make.left.equalTo(self.mas_left).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-5);
         make.height.equalTo(@120);
     }];
     
     [_chooseTableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_remarkTextView.mas_bottom).with.offset(10);
-        make.left.equalTo(rootView.mas_left).with.offset(5);
-        make.right.equalTo(rootView.mas_right).with.offset(-5);
+        make.left.equalTo(self.mas_left).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-5);
         make.height.equalTo(@200);
     }];
 }
 
--(void)initTopView:(UIView *)rootView
+-(void)initTopView
 {
     _titleLabel = [UILabel new];
     _titleLabel.font = [UIFont systemFontOfSize:15];//采用系统默认文字设置大小
     _titleLabel.text = @"12305";
     _titleLabel.textColor = [UIColor blackColor];
-    [rootView addSubview:_titleLabel];
+    [self addSubview:_titleLabel];
     
     _remarkTextView = [UITextField new];
     _remarkTextView.font = [UIFont systemFontOfSize:15];//
     _remarkTextView.textColor = [UIColor blackColor];
     _remarkTextView.placeholder=@"备注";
     _remarkTextView.borderStyle=UITextBorderStyleBezel;
-    [rootView addSubview:_remarkTextView];
+    [self addSubview:_remarkTextView];
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(rootView.mas_top).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
     }];
     
     [_remarkTextView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_titleLabel.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
     }];
 }
 
--(void)initBottomView:(UIView *)rootView
+-(void)initBottomView
 {
     UIView *bottomView = [UIView new];
     
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
     }];
     
@@ -125,7 +131,7 @@
     _numberLabel.text = @"12";
     _numberLabel.textAlignment = NSTextAlignmentCenter;
     _numberLabel.textColor = [UIColor whiteColor];
-    [rootView addSubview:_numberLabel];
+    [self addSubview:_numberLabel];
     _carIcon = [UILabel new];
     [_carIcon setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
     _carIcon.text = @"";

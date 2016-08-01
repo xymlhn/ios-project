@@ -11,24 +11,25 @@
 
 @implementation QrCodeBindView
 
-+ (instancetype)qrCodeBindViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     QrCodeBindView *qrCodeBindView = [QrCodeBindView new];
-    [qrCodeBindView setupView:view];
     return qrCodeBindView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor clearColor];
-
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    
+    self.backgroundColor = [UIColor clearColor];
+    
     UIView *alphaView = [UIView new];
     _baseView = [UIView new];
     alphaView.backgroundColor = [UIColor whiteColor];
     _baseView.backgroundColor = [UIColor blackColor];
     _baseView.alpha = 0.2;
-    [rootView addSubview:_baseView];
-    [rootView addSubview:alphaView];
-
+    [self addSubview:_baseView];
+    [self addSubview:alphaView];
+    
     _imageView = [UIImageView new];
     [alphaView addSubview:_imageView];
     
@@ -50,7 +51,7 @@
     _confirmBtn.titleLabel.font = [UIFont systemFontOfSize: 15.0];
     [_confirmBtn setBackgroundColor: [UIColor nameColor]];
     [alphaView addSubview:_confirmBtn];
-
+    
     _cancelBtn = [UIButton new];
     [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
     [_cancelBtn.layer setMasksToBounds:YES];
@@ -59,16 +60,16 @@
     _cancelBtn.titleLabel.font = [UIFont systemFontOfSize: 15.0];
     [_cancelBtn setBackgroundColor: [UIColor orangeColor]];
     [alphaView addSubview:_cancelBtn];
-
+    
     [alphaView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(rootView.mas_centerX);
-        make.centerY.equalTo(rootView.mas_centerY);
+        make.centerX.equalTo(self.mas_centerX);
+        make.centerY.equalTo(self.mas_centerY);
         make.width.equalTo(@250);
         make.height.equalTo(@300);
     }];
     
     [_baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
     
     
@@ -77,22 +78,24 @@
         make.width.equalTo(@200);
         make.height.equalTo(@200);
         make.centerX.equalTo(alphaView.mas_centerX);
-
+        
     }];
     
     [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(alphaView).with.offset(-20);
-        make.right.equalTo(rootView.mas_centerX).with.offset(-20);
+        make.right.equalTo(self.mas_centerX).with.offset(-20);
         make.width.equalTo(@60);
         make.height.equalTo(@32);
     }];
     
     [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(alphaView).with.offset(-20);
-        make.left.equalTo(rootView.mas_centerX).with.offset(20);
+        make.left.equalTo(self.mas_centerX).with.offset(20);
         make.width.equalTo(@60);
         make.height.equalTo(@32);
     }];
+    
+    return self;
 }
 
 -(void)setQrCodeUrl:(NSString *)qrCodeUrl{

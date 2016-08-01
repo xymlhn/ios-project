@@ -12,5 +12,5 @@
 @property (nonatomic,strong) UIView *baseView;
 @property (nonatomic,strong) UITableView *tableView;
 
-+ (instancetype)chooseViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

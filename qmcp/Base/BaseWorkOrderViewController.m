@@ -21,14 +21,10 @@
     [super viewDidLoad];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
                                                         forBarMetrics:UIBarMetricsDefault];
-    if(_workOrderCode){
-        self.navigationItem.title = _workOrderCode;
-    }
-    self.view.backgroundColor = [UIColor whiteColor];
+     self.view.backgroundColor = [UIColor whiteColor];
     [self setupView];
     [self bindListener];
     [self loadData];
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -41,7 +37,7 @@
 }
 
 -(void)setupView{
-    [NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
+//    [NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
 }
 -(void)bindListener{
     //[NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];

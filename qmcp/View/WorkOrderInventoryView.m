@@ -10,37 +10,38 @@
 
 @implementation WorkOrderInventoryView
 
-+ (instancetype)workOrderInventoryViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     WorkOrderInventoryView *workOrderInventoryView = [WorkOrderInventoryView new];
-    [workOrderInventoryView setupView:view];
     return workOrderInventoryView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    self.backgroundColor = [UIColor whiteColor];
     _tableView = [UITableView new];
     _tableView.rowHeight = 50;
     _tableView.backgroundColor = [UIColor themeColor];
-    [rootView addSubview:_tableView];
+    [self addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(rootView.mas_top).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(-40);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-40);
     }];
-    [self initBottomView:rootView];
-    
+    [self initBottomView];
+    return self;
 }
--(void)initBottomView:(UIView *)rootView
+
+-(void)initBottomView
 {
     UIView *bottomView = [UIView new];
     
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
     }];
     

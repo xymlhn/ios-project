@@ -23,5 +23,5 @@
 @property (nonatomic,strong) UILabel *carIcon;
 @property (nonatomic,strong) UILabel *photoIcon;
 
-+ (instancetype)workOrderInventoryEditView:(UIView *)view;
++ (instancetype)viewInstance;
 @end

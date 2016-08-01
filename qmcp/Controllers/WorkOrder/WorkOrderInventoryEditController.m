@@ -41,9 +41,10 @@
 @implementation WorkOrderInventoryEditController
 
 #pragma mark - BaseWorkOrderViewController
--(void)setupView
+-(void)loadView
 {
-     _inventoryEditView = [WorkOrderInventoryEditView workOrderInventoryEditView:self.view];
+     _inventoryEditView = [WorkOrderInventoryEditView viewInstance];
+    self.view = _inventoryEditView;
     self.title = @"清点编辑";
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(priceUpdate:) name:@"priceUpdate" object:nil];

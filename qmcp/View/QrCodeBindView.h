@@ -16,5 +16,5 @@
 @property (nonatomic,strong) UIView *baseView;
 @property (nonatomic,copy) NSString *qrCodeUrl;
 
-+ (instancetype)qrCodeBindViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

@@ -38,10 +38,10 @@
 
 #pragma mark - UIViewController
 
--(void)setupView
+-(void)loadView
 {
-    _workOrderFormView = [WorkOrderFormView viewInstance:self.view];
-
+    _workOrderFormView = [WorkOrderFormView viewInstance];
+    self.view = _workOrderFormView;
     self.title = @"表单编辑";
     
     

@@ -10,23 +10,25 @@
 
 @implementation CheckBoxView
 
-+ (instancetype)checkBoxViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     CheckBoxView *checkBoxView = [CheckBoxView new];
-    [checkBoxView setupView:view];
     return checkBoxView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor clearColor];
+
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    
+    self.backgroundColor = [UIColor clearColor];
     _baseView = [UIView new];
-     [rootView addSubview:_baseView];
+    [self addSubview:_baseView];
     
     UIView *alphaView = [UIView new];
     alphaView.backgroundColor = [UIColor whiteColor];
     _baseView.backgroundColor = [UIColor blackColor];
     _baseView.alpha = 0.2;
-    [rootView addSubview:alphaView];
+    [self addSubview:alphaView];
     
     UIView *topView = [UIView new];
     topView.backgroundColor = [UIColor whiteColor];
@@ -49,14 +51,14 @@
     [alphaView addSubview:_tableView];
     
     [_baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
     
     [alphaView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(rootView.mas_left);
-        make.right.equalTo(rootView.mas_right);
-        make.bottom.equalTo(rootView.mas_bottom);
-        make.top.equalTo(rootView.mas_centerY);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.bottom.equalTo(self.mas_bottom);
+        make.top.equalTo(self.mas_centerY);
     }];
     
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -87,5 +89,10 @@
         make.right.equalTo(alphaView.mas_right);
     }];
     
+
+    
+    return self;
 }
+
+
 @end

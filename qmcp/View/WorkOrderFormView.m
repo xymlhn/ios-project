@@ -10,49 +10,54 @@
 
 @implementation WorkOrderFormView
 
-+ (instancetype)viewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     WorkOrderFormView *workOrderFormView = [WorkOrderFormView new];
-    [workOrderFormView setupView:view];
     return workOrderFormView;
 }
 
--(void)setupView:(UIView *)rootView{
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    
     _tableView = [UITableView new];
     _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.separatorStyle = NO;
-    [rootView addSubview:_tableView];
-  
+    [self addSubview:_tableView];
+    
     
     _saveBtn = [UIButton new];
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
     _saveBtn.backgroundColor = [UIColor colorWithRed:0.400 green:0.800 blue:1.000 alpha:1.000];
-    [rootView addSubview:_saveBtn];
+    [self addSubview:_saveBtn];
     
     _completeBtn = [UIButton new];
     [_completeBtn setTitle:@"完结" forState:UIControlStateNormal];
     _completeBtn.backgroundColor = [UIColor grayColor];
-    [rootView addSubview:_completeBtn];
+    [self addSubview:_completeBtn];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(rootView.mas_left);
-        make.right.equalTo(rootView.mas_right);
-        make.top.equalTo(rootView.mas_top);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.top.equalTo(self.mas_top);
         make.bottom.equalTo(_saveBtn.mas_top);
     }];
     
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(rootView.mas_bottom);
-        make.left.equalTo(rootView.mas_left);
-        make.right.equalTo(rootView.mas_centerX);
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_centerX);
         make.height.equalTo(@50);
     }];
     
     [_completeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(rootView.mas_bottom);
-        make.left.equalTo(rootView.mas_centerX);
-        make.right.equalTo(rootView.mas_right);
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_centerX);
+        make.right.equalTo(self.mas_right);
         make.height.equalTo(@50);
     }];
+
+    return self;
 }
+
 @end

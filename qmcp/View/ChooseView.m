@@ -10,32 +10,33 @@
 
 @implementation ChooseView
 
-+ (instancetype)chooseViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     ChooseView *chooseView = [ChooseView new];
-    [chooseView setupView:view];
     return chooseView;
 }
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor clearColor];
+
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    self.backgroundColor = [UIColor clearColor];
     
     UIView *alphaView = [UIView new];
     _baseView = [UIView new];
     alphaView.backgroundColor = [UIColor whiteColor];
     _baseView.backgroundColor = [UIColor blackColor];
     _baseView.alpha = 0.2;
-    [rootView addSubview:_baseView];
-    [rootView addSubview:alphaView];
-
+    [self addSubview:_baseView];
+    [self addSubview:alphaView];
+    
     [_baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
     
     [alphaView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(rootView.mas_left);
-        make.right.equalTo(rootView.mas_right);
-        make.bottom.equalTo(rootView.mas_bottom);
-        make.top.equalTo(rootView.mas_centerY);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.bottom.equalTo(self.mas_bottom);
+        make.top.equalTo(self.mas_centerY);
     }];
     
     _tableView = [UITableView new];
@@ -46,7 +47,8 @@
         make.edges.equalTo(alphaView);
     }];
 
-    
+    return self;
 }
+
 
 @end

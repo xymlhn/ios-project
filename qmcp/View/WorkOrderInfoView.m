@@ -10,20 +10,21 @@
 
 @implementation WorkOrderInfoView
 
-+ (instancetype)workOrderInfoViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     WorkOrderInfoView *workOrderInfoView = [WorkOrderInfoView new];
-    [workOrderInfoView setupView:view];
     return workOrderInfoView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    
+    self.backgroundColor = [UIColor whiteColor];
     _containView = [UIView new];
     [_containView setBackgroundColor:[UIColor whiteColor]];
-    [rootView addSubview:_containView];
+    [self addSubview:_containView];
     [_containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
+        make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
     }];
     [self initCodeView];
     [self initUserView];
@@ -34,7 +35,8 @@
     [self initRemarkView];
     
     [self initStarBtn];
-    _view = rootView;
+    _view = self;
+    return self;
 }
 
 //编号
@@ -478,14 +480,14 @@
 {
     switch (workOrder.type) {
         case WorkOrderTypeOnsite:
-            [self initOnsiteBottomView:_view];
+            [self initOnsiteBottomView];
             break;
         case WorkOrderTypeService:
-            [self initServiceBottomView:_view];
+            [self initServiceBottomView];
             break;
             
         case WorkOrderTypeInventory:
-            [self initInventoryBottomView:_view];
+            [self initInventoryBottomView];
             break;
         default:
             break;
@@ -493,11 +495,11 @@
     
 }
 
--(void)initOnsiteBottomView:(UIView *)rootView
+-(void)initOnsiteBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
@@ -569,9 +571,9 @@
     [bottomView addSubview:inventoryLabel];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@50);
     }];
     
@@ -638,11 +640,11 @@
 }
 
 
--(void)initServiceBottomView:(UIView *)rootView
+-(void)initServiceBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
@@ -702,9 +704,9 @@
     
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@50);
     }];
     
@@ -761,11 +763,11 @@
 }
 
 
--(void)initInventoryBottomView:(UIView *)rootView
+-(void)initInventoryBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
@@ -824,9 +826,9 @@
     [bottomView addSubview:inventoryLabel];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@50);
     }];
     

@@ -10,21 +10,20 @@
 
 @implementation SearchView
 
-+ (instancetype)searchViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     SearchView *searchView = [SearchView new];
-    [searchView setupView:view];
     return searchView;
 }
-
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    self.backgroundColor = [UIColor whiteColor];
     
     UIView *containView = [UIView new];
     [containView setBackgroundColor:[UIColor whiteColor]];
-    [rootView addSubview:containView];
+    [self addSubview:containView];
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
     
     _searchBar = [UISearchBar new];
@@ -50,5 +49,7 @@
         make.right.equalTo(containView.mas_right).with.offset(0);
         make.bottom.equalTo(containView.mas_bottom).with.offset(0);
     }];
+    return self;
 }
+
 @end

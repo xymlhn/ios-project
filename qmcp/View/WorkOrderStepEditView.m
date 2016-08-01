@@ -11,21 +11,22 @@
 
 @implementation WorkOrderStepEditView
 
-+ (instancetype)workOrderStepEditViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     WorkOrderStepEditView *workOrderStepEditView = [WorkOrderStepEditView new];
-    [workOrderStepEditView setupView:view];
     return workOrderStepEditView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+
+    self.backgroundColor = [UIColor whiteColor];
     
     _containView = [UIView new];
     [_containView setBackgroundColor:[UIColor whiteColor]];
-    [rootView addSubview:_containView];
+    [self addSubview:_containView];
     [_containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
+        make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
     }];
     _titleText = [UILabel new];
     _titleText.font = [UIFont systemFontOfSize:12];//
@@ -88,9 +89,9 @@
     layout.minimumInteritemSpacing = 5;
     layout.minimumLineSpacing = 20;
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    _collectionView = [[UICollectionView alloc] initWithFrame:rootView.bounds collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     _collectionView.backgroundColor = [UIColor grayColor];
-    [rootView addSubview:_collectionView];
+    [self addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_editText.mas_bottom).with.offset(10);
         make.left.equalTo(_containView.mas_left).with.offset(0);
@@ -99,18 +100,21 @@
     }];
     [_collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];
     
-    [self initBottomView:rootView];
+    [self initBottomView];
+    
+    return self;
     
 }
--(void)initBottomView:(UIView *)rootView
+
+-(void)initBottomView
 {
     UIView *bottomView = [UIView new];
     
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
     }];
     

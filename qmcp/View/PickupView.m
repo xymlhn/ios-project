@@ -10,26 +10,28 @@
 
 @implementation PickupView
 
-+ (instancetype)pickupViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     PickupView *pickupView = [PickupView new];
-    [pickupView setupView:view];
     return pickupView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    
+    self.backgroundColor = [UIColor whiteColor];
     
     UIView *containView = [UIView new];
     [containView setBackgroundColor:[UIColor whiteColor]];
-    [rootView addSubview:containView];
+    [self addSubview:containView];
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
     
     _headView = [UIView new];
     [_headView setBackgroundColor:[UIColor whiteColor]];
-    [rootView addSubview:_headView];
+    [self addSubview:_headView];
     
     _codeText = [UILabel new];
     _codeText.text = @"订单编号";
@@ -73,7 +75,7 @@
     _tableView.rowHeight = 80;
     _tableView.backgroundColor = [UIColor themeColor];
     [containView addSubview:_tableView];
-
+    
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(containView.mas_top).with.offset(5);
         make.left.equalTo(containView.mas_left);
@@ -87,16 +89,16 @@
         make.height.mas_equalTo(@1);
     }];
     [_qrButton mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.left.equalTo(topView.mas_left).with.offset(5);
         make.centerY.equalTo(topView.mas_centerY);
         make.width.equalTo(@30);
         make.height.equalTo(@40);
-
+        
     }];
     
     [_searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.left.equalTo(_qrButton.mas_right).with.offset(0);
         make.right.equalTo(topView.mas_right).with.offset(5);
         make.centerY.equalTo(topView.mas_centerY).with.offset(-2);
@@ -120,7 +122,7 @@
         make.top.equalTo(_codeText.mas_bottom).with.offset(0);
         make.left.equalTo(_headView.mas_left).with.offset(15);
     }];
-
+    
     
     [_phoneText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_codeText.mas_bottom).with.offset(0);
@@ -135,15 +137,16 @@
         make.bottom.equalTo(containView.mas_bottom).with.offset(0);
     }];
     
-    [self initBottomView:rootView];
+    [self initBottomView];
+    return self;
 }
 
 
--(void)initBottomView:(UIView *)rootView
+-(void)initBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    [rootView addSubview:bottomView];
+    [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
@@ -164,9 +167,9 @@
     [bottomView addSubview:signLabel];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(rootView.mas_bottom).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@50);
     }];
     
@@ -185,6 +188,7 @@
         make.top.equalTo(_signButton.mas_bottom);
         make.centerX.equalTo(_signButton.mas_centerX);
     }];
-    
 }
+
+
 @end

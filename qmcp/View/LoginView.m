@@ -10,22 +10,23 @@
 
 @implementation LoginView
 
-+ (instancetype)loginViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     LoginView *loginView = [LoginView new];
-    [loginView setupView:view];
     return loginView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor whiteColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+    
+    self.backgroundColor = [UIColor whiteColor];
     UIView *topView = [UIView new];
     topView.backgroundColor = [UIColor nameColor];
-    [rootView addSubview:topView];
+    [self addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(rootView.mas_top).with.offset(0);
-        make.left.equalTo(rootView.mas_left).with.offset(0);
-        make.right.equalTo(rootView.mas_right).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@300);
     }];
     
@@ -47,17 +48,17 @@
         make.top.equalTo(logoIcon.mas_bottom).with.offset(15);
         make.centerX.equalTo(topView.mas_centerX);
     }];
-
+    
     UIView *userNameView = [UIView new];
     userNameView.backgroundColor = [UIColor whiteColor];
     [topView addSubview:userNameView];
     [userNameView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(rootView.mas_left).with.offset(25);
-        make.right.equalTo(rootView.mas_right).with.offset(-25);
+        make.left.equalTo(self.mas_left).with.offset(25);
+        make.right.equalTo(self.mas_right).with.offset(-25);
         make.height.equalTo(@35);
         make.top.equalTo(logoWordText.mas_bottom).with.offset(30);
     }];
-
+    
     UILabel *userIcon = [UILabel new];
     [userIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     userIcon.text = @"";
@@ -82,13 +83,13 @@
         make.height.mas_equalTo(30);
         
     }];
-
+    
     UIView *passwordView = [UIView new];
     passwordView.backgroundColor = [UIColor whiteColor];
     [topView addSubview:passwordView];
     [passwordView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(rootView.mas_left).with.offset(25);
-        make.right.equalTo(rootView.mas_right).with.offset(-25);
+        make.left.equalTo(self.mas_left).with.offset(25);
+        make.right.equalTo(self.mas_right).with.offset(-25);
         make.height.equalTo(@35);
         make.top.equalTo(userNameView.mas_bottom).with.offset(20);
     }];
@@ -120,14 +121,14 @@
         make.height.mas_equalTo(30);
         
     }];
-
+    
     UIImageView *circleIcon = [UIImageView new];
     circleIcon.image = [UIImage imageNamed:@"half_circle"];
-    [rootView addSubview:circleIcon];
+    [self addSubview:circleIcon];
     [circleIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topView.mas_bottom);
-        make.left.equalTo(rootView.mas_left);
-        make.right.equalTo(rootView.mas_right);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
         make.height.equalTo(@35);
     }];
     
@@ -138,14 +139,14 @@
     [_loginBtn.layer setCornerRadius:5.0];
     _loginBtn.titleLabel.font = [UIFont systemFontOfSize: 18.0];
     [_loginBtn setBackgroundColor: [UIColor nameColor]];
-    [rootView addSubview:_loginBtn];
+    [self addSubview:_loginBtn];
     [_loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(circleIcon.mas_bottom).with.offset(20);
-        make.left.equalTo(rootView.mas_left).with.offset(25);
-        make.right.equalTo(rootView.mas_right).with.offset(-25);
+        make.left.equalTo(self.mas_left).with.offset(25);
+        make.right.equalTo(self.mas_right).with.offset(-25);
         make.height.equalTo(@40);
     }];
-
+    
     _settingBtn = [UIButton new];
     [_settingBtn setTitle:@"设置" forState:UIControlStateNormal];
     [_settingBtn.layer setMasksToBounds:YES];
@@ -153,14 +154,14 @@
     [_settingBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _settingBtn.titleLabel.font = [UIFont systemFontOfSize: 18.0];
     [_settingBtn setBackgroundColor: [UIColor orangeColor]];
-    [rootView addSubview:_settingBtn];
+    [self addSubview:_settingBtn];
     [_settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_loginBtn.mas_bottom).with.offset(15);
-        make.left.equalTo(rootView.mas_left).with.offset(25);
-        make.right.equalTo(rootView.mas_right).with.offset(-25);
+        make.left.equalTo(self.mas_left).with.offset(25);
+        make.right.equalTo(self.mas_right).with.offset(-25);
         make.height.equalTo(@40);
     }];
+    return self;
 }
-
 
 @end

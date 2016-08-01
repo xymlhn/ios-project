@@ -13,5 +13,5 @@
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UILabel *qrButton;
 
-+ (instancetype)pickupNoticeViewInstance:(UIView *)view;
++ (instancetype)viewInstance;
 @end

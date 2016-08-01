@@ -11,23 +11,24 @@
 
 @implementation QrCodeIdentityView
 
-+ (instancetype)qrCodeIdentityViewInstance:(UIView *)view{
++ (instancetype)viewInstance{
     QrCodeIdentityView *qrCodeIdentityView = [QrCodeIdentityView new];
-    [qrCodeIdentityView setupView:view];
     return qrCodeIdentityView;
 }
 
--(void)setupView:(UIView *)rootView
-{
-    rootView.backgroundColor = [UIColor clearColor];
+- (id)init {
+    self = [super init];
+    if (!self) return nil;
+ 
+    self.backgroundColor = [UIColor clearColor];
     
     UIView *alphaView = [UIView new];
     _baseView = [UIView new];
     alphaView.backgroundColor = [UIColor whiteColor];
     _baseView.backgroundColor = [UIColor blackColor];
     _baseView.alpha = 0.2;
-    [rootView addSubview:_baseView];
-    [rootView addSubview:alphaView];
+    [self addSubview:_baseView];
+    [self addSubview:alphaView];
     
     _imageView = [UIImageView new];
     [alphaView addSubview:_imageView];
@@ -52,14 +53,14 @@
     [alphaView addSubview:_confirmBtn];
     
     [alphaView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(rootView.mas_centerX);
-        make.centerY.equalTo(rootView.mas_centerY);
+        make.centerX.equalTo(self.mas_centerX);
+        make.centerY.equalTo(self.mas_centerY);
         make.width.equalTo(@250);
         make.height.equalTo(@300);
     }];
     
     [_baseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(rootView);
+        make.edges.equalTo(self);
     }];
     
     
@@ -73,10 +74,11 @@
     
     [_confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(alphaView).with.offset(-20);
-        make.centerX.equalTo(rootView.mas_centerX).with.offset(0);
+        make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.width.equalTo(@60);
         make.height.equalTo(@32);
     }];
+    return self;
     
 }
 

@@ -29,9 +29,10 @@
 @implementation WorkOrderInventoryController
 
 #pragma mark - BaseWorkOrderViewController
--(void)setupView
+-(void)loadView
 {
-    _inventoryView = [WorkOrderInventoryView workOrderInventoryViewInstance:self.view];
+    _inventoryView = [WorkOrderInventoryView viewInstance];
+    self.view = _inventoryView;
     self.title = @"清点";
 }
 

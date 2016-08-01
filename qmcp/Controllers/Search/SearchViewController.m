@@ -20,6 +20,7 @@
 @end
 
 @implementation SearchViewController
+
 -(void)loadView{
     _searchView = [SearchView viewInstance];
     _searchView.searchBar.delegate = self;

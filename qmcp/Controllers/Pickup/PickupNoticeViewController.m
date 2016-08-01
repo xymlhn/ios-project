@@ -8,13 +8,11 @@
 
 #import "PickupNoticeViewController.h"
 #import "PickupNoticeView.h"
-#import "Config.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
 #import "MBProgressHUD.h"
 #import "PickupManager.h"
 #import "ItemComplete.h"
-#import "MJExtension.h"
 #import "PickupNoticeCell.h"
 
 @interface PickupNoticeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>

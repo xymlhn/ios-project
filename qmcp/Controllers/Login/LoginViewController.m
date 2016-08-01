@@ -8,14 +8,10 @@
 
 #import "LoginViewController.h"
 #import "LoginView.h"
-#import "ReactiveCocoa.h"
-#import "Config.h"
 #import "AppManager.h"
 #import "SettingViewController.h"
-#import "Utils.h"
 #import "RootViewController.h"
 #import "User.h"
-#import "MJExtension.h"
 #import "TMCache.h"
 @interface LoginViewController ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 

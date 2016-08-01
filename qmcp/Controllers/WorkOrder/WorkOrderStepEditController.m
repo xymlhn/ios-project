@@ -8,11 +8,8 @@
 
 #import "WorkOrderStepEditController.h"
 #import "QuartzCore/QuartzCore.h"
-#import "UIColor+Util.h"
-#import "NSObject+LKDBHelper.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "Attachment.h"
-#import "Utils.h"
 #import "WorkOrderManager.h"
 #import "AppManager.h"
 #import "WorkOrderStepEditView.h"

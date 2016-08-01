@@ -8,19 +8,15 @@
 
 #import "PickupViewController.h"
 #import "PickupView.h"
-#import "Config.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
-#import "MBProgressHUD.h"
 #import "SignViewController.h"
 #import "Attachment.h"
 #import "PickupManager.h"
 #import "PickupItem.h"
 #import "PickupCell.h"
 #import "PickupData.h"
-#import "MJExtension.h"
 #import "PickupSignature.h"
-#import "Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AppManager.h"
 @interface PickupViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>

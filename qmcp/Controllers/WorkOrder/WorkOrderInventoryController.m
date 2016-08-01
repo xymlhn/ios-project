@@ -7,17 +7,14 @@
 //
 
 #import "WorkOrderInventoryController.h"
-#import "UIColor+Util.h"
 #import "WorkOrderInventoryCell.h"
 #import "ItemSnapshot.h"
 #import "WorkOrderInventoryEditController.h"
 #import "QrCodeViewController.h"
 #import "ScanViewController.h"
 #import "WorkOrderInventoryView.h"
-#import "Config.h"
 #import "SignViewController.h"
 #import "Attachment.h"
-#import "Utils.h"
 #import "WorkOrderManager.h"
 @interface WorkOrderInventoryController ()<UITableViewDataSource,UITableViewDelegate>
 

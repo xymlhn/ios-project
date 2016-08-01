@@ -7,11 +7,8 @@
 //
 
 #import "InitViewController.h"
-#import "Masonry.h"
 #import "AppManager.h"
-#import "Config.h"
 #import "User.h"
-#import "MJExtension.h"
 @interface InitViewController ()
 
 @end

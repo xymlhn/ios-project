@@ -8,7 +8,6 @@
 
 #import "SettingViewController.h"
 #import "SettingViewCell.h"
-#import "Config.h"
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;

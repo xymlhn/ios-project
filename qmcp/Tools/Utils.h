@@ -55,9 +55,51 @@
  */
 +(void)showImage:(UIImage *)image;
 
+/**
+ *  保存图片到沙盒
+ *
+ *  @param image 图片
+ *  @param name  名字
+ *
+ *  @return 路径
+ */
 +(NSString *)saveImage:(UIImage *)image andName:(NSString *)name;
 
+/**
+ *  弹出一段文字
+ *
+ *  @param tipStr 需要提示文字
+ */
 + (void)showHudTipStr:(NSString *)tipStr;
 
+
+/**
+ *  根据文字弹出二维码
+ *
+ *  @param string 内容
+ *
+ *  @return 二维码图片
+ */
 + (UIImage *)createQRCodeFromString:(NSString *)string;
+
+/**
+ *  图片等比压缩
+ *
+ *  @param sourceImage 图片源
+ *  @param size        压缩系数
+ *
+ *  @return 图片
+ */
++(UIImage *) imageCompressForSize:(UIImage *)sourceImage targetSize:(CGSize)size;
+
+
+/**
+ *  图片固定比例压缩
+ *
+ *  @param img  图片源
+ *  @param size 比例
+ *
+ *  @return 图片
+ */
++ (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size;
 @end

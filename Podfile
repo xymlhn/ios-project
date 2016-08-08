@@ -2,7 +2,7 @@ platform :ios, '7.0'
 inhibit_all_warnings!
 source 'https://github.com/CocoaPods/Specs.git'
 
-pod 'MBProgressHUD', '0.9.2'
+pod 'MBProgressHUD', '1.0.0'
 pod 'RESideMenu', '4.0.7'
 pod 'GPUImage', '0.1.7'
 pod 'AFNetworking', '3.1.0'

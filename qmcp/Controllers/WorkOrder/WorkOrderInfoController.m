@@ -163,7 +163,7 @@
             [weakSelf.workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
             hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
-            [hub hide:YES afterDelay:1];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
             switch (weakSelf.workOrder.onSiteStatus) {
                 case OnSiteStatusWaiting:
                     [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
@@ -195,7 +195,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:1];
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
 
     }];
@@ -327,14 +327,14 @@
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                             hub.labelText = error;
-                            [hub hide:YES afterDelay:1];
+                            [hub hide:YES afterDelay:kEndFailedDelayTime];
                         }
                     }];
                 }
             }else
             {
                 hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
-                [hub hide:YES afterDelay:1];
+                [hub hide:YES afterDelay:kEndSucceedDelayTime];
                 
                 [self updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:WorkOrderTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
                 
@@ -346,7 +346,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:1];
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
             
         }
 

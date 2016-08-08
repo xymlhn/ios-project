@@ -130,7 +130,7 @@
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                     hub.labelText = error;
-                    [hub hide:YES afterDelay:kDelayTime];                }
+                    [hub hide:YES afterDelay:kEndFailedDelayTime];                }
             }];
             break;
         }
@@ -159,7 +159,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"扫描成功"];
-            [hub hide:YES];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
             WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
             [workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
@@ -170,7 +170,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:kDelayTime];
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 }

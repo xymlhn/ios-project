@@ -25,7 +25,8 @@ typedef void(^CompletionHandler)(NSDictionary *dict, NSString *error);
 #ifndef Header_h
 #define Header_h
 
-#define kDelayTime 1.5
+#define kEndSucceedDelayTime 0.5
+#define kEndFailedDelayTime 1.5
 #define kScreen_Bounds [UIScreen mainScreen].bounds
 #define kScreen_Height [UIScreen mainScreen].bounds.size.height
 #define kScreen_Width [UIScreen mainScreen].bounds.size.width

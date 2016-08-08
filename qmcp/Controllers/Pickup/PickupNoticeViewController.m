@@ -117,7 +117,7 @@
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            [hub hide:YES];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
             ItemComplete *itemComplete = [ItemComplete mj_objectWithKeyValues:obj];
             [weakSelf.itemCompleteArray insertObject:itemComplete atIndex:0];
             [weakSelf.pickupNoticeView.tableView reloadData];
@@ -126,7 +126,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:1.5];
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     

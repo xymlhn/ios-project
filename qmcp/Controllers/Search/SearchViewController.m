@@ -114,13 +114,13 @@
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                 hub.labelText = message;
-                [hub hide:YES afterDelay:kDelayTime];
+                [hub hide:YES afterDelay:kEndFailedDelayTime];
             }else{
                 message = @"搜索成功";
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
                 hub.labelText = message;
-                [hub hide:YES afterDelay:0.5];
+                [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }
             
         }else{
@@ -129,7 +129,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:1];
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 

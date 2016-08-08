@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "WorkOrderInfoController.h"
 #import "WorkOrderCell.h"
+#import "PchHeader.h"
 @interface WorkOrderListController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *workOrderList;
 @property (nonatomic, assign) WorkOrderStatus status;
@@ -74,7 +75,7 @@
     _hub.mode = MBProgressHUDModeCustomView;
     _hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
     _hub.labelText = [NSString stringWithFormat:@"加载成功"];
-    [_hub hide:YES];
+    [_hub hide:YES afterDelay:kEndSucceedDelayTime];
     switch (_status) {
         case WorkOrderStatusCompleted:
             [_workOrderList addObjectsFromArray:text.userInfo[@"failed"]];

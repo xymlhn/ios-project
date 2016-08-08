@@ -164,7 +164,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"加载成功"];
-            [hub hide:YES];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
             _pickupData = [PickupData mj_objectWithKeyValues:obj];
             NSArray<PickupItem *> * items = [PickupItem mj_objectArrayWithKeyValuesArray:_pickupData.items];
             for (PickupItem *pickItem in items) {
@@ -183,7 +183,7 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:kDelayTime];
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     
@@ -203,13 +203,13 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"成功"];
-            [hub hide:YES];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
         }else{
 
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:kDelayTime];
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     

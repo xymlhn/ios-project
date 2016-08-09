@@ -7,20 +7,11 @@
 //
 
 #import "SalesOrderBindListController.h"
-#import "UIColor+Util.h"
-#import "NSObject+LKDBHelper.h"
-#import "UIColor+Util.h"
 #import "MJRefresh.h"
-#import "Masonry.h"
 #import "SalesOrderSnapshot.h"
 #import "SalesOrderBindCell.h"
-#import "Utils.h"
-#import "QMCPAPI.h"
 #import "SalesOrderManager.h"
-#import "Config.h"
-#import "PchHeader.h"
 #import "QrCodeBindController.h"
-#import "MBProgressHUD.h"
 @interface SalesOrderBindListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *salesOrderList;

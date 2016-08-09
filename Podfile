@@ -1,5 +1,5 @@
 platform :ios, '7.0'
-target :qmcp do
+target:qmcp do
     pod 'MBProgressHUD', '0.9.2'
     pod 'RESideMenu', '4.0.7'
     pod 'AFNetworking', '3.1.0'
@@ -11,11 +11,11 @@ target :qmcp do
     pod 'MJRefresh', '3.1.0'
     pod 'ReactiveCocoa', '2.5'
     pod 'Masonry', '1.0.0'
-    pod 'TMCache’, '2.1.0'
+    pod 'TMCache', '2.1.0'
     pod 'JazzHands', '2.0.0'
     pod 'NYXImagesKit', '2.3'
-    pod 'ActionSheetPicker-3.0'
-    pod 'SDWebImage', '~>3.8'
-    pod 'AMap2DMap'
-    pod 'AMapLocation'
+    pod 'ActionSheetPicker-3.0','2.2.0'
+    pod 'SDWebImage','3.8.1'
+    pod 'AMap2DMap','4.1.0'
+    pod 'AMapLocation','2.1.0'
 end

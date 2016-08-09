@@ -13,7 +13,6 @@
 #import "UIImage+Util.h"
 #import <RESideMenu/RESideMenu.h>
 #import "WorkOrderListController.h"
-#import "GisViewController.h"
 #import "WorkOrder.h"
 #import "SalesOrderBindListController.h"
 #import "SalesOrderGrabListController.h"
@@ -21,6 +20,7 @@
 #import "PropertyManager.h"
 #import "Config.h"
 #import "SearchViewController.h"
+#import "AMapViewController.h"
 @interface OSCTabBarController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     WorkOrderListController *newsViewCtl;
@@ -74,7 +74,7 @@
                                                                      andControllers:@[grabViewCtl, bindViewCtl]
                                                                         underTabbar:YES];
     
-    GisViewController *gis = [[GisViewController alloc] init];
+    AMapViewController *gis = [[AMapViewController alloc] init];
     HelpViewController *help = [[HelpViewController alloc] init];
     self.tabBar.translucent = NO;
     self.viewControllers = @[[self addNavigationItemForViewController:workOrderSVC],

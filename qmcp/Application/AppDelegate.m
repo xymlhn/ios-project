@@ -10,7 +10,6 @@
 #import "UIColor+Util.h"
 #import "RootViewController.h"
 #import "Config.h"
-#import "GisViewController.h"
 #import "WorkOrderManager.h"
 #import "LoginViewController.h"
 #import "Config.h"
@@ -18,8 +17,11 @@
 #import "InitViewController.h"
 #import "IntroductionViewController.h"
 #import "Utils.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
-int const databaseVersion = 3;
+const static int databaseVersion = 3;
+const static NSString *APIKey = @"d69621b023e41d75c2890b727d3ff29c";
+
 @interface AppDelegate ()
 
 
@@ -40,6 +42,8 @@ int const databaseVersion = 3;
     }else{
         [Config setDatabaseVersion:databaseVersion];
     }
+    
+   [AMapServices sharedServices].apiKey = @"d69621b023e41d75c2890b727d3ff29c";
 
     /************ 控件外观设置 **************/
     NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};

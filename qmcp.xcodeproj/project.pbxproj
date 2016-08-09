@@ -56,7 +56,6 @@
 		244517811CA03E760085CC16 /* SalesOrderSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517791CA03E760085CC16 /* SalesOrderSnapshot.m */; };
 		244517821CA03E760085CC16 /* WorkOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445177B1CA03E760085CC16 /* WorkOrder.m */; };
 		244517831CA03E760085CC16 /* WorkOrderStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445177D1CA03E760085CC16 /* WorkOrderStep.m */; };
-		244517861CA03E8A0085CC16 /* GisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517851CA03E8A0085CC16 /* GisViewController.m */; };
 		244517971CA03ED60085CC16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 244517941CA03ED60085CC16 /* Main.storyboard */; };
 		244517981CA03ED60085CC16 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517961CA03ED60085CC16 /* RootViewController.m */; };
 		2445179F1CA03EFC0085CC16 /* HorizonalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445179A1CA03EFC0085CC16 /* HorizonalTableViewController.m */; };
@@ -72,6 +71,7 @@
 		244517BE1CA03F520085CC16 /* UIView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517BA1CA03F520085CC16 /* UIView+Util.m */; };
 		244517C11CA03F870085CC16 /* BaseWorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517C01CA03F870085CC16 /* BaseWorkOrderViewController.m */; };
 		245A2B721CAA49F7009A7572 /* WorkOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A2B711CAA49F7009A7572 /* WorkOrderListController.m */; };
+		246263001D58802400432575 /* AMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246262FF1D58802400432575 /* AMapViewController.m */; };
 		246516FF1D2F419000F1E5D3 /* PickupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 246516FE1D2F419000F1E5D3 /* PickupItem.m */; };
 		246517021D2F425100F1E5D3 /* PickupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246517011D2F425100F1E5D3 /* PickupCell.m */; };
 		246517051D2F49C000F1E5D3 /* PickupData.m in Sources */ = {isa = PBXBuildFile; fileRef = 246517041D2F49C000F1E5D3 /* PickupData.m */; };
@@ -244,8 +244,6 @@
 		2445177B1CA03E760085CC16 /* WorkOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrder.m; sourceTree = "<group>"; };
 		2445177C1CA03E760085CC16 /* WorkOrderStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStep.h; sourceTree = "<group>"; };
 		2445177D1CA03E760085CC16 /* WorkOrderStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStep.m; sourceTree = "<group>"; };
-		244517841CA03E8A0085CC16 /* GisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisViewController.h; sourceTree = "<group>"; };
-		244517851CA03E8A0085CC16 /* GisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GisViewController.m; sourceTree = "<group>"; };
 		244517941CA03ED60085CC16 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		244517951CA03ED60085CC16 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		244517961CA03ED60085CC16 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -276,6 +274,8 @@
 		244517C01CA03F870085CC16 /* BaseWorkOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWorkOrderViewController.m; sourceTree = "<group>"; };
 		245A2B701CAA49F7009A7572 /* WorkOrderListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderListController.h; sourceTree = "<group>"; };
 		245A2B711CAA49F7009A7572 /* WorkOrderListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderListController.m; sourceTree = "<group>"; };
+		246262FE1D58802400432575 /* AMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMapViewController.h; sourceTree = "<group>"; };
+		246262FF1D58802400432575 /* AMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMapViewController.m; sourceTree = "<group>"; };
 		246516FD1D2F419000F1E5D3 /* PickupItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupItem.h; sourceTree = "<group>"; };
 		246516FE1D2F419000F1E5D3 /* PickupItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupItem.m; sourceTree = "<group>"; };
 		246517001D2F425100F1E5D3 /* PickupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupCell.h; sourceTree = "<group>"; };
@@ -768,8 +768,8 @@
 		24DD86941C8EB6DF00390EBF /* Gis */ = {
 			isa = PBXGroup;
 			children = (
-				244517841CA03E8A0085CC16 /* GisViewController.h */,
-				244517851CA03E8A0085CC16 /* GisViewController.m */,
+				246262FE1D58802400432575 /* AMapViewController.h */,
+				246262FF1D58802400432575 /* AMapViewController.m */,
 			);
 			path = Gis;
 			sourceTree = "<group>";
@@ -1181,7 +1181,6 @@
 				24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */,
 				24902D761CC3882D00607659 /* SignViewController.m in Sources */,
 				246517051D2F49C000F1E5D3 /* PickupData.m in Sources */,
-				244517861CA03E8A0085CC16 /* GisViewController.m in Sources */,
 				242EA1DA1D2E4C2E001E4291 /* PickupNoticeViewController.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
 				249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */,
@@ -1213,6 +1212,7 @@
 				24B7DA271D2F93EA00A0723C /* SearchViewCell.m in Sources */,
 				244517BC1CA03F520085CC16 /* UIColor+Util.m in Sources */,
 				24948B3C1CC1DE3600DE8946 /* EnumUtil.m in Sources */,
+				246263001D58802400432575 /* AMapViewController.m in Sources */,
 				244517711CA03E640085CC16 /* Utils.m in Sources */,
 				24ABAFCC1CCF35950089F779 /* ThrowLineTool.m in Sources */,
 				24020A631CB74C1900D4EA96 /* WorkOrderInventoryEditView.m in Sources */,

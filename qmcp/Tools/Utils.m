@@ -14,11 +14,11 @@
 + (MBProgressHUD *)createHUD
 {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
-    HUD.label.font = [UIFont boldSystemFontOfSize:12];
+    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithWindow:window];
+    HUD.labelFont = [UIFont boldSystemFontOfSize:12];
  
     [window addSubview:HUD];
-    [HUD showAnimated:YES];
+    [HUD show:YES];
     HUD.removeFromSuperViewOnHide = YES;
     
     return HUD;
@@ -29,7 +29,7 @@
 {
     MBProgressHUD *HUD = [Utils createHUD];
     HUD.mode = MBProgressHUDModeCustomView;
-    HUD.bezelView.color = [UIColor whiteColor];
+    HUD.color = [UIColor whiteColor];
     HUD.customView = [[UIImageView alloc] initWithImage:image];
     [HUD addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideHUD:)]];
 }
@@ -40,10 +40,10 @@
 {
     MBProgressHUD *HUD = [Utils createHUD];
     HUD.mode = MBProgressHUDModeCustomView;
-    HUD.bezelView.color = [UIColor whiteColor];
-    HUD.label.text = @"扫一扫上面的二维码";
-    HUD.label.font = [UIFont systemFontOfSize:13];
-    HUD.label.textColor = [UIColor grayColor];
+    HUD.color = [UIColor whiteColor];
+    HUD.labelText = @"扫一扫上面的二维码";
+    HUD.labelFont = [UIFont systemFontOfSize:13];
+    HUD.labelColor = [UIColor grayColor];
     UIImage *myQRCode = [Utils createQRCodeFromString:string];
     HUD.customView = [[UIImageView alloc] initWithImage:myQRCode];
     [HUD addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideHUD:)]];
@@ -51,18 +51,18 @@
 
 + (void)hideHUD:(UIGestureRecognizer *)recognizer
 {
-    [(MBProgressHUD *)recognizer.view hideAnimated:YES];
+    [(MBProgressHUD *)recognizer.view hide:YES];
 }
 
 + (void)showHudTipStr:(NSString *)tipStr{
     if (tipStr && tipStr.length > 0) {
         MBProgressHUD *hud = [Utils createHUD];
         hud.mode = MBProgressHUDModeText;
-        hud.detailsLabel.font = [UIFont boldSystemFontOfSize:15.0];
-        hud.detailsLabel.text = tipStr;
+        hud.detailsLabelFont = [UIFont boldSystemFontOfSize:15.0];
+        hud.detailsLabelText = tipStr;
         hud.margin = 10.f;
         hud.removeFromSuperViewOnHide = YES;
-        [hud hideAnimated:YES afterDelay:1.0];
+        [hud hide:YES afterDelay:1.0];
     }
 }
 

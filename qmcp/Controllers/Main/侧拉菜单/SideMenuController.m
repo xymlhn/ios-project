@@ -114,14 +114,14 @@
         }
         case 4: {
             MBProgressHUD *hub = [Utils createHUD];
-            hub.label.text = @"登出中...";
+            hub.labelText = @"登出中...";
             hub.userInteractionEnabled = NO;
             [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSString *error) {
                 if(!error){
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                    hub.label.text = [NSString stringWithFormat:@"登出成功"];
-                    [hub hideAnimated:YES];
+                    hub.labelText = [NSString stringWithFormat:@"登出成功"];
+                    [hub hide:YES];
                     [[AppManager getInstance]clearUserDataWhenLogout];
                     LoginViewController *loginNav = [LoginViewController new];
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
@@ -129,8 +129,8 @@
                 }else{
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                    hub.label.text = error;
-                    [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];                }
+                    hub.labelText = error;
+                    [hub hide:YES afterDelay:kEndFailedDelayTime];                }
             }];
             break;
         }
@@ -152,14 +152,14 @@
 -(void)handleResult:(NSString *)result
 {
     MBProgressHUD *hub = [Utils createHUD];
-    hub.label.text = @"扫描中...";
+    hub.labelText = @"扫描中...";
     hub.userInteractionEnabled = NO;
     [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.label.text = [NSString stringWithFormat:@"扫描成功"];
-            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
+            hub.labelText = [NSString stringWithFormat:@"扫描成功"];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
             WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
             [workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
@@ -169,8 +169,8 @@
 
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.label.text = error;
-            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 }

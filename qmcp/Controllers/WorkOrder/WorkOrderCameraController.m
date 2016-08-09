@@ -10,7 +10,6 @@
 #import "CameraManager.h"
 #import "WorkOrderCameraCell.h"
 #import "CameraData.h"
-#import "UITableView+Common.h"
 
 @interface WorkOrderCameraController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -101,7 +100,6 @@
     CameraData *cameraData = _cameraArr[row];
     cell.cameraData = cameraData;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kPaddingLeftWidth];
     cell.switchBtn.tag = row;
     [cell.switchBtn addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     return cell;

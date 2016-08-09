@@ -7,7 +7,6 @@
 //
 
 #import "UIView+Util.h"
-#import <GPUImage/GPUImage.h>
 
 @implementation UIView (Util)
 
@@ -34,16 +33,6 @@
     return screenshot;
 }
 
-- (UIImage *)updateBlur
-{
-    UIImage *screenshot = [self convertViewToImage];
-    GPUImageiOSBlurFilter *blurFilter = [GPUImageiOSBlurFilter new];
-    blurFilter.saturation = 1.0;
-    blurFilter.rangeReductionFactor = 0.1;
-    
-    UIImage *blurImage = [blurFilter imageByFilteringImage:screenshot];
-    
-    return blurImage;
-}
+
 
 @end

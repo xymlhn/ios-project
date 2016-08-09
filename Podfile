@@ -1,8 +1,7 @@
 platform :ios, '7.0'
 target :qmcp do
-    pod 'MBProgressHUD', '1.0.0'
+    pod 'MBProgressHUD', '0.9.2'
     pod 'RESideMenu', '4.0.7'
-    pod 'GPUImage', '0.1.7'
     pod 'AFNetworking', '3.1.0'
     pod 'SSKeychain', '1.4.0'
     pod 'MJExtension', '3.0.10'

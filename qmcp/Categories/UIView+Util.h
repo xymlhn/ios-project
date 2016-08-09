@@ -14,6 +14,5 @@
 - (void)setBorderWidth:(CGFloat)width andColor:(UIColor *)color;
 
 - (UIImage *)convertViewToImage;
-- (UIImage *)updateBlur;
 
 @end

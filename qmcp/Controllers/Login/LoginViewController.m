@@ -158,7 +158,7 @@
     NSString *username = _loginView.userNameText.text;
     NSString *password = _loginView.passWordText.text;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在登录";
+    hub.label.text = @"正在登录";
     hub.userInteractionEnabled = NO;
     
     [[AppManager getInstance] loginWithUserName:username andPassword:password finishBlock:^(id data, NSString *error) {
@@ -170,7 +170,7 @@
                 [Config saveLoginStatus:true];
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.labelText = [NSString stringWithFormat:@"登录成功"];
+                hub.label.text = [NSString stringWithFormat:@"登录成功"];
                 [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 [[AppManager getInstance]setUser:account];
                 [[TMCache sharedCache] setObject:account forKey:@"user"];
@@ -181,13 +181,13 @@
                 
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.labelText = [NSString stringWithFormat:@"账号或密码错误"];
+                hub.label.text = [NSString stringWithFormat:@"账号或密码错误"];
                 [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.label.text = error;
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];

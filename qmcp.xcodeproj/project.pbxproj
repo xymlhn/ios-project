@@ -48,7 +48,6 @@
 		244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517601CA03E5B0085CC16 /* WorkOrderManager.m */; };
 		2445176E1CA03E640085CC16 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517661CA03E640085CC16 /* Config.m */; };
 		2445176F1CA03E640085CC16 /* HttpUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517681CA03E640085CC16 /* HttpUtil.m */; };
-		244517701CA03E640085CC16 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445176A1CA03E640085CC16 /* QrCodeViewController.m */; };
 		244517711CA03E640085CC16 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445176C1CA03E640085CC16 /* Utils.m */; };
 		2445177E1CA03E760085CC16 /* CommoditySnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517731CA03E760085CC16 /* CommoditySnapshot.m */; };
 		2445177F1CA03E760085CC16 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517751CA03E760085CC16 /* User.m */; };
@@ -90,13 +89,11 @@
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248A5DC21C85C3C30095A4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DC01C85C3C30095A4FB /* LaunchScreen.storyboard */; };
 		248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248EA7A61CAF873000B4D775 /* WorkOrderStepEditController.m */; };
-		24902D761CC3882D00607659 /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24902D751CC3882D00607659 /* SignViewController.m */; };
 		2493FE141D4302E50094ADA2 /* WorkOrderFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */; };
 		24948B3C1CC1DE3600DE8946 /* EnumUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B3B1CC1DE3600DE8946 /* EnumUtil.m */; };
 		24948B3F1CC235FC00DE8946 /* SalesOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B3E1CC235FC00DE8946 /* SalesOrderManager.m */; };
 		24948B421CC2375900DE8946 /* SalesOrderBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B411CC2375900DE8946 /* SalesOrderBind.m */; };
 		24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = 24986CD31CC3202100CE0CB5 /* SalesOrderConfirm.m */; };
-		2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */; };
 		249E49091CE6EFB80051C9C1 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E49081CE6EFB80051C9C1 /* CameraManager.m */; };
 		249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E490B1CE6F0D80051C9C1 /* CameraData.m */; };
 		249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E490E1CE6FA7A0051C9C1 /* WorkOrderCameraController.m */; };
@@ -119,18 +116,20 @@
 		24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE271CBA8385003C6C2E /* SettingViewCell.m */; };
 		24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */; };
 		24B398D51D3A37FB0067A528 /* CheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B398D41D3A37FB0067A528 /* CheckBoxView.m */; };
-		24B398D81D3A39800067A528 /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B398D71D3A39800067A528 /* CheckBoxViewController.m */; };
-		24B398DB1D3A3B140067A528 /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B398DA1D3A3B140067A528 /* CheckCell.m */; };
 		24B7DA201D2F6E5A00A0723C /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B7DA1F1D2F6E5A00A0723C /* ScanView.m */; };
 		24B7DA231D2F929800A0723C /* WorkOrderSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B7DA221D2F929800A0723C /* WorkOrderSearchResult.m */; };
 		24B7DA271D2F93EA00A0723C /* SearchViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B7DA261D2F93EA00A0723C /* SearchViewCell.m */; };
+		24B8A4D51D598705005CB6AE /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8A4D21D598705005CB6AE /* CheckBoxViewController.m */; };
+		24B8A4D61D598705005CB6AE /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8A4D41D598705005CB6AE /* CheckCell.m */; };
+		24B8A4DD1D598733005CB6AE /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8A4D81D598733005CB6AE /* QrCodeViewController.m */; };
+		24B8A4DE1D598733005CB6AE /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8A4DA1D598733005CB6AE /* ScanViewController.m */; };
+		24B8A4DF1D598733005CB6AE /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8A4DC1D598733005CB6AE /* SignViewController.m */; };
 		24C34F111CE9928400D945BE /* FormData.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F101CE9928400D945BE /* FormData.m */; };
 		24C34F141CE9931100D945BE /* FormTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F131CE9931100D945BE /* FormTemplate.m */; };
 		24C34F171CE9936F00D945BE /* FormTemplateField.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F161CE9936F00D945BE /* FormTemplateField.m */; };
 		24C34F1A1CE9956900D945BE /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F191CE9956900D945BE /* FormManager.m */; };
 		24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB411D275B15007A9BF6 /* SearchView.m */; };
 		24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB451D275BA0007A9BF6 /* SearchViewController.m */; };
-		24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D49D2E1CB54370003213C9 /* ScanViewController.m */; };
 		24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */; };
 		24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1EC1CC0DA5D00444A9D /* SalesOrderBindListController.m */; };
 		24EAD1F11CC0DF3100444A9D /* SalesOrderGrabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1F01CC0DF3100444A9D /* SalesOrderGrabCell.m */; };
@@ -228,8 +227,6 @@
 		244517661CA03E640085CC16 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		244517671CA03E640085CC16 /* HttpUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtil.h; sourceTree = "<group>"; };
 		244517681CA03E640085CC16 /* HttpUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpUtil.m; sourceTree = "<group>"; };
-		244517691CA03E640085CC16 /* QrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
-		2445176A1CA03E640085CC16 /* QrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeViewController.m; sourceTree = "<group>"; };
 		2445176B1CA03E640085CC16 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		2445176C1CA03E640085CC16 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		244517721CA03E760085CC16 /* CommoditySnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommoditySnapshot.h; sourceTree = "<group>"; };
@@ -313,8 +310,6 @@
 		248E2A4B1CCE482E00D72459 /* PchHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PchHeader.h; sourceTree = "<group>"; };
 		248EA7A51CAF873000B4D775 /* WorkOrderStepEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepEditController.h; sourceTree = "<group>"; };
 		248EA7A61CAF873000B4D775 /* WorkOrderStepEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepEditController.m; sourceTree = "<group>"; };
-		24902D741CC3882D00607659 /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
-		24902D751CC3882D00607659 /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
 		2493FE121D4302E50094ADA2 /* WorkOrderFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderFormView.h; sourceTree = "<group>"; };
 		2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderFormView.m; sourceTree = "<group>"; };
 		24948B3A1CC1DE3600DE8946 /* EnumUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumUtil.h; sourceTree = "<group>"; };
@@ -325,8 +320,6 @@
 		24948B411CC2375900DE8946 /* SalesOrderBind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderBind.m; sourceTree = "<group>"; };
 		24986CD21CC3202100CE0CB5 /* SalesOrderConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderConfirm.h; sourceTree = "<group>"; };
 		24986CD31CC3202100CE0CB5 /* SalesOrderConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderConfirm.m; sourceTree = "<group>"; };
-		2499B85D1CCB9D3D003FC604 /* UITableView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Common.h"; sourceTree = "<group>"; };
-		2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Common.m"; sourceTree = "<group>"; };
 		249E49071CE6EFB80051C9C1 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
 		249E49081CE6EFB80051C9C1 /* CameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraManager.m; sourceTree = "<group>"; };
 		249E490A1CE6F0D80051C9C1 /* CameraData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraData.h; sourceTree = "<group>"; };
@@ -371,16 +364,22 @@
 		24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		24B398D31D3A37FB0067A528 /* CheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxView.h; sourceTree = "<group>"; };
 		24B398D41D3A37FB0067A528 /* CheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxView.m; sourceTree = "<group>"; };
-		24B398D61D3A39800067A528 /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckBoxViewController.h; path = ../Controllers/WorkOrder/CheckBoxViewController.h; sourceTree = "<group>"; };
-		24B398D71D3A39800067A528 /* CheckBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckBoxViewController.m; path = ../Controllers/WorkOrder/CheckBoxViewController.m; sourceTree = "<group>"; };
-		24B398D91D3A3B140067A528 /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckCell.h; path = ../View/CheckCell.h; sourceTree = "<group>"; };
-		24B398DA1D3A3B140067A528 /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckCell.m; path = ../View/CheckCell.m; sourceTree = "<group>"; };
 		24B7DA1E1D2F6E5A00A0723C /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
 		24B7DA1F1D2F6E5A00A0723C /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
 		24B7DA211D2F929800A0723C /* WorkOrderSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderSearchResult.h; sourceTree = "<group>"; };
 		24B7DA221D2F929800A0723C /* WorkOrderSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderSearchResult.m; sourceTree = "<group>"; };
 		24B7DA251D2F93EA00A0723C /* SearchViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewCell.h; sourceTree = "<group>"; };
 		24B7DA261D2F93EA00A0723C /* SearchViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewCell.m; sourceTree = "<group>"; };
+		24B8A4D11D598705005CB6AE /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxViewController.h; sourceTree = "<group>"; };
+		24B8A4D21D598705005CB6AE /* CheckBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxViewController.m; sourceTree = "<group>"; };
+		24B8A4D31D598705005CB6AE /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCell.h; sourceTree = "<group>"; };
+		24B8A4D41D598705005CB6AE /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCell.m; sourceTree = "<group>"; };
+		24B8A4D71D598733005CB6AE /* QrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
+		24B8A4D81D598733005CB6AE /* QrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeViewController.m; sourceTree = "<group>"; };
+		24B8A4D91D598733005CB6AE /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		24B8A4DA1D598733005CB6AE /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		24B8A4DB1D598733005CB6AE /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
+		24B8A4DC1D598733005CB6AE /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
 		24C34F0F1CE9928400D945BE /* FormData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormData.h; sourceTree = "<group>"; };
 		24C34F101CE9928400D945BE /* FormData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormData.m; sourceTree = "<group>"; };
 		24C34F121CE9931100D945BE /* FormTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTemplate.h; sourceTree = "<group>"; };
@@ -393,8 +392,6 @@
 		24CDDB411D275B15007A9BF6 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		24CDDB441D275BA0007A9BF6 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		24CDDB451D275BA0007A9BF6 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		24D49D2D1CB54370003213C9 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
-		24D49D2E1CB54370003213C9 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		24EAD1E81CC0DA4300444A9D /* SalesOrderGrabListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabListController.h; sourceTree = "<group>"; };
 		24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabListController.m; sourceTree = "<group>"; };
 		24EAD1EB1CC0DA5D00444A9D /* SalesOrderBindListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderBindListController.h; sourceTree = "<group>"; };
@@ -721,6 +718,8 @@
 		24B0324F1C881E46007506DD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				24B8A4D01D598682005CB6AE /* ViewControllerTools */,
+				24B8A4CF1D598651005CB6AE /* CheckBox */,
 				24ABAFBF1CCF35950089F779 /* Standard */,
 				24233E211CCE07DF00CF93B6 /* SMPageControl */,
 				244517651CA03E640085CC16 /* Config.h */,
@@ -731,16 +730,6 @@
 				2445176C1CA03E640085CC16 /* Utils.m */,
 				24948B3A1CC1DE3600DE8946 /* EnumUtil.h */,
 				24948B3B1CC1DE3600DE8946 /* EnumUtil.m */,
-				244517691CA03E640085CC16 /* QrCodeViewController.h */,
-				2445176A1CA03E640085CC16 /* QrCodeViewController.m */,
-				24D49D2D1CB54370003213C9 /* ScanViewController.h */,
-				24D49D2E1CB54370003213C9 /* ScanViewController.m */,
-				24902D741CC3882D00607659 /* SignViewController.h */,
-				24902D751CC3882D00607659 /* SignViewController.m */,
-				24B398D91D3A3B140067A528 /* CheckCell.h */,
-				24B398DA1D3A3B140067A528 /* CheckCell.m */,
-				24B398D61D3A39800067A528 /* CheckBoxViewController.h */,
-				24B398D71D3A39800067A528 /* CheckBoxViewController.m */,
 			);
 			name = Tools;
 			path = ../Tools;
@@ -753,6 +742,30 @@
 				24B7DA261D2F93EA00A0723C /* SearchViewCell.m */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		24B8A4CF1D598651005CB6AE /* CheckBox */ = {
+			isa = PBXGroup;
+			children = (
+				24B8A4D11D598705005CB6AE /* CheckBoxViewController.h */,
+				24B8A4D21D598705005CB6AE /* CheckBoxViewController.m */,
+				24B8A4D31D598705005CB6AE /* CheckCell.h */,
+				24B8A4D41D598705005CB6AE /* CheckCell.m */,
+			);
+			path = CheckBox;
+			sourceTree = "<group>";
+		};
+		24B8A4D01D598682005CB6AE /* ViewControllerTools */ = {
+			isa = PBXGroup;
+			children = (
+				24B8A4D71D598733005CB6AE /* QrCodeViewController.h */,
+				24B8A4D81D598733005CB6AE /* QrCodeViewController.m */,
+				24B8A4D91D598733005CB6AE /* ScanViewController.h */,
+				24B8A4DA1D598733005CB6AE /* ScanViewController.m */,
+				24B8A4DB1D598733005CB6AE /* SignViewController.h */,
+				24B8A4DC1D598733005CB6AE /* SignViewController.m */,
+			);
+			path = ViewControllerTools;
 			sourceTree = "<group>";
 		};
 		24CDDB431D275B6F007A9BF6 /* Search */ = {
@@ -808,8 +821,6 @@
 				24AC36F01D3085E200316301 /* UISearchBar+Common.m */,
 				24AC36EC1D30850300316301 /* UIView+Frame.h */,
 				24AC36ED1D30850300316301 /* UIView+Frame.m */,
-				2499B85D1CCB9D3D003FC604 /* UITableView+Common.h */,
-				2499B85E1CCB9D3D003FC604 /* UITableView+Common.m */,
 				244517B31CA03F520085CC16 /* MBProgressHUD+Util.h */,
 				244517B41CA03F520085CC16 /* MBProgressHUD+Util.m */,
 				244517B51CA03F520085CC16 /* UIColor+Util.h */,
@@ -1121,12 +1132,10 @@
 				24AAFCF41D28DF8400DAB3C9 /* QrCodeIdentityView.m in Sources */,
 				24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */,
 				24AAFCF11D28DF2D00DAB3C9 /* ChooseView.m in Sources */,
-				24D49D2F1CB54370003213C9 /* ScanViewController.m in Sources */,
 				244517821CA03E760085CC16 /* WorkOrder.m in Sources */,
 				2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */,
 				24020A571CB7431500D4EA96 /* WorkOrderInfoView.m in Sources */,
 				244517BE1CA03F520085CC16 /* UIView+Util.m in Sources */,
-				24B398DB1D3A3B140067A528 /* CheckCell.m in Sources */,
 				248A5DB41C85C3C30095A4FB /* main.m in Sources */,
 				244517A01CA03EFC0085CC16 /* SwipableViewController.m in Sources */,
 				244517BB1CA03F520085CC16 /* MBProgressHUD+Util.m in Sources */,
@@ -1140,12 +1149,14 @@
 				24020A5D1CB7491100D4EA96 /* WorkOrderStepEditView.m in Sources */,
 				24EAD1F11CC0DF3100444A9D /* SalesOrderGrabCell.m in Sources */,
 				24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */,
+				24B8A4D61D598705005CB6AE /* CheckCell.m in Sources */,
 				24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */,
 				249E49091CE6EFB80051C9C1 /* CameraManager.m in Sources */,
 				242EA1DD1D2E4C86001E4291 /* PickupNoticeView.m in Sources */,
 				24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */,
 				2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */,
 				2493FE141D4302E50094ADA2 /* WorkOrderFormView.m in Sources */,
+				24B8A4D51D598705005CB6AE /* CheckBoxViewController.m in Sources */,
 				247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */,
 				24020A531CB7419400D4EA96 /* BaseView.m in Sources */,
 				246517081D2F561A00F1E5D3 /* PickupSignature.m in Sources */,
@@ -1163,9 +1174,9 @@
 				24EAD1F41CC0DF4300444A9D /* SalesOrderBindCell.m in Sources */,
 				244517BD1CA03F520085CC16 /* UIImage+Util.m in Sources */,
 				244517B21CA03F400085CC16 /* AppDelegate.m in Sources */,
-				244517701CA03E640085CC16 /* QrCodeViewController.m in Sources */,
 				24C34F141CE9931100D945BE /* FormTemplate.m in Sources */,
 				248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */,
+				24B8A4DF1D598733005CB6AE /* SignViewController.m in Sources */,
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */,
 				24B7DA231D2F929800A0723C /* WorkOrderSearchResult.m in Sources */,
@@ -1173,13 +1184,11 @@
 				247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */,
 				24AAFCF71D28E02000DAB3C9 /* QrCodeIdentityController.m in Sources */,
 				249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */,
-				2499B85F1CCB9D3D003FC604 /* UITableView+Common.m in Sources */,
 				242EA1E31D2E544D001E4291 /* PickupManager.m in Sources */,
 				24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */,
 				24AAFCFD1D28EEF800DAB3C9 /* ChooseViewController.m in Sources */,
 				244517831CA03E760085CC16 /* WorkOrderStep.m in Sources */,
 				24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */,
-				24902D761CC3882D00607659 /* SignViewController.m in Sources */,
 				246517051D2F49C000F1E5D3 /* PickupData.m in Sources */,
 				242EA1DA1D2E4C2E001E4291 /* PickupNoticeViewController.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
@@ -1202,7 +1211,6 @@
 				24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */,
 				24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */,
 				240F88B51CC755C900138F10 /* BaseViewController.m in Sources */,
-				24B398D81D3A39800067A528 /* CheckBoxViewController.m in Sources */,
 				244517A71CA03F190085CC16 /* SideMenuCell.m in Sources */,
 				24AC36F41D30869100316301 /* UIImage+Common.m in Sources */,
 				2445176E1CA03E640085CC16 /* Config.m in Sources */,
@@ -1228,6 +1236,7 @@
 				244517A91CA03F190085CC16 /* SideMenuController.m in Sources */,
 				24AAF4251D0EA4320020356F /* NSMutableArray+InsertArray.m in Sources */,
 				24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */,
+				24B8A4DD1D598733005CB6AE /* QrCodeViewController.m in Sources */,
 				24132AAC1D08016A005FDBDE /* WorkOrderFormController.m in Sources */,
 				24C34F171CE9936F00D945BE /* FormTemplateField.m in Sources */,
 				24A685641CC4C74B00663858 /* HelpViewController.m in Sources */,
@@ -1242,6 +1251,7 @@
 				24B398D51D3A37FB0067A528 /* CheckBoxView.m in Sources */,
 				247092661D23942E00EBADB3 /* QrCodeBindController.m in Sources */,
 				246B0AC31CB4B66D0017E956 /* WorkOrderInventoryController.m in Sources */,
+				24B8A4DE1D598733005CB6AE /* ScanViewController.m in Sources */,
 				242D49BD1D3895360013DE13 /* NumberCell.m in Sources */,
 				24948B421CC2375900DE8946 /* SalesOrderBind.m in Sources */,
 				244517611CA03E5B0085CC16 /* AppManager.m in Sources */,

@@ -157,14 +157,14 @@
 -(void)handleResult:(NSString *)result
 {
     MBProgressHUD *hub = [Utils createHUD];
-    hub.label.text = @"加载中...";
+    hub.labelText = @"加载中...";
     __weak typeof(self) weakSelf = self;
     [[PickupManager getInstance] getPickupItemByCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.label.text = [NSString stringWithFormat:@"加载成功"];
-            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
+            hub.labelText = [NSString stringWithFormat:@"加载成功"];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
             _pickupData = [PickupData mj_objectWithKeyValues:obj];
             NSArray<PickupItem *> * items = [PickupItem mj_objectArrayWithKeyValuesArray:_pickupData.items];
             for (PickupItem *pickItem in items) {
@@ -182,8 +182,8 @@
             weakSelf.pickupData = nil;
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.label.text = error;
-            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     
@@ -193,7 +193,7 @@
 -(void)postPickupData:(PickupSignature *)pickupSignature
 {
     MBProgressHUD *hub = [Utils createHUD];
-    hub.label.text = @"完成中...";
+    hub.labelText = @"完成中...";
     hub.userInteractionEnabled = NO;
     
     [[PickupManager getInstance] postPickupSignature:pickupSignature finishBlock:^(NSDictionary *obj, NSString *error) {
@@ -202,14 +202,14 @@
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.label.text = [NSString stringWithFormat:@"成功"];
-            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
+            hub.labelText = [NSString stringWithFormat:@"成功"];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
         }else{
 
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.label.text = error;
-            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     

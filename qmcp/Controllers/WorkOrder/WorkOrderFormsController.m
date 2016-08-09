@@ -54,7 +54,7 @@
     _workOrderFormList = [NSMutableArray new];
     
     MBProgressHUD *hub = [Utils createHUD];
-    hub.label.text = @"正在获取表单数据";
+    hub.labelText = @"正在获取表单数据";
     hub.userInteractionEnabled = NO;
     [[FormManager getInstance] getFormTemplateAndFormData:_workOrder.salesOrderSnapshot.code finishBlock:^(NSMutableArray *arr, NSString *error) {
         if (error == nil) {
@@ -67,13 +67,13 @@
                 success = @"获取表单数据成功";
                 [_collectionView reloadData];
             }
-            hub.label.text = success;
-            [hub hideAnimated:YES afterDelay:0.2];
+            hub.labelText = success;
+            [hub hide:YES afterDelay:0.2];
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.label.text = error;
-            [hub hideAnimated:YES afterDelay:1];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:1];
         }
     }];
     

@@ -10,7 +10,7 @@
 
 @implementation SignView
 
-+ (instancetype)viewInstance{
++ (instancetype)signViewInstance{
     SignView *signView = [SignView new];
     return signView;
 }

@@ -60,7 +60,7 @@
     gesture.delegate = self;
     [self.view addGestureRecognizer:gesture];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillhideAnimated:) name:UIKeyboardWillHideNotification object:nil];
     
 
 }
@@ -72,7 +72,7 @@
     _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, keyboardBounds.size.height, 0);
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
+- (void)keyboardWillhideAnimated:(NSNotification *)notification
 {
      _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, 0, 0);
 }

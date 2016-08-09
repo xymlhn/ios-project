@@ -69,20 +69,20 @@
 -(void)loadData
 {
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"加载中...";
+    hub.label.text = @"加载中...";
     hub.userInteractionEnabled = NO;
     [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSString *error) {
         if(error == nil){
             [self salesOrderUpdate:dict];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"加载成功"];
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.label.text = [NSString stringWithFormat:@"加载成功"];
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.label.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
         
     }];
@@ -134,7 +134,7 @@
 {
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"抢单中...";
+    hub.label.text = @"抢单中...";
     hub.userInteractionEnabled = NO;
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERGRAB,salesOrderSnapshot.code];
@@ -146,8 +146,8 @@
             [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"抢单成功"];
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.label.text = [NSString stringWithFormat:@"抢单成功"];
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
             [workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
@@ -161,8 +161,8 @@
             
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.label.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     

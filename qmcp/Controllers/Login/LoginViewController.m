@@ -171,7 +171,7 @@
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
                 hub.labelText = [NSString stringWithFormat:@"登录成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 [[AppManager getInstance]setUser:account];
                 [[TMCache sharedCache] setObject:account forKey:@"user"];
                 UIStoryboard *discoverSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -182,13 +182,13 @@
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                 hub.labelText = [NSString stringWithFormat:@"账号或密码错误"];
-                [hub hide:YES afterDelay:kEndFailedDelayTime];
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 }

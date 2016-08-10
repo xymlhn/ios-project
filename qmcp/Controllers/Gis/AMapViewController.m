@@ -8,7 +8,6 @@
 
 #import "AMapViewController.h"
 #import <MAMapKit/MAMapKit.h>
-
 #import <AMapLocationKit/AMapLocationKit.h>
 @interface AMapViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate>
 
@@ -19,7 +18,7 @@
 
 @implementation AMapViewController
 
--(void) viewDidAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
      

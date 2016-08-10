@@ -57,13 +57,12 @@
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
-    hub.userInteractionEnabled = NO;
     [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSString *error) {
         if(error == nil){
             [self refreshUIWithDict:dict];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"加载成功"];
+            hub.labelText = @"加载成功";
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
         }else{
             hub.mode = MBProgressHUDModeCustomView;

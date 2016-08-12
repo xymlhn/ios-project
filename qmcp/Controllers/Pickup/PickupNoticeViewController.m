@@ -10,7 +10,6 @@
 #import "PickupNoticeView.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
-#import "MBProgressHUD.h"
 #import "PickupManager.h"
 #import "ItemComplete.h"
 #import "PickupNoticeCell.h"

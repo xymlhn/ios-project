@@ -467,8 +467,7 @@
 				2493FE121D4302E50094ADA2 /* WorkOrderFormView.h */,
 				2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */,
 			);
-			name = View;
-			path = ../View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		24233E1D1CCE05F500CF93B6 /* Introduce */ = {
@@ -548,7 +547,6 @@
 		2445175C1CA03D770085CC16 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				24020A541CB7429300D4EA96 /* View */,
 				24020A511CB7419400D4EA96 /* BaseView.h */,
 				24020A521CB7419400D4EA96 /* BaseView.m */,
 				240F88B31CC755C900138F10 /* BaseViewController.h */,
@@ -669,6 +667,7 @@
 		248A5DB11C85C3C30095A4FB /* qmcp */ = {
 			isa = PBXGroup;
 			children = (
+				24020A541CB7429300D4EA96 /* View */,
 				2445175C1CA03D770085CC16 /* Base */,
 				24F135281C8697B100645F92 /* Controllers */,
 				24B0324F1C881E46007506DD /* Tools */,

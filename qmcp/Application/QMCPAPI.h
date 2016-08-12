@@ -9,9 +9,9 @@
 #ifndef iosapp_QMCPAPI_h
 #define iosapp_QMCPAPI_h
 
-//#define QMCPAPI_ADDRESS             @"http://192.168.13.63:8080/"
+#define QMCPAPI_ADDRESS             @"http://192.168.13.60:8080/"
 //#define QMCPAPI_ADDRESS             @"http://inforshare.vicp.cc:8000/"
-#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
+//#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
 #define QMCPAPI_LOGIN                    @"api/login"
 #define QMCPAPI_LOGOUT                   @"api/logout"
 #define QMCPAPI_SERVER_TIME              @"a/api/servertime"

@@ -150,7 +150,9 @@ NSString * const kCommodityProperty = @"commodityProperty";
 
 }
 
--(NSArray *)appendCommodityChooseWithOrder:(int) order andPropertyName:(NSString *)propertyName andPropertyContent:(NSString *)propertyContent{
+-(NSArray *)appendCommodityChooseWithOrder:(int) order
+                           andPropertyName:(NSString *)propertyName
+                        andPropertyContent:(NSString *)propertyContent{
     
     PropertyData *data = [PropertyData new];
     data.order = order;

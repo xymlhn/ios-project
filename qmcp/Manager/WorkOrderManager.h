@@ -30,7 +30,9 @@ extern NSString *const WorkOrderUpdateNotification;
  *  @param workOrder 工单
  *  @param steps     工单步骤
  */
-- (void)postWorkOrderStepWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion;
+- (void)postWorkOrderStepWithCode:(NSString *)code
+                        andParams:(NSDictionary *)params
+                      finishBlock:(CompletionHandler)completion;
 
 /**
  *  上传清点单数据
@@ -38,7 +40,9 @@ extern NSString *const WorkOrderUpdateNotification;
  *  @param params     参数
  *  @param completion 回调
  */
--(void)postWorkOrderInventoryWithCode:(NSString *) code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion;
+-(void)postWorkOrderInventoryWithCode:(NSString *)code
+                            andParams:(NSDictionary *)params
+                          finishBlock:(CompletionHandler)completion;
 
 
 /**
@@ -48,7 +52,9 @@ extern NSString *const WorkOrderUpdateNotification;
  *  @param params        请求参数
  *  @param block         回调
  */
--(void)updateTimeStampWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion;
+-(void)updateTimeStampWithCode:(NSString *)code
+                     andParams:(NSDictionary *)params
+                   finishBlock:(CompletionHandler)completion;
 
 /**
  *  根据工单code获取工单
@@ -56,7 +62,8 @@ extern NSString *const WorkOrderUpdateNotification;
  *  @param itemCode 工单code
  *  @param block 回调
  */
--(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion;
+-(void)getWorkOrderByItemCode:(NSString *)itemCode
+                  finishBlock:(CompletionHandler)completion;
 
 
 /**
@@ -65,7 +72,8 @@ extern NSString *const WorkOrderUpdateNotification;
  *  @param attachment 附件model
  *  @param block      回调
  */
--(void)postAttachment:(Attachment *)attachment finishBlock:(CompletionHandler)completion;
+-(void)postAttachment:(Attachment *)attachment
+          finishBlock:(CompletionHandler)completion;
 
 /**
  *  从数据库获取工单显示
@@ -95,5 +103,7 @@ extern NSString *const WorkOrderUpdateNotification;
  *  @param condition 是否包含历史工单
  *  @param block     回调
  */
--(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(CompletionHandler)completion;
+-(void)searchWorkOrderWithString:(NSString *)string
+                    andCondition:(BOOL)condition
+                     finishBlock:(CompletionHandler)completion;
 @end

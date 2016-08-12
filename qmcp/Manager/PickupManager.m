@@ -23,7 +23,9 @@
     return shared_manager;
 }
 
--(void)itemCompleteByCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion{
+-(void)itemCompleteByCode:(NSString *)itemCode
+              finishBlock:(CompletionHandler)completion{
+    
     NSDictionary *dict = @{@"code":itemCode};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ITEM_COMPLETE];
     [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
@@ -32,7 +34,8 @@
     
 }
 
--(void)getPickupItemByCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion{
+-(void)getPickupItemByCode:(NSString *)itemCode
+               finishBlock:(CompletionHandler)completion{
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_PICKUPITEM,itemCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -40,7 +43,9 @@
     }];
 }
 
--(void)postPickupSignature:(PickupSignature *)pickupSignature finishBlock:(CompletionHandler)completion{
+-(void)postPickupSignature:(PickupSignature *)pickupSignature
+               finishBlock:(CompletionHandler)completion{
+    
     NSDictionary *obj = [pickupSignature mj_keyValues];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_PICKUPSIGNATURE];
     [HttpUtil post:URLString param:obj finish:^(NSDictionary *obj, NSString *error) {

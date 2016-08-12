@@ -25,7 +25,8 @@ extern NSString *const kCameraNotification;
  *
  *  @param workOrderCode 工单code
  */
--(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode finishBlock:(CompletionHandler)completion;
+-(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode
+                           finishBlock:(CompletionHandler)completion;
 
 /**
  *  切换当前工单摄像头
@@ -34,7 +35,9 @@ extern NSString *const kCameraNotification;
  *  @param cameraCode    摄像头code
  *  @param ison          开关状态
  */
--(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode withCameraCode:(NSString *)cameraCode cameraStatus:(bool)isOn finishBlock:(CompletionHandler)completion;
+-(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode
+                    withCameraCode:(NSString *)cameraCode
+                      cameraStatus:(bool)isOn finishBlock:(CompletionHandler)completion;
 
 /**
  *  获取当前门店所有摄像头

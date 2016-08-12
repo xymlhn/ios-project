@@ -18,14 +18,16 @@
  *
  *  @param lastupdateTime 时间
  */
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion;
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime
+                             finishBlock:(CompletionHandler)completion;
 
 /**
  *  获取接单数据
  *
  *  @param lastupdateTime 时间
  */
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion;
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
+                                finishBlock:(CompletionHandler)completion;
 
 /**
  *  根据订单code删除接单字典中salesOrder

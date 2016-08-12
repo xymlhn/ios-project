@@ -57,8 +57,9 @@ NSString *const kConfirmCache = @"confirm";
     }
 }
 
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion
-{
+-(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime
+                             finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERBIND,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
@@ -88,8 +89,9 @@ NSString *const kConfirmCache = @"confirm";
 
 }
 
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime finishBlock:(CompletionHandler)completion
-{
+-(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
+                                finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCONFIRM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
@@ -114,12 +116,13 @@ NSString *const kConfirmCache = @"confirm";
     
 }
 
--(void)removeGrabDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode
-{
+-(void)removeGrabDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode{
+    
     if(_grabDict[salesOrderCode] != nil){
         [_grabDict removeObjectForKey:salesOrderCode];
         [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
     }
+    
 }
 
 @end

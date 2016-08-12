@@ -44,8 +44,7 @@ NSString *const kUserCache = @"user";
     return shared_manager;
 }
 
--(BOOL)handleHeader:(NSURLSessionDataTask *) session
-{
+-(BOOL)handleHeader:(NSURLSessionDataTask *) session{
     NSHTTPURLResponse *response = (NSHTTPURLResponse *)session.response;
     NSDictionary *dic = response.allHeaderFields;
     
@@ -74,8 +73,7 @@ NSString *const kUserCache = @"user";
     [[AppManager getInstance] setUser:nil];
 }
 
--(void)setUser:(User *)user
-{
+-(void)setUser:(User *)user{
     _us = user;
 }
 -(User *)getUser{
@@ -84,8 +82,9 @@ NSString *const kUserCache = @"user";
 }
 
 
--(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion
-{
+-(void)reLoginWithUserName:(NSString *)userName
+               andPassword:(NSString *)password
+               finishBlock:(CompletionHandler)completion{
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGIN];
 
@@ -95,7 +94,9 @@ NSString *const kUserCache = @"user";
   
 }
 
--(void)loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion{
+-(void)loginWithUserName:(NSString *)userName
+             andPassword:(NSString *)password
+             finishBlock:(CompletionHandler)completion{
     // 请求参数
     NSDictionary *dic = @{ @"user":userName,@"pwd":password};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGIN];
@@ -106,9 +107,7 @@ NSString *const kUserCache = @"user";
 }
 
 
--(void)logoutWithBlock:(void (^)(NSDictionary *data, NSString *error))block
-{
-
+-(void)logoutWithBlock:(void (^)(NSDictionary *data, NSString *error))block{
     // 请求参数
     NSDictionary *dic = @{};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
@@ -123,8 +122,7 @@ NSString *const kUserCache = @"user";
     }];
 }
 
--(void) getServerTimeWithBlock:(CompletionHandler)completion
-{
+-(void) getServerTimeWithBlock:(CompletionHandler)completion{
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_SERVER_TIME];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -136,8 +134,7 @@ NSString *const kUserCache = @"user";
     }];
 }
 
--(void) updateNickName
-{
+-(void) updateNickName{
     NSArray *arr = @[@"fuck"];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_NICKNAME];
     [HttpUtil post:URLString param:arr finish:^(NSDictionary *obj, NSString *error) {
@@ -164,7 +161,9 @@ NSString *const kUserCache = @"user";
     }];
 }
 
--(void)getImageUrlByKey:(NSString *)key andType:(int)type finishBlock:(CompletionHandler)completion{
+-(void)getImageUrlByKey:(NSString *)key
+                andType:(int)type
+            finishBlock:(CompletionHandler)completion{
     NSArray *array = @[key];
     NSString *jsonString = [array mj_JSONString];
     NSDictionary *dic = @{ @"storageType":[NSNumber numberWithInt:type],@"attachmentNames":jsonString};

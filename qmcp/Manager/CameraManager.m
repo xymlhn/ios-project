@@ -34,8 +34,7 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
     return shared_manager;
 }
 
-- (NSMutableArray<CameraData *> *)getAllCameraData
-{
+- (NSMutableArray<CameraData *> *)getAllCameraData{
     if(!_cameraDict){
         _cameraDict = [_allCameraArr mj_keyValues];
     }
@@ -61,15 +60,19 @@ NSString *const kCameraNotification = @"salesOrderGrabUpdate";
     }];
 }
 
--(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode finishBlock:(CompletionHandler)completion
-{
+-(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode
+                           finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_ALL_CAMERA,workOrderCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
     }];
 }
 
--(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode withCameraCode:(NSString *)cameraCode cameraStatus:(bool)isOn finishBlock:(CompletionHandler)completion{
+-(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode
+                    withCameraCode:(NSString *)cameraCode
+                      cameraStatus:(bool)isOn finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_CAMERA_SWITCH];
     NSDictionary *jsonDict = @{@"workOrderCode":workOrderCode,@"cameraCode":cameraCode,@"turnOn":[NSNumber numberWithBool:isOn]};
 

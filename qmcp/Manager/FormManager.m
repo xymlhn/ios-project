@@ -92,8 +92,7 @@
     }];
 }
 
--(void)handleFormTable:(NSMutableArray<FormTemplateField *> *)formList formTemplateId:(NSString *)formTemplateId
-{
+-(void)handleFormTable:(NSMutableArray<FormTemplateField *> *)formList formTemplateId:(NSString *)formTemplateId{
     if(![self isExistsFormData:formTemplateId]){
         int tableNumber = [self formTableNumber:formList];
         for (int i = 0; i < tableNumber; i++) {

@@ -93,7 +93,8 @@
     [UIView commitAnimations];
 }
 
--(void)searchWorkOrderByCode:(NSString *)string andCondition:(BOOL)condition{
+-(void)searchWorkOrderByCode:(NSString *)string
+                andCondition:(BOOL)condition{
     
     [_searchView.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;

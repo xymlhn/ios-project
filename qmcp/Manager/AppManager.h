@@ -31,7 +31,9 @@ extern NSString *const kReloginNotification;
  *  @param userName       用户名
  *  @param password       密码
  */
--(void) loginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion;
+-(void) loginWithUserName:(NSString *)userName
+              andPassword:(NSString *)password
+              finishBlock:(CompletionHandler)completion;
 
 /**
  *  获取服务器时间
@@ -69,7 +71,9 @@ extern NSString *const kReloginNotification;
  *  @param isFirst  是否首次重登陆
 
  */
--(void)reLoginWithUserName:(NSString *)userName andPassword:(NSString *)password finishBlock:(CompletionHandler)completion;
+-(void)reLoginWithUserName:(NSString *)userName
+               andPassword:(NSString *)password
+               finishBlock:(CompletionHandler)completion;
 
 /**
  *  设置当前用户
@@ -98,7 +102,9 @@ extern NSString *const kReloginNotification;
  *
  
  */
--(void)getImageUrlByKey:(NSString *)key andType:(int)type finishBlock:(CompletionHandler)completion;
+-(void)getImageUrlByKey:(NSString *)key
+                andType:(int)type
+            finishBlock:(CompletionHandler)completion;
 
 /**
  *  根据用户userOpenid获取图片url
@@ -106,7 +112,8 @@ extern NSString *const kReloginNotification;
  *  @param userOpenId userOPenid
  *  @param completion 回调
  */
--(void)getUserIconUrlByUserOpenId:(NSString *)userOpenId finishBlock:(CompletionHandler)completion;
+-(void)getUserIconUrlByUserOpenId:(NSString *)userOpenId
+                      finishBlock:(CompletionHandler)completion;
 
 
 @end

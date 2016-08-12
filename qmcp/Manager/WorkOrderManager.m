@@ -107,7 +107,8 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
     return workOrder;
 }
 
--(void)getWorkOrderByItemCode:(NSString *)itemCode finishBlock:(CompletionHandler)completion{
+-(void)getWorkOrderByItemCode:(NSString *)itemCode
+                  finishBlock:(CompletionHandler)completion{
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_GETWORKORDERBYITEMCODE,itemCode];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -128,8 +129,9 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
     
 }
 
--(void)postAttachment:(Attachment *)attachment finishBlock:(CompletionHandler)completion
-{
+-(void)postAttachment:(Attachment *)attachment
+          finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ATTACHMENT];
     NSDictionary *dict = @{@"storageType":[NSNumber numberWithInt:attachment.sort]};
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:attachment.path];;
@@ -144,35 +146,51 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
     }
     
     [HttpUtil postFile:URLString file:data name:@"data" fileName:attachment.key param:dict finish:completion];
+    
 }
 
--(void) updateTimeStampWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion{
+-(void) updateTimeStampWithCode:(NSString *)code
+                      andParams:(NSDictionary *)params
+                    finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,code];
     [HttpUtil postFormData:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
     }];
+    
 }
 
 
-- (void)postWorkOrderStepWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion{
+- (void)postWorkOrderStepWithCode:(NSString *)code
+                        andParams:(NSDictionary *)params
+                      finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,code];
     [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
     }];
+    
 }
 
--(void)postWorkOrderInventoryWithCode:(NSString *)code andParams:(NSDictionary *)params finishBlock:(CompletionHandler)completion{
+-(void)postWorkOrderInventoryWithCode:(NSString *)code
+                            andParams:(NSDictionary *)params
+                          finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERINVENTORY,code];
     [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
     }];
 }
 
--(void)searchWorkOrderWithString:(NSString *)string andCondition:(BOOL)condition finishBlock:(CompletionHandler)completion{
+-(void)searchWorkOrderWithString:(NSString *)string
+                    andCondition:(BOOL)condition
+                     finishBlock:(CompletionHandler)completion{
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@?includeHistory=%@&condition=%@", QMCPAPI_ADDRESS,QMCPAPI_SEARCH,[NSNumber numberWithBool:condition],string];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         completion(obj,error);
     }];
+    
 }
 
 @end

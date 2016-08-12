@@ -18,7 +18,8 @@
  *
  *  @param salesOrderCode 订单code
  */
--(void)getFormTemplateAndFormData:(NSString *)salesOrderCode finishBlock:(void (^)(NSMutableArray *, NSString *))block;
+-(void)getFormTemplateAndFormData:(NSString *)salesOrderCode
+                      finishBlock:(void (^)(NSMutableArray *, NSString *))block;
 
 /**
  *  保存表单数据
@@ -47,7 +48,8 @@
  *
  *  @param formList 表单数据
  */
--(void)handleFormTable:(NSMutableArray<FormTemplateField* > *) formList formTemplateId:(NSString *)formTemplateId;
+-(void)handleFormTable:(NSMutableArray<FormTemplateField* > *) formList
+        formTemplateId:(NSString *)formTemplateId;
 
 /**
  *  添加表格

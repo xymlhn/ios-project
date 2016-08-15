@@ -35,9 +35,6 @@
         case WorkOrderTypeService:
             str = @"服务";
             break;
-        case WorkOrderTypeInventory:
-            str = @"清点";
-            break;
         default:
             break;
     }

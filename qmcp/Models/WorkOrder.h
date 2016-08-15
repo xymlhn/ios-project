@@ -14,7 +14,6 @@
 #import "User.h"
 typedef NS_ENUM(NSInteger, WorkOrderType) {
     WorkOrderTypeOnsite = 10,//上门
-    WorkOrderTypeInventory = 20,//清点
     WorkOrderTypeService = 30,//服务
 };
 

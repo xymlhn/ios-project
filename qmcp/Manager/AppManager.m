@@ -30,7 +30,9 @@ NSString *const kUserCache = @"user";
 
 @interface AppManager()
 @property (nonatomic,strong) User* us;
-@property(nonatomic,strong)NSMutableArray<WorkOrder *> *workOrders;
+@property (nonatomic,strong) NSMutableArray<WorkOrder *> *workOrders;
+
+
 @end
 @implementation AppManager
 

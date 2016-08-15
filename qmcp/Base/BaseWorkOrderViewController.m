@@ -29,14 +29,14 @@
 }
 
 -(void)loadData{
-    [NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
+    
 }
 
 -(void)setupView{
-//    [NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
+
 }
 -(void)bindListener{
-    //[NSException raise:NSInternalInconsistencyException format:@"必须覆写%@方法在子类",NSStringFromSelector(_cmd)];
+    
 }
 
 -(void)saveData{}

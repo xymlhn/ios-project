@@ -1,15 +1,16 @@
 //
-//  SearchViewCell.m
+//  InventorySearchCell.m
 //  qmcp
 //
-//  Created by 谢永明 on 16/7/8.
+//  Created by 谢永明 on 16/8/15.
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "SearchViewCell.h"
+#import "InventorySearchCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
-@interface SearchViewCell()
+
+@interface InventorySearchCell()
 
 @property(nonatomic,strong)UILabel *typeText;
 @property(nonatomic,strong)UILabel *codeText;
@@ -18,15 +19,15 @@
 @property(nonatomic,strong)UILabel *phoneText;
 
 @end
-@implementation SearchViewCell
+@implementation InventorySearchCell
 
 //创建自定义可重用的cell对象
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *reuseId = @"WorkOrderCell";
-    SearchViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    static NSString *reuseId = @"InventorySearchCell";
+    InventorySearchCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
-        cell = [[SearchViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
+        cell = [[InventorySearchCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
     }
     cell.selectedBackgroundView.backgroundColor = [UIColor themeColor];
     return cell;
@@ -118,25 +119,10 @@
 }
 
 //重写属性的setter方法，给子控件赋值
-- (void)setWorkOrderSearchResult:(WorkOrderSearchResult *)workOrderSearchResult
-{
-
-    switch(workOrderSearchResult.type) {
-        case WorkOrderTypeOnsite:
-            _typeText.text = @"上门";
-            _typeText.backgroundColor = [UIColor orangeColor];
-            break;
-        case WorkOrderTypeService:
-            _typeText.text = @"服务";
-            _typeText.backgroundColor = [UIColor nameColor];
-            break;
-        default:
-            break;
-    }
-    _codeText.text = workOrderSearchResult.code;
-    _nameText.text = workOrderSearchResult.title;
-   
+- (void)setSalesOrderSearchResult:(SalesOrderSearchResult *)salesOrderSearchResult{
+    
     
 }
+
 
 @end

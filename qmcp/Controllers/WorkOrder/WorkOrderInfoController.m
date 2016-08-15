@@ -19,6 +19,7 @@
 @property (nonatomic,strong)WorkOrderInfoView *infoView;
 @property (nonatomic,copy)WorkOrder *workOrder;
 @property (nonatomic, retain) NSMutableArray *workOrderStepList;
+
 @end
 
 @implementation WorkOrderInfoController
@@ -53,9 +54,6 @@
                         break;
                 }
                 break;
-            case WorkOrderTypeInventory:
-                [self showOkayCancelAlert];
-                break;
             case WorkOrderTypeService:
                 [self showOkayCancelAlert];
                 break;
@@ -81,9 +79,6 @@
     
     _infoView.cameraBtn.userInteractionEnabled = YES;
     [_infoView.cameraBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraBtnClick:)]];
-    
-    _infoView.inventoryBtn.userInteractionEnabled = YES;
-    [_infoView.inventoryBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inventoryBtnClick:)]];
     
     _infoView.formBtn.userInteractionEnabled = YES;
     [_infoView.formBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(formBtnClick:)]];
@@ -126,9 +121,6 @@
                         break;
                 }
 
-                break;
-            case WorkOrderTypeInventory:
-                title = @"完结";
                 break;
             case WorkOrderTypeService:
 
@@ -213,19 +205,6 @@
     }
     
     WorkOrderStepController *info = [WorkOrderStepController new];
-    info.workOrderCode = [super workOrderCode];
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
--(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    if(_workOrder.type == WorkOrderTypeOnsite){
-        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
-            return;
-        }
-    }
-    WorkOrderInventoryController *info = [WorkOrderInventoryController new];
     info.workOrderCode = [super workOrderCode];
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];

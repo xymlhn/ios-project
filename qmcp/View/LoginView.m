@@ -48,6 +48,7 @@
         make.top.equalTo(logoIcon.mas_bottom).with.offset(15);
         make.centerX.equalTo(topView.mas_centerX);
     }];
+
     
     UIView *userNameView = [UIView new];
     userNameView.backgroundColor = [UIColor whiteColor];
@@ -104,6 +105,7 @@
         make.left.equalTo(passwordView.mas_left).with.offset(5);
         make.width.equalTo(@20);
     }];
+    
     _passWordText = [UITextField new];
     _passWordText.placeholder = @"请输入密码";
     _passWordText.clearButtonMode=UITextFieldViewModeWhileEditing;

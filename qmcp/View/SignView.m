@@ -78,8 +78,6 @@
     saveLabel.textColor = [UIColor blackColor];
     [bottomView addSubview:saveLabel];
     
-
-    
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);

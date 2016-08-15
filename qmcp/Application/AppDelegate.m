@@ -20,7 +20,6 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 
 const static int databaseVersion = 3;
-const static NSString *APIKey = @"d69621b023e41d75c2890b727d3ff29c";
 
 @interface AppDelegate ()
 

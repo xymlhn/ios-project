@@ -161,7 +161,7 @@
     
     
     UILabel *signLabel = [UILabel new];
-    signLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    signLabel.font = [UIFont systemFontOfSize:12];
     signLabel.text = @"签名";
     signLabel.textColor = [UIColor blackColor];
     [bottomView addSubview:signLabel];

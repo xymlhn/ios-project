@@ -29,4 +29,6 @@
 @property (nonatomic, assign) float price;
 
 @property (nonatomic, assign) BOOL isSelect;
+
+
 @end

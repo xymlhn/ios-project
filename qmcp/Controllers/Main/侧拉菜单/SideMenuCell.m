@@ -51,17 +51,18 @@
     [self.contentView addSubview:_icon];
     [_icon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
+        make.width.equalTo(@25);
         make.left.equalTo(self.contentView.mas_left).with.offset(10);
     }];
     
     _content = [UILabel new];
-    _content.font = [UIFont systemFontOfSize:16];//
+    _content.font = [UIFont systemFontOfSize:16];
     _content.text = @"12305";
     _content.textColor = [UIColor grayColor];
     [self.contentView addSubview:_content];
     [_content mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.left.equalTo(_icon.mas_right).with.offset(15);
+        make.left.equalTo(_icon.mas_right).with.offset(10);
     }];
 
 }

@@ -128,10 +128,6 @@
                 _typeText.text = @"上门";
                 _typeText.backgroundColor = [UIColor orangeColor];
                 break;
-            case WorkOrderTypeInventory:
-                _typeText.text = @"清点";
-                _typeText.backgroundColor = [UIColor colorWithRed:0.000 green:0.502 blue:0.000 alpha:1.000];
-                break;
             case WorkOrderTypeService:
                 _typeText.text = @"服务";
                 _typeText.backgroundColor = [UIColor nameColor];

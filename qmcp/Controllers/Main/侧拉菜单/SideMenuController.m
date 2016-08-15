@@ -25,6 +25,7 @@
 #import "PickupNoticeViewController.h"
 #import "TMCache.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "InventorySearchController.h"
 @interface SideMenuController ()
 
 @end
@@ -40,16 +41,12 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,7 +63,7 @@
     UIView *selectedBackground = [UIView new];
     selectedBackground.backgroundColor = [UIColor colorWithHex:0xCFCFCF];
     [cell setSelectedBackgroundView:selectedBackground];
-    [cell setContent:@[@"扫描取单", @"客户取件",@"完成物品", @"设置", @"注销"][indexPath.row] andIcon:@[@"", @"", @"",@"", @""][indexPath.row]];
+    [cell setContent:@[@"清点物品",@"扫描取单", @"客户取件",@"完成物品", @"设置", @"注销"][indexPath.row] andIcon:@[@"",@"", @"", @"",@"", @""][indexPath.row]];
 
     return cell;
 }
@@ -84,6 +81,12 @@
     
     switch (indexPath.row) {
         case 0: {
+            InventorySearchController *view = [InventorySearchController new];
+            [self setContentViewController:view];
+            
+            break;
+        }
+        case 1: {
             if([Config getQuickScan]){
                 ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
                     [weakSelf handleResult:textValue];
@@ -97,22 +100,22 @@
             }
             break;
         }
-        case 1: {
+        case 2: {
             PickupViewController *view = [PickupViewController new];
             [self setContentViewController:view];
             
             break;
-        }case 2: {
+        }case 3: {
             PickupNoticeViewController *view = [PickupNoticeViewController new];
             [self setContentViewController:view];
             break;
         }
-        case 3: {
+        case 4: {
             SettingViewController *setting = [SettingViewController new];
             [self setContentViewController:setting];
             break;
         }
-        case 4: {
+        case 5: {
             MBProgressHUD *hub = [Utils createHUD];
             hub.labelText = @"登出中...";
             hub.userInteractionEnabled = NO;

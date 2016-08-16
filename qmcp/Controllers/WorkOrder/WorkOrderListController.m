@@ -13,7 +13,7 @@
 #import "WorkOrderCell.h"
 #import "PchHeader.h"
 @interface WorkOrderListController ()<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic, strong) NSMutableArray *workOrderList;
+@property (nonatomic, strong) NSMutableArray<WorkOrder *> *workOrderList;
 @property (nonatomic, assign) WorkOrderStatus status;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MBProgressHUD *hub;
@@ -78,6 +78,7 @@
     [_hub hide:YES afterDelay:kEndSucceedDelayTime];
     switch (_status) {
         case WorkOrderStatusCompleted:
+            
             [_workOrderList addObjectsFromArray:text.userInfo[@"failed"]];
             break;
         case WorkOrderStatusInProgress:
@@ -97,7 +98,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.workOrderList.count;
+    return _workOrderList.count;
 }
 
 //返回每行显示的cell
@@ -107,7 +108,7 @@
     //1 创建可重用的自定义的cell
     WorkOrderCell *cell = [WorkOrderCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
-    WorkOrder *workOrder = self.workOrderList[row];
+    WorkOrder *workOrder = _workOrderList[row];
     cell.workOrder = workOrder;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //3 返回

@@ -58,9 +58,11 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
             if(workOrderGroup.assign){
                 NSArray *assignArray = [WorkOrder mj_objectArrayWithKeyValuesArray:workOrderGroup.assign];
                 [assignArray enumerateObjectsUsingBlock:^(WorkOrder *  _Nonnull order, NSUInteger idx, BOOL * _Nonnull stop) {
-                    order.salesOrderSnapshot.addressSnapshot.code = order.code;
-                    order.userId = [[AppManager getInstance] getUser].userOpenId;
-                    [order saveToDB];
+                    if(order.type != 20){
+                        order.salesOrderSnapshot.addressSnapshot.code = order.code;
+                        order.userId = [[AppManager getInstance] getUser].userOpenId;
+                        [order saveToDB];
+                    }
                 }];
             }
             

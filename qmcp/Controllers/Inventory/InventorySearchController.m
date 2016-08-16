@@ -159,8 +159,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger row = indexPath.row;
-    SalesOrderSearchResult *salesOrderSearchResult = self.resultList[row];
+//    NSInteger row = indexPath.row;
+//    SalesOrderSearchResult *salesOrderSearchResult = self.resultList[row];
     
 }
 

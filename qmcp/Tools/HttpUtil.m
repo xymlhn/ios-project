@@ -9,6 +9,9 @@
 #import "HttpUtil.h"
 #import "AFHTTPSessionManager.h"
 #import "AppManager.h"
+#import "Config.h"
+#import "Utils.h"
+#import "EnumUtil.h"
 @implementation HttpUtil
 
 +(void)post:(NSString *)urlpath param:(id)dict finish:(CompletionHandler)completion
@@ -85,7 +88,7 @@
 }
 
 /**
- *  处理请求失败
+ *  处理失败的请求
  *
  *  @param error      错误
  *  @param task       任务
@@ -97,7 +100,7 @@
                       urlPath:(NSString *)urlpath
                        finish:(CompletionHandler)completion{
     
-    [[AppManager getInstance] handleHeader:task];
+    [self handleHeader:task];
     DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, error);
     NSString *description = error.userInfo[@"NSLocalizedDescription"];
     NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
@@ -115,18 +118,55 @@
     }
 }
 
+/**
+ *  处理成功的请求
+ *
+ *  @param responseObject 响应对象
+ *  @param task           任务
+ *  @param urlpath        地址
+ *  @param completion     回调
+ */
 +(void)handleSuccessWithResponseObject:(id)responseObject
                                   task:(NSURLSessionDataTask *)task
                                urlPath:(NSString *)urlpath
                                 finish:(CompletionHandler)completion{
     NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
     DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, obj);
-    if(![[AppManager getInstance] handleHeader:task]){
+    if(![self handleHeader:task]){
         completion(obj ,nil);
     }else{
         completion(obj,@"错误");
     }
     
+}
+
+/**
+ *  处理响应头
+ *
+ *  @param session 任务
+ *
+ *  @return bool
+ */
++(BOOL)handleHeader:(NSURLSessionDataTask *) session{
+    NSHTTPURLResponse *response = (NSHTTPURLResponse *)session.response;
+    NSDictionary *dic = response.allHeaderFields;
+    
+    id failure = [dic valueForKey:@"failure"];
+    if(failure){
+        int type = [[dic valueForKey:@"exceptionType"] intValue];
+        NSLog(@"\n=============header==================\n%@\n",[EnumUtil exceptionTypeString:type] );
+        if (type == (int)ExceptionTypeNotLogin)  {
+            NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
+            NSString *name = accountAndPassword? accountAndPassword[0] : @"";
+            NSString *password = accountAndPassword? accountAndPassword[1] : @"";
+            [[AppManager getInstance] reLoginWithUserName:name andPassword:password finishBlock:^(id data, NSString *error) {
+                if(error){
+                    [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
+                }
+            }];
+        }
+    }
+    return failure;
 }
 
 @end

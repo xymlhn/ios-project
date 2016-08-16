@@ -22,4 +22,6 @@
 +(NSString *)formSortString:(FormSort)type;
 
 +(NSString *)pickupStatusString:(PickupStatus)type;
+
++(NSString *)exceptionTypeString:(int)type;
 @end

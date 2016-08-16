@@ -42,14 +42,6 @@ extern NSString *const kReloginNotification;
  */
 -(void) getServerTimeWithBlock:(void (^)(NSDictionary *data, NSString *error))completion;
 
-/**
- *  处理服务器响应信息头
- *
- *  @param session session description
- *
- *  @return bool
- */
--(BOOL) handleHeader:(NSURLSessionDataTask *) session;
 
 /**
  *  更新用户昵称

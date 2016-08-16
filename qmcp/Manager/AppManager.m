@@ -46,29 +46,6 @@ NSString *const kUserCache = @"user";
     return shared_manager;
 }
 
--(BOOL)handleHeader:(NSURLSessionDataTask *) session{
-    NSHTTPURLResponse *response = (NSHTTPURLResponse *)session.response;
-    NSDictionary *dic = response.allHeaderFields;
-    
-    id failure = [dic valueForKey:@"failure"];
-    if(failure){
-        int type = [[dic valueForKey:@"exceptionType"] intValue];
-        if (type != (int)ExceptionTypeNotLogin)  {
-            NSLog(@"服务器异常- %d",type);
-        } else {
-            NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
-            NSString *name = accountAndPassword? accountAndPassword[0] : @"";
-            NSString *password = accountAndPassword? accountAndPassword[1] : @"";
-            [self reLoginWithUserName:name andPassword:password finishBlock:^(id data, NSString *error) {
-                if(error){
-                    [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
-                }
-            }];
-        }
-    }
-    return failure;
-}
-
 -(void)clearUserDataWhenLogout{
     [Config setInitSetting];
     [[TMCache sharedCache]setObject:nil forKey:kUserCache];

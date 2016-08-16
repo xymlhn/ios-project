@@ -77,4 +77,30 @@
     return str;
 }
 
++(NSString *)exceptionTypeString:(int)type{
+    NSString *str = @"";
+
+    switch (type) {
+        case ExceptionTypeNotLogin: {
+            str = @"未登录";
+            break;
+        }
+        case ExceptionTypeNoPermission: {
+            str = @"未授权";
+            break;
+        }
+        case ExceptionTypeNOUrl: {
+            str = @"url错误";
+            break;
+        }
+        case ExceptionTypeCommon: {
+            str = @"服务器异常";
+            break;
+        }
+        default:
+            break;
+    }
+    return str;
+}
+
 @end

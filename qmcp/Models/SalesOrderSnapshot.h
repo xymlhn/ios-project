@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, SalesOrderType) {
 
 @property (nonatomic, assign) SalesOrderType type;
 
-@property (nonatomic, assign) AddressSnapshot *addressSnapshot;
+@property (nonatomic, retain) AddressSnapshot *addressSnapshot;
 
 @property (nonatomic, copy) NSString *qrCodeUrl;
 

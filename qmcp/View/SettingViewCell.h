@@ -16,6 +16,7 @@
 
 @property (nonatomic,strong) UILabel *iconView;
 
+
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 -(void)initSetting:(BOOL)on contentText:(NSString *)content icon:(NSString *)image;

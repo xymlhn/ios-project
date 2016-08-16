@@ -121,30 +121,30 @@
 //重写属性的setter方法，给子控件赋值
 - (void)setWorkOrder:(WorkOrder *)workOrder
 {
-//    if(workOrder != nil){
-//        _codeText.text = workOrder.code;
-//        switch (workOrder.type) {
-//            case WorkOrderTypeOnsite:
-//                _typeText.text = @"上门";
-//                _typeText.backgroundColor = [UIColor orangeColor];
-//                break;
-//            case WorkOrderTypeService:
-//                _typeText.text = @"服务";
-//                _typeText.backgroundColor = [UIColor nameColor];
-//                break;
-//            default:
-//                break;
-//        }
-//        
-//        if(workOrder.salesOrderSnapshot != nil){
-//            _commodityNameText.text = [workOrder.salesOrderSnapshot.commodityNames componentsJoinedByString:@","];;
-//            _codeText.text = workOrder.code;
-//            if(workOrder.salesOrderSnapshot.addressSnapshot != nil){
-//                _nameText.text = workOrder.salesOrderSnapshot.addressSnapshot.contacts;
-//                _phoneText.text = workOrder.salesOrderSnapshot.addressSnapshot.mobilePhone;
-//            }
-//        }
-//    }
+    if(workOrder != nil){
+        _codeText.text = workOrder.code;
+        switch (workOrder.type) {
+            case WorkOrderTypeOnsite:
+                _typeText.text = @"上门";
+                _typeText.backgroundColor = [UIColor orangeColor];
+                break;
+            case WorkOrderTypeService:
+                _typeText.text = @"服务";
+                _typeText.backgroundColor = [UIColor nameColor];
+                break;
+            default:
+                break;
+        }
+        
+        if(workOrder.salesOrderSnapshot != nil){
+            _commodityNameText.text = [workOrder.salesOrderSnapshot.commodityNames componentsJoinedByString:@","];;
+            _codeText.text = workOrder.code;
+            if(workOrder.salesOrderSnapshot.addressSnapshot != nil){
+                _nameText.text = workOrder.salesOrderSnapshot.addressSnapshot.contacts;
+                _phoneText.text = workOrder.salesOrderSnapshot.addressSnapshot.mobilePhone;
+            }
+        }
+    }
 }
 
 @end

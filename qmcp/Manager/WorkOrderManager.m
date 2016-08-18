@@ -66,8 +66,6 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
                 }];
             }
             
-        }else{
-            [self getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
         }
         [[WorkOrderManager getInstance] sortAllWorkOrder];
     }];

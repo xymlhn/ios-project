@@ -44,6 +44,8 @@
 		242EA1E31D2E544D001E4291 /* PickupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1E21D2E544D001E4291 /* PickupManager.m */; };
 		242EA1E71D2E578C001E4291 /* PickupNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1E61D2E578C001E4291 /* PickupNoticeCell.m */; };
 		2433412D1CAB9B5A00825112 /* WorkOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */; };
+		24412E011D64353F0068D019 /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24412E001D64353F0068D019 /* SettingViewCell.m */; };
+		24412E041D64357D0068D019 /* CacheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24412E031D64357D0068D019 /* CacheCell.m */; };
 		244517611CA03E5B0085CC16 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2445175E1CA03E5B0085CC16 /* AppManager.m */; };
 		244517621CA03E5B0085CC16 /* WorkOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517601CA03E5B0085CC16 /* WorkOrderManager.m */; };
 		2445176E1CA03E640085CC16 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 244517661CA03E640085CC16 /* Config.m */; };
@@ -115,7 +117,6 @@
 		24AC36EE1D30850300316301 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36ED1D30850300316301 /* UIView+Frame.m */; };
 		24AC36F11D3085E200316301 /* UISearchBar+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36F01D3085E200316301 /* UISearchBar+Common.m */; };
 		24AC36F41D30869100316301 /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AC36F31D30869100316301 /* UIImage+Common.m */; };
-		24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE271CBA8385003C6C2E /* SettingViewCell.m */; };
 		24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */; };
 		24B398D51D3A37FB0067A528 /* CheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B398D41D3A37FB0067A528 /* CheckBoxView.m */; };
 		24B7DA201D2F6E5A00A0723C /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B7DA1F1D2F6E5A00A0723C /* ScanView.m */; };
@@ -223,6 +224,10 @@
 		242EA1E61D2E578C001E4291 /* PickupNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupNoticeCell.m; sourceTree = "<group>"; };
 		2433412B1CAB9B5A00825112 /* WorkOrderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepController.h; sourceTree = "<group>"; };
 		2433412C1CAB9B5A00825112 /* WorkOrderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepController.m; sourceTree = "<group>"; };
+		24412DFF1D64353F0068D019 /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCell.h; sourceTree = "<group>"; };
+		24412E001D64353F0068D019 /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCell.m; sourceTree = "<group>"; };
+		24412E021D64357D0068D019 /* CacheCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheCell.h; sourceTree = "<group>"; };
+		24412E031D64357D0068D019 /* CacheCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheCell.m; sourceTree = "<group>"; };
 		2445175D1CA03E5B0085CC16 /* AppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
 		2445175E1CA03E5B0085CC16 /* AppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppManager.m; sourceTree = "<group>"; };
 		2445175F1CA03E5B0085CC16 /* WorkOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderManager.h; sourceTree = "<group>"; };
@@ -366,8 +371,6 @@
 		24AC36F01D3085E200316301 /* UISearchBar+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+Common.m"; sourceTree = "<group>"; };
 		24AC36F21D30869100316301 /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
 		24AC36F31D30869100316301 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
-		24AEEE261CBA8385003C6C2E /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewCell.h; path = ../../../View/SettingViewCell.h; sourceTree = "<group>"; };
-		24AEEE271CBA8385003C6C2E /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewCell.m; path = ../../../View/SettingViewCell.m; sourceTree = "<group>"; };
 		24AEEE2A1CBA87D9003C6C2E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		24AEEE2B1CBA87D9003C6C2E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		24B398D31D3A37FB0067A528 /* CheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxView.h; sourceTree = "<group>"; };
@@ -702,8 +705,10 @@
 		2493FE151D436C250094ADA2 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				24AEEE261CBA8385003C6C2E /* SettingViewCell.h */,
-				24AEEE271CBA8385003C6C2E /* SettingViewCell.m */,
+				24412DFF1D64353F0068D019 /* SettingViewCell.h */,
+				24412E001D64353F0068D019 /* SettingViewCell.m */,
+				24412E021D64357D0068D019 /* CacheCell.h */,
+				24412E031D64357D0068D019 /* CacheCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1173,7 +1178,6 @@
 				24AC36F11D3085E200316301 /* UISearchBar+Common.m in Sources */,
 				2489B3B21D260FEC00725C9F /* PickupView.m in Sources */,
 				244517AC1CA03F220085CC16 /* OSCTabBarController.m in Sources */,
-				24AEEE281CBA8385003C6C2E /* SettingViewCell.m in Sources */,
 				24E949CA1D5D742E00AEF2F3 /* WorkOrderInventoryCell.m in Sources */,
 				24020A5D1CB7491100D4EA96 /* WorkOrderStepEditView.m in Sources */,
 				24EAD1F11CC0DF3100444A9D /* SalesOrderGrabCell.m in Sources */,
@@ -1211,6 +1215,7 @@
 				247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */,
 				24AAFCF71D28E02000DAB3C9 /* QrCodeIdentityController.m in Sources */,
 				249E490F1CE6FA7A0051C9C1 /* WorkOrderCameraController.m in Sources */,
+				24412E011D64353F0068D019 /* SettingViewCell.m in Sources */,
 				242EA1E31D2E544D001E4291 /* PickupManager.m in Sources */,
 				24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */,
 				24AAFCFD1D28EEF800DAB3C9 /* ChooseViewController.m in Sources */,
@@ -1278,6 +1283,7 @@
 				244517801CA03E760085CC16 /* ItemSnapshot.m in Sources */,
 				242D49CE1D38B3220013DE13 /* SelectCell.m in Sources */,
 				24E949D01D5D743500AEF2F3 /* WorkOrderInventoryEditController.m in Sources */,
+				24412E041D64357D0068D019 /* CacheCell.m in Sources */,
 				24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */,
 				24020A5A1CB7471C00D4EA96 /* WorkOrderStepView.m in Sources */,
 				24B398D51D3A37FB0067A528 /* CheckBoxView.m in Sources */,

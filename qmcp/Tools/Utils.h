@@ -102,4 +102,20 @@
  *  @return 图片
  */
 + (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size;
+
+
+/**
+ *  删除response的cache
+ *
+ *  @return bool
+ */
++ (BOOL) deleteResponseCache;
+
+/**
+ *  获取response的cache的size
+ *
+ *  @return 大小
+ */
++ (NSUInteger)getResponseCacheSize;
+
 @end

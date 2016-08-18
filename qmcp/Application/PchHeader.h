@@ -38,4 +38,5 @@ typedef void(^CompletionHandler)(NSDictionary *dict, NSString *error);
 //常用变量
 #define DebugLog(s, ...) NSLog(@"%s(%d): %@", __FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
 
+#define kPath_ResponseCache @"ResponseCache"
 #endif /* Header_h */

@@ -14,6 +14,7 @@
 #import "AppManager.h"
 #import "WorkOrderStepEditView.h"
 #import "PhotoCell.h"
+#import "ImageViewerController.h"
 @interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,
                                             UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
 
@@ -292,7 +293,8 @@
     if(attachment.isPlus){
         [self plusBtnClick];
     }else{
-       [Utils showImage:cell.image.image];
+        ImageViewerController *imgViewweVC = [[ImageViewerController alloc] initWithImage:cell.image.image];
+        [self presentViewController:imgViewweVC animated:YES completion:nil];
     }
     
 }

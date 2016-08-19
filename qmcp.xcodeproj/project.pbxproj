@@ -85,6 +85,7 @@
 		247092661D23942E00EBADB3 /* QrCodeBindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092651D23942E00EBADB3 /* QrCodeBindController.m */; };
 		247092691D2397E400EBADB3 /* QrCodeBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247092681D2397E400EBADB3 /* QrCodeBindView.m */; };
 		24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24759F4C1CB9FB4700306E5C /* LoginViewController.m */; };
+		2479BEA51D66AB6300E4D846 /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2479BEA41D66AB6300E4D846 /* ImageViewerController.m */; };
 		247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EE90B1CBF3974008A3674 /* PickupItemSignature.m */; };
 		24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 24836CFE1CB7F05A00B58DBD /* WorkOrderGroup.m */; };
 		2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2489B3AA1D260EDA00725C9F /* InitViewController.m */; };
@@ -306,6 +307,8 @@
 		247092681D2397E400EBADB3 /* QrCodeBindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeBindView.m; sourceTree = "<group>"; };
 		24759F4B1CB9FB4700306E5C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		24759F4C1CB9FB4700306E5C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		2479BEA31D66AB6300E4D846 /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
+		2479BEA41D66AB6300E4D846 /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
 		247D31D71C8D7C040048DD38 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		247EE90A1CBF3974008A3674 /* PickupItemSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupItemSignature.h; sourceTree = "<group>"; };
 		247EE90B1CBF3974008A3674 /* PickupItemSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupItemSignature.m; sourceTree = "<group>"; };
@@ -575,6 +578,8 @@
 		245562371D59C0D4000A523F /* ViewControllerTools */ = {
 			isa = PBXGroup;
 			children = (
+				2479BEA31D66AB6300E4D846 /* ImageViewerController.h */,
+				2479BEA41D66AB6300E4D846 /* ImageViewerController.m */,
 				245562381D59C0F5000A523F /* CheckBoxViewController.h */,
 				245562391D59C0F5000A523F /* CheckBoxViewController.m */,
 				2455623A1D59C0F5000A523F /* CheckCell.h */,
@@ -1294,6 +1299,7 @@
 				244517611CA03E5B0085CC16 /* AppManager.m in Sources */,
 				240F88BB1CC76A2600138F10 /* CommodityItem.m in Sources */,
 				2445176F1CA03E640085CC16 /* HttpUtil.m in Sources */,
+				2479BEA51D66AB6300E4D846 /* ImageViewerController.m in Sources */,
 				242D49C71D38B1300013DE13 /* DateTimeCell.m in Sources */,
 				24AAF4221D0E8F360020356F /* FormTemplateCell.m in Sources */,
 				242D49C01D38AEA10013DE13 /* LabelCell.m in Sources */,

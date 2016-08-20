@@ -2,8 +2,8 @@
 //  QMCPAPI.h
 //  iosapp
 //
-//  Created by chenhaoxiang on 14-10-16.
-//  Copyright (c) 2014年 QMCPhina. All rights reserved.
+//  Created by 谢永明 on 16/3/4.
+//  Copyright © 2016年 inforshare. All rights reserved.
 //
 
 #ifndef iosapp_QMCPAPI_h

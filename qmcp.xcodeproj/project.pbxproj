@@ -147,10 +147,11 @@
 		24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F3597F1CB3BE4300C0950B /* WorkOrderStepCell.m */; };
 		24FBB2121CB9D222009C77E7 /* AddressSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FBB2111CB9D222009C77E7 /* AddressSnapshot.m */; };
 		24FBB2151CB9D2FA009C77E7 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FBB2141CB9D2FA009C77E7 /* LoginView.m */; };
-		B9888D5E10FD1AABB3C8AF87 /* libPods-qmcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D14289307D03E07735EFBE3 /* libPods-qmcp.a */; };
+		4E9323A4E0576734EEAEBB57 /* libPods-qmcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4305545D42B817C3FA72B687 /* libPods-qmcp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0C760458090EA7C2774AE5 /* Pods-qmcp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qmcp.release.xcconfig"; path = "Pods/Target Support Files/Pods-qmcp/Pods-qmcp.release.xcconfig"; sourceTree = "<group>"; };
 		24020A511CB7419400D4EA96 /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		24020A521CB7419400D4EA96 /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
 		24020A551CB7431500D4EA96 /* WorkOrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInfoView.h; sourceTree = "<group>"; };
@@ -432,9 +433,8 @@
 		24FBB2111CB9D222009C77E7 /* AddressSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressSnapshot.m; sourceTree = "<group>"; };
 		24FBB2131CB9D2FA009C77E7 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		24FBB2141CB9D2FA009C77E7 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
-		4D14289307D03E07735EFBE3 /* libPods-qmcp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-qmcp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9BF0F606D0C03A7A816EE842 /* Pods-qmcp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qmcp.release.xcconfig"; path = "Pods/Target Support Files/Pods-qmcp/Pods-qmcp.release.xcconfig"; sourceTree = "<group>"; };
-		DB3C3BB5EF9FCBA8B5EF2C2F /* Pods-qmcp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qmcp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qmcp/Pods-qmcp.debug.xcconfig"; sourceTree = "<group>"; };
+		4305545D42B817C3FA72B687 /* libPods-qmcp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-qmcp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6083A9B27AC8F265DD41E322 /* Pods-qmcp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qmcp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qmcp/Pods-qmcp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,7 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9888D5E10FD1AABB3C8AF87 /* libPods-qmcp.a in Frameworks */,
+				4E9323A4E0576734EEAEBB57 /* libPods-qmcp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,7 +668,7 @@
 				248A5DB11C85C3C30095A4FB /* qmcp */,
 				248A5DB01C85C3C30095A4FB /* Products */,
 				629598FDCA012DAE59C2708E /* Frameworks */,
-				50E323000134D81CB9D0A4C8 /* Pods */,
+				BFB522AA8075081619A32AE0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -683,13 +683,13 @@
 		248A5DB11C85C3C30095A4FB /* qmcp */ = {
 			isa = PBXGroup;
 			children = (
-				24020A541CB7429300D4EA96 /* View */,
+				24F135241C86979C00645F92 /* Application */,
 				2445175C1CA03D770085CC16 /* Base */,
+				24020A541CB7429300D4EA96 /* View */,
 				24F135281C8697B100645F92 /* Controllers */,
 				24B0324F1C881E46007506DD /* Tools */,
 				246F7B6E1C89860500364D88 /* Manager */,
 				24F135611C86E7E300645F92 /* Model */,
-				24F135241C86979C00645F92 /* Application */,
 				24F1351A1C86977E00645F92 /* Categories */,
 				248A5DBE1C85C3C30095A4FB /* Assets.xcassets */,
 				248A5DC01C85C3C30095A4FB /* LaunchScreen.storyboard */,
@@ -1018,22 +1018,22 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		50E323000134D81CB9D0A4C8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DB3C3BB5EF9FCBA8B5EF2C2F /* Pods-qmcp.debug.xcconfig */,
-				9BF0F606D0C03A7A816EE842 /* Pods-qmcp.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		629598FDCA012DAE59C2708E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				247D31D71C8D7C040048DD38 /* CoreData.framework */,
-				4D14289307D03E07735EFBE3 /* libPods-qmcp.a */,
+				4305545D42B817C3FA72B687 /* libPods-qmcp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFB522AA8075081619A32AE0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6083A9B27AC8F265DD41E322 /* Pods-qmcp.debug.xcconfig */,
+				0E0C760458090EA7C2774AE5 /* Pods-qmcp.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1404,7 +1404,7 @@
 		};
 		248A5DC71C85C3C30095A4FB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB3C3BB5EF9FCBA8B5EF2C2F /* Pods-qmcp.debug.xcconfig */;
+			baseConfigurationReference = 6083A9B27AC8F265DD41E322 /* Pods-qmcp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1420,7 +1420,7 @@
 		};
 		248A5DC81C85C3C30095A4FB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9BF0F606D0C03A7A816EE842 /* Pods-qmcp.release.xcconfig */;
+			baseConfigurationReference = 0E0C760458090EA7C2774AE5 /* Pods-qmcp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

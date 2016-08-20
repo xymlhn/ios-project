@@ -13,9 +13,7 @@
 
 @interface AppManager : NSObject
 
-
-
-extern NSString *const kReloginNotification;
+extern NSString *const kReloginNotification;  //登录通知
 
 + (AppManager *) getInstance;
 /**

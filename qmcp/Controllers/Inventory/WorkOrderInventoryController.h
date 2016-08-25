@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseWorkOrderViewController.h"
+#import "BaseViewController.h"
 
-@interface WorkOrderInventoryController : BaseWorkOrderViewController
+@interface WorkOrderInventoryController : BaseViewController
+
+@property (nonatomic,copy) NSString *code;
 
 @end

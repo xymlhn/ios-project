@@ -77,6 +77,7 @@
 		245562451D59C0F5000A523F /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455623F1D59C0F5000A523F /* ScanViewController.m */; };
 		245562461D59C0F5000A523F /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245562411D59C0F5000A523F /* SignViewController.m */; };
 		24596EFC1D6EC0CD00446C58 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24596EFB1D6EC0CD00446C58 /* GisLocation.m */; };
+		24596EFF1D6EC90C00446C58 /* InventoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24596EFE1D6EC90C00446C58 /* InventoryManager.m */; };
 		245A2B721CAA49F7009A7572 /* WorkOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A2B711CAA49F7009A7572 /* WorkOrderListController.m */; };
 		246263001D58802400432575 /* AMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246262FF1D58802400432575 /* AMapViewController.m */; };
 		246516FF1D2F419000F1E5D3 /* PickupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 246516FE1D2F419000F1E5D3 /* PickupItem.m */; };
@@ -293,6 +294,8 @@
 		245562411D59C0F5000A523F /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
 		24596EFA1D6EC0CD00446C58 /* GisLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisLocation.h; sourceTree = "<group>"; };
 		24596EFB1D6EC0CD00446C58 /* GisLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GisLocation.m; sourceTree = "<group>"; };
+		24596EFD1D6EC90C00446C58 /* InventoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryManager.h; sourceTree = "<group>"; };
+		24596EFE1D6EC90C00446C58 /* InventoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryManager.m; sourceTree = "<group>"; };
 		245A2B701CAA49F7009A7572 /* WorkOrderListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderListController.h; sourceTree = "<group>"; };
 		245A2B711CAA49F7009A7572 /* WorkOrderListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderListController.m; sourceTree = "<group>"; };
 		246262FE1D58802400432575 /* AMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMapViewController.h; sourceTree = "<group>"; };
@@ -614,6 +617,8 @@
 				249E49081CE6EFB80051C9C1 /* CameraManager.m */,
 				242EA1E11D2E544D001E4291 /* PickupManager.h */,
 				242EA1E21D2E544D001E4291 /* PickupManager.m */,
+				24596EFD1D6EC90C00446C58 /* InventoryManager.h */,
+				24596EFE1D6EC90C00446C58 /* InventoryManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1261,6 +1266,7 @@
 				2445176E1CA03E640085CC16 /* Config.m in Sources */,
 				240C742B1D17918600245D5C /* WorkOrderCell.m in Sources */,
 				244517811CA03E760085CC16 /* SalesOrderSnapshot.m in Sources */,
+				24596EFF1D6EC90C00446C58 /* InventoryManager.m in Sources */,
 				24B7DA271D2F93EA00A0723C /* SearchViewCell.m in Sources */,
 				24E949CF1D5D743500AEF2F3 /* WorkOrderInventoryController.m in Sources */,
 				244517BC1CA03F520085CC16 /* UIColor+Util.m in Sources */,

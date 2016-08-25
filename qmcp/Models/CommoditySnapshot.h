@@ -30,5 +30,8 @@
 
 @property (nonatomic, assign) BOOL isSelect;
 
+@property (nonatomic, copy) NSString *itemProperties;
+
+
 
 @end

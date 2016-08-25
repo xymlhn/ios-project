@@ -10,6 +10,9 @@
 #import "InventorySearchView.h"
 #import "SalesOrderSearchResult.h"
 #import "InventorySearchCell.h"
+#import "InventoryManager.h"
+#import "CommoditySnapshot.h"
+#import "WorkOrderInventoryController.h"
 
 
 @interface InventorySearchController()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -75,7 +78,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *result = searchBar.text;
     
-    [self searchWorkOrderByCode:result andCondition:[Config getSearch]];
+    [self searchWorkOrderByCode:result];
     
 }
 
@@ -92,47 +95,44 @@
     [UIView commitAnimations];
 }
 
--(void)searchWorkOrderByCode:(NSString *)string
-                andCondition:(BOOL)condition{
+-(void)searchWorkOrderByCode:(NSString *)string{
     
-//    [_searchView.searchBar resignFirstResponder];
-//    __weak typeof(self) weakSelf = self;
-//    MBProgressHUD *hub = [Utils createHUD];
-//    hub.labelText = @"正在搜索";
-//    hub.userInteractionEnabled = NO;
-//    
-//    [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSString *error) {
-//        if(!error){
-//            [weakSelf.resultList removeAllObjects];
-//            NSArray<WorkOrderSearchResult *> *arr = [WorkOrderSearchResult mj_objectArrayWithKeyValuesArray:obj];
-//            [weakSelf.resultList addObjectsFromArray:arr];
-//            [weakSelf.searchView.tableView reloadData];
-//            weakSelf.searchView.searchBar.text = @"";
-//            NSString *message;
-//            if(arr.count == 0){
-//                message = @"搜索不到工单";
-//                hub.mode = MBProgressHUDModeCustomView;
-//                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-//                hub.labelText = message;
-//                [hub hide:YES afterDelay:kEndFailedDelayTime];
-//            }else{
-//                message = @"搜索成功";
-//                hub.mode = MBProgressHUDModeCustomView;
-//                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-//                hub.labelText = message;
-//                [hub hide:YES afterDelay:kEndSucceedDelayTime];
-//            }
-//            
-//        }else{
-//            [weakSelf.resultList removeAllObjects];
-//            [weakSelf.searchView.tableView reloadData];
-//            hub.mode = MBProgressHUDModeCustomView;
-//            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-//            hub.labelText = error;
-//            [hub hide:YES afterDelay:kEndFailedDelayTime];
-//        }
-//    }];
-//    
+    [_searchView.searchBar resignFirstResponder];
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在搜索";
+    hub.userInteractionEnabled = NO;
+    
+    [[InventoryManager getInstance] getSalesOrderSearchResult:string finishBlock:^(NSMutableArray<SalesOrderSearchResult *> *array, NSString *error) {
+        if(!error){
+            weakSelf.resultList = array;
+            NSString *message;
+            if(array.count == 0){
+                message = @"搜索不到工单";
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.labelText = message;
+                [hub hide:YES afterDelay:kEndFailedDelayTime];
+            }else{
+                message = @"搜索成功";
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.labelText = message;
+                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            }
+            [weakSelf.searchView.tableView reloadData];
+            
+        }else{
+            [weakSelf.resultList removeAllObjects];
+            [weakSelf.searchView.tableView reloadData];
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
+        }
+    }];
+    
+
     
 }
 
@@ -159,16 +159,42 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSInteger row = indexPath.row;
-//    SalesOrderSearchResult *salesOrderSearchResult = self.resultList[row];
-    
+    NSInteger row = indexPath.row;
+    SalesOrderSearchResult *salesOrderSearchResult = self.resultList[row];
+    if(salesOrderSearchResult.itemConfirmed){
+        [Utils showHudTipStr:@"该订单已经清点了!"];
+    }else{
+        [InventoryManager getInstance].currentSalesOrderCode = salesOrderSearchResult.code;
+        __weak typeof(self) weakSelf = self;
+        MBProgressHUD *hub = [Utils createHUD];
+        hub.labelText = @"正在获取";
+        hub.userInteractionEnabled = NO;
+        NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,salesOrderSearchResult.code];
+        [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+            if(!error){
+                NSArray<CommoditySnapshot *> *commoditySnapshots = [CommoditySnapshot mj_objectArrayWithKeyValuesArray:obj];
+                salesOrderSearchResult.commodityItemList = commoditySnapshots;
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.labelText = @"获取成功";
+                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                [weakSelf pushInfoView:salesOrderSearchResult.code];
+            }else{
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.labelText = error;
+                [hub hide:YES afterDelay:kEndFailedDelayTime];
+            }
+
+        }];
+    }
 }
 
 - (void)pushInfoView:(NSString *)code
 {
-//    WorkOrderInfoController *info = [WorkOrderInfoController new];
-//    info.workOrderCode = code;
-//    info.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:info animated:YES];
+    WorkOrderInventoryController *info = [WorkOrderInventoryController new];
+    info.code = code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 @end

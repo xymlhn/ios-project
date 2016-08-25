@@ -24,7 +24,7 @@
 #import "ChooseViewController.h"
 @interface WorkOrderInventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,StandardsViewDelegate,
                                                 UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
-@property (nonatomic, strong) WorkOrder *workOrder;
+
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderInventoryEditView *inventoryEditView;
@@ -65,21 +65,13 @@
 
 -(void)loadData
 {
-    NSString *itemWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderStepCode];
-    _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
-   _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
+    
     
     _attachments = [NSMutableArray new];
     if(_itemSnapshot.attachments != nil){
         [_attachments addObjectsFromArray:_itemSnapshot.attachments];
     }
-    
     _commodities = [NSMutableArray new];
-    if(_workOrder.commoditySnapshots != nil){
-        [_commodities addObjectsFromArray:_workOrder.commoditySnapshots ];
-        
-    }
     
     _chooseCommodityArr = [NSMutableArray new];
     if(_itemSnapshot.commodities != nil){
@@ -161,7 +153,7 @@
     [picker dismissViewControllerAnimated:YES completion:^ {
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
-        attachment.workOrderStepCode = [super workOrderStepCode];
+        attachment.itemSnapShotId = _itemSnapshotCode;
         attachment.sort = 20;
         attachment.type = 10;
         NSString *type = [info objectForKey:UIImagePickerControllerMediaType];

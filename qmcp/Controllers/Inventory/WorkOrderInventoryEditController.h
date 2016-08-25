@@ -6,10 +6,15 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "BaseWorkOrderViewController.h"
+#import "BaseViewController.h"
 #import "ItemSnapshot.h"
 
-@interface WorkOrderInventoryEditController : BaseWorkOrderViewController
+@interface WorkOrderInventoryEditController : BaseViewController
+
+
+@property (nonatomic, copy) NSString *code;
+
+@property (nonatomic, copy) NSString *itemSnapshotCode;
 
 @property (copy, nonatomic) void(^doneBlock)(ItemSnapshot *item);
 

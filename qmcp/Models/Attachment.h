@@ -22,6 +22,8 @@
 
 @property (nonatomic, copy) NSString *workOrderCode;
 
+@property (nonatomic, copy) NSString *salesOrderCode;
+
 @property (nonatomic, copy) NSString *imageUrl;
 
 @property (nonatomic, assign) int sort;

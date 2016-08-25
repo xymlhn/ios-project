@@ -9,6 +9,7 @@
 #import "InventorySearchCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
+#import "EnumUtil.h"
 
 @interface InventorySearchCell()
 
@@ -120,8 +121,10 @@
 
 //重写属性的setter方法，给子控件赋值
 - (void)setSalesOrderSearchResult:(SalesOrderSearchResult *)salesOrderSearchResult{
-    
-    
+    _nameText.text = salesOrderSearchResult.addressSnapshot.contacts;
+    _phoneText.text = salesOrderSearchResult.addressSnapshot.mobilePhone;
+    _codeText.text = salesOrderSearchResult.code;
+    _typeText.text = salesOrderSearchResult.storePricingReviewFlag ? @"商家" : @"客户";
 }
 
 

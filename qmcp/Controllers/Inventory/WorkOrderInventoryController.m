@@ -16,11 +16,13 @@
 #import "SignViewController.h"
 #import "Attachment.h"
 #import "WorkOrderManager.h"
+#import "SalesOrderSearchResult.h"
+#import "InventoryManager.h"
 @interface WorkOrderInventoryController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray<ItemSnapshot *> *itemSnapshotList;
 @property (nonatomic, strong) WorkOrderInventoryView *inventoryView;
-@property (nonatomic, strong) WorkOrder *workOrder;
+@property (nonatomic, strong) SalesOrderSearchResult *salesOrderSearchResult;
 @end
 
 @implementation WorkOrderInventoryController
@@ -47,10 +49,7 @@
 
 -(void)loadData
 {
-    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
-    _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
-    _workOrder = [WorkOrder searchWithWhere:workWhere][0];
+    _salesOrderSearchResult = [[InventoryManager getInstance] getSalesOrderSearchResultByCode:_code];
 }
 
 #pragma mark - IBAction
@@ -91,15 +90,14 @@
     if(image){
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
-        attachment.workOrderCode = [super workOrderCode];
+        attachment.salesOrderCode = _code;
         attachment.path = [Utils saveImage:image andName:attachment.key];
         [attachment saveToDB];
         
-        _workOrder.salesOrderSnapshot.itemConfirmed = true;
-        _workOrder.signatureImageKey = attachment.key;
-        [_workOrder saveToDB];
+        _salesOrderSearchResult.itemConfirmed = YES;
+        _salesOrderSearchResult.signatureImageKey = attachment.key;
         
-        [self postWorkOrderInventoryWitCode:_workOrder.code];
+        [self postWorkOrderInventoryWitCode:_code];
     }else{
         [Utils showHudTipStr:@"请重新签名!"];
     }
@@ -113,8 +111,8 @@
 
     NSMutableArray *itemArray = [ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList];
     
-    NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_workOrder.salesOrderSnapshot.itemConfirmed],
-                                    @"signatureImageKey":_workOrder.signatureImageKey,@"itemSnapshots":itemArray};
+    NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_salesOrderSearchResult.itemConfirmed],
+                                    @"signatureImageKey":_salesOrderSearchResult.signatureImageKey,@"itemSnapshots":itemArray};
 
     [[WorkOrderManager getInstance] postWorkOrderInventoryWithCode:code andParams:inventoryDict finishBlock:^(NSDictionary *dict, NSString *error) {
         if (!error) {
@@ -174,14 +172,13 @@
     itemSnapshot.code = result;
     long size = _itemSnapshotList.count + 1;
     itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
-    itemSnapshot.workOrderCode = [super workOrderCode];
+    itemSnapshot.workOrderCode = _code;
     [itemSnapshot saveToDB];
     WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(ItemSnapshot *item) {
         [weakSelf.itemSnapshotList addObject:item];
         [weakSelf.inventoryView.tableView reloadData];
     }];
-    info.workOrderCode = [super workOrderCode];
-    info.workOrderStepCode = itemSnapshot.code;
+    
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -209,8 +206,8 @@
 {
     WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController new];
     ItemSnapshot *itemSnapshot = self.itemSnapshotList[indexPath.row];
-    info.workOrderCode = [super workOrderCode];
-    info.workOrderStepCode = itemSnapshot.code;
+    info.itemSnapshotCode = itemSnapshot.salesOrderItemCode;
+    info.code = _code;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
     

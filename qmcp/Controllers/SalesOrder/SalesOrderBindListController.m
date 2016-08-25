@@ -35,8 +35,6 @@
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
-
-    self.view = _tableView;
     
 }
 
@@ -81,8 +79,7 @@
 
 -(void)refreshUIWithDict:(NSDictionary *)dict{
     [self.tableView.mj_header endRefreshing];
-    [self.salesOrderList removeAllObjects];
-    [self.salesOrderList addObjectsFromArray:[dict allValues]];
+    self.salesOrderList = [SalesOrderSnapshot mj_objectArrayWithKeyValuesArray:[dict allValues]];
     [self.tableView reloadData];
 }
 

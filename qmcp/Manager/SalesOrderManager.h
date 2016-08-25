@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PchHeader.h"
+#import "SalesOrderSnapshot.h"
 
 @interface SalesOrderManager : NSObject
 
@@ -43,4 +44,11 @@
  */
 -(void)removeBindDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode;
 
+/**
+ *  根据订单code更新绑定字典中的salesOrder
+ *
+ *  @param salesOrderSnapshot salesOrder
+ */
+
+-(void)updateGrabDictSalesOrderSnapshot:(SalesOrderSnapshot *)salesOrderSnapshot;
 @end

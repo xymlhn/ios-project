@@ -98,11 +98,11 @@ NSString *const kConfirmCache = @"confirm";
             [Config setSalesOrderGrabTime:[Utils formatDate:[NSDate new]]];
             SalesOrderConfirm *salesOrderConfirm = [SalesOrderConfirm mj_objectWithKeyValues:obj];
            
-            for (NSString *code in salesOrderConfirm.haveConfirmed) {
+            for (NSString *code in salesOrderConfirm.haveAssign) {
                 [_grabDict removeObjectForKey:code];
             }
-            
-            for (SalesOrderSnapshot *salesOrder in salesOrderConfirm.unconfirmed) {
+            NSArray<SalesOrderSnapshot *> *unArr = [SalesOrderSnapshot mj_objectArrayWithKeyValuesArray:salesOrderConfirm.unassigned];
+            for (SalesOrderSnapshot *salesOrder in unArr) {
                 _grabDict[salesOrder.code] = salesOrder;
             }
             [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
@@ -120,6 +120,15 @@ NSString *const kConfirmCache = @"confirm";
     
     if(_grabDict[salesOrderCode] != nil){
         [_grabDict removeObjectForKey:salesOrderCode];
+        [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
+    }
+    
+}
+
+-(void)updateGrabDictSalesOrderSnapshot:(SalesOrderSnapshot *)salesOrderSnapshot{
+    
+    if(_grabDict[salesOrderSnapshot.code] != nil){
+        _grabDict[salesOrderSnapshot.code] = salesOrderSnapshot;
         [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
     }
     

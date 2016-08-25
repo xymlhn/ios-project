@@ -23,6 +23,7 @@ NSString * const kWorkOrderTime = @"workOrderTime";
 NSString * const kCommodityItemTime = @"commodityItemTime";
 NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
 NSString * const kDatabaseVersion = @"databaseVersion";
+NSString * const kWork = @"work";
 @implementation Config
 
 +(void)setInitSetting{
@@ -191,6 +192,15 @@ NSString * const kDatabaseVersion = @"databaseVersion";
     return [number intValue];
 }
 
++(void)setWork:(BOOL)work
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setBool:work forKey:kWork];
+}
++(BOOL)isWork{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    return [user boolForKey:kWork];
+}
 
 
 

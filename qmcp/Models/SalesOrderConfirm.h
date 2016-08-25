@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SalesOrderSnapshot.h"
 @interface SalesOrderConfirm : NSObject
 
-@property (nonatomic,strong) NSArray *unconfirmed;
+@property (nonatomic,strong) NSArray<SalesOrderSnapshot *> *unassigned;
 
-@property (nonatomic,strong) NSArray *haveConfirmed;
+@property (nonatomic,strong) NSArray<NSString *> *haveAssign;
 @end

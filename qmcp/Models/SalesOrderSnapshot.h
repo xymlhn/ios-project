@@ -43,5 +43,11 @@ typedef NS_ENUM(NSInteger, SalesOrderType) {
 
 @property (nonatomic, strong) NSArray *commodityNames;
 
+@property (nonatomic, assign) BOOL storePricingReviewFlag;
+
+@property (nonatomic, assign) BOOL confirmationFlag;
+
+
+
 
 @end

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[SalesOrderGrabCell setSalesOrderSnapshot:]:SalesOrderGrabCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "salesOrderSnapshot.type">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__70-[SalesOrderManager getSalesOrderConfirmByLastUpdateTime:finishBlock:]_block_invoke:SalesOrderManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[SalesOrderGrabListController salesOrderUpdate:]:SalesOrderGrabListController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[SalesOrderGrabListController tableView:numberOfRowsInSection:]:SalesOrderGrabListController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__32+[SalesOrderManager getInstance]_block_invoke:SalesOrderManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "shared_manager.grabDict">
+            </PersistentString>
+            <PersistentString
+               value = "_grabDict">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

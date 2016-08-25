@@ -83,4 +83,8 @@
 //数据库版本
 +(void)setDatabaseVersion:(int)version;
 +(int)getDatabaseVersion;
+
+//上下班
++(void)setWork:(BOOL)work;
++(BOOL)isWork;
 @end

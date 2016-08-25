@@ -76,6 +76,7 @@
 		245562441D59C0F5000A523F /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455623D1D59C0F5000A523F /* QrCodeViewController.m */; };
 		245562451D59C0F5000A523F /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455623F1D59C0F5000A523F /* ScanViewController.m */; };
 		245562461D59C0F5000A523F /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245562411D59C0F5000A523F /* SignViewController.m */; };
+		24596EFC1D6EC0CD00446C58 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24596EFB1D6EC0CD00446C58 /* GisLocation.m */; };
 		245A2B721CAA49F7009A7572 /* WorkOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A2B711CAA49F7009A7572 /* WorkOrderListController.m */; };
 		246263001D58802400432575 /* AMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246262FF1D58802400432575 /* AMapViewController.m */; };
 		246516FF1D2F419000F1E5D3 /* PickupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 246516FE1D2F419000F1E5D3 /* PickupItem.m */; };
@@ -290,6 +291,8 @@
 		2455623F1D59C0F5000A523F /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		245562401D59C0F5000A523F /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
 		245562411D59C0F5000A523F /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
+		24596EFA1D6EC0CD00446C58 /* GisLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisLocation.h; sourceTree = "<group>"; };
+		24596EFB1D6EC0CD00446C58 /* GisLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GisLocation.m; sourceTree = "<group>"; };
 		245A2B701CAA49F7009A7572 /* WorkOrderListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderListController.h; sourceTree = "<group>"; };
 		245A2B711CAA49F7009A7572 /* WorkOrderListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderListController.m; sourceTree = "<group>"; };
 		246262FE1D58802400432575 /* AMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMapViewController.h; sourceTree = "<group>"; };
@@ -1013,6 +1016,8 @@
 				24B7DA221D2F929800A0723C /* WorkOrderSearchResult.m */,
 				24EC4EF61D615B400087AE7D /* SalesOrderSearchResult.h */,
 				24EC4EF71D615B400087AE7D /* SalesOrderSearchResult.m */,
+				24596EFA1D6EC0CD00446C58 /* GisLocation.h */,
+				24596EFB1D6EC0CD00446C58 /* GisLocation.m */,
 			);
 			name = Model;
 			path = Models;
@@ -1208,6 +1213,7 @@
 				240F88BE1CC76AD400138F10 /* CommodityProperty.m in Sources */,
 				24EAD1F41CC0DF4300444A9D /* SalesOrderBindCell.m in Sources */,
 				244517BD1CA03F520085CC16 /* UIImage+Util.m in Sources */,
+				24596EFC1D6EC0CD00446C58 /* GisLocation.m in Sources */,
 				244517B21CA03F400085CC16 /* AppDelegate.m in Sources */,
 				24C34F141CE9931100D945BE /* FormTemplate.m in Sources */,
 				248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */,

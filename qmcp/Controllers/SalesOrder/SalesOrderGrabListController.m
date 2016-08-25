@@ -17,7 +17,7 @@
 #import "WorkOrderInfoController.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *salesOrderList;
+@property (nonatomic, strong) NSMutableArray<SalesOrderSnapshot *> *salesOrderList;
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -40,22 +40,11 @@
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
-
-    self.view = _tableView;
     
 }
 
-//懒加载
--(NSMutableArray *)salesOrderList{
-    if(_salesOrderList == nil)
-    {
-        _salesOrderList = [NSMutableArray new];
-    }
-    return _salesOrderList;
-}
-
--(void)loadData
-{
+-(void)loadData{
+    _salesOrderList = [NSMutableArray new];
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
     hub.userInteractionEnabled = NO;
@@ -82,9 +71,9 @@
 }
 
 - (void)salesOrderUpdate:(NSDictionary *)dict{
-    [self.tableView.mj_header endRefreshing];
-    [self.salesOrderList removeAllObjects];
-    [self.salesOrderList addObjectsFromArray:[dict allValues]];
+    [_tableView.mj_header endRefreshing];
+    [_salesOrderList removeAllObjects];
+    [_salesOrderList addObjectsFromArray:[SalesOrderSnapshot mj_objectArrayWithKeyValuesArray:[dict allValues]]];
     [self.tableView reloadData];
 }
 
@@ -92,7 +81,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.salesOrderList.count;
+    return _salesOrderList.count;
 }
 
 //返回每行显示的cell
@@ -102,9 +91,13 @@
     //1 创建可重用的自定义的cell
     SalesOrderGrabCell *cell = [SalesOrderGrabCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
-    SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[row];
+    SalesOrderSnapshot *salesOrderSnapshot = _salesOrderList[row];
     cell.grabBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self grabSalesOrder:salesOrderSnapshot];
+        if(salesOrderSnapshot.confirmationFlag){
+            [self assignSalesOrder:salesOrderSnapshot];
+        }else{
+            [self grabSalesOrder:salesOrderSnapshot];
+        }
         return [RACSignal empty];
     }];
     cell.salesOrderSnapshot = salesOrderSnapshot;
@@ -122,19 +115,51 @@
 {
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"抢单中...";
+    hub.labelText = @"接单中...";
     hub.userInteractionEnabled = NO;
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERGRAB,salesOrderSnapshot.code];
     NSDictionary *dict = @{@"grab":[NSNumber numberWithBool:YES]};
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
+            salesOrderSnapshot.confirmationFlag = YES;
+            [weakSelf.tableView reloadData];
+            [[SalesOrderManager getInstance] updateGrabDictSalesOrderSnapshot:salesOrderSnapshot];
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+            hub.labelText = [NSString stringWithFormat:@"接单成功"];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            
+        }else{
+            
+            [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
+            [weakSelf.tableView reloadData];
+            [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
+        }
+    }];
+    
+}
+
+-(void)assignSalesOrder:(SalesOrderSnapshot *)salesOrderSnapshot
+{
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"派单中...";
+    hub.userInteractionEnabled = NO;
+    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERASSIGN,salesOrderSnapshot.code];
+    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+        if (!error) {
             [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
             [weakSelf.tableView reloadData];
             [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"抢单成功"];
+            hub.labelText = [NSString stringWithFormat:@"派单成功"];
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
             WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
             [workOrder saveToDB];

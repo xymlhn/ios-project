@@ -51,6 +51,8 @@
         _codeText.text = salesOrderSnapshot.code;
         _nameText.text = salesOrderSnapshot.addressSnapshot.contacts;
         _phoneText.text = salesOrderSnapshot.addressSnapshot.mobilePhone;
+        NSString *title = salesOrderSnapshot.confirmationFlag ? @"派单" : @"接单";
+        [_grabBtn setTitle:title forState:UIControlStateNormal];
     }
 }
 

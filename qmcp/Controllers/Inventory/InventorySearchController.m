@@ -190,10 +190,10 @@
     }
 }
 
-- (void)pushInfoView:(NSString *)code
+- (void)pushInfoView:(NSString *)salesOrderCode
 {
     WorkOrderInventoryController *info = [WorkOrderInventoryController new];
-    info.code = code;
+    info.salesOrderCode = salesOrderCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }

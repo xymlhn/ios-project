@@ -21,6 +21,7 @@ NSString * const kSalesOrderBindTime = @"bindTime";
 NSString * const kSalesOrderGrabTime = @"grabTime";
 NSString * const kWorkOrderTime = @"workOrderTime";
 NSString * const kCommodityItemTime = @"commodityItemTime";
+NSString * const kCommoditySnapshotTime = @"commoditySnapshotTime";
 NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
 NSString * const kDatabaseVersion = @"databaseVersion";
 NSString * const kWork = @"work";
@@ -34,6 +35,7 @@ NSString * const kWork = @"work";
     [self setCommodityProperty:@""];
     [self setCommodityItem:@""];
     [self setSearch:NO];
+    [self setCommoditySnapshot:@""];
 }
 
 + (void)saveOwnAccount:(NSString *)account andPassword:(NSString *)password
@@ -165,6 +167,17 @@ NSString * const kWork = @"work";
 +(NSString *)getCommodityItem{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *str = [user objectForKey:kCommodityItemTime];
+    return str == nil ?@"":str;
+}
+
+
++(void)setCommoditySnapshot:(NSString *)lastupdateTime{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:lastupdateTime forKey:kCommoditySnapshotTime];
+}
++(NSString *)getCommoditySnapshot{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *str = [user objectForKey:kCommoditySnapshotTime];
     return str == nil ?@"":str;
 }
 

@@ -17,11 +17,14 @@
 #import "CommodityItem.h"
 #import "CommodityProperty.h"
 #import "PropertyData.h"
+#import "CommoditySnapshot.h"
 
 NSString * const kCommodityItem = @"commodityItem";
 NSString * const kCommodityProperty = @"commodityProperty";
+NSString * const kCommoditySnapshot = @"commoditySnapshot";
 @interface PropertyManager()
 
+@property (nonatomic, strong) NSMutableArray<CommoditySnapshot *> * commoditySnapshotArr;
 @property (nonatomic, strong) NSMutableArray<CommodityItem *> * commodityItemArr;
 @property (nonatomic, strong) NSDictionary<NSString *,CommodityProperty *> * commodityPropertyDict;
 
@@ -42,6 +45,10 @@ NSString * const kCommodityProperty = @"commodityProperty";
             shared_manager.commodityItemArr = [NSMutableArray new];
         }else{
             shared_manager.commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:tempCommodityArr];
+        }
+        shared_manager.commoditySnapshotArr = [[TMCache sharedCache] objectForKey:kCommoditySnapshot];
+        if(shared_manager.commoditySnapshotArr == nil){
+            shared_manager.commoditySnapshotArr = [NSMutableArray new];
         }
         shared_manager.commodityPropertyDict = [[TMCache sharedCache] objectForKey:kCommodityProperty];
         if(shared_manager.commodityPropertyDict == nil)
@@ -69,6 +76,24 @@ NSString * const kCommodityProperty = @"commodityProperty";
             if(obj != nil){
                 _commodityItemArr = [CommodityItem mj_objectArrayWithKeyValuesArray:obj];
                 [[TMCache sharedCache] setObject:_commodityItemArr forKey:kCommodityItem];
+            }
+            
+        }else{
+            [self getCommodityItemByLastUpdateTime:[Config getCommodityItem]];
+        }
+    }];
+    
+}
+
+-(void)getCommoditySnapshotByLastUpdateTime:(NSString *)lastupdateTime
+{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMMODITYSNAPSHOT,lastupdateTime];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+        if (!error) {
+            [Config setCommoditySnapshot:[Utils formatDate:[NSDate new]]];
+            if(obj != nil){
+                _commoditySnapshotArr = [CommoditySnapshot mj_objectArrayWithKeyValuesArray:obj];
+                [[TMCache sharedCache] setObject:_commoditySnapshotArr forKey:kCommoditySnapshot];
             }
             
         }else{

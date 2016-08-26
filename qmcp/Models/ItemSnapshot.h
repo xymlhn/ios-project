@@ -21,7 +21,7 @@
 
 @property (nonatomic, copy) NSMutableArray *attachments;
 \
-@property (nonatomic, copy) NSString *workOrderCode;
+@property (nonatomic, copy) NSString *salesOrderCode;
 
 @property (nonatomic, assign) BOOL isUse;
 @end

@@ -12,7 +12,7 @@
 @interface WorkOrderInventoryEditController : BaseViewController
 
 
-@property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *salesOrderCode;
 
 @property (nonatomic, copy) NSString *itemSnapshotCode;
 

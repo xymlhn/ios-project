@@ -11,6 +11,6 @@
 
 @interface WorkOrderInventoryController : BaseViewController
 
-@property (nonatomic,copy) NSString *code;
+@property (nonatomic,copy) NSString *salesOrderCode;
 
 @end

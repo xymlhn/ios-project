@@ -1,3 +1,4 @@
+
 //
 //  WorkOrderInventoryEditController.m
 //  qmcp
@@ -22,6 +23,9 @@
 #import "PropertyChoose.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ChooseViewController.h"
+#import "UIViewController+BackButtonHandler.h"
+#import "ScanViewController.h"
+#import "QrCodeViewController.h"
 @interface WorkOrderInventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,StandardsViewDelegate,
                                                 UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 
@@ -65,7 +69,8 @@
 
 -(void)loadData
 {
-    
+    NSString *itemWhere = [NSString stringWithFormat:@"salesOrderItemCode = '%@'",_itemSnapshotCode];
+    _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
     
     _attachments = [NSMutableArray new];
     if(_itemSnapshot.attachments != nil){
@@ -263,7 +268,7 @@
         _propertyChoose = [PropertyChoose new];
         _propertyChoose.code = [[NSUUID UUID] UUIDString];
         _propertyChoose.itemProperties = itemProperties;
-        _propertyChoose.price = [price floatValue];
+        _propertyChoose.price = price;
     }else{
         _propertyChoose = nil;
         _mystandardsView.priceLab.text = @"";
@@ -355,4 +360,31 @@
     return standview;
 }
 
+-(void)push{
+    __weak typeof(self) weakSelf = self;
+    if([Config getQuickScan]){
+        ScanViewController *scanViewController = [ScanViewController doneBlock:^(NSString *textValue) {
+            [weakSelf handleQrCode:textValue];
+        }];
+        [self.navigationController pushViewController:scanViewController animated:YES];
+    }else{
+        QrCodeViewController *info = [QrCodeViewController doneBlock:^(NSString *textValue) {
+            [weakSelf handleQrCode:textValue];
+        }];
+        [self.navigationController pushViewController:info animated:YES];
+    }
+}
+
+-(void)handleQrCode:(NSString *)qrCode{
+    
+}
+
+//返回按钮监听
+- (BOOL)navigationShouldPopOnBackButton {
+    if (true) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return NO;
+    }
+    return YES;
+}
 @end

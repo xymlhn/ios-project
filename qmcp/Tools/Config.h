@@ -80,6 +80,10 @@
 +(void)setCommodityProperty:(NSString *)lastupdateTime;
 +(NSString *)getCommodityProperty;
 
+//服务更新时间
++(void)setCommoditySnapshot:(NSString *)lastupdateTime;
++(NSString *)getCommoditySnapshot;
+
 //数据库版本
 +(void)setDatabaseVersion:(int)version;
 +(int)getDatabaseVersion;

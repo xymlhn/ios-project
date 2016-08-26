@@ -7,6 +7,7 @@
 //
 
 #import "CommoditySnapshot.h"
+#import "MJExtension.h"
 
 @implementation CommoditySnapshot
 
@@ -14,4 +15,6 @@
 {
     return @"code";
 }
+
+MJCodingImplementation
 @end

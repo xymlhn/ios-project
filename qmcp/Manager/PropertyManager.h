@@ -21,6 +21,14 @@
 -(void)getCommodityItemByLastUpdateTime:(NSString *)lastupdateTime;
 
 /**
+ *  获取服务
+ *
+ *  @param lastupdateTime 时间
+ */
+-(void)getCommoditySnapshotByLastUpdateTime:(NSString *)lastupdateTime;
+
+
+/**
  *  获取规格属性
  *
  *  @param lastupdateTime 时间

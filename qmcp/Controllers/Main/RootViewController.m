@@ -35,6 +35,7 @@
     [super viewDidLoad];
     [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
     [[PropertyManager getInstance] getCommodityItemByLastUpdateTime:[Config getCommodityItem]];
+    [[PropertyManager getInstance] getCommoditySnapshotByLastUpdateTime:[Config getCommoditySnapshot]];
     [[PropertyManager getInstance] getCommodityPropertyByLastUpdateTime:[Config getCommodityProperty]];
     [[CameraManager getInstance] getAllSystemCamera];
 }

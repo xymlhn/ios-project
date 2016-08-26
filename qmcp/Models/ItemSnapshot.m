@@ -12,7 +12,7 @@
 
 + (NSString*)getPrimaryKey
 {
-    return @"code";
+    return @"salesOrderItemCode";
 }
 
 + (NSDictionary *)mj_objectClassInArray

@@ -26,7 +26,7 @@
 
 @property (nonatomic, assign) int code;
 
-@property (nonatomic, assign) float price;
+@property (nonatomic, copy) NSString  *price;
 
 @property (nonatomic, assign) BOOL isSelect;
 

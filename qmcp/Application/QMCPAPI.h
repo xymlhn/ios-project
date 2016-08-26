@@ -31,6 +31,7 @@
 #define QMCPAPI_SALESORDERASSIGN         @"i/a/api/salesorder/assign/"
 #define QMCPAPI_MANUAL                   @"api/appoperationmanual"
 #define QMCPAPI_COMMODITYITEM            @"i/a/api/commodity/item?lastUpdateTime="
+#define QMCPAPI_COMMODITYSNAPSHOT        @"i/a/api/commodity/baseinfo?lastUpdateTime="
 #define QMCPAPI_COMODITYPROPERTY         @"i/a/api/commodity/property?lastUpdateTime="
 #define QMCPAPI_GETWORKORDERBYITEMCODE   @"i/a/api/workorder/item/"
 #define QMCPAPI_ALL_CAMERA               @"i/a/api/camera/"

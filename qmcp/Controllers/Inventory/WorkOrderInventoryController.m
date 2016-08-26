@@ -49,24 +49,29 @@
 
 -(void)loadData
 {
-    _salesOrderSearchResult = [[InventoryManager getInstance] getSalesOrderSearchResultByCode:_code];
+    _salesOrderSearchResult = [[InventoryManager getInstance] getSalesOrderSearchResultByCode:_salesOrderCode];
+    NSString *where = [NSString stringWithFormat:@"salesOrderItemCode = '%@'",_salesOrderSearchResult.code];
+    _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
 }
 
 #pragma mark - IBAction
 - (void)addBtnClick:(UITapGestureRecognizer *)recognizer
 {
     __weak typeof(self) weakSelf = self;
-    if([Config getQuickScan]){
-        ScanViewController *scanViewController = [ScanViewController doneBlock:^(NSString *textValue) {
-            [weakSelf handleResult:textValue];
-        }];
-        [self.navigationController pushViewController:scanViewController animated:YES];
-    }else{
-        QrCodeViewController *info = [QrCodeViewController doneBlock:^(NSString *textValue) {
-            [weakSelf handleResult:textValue];
-        }];
-        [self.navigationController pushViewController:info animated:YES];
-    }
+    ItemSnapshot *itemSnapshot = [ItemSnapshot new];
+    itemSnapshot.salesOrderItemCode = [[NSUUID UUID] UUIDString];
+    long size = _itemSnapshotList.count + 1;
+    itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
+    itemSnapshot.salesOrderCode = _salesOrderCode;
+    [itemSnapshot saveToDB];
+    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(ItemSnapshot *item) {
+        [weakSelf.itemSnapshotList addObject:item];
+        [weakSelf.inventoryView.tableView reloadData];
+    }];
+    info.itemSnapshotCode = itemSnapshot.salesOrderItemCode;
+    info.salesOrderCode = _salesOrderCode;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
@@ -90,14 +95,14 @@
     if(image){
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
-        attachment.salesOrderCode = _code;
+        attachment.salesOrderCode = _salesOrderCode;
         attachment.path = [Utils saveImage:image andName:attachment.key];
         [attachment saveToDB];
         
         _salesOrderSearchResult.itemConfirmed = YES;
         _salesOrderSearchResult.signatureImageKey = attachment.key;
         
-        [self postWorkOrderInventoryWitCode:_code];
+        [self postWorkOrderInventoryWitCode:_salesOrderCode];
     }else{
         [Utils showHudTipStr:@"请重新签名!"];
     }
@@ -164,24 +169,6 @@
     }];
 }
 
--(void)handleResult:(NSString *)result
-{
-    __weak typeof(self) weakSelf = self;
-    ItemSnapshot *itemSnapshot = [ItemSnapshot new];
-    itemSnapshot.salesOrderItemCode = [[NSUUID UUID] UUIDString];
-    itemSnapshot.code = result;
-    long size = _itemSnapshotList.count + 1;
-    itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
-    itemSnapshot.workOrderCode = _code;
-    [itemSnapshot saveToDB];
-    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(ItemSnapshot *item) {
-        [weakSelf.itemSnapshotList addObject:item];
-        [weakSelf.inventoryView.tableView reloadData];
-    }];
-    
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
 
 #pragma mark - Table view data source
 
@@ -207,7 +194,7 @@
     WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController new];
     ItemSnapshot *itemSnapshot = self.itemSnapshotList[indexPath.row];
     info.itemSnapshotCode = itemSnapshot.salesOrderItemCode;
-    info.code = _code;
+    info.salesOrderCode = _salesOrderCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
     

@@ -20,153 +20,308 @@
 - (id)init {
     self = [super init];
     if (!self) return nil;
-    self.backgroundColor = [UIColor whiteColor];
    
     self.backgroundColor = [UIColor whiteColor];
     UIView *containView = [UIView new];
     [containView setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:containView];
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self);
+        make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
     }];
-    [self initTopView];
-    [self initTableView];
-    [self initBottomView];
+    [self setupView];
+
 
     return self;
 }
 
 
 
--(void)initTableView
+-(void)setupView
 {
-    //创建布局对象
-    UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
-    //flowlaout的属性，横向滑动
-    flowLayout1.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _photoTableView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout1];
+    UIView *qrView = [UIView new];
+    [self addSubview:qrView];
+    
+    UIView *qrLine = [UIView new];
+    qrLine.backgroundColor = [UIColor grayColor];
+    [qrView addSubview:qrLine];
+    
+    _qrBtn = [UIButton new];
+    [_qrBtn setBackgroundImage:[UIImage imageNamed:@"qr_scan"] forState:UIControlStateNormal];
+    [qrView addSubview:_qrBtn];
+    
+    _qrText = [UITextField new];
+    _qrText.layer.borderColor= [UIColor grayColor].CGColor;
+    _qrText.layer.borderWidth= 1.0f;
+    _qrText.layer.cornerRadius = 5.0f;
+    _qrText.font = [UIFont systemFontOfSize:12];
+    _qrText.textColor = [UIColor grayColor];
+    CGRect frame = _qrText.frame;
+    frame.size.width = 5.0f;
+    _qrText.leftViewMode = UITextFieldViewModeAlways;
+    _qrText.leftView = [[UIView alloc] initWithFrame:frame];
+    [qrView addSubview:_qrText];
+    
+    _lockIcon = [UILabel new];
+    [_lockIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    _lockIcon.text = @"";
+    _lockIcon.textColor = [UIColor blackColor];
+    [qrView addSubview:_lockIcon];
+    
+    UIView *goodNameView = [UIView new];
+    [self addSubview:goodNameView];
+    
+    UIView *goodNameLine = [UIView new];
+    goodNameLine.backgroundColor = [UIColor grayColor];
+    [goodNameView addSubview:goodNameLine];
+    
+    _goodNameLabel = [UILabel new];
+    _goodNameLabel.text = @"物品名";
+    [goodNameView addSubview:_goodNameLabel];
+    
+    _goodNameText = [UITextField new];
+    _goodNameText.layer.borderColor= [UIColor grayColor].CGColor;
+    _goodNameText.layer.borderWidth= 1.0f;
+    _goodNameText.layer.cornerRadius = 5.0f;
+    _goodNameText.font = [UIFont systemFontOfSize:12];
+    _goodNameText.textColor = [UIColor grayColor];
+    CGRect goodframe = _goodNameText.frame;
+    goodframe.size.width = 5.0f;
+    _goodNameText.leftViewMode = UITextFieldViewModeAlways;
+    _goodNameText.leftView = [[UIView alloc] initWithFrame:goodframe];
+    [goodNameView addSubview:_goodNameText];
+    
+    UIView *remarkView = [UIView new];
+    [self addSubview:remarkView];
+    
+    UIView *remarkLine = [UIView new];
+    remarkLine.backgroundColor = [UIColor grayColor];
+    [remarkView addSubview:remarkLine];
+    
+    _remarkLabel = [UILabel new];
+    _remarkLabel.text = @"备    注";
+    [remarkView addSubview:_remarkLabel];
+    
+    _remarkText = [UITextField new];
+    _remarkText.layer.borderColor= [UIColor grayColor].CGColor;
+    _remarkText.layer.borderWidth= 1.0f;
+    _remarkText.layer.cornerRadius = 5.0f;
+    _remarkText.font = [UIFont systemFontOfSize:12];
+    _remarkText.textColor = [UIColor grayColor];
+    CGRect remarkframe = _remarkText.frame;
+    goodframe.size.width = 5.0f;
+    _remarkText.leftViewMode = UITextFieldViewModeAlways;
+    _remarkText.leftView = [[UIView alloc] initWithFrame:remarkframe];
+    [remarkView addSubview:_remarkText];
+    
+    UIView *photoView = [UIView new];
+    [self addSubview:photoView];
+    
+    UIView *photoLine = [UIView new];
+    photoLine.backgroundColor = [UIColor grayColor];
+    [photoView addSubview:photoLine];
+    
+    _photoIcon = [UILabel new];
+    [_photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    _photoIcon.text = @"";
+    _photoIcon.textColor = [UIColor blackColor];
+    [photoView addSubview:_photoIcon];
+    
+    _photoLabel = [UILabel new];
+    _photoLabel.text = @"相片";
+    [photoView addSubview:_photoLabel];
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    _photoTableView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
     _photoTableView.backgroundColor = [UIColor grayColor];
     [_photoTableView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
     [self addSubview:_photoTableView];
     
-    //创建布局对象
-    UICollectionViewFlowLayout *flowLayout2 = [[UICollectionViewFlowLayout alloc] init];
-    //flowlaout的属性，横向滑动
-    flowLayout2.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _chooseTableView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout2];
-    _chooseTableView.backgroundColor = [UIColor lightGrayColor];
-    [_chooseTableView registerClass:[CommodityCell class] forCellWithReuseIdentifier:@"commodityCell"];
-    [self addSubview:_chooseTableView];
+    UIView *commodityView = [UIView new];
+    [self addSubview:commodityView];
     
-    [_photoTableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_chooseTableView.mas_bottom).with.offset(10);
-        make.left.equalTo(self.mas_left).with.offset(5);
-        make.right.equalTo(self.mas_right).with.offset(-5);
-        make.height.equalTo(@120);
-    }];
+    UIView *commodityLine = [UIView new];
+    commodityLine.backgroundColor = [UIColor grayColor];
+    [commodityView addSubview:commodityLine];
     
-    [_chooseTableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_remarkTextView.mas_bottom).with.offset(10);
-        make.left.equalTo(self.mas_left).with.offset(5);
-        make.right.equalTo(self.mas_right).with.offset(-5);
-        make.height.equalTo(@200);
-    }];
-}
+    UIView *commodityTopLine = [UIView new];
+    commodityTopLine.backgroundColor = [UIColor grayColor];
+    [commodityView addSubview:commodityTopLine];
+    
+    _commodityLeftIcon = [UILabel new];
+    [_commodityLeftIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    _commodityLeftIcon.text = @"";
+    _commodityLeftIcon.textColor = [UIColor blackColor];
+    [commodityView addSubview:_commodityLeftIcon];
+    
+    _commodityLabel = [UILabel new];
+    _commodityLabel.text = @"添加服务";
+    [commodityView addSubview:_commodityLabel];
+    
+    _commodityRightIcon = [UILabel new];
+    [_commodityRightIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    _commodityRightIcon.text = @"";
+    _commodityRightIcon.textColor = [UIColor blackColor];
+    [commodityView addSubview:_commodityRightIcon];
 
--(void)initTopView
-{
-    _titleLabel = [UILabel new];
-    _titleLabel.font = [UIFont systemFontOfSize:15];//采用系统默认文字设置大小
-    _titleLabel.text = @"12305";
-    _titleLabel.textColor = [UIColor blackColor];
-    [self addSubview:_titleLabel];
-    
-    _remarkTextView = [UITextField new];
-    _remarkTextView.font = [UIFont systemFontOfSize:15];//
-    _remarkTextView.textColor = [UIColor blackColor];
-    _remarkTextView.placeholder=@"备注";
-    _remarkTextView.borderStyle=UITextBorderStyleBezel;
-    [self addSubview:_remarkTextView];
-    
-    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
+    [qrView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.mas_top).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-    }];
-    
-    [_remarkTextView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_titleLabel.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-    }];
-}
-
--(void)initBottomView
-{
-    UIView *bottomView = [UIView new];
-    
-    [self addSubview:bottomView];
-    [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
     }];
     
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [bottomView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(bottomView.mas_top).with.offset(0);
-        make.left.equalTo(bottomView.mas_left).with.offset(0);
-        make.right.equalTo(bottomView.mas_right).with.offset(0);
+    [_qrBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(qrView.mas_centerY);
+        make.left.equalTo(qrView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@25);
+        make.height.equalTo(@25);
+    }];
+    
+    [_qrText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(qrView.mas_centerY);
+        make.left.equalTo(_qrBtn.mas_right).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_lockIcon.mas_left).with.offset(-kPaddingLeftWidth);
+        make.height.equalTo(@25);
+    }];
+    
+    [_lockIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(qrView.mas_centerY);
+        make.right.equalTo(qrView.mas_right).with.offset(-kPaddingLeftWidth);
+    }];
+    
+    [qrLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(qrView.mas_bottom).with.offset(0);
+        make.left.equalTo(qrView.mas_left).with.offset(0);
+        make.right.equalTo(qrView.mas_right).with.offset(0);
         make.height.mas_equalTo(@1);
     }];
     
-    _numberLabel = [UILabel new];
-    _numberLabel.font = [UIFont systemFontOfSize:9];
-    _numberLabel.layer.masksToBounds = YES;
-    _numberLabel.backgroundColor = [UIColor redColor];
-    _numberLabel.layer.cornerRadius = 7.5;
-    _numberLabel.text = @"12";
-    _numberLabel.textAlignment = NSTextAlignmentCenter;
-    _numberLabel.textColor = [UIColor whiteColor];
-    [self addSubview:_numberLabel];
-    _carIcon = [UILabel new];
-    [_carIcon setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _carIcon.text = @"";
-    _carIcon.textColor = [UIColor nameColor];
-    _carIcon.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_carIcon];
+    [goodNameView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(qrView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@40);
+    }];
     
-    _photoIcon = [UILabel new];
-    [_photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _photoIcon.text = @"";
-    _photoIcon.textAlignment = NSTextAlignmentCenter;
-    _photoIcon.textColor = [UIColor nameColor];
-    [bottomView addSubview:_photoIcon];
+    [_goodNameLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(goodNameView.mas_centerY);
+        make.left.equalTo(goodNameView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@60);
+    }];
     
+    [_goodNameText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(goodNameView.mas_centerY);
+        make.right.equalTo(goodNameView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.left.equalTo(_goodNameLabel.mas_right).with.offset(5);
+        make.height.equalTo(@25);
+    }];
     
-    [_carIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(bottomView.mas_top).offset(3);
-        make.left.equalTo(bottomView.mas_left);
-        make.right.equalTo(_photoIcon.mas_left);
-        make.width.equalTo(_photoIcon);
+    [goodNameLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(goodNameView.mas_bottom).with.offset(0);
+        make.left.equalTo(goodNameView.mas_left).with.offset(0);
+        make.right.equalTo(goodNameView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    [remarkView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(goodNameView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@40);
+    }];
+    
+    [_remarkLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(remarkView.mas_centerY);
+        make.left.equalTo(remarkView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@60);
+    }];
+    
+    [_remarkText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(remarkView.mas_centerY);
+        make.right.equalTo(remarkView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.left.equalTo(_remarkLabel.mas_right).with.offset(5);
+        make.height.equalTo(@25);
+    }];
+    
+    [remarkLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(remarkView.mas_bottom).with.offset(0);
+        make.left.equalTo(remarkView.mas_left).with.offset(0);
+        make.right.equalTo(remarkView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    [photoView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(remarkView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@40);
     }];
     
     [_photoIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(bottomView.mas_top).offset(3);
-        make.right.equalTo(bottomView.mas_right);
-        make.left.equalTo(_carIcon.mas_right);
-        make.width.equalTo(_carIcon.mas_width);
+        make.centerY.equalTo(photoView.mas_centerY);
+        make.left.equalTo(photoView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@30);
     }];
     
-    [_numberLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(@15);
-        make.height.equalTo(@15);
-        make.top.equalTo(_carIcon.mas_top).with.offset(0);
-        make.centerX.equalTo(_carIcon.mas_centerX).with.offset(20);
+    [_photoLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(photoView.mas_centerY);
+        make.right.equalTo(photoView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.left.equalTo(_photoIcon.mas_right).with.offset(5);
+    }];
+    
+    [photoLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(photoView.mas_bottom).with.offset(0);
+        make.left.equalTo(photoView.mas_left).with.offset(0);
+        make.right.equalTo(photoView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    [_photoTableView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(photoView.mas_bottom).with.offset(5);
+        make.left.equalTo(self.mas_left).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-5);
+        make.height.equalTo(@120);
+    }];
+    
+    [commodityView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_photoTableView.mas_bottom).with.offset(5);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@40);
+    }];
+    
+    [_commodityLeftIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(commodityView.mas_centerY);
+        make.left.equalTo(commodityView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@30);
+    }];
+    
+    [_commodityLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(commodityView.mas_centerY);
+        make.left.equalTo(_commodityLeftIcon.mas_right).with.offset(5);
+        make.right.equalTo(_commodityRightIcon.mas_left).with.offset(5);
+    }];
+    
+    [_commodityRightIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(commodityView.mas_centerY);
+        make.right.equalTo(commodityView.mas_right).with.offset(-kPaddingLeftWidth);
+    }];
+    
+    [commodityTopLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(commodityView.mas_top).with.offset(0);
+        make.left.equalTo(commodityView.mas_left).with.offset(0);
+        make.right.equalTo(commodityView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    [commodityLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(commodityView.mas_bottom).with.offset(0);
+        make.left.equalTo(commodityView.mas_left).with.offset(0);
+        make.right.equalTo(commodityView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
     }];
     
 }
+
 @end

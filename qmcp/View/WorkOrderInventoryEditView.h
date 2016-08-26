@@ -11,17 +11,24 @@
 @interface WorkOrderInventoryEditView : BaseView
 
 @property (nonatomic, strong) UICollectionView *photoTableView;
+@property (nonatomic,strong) UIButton *qrBtn;
+@property (nonatomic,strong) UITextField *qrText;
+@property (nonatomic,strong) UILabel *lockIcon;
 
-@property (nonatomic, strong) UICollectionView *chooseTableView;
+@property (nonatomic,strong) UILabel *goodNameLabel;
+@property (nonatomic,strong) UITextField *goodNameText;
 
-@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,strong) UILabel *remarkLabel;
+@property (nonatomic,strong) UITextField *remarkText;
 
-@property (nonatomic,strong) UITextField *remarkTextView;;
-
-@property (nonatomic,strong) UILabel *numberLabel;
-
-@property (nonatomic,strong) UILabel *carIcon;
 @property (nonatomic,strong) UILabel *photoIcon;
+@property (nonatomic,strong) UILabel *photoLabel;
+
+@property (nonatomic,strong) UILabel *commodityLeftIcon;
+@property (nonatomic,strong) UILabel *commodityRightIcon;
+@property (nonatomic,strong) UILabel *commodityLabel;
+
+
 
 + (instancetype)viewInstance;
 @end

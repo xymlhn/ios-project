@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ItemSnapshot.h"
  
-@interface WorkOrderInventoryCell : UITableViewCell
+@interface InventoryCell : UITableViewCell
 
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic, strong) ItemSnapshot  *itemSnapshot;

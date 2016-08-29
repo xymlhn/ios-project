@@ -12,7 +12,7 @@
 #import "InventorySearchCell.h"
 #import "InventoryManager.h"
 #import "CommoditySnapshot.h"
-#import "WorkOrderInventoryController.h"
+#import "InventoryController.h"
 
 
 @interface InventorySearchController()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -138,14 +138,12 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.resultList.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     InventorySearchCell *cell = [InventorySearchCell cellWithTableView:tableView];
@@ -157,8 +155,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     SalesOrderSearchResult *salesOrderSearchResult = self.resultList[row];
     if(salesOrderSearchResult.itemConfirmed){
@@ -190,9 +187,8 @@
     }
 }
 
-- (void)pushInfoView:(NSString *)salesOrderCode
-{
-    WorkOrderInventoryController *info = [WorkOrderInventoryController new];
+- (void)pushInfoView:(NSString *)salesOrderCode{
+    InventoryController *info = [InventoryController new];
     info.salesOrderCode = salesOrderCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];

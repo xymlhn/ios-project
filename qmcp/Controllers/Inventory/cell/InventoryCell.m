@@ -6,23 +6,23 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "WorkOrderInventoryCell.h"
+#import "InventoryCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
-@interface WorkOrderInventoryCell()
+@interface InventoryCell()
 
 
 @end
 
-@implementation WorkOrderInventoryCell
+@implementation InventoryCell
 
 //创建自定义可重用的cell对象
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *reuseId = @"WorkOrderInventoryCell";
-    WorkOrderInventoryCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    static NSString *reuseId = @"InventoryCell";
+    InventoryCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
-        cell = [[WorkOrderInventoryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
+        cell = [[InventoryCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
     }
     cell.selectedBackgroundView.backgroundColor = [UIColor themeColor];
     return cell;

@@ -8,7 +8,7 @@
 
 #import "WorkOrderInfoController.h"
 #import "WorkOrderStepController.h"
-#import "WorkOrderInventoryController.h"
+#import "InventoryController.h"
 #import "WorkOrderInfoView.h"
 #import "WorkOrderManager.h"
 #import "WorkOrderFormsController.h"

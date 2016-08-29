@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface WorkOrderInventoryController : BaseViewController
+@interface InventoryController : BaseViewController
 
 @property (nonatomic,copy) NSString *salesOrderCode;
 

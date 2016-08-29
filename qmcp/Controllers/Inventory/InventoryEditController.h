@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "ItemSnapshot.h"
 
-@interface WorkOrderInventoryEditController : BaseViewController
+@interface InventoryEditController : BaseViewController
 
 
 @property (nonatomic, copy) NSString *salesOrderCode;

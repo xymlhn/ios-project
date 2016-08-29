@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 
-@interface WorkOrderInventoryEditView : BaseView
+@interface InventoryEditView : BaseView
 
 @property (nonatomic, strong) UICollectionView *photoCollectionView;
 @property (nonatomic,strong) UIButton *qrBtn;
@@ -27,7 +27,7 @@
 @property (nonatomic,strong) UILabel *commodityLeftIcon;
 @property (nonatomic,strong) UILabel *commodityRightIcon;
 @property (nonatomic,strong) UILabel *commodityLabel;
-
+@property (nonatomic,strong) UIView *commodityView;
 
 
 + (instancetype)viewInstance;

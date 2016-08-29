@@ -24,9 +24,9 @@
 
 @property (nonatomic, copy) NSString *workOrderCode;
 
-@property (nonatomic, assign) int code;
+@property (nonatomic, copy) NSString *code;
 
-@property (nonatomic, copy) NSString  *price;
+@property (nonatomic, copy) NSString *price;
 
 @property (nonatomic, assign) BOOL isSelect;
 

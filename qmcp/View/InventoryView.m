@@ -6,12 +6,12 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "WorkOrderInventoryView.h"
+#import "InventoryView.h"
 
-@implementation WorkOrderInventoryView
+@implementation InventoryView
 
 + (instancetype)viewInstance{
-    WorkOrderInventoryView *workOrderInventoryView = [WorkOrderInventoryView new];
+    InventoryView *workOrderInventoryView = [InventoryView new];
     return workOrderInventoryView;
 }
 

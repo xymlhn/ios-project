@@ -30,5 +30,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "__30+[PropertyManager getInstance]_block_invoke:PropertyManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[TMCache sharedCache] objectForKey:kCommoditySnapshot]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -7,13 +7,13 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "WorkOrderInventoryEditController.h"
+#import "InventoryEditController.h"
 #import "WorkOrder.h"
 #import "Attachment.h"
 #import "ItemSnapshot.h"
 #import "PhotoCell.h"
-#import "WorkOrderInventoryEditView.h"
-#import "WorkOrderInventoryView.h"
+#import "InventoryEditView.h"
+#import "InventoryView.h"
 #import "CommodityCell.h"
 #import "Commodity.h"
 #import "SettingViewCell.h"
@@ -26,12 +26,13 @@
 #import "UIViewController+BackButtonHandler.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
-@interface WorkOrderInventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,
+#import "InventoryChooseController.h"
+@interface InventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,
                                                 UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
 @property (nonatomic, strong) NSMutableArray *attachments;
-@property (nonatomic, strong) WorkOrderInventoryEditView *inventoryEditView;
+@property (nonatomic, strong) InventoryEditView *inventoryEditView;
 @property (nonatomic, assign) BOOL unLock;
 @property (nonatomic, assign) BOOL isDelete;
 
@@ -40,12 +41,12 @@
 
 @end
 
-@implementation WorkOrderInventoryEditController
+@implementation InventoryEditController
 
 #pragma mark - BaseWorkOrderViewController
 -(void)loadView
 {
-     _inventoryEditView = [WorkOrderInventoryEditView viewInstance];
+     _inventoryEditView = [InventoryEditView viewInstance];
     self.view = _inventoryEditView;
     self.title = @"清点编辑";
 }
@@ -64,8 +65,10 @@
     [_inventoryEditView.remarkText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     _inventoryEditView.lockIcon.userInteractionEnabled = YES;
-    [_inventoryEditView.lockIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lockIconClick:)]];
+    [_inventoryEditView.lockIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
 
+    _inventoryEditView.commodityView.userInteractionEnabled = YES;
+    [_inventoryEditView.commodityView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
     
      __weak typeof(self) weakSelf = self;
     _inventoryEditView.qrBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
@@ -115,22 +118,30 @@
 
 +(instancetype)doneBlock:(void (^)(BOOL ,ItemSnapshot *))block{
     
-    WorkOrderInventoryEditController *vc = [[WorkOrderInventoryEditController alloc] init];
+    InventoryEditController *vc = [[InventoryEditController alloc] init];
     vc.doneBlock = block;
     return vc;
     
 }
 
 #pragma mark - IBAction
-- (void)lockIconClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)commodityViewClick:(UITapGestureRecognizer *)recognizer{
+    
+    InventoryChooseController *info = [InventoryChooseController new];
+    info.itemSnapshotCode = _itemSnapshot.salesOrderItemCode;
+    info.salesOrderCode = _salesOrderCode;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+
+}
+
+- (void)lockIconClick:(UITapGestureRecognizer *)recognizer{
     _unLock = !_unLock;
     _inventoryEditView.lockIcon.text = _unLock ?  @"" :@"";
     _inventoryEditView.qrText.enabled = _unLock;
 }
 
-- (void)photoIconClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)photoIconClick:(UITapGestureRecognizer *)recognizer{
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self showOkayCancelAlert];
@@ -162,8 +173,7 @@
 
 #pragma mark - UIImagePickerController
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:^ {
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
@@ -190,14 +200,12 @@
 #pragma mark -UICollectionViewDataSource
 
 //指定单元格的个数 ，这个是一个组里面有多少单元格，e.g : 一个单元格就是一张图片
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _attachments.count;
 }
 
 //构建单元格
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"cell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     Attachment *attachment = _attachments[indexPath.row];
@@ -209,22 +217,19 @@
 }
 
 //定义每个UICollectionView 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     return UIEdgeInsetsMake(5, 5, 5, 5);
 }
 
 //定义每个UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     return CGSizeMake(96, 100);
 
 }
 
 //UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     PhotoCell * cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
     [Utils showImage:cell.image.image];
     
@@ -236,15 +241,13 @@
 
 #pragma mark - 键盘操作
 
-- (void)hidenKeyboard
-{
+- (void)hidenKeyboard{
     [_inventoryEditView.qrText resignFirstResponder];
     [_inventoryEditView.goodNameText resignFirstResponder];
     [_inventoryEditView.remarkText resignFirstResponder];
 }
 
-- (void)returnOnKeyboard:(UITextField *)sender
-{
+- (void)returnOnKeyboard:(UITextField *)sender{
     if (sender == _inventoryEditView.qrText) {
         [_inventoryEditView.goodNameText becomeFirstResponder];
     } else if (sender == _inventoryEditView.goodNameText) {

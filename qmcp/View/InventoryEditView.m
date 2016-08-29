@@ -6,14 +6,14 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "WorkOrderInventoryEditView.h"
+#import "InventoryEditView.h"
 #import "PhotoCell.h"
 #import "CommodityCell.h"
 
-@implementation WorkOrderInventoryEditView
+@implementation InventoryEditView
 
 + (instancetype)viewInstance{
-    WorkOrderInventoryEditView *workOrderInventoryEditView = [WorkOrderInventoryEditView new];
+    InventoryEditView *workOrderInventoryEditView = [InventoryEditView new];
     return workOrderInventoryEditView;
 }
 
@@ -137,32 +137,32 @@
     [_photoCollectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
     [self addSubview:_photoCollectionView];
     
-    UIView *commodityView = [UIView new];
-    [self addSubview:commodityView];
+    _commodityView = [UIView new];
+    [self addSubview:_commodityView];
     
     UIView *commodityLine = [UIView new];
     commodityLine.backgroundColor = [UIColor grayColor];
-    [commodityView addSubview:commodityLine];
+    [_commodityView addSubview:commodityLine];
     
     UIView *commodityTopLine = [UIView new];
     commodityTopLine.backgroundColor = [UIColor grayColor];
-    [commodityView addSubview:commodityTopLine];
+    [_commodityView addSubview:commodityTopLine];
     
     _commodityLeftIcon = [UILabel new];
     [_commodityLeftIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     _commodityLeftIcon.text = @"";
     _commodityLeftIcon.textColor = [UIColor blackColor];
-    [commodityView addSubview:_commodityLeftIcon];
+    [_commodityView addSubview:_commodityLeftIcon];
     
     _commodityLabel = [UILabel new];
     _commodityLabel.text = @"添加服务";
-    [commodityView addSubview:_commodityLabel];
+    [_commodityView addSubview:_commodityLabel];
     
     _commodityRightIcon = [UILabel new];
     [_commodityRightIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     _commodityRightIcon.text = @"";
     _commodityRightIcon.textColor = [UIColor blackColor];
-    [commodityView addSubview:_commodityRightIcon];
+    [_commodityView addSubview:_commodityRightIcon];
 
     [qrView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.mas_top).with.offset(0);
@@ -284,7 +284,7 @@
         make.height.equalTo(@120);
     }];
     
-    [commodityView mas_makeConstraints:^(MASConstraintMaker *make){
+    [_commodityView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_photoCollectionView.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
@@ -292,33 +292,33 @@
     }];
     
     [_commodityLeftIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(commodityView.mas_centerY);
-        make.left.equalTo(commodityView.mas_left).with.offset(kPaddingLeftWidth);
+        make.centerY.equalTo(_commodityView.mas_centerY);
+        make.left.equalTo(_commodityView.mas_left).with.offset(kPaddingLeftWidth);
         make.width.equalTo(@30);
     }];
     
     [_commodityLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(commodityView.mas_centerY);
+        make.centerY.equalTo(_commodityView.mas_centerY);
         make.left.equalTo(_commodityLeftIcon.mas_right).with.offset(5);
         make.right.equalTo(_commodityRightIcon.mas_left).with.offset(5);
     }];
     
     [_commodityRightIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(commodityView.mas_centerY);
-        make.right.equalTo(commodityView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.centerY.equalTo(_commodityView.mas_centerY);
+        make.right.equalTo(_commodityView.mas_right).with.offset(-kPaddingLeftWidth);
     }];
     
     [commodityTopLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(commodityView.mas_top).with.offset(0);
-        make.left.equalTo(commodityView.mas_left).with.offset(0);
-        make.right.equalTo(commodityView.mas_right).with.offset(0);
+        make.top.equalTo(_commodityView.mas_top).with.offset(0);
+        make.left.equalTo(_commodityView.mas_left).with.offset(0);
+        make.right.equalTo(_commodityView.mas_right).with.offset(0);
         make.height.mas_equalTo(@1);
     }];
     
     [commodityLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(commodityView.mas_bottom).with.offset(0);
-        make.left.equalTo(commodityView.mas_left).with.offset(0);
-        make.right.equalTo(commodityView.mas_right).with.offset(0);
+        make.bottom.equalTo(_commodityView.mas_bottom).with.offset(0);
+        make.left.equalTo(_commodityView.mas_left).with.offset(0);
+        make.right.equalTo(_commodityView.mas_right).with.offset(0);
         make.height.mas_equalTo(@1);
     }];
     

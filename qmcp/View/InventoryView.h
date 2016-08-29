@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 
-@interface WorkOrderInventoryView : BaseView
+@interface InventoryView : BaseView
 
 @property (nonatomic, strong) UITableView *tableView;
 

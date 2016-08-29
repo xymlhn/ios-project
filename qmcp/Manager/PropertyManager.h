@@ -69,4 +69,12 @@
  */
 -(void)releaseData;
 
+
+/**
+ *  获取本地所有门店服务
+ *
+ *  @return 服务数组
+ */
+-(NSArray *)getAllLocalCommoditySnapshot;
+
 @end

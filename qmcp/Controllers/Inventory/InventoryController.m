@@ -6,37 +6,35 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "WorkOrderInventoryController.h"
-#import "WorkOrderInventoryCell.h"
+#import "InventoryController.h"
+#import "InventoryCell.h"
 #import "ItemSnapshot.h"
-#import "WorkOrderInventoryEditController.h"
+#import "InventoryEditController.h"
 #import "QrCodeViewController.h"
 #import "ScanViewController.h"
-#import "WorkOrderInventoryView.h"
+#import "InventoryView.h"
 #import "SignViewController.h"
 #import "Attachment.h"
 #import "WorkOrderManager.h"
 #import "SalesOrderSearchResult.h"
 #import "InventoryManager.h"
-@interface WorkOrderInventoryController ()<UITableViewDataSource,UITableViewDelegate>
+@interface InventoryController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray<ItemSnapshot *> *itemSnapshotList;
-@property (nonatomic, strong) WorkOrderInventoryView *inventoryView;
+@property (nonatomic, strong) InventoryView *inventoryView;
 @property (nonatomic, strong) SalesOrderSearchResult *salesOrderSearchResult;
 @end
 
-@implementation WorkOrderInventoryController
+@implementation InventoryController
 
 #pragma mark - BaseWorkOrderViewController
--(void)loadView
-{
-    _inventoryView = [WorkOrderInventoryView viewInstance];
+-(void)loadView{
+    _inventoryView = [InventoryView viewInstance];
     self.view = _inventoryView;
     self.title = @"清点";
 }
 
--(void)bindListener
-{
+-(void)bindListener{
     _inventoryView.tableView.delegate = self;
     _inventoryView.tableView.dataSource = self;
     
@@ -47,16 +45,14 @@
     [_inventoryView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
 }
 
--(void)loadData
-{
+-(void)loadData{
     _salesOrderSearchResult = [[InventoryManager getInstance] getSalesOrderSearchResultByCode:_salesOrderCode];
     NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_salesOrderSearchResult.code];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
 }
 
 #pragma mark - IBAction
-- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
     __weak typeof(self) weakSelf = self;
     ItemSnapshot *itemSnapshot = [ItemSnapshot new];
     itemSnapshot.salesOrderItemCode = [[NSUUID UUID] UUIDString];
@@ -65,7 +61,7 @@
     itemSnapshot.salesOrderCode = _salesOrderCode;
     [itemSnapshot saveToDB];
     
-    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
+    InventoryEditController *info = [InventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
         if(!isDelete){
             [weakSelf.itemSnapshotList addObject:item];
             [weakSelf.inventoryView.tableView reloadData];
@@ -77,8 +73,7 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
-- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer{
      __weak typeof(self) weakSelf = self;
     SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
         [weakSelf reportSignImage:signImage];
@@ -87,8 +82,7 @@
     
 }
 
--(void) reportSignImage:(UIImage *)image
-{
+-(void) reportSignImage:(UIImage *)image{
     if(image){
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
@@ -169,27 +163,23 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.itemSnapshotList.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    WorkOrderInventoryCell *cell = [WorkOrderInventoryCell cellWithTableView:tableView];
+    InventoryCell *cell = [InventoryCell cellWithTableView:tableView];
     ItemSnapshot *itemSnapshot = self.itemSnapshotList[row];
     cell.itemSnapshot = itemSnapshot;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     __weak typeof(self) weakSelf = self;
-    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
+    InventoryEditController *info = [InventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
         [weakSelf loadData];
         [weakSelf.inventoryView.tableView reloadData];
     }];

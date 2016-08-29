@@ -1,0 +1,17 @@
+//
+//  InventoryChooseController.h
+//  qmcp
+//
+//  Created by 谢永明 on 16/8/29.
+//  Copyright © 2016年 inforshare. All rights reserved.
+//
+
+#import "BaseViewController.h"
+
+@interface InventoryChooseController : BaseViewController
+
+@property (nonatomic, copy) NSString *salesOrderCode;
+
+@property (nonatomic, copy) NSString *itemSnapshotCode;
+
+@end

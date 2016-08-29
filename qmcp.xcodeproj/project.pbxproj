@@ -11,8 +11,8 @@
 		24020A571CB7431500D4EA96 /* WorkOrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A561CB7431500D4EA96 /* WorkOrderInfoView.m */; };
 		24020A5A1CB7471C00D4EA96 /* WorkOrderStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A591CB7471C00D4EA96 /* WorkOrderStepView.m */; };
 		24020A5D1CB7491100D4EA96 /* WorkOrderStepEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A5C1CB7491100D4EA96 /* WorkOrderStepEditView.m */; };
-		24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A5F1CB74AF700D4EA96 /* WorkOrderInventoryView.m */; };
-		24020A631CB74C1900D4EA96 /* WorkOrderInventoryEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */; };
+		24020A601CB74AF700D4EA96 /* InventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A5F1CB74AF700D4EA96 /* InventoryView.m */; };
+		24020A631CB74C1900D4EA96 /* InventoryEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24020A621CB74C1900D4EA96 /* InventoryEditView.m */; };
 		2402D9D11CA3D2C200DD3EB3 /* WorkOrderInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402D9D01CA3D2C200DD3EB3 /* WorkOrderInfoController.m */; };
 		240C742B1D17918600245D5C /* WorkOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 240C742A1D17918600245D5C /* WorkOrderCell.m */; };
 		240C8C021D29F9510063BD69 /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240C8C011D29F9510063BD69 /* SignView.m */; };
@@ -132,9 +132,9 @@
 		24C34F1A1CE9956900D945BE /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F191CE9956900D945BE /* FormManager.m */; };
 		24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB411D275B15007A9BF6 /* SearchView.m */; };
 		24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB451D275BA0007A9BF6 /* SearchViewController.m */; };
-		24E949CA1D5D742E00AEF2F3 /* WorkOrderInventoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949C91D5D742E00AEF2F3 /* WorkOrderInventoryCell.m */; };
-		24E949CF1D5D743500AEF2F3 /* WorkOrderInventoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949CC1D5D743500AEF2F3 /* WorkOrderInventoryController.m */; };
-		24E949D01D5D743500AEF2F3 /* WorkOrderInventoryEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949CE1D5D743500AEF2F3 /* WorkOrderInventoryEditController.m */; };
+		24E949CA1D5D742E00AEF2F3 /* InventoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949C91D5D742E00AEF2F3 /* InventoryCell.m */; };
+		24E949CF1D5D743500AEF2F3 /* InventoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949CC1D5D743500AEF2F3 /* InventoryController.m */; };
+		24E949D01D5D743500AEF2F3 /* InventoryEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949CE1D5D743500AEF2F3 /* InventoryEditController.m */; };
 		24EAD1EA1CC0DA4300444A9D /* SalesOrderGrabListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */; };
 		24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1EC1CC0DA5D00444A9D /* SalesOrderBindListController.m */; };
 		24EAD1F11CC0DF3100444A9D /* SalesOrderGrabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EAD1F01CC0DF3100444A9D /* SalesOrderGrabCell.m */; };
@@ -143,6 +143,9 @@
 		24EC4EF21D6159AE0087AE7D /* InventorySearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC4EF11D6159AE0087AE7D /* InventorySearchController.m */; };
 		24EC4EF51D615ABA0087AE7D /* InventorySearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC4EF41D615ABA0087AE7D /* InventorySearchCell.m */; };
 		24EC4EF81D615B400087AE7D /* SalesOrderSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC4EF71D615B400087AE7D /* SalesOrderSearchResult.m */; };
+		24F0A23B1D73DC1300DD0538 /* InventoryChooseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F0A23A1D73DC1300DD0538 /* InventoryChooseController.m */; };
+		24F0A23E1D73DC6200DD0538 /* InventoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F0A23D1D73DC6200DD0538 /* InventoryChooseView.m */; };
+		24F0A2411D73E19E00DD0538 /* InventoryChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F0A2401D73E19E00DD0538 /* InventoryChooseCell.m */; };
 		24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F0C1E51CC5DDE9005B3F98 /* Commodity.m */; };
 		24F0C1E91CC5E299005B3F98 /* CommodityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F0C1E81CC5E299005B3F98 /* CommodityCell.m */; };
 		24F359761CB3B2B400C0950B /* Attachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F359751CB3B2B400C0950B /* Attachment.m */; };
@@ -163,10 +166,10 @@
 		24020A591CB7471C00D4EA96 /* WorkOrderStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepView.m; sourceTree = "<group>"; };
 		24020A5B1CB7491100D4EA96 /* WorkOrderStepEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepEditView.h; sourceTree = "<group>"; };
 		24020A5C1CB7491100D4EA96 /* WorkOrderStepEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepEditView.m; sourceTree = "<group>"; };
-		24020A5E1CB74AF700D4EA96 /* WorkOrderInventoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryView.h; sourceTree = "<group>"; };
-		24020A5F1CB74AF700D4EA96 /* WorkOrderInventoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryView.m; sourceTree = "<group>"; };
-		24020A611CB74C1900D4EA96 /* WorkOrderInventoryEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryEditView.h; sourceTree = "<group>"; };
-		24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryEditView.m; sourceTree = "<group>"; };
+		24020A5E1CB74AF700D4EA96 /* InventoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryView.h; sourceTree = "<group>"; };
+		24020A5F1CB74AF700D4EA96 /* InventoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryView.m; sourceTree = "<group>"; };
+		24020A611CB74C1900D4EA96 /* InventoryEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryEditView.h; sourceTree = "<group>"; };
+		24020A621CB74C1900D4EA96 /* InventoryEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryEditView.m; sourceTree = "<group>"; };
 		2402D9CF1CA3D2C200DD3EB3 /* WorkOrderInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInfoController.h; sourceTree = "<group>"; };
 		2402D9D01CA3D2C200DD3EB3 /* WorkOrderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInfoController.m; sourceTree = "<group>"; };
 		240C74291D17918600245D5C /* WorkOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderCell.h; sourceTree = "<group>"; };
@@ -406,12 +409,12 @@
 		24CDDB411D275B15007A9BF6 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		24CDDB441D275BA0007A9BF6 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		24CDDB451D275BA0007A9BF6 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		24E949C81D5D742E00AEF2F3 /* WorkOrderInventoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryCell.h; sourceTree = "<group>"; };
-		24E949C91D5D742E00AEF2F3 /* WorkOrderInventoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryCell.m; sourceTree = "<group>"; };
-		24E949CB1D5D743500AEF2F3 /* WorkOrderInventoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryController.h; sourceTree = "<group>"; };
-		24E949CC1D5D743500AEF2F3 /* WorkOrderInventoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryController.m; sourceTree = "<group>"; };
-		24E949CD1D5D743500AEF2F3 /* WorkOrderInventoryEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderInventoryEditController.h; sourceTree = "<group>"; };
-		24E949CE1D5D743500AEF2F3 /* WorkOrderInventoryEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderInventoryEditController.m; sourceTree = "<group>"; };
+		24E949C81D5D742E00AEF2F3 /* InventoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryCell.h; sourceTree = "<group>"; };
+		24E949C91D5D742E00AEF2F3 /* InventoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryCell.m; sourceTree = "<group>"; };
+		24E949CB1D5D743500AEF2F3 /* InventoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryController.h; sourceTree = "<group>"; };
+		24E949CC1D5D743500AEF2F3 /* InventoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryController.m; sourceTree = "<group>"; };
+		24E949CD1D5D743500AEF2F3 /* InventoryEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryEditController.h; sourceTree = "<group>"; };
+		24E949CE1D5D743500AEF2F3 /* InventoryEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryEditController.m; sourceTree = "<group>"; };
 		24EAD1E81CC0DA4300444A9D /* SalesOrderGrabListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabListController.h; sourceTree = "<group>"; };
 		24EAD1E91CC0DA4300444A9D /* SalesOrderGrabListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabListController.m; sourceTree = "<group>"; };
 		24EAD1EB1CC0DA5D00444A9D /* SalesOrderBindListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderBindListController.h; sourceTree = "<group>"; };
@@ -428,6 +431,12 @@
 		24EC4EF41D615ABA0087AE7D /* InventorySearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventorySearchCell.m; sourceTree = "<group>"; };
 		24EC4EF61D615B400087AE7D /* SalesOrderSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderSearchResult.h; sourceTree = "<group>"; };
 		24EC4EF71D615B400087AE7D /* SalesOrderSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderSearchResult.m; sourceTree = "<group>"; };
+		24F0A2391D73DC1300DD0538 /* InventoryChooseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryChooseController.h; sourceTree = "<group>"; };
+		24F0A23A1D73DC1300DD0538 /* InventoryChooseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryChooseController.m; sourceTree = "<group>"; };
+		24F0A23C1D73DC6200DD0538 /* InventoryChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryChooseView.h; sourceTree = "<group>"; };
+		24F0A23D1D73DC6200DD0538 /* InventoryChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryChooseView.m; sourceTree = "<group>"; };
+		24F0A23F1D73E19E00DD0538 /* InventoryChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryChooseCell.h; sourceTree = "<group>"; };
+		24F0A2401D73E19E00DD0538 /* InventoryChooseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryChooseCell.m; sourceTree = "<group>"; };
 		24F0C1E41CC5DDE9005B3F98 /* Commodity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commodity.h; sourceTree = "<group>"; };
 		24F0C1E51CC5DDE9005B3F98 /* Commodity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Commodity.m; sourceTree = "<group>"; };
 		24F0C1E71CC5E299005B3F98 /* CommodityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityCell.h; sourceTree = "<group>"; };
@@ -483,18 +492,20 @@
 				24020A591CB7471C00D4EA96 /* WorkOrderStepView.m */,
 				24020A5B1CB7491100D4EA96 /* WorkOrderStepEditView.h */,
 				24020A5C1CB7491100D4EA96 /* WorkOrderStepEditView.m */,
-				24020A5E1CB74AF700D4EA96 /* WorkOrderInventoryView.h */,
-				24020A5F1CB74AF700D4EA96 /* WorkOrderInventoryView.m */,
-				24020A611CB74C1900D4EA96 /* WorkOrderInventoryEditView.h */,
-				24020A621CB74C1900D4EA96 /* WorkOrderInventoryEditView.m */,
 				247092671D2397E400EBADB3 /* QrCodeBindView.h */,
 				247092681D2397E400EBADB3 /* QrCodeBindView.m */,
 				24AAFCF21D28DF8400DAB3C9 /* QrCodeIdentityView.h */,
 				24AAFCF31D28DF8400DAB3C9 /* QrCodeIdentityView.m */,
 				2493FE121D4302E50094ADA2 /* WorkOrderFormView.h */,
 				2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */,
+				24020A5E1CB74AF700D4EA96 /* InventoryView.h */,
+				24020A5F1CB74AF700D4EA96 /* InventoryView.m */,
+				24020A611CB74C1900D4EA96 /* InventoryEditView.h */,
+				24020A621CB74C1900D4EA96 /* InventoryEditView.m */,
 				24EC4EED1D61595B0087AE7D /* InventorySearchView.h */,
 				24EC4EEE1D61595B0087AE7D /* InventorySearchView.m */,
+				24F0A23C1D73DC6200DD0538 /* InventoryChooseView.h */,
+				24F0A23D1D73DC6200DD0538 /* InventoryChooseView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -811,12 +822,14 @@
 			isa = PBXGroup;
 			children = (
 				24E949C71D5D740D00AEF2F3 /* cell */,
-				24E949CB1D5D743500AEF2F3 /* WorkOrderInventoryController.h */,
-				24E949CC1D5D743500AEF2F3 /* WorkOrderInventoryController.m */,
-				24E949CD1D5D743500AEF2F3 /* WorkOrderInventoryEditController.h */,
-				24E949CE1D5D743500AEF2F3 /* WorkOrderInventoryEditController.m */,
+				24E949CB1D5D743500AEF2F3 /* InventoryController.h */,
+				24E949CC1D5D743500AEF2F3 /* InventoryController.m */,
+				24E949CD1D5D743500AEF2F3 /* InventoryEditController.h */,
+				24E949CE1D5D743500AEF2F3 /* InventoryEditController.m */,
 				24EC4EF01D6159AE0087AE7D /* InventorySearchController.h */,
 				24EC4EF11D6159AE0087AE7D /* InventorySearchController.m */,
+				24F0A2391D73DC1300DD0538 /* InventoryChooseController.h */,
+				24F0A23A1D73DC1300DD0538 /* InventoryChooseController.m */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -824,10 +837,12 @@
 		24E949C71D5D740D00AEF2F3 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				24E949C81D5D742E00AEF2F3 /* WorkOrderInventoryCell.h */,
-				24E949C91D5D742E00AEF2F3 /* WorkOrderInventoryCell.m */,
+				24E949C81D5D742E00AEF2F3 /* InventoryCell.h */,
+				24E949C91D5D742E00AEF2F3 /* InventoryCell.m */,
 				24EC4EF31D615ABA0087AE7D /* InventorySearchCell.h */,
 				24EC4EF41D615ABA0087AE7D /* InventorySearchCell.m */,
+				24F0A23F1D73E19E00DD0538 /* InventoryChooseCell.h */,
+				24F0A2401D73E19E00DD0538 /* InventoryChooseCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1198,11 +1213,11 @@
 				24AC36F11D3085E200316301 /* UISearchBar+Common.m in Sources */,
 				2489B3B21D260FEC00725C9F /* PickupView.m in Sources */,
 				244517AC1CA03F220085CC16 /* OSCTabBarController.m in Sources */,
-				24E949CA1D5D742E00AEF2F3 /* WorkOrderInventoryCell.m in Sources */,
+				24E949CA1D5D742E00AEF2F3 /* InventoryCell.m in Sources */,
 				24020A5D1CB7491100D4EA96 /* WorkOrderStepEditView.m in Sources */,
 				24EAD1F11CC0DF3100444A9D /* SalesOrderGrabCell.m in Sources */,
 				24AEEE2C1CBA87D9003C6C2E /* SettingViewController.m in Sources */,
-				24020A601CB74AF700D4EA96 /* WorkOrderInventoryView.m in Sources */,
+				24020A601CB74AF700D4EA96 /* InventoryView.m in Sources */,
 				249E49091CE6EFB80051C9C1 /* CameraManager.m in Sources */,
 				242EA1DD1D2E4C86001E4291 /* PickupNoticeView.m in Sources */,
 				24F359821CB3BE4300C0950B /* WorkOrderStepCell.m in Sources */,
@@ -1226,7 +1241,9 @@
 				24596EFC1D6EC0CD00446C58 /* GisLocation.m in Sources */,
 				244517B21CA03F400085CC16 /* AppDelegate.m in Sources */,
 				24C34F141CE9931100D945BE /* FormTemplate.m in Sources */,
+				24F0A2411D73E19E00DD0538 /* InventoryChooseCell.m in Sources */,
 				248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */,
+				24F0A23B1D73DC1300DD0538 /* InventoryChooseController.m in Sources */,
 				24F0C1E61CC5DDE9005B3F98 /* Commodity.m in Sources */,
 				245562461D59C0F5000A523F /* SignViewController.m in Sources */,
 				24EC4EF21D6159AE0087AE7D /* InventorySearchController.m in Sources */,
@@ -1244,6 +1261,7 @@
 				24986CD41CC3202100CE0CB5 /* SalesOrderConfirm.m in Sources */,
 				246517051D2F49C000F1E5D3 /* PickupData.m in Sources */,
 				242EA1DA1D2E4C2E001E4291 /* PickupNoticeViewController.m in Sources */,
+				24F0A23E1D73DC6200DD0538 /* InventoryChooseView.m in Sources */,
 				24ABAFC91CCF35950089F779 /* StandardsView.m in Sources */,
 				249E490C1CE6F0D80051C9C1 /* CameraData.m in Sources */,
 				24C34F1A1CE9956900D945BE /* FormManager.m in Sources */,
@@ -1274,13 +1292,13 @@
 				244517811CA03E760085CC16 /* SalesOrderSnapshot.m in Sources */,
 				24596EFF1D6EC90C00446C58 /* InventoryManager.m in Sources */,
 				24B7DA271D2F93EA00A0723C /* SearchViewCell.m in Sources */,
-				24E949CF1D5D743500AEF2F3 /* WorkOrderInventoryController.m in Sources */,
+				24E949CF1D5D743500AEF2F3 /* InventoryController.m in Sources */,
 				244517BC1CA03F520085CC16 /* UIColor+Util.m in Sources */,
 				24948B3C1CC1DE3600DE8946 /* EnumUtil.m in Sources */,
 				246263001D58802400432575 /* AMapViewController.m in Sources */,
 				244517711CA03E640085CC16 /* Utils.m in Sources */,
 				24ABAFCC1CCF35950089F779 /* ThrowLineTool.m in Sources */,
-				24020A631CB74C1900D4EA96 /* WorkOrderInventoryEditView.m in Sources */,
+				24020A631CB74C1900D4EA96 /* InventoryEditView.m in Sources */,
 				24948B3F1CC235FC00DE8946 /* SalesOrderManager.m in Sources */,
 				2445177E1CA03E760085CC16 /* CommoditySnapshot.m in Sources */,
 				240E64071CD04EFD00E355A7 /* PropertyChoose.m in Sources */,
@@ -1305,7 +1323,7 @@
 				242D49D41D38B3EA0013DE13 /* FooterCell.m in Sources */,
 				244517801CA03E760085CC16 /* ItemSnapshot.m in Sources */,
 				242D49CE1D38B3220013DE13 /* SelectCell.m in Sources */,
-				24E949D01D5D743500AEF2F3 /* WorkOrderInventoryEditController.m in Sources */,
+				24E949D01D5D743500AEF2F3 /* InventoryEditController.m in Sources */,
 				24412E041D64357D0068D019 /* CacheCell.m in Sources */,
 				24233E201CCE063D00CF93B6 /* IntroductionViewController.m in Sources */,
 				24020A5A1CB7471C00D4EA96 /* WorkOrderStepView.m in Sources */,

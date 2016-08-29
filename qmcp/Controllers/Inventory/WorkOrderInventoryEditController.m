@@ -26,13 +26,15 @@
 #import "UIViewController+BackButtonHandler.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
-@interface WorkOrderInventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,
+@interface WorkOrderInventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,
                                                 UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderInventoryEditView *inventoryEditView;
 @property (nonatomic, assign) BOOL unLock;
+@property (nonatomic, assign) BOOL isDelete;
+
 
 
 
@@ -50,8 +52,16 @@
 
 -(void)bindListener
 {
-    _inventoryEditView.photoTableView.delegate = self;
-    _inventoryEditView.photoTableView.dataSource = self;
+    _inventoryEditView.photoCollectionView.delegate = self;
+    _inventoryEditView.photoCollectionView.dataSource = self;
+    
+    _inventoryEditView.qrText.delegate = self;
+    _inventoryEditView.goodNameText.delegate = self;
+    _inventoryEditView.remarkText.delegate = self;
+    
+    [_inventoryEditView.qrText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_inventoryEditView.goodNameText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_inventoryEditView.remarkText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     _inventoryEditView.lockIcon.userInteractionEnabled = YES;
     [_inventoryEditView.lockIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lockIconClick:)]];
@@ -84,6 +94,11 @@
     if(_itemSnapshot.attachments != nil){
         [_attachments addObjectsFromArray:_itemSnapshot.attachments];
     }
+    
+    _inventoryEditView.qrText.text = _itemSnapshot.code;
+    _inventoryEditView.remarkText.text = _itemSnapshot.remark;
+    _inventoryEditView.goodNameText.text = _itemSnapshot.name;
+    
 
 }
 
@@ -94,11 +109,11 @@
     
     [_itemSnapshot updateToDB];
     if (self.doneBlock) {
-        self.doneBlock(_itemSnapshot);
+        self.doneBlock(_isDelete,_itemSnapshot);
     }
 }
 
-+(instancetype)doneBlock:(void (^)(ItemSnapshot *))block{
++(instancetype)doneBlock:(void (^)(BOOL ,ItemSnapshot *))block{
     
     WorkOrderInventoryEditController *vc = [[WorkOrderInventoryEditController alloc] init];
     vc.doneBlock = block;
@@ -166,7 +181,7 @@
         [_attachments addObject:attachment];
         _itemSnapshot.attachments = _attachments;
         [_itemSnapshot saveToDB];
-        [_inventoryEditView.photoTableView reloadData];
+        [_inventoryEditView.photoCollectionView reloadData];
     }];
     
     
@@ -219,10 +234,41 @@
     _inventoryEditView.qrText.text = qrCode;
 }
 
+#pragma mark - 键盘操作
+
+- (void)hidenKeyboard
+{
+    [_inventoryEditView.qrText resignFirstResponder];
+    [_inventoryEditView.goodNameText resignFirstResponder];
+    [_inventoryEditView.remarkText resignFirstResponder];
+}
+
+- (void)returnOnKeyboard:(UITextField *)sender
+{
+    if (sender == _inventoryEditView.qrText) {
+        [_inventoryEditView.goodNameText becomeFirstResponder];
+    } else if (sender == _inventoryEditView.goodNameText) {
+        [_inventoryEditView.remarkText becomeFirstResponder];
+    }else if(sender == _inventoryEditView.remarkText){
+        [self hidenKeyboard];
+    }
+}
+
+
 //返回按钮监听
 - (BOOL)navigationShouldPopOnBackButton {
     if (true) {
-        [self.navigationController popViewControllerAnimated:YES];
+        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"二维码为空/还未拍照,是否放弃编辑?" preferredStyle:UIAlertControllerStyleAlert];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [_itemSnapshot deleteToDB];
+            _isDelete = YES;
+            [self.navigationController popViewControllerAnimated:YES];
+        }]];
+        
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self presentViewController:alertControl animated:YES completion:nil];
         return NO;
     }
     return YES;

@@ -41,7 +41,7 @@
     _inventoryView.tableView.dataSource = self;
     
     _inventoryView.addBtn.userInteractionEnabled = YES;
-    [_inventoryView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addBtnClick:)]];
+    [_inventoryView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
 
     _inventoryView.signBtn.userInteractionEnabled = YES;
     [_inventoryView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
@@ -50,12 +50,12 @@
 -(void)loadData
 {
     _salesOrderSearchResult = [[InventoryManager getInstance] getSalesOrderSearchResultByCode:_salesOrderCode];
-    NSString *where = [NSString stringWithFormat:@"salesOrderItemCode = '%@'",_salesOrderSearchResult.code];
+    NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_salesOrderSearchResult.code];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
 }
 
 #pragma mark - IBAction
-- (void)addBtnClick:(UITapGestureRecognizer *)recognizer
+- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer
 {
     __weak typeof(self) weakSelf = self;
     ItemSnapshot *itemSnapshot = [ItemSnapshot new];
@@ -64,9 +64,12 @@
     itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
     itemSnapshot.salesOrderCode = _salesOrderCode;
     [itemSnapshot saveToDB];
-    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(ItemSnapshot *item) {
-        [weakSelf.itemSnapshotList addObject:item];
-        [weakSelf.inventoryView.tableView reloadData];
+    
+    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
+        if(!isDelete){
+            [weakSelf.itemSnapshotList addObject:item];
+            [weakSelf.inventoryView.tableView reloadData];
+        }
     }];
     info.itemSnapshotCode = itemSnapshot.salesOrderItemCode;
     info.salesOrderCode = _salesOrderCode;
@@ -84,13 +87,7 @@
     
 }
 
--(void)reloadView
-{
-    [self loadData];
-    [_inventoryView.tableView reloadData];
-}
-
--(void)reportSignImage:(UIImage *)image
+-(void) reportSignImage:(UIImage *)image
 {
     if(image){
         Attachment *attachment = [Attachment new];
@@ -191,7 +188,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 {
-    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController new];
+    __weak typeof(self) weakSelf = self;
+    WorkOrderInventoryEditController *info = [WorkOrderInventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
+        [weakSelf loadData];
+        [weakSelf.inventoryView.tableView reloadData];
+    }];
     ItemSnapshot *itemSnapshot = self.itemSnapshotList[indexPath.row];
     info.itemSnapshotCode = itemSnapshot.salesOrderItemCode;
     info.salesOrderCode = _salesOrderCode;
@@ -210,8 +211,6 @@
         if([_itemSnapshotList[indexPath.row] deleteToDB]){
             [_itemSnapshotList removeObjectAtIndex:indexPath.row];
             [_inventoryView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }else{
-            
         }
         
     }

@@ -11,6 +11,7 @@
 @interface ItemSnapshot : NSObject
 
 @property (nonatomic, copy) NSString *salesOrderItemCode;
+
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, copy) NSString *code;

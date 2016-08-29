@@ -108,7 +108,7 @@
     _remarkText.font = [UIFont systemFontOfSize:12];
     _remarkText.textColor = [UIColor grayColor];
     CGRect remarkframe = _remarkText.frame;
-    goodframe.size.width = 5.0f;
+    remarkframe.size.width = 5.0f;
     _remarkText.leftViewMode = UITextFieldViewModeAlways;
     _remarkText.leftView = [[UIView alloc] initWithFrame:remarkframe];
     [remarkView addSubview:_remarkText];
@@ -132,10 +132,10 @@
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _photoTableView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
-    _photoTableView.backgroundColor = [UIColor grayColor];
-    [_photoTableView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
-    [self addSubview:_photoTableView];
+    _photoCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+    _photoCollectionView.backgroundColor = [UIColor grayColor];
+    [_photoCollectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
+    [self addSubview:_photoCollectionView];
     
     UIView *commodityView = [UIView new];
     [self addSubview:commodityView];
@@ -277,7 +277,7 @@
         make.height.mas_equalTo(@1);
     }];
     
-    [_photoTableView mas_makeConstraints:^(MASConstraintMaker *make){
+    [_photoCollectionView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(photoView.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(5);
         make.right.equalTo(self.mas_right).with.offset(-5);
@@ -285,7 +285,7 @@
     }];
     
     [commodityView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_photoTableView.mas_bottom).with.offset(5);
+        make.top.equalTo(_photoCollectionView.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);

@@ -16,8 +16,8 @@
 
 @property (nonatomic, copy) NSString *itemSnapshotCode;
 
-@property (copy, nonatomic) void(^doneBlock)(ItemSnapshot *item);
+@property (copy, nonatomic) void(^doneBlock)(BOOL isDelete, ItemSnapshot *item);
 
-+ (instancetype) doneBlock:(void(^)(ItemSnapshot *item))block;
++ (instancetype) doneBlock:(void(^)(BOOL isDelete, ItemSnapshot *item))block;
 
 @end

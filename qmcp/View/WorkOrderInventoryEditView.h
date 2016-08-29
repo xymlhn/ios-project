@@ -10,7 +10,7 @@
 
 @interface WorkOrderInventoryEditView : BaseView
 
-@property (nonatomic, strong) UICollectionView *photoTableView;
+@property (nonatomic, strong) UICollectionView *photoCollectionView;
 @property (nonatomic,strong) UIButton *qrBtn;
 @property (nonatomic,strong) UITextField *qrText;
 @property (nonatomic,strong) UILabel *lockIcon;

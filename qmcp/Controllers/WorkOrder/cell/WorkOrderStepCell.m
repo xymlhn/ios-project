@@ -11,9 +11,10 @@
 #import "Masonry.h"
 
 @interface WorkOrderStepCell()
-@property(nonatomic, strong) UILabel *titleText;
+@property(nonatomic, strong) UILabel *userNamaLabel;
 @property (nonatomic,strong)UIImageView *image;
-@property (nonatomic,strong)UILabel *contentText;
+@property (nonatomic,strong)UILabel *contentLabel;
+@property (nonatomic,strong) UILabel *timeLabel;
 @end
 @implementation WorkOrderStepCell
 
@@ -44,45 +45,54 @@
 - (void)setWorkOrderStep:(WorkOrderStep *)workOrderStep
 {
     if(workOrderStep != nil){
-        _titleText.text = workOrderStep.stepName;
-        _contentText.text = workOrderStep.content;
+        _userNamaLabel.text = workOrderStep.submitUser;
+        _contentLabel.text = workOrderStep.content;
+        _timeLabel.text = workOrderStep.submitTime;
     }
 
-}
-
--(void)imageBackgroud:(NSString *)imageName
-{
-    UIImage *backgroudImage = [[UIImage imageNamed:imageName]resizableImageWithCapInsets:UIEdgeInsetsMake(30,80,5,30)];
-    [_image setImage:backgroudImage];
 }
 
 -(void)initView
 {
     _image = [UIImageView new];
+    [_image setImage:[UIImage imageNamed:@"default－portrait"]];
     [self.contentView addSubview:_image];
     [_image mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.contentView.mas_top).with.offset(0);
-        make.left.equalTo(self.contentView.mas_left).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(4);
+        make.top.equalTo(self.contentView.mas_top).with.offset(10);
+        make.left.equalTo(self.contentView.mas_left).with.offset(10);
+        make.width.equalTo(@35);
+        make.height.equalTo(@35);
     }];
     
-    _titleText = [UILabel new];
-    [self.contentView addSubview:_titleText];
-    [_titleText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.contentView.mas_top).with.offset(10);
-        make.left.equalTo(self.contentView.mas_left).with.offset(50);
-        make.right.equalTo(self.contentView.mas_right).with.offset(10);
+    _userNamaLabel = [UILabel new];
+    _userNamaLabel.font = [UIFont systemFontOfSize:12];
+    _userNamaLabel.textColor = [UIColor blueColor];
+    [self.contentView addSubview:_userNamaLabel];
+    [_userNamaLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_image.mas_top).with.offset(0);
+        make.left.equalTo(_image.mas_right).with.offset(10);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
     }];
 
-    _contentText = [UILabel new];
-    _contentText.font = [UIFont systemFontOfSize:12];
-    [self.contentView addSubview:_contentText];
-    [_contentText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_titleText.mas_bottom).with.offset(5);
-        make.left.equalTo(self.contentView.mas_left).with.offset(50);
-        make.right.equalTo(self.contentView.mas_right).with.offset(10);
+    _contentLabel = [UILabel new];
+    _contentLabel.font = [UIFont systemFontOfSize:12];
+    _contentLabel.textColor = [UIColor blackColor];
+    [self.contentView addSubview:_contentLabel];
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_userNamaLabel.mas_bottom).with.offset(5);
+        make.left.equalTo(_image.mas_right).with.offset(10);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
     }];
+    
+    _timeLabel = [UILabel new];
+    _timeLabel.font = [UIFont systemFontOfSize:12];
+    _timeLabel.textColor = [UIColor blackColor];
+    [self.contentView addSubview:_timeLabel];
 
+    [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
+        make.left.equalTo(_image.mas_right).with.offset(10);
+        make.right.equalTo(self.contentView.mas_right).with.offset(0);
+    }];
 }
 @end

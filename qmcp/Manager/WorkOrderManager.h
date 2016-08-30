@@ -25,6 +25,13 @@ extern NSString *const WorkOrderUpdateNotification;
 -(void) getWorkOrderByLastUpdateTime:(NSString *) dateStr;
 
 /**
+ *  根据时间点获取服务常用步骤
+ *
+ *  @param dateStr 时间戳
+ */
+-(void) getCommodityStepByLastUpdateTime:(NSString *) dateStr;
+
+/**
  *  上传工单一般步骤
  *
  *  @param workOrder 工单

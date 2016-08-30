@@ -90,6 +90,8 @@
 		24759F4D1CB9FB4700306E5C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24759F4C1CB9FB4700306E5C /* LoginViewController.m */; };
 		2479BEA51D66AB6300E4D846 /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2479BEA41D66AB6300E4D846 /* ImageViewerController.m */; };
 		247EE90C1CBF3974008A3674 /* PickupItemSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EE90B1CBF3974008A3674 /* PickupItemSignature.m */; };
+		248142551D75642400140865 /* CommodityBrife.m in Sources */ = {isa = PBXBuildFile; fileRef = 248142541D75642400140865 /* CommodityBrife.m */; };
+		248142581D75646100140865 /* CommodityStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 248142571D75646100140865 /* CommodityStep.m */; };
 		24836CFF1CB7F05A00B58DBD /* WorkOrderGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 24836CFE1CB7F05A00B58DBD /* WorkOrderGroup.m */; };
 		2489B3AB1D260EDA00725C9F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2489B3AA1D260EDA00725C9F /* InitViewController.m */; };
 		2489B3AF1D260F6100725C9F /* PickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2489B3AE1D260F6100725C9F /* PickupViewController.m */; };
@@ -325,6 +327,10 @@
 		247D31D71C8D7C040048DD38 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		247EE90A1CBF3974008A3674 /* PickupItemSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupItemSignature.h; sourceTree = "<group>"; };
 		247EE90B1CBF3974008A3674 /* PickupItemSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupItemSignature.m; sourceTree = "<group>"; };
+		248142531D75642400140865 /* CommodityBrife.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityBrife.h; sourceTree = "<group>"; };
+		248142541D75642400140865 /* CommodityBrife.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityBrife.m; sourceTree = "<group>"; };
+		248142561D75646100140865 /* CommodityStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityStep.h; sourceTree = "<group>"; };
+		248142571D75646100140865 /* CommodityStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityStep.m; sourceTree = "<group>"; };
 		24836CFD1CB7F05A00B58DBD /* WorkOrderGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderGroup.h; sourceTree = "<group>"; };
 		24836CFE1CB7F05A00B58DBD /* WorkOrderGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderGroup.m; sourceTree = "<group>"; };
 		2489B3A91D260EDA00725C9F /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitViewController.h; sourceTree = "<group>"; };
@@ -1043,6 +1049,10 @@
 				24EC4EF71D615B400087AE7D /* SalesOrderSearchResult.m */,
 				24596EFA1D6EC0CD00446C58 /* GisLocation.h */,
 				24596EFB1D6EC0CD00446C58 /* GisLocation.m */,
+				248142531D75642400140865 /* CommodityBrife.h */,
+				248142541D75642400140865 /* CommodityBrife.m */,
+				248142561D75646100140865 /* CommodityStep.h */,
+				248142571D75646100140865 /* CommodityStep.m */,
 			);
 			name = Model;
 			path = Models;
@@ -1284,6 +1294,7 @@
 				242D49C31D38AF9D0013DE13 /* TextMultiCell.m in Sources */,
 				24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */,
 				24EAD1ED1CC0DA5D00444A9D /* SalesOrderBindListController.m in Sources */,
+				248142551D75642400140865 /* CommodityBrife.m in Sources */,
 				240F88B51CC755C900138F10 /* BaseViewController.m in Sources */,
 				244517A71CA03F190085CC16 /* SideMenuCell.m in Sources */,
 				24AC36F41D30869100316301 /* UIImage+Common.m in Sources */,
@@ -1330,6 +1341,7 @@
 				24B398D51D3A37FB0067A528 /* CheckBoxView.m in Sources */,
 				247092661D23942E00EBADB3 /* QrCodeBindController.m in Sources */,
 				245562451D59C0F5000A523F /* ScanViewController.m in Sources */,
+				248142581D75646100140865 /* CommodityStep.m in Sources */,
 				242D49BD1D3895360013DE13 /* NumberCell.m in Sources */,
 				24948B421CC2375900DE8946 /* SalesOrderBind.m in Sources */,
 				244517611CA03E5B0085CC16 /* AppManager.m in Sources */,

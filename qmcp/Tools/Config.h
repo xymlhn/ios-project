@@ -91,4 +91,8 @@
 //上下班
 +(void)setWork:(BOOL)work;
 +(BOOL)isWork;
+
+//服务常用步骤
++(void)setCommodityStep:(NSString*)step;
++(NSString *)getCommodityStep;
 @end

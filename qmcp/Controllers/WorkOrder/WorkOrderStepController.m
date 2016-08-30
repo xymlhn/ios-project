@@ -38,9 +38,6 @@
     _stepView.tableView.dataSource = self;
     _stepView.addBtn.userInteractionEnabled = YES;
     [_stepView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
-    
-    _stepView.saveBtn.userInteractionEnabled = YES;
-    [_stepView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
 
 }
 
@@ -120,72 +117,6 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
-- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    [self postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList isCompleteAll:NO];
-}
-
-
-- (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps isCompleteAll:(BOOL)isCompleteAll{
-    
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在上传工单步骤";
-    hub.userInteractionEnabled = NO;
-    NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
-    NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
-    
-    [[WorkOrderManager getInstance] postWorkOrderStepWithCode:workOrder.code andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
-        if (!error) {
-            NSMutableArray *attachments = [NSMutableArray new];
-            for (WorkOrderStep *step in steps) {
-                for(Attachment *attachment in step.attachments)
-                {
-                    if(!attachment.isUpload){
-                        [attachments addObject:attachment];
-                    }
-                }
-                
-            }
-            if(attachments.count > 0){
-                int i= 0;
-                for(Attachment *attachment in attachments)
-                {
-                    i++;
-                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
-                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
-                        if (!error) {
-                            attachment.isUpload = YES;
-                            [attachment updateToDB];
-                            if(i == attachments.count)
-                            {
-                                hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
-                                [hub hide:YES afterDelay:kEndSucceedDelayTime];
-                            }
-                        }else{
-                            hub.mode = MBProgressHUDModeCustomView;
-                            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = error;
-                            [hub hide:YES afterDelay:kEndFailedDelayTime];
-                        }
-                    }];
-                }
-            }else
-            {
-                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
-            }
-        }else{
-            
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
-            
-        }
-    }];
-    
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -197,22 +128,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
-    NSString *imageName;
-    if(self.workOrderStepList.count == 1)
-    {
-        imageName = @"singleblock.9";
-    }else
-    {
-        if(row == 0)
-        {
-            imageName = @"topblock.9";
-        }else
-        {
-            imageName = @"middleblock.9";
-        }
-    }
     WorkOrderStepCell *cell = [WorkOrderStepCell cellWithTableView:tableView];
-    [cell imageBackgroud:imageName];
     WorkOrderStep *step = self.workOrderStepList[row];
     cell.workOrderStep = step;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

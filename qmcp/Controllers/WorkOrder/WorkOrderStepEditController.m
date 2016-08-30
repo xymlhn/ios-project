@@ -50,10 +50,6 @@
         plusIcon.isPlus = true;
         [_attachments insertObject:plusIcon atIndex:_attachments.count];
     }
-       
-    _editView.editText.delegate = self;
-    
-    _editView.titleText.text = _step.stepName;
     _editView.editText.text = _step.content;
     
 }
@@ -71,6 +67,10 @@
     [_editView.delBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delBtnClick:)]];
     _editView.collectionView.delegate = self;
     _editView.collectionView.dataSource = self;
+    _editView.editText.delegate = self;
+    
+    _editView.fastView.userInteractionEnabled = YES;
+    [_editView.fastView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fastViewClick:)]];
     
 }
 
@@ -202,8 +202,7 @@
     }];
     
 }
-- (void)plusBtnClick
-{
+- (void)plusBtnClick{
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self showOkayCancelAlert];
@@ -220,8 +219,8 @@
     }
 }
 
-- (void)delBtnClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)delBtnClick:(UITapGestureRecognizer *)recognizer{
+
     if([_step deleteToDB]){
         for (Attachment *attachment in _attachments) {
             if(!attachment.isPlus)
@@ -232,6 +231,9 @@
     }
 }
 
+- (void)fastViewClick:(UITapGestureRecognizer *)recognizer{
+    
+}
 #pragma mark - UIImagePickerController
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

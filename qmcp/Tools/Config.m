@@ -25,6 +25,7 @@ NSString * const kCommoditySnapshotTime = @"commoditySnapshotTime";
 NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
 NSString * const kDatabaseVersion = @"databaseVersion";
 NSString * const kWork = @"work";
+NSString * const kCommodityStep = @"commodityStep";
 @implementation Config
 
 +(void)setInitSetting{
@@ -36,6 +37,8 @@ NSString * const kWork = @"work";
     [self setCommodityItem:@""];
     [self setSearch:NO];
     [self setCommoditySnapshot:@""];
+    [self setCommodityStep:@""];
+
 }
 
 + (void)saveOwnAccount:(NSString *)account andPassword:(NSString *)password
@@ -213,6 +216,17 @@ NSString * const kWork = @"work";
 +(BOOL)isWork{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     return [user boolForKey:kWork];
+}
+
++(void)setCommodityStep:(NSString*)step
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:step forKey:kCommodityStep];
+}
++(NSString *)getCommodityStep{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *str = [user objectForKey:kCommodityStep];
+    return str == nil ?@"":str;
 }
 
 

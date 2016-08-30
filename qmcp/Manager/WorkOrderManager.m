@@ -24,12 +24,16 @@
 #import "Config.h"
 #import "AppManager.h"
 #import "User.h"
+#import "CommodityBrife.h"
+#import "CommodityStep.h"
+#import "TMCache.h"
 
 NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
+NSString * const kCommodityStepCache = @"commodityStepCache";
 @interface WorkOrderManager()
 
-@property(nonatomic,strong)NSMutableArray<WorkOrder *> *workOrders;
-
+@property (nonatomic,strong) NSMutableArray<WorkOrder *> *workOrders;
+@property (nonatomic,strong) NSMutableDictionary<NSString *,NSMutableArray<CommodityStep *> *> *commodityStepDict;
 @end
 @implementation WorkOrderManager
 
@@ -38,8 +42,39 @@ NSString *const WorkOrderUpdateNotification = @"workOrderUpdate";
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
+        
+        shared_manager.commodityStepDict = [[TMCache sharedCache] objectForKey:kCommodityStepCache];
+        if(shared_manager.commodityStepDict == nil){
+            shared_manager.commodityStepDict = [NSMutableDictionary new];
+        }
     });
     return shared_manager;
+}
+
+-(void)getCommodityStepByLastUpdateTime:(NSString *)dateStr{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMMODITYSTEP,dateStr];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+        if (!error) {
+            [Config setCommodityStep:[Utils formatDate:[NSDate new]]];
+            NSArray<CommodityBrife *> *commodityBrifeArr = [CommodityBrife mj_objectArrayWithKeyValuesArray:obj];
+            _commodityStepDict = [NSMutableDictionary new];
+            if(commodityBrifeArr > 0){
+                for (CommodityBrife *commodityBrife in commodityBrifeArr) {
+                    NSMutableArray<CommodityStep *> *tempArr = [NSMutableArray new];
+                    for (NSString *key in commodityBrife.steps) {
+                        CommodityStep *commodityStep = [CommodityStep new];
+                        commodityStep.stepName = key;
+                        commodityStep.stepDescription = commodityBrife.steps[key];
+                        [tempArr addObject:commodityStep];
+                    }
+                    [_commodityStepDict setObject:tempArr forKey:commodityBrife.code];
+                }
+                [[TMCache sharedCache] setObject:_commodityStepDict forKey:kCommodityStepCache];
+                
+            }
+        }
+        [[WorkOrderManager getInstance] sortAllWorkOrder];
+    }];
 }
 
 -(void)getWorkOrderByLastUpdateTime:(NSString *)dateStr{

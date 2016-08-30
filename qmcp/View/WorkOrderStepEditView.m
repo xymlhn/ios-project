@@ -22,63 +22,127 @@
 
     self.backgroundColor = [UIColor whiteColor];
     
-    _containView = [UIView new];
-    [_containView setBackgroundColor:[UIColor whiteColor]];
-    [self addSubview:_containView];
-    [_containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
-    }];
-    _titleText = [UILabel new];
-    _titleText.font = [UIFont systemFontOfSize:12];//
-    _titleText.text = @"步骤1";
-    _titleText.textColor = [UIColor blackColor];
-    
-    [_containView addSubview:_titleText];
-    [_titleText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_containView.mas_top).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(5);
-        make.right.equalTo(_containView.mas_right).with.offset(5);
-        make.height.equalTo(@30);
-    }];
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_containView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_titleText.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
-    }];
-    
-    _alwaysBtn = [UILabel new];
-    _alwaysBtn.font = [UIFont systemFontOfSize:20];//
-    _alwaysBtn.text = @"常用步骤";
-    _alwaysBtn.textColor = [UIColor blackColor];
-    _alwaysBtn.layer.borderColor = [UIColor grayColor].CGColor;
-    _alwaysBtn.layer.borderWidth =1.0;
-    _alwaysBtn.layer.cornerRadius =5.0;
-    _alwaysBtn.textAlignment = NSTextAlignmentCenter;
-    [_containView addSubview:_alwaysBtn];
-    [_alwaysBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerX.equalTo(_containView.mas_centerX);
-        make.top.equalTo(_titleText.mas_bottom).with.offset(10);
-        make.width.equalTo(@100);
-        make.height.equalTo(@30);
-    }];
-    
     _editText = [UITextView new];
     _editText.font = [UIFont systemFontOfSize:14];
     _editText.textColor = [UIColor blackColor];
-    _editText.layer.borderColor = [UIColor grayColor].CGColor;
-    _editText.layer.borderWidth =1.0;
-    _editText.layer.cornerRadius =5.0;
-    [_containView addSubview:_editText];
+    [self addSubview:_editText];
     [_editText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_alwaysBtn.mas_bottom).with.offset(10);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(10);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.equalTo(@150);
     }];
+  
+    
+    _fastView = [UIView new];
+    [self addSubview:_fastView];
+    
+    UIView *commodityLine = [UIView new];
+    commodityLine.backgroundColor = [UIColor grayColor];
+    [_fastView addSubview:commodityLine];
+    
+    UIView *commodityTopLine = [UIView new];
+    commodityTopLine.backgroundColor = [UIColor grayColor];
+    [_fastView addSubview:commodityTopLine];
+    
+    UILabel *leftIcon = [UILabel new];
+    [leftIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    leftIcon.text = @"";
+    leftIcon.textColor = [UIColor blackColor];
+    [_fastView addSubview:leftIcon];
+    
+    UILabel *fastLabel = [UILabel new];
+    fastLabel.text = @"快速描述";
+    [_fastView addSubview:fastLabel];
+    
+    UILabel *rightIcon = [UILabel new];
+    [rightIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    rightIcon.text = @"";
+    rightIcon.textColor = [UIColor blackColor];
+    [_fastView addSubview:rightIcon];
+    
+    [_fastView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_editText.mas_bottom).with.offset(5);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@40);
+    }];
+    
+    [leftIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_fastView.mas_centerY);
+        make.left.equalTo(_fastView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@30);
+    }];
+    
+    [fastLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_fastView.mas_centerY);
+        make.left.equalTo(leftIcon.mas_right).with.offset(5);
+        make.right.equalTo(rightIcon.mas_left).with.offset(5);
+    }];
+    
+    [rightIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_fastView.mas_centerY);
+        make.right.equalTo(_fastView.mas_right).with.offset(-kPaddingLeftWidth);
+    }];
+    
+    [commodityTopLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_fastView.mas_top).with.offset(0);
+        make.left.equalTo(_fastView.mas_left).with.offset(0);
+        make.right.equalTo(_fastView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    [commodityLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_fastView.mas_bottom).with.offset(0);
+        make.left.equalTo(_fastView.mas_left).with.offset(0);
+        make.right.equalTo(_fastView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+    
+    UIView *photoView = [UIView new];
+    [self addSubview:photoView];
+    
+    UIView *photoLine = [UIView new];
+    photoLine.backgroundColor = [UIColor grayColor];
+    [photoView addSubview:photoLine];
+    
+    UILabel *photoIcon = [UILabel new];
+    [photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    photoIcon.text = @"";
+    photoIcon.textColor = [UIColor blackColor];
+    [photoView addSubview:photoIcon];
+    
+    UILabel *photoLabel = [UILabel new];
+    photoLabel.text = @"相片";
+    [photoView addSubview:photoLabel];
+    
+    [photoView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_fastView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@40);
+    }];
+    
+    [photoIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(photoView.mas_centerY);
+        make.left.equalTo(photoView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@30);
+    }];
+    
+    [photoLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(photoView.mas_centerY);
+        make.right.equalTo(photoView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.left.equalTo(photoIcon.mas_right).with.offset(5);
+    }];
+    
+    [photoLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(photoView.mas_bottom).with.offset(0);
+        make.left.equalTo(photoView.mas_left).with.offset(0);
+        make.right.equalTo(photoView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@1);
+    }];
+
+    
     
     //创建布局对象
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -93,9 +157,9 @@
     _collectionView.backgroundColor = [UIColor grayColor];
     [self addSubview:_collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_editText.mas_bottom).with.offset(10);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
+        make.top.equalTo(photoView.mas_bottom).with.offset(10);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.equalTo(@120);
     }];
     [_collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];

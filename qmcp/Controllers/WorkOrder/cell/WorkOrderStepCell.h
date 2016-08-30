@@ -15,5 +15,4 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
--(void)imageBackgroud:(NSString *)imageName;
 @end

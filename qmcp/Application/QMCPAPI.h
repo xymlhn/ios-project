@@ -48,6 +48,6 @@
 #define QMCPAPI_IMAGEURL                 @"i/a/api/attachment/get"
 #define QMCPAPI_USERICONURL              @"i/a/api/user/info/portrait/"
 #define QMCPAPI_SALESORDERSEARCH         @"i/a/api/salesorder/check"
-#define QMCPAPI_SALESORDERITEM            @"i/a/api/salesorder/commodityItem/"
-
+#define QMCPAPI_SALESORDERITEM           @"i/a/api/salesorder/commodityItem/"
+#define QMCPAPI_COMMODITYSTEP            @"i/a/api/commodity/step?lastUpdateTime="
 #endif

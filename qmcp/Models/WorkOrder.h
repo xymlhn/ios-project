@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, OnSiteStatus) {
 
 @property (nonatomic, copy) NSMutableArray *processDetail;
 
-@property (nonatomic, copy) NSMutableArray *commoditySnapshots;
+@property (nonatomic, copy) NSMutableArray *salesOrderCommoditySnapshots;
 
 @property (nonatomic, copy) NSString *qrCodeUrl;
 

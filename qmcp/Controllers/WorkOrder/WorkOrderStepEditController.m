@@ -15,6 +15,8 @@
 #import "WorkOrderStepEditView.h"
 #import "PhotoCell.h"
 #import "ImageViewerController.h"
+#import "CommodityStepController.h"
+#import "CommoditySnapshot.h"
 @interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,
                                             UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
 
@@ -22,7 +24,7 @@
 @property (nonatomic, strong) WorkOrder *workOrder;
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderStepEditView *editView;
-
+@property (nonatomic, strong)NSMutableArray *dataArray;//数据
 @end
 
 @implementation WorkOrderStepEditController
@@ -51,6 +53,12 @@
         [_attachments insertObject:plusIcon atIndex:_attachments.count];
     }
     _editView.editText.text = _step.content;
+
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    for (CommoditySnapshot *snapshot in _workOrder.salesOrderCommoditySnapshots) {
+        [dict setObject:snapshot.commodityName forKey:snapshot.commodityCode];
+    }
+    _dataArray = [[WorkOrderManager getInstance] getCommodityByCommodityCode:dict];
     
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
@@ -232,7 +240,26 @@
 }
 
 - (void)fastViewClick:(UITapGestureRecognizer *)recognizer{
-    
+    if(_dataArray.count == 0){
+        [Utils showHudTipStr:@"无快速描述"];
+        return;
+    }
+    CommodityStepController *controller = [CommodityStepController doneBlock:^(NSString *textValue) {
+        _editView.editText.text = textValue;
+    }];
+    controller.dataArray = _dataArray;
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        controller.providesPresentationContextTransitionStyle = YES;
+        controller.definesPresentationContext = YES;
+        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self.tabBarController presentViewController:controller animated:YES completion:nil];
+        
+    } else {
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self presentViewController:controller animated:NO completion:nil];
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
 }
 #pragma mark - UIImagePickerController
 

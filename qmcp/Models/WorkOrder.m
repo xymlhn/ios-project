@@ -18,6 +18,6 @@
 + (NSDictionary *)mj_objectClassInArray
 {
     return @{@"processDetail":@"WorkOrderStep",
-             @"commoditySnapshots":@"CommoditySnapshot"};
+             @"salesOrderCommoditySnapshots":@"CommoditySnapshot"};
 }
 @end

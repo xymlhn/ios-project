@@ -33,7 +33,7 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
 @interface WorkOrderManager()
 
 @property (nonatomic,strong) NSMutableArray<WorkOrder *> *workOrders;
-@property (nonatomic,strong) NSMutableDictionary<NSString *,NSMutableArray<CommodityStep *> *> *commodityStepDict;
+@property (nonatomic,retain) NSMutableDictionary<NSString *,NSMutableArray<CommodityStep *> *> *commodityStepDict;
 @end
 @implementation WorkOrderManager
 
@@ -51,14 +51,15 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
     return shared_manager;
 }
 
+
 -(void)getCommodityStepByLastUpdateTime:(NSString *)dateStr{
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMMODITYSTEP,dateStr];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [Config setCommodityStep:[Utils formatDate:[NSDate new]]];
             NSArray<CommodityBrife *> *commodityBrifeArr = [CommodityBrife mj_objectArrayWithKeyValuesArray:obj];
-            _commodityStepDict = [NSMutableDictionary new];
             if(commodityBrifeArr > 0){
+                _commodityStepDict = [NSMutableDictionary new];
                 for (CommodityBrife *commodityBrife in commodityBrifeArr) {
                     NSMutableArray<CommodityStep *> *tempArr = [NSMutableArray new];
                     for (NSString *key in commodityBrife.steps) {
@@ -73,8 +74,22 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
                 
             }
         }
-        [[WorkOrderManager getInstance] sortAllWorkOrder];
+
     }];
+}
+
+-(NSMutableArray *)getCommodityByCommodityCode:(NSMutableDictionary<NSString *,NSString *> *)commodityDict{
+    NSMutableArray *array = [NSMutableArray new];
+    for (NSString *key in commodityDict) {
+        NSMutableArray<CommodityStep *> *tempArray = _commodityStepDict[key];
+        if(tempArray.count > 0){
+            for (CommodityStep *commodityStep in tempArray) {
+                commodityStep.commodityName = commodityDict[key];
+            }
+            [array addObject:tempArray];
+        }
+    }
+    return array;
 }
 
 -(void)getWorkOrderByLastUpdateTime:(NSString *)dateStr{
@@ -95,6 +110,9 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
                 [assignArray enumerateObjectsUsingBlock:^(WorkOrder *  _Nonnull order, NSUInteger idx, BOOL * _Nonnull stop) {
                     if(order.type != 20){
                         order.salesOrderSnapshot.addressSnapshot.code = order.code;
+                        [order.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
+                            css.code = [NSUUID UUID].UUIDString;
+                        }];
                         order.userId = [[AppManager getInstance] getUser].userOpenId;
                         [order saveToDB];
                     }

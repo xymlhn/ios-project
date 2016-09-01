@@ -11,13 +11,34 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__70-[SalesOrderManager getSalesOrderConfirmByLastUpdateTime:finishBlock:]_block_invoke:SalesOrderManager.m">
+         contextName = "-[WorkOrderManager getCommodityByCommodityCode:]:WorkOrderManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
+            </PersistentString>
+            <PersistentString
+               value = "self.commodityStepDict">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[SalesOrderGrabListController salesOrderUpdate:]:SalesOrderGrabListController.m">
+         contextName = "-[CommodityStepController buttonAction:]:CommodityStepController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.dataArray">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[SalesOrderGrabListController tableView:numberOfRowsInSection:]:SalesOrderGrabListController.m">
+         contextName = "__30+[PropertyManager getInstance]_block_invoke:PropertyManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[TMCache sharedCache] objectForKey:kCommoditySnapshot]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__49-[WorkOrderManager getWorkOrderByLastUpdateTime:]_block_invoke:WorkOrderManager.m">
       </ContextState>
       <ContextState
          contextName = "__32+[SalesOrderManager getInstance]_block_invoke:SalesOrderManager.m">
@@ -31,12 +52,45 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__30+[PropertyManager getInstance]_block_invoke:PropertyManager.m">
+         contextName = "__31+[WorkOrderManager getInstance]_block_invoke:WorkOrderManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[TMCache sharedCache] objectForKey:kCommoditySnapshot]">
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
+            </PersistentString>
+            <PersistentString
+               value = "_commodityStepDict">
+            </PersistentString>
+            <PersistentString
+               value = "shared_manager.commodityStepDict">
+            </PersistentString>
+            <PersistentString
+               value = "shared_manager">
+            </PersistentString>
+            <PersistentString
+               value = "self">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SalesOrderGrabListController tableView:numberOfRowsInSection:]:SalesOrderGrabListController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[SalesOrderGrabListController salesOrderUpdate:]:SalesOrderGrabListController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__67-[SalesOrderManager getSalesOrderBindByLastUpdateTime:finishBlock:]_block_invoke:SalesOrderManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "__70-[SalesOrderManager getSalesOrderConfirmByLastUpdateTime:finishBlock:]_block_invoke:SalesOrderManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "__53-[WorkOrderManager getCommodityStepByLastUpdateTime:]_block_invoke:WorkOrderManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CommodityStepController tableView:cellForRowAtIndexPath:]:CommodityStepController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[WorkOrderStepEditController loadData]:WorkOrderStepEditController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

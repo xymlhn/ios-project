@@ -10,7 +10,6 @@
 
 @interface CommodityStep : NSObject
 
-
 @property (nonatomic, copy) NSString *commodityName;
 
 @property (nonatomic, copy) NSString *stepName;

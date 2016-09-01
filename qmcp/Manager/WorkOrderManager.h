@@ -10,6 +10,7 @@
 #import "WorkOrder.h"
 #import "Attachment.h"
 #import "PchHeader.h"
+#import "CommodityStep.h"
 
 @interface WorkOrderManager : NSObject
 
@@ -17,6 +18,14 @@ extern NSString *const WorkOrderUpdateNotification;
 
 + (WorkOrderManager *) getInstance;
 
+/**
+ *  获取步骤
+ *
+ *  @param commodityDict 名字
+ *
+ *  @return 步骤数组
+ */
+-(NSMutableArray *)getCommodityByCommodityCode:(NSMutableDictionary<NSString *,NSString *> *)commodityDict;
 /**
  *  根据时间点获取工单
  *

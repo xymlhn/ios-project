@@ -130,12 +130,21 @@
     _photoLabel.text = @"相片";
     [photoView addSubview:_photoLabel];
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _photoCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
-    _photoCollectionView.backgroundColor = [UIColor grayColor];
-    [_photoCollectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"cell"];
+    CGFloat itemWH = (kScreen_Width - 12 * 4) / 3;
+    //创建布局对象
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(itemWH, itemWH);
+    layout.sectionInset = UIEdgeInsetsMake(6, 12, 6, 12);
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 20;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    _photoCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
+    _photoCollectionView.backgroundColor = [UIColor whiteColor];
+    _photoCollectionView.scrollEnabled = NO;
     [self addSubview:_photoCollectionView];
+    
+    [_photoCollectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];
+    
     
     _commodityView = [UIView new];
     [self addSubview:_commodityView];
@@ -276,12 +285,12 @@
         make.right.equalTo(photoView.mas_right).with.offset(0);
         make.height.mas_equalTo(@1);
     }];
-    
+    NSNumber *collectionH = [NSNumber numberWithInteger:itemWH * 2 + 12 *3] ;
     [_photoCollectionView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(photoView.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(5);
         make.right.equalTo(self.mas_right).with.offset(-5);
-        make.height.equalTo(@120);
+        make.height.equalTo(collectionH);
     }];
     
     [_commodityView mas_makeConstraints:^(MASConstraintMaker *make){

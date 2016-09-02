@@ -39,4 +39,5 @@ typedef void(^CompletionHandler)(NSDictionary *dict, NSString *error);
 #define DebugLog(s, ...) NSLog(@"%s(%d): %@", __FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
 
 #define kPath_ResponseCache @"ResponseCache"
+#define kTipAlert(_S_, ...)     [[[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:(_S_), ##__VA_ARGS__] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil] show]
 #endif /* Header_h */

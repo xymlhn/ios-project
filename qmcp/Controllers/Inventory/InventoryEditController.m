@@ -27,7 +27,8 @@
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
 #import "InventoryChooseController.h"
-@interface InventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,
+#import "Helper.h"
+@interface InventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,
                                                 UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
@@ -35,9 +36,7 @@
 @property (nonatomic, strong) InventoryEditView *inventoryEditView;
 @property (nonatomic, assign) BOOL unLock;
 @property (nonatomic, assign) BOOL isDelete;
-
-
-
+@property (nonatomic, strong) Attachment *plusIcon;
 
 @end
 
@@ -96,6 +95,11 @@
     _attachments = [NSMutableArray new];
     if(_itemSnapshot.attachments != nil){
         [_attachments addObjectsFromArray:_itemSnapshot.attachments];
+        if(_attachments.count < 6){
+            _plusIcon = [Attachment new];
+            _plusIcon.isPlus = true;
+            [_attachments insertObject:_plusIcon atIndex:_attachments.count];
+        }
     }
     
     _inventoryEditView.qrText.text = _itemSnapshot.code;
@@ -143,32 +147,46 @@
 
 - (void)photoIconClick:(UITapGestureRecognizer *)recognizer{
     
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [self showOkayCancelAlert];
-    } else {
-        UIImagePickerController *imagePickerController = [UIImagePickerController new];
-        imagePickerController.delegate = self;
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerController.allowsEditing = YES;
-        imagePickerController.showsCameraControls = YES;
-        imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        imagePickerController.mediaTypes = @[(NSString *)kUTTypeImage];
-        
-        [self presentViewController:imagePickerController animated:YES completion:nil];
-    }
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+    [actionSheet showInView:self.view];
 
 }
 
-- (void)showOkayCancelAlert {
-    NSString *title = NSLocalizedString(@"提示", nil);
-    NSString *message = NSLocalizedString(@"当前机器没有摄像头!", nil);
-    NSString *otherButtonTitle = NSLocalizedString(@"好的", nil);
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
-    }];
-    [alertController addAction:otherAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+-(void)updateStep{
+    
+    [_attachments removeObject:_plusIcon];
+    _itemSnapshot.attachments = _attachments;
+    [_itemSnapshot updateToDB];
+    if(_attachments.count < 6){
+        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
+    }
+}
+
+
+#pragma mark UIActionSheetDelegate M
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 2) {
+        return;
+    }
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;//设置可编辑
+    
+    if (buttonIndex == 0) {
+        //        拍照
+        if (![Helper checkCameraAuthorizationStatus]) {
+            return;
+        }
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else if (buttonIndex == 1){
+        //        相册
+        if (![Helper checkPhotoLibraryAuthorizationStatus]) {
+            return;
+        }
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    }
+    [self presentViewController:picker animated:YES completion:nil];
+    
 }
 
 #pragma mark - UIImagePickerController
@@ -188,9 +206,8 @@
             attachment.path = [Utils saveImage:image andName:attachment.key];
         }
         
-        [_attachments addObject:attachment];
-        _itemSnapshot.attachments = _attachments;
-        [_itemSnapshot saveToDB];
+        [_attachments insertObject:attachment atIndex:0];
+        [self updateStep];
         [_inventoryEditView.photoCollectionView reloadData];
     }];
     
@@ -216,17 +233,6 @@
     return cell;
 }
 
-//定义每个UICollectionView 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(5, 5, 5, 5);
-}
-
-//定义每个UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return CGSizeMake(96, 100);
-
-}
 
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

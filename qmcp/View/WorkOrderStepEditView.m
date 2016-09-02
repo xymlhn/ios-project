@@ -22,17 +22,18 @@
 
     self.backgroundColor = [UIColor whiteColor];
     
+    [self initTopView];
+    [self initBottomView];
+    
+    return self;
+    
+}
+
+-(void)initTopView{
     _editText = [UITextView new];
     _editText.font = [UIFont systemFontOfSize:14];
     _editText.textColor = [UIColor blackColor];
     [self addSubview:_editText];
-    [_editText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.mas_top).with.offset(10);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.equalTo(@150);
-    }];
-  
     
     _fastView = [UIView new];
     [self addSubview:_fastView];
@@ -60,6 +61,45 @@
     rightIcon.text = @"";
     rightIcon.textColor = [UIColor blackColor];
     [_fastView addSubview:rightIcon];
+    
+    UIView *photoView = [UIView new];
+    [self addSubview:photoView];
+    
+    UIView *photoLine = [UIView new];
+    photoLine.backgroundColor = [UIColor grayColor];
+    [photoView addSubview:photoLine];
+    
+    UILabel *photoIcon = [UILabel new];
+    [photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    photoIcon.text = @"";
+    photoIcon.textColor = [UIColor blackColor];
+    [photoView addSubview:photoIcon];
+    
+    UILabel *photoLabel = [UILabel new];
+    photoLabel.text = @"相片";
+    [photoView addSubview:photoLabel];
+    
+    CGFloat itemWH = (kScreen_Width - 12 * 4) / 3;
+    //创建布局对象
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(itemWH, itemWH);
+    layout.sectionInset = UIEdgeInsetsMake(6, 12, 6, 12);
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 20;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
+    _collectionView.backgroundColor = [UIColor whiteColor];
+    _collectionView.scrollEnabled = NO;
+    [self addSubview:_collectionView];
+    
+    [_collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];
+    
+    [_editText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(self.mas_top).with.offset(10);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.equalTo(@100);
+    }];
     
     [_fastView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_editText.mas_bottom).with.offset(5);
@@ -99,23 +139,6 @@
         make.height.mas_equalTo(@1);
     }];
     
-    UIView *photoView = [UIView new];
-    [self addSubview:photoView];
-    
-    UIView *photoLine = [UIView new];
-    photoLine.backgroundColor = [UIColor grayColor];
-    [photoView addSubview:photoLine];
-    
-    UILabel *photoIcon = [UILabel new];
-    [photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    photoIcon.text = @"";
-    photoIcon.textColor = [UIColor blackColor];
-    [photoView addSubview:photoIcon];
-    
-    UILabel *photoLabel = [UILabel new];
-    photoLabel.text = @"相片";
-    [photoView addSubview:photoLabel];
-    
     [photoView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_fastView.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
@@ -141,33 +164,14 @@
         make.right.equalTo(photoView.mas_right).with.offset(0);
         make.height.mas_equalTo(@1);
     }];
-
     
-    
-    //创建布局对象
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    CGFloat itemW = (kScreen_Width - 12 * 3) / 3;
-    CGFloat itemH = (kScreen_Width - 12 * 3) / 3;
-    layout.itemSize = CGSizeMake(itemW, itemH);
-    layout.sectionInset = UIEdgeInsetsMake(20, 12, 20, 12);
-    layout.minimumInteritemSpacing = 5;
-    layout.minimumLineSpacing = 20;
-    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
-    _collectionView.backgroundColor = [UIColor grayColor];
-    [self addSubview:_collectionView];
+    NSNumber *collectionH = [NSNumber numberWithInteger:itemWH * 2 + 12 *3] ;
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(photoView.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.equalTo(@120);
+        make.height.equalTo(collectionH);
     }];
-    [_collectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];
-    
-    [self initBottomView];
-    
-    return self;
-    
 }
 
 -(void)initBottomView

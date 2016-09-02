@@ -103,6 +103,9 @@
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248A5DC21C85C3C30095A4FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DC01C85C3C30095A4FB /* LaunchScreen.storyboard */; };
 		248EA7A71CAF873000B4D775 /* WorkOrderStepEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248EA7A61CAF873000B4D775 /* WorkOrderStepEditController.m */; };
+		248F2E871D795F3500BB982F /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 248F2E861D795F3500BB982F /* Helper.m */; };
+		248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E881D79603600BB982F /* AVFoundation.framework */; };
+		248F2E8B1D79606200BB982F /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E8A1D79606200BB982F /* AssetsLibrary.framework */; };
 		2493FE141D4302E50094ADA2 /* WorkOrderFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */; };
 		24948B3C1CC1DE3600DE8946 /* EnumUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B3B1CC1DE3600DE8946 /* EnumUtil.m */; };
 		24948B3F1CC235FC00DE8946 /* SalesOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24948B3E1CC235FC00DE8946 /* SalesOrderManager.m */; };
@@ -356,6 +359,10 @@
 		248E2A4B1CCE482E00D72459 /* PchHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PchHeader.h; sourceTree = "<group>"; };
 		248EA7A51CAF873000B4D775 /* WorkOrderStepEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderStepEditController.h; sourceTree = "<group>"; };
 		248EA7A61CAF873000B4D775 /* WorkOrderStepEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderStepEditController.m; sourceTree = "<group>"; };
+		248F2E851D795F3500BB982F /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		248F2E861D795F3500BB982F /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		248F2E881D79603600BB982F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		248F2E8A1D79606200BB982F /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2493FE121D4302E50094ADA2 /* WorkOrderFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderFormView.h; sourceTree = "<group>"; };
 		2493FE131D4302E50094ADA2 /* WorkOrderFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderFormView.m; sourceTree = "<group>"; };
 		24948B3A1CC1DE3600DE8946 /* EnumUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumUtil.h; sourceTree = "<group>"; };
@@ -475,6 +482,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				248F2E8B1D79606200BB982F /* AssetsLibrary.framework in Frameworks */,
+				248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */,
 				4E9323A4E0576734EEAEBB57 /* libPods-qmcp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -796,6 +805,8 @@
 		24B0324F1C881E46007506DD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				248F2E851D795F3500BB982F /* Helper.h */,
+				248F2E861D795F3500BB982F /* Helper.m */,
 				245562371D59C0D4000A523F /* ViewControllerTools */,
 				24ABAFBF1CCF35950089F779 /* Standard */,
 				24233E211CCE07DF00CF93B6 /* SMPageControl */,
@@ -1076,6 +1087,8 @@
 		629598FDCA012DAE59C2708E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				248F2E8A1D79606200BB982F /* AssetsLibrary.framework */,
+				248F2E881D79603600BB982F /* AVFoundation.framework */,
 				247D31D71C8D7C040048DD38 /* CoreData.framework */,
 				4305545D42B817C3FA72B687 /* libPods-qmcp.a */,
 			);
@@ -1256,6 +1269,7 @@
 				24A2B4471CB4EDB3006E29DB /* PJRSignatureView.m in Sources */,
 				242EA1E71D2E578C001E4291 /* PickupNoticeCell.m in Sources */,
 				242D49CA1D38B2BF0013DE13 /* CheckBoxCell.m in Sources */,
+				248F2E871D795F3500BB982F /* Helper.m in Sources */,
 				24233E241CCE07DF00CF93B6 /* SMPageControl.m in Sources */,
 				244517C11CA03F870085CC16 /* BaseWorkOrderViewController.m in Sources */,
 				246516FF1D2F419000F1E5D3 /* PickupItem.m in Sources */,

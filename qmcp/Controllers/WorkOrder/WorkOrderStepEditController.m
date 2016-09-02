@@ -17,7 +17,8 @@
 #import "ImageViewerController.h"
 #import "CommodityStepController.h"
 #import "CommoditySnapshot.h"
-@interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,
+#import "Helper.h"
+@interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,
                                             UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) WorkOrderStep *step;
@@ -25,6 +26,9 @@
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderStepEditView *editView;
 @property (nonatomic, strong)NSMutableArray *dataArray;//数据
+@property (nonatomic, strong) Attachment *plusIcon;
+
+
 @end
 
 @implementation WorkOrderStepEditController
@@ -48,9 +52,9 @@
     
     [_attachments addObjectsFromArray:_step.attachments];
     if(_attachments.count < 6){
-        Attachment *plusIcon = [Attachment new];
-        plusIcon.isPlus = true;
-        [_attachments insertObject:plusIcon atIndex:_attachments.count];
+        _plusIcon = [Attachment new];
+        _plusIcon.isPlus = true;
+        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
     }
     _editView.editText.text = _step.content;
 
@@ -102,19 +106,6 @@
     [attachment deleteToDB];
 }
 
-
-- (void)showOkayCancelAlert {
-    NSString *title = NSLocalizedString(@"提示", nil);
-    NSString *message = NSLocalizedString(@"当前机器没有摄像头!", nil);
-    NSString *otherButtonTitle = NSLocalizedString(@"好的", nil);
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
-    }];
-    [alertController addAction:otherAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
 -(void)saveData
 {
     
@@ -142,6 +133,15 @@
 
     }
     
+}
+-(void)updateStep{
+    
+    [_attachments removeObject:_plusIcon];
+    _step.attachments = _attachments;
+    [_step updateToDB];
+    if(_attachments.count < 6){
+        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
+    }
 }
 
 #pragma mark - IBAction
@@ -212,19 +212,8 @@
 }
 - (void)plusBtnClick{
     
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [self showOkayCancelAlert];
-    } else {
-        UIImagePickerController *imagePickerController = [UIImagePickerController new];
-        imagePickerController.delegate = self;
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerController.allowsEditing = YES;
-        imagePickerController.showsCameraControls = YES;
-        imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        imagePickerController.mediaTypes = @[(NSString *)kUTTypeImage];
-        
-        [self presentViewController:imagePickerController animated:YES completion:nil];
-    }
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+    [actionSheet showInView:self.view];
 }
 
 - (void)delBtnClick:(UITapGestureRecognizer *)recognizer{
@@ -241,7 +230,7 @@
 
 - (void)fastViewClick:(UITapGestureRecognizer *)recognizer{
     if(_dataArray.count == 0){
-        [Utils showHudTipStr:@"无快速描述"];
+        kTipAlert(@"无快速描述");
         return;
     }
     CommodityStepController *controller = [CommodityStepController doneBlock:^(NSString *textValue) {
@@ -261,6 +250,33 @@
         self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     }
 }
+
+#pragma mark UIActionSheetDelegate M
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 2) {
+        return;
+    }
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;//设置可编辑
+    
+    if (buttonIndex == 0) {
+        //        拍照
+        if (![Helper checkCameraAuthorizationStatus]) {
+            return;
+        }
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else if (buttonIndex == 1){
+        //        相册
+        if (![Helper checkPhotoLibraryAuthorizationStatus]) {
+            return;
+        }
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    }
+    [self presentViewController:picker animated:YES completion:nil];
+    
+}
+
 #pragma mark - UIImagePickerController
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -278,14 +294,16 @@
             UIImage *image = [Utils scaleToSize:info[UIImagePickerControllerEditedImage] size:CGSizeMake(640.0f, 960.0f)];
             attachment.path = [Utils saveImage:image andName:attachment.key];
         }
-        
-        [_attachments addObject:attachment];
-        _step.attachments = _attachments;
-        [_step saveToDB];
+        [_attachments insertObject:attachment atIndex:0];
+        [self updateStep];
         [_editView.collectionView reloadData];
     }];
     
     
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -UICollectionViewDataSource

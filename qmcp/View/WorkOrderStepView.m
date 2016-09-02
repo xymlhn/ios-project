@@ -33,7 +33,7 @@
     }];
     
     _addBtn = [UILabel new];
-    [_addBtn setFont:[UIFont fontWithName:@"FontAwesome" size:40]];
+    [_addBtn setFont:[UIFont fontWithName:@"FontAwesome" size:60]];
     _addBtn.text = @"";
     _addBtn.textColor = [UIColor nameColor];
     _addBtn.textAlignment = NSTextAlignmentCenter;
@@ -41,7 +41,7 @@
     
     [_addBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.right.equalTo(self.mas_right).with.offset(-30);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-30);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-50);
     }];
     return self;
     

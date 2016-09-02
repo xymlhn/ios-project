@@ -88,11 +88,11 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *content = self.dataArray[indexPath.section][indexPath.row];
+    CommodityStep *commodityStep = self.dataArray[indexPath.section][indexPath.row];
     [self dissmiss];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.doneBlock) {
-            self.doneBlock(content);
+            self.doneBlock(commodityStep.stepName);
         }
     });
 }

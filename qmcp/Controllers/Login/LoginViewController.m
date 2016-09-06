@@ -13,6 +13,7 @@
 #import "RootViewController.h"
 #import "User.h"
 #import "TMCache.h"
+#import "AddressViewController.h"
 @interface LoginViewController ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property LoginView *loginView;
@@ -57,7 +58,10 @@
     }];
     
     _loginView.settingBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        SettingViewController *setting = [SettingViewController new];
+//        SettingViewController *setting = [SettingViewController new];
+//        [self.navigationController pushViewController:setting animated:YES];
+        
+        AddressViewController *setting = [AddressViewController new];
         [self.navigationController pushViewController:setting animated:YES];
         return [RACSignal empty];
     }];

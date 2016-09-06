@@ -203,7 +203,7 @@
         if ([type isEqualToString:@"public.image"])
         {
             UIImage *image = info[UIImagePickerControllerEditedImage];
-            attachment.path = [Utils saveImage:image andName:attachment.key];
+            [Utils saveImage:image andName:attachment.key];
         }
         
         [_attachments insertObject:attachment atIndex:0];
@@ -226,9 +226,7 @@
     static NSString *identify = @"cell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     Attachment *attachment = _attachments[indexPath.row];
-    
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:attachment.path];
-    
+    UIImage *image = [Utils loadImage:attachment.key];
     cell.image.image = image;
     return cell;
 }

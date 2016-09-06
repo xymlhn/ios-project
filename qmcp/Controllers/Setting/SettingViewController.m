@@ -11,6 +11,9 @@
 #import "CacheCell.h"
 #import "SDImageCache.h"
 #import "Utils.h"
+#if DEBUG
+#import "FLEXManager.h"
+#endif
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;

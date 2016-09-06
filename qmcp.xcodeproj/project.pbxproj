@@ -140,6 +140,9 @@
 		24C34F1A1CE9956900D945BE /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C34F191CE9956900D945BE /* FormManager.m */; };
 		24CDDB421D275B15007A9BF6 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB411D275B15007A9BF6 /* SearchView.m */; };
 		24CDDB461D275BA0007A9BF6 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDDB451D275BA0007A9BF6 /* SearchViewController.m */; };
+		24E517921D7EA64C00811551 /* address.json in Resources */ = {isa = PBXBuildFile; fileRef = 24E517911D7EA64C00811551 /* address.json */; };
+		24E517951D7EA66500811551 /* AddressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E517941D7EA66500811551 /* AddressManager.m */; };
+		24E517981D7EABE100811551 /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E517971D7EABE100811551 /* AddressViewController.m */; };
 		24E949CA1D5D742E00AEF2F3 /* InventoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949C91D5D742E00AEF2F3 /* InventoryCell.m */; };
 		24E949CF1D5D743500AEF2F3 /* InventoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949CC1D5D743500AEF2F3 /* InventoryController.m */; };
 		24E949D01D5D743500AEF2F3 /* InventoryEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E949CE1D5D743500AEF2F3 /* InventoryEditController.m */; };
@@ -431,6 +434,11 @@
 		24CDDB411D275B15007A9BF6 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		24CDDB441D275BA0007A9BF6 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		24CDDB451D275BA0007A9BF6 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		24E517911D7EA64C00811551 /* address.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = address.json; sourceTree = "<group>"; };
+		24E517931D7EA66500811551 /* AddressManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressManager.h; sourceTree = "<group>"; };
+		24E517941D7EA66500811551 /* AddressManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressManager.m; sourceTree = "<group>"; };
+		24E517961D7EABE100811551 /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
+		24E517971D7EABE100811551 /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
 		24E949C81D5D742E00AEF2F3 /* InventoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryCell.h; sourceTree = "<group>"; };
 		24E949C91D5D742E00AEF2F3 /* InventoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryCell.m; sourceTree = "<group>"; };
 		24E949CB1D5D743500AEF2F3 /* InventoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryController.h; sourceTree = "<group>"; };
@@ -638,6 +646,8 @@
 				2455623F1D59C0F5000A523F /* ScanViewController.m */,
 				245562401D59C0F5000A523F /* SignViewController.h */,
 				245562411D59C0F5000A523F /* SignViewController.m */,
+				24E517961D7EABE100811551 /* AddressViewController.h */,
+				24E517971D7EABE100811551 /* AddressViewController.m */,
 			);
 			path = ViewControllerTools;
 			sourceTree = "<group>";
@@ -661,6 +671,8 @@
 				242EA1E21D2E544D001E4291 /* PickupManager.m */,
 				24596EFD1D6EC90C00446C58 /* InventoryManager.h */,
 				24596EFE1D6EC90C00446C58 /* InventoryManager.m */,
+				24E517931D7EA66500811551 /* AddressManager.h */,
+				24E517941D7EA66500811551 /* AddressManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -735,6 +747,7 @@
 		248A5DB11C85C3C30095A4FB /* qmcp */ = {
 			isa = PBXGroup;
 			children = (
+				24E517901D7EA63500811551 /* Resources */,
 				24F135241C86979C00645F92 /* Application */,
 				2445175C1CA03D770085CC16 /* Base */,
 				24020A541CB7429300D4EA96 /* View */,
@@ -848,6 +861,14 @@
 				246262FF1D58802400432575 /* AMapViewController.m */,
 			);
 			path = Gis;
+			sourceTree = "<group>";
+		};
+		24E517901D7EA63500811551 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				24E517911D7EA64C00811551 /* address.json */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		24E949C61D5D73CD00AEF2F3 /* Inventory */ = {
@@ -1175,6 +1196,7 @@
 			files = (
 				244517971CA03ED60085CC16 /* Main.storyboard in Resources */,
 				248A5DC21C85C3C30095A4FB /* LaunchScreen.storyboard in Resources */,
+				24E517921D7EA64C00811551 /* address.json in Resources */,
 				248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1247,6 +1269,7 @@
 				244517BB1CA03F520085CC16 /* MBProgressHUD+Util.m in Sources */,
 				2489B3AF1D260F6100725C9F /* PickupViewController.m in Sources */,
 				24236A791D2A5EEF00994D89 /* ChooseCommodityCell.m in Sources */,
+				24E517981D7EABE100811551 /* AddressViewController.m in Sources */,
 				2445179F1CA03EFC0085CC16 /* HorizonalTableViewController.m in Sources */,
 				24AC36F11D3085E200316301 /* UISearchBar+Common.m in Sources */,
 				2489B3B21D260FEC00725C9F /* PickupView.m in Sources */,
@@ -1364,6 +1387,7 @@
 				242D49D11D38B3BD0013DE13 /* HeaderCell.m in Sources */,
 				24F359801CB3BE4300C0950B /* PhotoCell.m in Sources */,
 				242D49D41D38B3EA0013DE13 /* FooterCell.m in Sources */,
+				24E517951D7EA66500811551 /* AddressManager.m in Sources */,
 				244517801CA03E760085CC16 /* ItemSnapshot.m in Sources */,
 				242D49CE1D38B3220013DE13 /* SelectCell.m in Sources */,
 				24E949D01D5D743500AEF2F3 /* InventoryEditController.m in Sources */,

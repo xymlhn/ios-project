@@ -87,7 +87,7 @@
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
         attachment.salesOrderCode = _salesOrderCode;
-        attachment.path = [Utils saveImage:image andName:attachment.key];
+        [Utils saveImage:image andName:attachment.key];
         [attachment saveToDB];
         
         _salesOrderSearchResult.itemConfirmed = YES;

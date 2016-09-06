@@ -10,7 +10,6 @@
 #import "UIColor+Util.h"
 #import "RootViewController.h"
 #import "Config.h"
-#import "WorkOrderManager.h"
 #import "LoginViewController.h"
 #import "Config.h"
 #import "AppManager.h"
@@ -19,7 +18,7 @@
 #import "Utils.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 
-const static int databaseVersion = 3;
+const static int databaseVersion = 0;
 
 @interface AppDelegate ()
 
@@ -27,7 +26,6 @@ const static int databaseVersion = 3;
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     /************第三方插件配置 **************/

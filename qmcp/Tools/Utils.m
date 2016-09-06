@@ -115,7 +115,8 @@
     return [fmt dateFromString:date];
 }
 
-+(NSString *)saveImage:(UIImage *)image andName:(NSString *)name{
++(BOOL)saveImage:(UIImage *)image andName:(NSString *)name{
+    BOOL result = YES;
     NSData *data;
     if (UIImagePNGRepresentation(image) == nil)
     {
@@ -126,16 +127,14 @@
         data = UIImagePNGRepresentation(image);
     }
     
-    //图片保存的路径
-    //这里将图片放在沙盒的documents文件夹中
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString* filePath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithString:name] ];
     
-    NSString *filePath = [[NSString alloc]initWithFormat:@"%@/%@",documentsPath,name];
     if(![data writeToFile:filePath atomically:YES]){
-        filePath = @"";
+        result = NO;
     }
-    return filePath;
+    return result;
 
 }
 
@@ -200,14 +199,30 @@
     
 }
 
-+ (UIImage*)loadImage:(NSString *)imageName
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
++ (UIImage*)loadImage:(NSString *)imageName{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString* path = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithString: imageName] ];
     UIImage* image = [UIImage imageWithContentsOfFile:path];
     return image;
+    
+}
+
++(BOOL)deleteImage:(NSString *)imageName{
+    BOOL result = YES;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString* path = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithString: imageName]];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:path]){
+        NSError *error;
+        if ([fileManager removeItemAtPath:path error: & error] != YES){
+            [self showHudTipStr:@"删除图片失败!"];
+            result = NO;
+        }
+    }
+    return result;
 }
 
 + (NSUInteger)getResponseCacheSize {

@@ -12,8 +12,6 @@
 
 @property (nonatomic, copy) NSString *key;
 
-@property (nonatomic, copy) NSString *path;
-
 @property (nonatomic, copy) NSString *workOrderStepCode;
 
 @property (nonatomic, assign) BOOL isUpload;

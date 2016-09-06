@@ -61,9 +61,8 @@
  *  @param image 图片
  *  @param name  名字
  *
- *  @return 路径
  */
-+(NSString *)saveImage:(UIImage *)image andName:(NSString *)name;
++(BOOL)saveImage:(UIImage *)image andName:(NSString *)name;
 
 /**
  *  弹出一段文字
@@ -118,7 +117,21 @@
  */
 + (NSUInteger)getResponseCacheSize;
 
-//根据图片名获取document目录下图片
+/**
+ *   根据图片名获取图片
+ *
+ *  @param imageName 图片名字
+ *
+ *  @return 图片
+ */
 + (UIImage*)loadImage:(NSString *)imageName;
 
+/**
+ *  根据图片名删除document目录图片
+ *
+ *  @param imageName 图片名
+ *
+ *  @return 结果
+ */
++(BOOL)deleteImage:(NSString *)imageName;
 @end

@@ -124,10 +124,7 @@
     if(image){
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
-        
-        attachment.path = [Utils saveImage:image andName:attachment.key];
         [attachment saveToDB];
-        
         PickupSignature *pickupSignature = [PickupSignature new];
         pickupSignature.salesOrderCode = _pickupData.salesOrderCode;
         pickupSignature.pickupTime = [Utils formatDate:[NSDate new]];

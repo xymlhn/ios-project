@@ -3,23 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[SalesOrderGrabCell setSalesOrderSnapshot:]:SalesOrderGrabCell.m">
+         contextName = "-[WorkOrderManager getCommodityByCommodityCode:]:WorkOrderManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "salesOrderSnapshot.type">
+               value = "self.commodityStepDict">
+            </PersistentString>
+            <PersistentString
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[WorkOrderManager getCommodityByCommodityCode:]:WorkOrderManager.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
-            </PersistentString>
-            <PersistentString
-               value = "self.commodityStepDict">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[WorkOrderStepEditController loadData]:WorkOrderStepEditController.m">
       </ContextState>
       <ContextState
          contextName = "-[CommodityStepController buttonAction:]:CommodityStepController.m">
@@ -55,13 +50,13 @@
          contextName = "__31+[WorkOrderManager getInstance]_block_invoke:WorkOrderManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
+               value = "shared_manager.commodityStepDict">
             </PersistentString>
             <PersistentString
                value = "_commodityStepDict">
             </PersistentString>
             <PersistentString
-               value = "shared_manager.commodityStepDict">
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
             </PersistentString>
             <PersistentString
                value = "shared_manager">
@@ -90,7 +85,20 @@
          contextName = "-[CommodityStepController tableView:cellForRowAtIndexPath:]:CommodityStepController.m">
       </ContextState>
       <ContextState
-         contextName = "-[WorkOrderStepEditController loadData]:WorkOrderStepEditController.m">
+         contextName = "-[AddressManager getCity:]:AddressManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.addressArr[index]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SalesOrderGrabCell setSalesOrderSnapshot:]:SalesOrderGrabCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "salesOrderSnapshot.type">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

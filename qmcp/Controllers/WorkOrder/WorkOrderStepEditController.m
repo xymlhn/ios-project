@@ -96,13 +96,7 @@
 
 -(void)deleteAttachment:(Attachment *)attachment
 {
-     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if([fileManager fileExistsAtPath:attachment.path]){
-        NSError *error;
-        if ([fileManager removeItemAtPath:attachment.path error: & error] != YES){
-            NSLog(@"删除附件失败!");
-        }
-    }
+    [Utils deleteImage:attachment.key];
     [attachment deleteToDB];
 }
 
@@ -292,7 +286,7 @@
         if ([type isEqualToString:@"public.image"])
         {
             UIImage *image = [Utils scaleToSize:info[UIImagePickerControllerEditedImage] size:CGSizeMake(320.0f, 480.0f)];
-            attachment.path = [Utils saveImage:image andName:attachment.key];
+            [Utils saveImage:image andName:attachment.key];
         }
         [_attachments insertObject:attachment atIndex:0];
         [self updateStep];

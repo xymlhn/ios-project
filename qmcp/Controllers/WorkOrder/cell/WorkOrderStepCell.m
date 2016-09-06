@@ -92,7 +92,7 @@
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0);
         make.left.equalTo(_image.mas_right).with.offset(10);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-10);
     }];
 }
 @end

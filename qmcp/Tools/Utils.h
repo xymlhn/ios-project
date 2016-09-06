@@ -118,4 +118,7 @@
  */
 + (NSUInteger)getResponseCacheSize;
 
+//根据图片名获取document目录下图片
++ (UIImage*)loadImage:(NSString *)imageName;
+
 @end

@@ -18,7 +18,9 @@
  *  @param dict    字典参数
  *  @param block      回调
  */
-+(void) post:(NSString *)urlpath param:(id)dict finish:(CompletionHandler)completion;
++(void) post:(NSString *)urlpath
+       param:(id)dict
+      finish:(CompletionHandler)completion;
 
 
 /**
@@ -28,7 +30,9 @@
  *  @param dict    参数
  *  @param block      回调
  */
-+(void) get:(NSString *)urlpath param:(id)dict finish:(CompletionHandler)completion;
++(void) get:(NSString *)urlpath
+      param:(id)dict
+     finish:(CompletionHandler)completion;
 
 
 /**
@@ -41,7 +45,11 @@
  *  @param dict     字典参数
  *  @param block       回调
  */
-+(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(CompletionHandler)completion;
++(void)postFile:(NSString *)urlpath
+           file:(NSData *)data
+           name:(NSString *)name
+       fileName:(NSString *)fileName
+          param:(NSDictionary *)dict finish:(CompletionHandler)completion;
 
 /**
  *  post FormData类型
@@ -50,5 +58,7 @@
  *  @param dict       参数
  *  @param completion 回调
  */
-+(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(CompletionHandler)completion;
++(void)postFormData:(NSString *)urlpath
+              param:(NSDictionary *)dict
+             finish:(CompletionHandler)completion;
 @end

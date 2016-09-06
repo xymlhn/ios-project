@@ -291,7 +291,7 @@
         //当选择的类型是图片
         if ([type isEqualToString:@"public.image"])
         {
-            UIImage *image = [Utils scaleToSize:info[UIImagePickerControllerEditedImage] size:CGSizeMake(640.0f, 960.0f)];
+            UIImage *image = [Utils scaleToSize:info[UIImagePickerControllerEditedImage] size:CGSizeMake(320.0f, 480.0f)];
             attachment.path = [Utils saveImage:image andName:attachment.key];
         }
         [_attachments insertObject:attachment atIndex:0];
@@ -324,7 +324,7 @@
         UIImage *image = [UIImage imageNamed:@"plus_photo.png"];
         cell.image.image = image;
     }else{
-        UIImage *image = [[UIImage alloc] initWithContentsOfFile:attachment.path];
+        UIImage *image = [Utils loadImage:attachment.key];
         cell.image.image = image;
     }
     

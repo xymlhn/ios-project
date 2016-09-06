@@ -49,6 +49,7 @@
     UILabel *leftIcon = [UILabel new];
     [leftIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     leftIcon.text = @"";
+    leftIcon.textAlignment = NSTextAlignmentCenter;
     leftIcon.textColor = [UIColor blackColor];
     [_fastView addSubview:leftIcon];
     
@@ -59,6 +60,7 @@
     UILabel *rightIcon = [UILabel new];
     [rightIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     rightIcon.text = @"";
+    
     rightIcon.textColor = [UIColor blackColor];
     [_fastView addSubview:rightIcon];
     
@@ -72,6 +74,7 @@
     UILabel *photoIcon = [UILabel new];
     [photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
     photoIcon.text = @"";
+    photoIcon.textAlignment = NSTextAlignmentCenter;
     photoIcon.textColor = [UIColor blackColor];
     [photoView addSubview:photoIcon];
     

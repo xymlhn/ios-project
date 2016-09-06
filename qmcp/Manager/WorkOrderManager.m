@@ -187,7 +187,7 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ATTACHMENT];
     NSDictionary *dict = @{@"storageType":[NSNumber numberWithInt:attachment.sort]};
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:attachment.path];;
+    UIImage *image = [Utils loadImage:attachment.key];
     NSData *data;
     if (UIImagePNGRepresentation(image) == nil)
     {

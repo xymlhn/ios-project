@@ -14,8 +14,10 @@
 #import "EnumUtil.h"
 @implementation HttpUtil
 
-+(void)post:(NSString *)urlpath param:(id)dict finish:(CompletionHandler)completion
-{
++(void)post:(NSString *)urlpath
+      param:(id)dict
+     finish:(CompletionHandler)completion{
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -29,10 +31,13 @@
         [self handleFailureWithError:error task:task urlPath:urlpath finish:completion];
        
     }];
+    
 }
 
-+(void)get:(NSString *)urlpath param:(id)dict finish:(CompletionHandler)completion
-{
++(void)get:(NSString *)urlpath
+     param:(id)dict
+    finish:(CompletionHandler)completion{
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -44,10 +49,15 @@
     }failure:^(NSURLSessionDataTask * task, NSError * error){
         [self handleFailureWithError:error task:task urlPath:urlpath finish:completion];
     }];
+    
 }
 
-+(void)postFile:(NSString *)urlpath file:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName param:(NSDictionary *)dict finish:(CompletionHandler)completion
-{
++(void)postFile:(NSString *)urlpath
+           file:(NSData *)data
+           name:(NSString *)name
+       fileName:(NSString *)fileName
+          param:(NSDictionary *)dict
+         finish:(CompletionHandler)completion{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -67,8 +77,9 @@
     }];
 }
 
-+(void)postFormData:(NSString *)urlpath param:(NSDictionary *)dict finish:(CompletionHandler)completion
-{
++(void)postFormData:(NSString *)urlpath
+              param:(NSDictionary *)dict
+             finish:(CompletionHandler)completion{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

@@ -83,7 +83,7 @@
     [_codeContent mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_codeView.mas_centerY);
         make.left.equalTo(codeTitle.mas_right).with.offset(5);
-        make.right.equalTo(_codeView.mas_right).with.offset(5);
+        make.right.equalTo(_codeView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
 }
@@ -122,6 +122,7 @@
     UILabel *userIcon = [UILabel new];
     [userIcon setFont:[UIFont fontWithName:@"FontAwesome" size:12]];
     userIcon.text = @"";
+    userIcon.textAlignment = NSTextAlignmentCenter;
     userIcon.textColor = [UIColor nameColor];
     [_userView addSubview:userIcon];
     
@@ -142,13 +143,14 @@
     [_userNameText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_userView.mas_centerY);
         make.left.equalTo(userIcon.mas_right).with.offset(5);
-        make.right.equalTo(_userView.mas_right).with.offset(5);
+        make.right.equalTo(_userView.mas_centerX).with.offset(-5);
         make.height.equalTo(@20);
     }];
     
     UILabel *passwordIcon = [UILabel new];
     [passwordIcon setFont:[UIFont fontWithName:@"FontAwesome" size:15]];
     passwordIcon.text = @"";
+    passwordIcon.textAlignment = NSTextAlignmentCenter;
     passwordIcon.textColor = [UIColor nameColor];
     [_userView addSubview:passwordIcon];
     
@@ -169,7 +171,7 @@
     [_passwordText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_userView.mas_centerY);
         make.left.equalTo(passwordIcon.mas_right).with.offset(5);
-        make.right.equalTo(_userView.mas_right).with.offset(5);
+        make.right.equalTo(_userView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
 }
@@ -198,6 +200,7 @@
     UILabel *locationIcon = [UILabel new];
     [locationIcon setFont:[UIFont fontWithName:@"FontAwesome" size:12]];
     locationIcon.text = @"";
+     locationIcon.textAlignment = NSTextAlignmentCenter;
     locationIcon.textColor = [UIColor nameColor];
     [_codeView addSubview:locationIcon];
     
@@ -218,7 +221,7 @@
     [_locationText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_locationView.mas_centerY);
         make.left.equalTo(locationIcon.mas_right).with.offset(5);
-        make.right.equalTo(_locationView.mas_right).with.offset(5);
+        make.right.equalTo(_locationView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
     
@@ -279,7 +282,7 @@
     [_typeText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_typeView.mas_centerY);
         make.left.equalTo(typeTitle.mas_right).with.offset(5);
-        make.right.equalTo(_typeView.mas_right).with.offset(5);
+        make.right.equalTo(_typeView.mas_centerX).with.offset(-5);
         make.height.equalTo(@20);
     }];
     
@@ -306,7 +309,7 @@
     [_statusText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_typeView.mas_centerY);
         make.left.equalTo(statusTitle.mas_right).with.offset(5);
-        make.right.equalTo(_typeView.mas_right).with.offset(5);
+        make.right.equalTo(_typeView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
 }
@@ -355,7 +358,7 @@
     [_appointmentTimeText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_appointmentTimeView.mas_centerY);
         make.left.equalTo(appointmentTitle.mas_right).with.offset(5);
-        make.right.equalTo(_appointmentTimeView.mas_right).with.offset(5);
+        make.right.equalTo(_appointmentTimeView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
 }
@@ -404,7 +407,7 @@
     [_serviceText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_serviceView.mas_centerY);
         make.left.equalTo(serviceTitle.mas_right).with.offset(5);
-        make.right.equalTo(_serviceView.mas_right).with.offset(5);
+        make.right.equalTo(_serviceView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
 }
@@ -452,7 +455,7 @@
     [_remarkText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_remarkView.mas_centerY);
         make.left.equalTo(remarkTitle.mas_right).with.offset(5);
-        make.right.equalTo(_remarkView.mas_right).with.offset(5);
+        make.right.equalTo(_remarkView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
 }

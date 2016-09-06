@@ -13,8 +13,8 @@
 
 @implementation Utils
 
-+ (MBProgressHUD *)createHUD
-{
++ (MBProgressHUD *)createHUD{
+    
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithWindow:window];
     HUD.labelFont = [UIFont boldSystemFontOfSize:12];
@@ -27,8 +27,8 @@
 }
 
 #pragma mark - 显示图片
-+(void)showImage:(UIImage *)image
-{
++(void)showImage:(UIImage *)image{
+    
     MBProgressHUD *HUD = [Utils createHUD];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.color = [UIColor whiteColor];
@@ -38,8 +38,8 @@
 
 #pragma mark - 二维码相关
 
-+ (void)showQRCode:(NSString *)string
-{
++ (void)showQRCode:(NSString *)string{
+    
     MBProgressHUD *HUD = [Utils createHUD];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.color = [UIColor whiteColor];
@@ -51,9 +51,10 @@
     [HUD addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideHUD:)]];
 }
 
-+ (void)hideHUD:(UIGestureRecognizer *)recognizer
-{
++ (void)hideHUD:(UIGestureRecognizer *)recognizer{
+    
     [(MBProgressHUD *)recognizer.view hide:YES];
+    
 }
 
 + (void)showHudTipStr:(NSString *)tipStr{
@@ -68,8 +69,7 @@
     }
 }
 
-+ (UIImage *)createQRCodeFromString:(NSString *)string
-{
++ (UIImage *)createQRCodeFromString:(NSString *)string{
     NSData *stringData = [string dataUsingEncoding:NSUTF8StringEncoding];
     
     CIFilter *QRFilter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
@@ -115,8 +115,7 @@
     return [fmt dateFromString:date];
 }
 
-+(NSString *)saveImage:(UIImage *)image andName:(NSString *)name
-{
++(NSString *)saveImage:(UIImage *)image andName:(NSString *)name{
     NSData *data;
     if (UIImagePNGRepresentation(image) == nil)
     {
@@ -199,6 +198,16 @@
     
     return newImage;
     
+}
+
++ (UIImage*)loadImage:(NSString *)imageName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString* path = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithString: imageName] ];
+    UIImage* image = [UIImage imageWithContentsOfFile:path];
+    return image;
 }
 
 + (NSUInteger)getResponseCacheSize {

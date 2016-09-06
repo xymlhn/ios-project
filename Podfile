@@ -18,4 +18,5 @@ target:qmcp do
     pod 'SDWebImage','3.8.1'
     pod 'AMap2DMap','4.1.0'
     pod 'AMapLocation','2.1.0'
+    pod 'FLEX', :configurations => ['Debug']
 end

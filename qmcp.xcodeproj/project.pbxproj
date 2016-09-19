@@ -792,6 +792,9 @@
 		240EC9231D7FB2B7008A5696 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				240EC9381D7FB2B7008A5696 /* ViewControllerTools */,
+				240EC92F1D7FB2B7008A5696 /* Standard */,
+				240EC92C1D7FB2B7008A5696 /* SMPageControl */,
 				240EC9241D7FB2B7008A5696 /* Config.h */,
 				240EC9251D7FB2B7008A5696 /* Config.m */,
 				240EC9261D7FB2B7008A5696 /* EnumUtil.h */,
@@ -800,11 +803,8 @@
 				240EC9291D7FB2B7008A5696 /* Helper.m */,
 				240EC92A1D7FB2B7008A5696 /* HttpUtil.h */,
 				240EC92B1D7FB2B7008A5696 /* HttpUtil.m */,
-				240EC92C1D7FB2B7008A5696 /* SMPageControl */,
-				240EC92F1D7FB2B7008A5696 /* Standard */,
 				240EC9361D7FB2B7008A5696 /* Utils.h */,
 				240EC9371D7FB2B7008A5696 /* Utils.m */,
-				240EC9381D7FB2B7008A5696 /* ViewControllerTools */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1296,7 +1296,7 @@
 				TargetAttributes = {
 					248A5DAE1C85C3C30095A4FB = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = G65BL8U2C9;
+						DevelopmentTeam = Q9G4J826UF;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1651,10 +1651,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Q9G4J826UF;
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp;
 				PRODUCT_NAME = "e服务365";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1667,10 +1668,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Q9G4J826UF;
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp;
 				PRODUCT_NAME = "e服务365";
 				PROVISIONING_PROFILE = "";
 			};

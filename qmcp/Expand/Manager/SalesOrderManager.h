@@ -12,6 +12,7 @@
 
 @interface SalesOrderManager : NSObject
 
+
 + (SalesOrderManager *) getInstance;
 
 /**

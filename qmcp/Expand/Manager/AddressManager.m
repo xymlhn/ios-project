@@ -10,6 +10,7 @@
 #import "MJExtension.h"
 
 @interface AddressManager()
+
 @property (nonatomic,strong) NSArray *addressArr; // 解析出来的最外层数组
 @property (nonatomic,strong) NSArray *provinceArr; // 省
 

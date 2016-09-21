@@ -8,7 +8,7 @@ target:qmcp do
     pod 'FMDB', '2.6.2'
     pod 'LKDBHelper', '2.2'
     pod 'FontAwesome', '4.5.0'
-    pod 'MJRefresh', '3.1.0'
+    pod 'MJRefresh', '3.1.10'
     pod 'ReactiveCocoa', '2.5'
     pod 'Masonry', '1.0.0'
     pod 'TMCache', '2.1.0'

@@ -6,8 +6,12 @@
 //  Copyright (c) 2015年 apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
+#import <Foundation/Foundation.h>
+typedef NS_ENUM(NSInteger, CooperationMode) {
+    CooperationModeTeam = 10,//团队模式
+    CooperationModeSingle = 20,//单人模式
+};
 @interface User : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *errorMessage;
@@ -21,4 +25,7 @@
 @property (nonatomic, copy) NSString *userId;
 
 @property (nonatomic, assign) Boolean authenticated;
+
+@property (nonatomic, assign) CooperationMode cooperationMode;
+
 @end

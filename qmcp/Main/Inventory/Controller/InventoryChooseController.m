@@ -22,10 +22,6 @@
 @property (nonatomic,strong) NSMutableArray<CommoditySnapshot *> *chooseCommodityList;
 @property (nonatomic, strong) CommoditySnapshot *currentCommoditySnapshot;
 @property (nonatomic, assign) BOOL isChoose;
-
-
-
-
 @property (nonatomic, strong) StandardsView *standardsView;
 
 @end

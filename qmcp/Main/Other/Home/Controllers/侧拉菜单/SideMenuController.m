@@ -28,6 +28,8 @@
 #import "InventorySearchController.h"
 @interface SideMenuController ()
 
+@property (nonatomic,strong) NSArray<NSString *> *titleArray;
+@property (nonatomic,strong) NSArray<NSString *> *iconArray;
 @end
 
 @implementation SideMenuController
@@ -35,10 +37,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([[AppManager getInstance] getUser].cooperationMode == CooperationModeSingle) {
+        _titleArray = @[@"清点物品", @"客户取件",@"完成物品", @"设置", @"注销"];
+        _iconArray = @[@"", @"", @"",@"", @""];
+    }else{
+        _titleArray = @[@"清点物品",@"扫描接单", @"客户取件",@"完成物品", @"设置", @"注销"];
+        _iconArray = @[@"",@"", @"", @"",@"", @""];
+    }
+    
     self.tableView.bounces = NO;
     self.tableView.backgroundColor = [UIColor titleBarColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
 }
 
 
@@ -46,7 +57,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return [_titleArray count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,7 +74,7 @@
     UIView *selectedBackground = [UIView new];
     selectedBackground.backgroundColor = [UIColor colorWithHex:0xCFCFCF];
     [cell setSelectedBackgroundView:selectedBackground];
-    [cell setContent:@[@"清点物品",@"扫描取单", @"客户取件",@"完成物品", @"设置", @"注销"][indexPath.row] andIcon:@[@"",@"", @"", @"",@"", @""][indexPath.row]];
+    [cell setContent:_titleArray[indexPath.row] andIcon:_iconArray[indexPath.row]];
 
     return cell;
 }
@@ -78,72 +89,64 @@
 {
     __weak typeof(self) weakSelf = self;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *title = _titleArray[indexPath.row];
     
-    switch (indexPath.row) {
-        case 0: {
-            InventorySearchController *view = [InventorySearchController new];
-            [self setContentViewController:view];
+    if ([title isEqualToString:@"清点物品"]) {
+        InventorySearchController *view = [InventorySearchController new];
+        [self setContentViewController:view];
+    } else if([title isEqualToString:@"扫描接单"]){
+        if([Config getQuickScan]){
+            ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
+                [weakSelf handleResult:textValue];
+            }];
+            [self setContentViewController:scanViewController];
+        }else{
+            QrCodeViewController *qrCodeViewController = [QrCodeViewController doneBlock:^(NSString *textValue) {
+                [weakSelf handleResult:textValue];
+            }];
+            [self setContentViewController:qrCodeViewController];
+        }
+
+    }else if([title isEqualToString:@"客户取件"]){
+        PickupViewController *view = [PickupViewController new];
+        [self setContentViewController:view];
+        
+    }else if([title isEqualToString:@"完成物品"]){
+        PickupNoticeViewController *view = [PickupNoticeViewController new];
+        [self setContentViewController:view];
+        
+    }else if([title isEqualToString:@"设置"]){
+        SettingViewController *setting = [SettingViewController new];
+        [self setContentViewController:setting];
+        
+    }else if([title isEqualToString:@"注销"]){
+        if([Config isWork]){
+            [Utils showHudTipStr:@"请下班后登出!"];
+        }else{
             
-            break;
+            MBProgressHUD *hub = [Utils createHUD];
+            hub.labelText = @"登出中...";
+            hub.userInteractionEnabled = NO;
+            [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSString *error) {
+                if(!error){
+                    hub.mode = MBProgressHUDModeCustomView;
+                    hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                    hub.labelText = [NSString stringWithFormat:@"登出成功"];
+                    [hub hide:YES];
+                    [[AppManager getInstance]clearUserDataWhenLogout];
+                    LoginViewController *loginNav = [LoginViewController new];
+                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
+                    [self presentViewController:nav animated:YES completion:nil];
+                }else{
+                    hub.mode = MBProgressHUDModeCustomView;
+                    hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                    hub.labelText = error;
+                    [hub hide:YES afterDelay:kEndFailedDelayTime];                }
+            }];
         }
-        case 1: {
-            if([Config getQuickScan]){
-                ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
-                    [weakSelf handleResult:textValue];
-                }];
-                [self setContentViewController:scanViewController];
-            }else{
-                QrCodeViewController *qrCodeViewController = [QrCodeViewController doneBlock:^(NSString *textValue) {
-                    [weakSelf handleResult:textValue];
-                }];
-                [self setContentViewController:qrCodeViewController];
-            }
-            break;
-        }
-        case 2: {
-            PickupViewController *view = [PickupViewController new];
-            [self setContentViewController:view];
-            
-            break;
-        }case 3: {
-            PickupNoticeViewController *view = [PickupNoticeViewController new];
-            [self setContentViewController:view];
-            break;
-        }
-        case 4: {
-            SettingViewController *setting = [SettingViewController new];
-            [self setContentViewController:setting];
-            break;
-        }
-        case 5: {
-            if([Config isWork]){
-                [Utils showHudTipStr:@"请下班后登出!"];
-            }else{
-                
-                MBProgressHUD *hub = [Utils createHUD];
-                hub.labelText = @"登出中...";
-                hub.userInteractionEnabled = NO;
-                [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSString *error) {
-                    if(!error){
-                        hub.mode = MBProgressHUDModeCustomView;
-                        hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                        hub.labelText = [NSString stringWithFormat:@"登出成功"];
-                        [hub hide:YES];
-                        [[AppManager getInstance]clearUserDataWhenLogout];
-                        LoginViewController *loginNav = [LoginViewController new];
-                        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
-                        [self presentViewController:nav animated:YES completion:nil];
-                    }else{
-                        hub.mode = MBProgressHUDModeCustomView;
-                        hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                        hub.labelText = error;
-                        [hub hide:YES afterDelay:kEndFailedDelayTime];                }
-                }];
-            }
-            break;
-        }
-        default: break;
+        
     }
+
 }
 
 #pragma mark code

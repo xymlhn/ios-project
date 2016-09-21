@@ -20,6 +20,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     self.parallaxEnabled = NO;
     self.scaleContentView = YES;
     self.contentViewScaleValue = 0.95;
@@ -33,6 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //数据初始化
     [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
     [[WorkOrderManager getInstance] getCommodityStepByLastUpdateTime:[Config getCommodityStep]];
     [[PropertyManager getInstance] getCommodityItemByLastUpdateTime:[Config getCommodityItem]];

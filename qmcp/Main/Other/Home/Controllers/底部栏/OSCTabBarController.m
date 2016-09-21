@@ -21,6 +21,7 @@
 #import "Config.h"
 #import "SearchViewController.h"
 #import "AMapViewController.h"
+#import "AppManager.h"
 @interface OSCTabBarController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     WorkOrderListController *newsViewCtl;
@@ -30,6 +31,8 @@
     SalesOrderGrabListController *grabViewCtl;
 }
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) NSArray *titles;
+@property (nonatomic, strong) NSArray *images;
 @end
 
 @implementation OSCTabBarController
@@ -65,29 +68,40 @@
     grabViewCtl = [SalesOrderGrabListController new];
     bindViewCtl = [SalesOrderBindListController new];
  
-    SwipableViewController *workOrderSVC = [[SwipableViewController alloc] initWithTitle:@"工单"
-                                                                       andSubTitles:@[@"未完成", @"待上传",]
-                                                                     andControllers:@[newsViewCtl, hotNewsViewCtl]
-                                                                        underTabbar:YES];
-    SwipableViewController *saleOrderSVC = [[SwipableViewController alloc] initWithTitle:@"订单"
-                                                                       andSubTitles:@[@"抢单", @"绑定"]
-                                                                     andControllers:@[grabViewCtl, bindViewCtl]
-                                                                        underTabbar:YES];
-    
     AMapViewController *gis = [[AMapViewController alloc] init];
     HelpViewController *help = [[HelpViewController alloc] init];
-    self.tabBar.translucent = NO;
-    self.viewControllers = @[[self addNavigationItemForViewController:workOrderSVC],
-                             [self addNavigationItemForViewController:saleOrderSVC],
-                             [self addNavigationItemForViewController:gis],
-                             [self addNavigationItemForViewController:help]];
+    SwipableViewController *saleOrderSVC = [[SwipableViewController alloc] initWithTitle:@"订单"
+                                                                            andSubTitles:@[@"抢单", @"绑定"]
+                                                                          andControllers:@[grabViewCtl, bindViewCtl]
+                                                                             underTabbar:YES];
+    if ([[AppManager getInstance] getUser].cooperationMode == CooperationModeSingle) {
+        _titles = @[@"订单", @"地图", @"帮助"];
+        _images = @[@"tabbar-discover", @"tabbar-discover", @"tabbar-me"];
+        self.viewControllers = @[[self addNavigationItemForViewController:saleOrderSVC],
+                                 [self addNavigationItemForViewController:gis],
+                                 [self addNavigationItemForViewController:help]];
+    }else{
+        _titles = @[@"工单",@"订单", @"地图", @"帮助"];
+        _images = @[@"tabbar-news", @"tabbar-discover", @"tabbar-discover", @"tabbar-me"];
+        SwipableViewController *workOrderSVC = [[SwipableViewController alloc] initWithTitle:@"工单"
+                                                                                andSubTitles:@[@"未完成", @"待上传",]
+                                                                              andControllers:@[newsViewCtl, hotNewsViewCtl]
+                                                                                 underTabbar:YES];
+        self.viewControllers = @[[self addNavigationItemForViewController:workOrderSVC],
+                                 [self addNavigationItemForViewController:saleOrderSVC],
+                                 [self addNavigationItemForViewController:gis],
+                                 [self addNavigationItemForViewController:help]];
+    }
+
+
     
-    NSArray *titles = @[@"工单",@"订单", @"地图", @"帮助"];
-    NSArray *images = @[@"tabbar-news", @"tabbar-discover", @"tabbar-discover", @"tabbar-me"];
+   
+    self.tabBar.translucent = NO;
+    
     [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem *item, NSUInteger idx, BOOL *stop) {
-        [item setTitle:titles[idx]];
-        [item setImage:[UIImage imageNamed:images[idx]]];
-        [item setSelectedImage:[UIImage imageNamed:[images[idx] stringByAppendingString:@"-selected"]]];
+        [item setTitle:_titles[idx]];
+        [item setImage:[UIImage imageNamed:_images[idx]]];
+        [item setSelectedImage:[UIImage imageNamed:[_images[idx] stringByAppendingString:@"-selected"]]];
     }];
     
     [self.tabBar addObserver:self

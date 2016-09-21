@@ -164,6 +164,7 @@
 		24AFDC821D92399E00B2F1B9 /* PickupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC801D92399E00B2F1B9 /* PickupView.m */; };
 		24AFDC871D9239BB00B2F1B9 /* PickupNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC841D9239BB00B2F1B9 /* PickupNoticeViewController.m */; };
 		24AFDC881D9239BB00B2F1B9 /* PickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC861D9239BB00B2F1B9 /* PickupViewController.m */; };
+		24EABBA61D92778900AF2A02 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24EABBA41D92761B00AF2A02 /* Security.framework */; };
 		4E9323A4E0576734EEAEBB57 /* libPods-qmcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4305545D42B817C3FA72B687 /* libPods-qmcp.a */; };
 /* End PBXBuildFile section */
 
@@ -481,6 +482,7 @@
 		24AFDC841D9239BB00B2F1B9 /* PickupNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupNoticeViewController.m; sourceTree = "<group>"; };
 		24AFDC851D9239BB00B2F1B9 /* PickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupViewController.h; sourceTree = "<group>"; };
 		24AFDC861D9239BB00B2F1B9 /* PickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupViewController.m; sourceTree = "<group>"; };
+		24EABBA41D92761B00AF2A02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4305545D42B817C3FA72B687 /* libPods-qmcp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-qmcp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6083A9B27AC8F265DD41E322 /* Pods-qmcp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qmcp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qmcp/Pods-qmcp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -490,6 +492,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24EABBA61D92778900AF2A02 /* Security.framework in Frameworks */,
 				248F2E8B1D79606200BB982F /* AssetsLibrary.framework in Frameworks */,
 				248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */,
 				4E9323A4E0576734EEAEBB57 /* libPods-qmcp.a in Frameworks */,
@@ -1331,6 +1334,7 @@
 		629598FDCA012DAE59C2708E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24EABBA41D92761B00AF2A02 /* Security.framework */,
 				248F2E8A1D79606200BB982F /* AssetsLibrary.framework */,
 				248F2E881D79603600BB982F /* AVFoundation.framework */,
 				247D31D71C8D7C040048DD38 /* CoreData.framework */,

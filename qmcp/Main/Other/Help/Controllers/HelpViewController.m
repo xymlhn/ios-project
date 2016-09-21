@@ -57,7 +57,7 @@
     [_hub hide:YES afterDelay:kEndSucceedDelayTime];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     _hub.mode = MBProgressHUDModeCustomView;
     _hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
     _hub.labelText = @"加载失败";

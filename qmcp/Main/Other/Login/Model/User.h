@@ -20,8 +20,5 @@
 
 @property (nonatomic, copy) NSString *userId;
 
-@property (nonatomic, assign) Boolean isAuthenticated;
-
-@property (nonatomic, assign) Boolean isExecuteSuccess;
-
+@property (nonatomic, assign) Boolean authenticated;
 @end

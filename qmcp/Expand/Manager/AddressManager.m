@@ -36,7 +36,6 @@
         }
         // 第一层是省份 分解出整个省份数组
         shared_manager.provinceArr = firstName;
-        
     });
     return shared_manager;
 }

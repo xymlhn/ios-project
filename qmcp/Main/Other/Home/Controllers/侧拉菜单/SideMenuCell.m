@@ -17,9 +17,6 @@
 @end
 @implementation SideMenuCell
 
-- (void)awakeFromNib {
-
-}
 
 //创建自定义可重用的cell对象
 + (instancetype)SideMenuCellWithTableView:(UITableView *)tableView

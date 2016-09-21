@@ -166,7 +166,7 @@
         if(!error){
             // 字典转模型
             User *account = [User mj_objectWithKeyValues:data];
-            if(account.isAuthenticated){
+            if(account.authenticated){
                 [Config saveOwnAccount:username andPassword:password];
                 [Config saveLoginStatus:true];
                 hub.mode = MBProgressHUDModeCustomView;

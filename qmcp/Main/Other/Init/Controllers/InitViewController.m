@@ -32,7 +32,7 @@
         NSDictionary *dict;
         if(error == nil){
             User *account = [User mj_objectWithKeyValues:data];
-            if(account.isAuthenticated){
+            if(account.authenticated){
                 dict = @{@"info":@"0"};
             }else{
                 dict = @{@"info":@"1"};

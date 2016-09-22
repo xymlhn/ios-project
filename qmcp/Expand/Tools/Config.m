@@ -45,9 +45,13 @@ NSString * const kCommodityStep = @"commodityStep";
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:account ?: @"" forKey:kAccount];
-    [userDefaults synchronize];
     
-    [SSKeychain setPassword:password ?: @"" forService:kService account:account];
+    #ifdef DEBUG
+        [userDefaults setObject:password ?: @"" forKey:kService];
+    #else
+        [SSKeychain setPassword:password ?: @"" forService:kService account:account];
+    #endif
+    [userDefaults synchronize];
 }
 
 
@@ -55,8 +59,16 @@ NSString * const kCommodityStep = @"commodityStep";
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *account = [userDefaults objectForKey:kAccount];
-    NSString *password = [SSKeychain passwordForService:kService account:account] ?: @"";
-    if (account) {return @[account, password];}
+    
+    #ifdef DEBUG
+        NSString *password =  [userDefaults objectForKey:kService] == nil ? @"" : [userDefaults objectForKey:kService];
+        if (account) {return @[account, password];}
+    #else
+        NSString *password = [SSKeychain passwordForService:kService account:account] ?: @"";
+        if (account) {return @[account, password];}
+    #endif
+    
+    
     return nil;
 }
 

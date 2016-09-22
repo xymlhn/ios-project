@@ -107,7 +107,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
+//    SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
     
 }
 

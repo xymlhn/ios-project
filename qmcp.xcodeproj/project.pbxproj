@@ -34,17 +34,24 @@
 		240EC95F1D7FB2B7008A5696 /* StandardsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9331D7FB2B7008A5696 /* StandardsView.m */; };
 		240EC9601D7FB2B7008A5696 /* ThrowLineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9351D7FB2B7008A5696 /* ThrowLineTool.m */; };
 		240EC9611D7FB2B7008A5696 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9371D7FB2B7008A5696 /* Utils.m */; };
-		240EC9621D7FB2B7008A5696 /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC93A1D7FB2B7008A5696 /* AddressViewController.m */; };
-		240EC9631D7FB2B7008A5696 /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC93C1D7FB2B7008A5696 /* CheckBoxViewController.m */; };
-		240EC9641D7FB2B7008A5696 /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC93E1D7FB2B7008A5696 /* CheckCell.m */; };
-		240EC9651D7FB2B7008A5696 /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9401D7FB2B7008A5696 /* ImageViewerController.m */; };
-		240EC9661D7FB2B7008A5696 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9421D7FB2B7008A5696 /* QrCodeViewController.m */; };
-		240EC9671D7FB2B7008A5696 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9441D7FB2B7008A5696 /* ScanViewController.m */; };
-		240EC9681D7FB2B7008A5696 /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9461D7FB2B7008A5696 /* SignViewController.m */; };
 		240EC9701D7FB2DC008A5696 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96B1D7FB2DC008A5696 /* BaseView.m */; };
 		240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96D1D7FB2DC008A5696 /* BaseViewController.m */; };
 		240EC9721D7FB2DC008A5696 /* BaseWorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96F1D7FB2DC008A5696 /* BaseWorkOrderViewController.m */; };
 		240EC9881D7FB456008A5696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240EC9861D7FB456008A5696 /* LaunchScreen.storyboard */; };
+		242815D31D936BE7006120ED /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B71D936BE7006120ED /* AddressViewController.m */; };
+		242815D41D936BE7006120ED /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B91D936BE7006120ED /* CheckBoxViewController.m */; };
+		242815D51D936BE7006120ED /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815BB1D936BE7006120ED /* CheckCell.m */; };
+		242815D61D936BE7006120ED /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815BD1D936BE7006120ED /* ImageViewerController.m */; };
+		242815D71D936BE7006120ED /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815BF1D936BE7006120ED /* QrCodeViewController.m */; };
+		242815D81D936BE7006120ED /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815C11D936BE7006120ED /* ScanViewController.m */; };
+		242815D91D936BE7006120ED /* SignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815C31D936BE7006120ED /* SignViewController.m */; };
+		242815DA1D936BE7006120ED /* CheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815C61D936BE7006120ED /* CheckBoxView.m */; };
+		242815DB1D936BE7006120ED /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815C81D936BE7006120ED /* ChooseView.m */; };
+		242815DC1D936BE7006120ED /* CommodityStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815CA1D936BE7006120ED /* CommodityStepView.m */; };
+		242815DD1D936BE7006120ED /* QrCodeBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815CC1D936BE7006120ED /* QrCodeBindView.m */; };
+		242815DE1D936BE7006120ED /* QrCodeIdentityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815CE1D936BE7006120ED /* QrCodeIdentityView.m */; };
+		242815DF1D936BE7006120ED /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815D01D936BE7006120ED /* ScanView.m */; };
+		242815E01D936BE7006120ED /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815D21D936BE7006120ED /* SignView.m */; };
 		248A5DB41C85C3C30095A4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A5DB31C85C3C30095A4FB /* main.m */; };
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E881D79603600BB982F /* AVFoundation.framework */; };
@@ -88,13 +95,6 @@
 		24AFDC301D9238FF00B2F1B9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB5B1D9238FF00B2F1B9 /* LoginViewController.m */; };
 		24AFDC311D9238FF00B2F1B9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB5E1D9238FF00B2F1B9 /* User.m */; };
 		24AFDC321D9238FF00B2F1B9 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB611D9238FF00B2F1B9 /* LoginView.m */; };
-		24AFDC331D9238FF00B2F1B9 /* CheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB641D9238FF00B2F1B9 /* CheckBoxView.m */; };
-		24AFDC341D9238FF00B2F1B9 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB661D9238FF00B2F1B9 /* ChooseView.m */; };
-		24AFDC351D9238FF00B2F1B9 /* CommodityStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB681D9238FF00B2F1B9 /* CommodityStepView.m */; };
-		24AFDC361D9238FF00B2F1B9 /* QrCodeBindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB6A1D9238FF00B2F1B9 /* QrCodeBindView.m */; };
-		24AFDC371D9238FF00B2F1B9 /* QrCodeIdentityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB6C1D9238FF00B2F1B9 /* QrCodeIdentityView.m */; };
-		24AFDC381D9238FF00B2F1B9 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB6E1D9238FF00B2F1B9 /* ScanView.m */; };
-		24AFDC391D9238FF00B2F1B9 /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB701D9238FF00B2F1B9 /* SignView.m */; };
 		24AFDC3A1D9238FF00B2F1B9 /* CacheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB751D9238FF00B2F1B9 /* CacheCell.m */; };
 		24AFDC3B1D9238FF00B2F1B9 /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB771D9238FF00B2F1B9 /* SettingViewCell.m */; };
 		24AFDC3C1D9238FF00B2F1B9 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB791D9238FF00B2F1B9 /* SettingViewController.m */; };
@@ -224,20 +224,6 @@
 		240EC9351D7FB2B7008A5696 /* ThrowLineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowLineTool.m; sourceTree = "<group>"; };
 		240EC9361D7FB2B7008A5696 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		240EC9371D7FB2B7008A5696 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
-		240EC9391D7FB2B7008A5696 /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
-		240EC93A1D7FB2B7008A5696 /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
-		240EC93B1D7FB2B7008A5696 /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxViewController.h; sourceTree = "<group>"; };
-		240EC93C1D7FB2B7008A5696 /* CheckBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxViewController.m; sourceTree = "<group>"; };
-		240EC93D1D7FB2B7008A5696 /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCell.h; sourceTree = "<group>"; };
-		240EC93E1D7FB2B7008A5696 /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCell.m; sourceTree = "<group>"; };
-		240EC93F1D7FB2B7008A5696 /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
-		240EC9401D7FB2B7008A5696 /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
-		240EC9411D7FB2B7008A5696 /* QrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
-		240EC9421D7FB2B7008A5696 /* QrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeViewController.m; sourceTree = "<group>"; };
-		240EC9431D7FB2B7008A5696 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
-		240EC9441D7FB2B7008A5696 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
-		240EC9451D7FB2B7008A5696 /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
-		240EC9461D7FB2B7008A5696 /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
 		240EC96A1D7FB2DC008A5696 /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		240EC96B1D7FB2DC008A5696 /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
 		240EC96C1D7FB2DC008A5696 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -246,6 +232,34 @@
 		240EC96F1D7FB2DC008A5696 /* BaseWorkOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWorkOrderViewController.m; sourceTree = "<group>"; };
 		240EC9871D7FB456008A5696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		240EC98B1D7FB491008A5696 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		242815B61D936BE7006120ED /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
+		242815B71D936BE7006120ED /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
+		242815B81D936BE7006120ED /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxViewController.h; sourceTree = "<group>"; };
+		242815B91D936BE7006120ED /* CheckBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxViewController.m; sourceTree = "<group>"; };
+		242815BA1D936BE7006120ED /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCell.h; sourceTree = "<group>"; };
+		242815BB1D936BE7006120ED /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCell.m; sourceTree = "<group>"; };
+		242815BC1D936BE7006120ED /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
+		242815BD1D936BE7006120ED /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
+		242815BE1D936BE7006120ED /* QrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
+		242815BF1D936BE7006120ED /* QrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeViewController.m; sourceTree = "<group>"; };
+		242815C01D936BE7006120ED /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		242815C11D936BE7006120ED /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		242815C21D936BE7006120ED /* SignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
+		242815C31D936BE7006120ED /* SignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignViewController.m; sourceTree = "<group>"; };
+		242815C51D936BE7006120ED /* CheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxView.h; sourceTree = "<group>"; };
+		242815C61D936BE7006120ED /* CheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxView.m; sourceTree = "<group>"; };
+		242815C71D936BE7006120ED /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
+		242815C81D936BE7006120ED /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
+		242815C91D936BE7006120ED /* CommodityStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityStepView.h; sourceTree = "<group>"; };
+		242815CA1D936BE7006120ED /* CommodityStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityStepView.m; sourceTree = "<group>"; };
+		242815CB1D936BE7006120ED /* QrCodeBindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeBindView.h; sourceTree = "<group>"; };
+		242815CC1D936BE7006120ED /* QrCodeBindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeBindView.m; sourceTree = "<group>"; };
+		242815CD1D936BE7006120ED /* QrCodeIdentityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeIdentityView.h; sourceTree = "<group>"; };
+		242815CE1D936BE7006120ED /* QrCodeIdentityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeIdentityView.m; sourceTree = "<group>"; };
+		242815CF1D936BE7006120ED /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
+		242815D01D936BE7006120ED /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
+		242815D11D936BE7006120ED /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
+		242815D21D936BE7006120ED /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
 		247D31D71C8D7C040048DD38 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		248A5DAF1C85C3C30095A4FB /* e服务365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e服务365.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		248A5DB31C85C3C30095A4FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -330,20 +344,6 @@
 		24AFDB5E1D9238FF00B2F1B9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		24AFDB601D9238FF00B2F1B9 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		24AFDB611D9238FF00B2F1B9 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
-		24AFDB631D9238FF00B2F1B9 /* CheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxView.h; sourceTree = "<group>"; };
-		24AFDB641D9238FF00B2F1B9 /* CheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxView.m; sourceTree = "<group>"; };
-		24AFDB651D9238FF00B2F1B9 /* ChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
-		24AFDB661D9238FF00B2F1B9 /* ChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
-		24AFDB671D9238FF00B2F1B9 /* CommodityStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityStepView.h; sourceTree = "<group>"; };
-		24AFDB681D9238FF00B2F1B9 /* CommodityStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityStepView.m; sourceTree = "<group>"; };
-		24AFDB691D9238FF00B2F1B9 /* QrCodeBindView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeBindView.h; sourceTree = "<group>"; };
-		24AFDB6A1D9238FF00B2F1B9 /* QrCodeBindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeBindView.m; sourceTree = "<group>"; };
-		24AFDB6B1D9238FF00B2F1B9 /* QrCodeIdentityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeIdentityView.h; sourceTree = "<group>"; };
-		24AFDB6C1D9238FF00B2F1B9 /* QrCodeIdentityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeIdentityView.m; sourceTree = "<group>"; };
-		24AFDB6D1D9238FF00B2F1B9 /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
-		24AFDB6E1D9238FF00B2F1B9 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
-		24AFDB6F1D9238FF00B2F1B9 /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
-		24AFDB701D9238FF00B2F1B9 /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
 		24AFDB741D9238FF00B2F1B9 /* CacheCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheCell.h; sourceTree = "<group>"; };
 		24AFDB751D9238FF00B2F1B9 /* CacheCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheCell.m; sourceTree = "<group>"; };
 		24AFDB761D9238FF00B2F1B9 /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCell.h; sourceTree = "<group>"; };
@@ -507,7 +507,7 @@
 			children = (
 				24AFD7F31D92339200B2F1B9 /* Application */,
 				24AFD7F01D92337300B2F1B9 /* Resources(资源) */,
-				240EC9691D7FB2DC008A5696 /* Base */,
+				240EC9691D7FB2DC008A5696 /* Base(基类) */,
 				240EC8FD1D7FB2B7008A5696 /* Categories(分类) */,
 				240EC9101D7FB2B7008A5696 /* Manager(单例) */,
 				240EC9231D7FB2B7008A5696 /* Tools(工具) */,
@@ -571,7 +571,6 @@
 		240EC9231D7FB2B7008A5696 /* Tools(工具) */ = {
 			isa = PBXGroup;
 			children = (
-				240EC9381D7FB2B7008A5696 /* ViewControllerTools */,
 				240EC92F1D7FB2B7008A5696 /* Standard */,
 				240EC92C1D7FB2B7008A5696 /* SMPageControl */,
 				240EC9241D7FB2B7008A5696 /* Config.h */,
@@ -611,28 +610,7 @@
 			path = Standard;
 			sourceTree = "<group>";
 		};
-		240EC9381D7FB2B7008A5696 /* ViewControllerTools */ = {
-			isa = PBXGroup;
-			children = (
-				240EC9391D7FB2B7008A5696 /* AddressViewController.h */,
-				240EC93A1D7FB2B7008A5696 /* AddressViewController.m */,
-				240EC93B1D7FB2B7008A5696 /* CheckBoxViewController.h */,
-				240EC93C1D7FB2B7008A5696 /* CheckBoxViewController.m */,
-				240EC93D1D7FB2B7008A5696 /* CheckCell.h */,
-				240EC93E1D7FB2B7008A5696 /* CheckCell.m */,
-				240EC93F1D7FB2B7008A5696 /* ImageViewerController.h */,
-				240EC9401D7FB2B7008A5696 /* ImageViewerController.m */,
-				240EC9411D7FB2B7008A5696 /* QrCodeViewController.h */,
-				240EC9421D7FB2B7008A5696 /* QrCodeViewController.m */,
-				240EC9431D7FB2B7008A5696 /* ScanViewController.h */,
-				240EC9441D7FB2B7008A5696 /* ScanViewController.m */,
-				240EC9451D7FB2B7008A5696 /* SignViewController.h */,
-				240EC9461D7FB2B7008A5696 /* SignViewController.m */,
-			);
-			path = ViewControllerTools;
-			sourceTree = "<group>";
-		};
-		240EC9691D7FB2DC008A5696 /* Base */ = {
+		240EC9691D7FB2DC008A5696 /* Base(基类) */ = {
 			isa = PBXGroup;
 			children = (
 				240EC96A1D7FB2DC008A5696 /* BaseView.h */,
@@ -642,7 +620,50 @@
 				240EC96E1D7FB2DC008A5696 /* BaseWorkOrderViewController.h */,
 				240EC96F1D7FB2DC008A5696 /* BaseWorkOrderViewController.m */,
 			);
+			name = "Base(基类)";
 			path = Base;
+			sourceTree = "<group>";
+		};
+		242815B51D936BE7006120ED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				242815B61D936BE7006120ED /* AddressViewController.h */,
+				242815B71D936BE7006120ED /* AddressViewController.m */,
+				242815B81D936BE7006120ED /* CheckBoxViewController.h */,
+				242815B91D936BE7006120ED /* CheckBoxViewController.m */,
+				242815BA1D936BE7006120ED /* CheckCell.h */,
+				242815BB1D936BE7006120ED /* CheckCell.m */,
+				242815BC1D936BE7006120ED /* ImageViewerController.h */,
+				242815BD1D936BE7006120ED /* ImageViewerController.m */,
+				242815BE1D936BE7006120ED /* QrCodeViewController.h */,
+				242815BF1D936BE7006120ED /* QrCodeViewController.m */,
+				242815C01D936BE7006120ED /* ScanViewController.h */,
+				242815C11D936BE7006120ED /* ScanViewController.m */,
+				242815C21D936BE7006120ED /* SignViewController.h */,
+				242815C31D936BE7006120ED /* SignViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		242815C41D936BE7006120ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				242815C51D936BE7006120ED /* CheckBoxView.h */,
+				242815C61D936BE7006120ED /* CheckBoxView.m */,
+				242815C71D936BE7006120ED /* ChooseView.h */,
+				242815C81D936BE7006120ED /* ChooseView.m */,
+				242815C91D936BE7006120ED /* CommodityStepView.h */,
+				242815CA1D936BE7006120ED /* CommodityStepView.m */,
+				242815CB1D936BE7006120ED /* QrCodeBindView.h */,
+				242815CC1D936BE7006120ED /* QrCodeBindView.m */,
+				242815CD1D936BE7006120ED /* QrCodeIdentityView.h */,
+				242815CE1D936BE7006120ED /* QrCodeIdentityView.m */,
+				242815CF1D936BE7006120ED /* ScanView.h */,
+				242815D01D936BE7006120ED /* ScanView.m */,
+				242815D11D936BE7006120ED /* SignView.h */,
+				242815D21D936BE7006120ED /* SignView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		248A5DA61C85C3C30095A4FB = {
@@ -803,26 +824,27 @@
 		24AFDB2E1D9238FF00B2F1B9 /* Other(其他) */ = {
 			isa = PBXGroup;
 			children = (
-				24AFDB2F1D9238FF00B2F1B9 /* Gis */,
-				24AFDB381D9238FF00B2F1B9 /* Help */,
-				24AFDB3C1D9238FF00B2F1B9 /* Home */,
-				24AFDB501D9238FF00B2F1B9 /* Init */,
-				24AFDB541D9238FF00B2F1B9 /* Introduce */,
-				24AFDB581D9238FF00B2F1B9 /* Login */,
-				24AFDB621D9238FF00B2F1B9 /* Public */,
-				24AFDB711D9238FF00B2F1B9 /* Setting */,
+				24AFDB2F1D9238FF00B2F1B9 /* Gis(地图) */,
+				24AFDB381D9238FF00B2F1B9 /* Help(帮助) */,
+				24AFDB3C1D9238FF00B2F1B9 /* Home(主页) */,
+				24AFDB501D9238FF00B2F1B9 /* Init(初始化) */,
+				24AFDB541D9238FF00B2F1B9 /* Introduce(欢迎页) */,
+				24AFDB581D9238FF00B2F1B9 /* Login(登录) */,
+				24AFDB621D9238FF00B2F1B9 /* Public(公用) */,
+				24AFDB711D9238FF00B2F1B9 /* Setting(设置) */,
 			);
 			name = "Other(其他)";
 			path = Other;
 			sourceTree = "<group>";
 		};
-		24AFDB2F1D9238FF00B2F1B9 /* Gis */ = {
+		24AFDB2F1D9238FF00B2F1B9 /* Gis(地图) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB301D9238FF00B2F1B9 /* Controllers */,
 				24AFDB331D9238FF00B2F1B9 /* Models */,
 				24AFDB371D9238FF00B2F1B9 /* Search */,
 			);
+			name = "Gis(地图)";
 			path = Gis;
 			sourceTree = "<group>";
 		};
@@ -859,11 +881,12 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		24AFDB381D9238FF00B2F1B9 /* Help */ = {
+		24AFDB381D9238FF00B2F1B9 /* Help(帮助) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB391D9238FF00B2F1B9 /* Controllers */,
 			);
+			name = "Help(帮助)";
 			path = Help;
 			sourceTree = "<group>";
 		};
@@ -876,11 +899,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		24AFDB3C1D9238FF00B2F1B9 /* Home */ = {
+		24AFDB3C1D9238FF00B2F1B9 /* Home(主页) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB3D1D9238FF00B2F1B9 /* Controllers */,
 			);
+			name = "Home(主页)";
 			path = Home;
 			sourceTree = "<group>";
 		};
@@ -930,11 +954,12 @@
 			path = "底部栏";
 			sourceTree = "<group>";
 		};
-		24AFDB501D9238FF00B2F1B9 /* Init */ = {
+		24AFDB501D9238FF00B2F1B9 /* Init(初始化) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB511D9238FF00B2F1B9 /* Controllers */,
 			);
+			name = "Init(初始化)";
 			path = Init;
 			sourceTree = "<group>";
 		};
@@ -947,11 +972,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		24AFDB541D9238FF00B2F1B9 /* Introduce */ = {
+		24AFDB541D9238FF00B2F1B9 /* Introduce(欢迎页) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB551D9238FF00B2F1B9 /* Controllers */,
 			);
+			name = "Introduce(欢迎页)";
 			path = Introduce;
 			sourceTree = "<group>";
 		};
@@ -964,13 +990,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		24AFDB581D9238FF00B2F1B9 /* Login */ = {
+		24AFDB581D9238FF00B2F1B9 /* Login(登录) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB591D9238FF00B2F1B9 /* Controllers */,
 				24AFDB5C1D9238FF00B2F1B9 /* Model */,
 				24AFDB5F1D9238FF00B2F1B9 /* View */,
 			);
+			name = "Login(登录)";
 			path = Login;
 			sourceTree = "<group>";
 		};
@@ -1001,32 +1028,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		24AFDB621D9238FF00B2F1B9 /* Public */ = {
+		24AFDB621D9238FF00B2F1B9 /* Public(公用) */ = {
 			isa = PBXGroup;
 			children = (
-				24AFDB631D9238FF00B2F1B9 /* CheckBoxView.h */,
-				24AFDB641D9238FF00B2F1B9 /* CheckBoxView.m */,
-				24AFDB651D9238FF00B2F1B9 /* ChooseView.h */,
-				24AFDB661D9238FF00B2F1B9 /* ChooseView.m */,
-				24AFDB671D9238FF00B2F1B9 /* CommodityStepView.h */,
-				24AFDB681D9238FF00B2F1B9 /* CommodityStepView.m */,
-				24AFDB691D9238FF00B2F1B9 /* QrCodeBindView.h */,
-				24AFDB6A1D9238FF00B2F1B9 /* QrCodeBindView.m */,
-				24AFDB6B1D9238FF00B2F1B9 /* QrCodeIdentityView.h */,
-				24AFDB6C1D9238FF00B2F1B9 /* QrCodeIdentityView.m */,
-				24AFDB6D1D9238FF00B2F1B9 /* ScanView.h */,
-				24AFDB6E1D9238FF00B2F1B9 /* ScanView.m */,
-				24AFDB6F1D9238FF00B2F1B9 /* SignView.h */,
-				24AFDB701D9238FF00B2F1B9 /* SignView.m */,
+				242815B51D936BE7006120ED /* Controller */,
+				242815C41D936BE7006120ED /* View */,
 			);
+			name = "Public(公用)";
 			path = Public;
 			sourceTree = "<group>";
 		};
-		24AFDB711D9238FF00B2F1B9 /* Setting */ = {
+		24AFDB711D9238FF00B2F1B9 /* Setting(设置) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB721D9238FF00B2F1B9 /* Controllers */,
 			);
+			name = "Setting(设置)";
 			path = Setting;
 			sourceTree = "<group>";
 		};
@@ -1496,6 +1513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24AFDC4B1D9238FF00B2F1B9 /* SalesOrderConfirm.m in Sources */,
+				242815DD1D936BE7006120ED /* QrCodeBindView.m in Sources */,
 				24AFDC681D92390000B2F1B9 /* WorkOrderFormController.m in Sources */,
 				24AFDC881D9239BB00B2F1B9 /* PickupViewController.m in Sources */,
 				24AFDC631D92390000B2F1B9 /* WorkOrderStepCell.m in Sources */,
@@ -1511,7 +1529,6 @@
 				24AFDC561D9238FF00B2F1B9 /* DateTimeCell.m in Sources */,
 				24AFDC301D9238FF00B2F1B9 /* LoginViewController.m in Sources */,
 				24AFDC6C1D92390000B2F1B9 /* WorkOrderStepController.m in Sources */,
-				24AFDC341D9238FF00B2F1B9 /* ChooseView.m in Sources */,
 				24AFDC7A1D92390000B2F1B9 /* WorkOrderInfoView.m in Sources */,
 				24AFDC2A1D9238FF00B2F1B9 /* TitleBarView.m in Sources */,
 				24AFDC231D9238FF00B2F1B9 /* AMapViewController.m in Sources */,
@@ -1520,58 +1537,60 @@
 				24AFDC701D92390000B2F1B9 /* CameraData.m in Sources */,
 				24AFDC211D9238FF00B2F1B9 /* InventorySearchView.m in Sources */,
 				24AFDC4F1D9238FF00B2F1B9 /* SearchViewController.m in Sources */,
+				242815D51D936BE7006120ED /* CheckCell.m in Sources */,
 				24AFDC511D9238FF00B2F1B9 /* CheckBoxCell.m in Sources */,
-				24AFDC351D9238FF00B2F1B9 /* CommodityStepView.m in Sources */,
 				24AFDC0F1D9238FF00B2F1B9 /* InventoryChooseCell.m in Sources */,
 				24AFDC451D9238FF00B2F1B9 /* SalesOrderBindCell.m in Sources */,
+				242815D71D936BE7006120ED /* QrCodeViewController.m in Sources */,
 				240EC9601D7FB2B7008A5696 /* ThrowLineTool.m in Sources */,
 				24AFDC571D9238FF00B2F1B9 /* FooterCell.m in Sources */,
+				242815D91D936BE7006120ED /* SignViewController.m in Sources */,
 				240EC9591D7FB2B7008A5696 /* Config.m in Sources */,
 				240EC9521D7FB2B7008A5696 /* CameraManager.m in Sources */,
-				240EC9631D7FB2B7008A5696 /* CheckBoxViewController.m in Sources */,
 				24AFDC121D9238FF00B2F1B9 /* InventoryController.m in Sources */,
 				24AFDC871D9239BB00B2F1B9 /* PickupNoticeViewController.m in Sources */,
-				24AFDC331D9238FF00B2F1B9 /* CheckBoxView.m in Sources */,
 				24AFDC2E1D9238FF00B2F1B9 /* InitViewController.m in Sources */,
 				24AFDC3C1D9238FF00B2F1B9 /* SettingViewController.m in Sources */,
 				24AFDC3F1D9238FF00B2F1B9 /* PickupData.m in Sources */,
+				242815DB1D936BE7006120ED /* ChooseView.m in Sources */,
 				240EC94C1D7FB2B7008A5696 /* UISearchBar+Common.m in Sources */,
 				24AFDC731D92390000B2F1B9 /* FormTemplateBrife.m in Sources */,
 				24AFDC1C1D9238FF00B2F1B9 /* ItemSnapshot.m in Sources */,
 				240EC95D1D7FB2B7008A5696 /* SMPageControl.m in Sources */,
 				240EC94F1D7FB2B7008A5696 /* UIViewController+BackButtonHandler.m in Sources */,
+				242815DA1D936BE7006120ED /* CheckBoxView.m in Sources */,
 				240EC95E1D7FB2B7008A5696 /* StandardModel.m in Sources */,
 				24AFDC5C1D92390000B2F1B9 /* PhotoCell.m in Sources */,
+				242815DE1D936BE7006120ED /* QrCodeIdentityView.m in Sources */,
 				24AFDC711D92390000B2F1B9 /* FormData.m in Sources */,
 				24AFDC1D1D9238FF00B2F1B9 /* PropertyChoose.m in Sources */,
+				242815D31D936BE7006120ED /* AddressViewController.m in Sources */,
 				24AFDC6E1D92390000B2F1B9 /* AddressSnapshot.m in Sources */,
 				24AFDC271D9238FF00B2F1B9 /* RootViewController.m in Sources */,
 				240EC9561D7FB2B7008A5696 /* PropertyManager.m in Sources */,
 				240EC94B1D7FB2B7008A5696 /* UIImage+Util.m in Sources */,
 				240EC9471D7FB2B7008A5696 /* MBProgressHUD+Util.m in Sources */,
 				24AFDC2D1D9238FF00B2F1B9 /* OSCTabBarController.m in Sources */,
-				240EC9621D7FB2B7008A5696 /* AddressViewController.m in Sources */,
-				240EC9651D7FB2B7008A5696 /* ImageViewerController.m in Sources */,
 				24AFDC421D9238FF00B2F1B9 /* PickupSignature.m in Sources */,
 				240EC95B1D7FB2B7008A5696 /* Helper.m in Sources */,
 				24AFDC6B1D92390000B2F1B9 /* WorkOrderListController.m in Sources */,
 				24AFDC4D1D9238FF00B2F1B9 /* SalesOrderSnapshot.m in Sources */,
 				24AFDC1B1D9238FF00B2F1B9 /* ItemComplete.m in Sources */,
-				24AFDC371D9238FF00B2F1B9 /* QrCodeIdentityView.m in Sources */,
 				24AFDC251D9238FF00B2F1B9 /* HelpViewController.m in Sources */,
 				24AFDC481D9238FF00B2F1B9 /* SalesOrderBindListController.m in Sources */,
 				240EC9481D7FB2B7008A5696 /* NSMutableArray+InsertArray.m in Sources */,
 				24AFDC551D9238FF00B2F1B9 /* DateCell.m in Sources */,
 				240EC9581D7FB2B7008A5696 /* WorkOrderManager.m in Sources */,
-				240EC9661D7FB2B7008A5696 /* QrCodeViewController.m in Sources */,
 				24AFDC2B1D9238FF00B2F1B9 /* SideMenuCell.m in Sources */,
 				24AFDC3A1D9238FF00B2F1B9 /* CacheCell.m in Sources */,
 				24AFDC471D9238FF00B2F1B9 /* QrCodeBindController.m in Sources */,
+				242815DC1D936BE7006120ED /* CommodityStepView.m in Sources */,
 				240EC9551D7FB2B7008A5696 /* PickupManager.m in Sources */,
 				24AFDC5B1D92390000B2F1B9 /* NumberCell.m in Sources */,
 				24AFDC601D92390000B2F1B9 /* TextSingleCell.m in Sources */,
 				24AFDC671D92390000B2F1B9 /* WorkOrderCameraController.m in Sources */,
 				24AFDC5A1D92390000B2F1B9 /* LabelCell.m in Sources */,
+				242815D61D936BE7006120ED /* ImageViewerController.m in Sources */,
 				240EC9501D7FB2B7008A5696 /* AddressManager.m in Sources */,
 				24AFD7F81D92339200B2F1B9 /* AppDelegate.m in Sources */,
 				240EC95F1D7FB2B7008A5696 /* StandardsView.m in Sources */,
@@ -1581,6 +1600,7 @@
 				24AFDC151D9238FF00B2F1B9 /* Commodity.m in Sources */,
 				24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */,
 				24AFDC111D9238FF00B2F1B9 /* InventoryChooseController.m in Sources */,
+				242815D81D936BE7006120ED /* ScanViewController.m in Sources */,
 				240EC9701D7FB2DC008A5696 /* BaseView.m in Sources */,
 				24AFDC791D92390000B2F1B9 /* WorkOrderFormView.m in Sources */,
 				24AFDC291D9238FF00B2F1B9 /* SwipableViewController.m in Sources */,
@@ -1595,11 +1615,8 @@
 				24AFDC721D92390000B2F1B9 /* FormTemplate.m in Sources */,
 				24AFDC4A1D9238FF00B2F1B9 /* SalesOrderBind.m in Sources */,
 				24AFDC2C1D9238FF00B2F1B9 /* SideMenuController.m in Sources */,
-				240EC9641D7FB2B7008A5696 /* CheckCell.m in Sources */,
 				24AFDC621D92390000B2F1B9 /* WorkOrderCell.m in Sources */,
-				24AFDC391D9238FF00B2F1B9 /* SignView.m in Sources */,
 				24AFDC3E1D9238FF00B2F1B9 /* PickupNoticeCell.m in Sources */,
-				240EC9681D7FB2B7008A5696 /* SignViewController.m in Sources */,
 				24AFDC241D9238FF00B2F1B9 /* GisLocation.m in Sources */,
 				24AFDC1E1D9238FF00B2F1B9 /* PropertyData.m in Sources */,
 				24AFDC581D92390000B2F1B9 /* FormTemplateCell.m in Sources */,
@@ -1616,15 +1633,16 @@
 				24AFDC821D92399E00B2F1B9 /* PickupView.m in Sources */,
 				24AFDC5F1D92390000B2F1B9 /* TextMultiCell.m in Sources */,
 				24AFDC5D1D92390000B2F1B9 /* PJRSignatureView.m in Sources */,
+				242815DF1D936BE7006120ED /* ScanView.m in Sources */,
 				24AFDC6F1D92390000B2F1B9 /* Attachment.m in Sources */,
 				24AFDC771D92390000B2F1B9 /* WorkOrderSearchResult.m in Sources */,
 				24AFDC3B1D9238FF00B2F1B9 /* SettingViewCell.m in Sources */,
 				24AFDC321D9238FF00B2F1B9 /* LoginView.m in Sources */,
 				24AFDC161D9238FF00B2F1B9 /* CommodityBrife.m in Sources */,
 				240EC94A1D7FB2B7008A5696 /* UIImage+Common.m in Sources */,
-				24AFDC381D9238FF00B2F1B9 /* ScanView.m in Sources */,
 				24AFDC131D9238FF00B2F1B9 /* InventoryEditController.m in Sources */,
 				24AFDC6D1D92390000B2F1B9 /* WorkOrderStepEditController.m in Sources */,
+				242815D41D936BE7006120ED /* CheckBoxViewController.m in Sources */,
 				24AFDC741D92390000B2F1B9 /* FormTemplateField.m in Sources */,
 				24AFDC4C1D9238FF00B2F1B9 /* SalesOrderSearchResult.m in Sources */,
 				240EC94E1D7FB2B7008A5696 /* UIView+Util.m in Sources */,
@@ -1632,9 +1650,7 @@
 				24AFDC781D92390000B2F1B9 /* WorkOrderStep.m in Sources */,
 				240EC9541D7FB2B7008A5696 /* InventoryManager.m in Sources */,
 				24AFDC461D9238FF00B2F1B9 /* SalesOrderGrabCell.m in Sources */,
-				24AFDC361D9238FF00B2F1B9 /* QrCodeBindView.m in Sources */,
 				24AFDC191D9238FF00B2F1B9 /* CommoditySnapshot.m in Sources */,
-				240EC9671D7FB2B7008A5696 /* ScanViewController.m in Sources */,
 				24AFDC7B1D92390000B2F1B9 /* WorkOrderStepEditView.m in Sources */,
 				24AFDC651D92390000B2F1B9 /* CommodityStepController.m in Sources */,
 				24AFDC401D9238FF00B2F1B9 /* PickupItem.m in Sources */,
@@ -1642,6 +1658,7 @@
 				24AFDC281D9238FF00B2F1B9 /* HorizonalTableViewController.m in Sources */,
 				240EC9511D7FB2B7008A5696 /* AppManager.m in Sources */,
 				24AFDC691D92390000B2F1B9 /* WorkOrderFormsController.m in Sources */,
+				242815E01D936BE7006120ED /* SignView.m in Sources */,
 				24AFDC761D92390000B2F1B9 /* WorkOrderGroup.m in Sources */,
 				24AFDC541D9238FF00B2F1B9 /* CommodityStepCell.m in Sources */,
 				24AFDC811D92399E00B2F1B9 /* PickupNoticeView.m in Sources */,

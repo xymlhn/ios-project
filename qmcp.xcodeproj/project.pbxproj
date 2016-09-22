@@ -502,20 +502,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		240EC8FC1D7FB234008A5696 /* Expand */ = {
+		240EC8FC1D7FB234008A5696 /* Expand(扩展) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFD7F31D92339200B2F1B9 /* Application */,
-				24AFD7F01D92337300B2F1B9 /* Resources */,
+				24AFD7F01D92337300B2F1B9 /* Resources(资源) */,
 				240EC9691D7FB2DC008A5696 /* Base */,
-				240EC8FD1D7FB2B7008A5696 /* Categories */,
-				240EC9101D7FB2B7008A5696 /* Manager */,
-				240EC9231D7FB2B7008A5696 /* Tools */,
+				240EC8FD1D7FB2B7008A5696 /* Categories(分类) */,
+				240EC9101D7FB2B7008A5696 /* Manager(单例) */,
+				240EC9231D7FB2B7008A5696 /* Tools(工具) */,
 			);
+			name = "Expand(扩展)";
 			path = Expand;
 			sourceTree = "<group>";
 		};
-		240EC8FD1D7FB2B7008A5696 /* Categories */ = {
+		240EC8FD1D7FB2B7008A5696 /* Categories(分类) */ = {
 			isa = PBXGroup;
 			children = (
 				240EC8FE1D7FB2B7008A5696 /* MBProgressHUD+Util.h */,
@@ -537,10 +538,11 @@
 				240EC90E1D7FB2B7008A5696 /* UIViewController+BackButtonHandler.h */,
 				240EC90F1D7FB2B7008A5696 /* UIViewController+BackButtonHandler.m */,
 			);
+			name = "Categories(分类)";
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		240EC9101D7FB2B7008A5696 /* Manager */ = {
+		240EC9101D7FB2B7008A5696 /* Manager(单例) */ = {
 			isa = PBXGroup;
 			children = (
 				240EC9111D7FB2B7008A5696 /* AddressManager.h */,
@@ -562,10 +564,11 @@
 				240EC9211D7FB2B7008A5696 /* WorkOrderManager.h */,
 				240EC9221D7FB2B7008A5696 /* WorkOrderManager.m */,
 			);
+			name = "Manager(单例)";
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		240EC9231D7FB2B7008A5696 /* Tools */ = {
+		240EC9231D7FB2B7008A5696 /* Tools(工具) */ = {
 			isa = PBXGroup;
 			children = (
 				240EC9381D7FB2B7008A5696 /* ViewControllerTools */,
@@ -582,6 +585,7 @@
 				240EC9361D7FB2B7008A5696 /* Utils.h */,
 				240EC9371D7FB2B7008A5696 /* Utils.m */,
 			);
+			name = "Tools(工具)";
 			path = Tools;
 			sourceTree = "<group>";
 		};
@@ -662,8 +666,8 @@
 		248A5DB11C85C3C30095A4FB /* qmcp */ = {
 			isa = PBXGroup;
 			children = (
-				24AFD7EF1D9232B100B2F1B9 /* Main */,
-				240EC8FC1D7FB234008A5696 /* Expand */,
+				24AFD7EF1D9232B100B2F1B9 /* Main(主要) */,
+				240EC8FC1D7FB234008A5696 /* Expand(扩展) */,
 				248A5DBE1C85C3C30095A4FB /* Assets.xcassets */,
 				248A5DB21C85C3C30095A4FB /* Supporting Files */,
 			);
@@ -680,24 +684,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		24AFD7EF1D9232B100B2F1B9 /* Main */ = {
+		24AFD7EF1D9232B100B2F1B9 /* Main(主要) */ = {
 			isa = PBXGroup;
 			children = (
-				24AFDAFF1D9238FF00B2F1B9 /* Inventory */,
-				24AFDB2E1D9238FF00B2F1B9 /* Other */,
-				24AFDB7A1D9238FF00B2F1B9 /* Pickup */,
-				24AFDB8F1D9238FF00B2F1B9 /* SalesOrder */,
-				24AFDBA61D9238FF00B2F1B9 /* Search */,
-				24AFDBB11D9238FF00B2F1B9 /* WorkOrder */,
+				24AFDAFF1D9238FF00B2F1B9 /* Inventory(清点) */,
+				24AFDB2E1D9238FF00B2F1B9 /* Other(其他) */,
+				24AFDB7A1D9238FF00B2F1B9 /* Pickup(取件) */,
+				24AFDB8F1D9238FF00B2F1B9 /* SalesOrder(订单) */,
+				24AFDBA61D9238FF00B2F1B9 /* Search(搜索) */,
+				24AFDBB11D9238FF00B2F1B9 /* WorkOrder(工单) */,
 			);
+			name = "Main(主要)";
 			path = Main;
 			sourceTree = "<group>";
 		};
-		24AFD7F01D92337300B2F1B9 /* Resources */ = {
+		24AFD7F01D92337300B2F1B9 /* Resources(资源) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFD7F11D92337300B2F1B9 /* address.json */,
 			);
+			name = "Resources(资源)";
 			path = Resources;
 			sourceTree = "<group>";
 		};
@@ -712,13 +718,14 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		24AFDAFF1D9238FF00B2F1B9 /* Inventory */ = {
+		24AFDAFF1D9238FF00B2F1B9 /* Inventory(清点) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB001D9238FF00B2F1B9 /* Controller */,
 				24AFDB101D9238FF00B2F1B9 /* Model */,
 				24AFDB251D9238FF00B2F1B9 /* View */,
 			);
+			name = "Inventory(清点)";
 			path = Inventory;
 			sourceTree = "<group>";
 		};
@@ -793,7 +800,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		24AFDB2E1D9238FF00B2F1B9 /* Other */ = {
+		24AFDB2E1D9238FF00B2F1B9 /* Other(其他) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB2F1D9238FF00B2F1B9 /* Gis */,
@@ -805,6 +812,7 @@
 				24AFDB621D9238FF00B2F1B9 /* Public */,
 				24AFDB711D9238FF00B2F1B9 /* Setting */,
 			);
+			name = "Other(其他)";
 			path = Other;
 			sourceTree = "<group>";
 		};
@@ -1043,13 +1051,14 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
-		24AFDB7A1D9238FF00B2F1B9 /* Pickup */ = {
+		24AFDB7A1D9238FF00B2F1B9 /* Pickup(取件) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB7B1D9238FF00B2F1B9 /* Controller */,
 				24AFDB811D9238FF00B2F1B9 /* Model */,
 				24AFDB8A1D9238FF00B2F1B9 /* View */,
 			);
+			name = "Pickup(取件)";
 			path = Pickup;
 			sourceTree = "<group>";
 		};
@@ -1102,13 +1111,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		24AFDB8F1D9238FF00B2F1B9 /* SalesOrder */ = {
+		24AFDB8F1D9238FF00B2F1B9 /* SalesOrder(订单) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDB901D9238FF00B2F1B9 /* Controller */,
 				24AFDB9C1D9238FF00B2F1B9 /* Model */,
 				24AFDBA51D9238FF00B2F1B9 /* View */,
 			);
+			name = "SalesOrder(订单)";
 			path = SalesOrder;
 			sourceTree = "<group>";
 		};
@@ -1159,13 +1169,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		24AFDBA61D9238FF00B2F1B9 /* Search */ = {
+		24AFDBA61D9238FF00B2F1B9 /* Search(搜索) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDBA71D9238FF00B2F1B9 /* Controller */,
 				24AFDBAD1D9238FF00B2F1B9 /* Model */,
 				24AFDBAE1D9238FF00B2F1B9 /* View */,
 			);
+			name = "Search(搜索)";
 			path = Search;
 			sourceTree = "<group>";
 		};
@@ -1204,13 +1215,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		24AFDBB11D9238FF00B2F1B9 /* WorkOrder */ = {
+		24AFDBB11D9238FF00B2F1B9 /* WorkOrder(工单) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFDBB21D9238FF00B2F1B9 /* Controller */,
 				24AFDBEE1D9238FF00B2F1B9 /* Model */,
 				24AFDC051D9238FF00B2F1B9 /* View */,
 			);
+			name = "WorkOrder(工单)";
 			path = WorkOrder;
 			sourceTree = "<group>";
 		};

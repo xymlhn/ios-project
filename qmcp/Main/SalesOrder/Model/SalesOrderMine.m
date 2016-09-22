@@ -6,13 +6,13 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "SalesOrderBind.h"
+#import "SalesOrderMine.h"
 #import "MJExtension.h"
-@implementation SalesOrderBind
+@implementation SalesOrderMine
 
 + (NSDictionary *)mj_objectClassInArray
 {
-    return @{@"unbound":@"SalesOrderSnapshot",
-             @"haveBound":[NSString class]};
+    return @{@"uncompleted":@"SalesOrder",
+             @"haveCompleted":[NSString class]};
 }
 @end

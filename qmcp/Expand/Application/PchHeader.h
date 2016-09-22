@@ -21,7 +21,21 @@ typedef NS_ENUM(NSInteger, ExceptionType) {
     ExceptionTypeWorkOrderStatus = 10001,
     
 };
+
+typedef NS_ENUM(NSInteger, SalesOrderType) {
+    SalesOrderTypeOnsite = 10,//上门
+    SalesOrderTypeShop = 20,//到店
+    SalesOrderTypeUnknown = 30,//到店
+};
+
+typedef NS_ENUM(NSInteger, PaymentStatus) {
+    PaymentStatusWaiting = 10,//待支付
+    PaymentStatusSuccess = 20,//已支付
+    PaymentStatusClosed = 30,//已关闭
+    PaymentStatusRefunded = 100,//已退款
+};
 typedef void(^CompletionHandler)(NSDictionary *dict, NSString *error);
+typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #ifndef Header_h
 #define Header_h
 

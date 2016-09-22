@@ -61,8 +61,8 @@
 +(BOOL)getSearch;
 
 //绑单更新时间
-+(void)setSaleOrderBindTime:(NSString *)lastupdateTime;
-+(NSString *)getSalesOrderBindTime;
++(void)setSaleOrderMineTime:(NSString *)lastupdateTime;
++(NSString *)getSalesOrderMineTime;
 
 //工单更新时间
 +(void)setWorkOrderTime:(NSString *)lastupdateTime;

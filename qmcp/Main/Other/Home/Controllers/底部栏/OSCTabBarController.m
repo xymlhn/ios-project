@@ -14,7 +14,7 @@
 #import <RESideMenu/RESideMenu.h>
 #import "WorkOrderListController.h"
 #import "WorkOrder.h"
-#import "SalesOrderBindListController.h"
+#import "SalesOrderMineListController.h"
 #import "SalesOrderGrabListController.h"
 #import "HelpViewController.h"
 #import "PropertyManager.h"
@@ -27,7 +27,7 @@
     WorkOrderListController *newsViewCtl;
     WorkOrderListController *hotNewsViewCtl;
     
-    SalesOrderBindListController *bindViewCtl;
+    SalesOrderMineListController *bindViewCtl;
     SalesOrderGrabListController *grabViewCtl;
 }
 @property (nonatomic, strong) NSMutableArray *items;
@@ -66,7 +66,7 @@
     hotNewsViewCtl = [[WorkOrderListController alloc] initWithStatus:WorkOrderStatusCompleted];
     
     grabViewCtl = [SalesOrderGrabListController new];
-    bindViewCtl = [SalesOrderBindListController new];
+    bindViewCtl = [SalesOrderMineListController new];
  
     AMapViewController *gis = [[AMapViewController alloc] init];
     HelpViewController *help = [[HelpViewController alloc] init];

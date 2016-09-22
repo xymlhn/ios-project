@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SalesOrderBind : NSObject
-@property (nonatomic, copy)NSArray *unbound;
-@property (nonatomic, copy)NSArray *haveBound;
+@interface SalesOrderMine : NSObject
+@property (nonatomic, copy)NSArray *uncompleted;
+@property (nonatomic, copy)NSArray *haveCompleted;
 @end

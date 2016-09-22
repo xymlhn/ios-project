@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface QrCodeBindController : BaseViewController
+@interface QrCodeImageController : BaseViewController
 
 @property (nonatomic,copy) NSString *qrCodeUrl;
 @property (nonatomic,copy) NSString *salesOrderCode;

@@ -7,7 +7,7 @@
 //
 
 #import "SalesOrderGrabCell.h"
-#import "SalesOrderBindCell.h"
+#import "SalesOrderMineCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
 #import "MJExtension.h"
@@ -51,7 +51,7 @@
         _codeText.text = salesOrderSnapshot.code;
         _nameText.text = salesOrderSnapshot.addressSnapshot.contacts;
         _phoneText.text = salesOrderSnapshot.addressSnapshot.mobilePhone;
-        NSString *title = salesOrderSnapshot.confirmationFlag ? @"派单" : @"接单";
+        NSString *title = @"接单";
         [_grabBtn setTitle:title forState:UIControlStateNormal];
     }
 }

@@ -31,7 +31,7 @@ NSString * const kCommodityStep = @"commodityStep";
 +(void)setInitSetting{
     [self saveLoginStatus:NO];
     [self setWorkOrderTime:@""];
-    [self setSaleOrderBindTime:@""];
+    [self setSaleOrderMineTime:@""];
     [self setSalesOrderGrabTime:@""];
     [self setCommodityProperty:@""];
     [self setCommodityItem:@""];
@@ -124,13 +124,13 @@ NSString * const kCommodityStep = @"commodityStep";
     return [user boolForKey:kSearch];
 }
 
-+(void)setSaleOrderBindTime:(NSString *)lastupdateTime
++(void)setSaleOrderMineTime:(NSString *)lastupdateTime
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:lastupdateTime forKey:kSalesOrderBindTime];
 }
 
-+(NSString *)getSalesOrderBindTime{
++(NSString *)getSalesOrderMineTime{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *str = [user objectForKey:kSalesOrderBindTime];
     return str == nil ?@"":str;

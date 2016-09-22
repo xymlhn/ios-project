@@ -9,12 +9,9 @@
 #import "SalesOrderGrabListController.h"
 #import "UIColor+Util.h"
 #import "MJRefresh.h"
-#import "SalesOrderSnapshot.h"
+#import "SalesOrder.h"
 #import "SalesOrderGrabCell.h"
 #import "SalesOrderManager.h"
-#import "WorkOrder.h"
-#import "WorkOrderManager.h"
-#import "WorkOrderInfoController.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray<SalesOrderSnapshot *> *salesOrderList;
@@ -44,13 +41,13 @@
 }
 
 -(void)loadData{
-    _salesOrderList = [NSMutableArray new];
+    self.salesOrderList = [[SalesOrderManager getInstance] sortSalesOrder:NO];
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
     hub.userInteractionEnabled = NO;
-    [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSString *error) {
+    [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime]  finishBlock:^(NSMutableArray *arr, NSString *error) {
         if(error == nil){
-            [self salesOrderUpdate:dict];
+            [self refreshTableView:arr];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"加载成功"];
@@ -64,16 +61,17 @@
         
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSDictionary *dict, NSString *error) {
-            [self salesOrderUpdate:dict];
+        [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
+            if(error != nil){
+                [self refreshTableView:arr];
+            }
         }];
     }];
 }
 
-- (void)salesOrderUpdate:(NSDictionary *)dict{
+- (void)refreshTableView:(NSMutableArray *)arr{
     [_tableView.mj_header endRefreshing];
-    [_salesOrderList removeAllObjects];
-    [_salesOrderList addObjectsFromArray:[SalesOrderSnapshot mj_objectArrayWithKeyValuesArray:[dict allValues]]];
+    _salesOrderList = arr;
     [self.tableView reloadData];
 }
 
@@ -93,11 +91,7 @@
     //2 设置cell内部的子控件
     SalesOrderSnapshot *salesOrderSnapshot = _salesOrderList[row];
     cell.grabBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        if(salesOrderSnapshot.confirmationFlag){
-            [self assignSalesOrder:salesOrderSnapshot];
-        }else{
-            [self grabSalesOrder:salesOrderSnapshot];
-        }
+        [self grabSalesOrder:salesOrderSnapshot];
         return [RACSignal empty];
     }];
     cell.salesOrderSnapshot = salesOrderSnapshot;
@@ -122,9 +116,7 @@
     NSDictionary *dict = @{@"grab":[NSNumber numberWithBool:YES]};
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
-            salesOrderSnapshot.confirmationFlag = YES;
-            [weakSelf.tableView reloadData];
-            [[SalesOrderManager getInstance] updateGrabDictSalesOrderSnapshot:salesOrderSnapshot];
+            
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"接单成功"];
@@ -134,7 +126,6 @@
             
             [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
             [weakSelf.tableView reloadData];
-            [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
@@ -144,51 +135,5 @@
     
 }
 
--(void)assignSalesOrder:(SalesOrderSnapshot *)salesOrderSnapshot
-{
-    __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"派单中...";
-    hub.userInteractionEnabled = NO;
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERASSIGN,salesOrderSnapshot.code];
-    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        if (!error) {
-            [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
-            [weakSelf.tableView reloadData];
-            [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"派单成功"];
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
-            WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
-            [workOrder saveToDB];
-            [[WorkOrderManager getInstance] sortAllWorkOrder];
-            [self pushWorkOrderInfoUI:workOrder.code];
-            
-        }else{
-            
-            [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
-            [weakSelf.tableView reloadData];
-            [[SalesOrderManager getInstance]removeGrabDictSalesOrderSnapshotByCode:salesOrderSnapshot.code];
-            
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
-        }
-    }];
-    
-}
-/**
- * 跳转到WorkOrderInfo界面
- *
- *  @param code 工单code
- */
--(void)pushWorkOrderInfoUI:(NSString *)code{
-    WorkOrderInfoController *info = [WorkOrderInfoController new];
-    info.workOrderCode = code;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
+
 @end

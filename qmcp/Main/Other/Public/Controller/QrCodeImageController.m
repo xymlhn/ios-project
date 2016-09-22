@@ -6,16 +6,16 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "QrCodeBindController.h"
+#import "QrCodeImageController.h"
 #import "QrCodeBindView.h"
 
-@interface QrCodeBindController ()
+@interface QrCodeImageController ()
 
 @property (nonatomic,strong)QrCodeBindView *qrCodeBindView;
 
 @end
 
-@implementation QrCodeBindController
+@implementation QrCodeImageController
 
 
 -(void)setupView{
@@ -41,7 +41,7 @@
 
 +(instancetype)doneBlock:(void (^)(NSString *))block{
     
-    QrCodeBindController *vc = [[QrCodeBindController alloc] init];
+    QrCodeImageController *vc = [[QrCodeImageController alloc] init];
     vc.doneBlock = block;
     return vc;
     

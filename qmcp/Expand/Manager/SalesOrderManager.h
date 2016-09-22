@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PchHeader.h"
-#import "SalesOrderSnapshot.h"
+#import "SalesOrder.h"
 
 @interface SalesOrderManager : NSObject
 
@@ -20,8 +20,8 @@
  *
  *  @param lastupdateTime 时间
  */
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime
-                             finishBlock:(CompletionHandler)completion;
+-(void)getSalesOrderMineByLastUpdateTime:(NSString *)lastupdateTime
+                             finishBlock:(SalesOrderCompletion)completion;
 
 /**
  *  获取接单数据
@@ -29,27 +29,15 @@
  *  @param lastupdateTime 时间
  */
 -(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
-                                finishBlock:(CompletionHandler)completion;
+                                finishBlock:(SalesOrderCompletion)completion;
+
 
 /**
- *  根据订单code删除接单字典中salesOrder
- *
- *  @param salesOrderCode 订单code
- */
--(void)removeGrabDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode;
+ 根据类型获取订单
 
-/**
- *  根据订单code删除绑单字典中salesOrder
- *
- *  @param salesOrderCode 订单code
- */
--(void)removeBindDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode;
+ @param isMine isMine description
 
-/**
- *  根据订单code更新绑定字典中的salesOrder
- *
- *  @param salesOrderSnapshot salesOrder
+ @return 订单列表
  */
-
--(void)updateGrabDictSalesOrderSnapshot:(SalesOrderSnapshot *)salesOrderSnapshot;
+- (NSMutableArray *)sortSalesOrder:(BOOL)isMine;
 @end

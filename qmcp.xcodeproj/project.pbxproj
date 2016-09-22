@@ -40,7 +40,6 @@
 		240EC9881D7FB456008A5696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240EC9861D7FB456008A5696 /* LaunchScreen.storyboard */; };
 		242815D31D936BE7006120ED /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B71D936BE7006120ED /* AddressViewController.m */; };
 		242815D41D936BE7006120ED /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B91D936BE7006120ED /* CheckBoxViewController.m */; };
-		242815D51D936BE7006120ED /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815BB1D936BE7006120ED /* CheckCell.m */; };
 		242815D61D936BE7006120ED /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815BD1D936BE7006120ED /* ImageViewerController.m */; };
 		242815D71D936BE7006120ED /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815BF1D936BE7006120ED /* QrCodeViewController.m */; };
 		242815D81D936BE7006120ED /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815C11D936BE7006120ED /* ScanViewController.m */; };
@@ -52,6 +51,9 @@
 		242815DE1D936BE7006120ED /* QrCodeIdentityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815CE1D936BE7006120ED /* QrCodeIdentityView.m */; };
 		242815DF1D936BE7006120ED /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815D01D936BE7006120ED /* ScanView.m */; };
 		242815E01D936BE7006120ED /* SignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815D21D936BE7006120ED /* SignView.m */; };
+		242815E41D936C9F006120ED /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815E31D936C9F006120ED /* CheckCell.m */; };
+		242815E71D936D0F006120ED /* SalesOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815E61D936D0F006120ED /* SalesOrder.m */; };
+		242815ED1D9381B4006120ED /* QrCodeImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815EC1D9381B4006120ED /* QrCodeImageController.m */; };
 		248A5DB41C85C3C30095A4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A5DB31C85C3C30095A4FB /* main.m */; };
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E881D79603600BB982F /* AVFoundation.framework */; };
@@ -104,12 +106,11 @@
 		24AFDC401D9238FF00B2F1B9 /* PickupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB851D9238FF00B2F1B9 /* PickupItem.m */; };
 		24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB871D9238FF00B2F1B9 /* PickupItemSignature.m */; };
 		24AFDC421D9238FF00B2F1B9 /* PickupSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB891D9238FF00B2F1B9 /* PickupSignature.m */; };
-		24AFDC451D9238FF00B2F1B9 /* SalesOrderBindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB931D9238FF00B2F1B9 /* SalesOrderBindCell.m */; };
+		24AFDC451D9238FF00B2F1B9 /* SalesOrderMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB931D9238FF00B2F1B9 /* SalesOrderMineCell.m */; };
 		24AFDC461D9238FF00B2F1B9 /* SalesOrderGrabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB951D9238FF00B2F1B9 /* SalesOrderGrabCell.m */; };
-		24AFDC471D9238FF00B2F1B9 /* QrCodeBindController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB971D9238FF00B2F1B9 /* QrCodeBindController.m */; };
-		24AFDC481D9238FF00B2F1B9 /* SalesOrderBindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB991D9238FF00B2F1B9 /* SalesOrderBindListController.m */; };
+		24AFDC481D9238FF00B2F1B9 /* SalesOrderMineListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB991D9238FF00B2F1B9 /* SalesOrderMineListController.m */; };
 		24AFDC491D9238FF00B2F1B9 /* SalesOrderGrabListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB9B1D9238FF00B2F1B9 /* SalesOrderGrabListController.m */; };
-		24AFDC4A1D9238FF00B2F1B9 /* SalesOrderBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB9E1D9238FF00B2F1B9 /* SalesOrderBind.m */; };
+		24AFDC4A1D9238FF00B2F1B9 /* SalesOrderMine.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB9E1D9238FF00B2F1B9 /* SalesOrderMine.m */; };
 		24AFDC4B1D9238FF00B2F1B9 /* SalesOrderConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDBA01D9238FF00B2F1B9 /* SalesOrderConfirm.m */; };
 		24AFDC4C1D9238FF00B2F1B9 /* SalesOrderSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDBA21D9238FF00B2F1B9 /* SalesOrderSearchResult.m */; };
 		24AFDC4D1D9238FF00B2F1B9 /* SalesOrderSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDBA41D9238FF00B2F1B9 /* SalesOrderSnapshot.m */; };
@@ -236,8 +237,6 @@
 		242815B71D936BE7006120ED /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
 		242815B81D936BE7006120ED /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxViewController.h; sourceTree = "<group>"; };
 		242815B91D936BE7006120ED /* CheckBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxViewController.m; sourceTree = "<group>"; };
-		242815BA1D936BE7006120ED /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCell.h; sourceTree = "<group>"; };
-		242815BB1D936BE7006120ED /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCell.m; sourceTree = "<group>"; };
 		242815BC1D936BE7006120ED /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
 		242815BD1D936BE7006120ED /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
 		242815BE1D936BE7006120ED /* QrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
@@ -260,6 +259,12 @@
 		242815D01D936BE7006120ED /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
 		242815D11D936BE7006120ED /* SignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignView.h; sourceTree = "<group>"; };
 		242815D21D936BE7006120ED /* SignView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignView.m; sourceTree = "<group>"; };
+		242815E21D936C9F006120ED /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCell.h; sourceTree = "<group>"; };
+		242815E31D936C9F006120ED /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCell.m; sourceTree = "<group>"; };
+		242815E51D936D0F006120ED /* SalesOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrder.h; sourceTree = "<group>"; };
+		242815E61D936D0F006120ED /* SalesOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrder.m; sourceTree = "<group>"; };
+		242815EB1D9381B4006120ED /* QrCodeImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeImageController.h; sourceTree = "<group>"; };
+		242815EC1D9381B4006120ED /* QrCodeImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeImageController.m; sourceTree = "<group>"; };
 		247D31D71C8D7C040048DD38 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		248A5DAF1C85C3C30095A4FB /* e服务365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e服务365.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		248A5DB31C85C3C30095A4FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -362,18 +367,16 @@
 		24AFDB871D9238FF00B2F1B9 /* PickupItemSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupItemSignature.m; sourceTree = "<group>"; };
 		24AFDB881D9238FF00B2F1B9 /* PickupSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupSignature.h; sourceTree = "<group>"; };
 		24AFDB891D9238FF00B2F1B9 /* PickupSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupSignature.m; sourceTree = "<group>"; };
-		24AFDB921D9238FF00B2F1B9 /* SalesOrderBindCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderBindCell.h; sourceTree = "<group>"; };
-		24AFDB931D9238FF00B2F1B9 /* SalesOrderBindCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderBindCell.m; sourceTree = "<group>"; };
+		24AFDB921D9238FF00B2F1B9 /* SalesOrderMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderMineCell.h; sourceTree = "<group>"; };
+		24AFDB931D9238FF00B2F1B9 /* SalesOrderMineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderMineCell.m; sourceTree = "<group>"; };
 		24AFDB941D9238FF00B2F1B9 /* SalesOrderGrabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabCell.h; sourceTree = "<group>"; };
 		24AFDB951D9238FF00B2F1B9 /* SalesOrderGrabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabCell.m; sourceTree = "<group>"; };
-		24AFDB961D9238FF00B2F1B9 /* QrCodeBindController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeBindController.h; sourceTree = "<group>"; };
-		24AFDB971D9238FF00B2F1B9 /* QrCodeBindController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeBindController.m; sourceTree = "<group>"; };
-		24AFDB981D9238FF00B2F1B9 /* SalesOrderBindListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderBindListController.h; sourceTree = "<group>"; };
-		24AFDB991D9238FF00B2F1B9 /* SalesOrderBindListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderBindListController.m; sourceTree = "<group>"; };
+		24AFDB981D9238FF00B2F1B9 /* SalesOrderMineListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderMineListController.h; sourceTree = "<group>"; };
+		24AFDB991D9238FF00B2F1B9 /* SalesOrderMineListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderMineListController.m; sourceTree = "<group>"; };
 		24AFDB9A1D9238FF00B2F1B9 /* SalesOrderGrabListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabListController.h; sourceTree = "<group>"; };
 		24AFDB9B1D9238FF00B2F1B9 /* SalesOrderGrabListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabListController.m; sourceTree = "<group>"; };
-		24AFDB9D1D9238FF00B2F1B9 /* SalesOrderBind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderBind.h; sourceTree = "<group>"; };
-		24AFDB9E1D9238FF00B2F1B9 /* SalesOrderBind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderBind.m; sourceTree = "<group>"; };
+		24AFDB9D1D9238FF00B2F1B9 /* SalesOrderMine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderMine.h; sourceTree = "<group>"; };
+		24AFDB9E1D9238FF00B2F1B9 /* SalesOrderMine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderMine.m; sourceTree = "<group>"; };
 		24AFDB9F1D9238FF00B2F1B9 /* SalesOrderConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderConfirm.h; sourceTree = "<group>"; };
 		24AFDBA01D9238FF00B2F1B9 /* SalesOrderConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderConfirm.m; sourceTree = "<group>"; };
 		24AFDBA11D9238FF00B2F1B9 /* SalesOrderSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderSearchResult.h; sourceTree = "<group>"; };
@@ -627,12 +630,13 @@
 		242815B51D936BE7006120ED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				242815E11D936C9F006120ED /* cell */,
+				242815EB1D9381B4006120ED /* QrCodeImageController.h */,
+				242815EC1D9381B4006120ED /* QrCodeImageController.m */,
 				242815B61D936BE7006120ED /* AddressViewController.h */,
 				242815B71D936BE7006120ED /* AddressViewController.m */,
 				242815B81D936BE7006120ED /* CheckBoxViewController.h */,
 				242815B91D936BE7006120ED /* CheckBoxViewController.m */,
-				242815BA1D936BE7006120ED /* CheckCell.h */,
-				242815BB1D936BE7006120ED /* CheckCell.m */,
 				242815BC1D936BE7006120ED /* ImageViewerController.h */,
 				242815BD1D936BE7006120ED /* ImageViewerController.m */,
 				242815BE1D936BE7006120ED /* QrCodeViewController.h */,
@@ -664,6 +668,15 @@
 				242815D21D936BE7006120ED /* SignView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		242815E11D936C9F006120ED /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				242815E21D936C9F006120ED /* CheckCell.h */,
+				242815E31D936C9F006120ED /* CheckCell.m */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		248A5DA61C85C3C30095A4FB = {
@@ -1143,10 +1156,8 @@
 			isa = PBXGroup;
 			children = (
 				24AFDB911D9238FF00B2F1B9 /* cell */,
-				24AFDB961D9238FF00B2F1B9 /* QrCodeBindController.h */,
-				24AFDB971D9238FF00B2F1B9 /* QrCodeBindController.m */,
-				24AFDB981D9238FF00B2F1B9 /* SalesOrderBindListController.h */,
-				24AFDB991D9238FF00B2F1B9 /* SalesOrderBindListController.m */,
+				24AFDB981D9238FF00B2F1B9 /* SalesOrderMineListController.h */,
+				24AFDB991D9238FF00B2F1B9 /* SalesOrderMineListController.m */,
 				24AFDB9A1D9238FF00B2F1B9 /* SalesOrderGrabListController.h */,
 				24AFDB9B1D9238FF00B2F1B9 /* SalesOrderGrabListController.m */,
 			);
@@ -1156,8 +1167,8 @@
 		24AFDB911D9238FF00B2F1B9 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				24AFDB921D9238FF00B2F1B9 /* SalesOrderBindCell.h */,
-				24AFDB931D9238FF00B2F1B9 /* SalesOrderBindCell.m */,
+				24AFDB921D9238FF00B2F1B9 /* SalesOrderMineCell.h */,
+				24AFDB931D9238FF00B2F1B9 /* SalesOrderMineCell.m */,
 				24AFDB941D9238FF00B2F1B9 /* SalesOrderGrabCell.h */,
 				24AFDB951D9238FF00B2F1B9 /* SalesOrderGrabCell.m */,
 			);
@@ -1167,14 +1178,16 @@
 		24AFDB9C1D9238FF00B2F1B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				24AFDB9D1D9238FF00B2F1B9 /* SalesOrderBind.h */,
-				24AFDB9E1D9238FF00B2F1B9 /* SalesOrderBind.m */,
+				24AFDB9D1D9238FF00B2F1B9 /* SalesOrderMine.h */,
+				24AFDB9E1D9238FF00B2F1B9 /* SalesOrderMine.m */,
 				24AFDB9F1D9238FF00B2F1B9 /* SalesOrderConfirm.h */,
 				24AFDBA01D9238FF00B2F1B9 /* SalesOrderConfirm.m */,
 				24AFDBA11D9238FF00B2F1B9 /* SalesOrderSearchResult.h */,
 				24AFDBA21D9238FF00B2F1B9 /* SalesOrderSearchResult.m */,
 				24AFDBA31D9238FF00B2F1B9 /* SalesOrderSnapshot.h */,
 				24AFDBA41D9238FF00B2F1B9 /* SalesOrderSnapshot.m */,
+				242815E51D936D0F006120ED /* SalesOrder.h */,
+				242815E61D936D0F006120ED /* SalesOrder.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1537,10 +1550,9 @@
 				24AFDC701D92390000B2F1B9 /* CameraData.m in Sources */,
 				24AFDC211D9238FF00B2F1B9 /* InventorySearchView.m in Sources */,
 				24AFDC4F1D9238FF00B2F1B9 /* SearchViewController.m in Sources */,
-				242815D51D936BE7006120ED /* CheckCell.m in Sources */,
 				24AFDC511D9238FF00B2F1B9 /* CheckBoxCell.m in Sources */,
 				24AFDC0F1D9238FF00B2F1B9 /* InventoryChooseCell.m in Sources */,
-				24AFDC451D9238FF00B2F1B9 /* SalesOrderBindCell.m in Sources */,
+				24AFDC451D9238FF00B2F1B9 /* SalesOrderMineCell.m in Sources */,
 				242815D71D936BE7006120ED /* QrCodeViewController.m in Sources */,
 				240EC9601D7FB2B7008A5696 /* ThrowLineTool.m in Sources */,
 				24AFDC571D9238FF00B2F1B9 /* FooterCell.m in Sources */,
@@ -1572,18 +1584,18 @@
 				240EC9471D7FB2B7008A5696 /* MBProgressHUD+Util.m in Sources */,
 				24AFDC2D1D9238FF00B2F1B9 /* OSCTabBarController.m in Sources */,
 				24AFDC421D9238FF00B2F1B9 /* PickupSignature.m in Sources */,
+				242815E71D936D0F006120ED /* SalesOrder.m in Sources */,
 				240EC95B1D7FB2B7008A5696 /* Helper.m in Sources */,
 				24AFDC6B1D92390000B2F1B9 /* WorkOrderListController.m in Sources */,
 				24AFDC4D1D9238FF00B2F1B9 /* SalesOrderSnapshot.m in Sources */,
 				24AFDC1B1D9238FF00B2F1B9 /* ItemComplete.m in Sources */,
 				24AFDC251D9238FF00B2F1B9 /* HelpViewController.m in Sources */,
-				24AFDC481D9238FF00B2F1B9 /* SalesOrderBindListController.m in Sources */,
+				24AFDC481D9238FF00B2F1B9 /* SalesOrderMineListController.m in Sources */,
 				240EC9481D7FB2B7008A5696 /* NSMutableArray+InsertArray.m in Sources */,
 				24AFDC551D9238FF00B2F1B9 /* DateCell.m in Sources */,
 				240EC9581D7FB2B7008A5696 /* WorkOrderManager.m in Sources */,
 				24AFDC2B1D9238FF00B2F1B9 /* SideMenuCell.m in Sources */,
 				24AFDC3A1D9238FF00B2F1B9 /* CacheCell.m in Sources */,
-				24AFDC471D9238FF00B2F1B9 /* QrCodeBindController.m in Sources */,
 				242815DC1D936BE7006120ED /* CommodityStepView.m in Sources */,
 				240EC9551D7FB2B7008A5696 /* PickupManager.m in Sources */,
 				24AFDC5B1D92390000B2F1B9 /* NumberCell.m in Sources */,
@@ -1601,6 +1613,7 @@
 				24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */,
 				24AFDC111D9238FF00B2F1B9 /* InventoryChooseController.m in Sources */,
 				242815D81D936BE7006120ED /* ScanViewController.m in Sources */,
+				242815ED1D9381B4006120ED /* QrCodeImageController.m in Sources */,
 				240EC9701D7FB2DC008A5696 /* BaseView.m in Sources */,
 				24AFDC791D92390000B2F1B9 /* WorkOrderFormView.m in Sources */,
 				24AFDC291D9238FF00B2F1B9 /* SwipableViewController.m in Sources */,
@@ -1613,7 +1626,7 @@
 				240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */,
 				24AFDC591D92390000B2F1B9 /* HeaderCell.m in Sources */,
 				24AFDC721D92390000B2F1B9 /* FormTemplate.m in Sources */,
-				24AFDC4A1D9238FF00B2F1B9 /* SalesOrderBind.m in Sources */,
+				24AFDC4A1D9238FF00B2F1B9 /* SalesOrderMine.m in Sources */,
 				24AFDC2C1D9238FF00B2F1B9 /* SideMenuController.m in Sources */,
 				24AFDC621D92390000B2F1B9 /* WorkOrderCell.m in Sources */,
 				24AFDC3E1D9238FF00B2F1B9 /* PickupNoticeCell.m in Sources */,
@@ -1621,6 +1634,7 @@
 				24AFDC1E1D9238FF00B2F1B9 /* PropertyData.m in Sources */,
 				24AFDC581D92390000B2F1B9 /* FormTemplateCell.m in Sources */,
 				240EC95A1D7FB2B7008A5696 /* EnumUtil.m in Sources */,
+				242815E41D936C9F006120ED /* CheckCell.m in Sources */,
 				24AFDC171D9238FF00B2F1B9 /* CommodityItem.m in Sources */,
 				24AFDC2F1D9238FF00B2F1B9 /* IntroductionViewController.m in Sources */,
 				24AFDC101D9238FF00B2F1B9 /* InventorySearchCell.m in Sources */,

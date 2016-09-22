@@ -6,21 +6,19 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "SalesOrderBindListController.h"
+#import "SalesOrderMineListController.h"
 #import "MJRefresh.h"
-#import "SalesOrderSnapshot.h"
-#import "SalesOrderBindCell.h"
+#import "SalesOrder.h"
+#import "SalesOrderMineCell.h"
 #import "SalesOrderManager.h"
-#import "QrCodeBindController.h"
-@interface SalesOrderBindListController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SalesOrderMineListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *salesOrderList;
-
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation SalesOrderBindListController
+@implementation SalesOrderMineListController
 -(void)setupView
 {
     _tableView = [UITableView new];
@@ -52,12 +50,12 @@
 
 -(void)loadData
 {
-    
+    self.salesOrderList = [[SalesOrderManager getInstance] sortSalesOrder:YES];
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";
-    [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSString *error) {
+    [[SalesOrderManager getInstance] getSalesOrderMineByLastUpdateTime:[Config getSalesOrderMineTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
         if(error == nil){
-            [self refreshUIWithDict:dict];
+            [self refreshTableView:arr];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = @"加载成功";
@@ -71,15 +69,17 @@
         
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderBindByLastUpdateTime:[Config getSalesOrderBindTime] finishBlock:^(NSDictionary *dict, NSString *error) {
-            [self refreshUIWithDict:dict];
+        [[SalesOrderManager getInstance] getSalesOrderMineByLastUpdateTime:[Config getSalesOrderMineTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
+            if(error != nil){
+                [self refreshTableView:arr];
+            }
         }];
     }];
 }
 
--(void)refreshUIWithDict:(NSDictionary *)dict{
+-(void)refreshTableView:(NSMutableArray *)arr{
     [self.tableView.mj_header endRefreshing];
-    self.salesOrderList = [SalesOrderSnapshot mj_objectArrayWithKeyValuesArray:[dict allValues]];
+    self.salesOrderList = arr;
     [self.tableView reloadData];
 }
 
@@ -95,7 +95,7 @@
 {
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
-    SalesOrderBindCell *cell = [SalesOrderBindCell cellWithTableView:tableView];
+    SalesOrderMineCell *cell = [SalesOrderMineCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
     SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[row];
     cell.salesOrderSnapshot = salesOrderSnapshot;
@@ -106,27 +106,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[indexPath.row];
-    NSString *url = [NSString stringWithFormat:@"%@%@",QMCPAPI_ADDRESS,salesOrderSnapshot.qrCodeUrl];
-    QrCodeBindController *controller = [QrCodeBindController doneBlock:^(NSString *salesOrderCode) {
-        [self.salesOrderList removeObject:salesOrderSnapshot];
-        [[SalesOrderManager getInstance] removeBindDictSalesOrderSnapshotByCode:salesOrderCode];
-        [self.tableView reloadData];
-    }];
-    controller.salesOrderCode = salesOrderSnapshot.code;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    controller.qrCodeUrl = url;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        controller.providesPresentationContextTransitionStyle = YES;
-        controller.definesPresentationContext = YES;
-        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self.tabBarController presentViewController:controller animated:YES completion:nil];
-        
-    } else {
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-        [self presentViewController:controller animated:NO completion:nil];
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    }
+    SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
+    
 }
 
 

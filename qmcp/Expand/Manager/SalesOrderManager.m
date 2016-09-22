@@ -9,24 +9,17 @@
 #import "SalesOrderManager.h"
 #import "QMCPAPI.h"
 #import "HttpUtil.h"
-#import "SalesOrderBind.h"
+#import "SalesOrderMine.h"
 #import "NSObject+LKDBHelper.h"
 #import "MJExtension.h"
-#import "SalesOrderSnapshot.h"
+#import "SalesOrder.h"
 #import "SalesOrderConfirm.h"
 #import "Config.h"
 #import "Utils.h"
 #import "TMCache.h"
 #import "MBProgressHUD.h"
 
-NSString *const kBindCache = @"bind";
-NSString *const kConfirmCache = @"confirm";
-
 @interface SalesOrderManager()
-
-@property(nonatomic,strong)NSMutableDictionary<NSString *,SalesOrderSnapshot *> *bindDict; //绑单
-
-@property(nonatomic,strong)NSMutableDictionary<NSString *,SalesOrderSnapshot *> *grabDict; //接单
 
 @end
 @implementation SalesOrderManager
@@ -36,61 +29,64 @@ NSString *const kConfirmCache = @"confirm";
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
-        shared_manager.bindDict = [[TMCache sharedCache] objectForKey:kBindCache];
-        if(shared_manager.bindDict == nil)
-        {
-            shared_manager.bindDict = [NSMutableDictionary new];
-        }
-        shared_manager.grabDict = [[TMCache sharedCache] objectForKey:kConfirmCache];
-        if(shared_manager.grabDict == nil)
-        {
-            shared_manager.grabDict = [NSMutableDictionary new];
-        }
     });
     return shared_manager;
 }
 
--(void)removeBindDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode{
-    if(_bindDict[salesOrderCode] != nil){
-        [_bindDict removeObjectForKey:salesOrderCode];
-        [[TMCache sharedCache] setObject:_bindDict forKey:kBindCache];
-    }
-}
-
--(void)getSalesOrderBindByLastUpdateTime:(NSString *)lastupdateTime
-                             finishBlock:(CompletionHandler)completion{
+-(void)getSalesOrderMineByLastUpdateTime:(NSString *)lastupdateTime
+                             finishBlock:(SalesOrderCompletion)completion{
     
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERBIND,lastupdateTime];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERMINE,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
-            [Config setSaleOrderBindTime:[Utils formatDate:[NSDate new]]];
-            SalesOrderBind *salesOrderBind = [SalesOrderBind mj_objectWithKeyValues:obj];
-            if(salesOrderBind.unbound.count == 0){
+            [Config setSaleOrderMineTime:[Utils formatDate:[NSDate new]]];
+            SalesOrderMine *salesOrderMine = [SalesOrderMine mj_objectWithKeyValues:obj];
+            if(salesOrderMine.uncompleted.count == 0){
                 
             }else{
-                NSArray *array = salesOrderBind.haveBound;
+                NSArray *array = salesOrderMine.haveCompleted;
                 for (NSString *code in array) {
-                    [_bindDict removeObjectForKey:code];
+                    NSString *where = [NSString stringWithFormat:@"code = '%@'",code];
+                    [SalesOrder deleteWithWhere:where];
+
                 }
                 
-                for (SalesOrderSnapshot *salesOrder in salesOrderBind.unbound) {
-                    _bindDict[salesOrder.code] = salesOrder;
+                for (SalesOrder *salesOrder in salesOrderMine.uncompleted) {
+                    salesOrder.addressSnapshot.code = salesOrder.code;
+                    salesOrder.isMine = YES;
+                    [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
+                        css.code = [NSUUID UUID].UUIDString;
+                    }];
+                    [salesOrder saveToDB];
                 }
-                [[TMCache sharedCache] setObject:_bindDict forKey:kBindCache];
                 
             }
 
-            completion(_bindDict,nil);
+            completion([self sortSalesOrder:YES],nil);
             
         }else{
-            completion(obj,error);
+            completion(nil,error);
         }
     }];
 
 }
 
+
+- (NSMutableArray *)sortSalesOrder:(BOOL)isMine{
+    
+    NSString *salesOrderWhere = [NSString stringWithFormat:@"isMine = '%@'",[NSNumber numberWithBool:isMine]];
+    NSMutableArray *salesOrders = [SalesOrder searchWithWhere:salesOrderWhere];
+
+    [salesOrders sortUsingComparator:^NSComparisonResult(SalesOrder *  _Nonnull obj1, SalesOrder *  _Nonnull obj2) {
+        int a1 = [[obj1.code componentsSeparatedByString:@"-"][1] intValue];
+        int a2 = [[obj2.code componentsSeparatedByString:@"-"][1] intValue];
+        return a1 < a2;
+    }];
+    return salesOrders;
+}
+
 -(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
-                                finishBlock:(CompletionHandler)completion{
+                                finishBlock:(SalesOrderCompletion)completion{
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCONFIRM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -99,39 +95,27 @@ NSString *const kConfirmCache = @"confirm";
             SalesOrderConfirm *salesOrderConfirm = [SalesOrderConfirm mj_objectWithKeyValues:obj];
            
             for (NSString *code in salesOrderConfirm.haveAssign) {
-                [_grabDict removeObjectForKey:code];
+                NSString *where = [NSString stringWithFormat:@"code = '%@'",code];
+                [SalesOrder deleteWithWhere:where];
             }
-            NSArray<SalesOrderSnapshot *> *unArr = [SalesOrderSnapshot mj_objectArrayWithKeyValuesArray:salesOrderConfirm.unassigned];
-            for (SalesOrderSnapshot *salesOrder in unArr) {
-                _grabDict[salesOrder.code] = salesOrder;
+            NSArray<SalesOrder *> *unArr = [SalesOrder mj_objectArrayWithKeyValuesArray:salesOrderConfirm.unassigned];
+            for (SalesOrder *salesOrder in unArr) {
+                salesOrder.addressSnapshot.code = salesOrder.code;
+                [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
+                    css.code = [NSUUID UUID].UUIDString;
+                }];
+                salesOrder.isMine = NO;
+                [salesOrder saveToDB];
             }
-            [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
-                
-            completion(_grabDict,nil);
+            
+            completion([self sortSalesOrder:NO],nil);
             
         }else{
-            completion(obj,error);
+            completion([self sortSalesOrder:NO],error);
         }
     }];
     
 }
 
--(void)removeGrabDictSalesOrderSnapshotByCode:(NSString *)salesOrderCode{
-    
-    if(_grabDict[salesOrderCode] != nil){
-        [_grabDict removeObjectForKey:salesOrderCode];
-        [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
-    }
-    
-}
-
--(void)updateGrabDictSalesOrderSnapshot:(SalesOrderSnapshot *)salesOrderSnapshot{
-    
-    if(_grabDict[salesOrderSnapshot.code] != nil){
-        _grabDict[salesOrderSnapshot.code] = salesOrderSnapshot;
-        [[TMCache sharedCache] setObject:_grabDict forKey:kConfirmCache];
-    }
-    
-}
 
 @end

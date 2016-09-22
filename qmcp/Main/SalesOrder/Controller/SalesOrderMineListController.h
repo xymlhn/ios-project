@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface SalesOrderBindListController : BaseViewController
+@interface SalesOrderMineListController : BaseViewController
 
 @end

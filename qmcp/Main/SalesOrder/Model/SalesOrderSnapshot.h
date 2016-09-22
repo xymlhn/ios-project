@@ -8,12 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "AddressSnapshot.h"
+#import "PchHeader.h"
 
-typedef NS_ENUM(NSInteger, SalesOrderType) {
-    SalesOrderTypeOnsite = 10,//上门
-    SalesOrderTypeShop = 20,//到店
-    SalesOrderTypeUnknown = 30,//到店
-};
 
 @interface SalesOrderSnapshot : NSObject
 
@@ -39,15 +35,8 @@ typedef NS_ENUM(NSInteger, SalesOrderType) {
 
 @property (nonatomic, retain) AddressSnapshot *addressSnapshot;
 
-@property (nonatomic, copy) NSString *qrCodeUrl;
-
 @property (nonatomic, strong) NSArray *commodityNames;
 
 @property (nonatomic, assign) BOOL storePricingReviewFlag;
-
-@property (nonatomic, assign) BOOL confirmationFlag;
-
-
-
 
 @end

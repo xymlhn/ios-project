@@ -6,20 +6,20 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "SalesOrderBindCell.h"
+#import "SalesOrderMineCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
 #import "MJExtension.h"
 #import "EnumUtil.h"
-@implementation SalesOrderBindCell
+@implementation SalesOrderMineCell
 
 //创建自定义可重用的cell对象
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *reuseId = @"SalesOrderBindCell";
-    SalesOrderBindCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    static NSString *reuseId = @"SalesOrderMineCell";
+    SalesOrderMineCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
-        cell = [[SalesOrderBindCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
+        cell = [[SalesOrderMineCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
     }
     cell.selectedBackgroundView.backgroundColor = [UIColor themeColor];
     return cell;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SalesOrderSnapshot.h"
 
-@interface SalesOrderBindCell : UITableViewCell
+@interface SalesOrderMineCell : UITableViewCell
 
 @property(nonatomic,strong)UILabel *typeText;
 @property(nonatomic,strong)UILabel *codeText;

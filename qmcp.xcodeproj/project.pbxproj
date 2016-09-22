@@ -54,6 +54,10 @@
 		242815E41D936C9F006120ED /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815E31D936C9F006120ED /* CheckCell.m */; };
 		242815E71D936D0F006120ED /* SalesOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815E61D936D0F006120ED /* SalesOrder.m */; };
 		242815ED1D9381B4006120ED /* QrCodeImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815EC1D9381B4006120ED /* QrCodeImageController.m */; };
+		242815F01D9388BC006120ED /* BusinessSalesOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */; };
+		242815F31D9388FD006120ED /* BusinessSalesOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815F21D9388FD006120ED /* BusinessSalesOrder.m */; };
+		242815F61D938AA8006120ED /* BusinessSalesOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815F51D938AA8006120ED /* BusinessSalesOrderView.m */; };
+		245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 245BCF841D93CBCE00028C40 /* GisLocation.m */; };
 		248A5DB41C85C3C30095A4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A5DB31C85C3C30095A4FB /* main.m */; };
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E881D79603600BB982F /* AVFoundation.framework */; };
@@ -82,7 +86,6 @@
 		24AFDC211D9238FF00B2F1B9 /* InventorySearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB2B1D9238FF00B2F1B9 /* InventorySearchView.m */; };
 		24AFDC221D9238FF00B2F1B9 /* InventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB2D1D9238FF00B2F1B9 /* InventoryView.m */; };
 		24AFDC231D9238FF00B2F1B9 /* AMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB321D9238FF00B2F1B9 /* AMapViewController.m */; };
-		24AFDC241D9238FF00B2F1B9 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB361D9238FF00B2F1B9 /* GisLocation.m */; };
 		24AFDC251D9238FF00B2F1B9 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB3B1D9238FF00B2F1B9 /* HelpViewController.m */; };
 		24AFDC261D9238FF00B2F1B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24AFDB3E1D9238FF00B2F1B9 /* Main.storyboard */; };
 		24AFDC271D9238FF00B2F1B9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB401D9238FF00B2F1B9 /* RootViewController.m */; };
@@ -265,6 +268,32 @@
 		242815E61D936D0F006120ED /* SalesOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrder.m; sourceTree = "<group>"; };
 		242815EB1D9381B4006120ED /* QrCodeImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeImageController.h; sourceTree = "<group>"; };
 		242815EC1D9381B4006120ED /* QrCodeImageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeImageController.m; sourceTree = "<group>"; };
+		242815EE1D9388BC006120ED /* BusinessSalesOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessSalesOrderController.h; sourceTree = "<group>"; };
+		242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSalesOrderController.m; sourceTree = "<group>"; };
+		242815F11D9388FD006120ED /* BusinessSalesOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessSalesOrder.h; sourceTree = "<group>"; };
+		242815F21D9388FD006120ED /* BusinessSalesOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSalesOrder.m; sourceTree = "<group>"; };
+		242815F41D938AA8006120ED /* BusinessSalesOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessSalesOrderView.h; path = qmcp/Main/SalesOrder/Model/BusinessSalesOrderView.h; sourceTree = SOURCE_ROOT; };
+		242815F51D938AA8006120ED /* BusinessSalesOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessSalesOrderView.m; path = qmcp/Main/SalesOrder/Model/BusinessSalesOrderView.m; sourceTree = SOURCE_ROOT; };
+		245BCF831D93CBCE00028C40 /* GisLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisLocation.h; sourceTree = "<group>"; };
+		245BCF841D93CBCE00028C40 /* GisLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GisLocation.m; sourceTree = "<group>"; };
+		245BCF861D93D34F00028C40 /* libActionSheetPicker-3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libActionSheetPicker-3.0.a"; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/ActionSheetPicker-3.0/libActionSheetPicker-3.0.a"; sourceTree = "<group>"; };
+		245BCF871D93D34F00028C40 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
+		245BCF881D93D34F00028C40 /* libFLEX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFLEX.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/FLEX/libFLEX.a"; sourceTree = "<group>"; };
+		245BCF891D93D34F00028C40 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/FMDB/libFMDB.a"; sourceTree = "<group>"; };
+		245BCF8A1D93D34F00028C40 /* libFontAwesome.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFontAwesome.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/FontAwesome/libFontAwesome.a"; sourceTree = "<group>"; };
+		245BCF8B1D93D34F00028C40 /* libJazzHands.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libJazzHands.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/JazzHands/libJazzHands.a"; sourceTree = "<group>"; };
+		245BCF8C1D93D34F00028C40 /* libLKDBHelper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLKDBHelper.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/LKDBHelper/libLKDBHelper.a"; sourceTree = "<group>"; };
+		245BCF8D1D93D34F00028C40 /* libMasonry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMasonry.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/Masonry/libMasonry.a"; sourceTree = "<group>"; };
+		245BCF8E1D93D34F00028C40 /* libMBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMBProgressHUD.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/MBProgressHUD/libMBProgressHUD.a"; sourceTree = "<group>"; };
+		245BCF8F1D93D34F00028C40 /* libMJExtension.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMJExtension.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/MJExtension/libMJExtension.a"; sourceTree = "<group>"; };
+		245BCF901D93D34F00028C40 /* libMJRefresh.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMJRefresh.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/MJRefresh/libMJRefresh.a"; sourceTree = "<group>"; };
+		245BCF911D93D34F00028C40 /* libNYXImagesKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNYXImagesKit.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/NYXImagesKit/libNYXImagesKit.a"; sourceTree = "<group>"; };
+		245BCF921D93D34F00028C40 /* libReactiveCocoa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libReactiveCocoa.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/ReactiveCocoa/libReactiveCocoa.a"; sourceTree = "<group>"; };
+		245BCF931D93D34F00028C40 /* libRESideMenu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRESideMenu.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/RESideMenu/libRESideMenu.a"; sourceTree = "<group>"; };
+		245BCF941D93D34F00028C40 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/SDWebImage/libSDWebImage.a"; sourceTree = "<group>"; };
+		245BCF951D93D34F00028C40 /* libSSKeychain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSSKeychain.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/SSKeychain/libSSKeychain.a"; sourceTree = "<group>"; };
+		245BCF961D93D34F00028C40 /* libTMCache.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTMCache.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/TMCache/libTMCache.a"; sourceTree = "<group>"; };
+		245BCFA81D93D4AB00028C40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		247D31D71C8D7C040048DD38 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		248A5DAF1C85C3C30095A4FB /* e服务365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e服务365.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		248A5DB31C85C3C30095A4FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -320,8 +349,6 @@
 		24AFDB2D1D9238FF00B2F1B9 /* InventoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryView.m; sourceTree = "<group>"; };
 		24AFDB311D9238FF00B2F1B9 /* AMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMapViewController.h; sourceTree = "<group>"; };
 		24AFDB321D9238FF00B2F1B9 /* AMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMapViewController.m; sourceTree = "<group>"; };
-		24AFDB351D9238FF00B2F1B9 /* GisLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisLocation.h; sourceTree = "<group>"; };
-		24AFDB361D9238FF00B2F1B9 /* GisLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GisLocation.m; sourceTree = "<group>"; };
 		24AFDB3A1D9238FF00B2F1B9 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		24AFDB3B1D9238FF00B2F1B9 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		24AFDB3E1D9238FF00B2F1B9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -485,6 +512,7 @@
 		24AFDC841D9239BB00B2F1B9 /* PickupNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupNoticeViewController.m; sourceTree = "<group>"; };
 		24AFDC851D9239BB00B2F1B9 /* PickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupViewController.h; sourceTree = "<group>"; };
 		24AFDC861D9239BB00B2F1B9 /* PickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupViewController.m; sourceTree = "<group>"; };
+		24B97B7C1D93D6CA005D1047 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		24EABBA41D92761B00AF2A02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4305545D42B817C3FA72B687 /* libPods-qmcp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-qmcp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6083A9B27AC8F265DD41E322 /* Pods-qmcp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qmcp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qmcp/Pods-qmcp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -873,18 +901,10 @@
 		24AFDB331D9238FF00B2F1B9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				24AFDB341D9238FF00B2F1B9 /* Gis */,
+				245BCF831D93CBCE00028C40 /* GisLocation.h */,
+				245BCF841D93CBCE00028C40 /* GisLocation.m */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		24AFDB341D9238FF00B2F1B9 /* Gis */ = {
-			isa = PBXGroup;
-			children = (
-				24AFDB351D9238FF00B2F1B9 /* GisLocation.h */,
-				24AFDB361D9238FF00B2F1B9 /* GisLocation.m */,
-			);
-			path = Gis;
 			sourceTree = "<group>";
 		};
 		24AFDB371D9238FF00B2F1B9 /* Search */ = {
@@ -1160,6 +1180,8 @@
 				24AFDB991D9238FF00B2F1B9 /* SalesOrderMineListController.m */,
 				24AFDB9A1D9238FF00B2F1B9 /* SalesOrderGrabListController.h */,
 				24AFDB9B1D9238FF00B2F1B9 /* SalesOrderGrabListController.m */,
+				242815EE1D9388BC006120ED /* BusinessSalesOrderController.h */,
+				242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1188,6 +1210,8 @@
 				24AFDBA41D9238FF00B2F1B9 /* SalesOrderSnapshot.m */,
 				242815E51D936D0F006120ED /* SalesOrder.h */,
 				242815E61D936D0F006120ED /* SalesOrder.m */,
+				242815F11D9388FD006120ED /* BusinessSalesOrder.h */,
+				242815F21D9388FD006120ED /* BusinessSalesOrder.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1195,6 +1219,8 @@
 		24AFDBA51D9238FF00B2F1B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				242815F41D938AA8006120ED /* BusinessSalesOrderView.h */,
+				242815F51D938AA8006120ED /* BusinessSalesOrderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1376,6 +1402,25 @@
 		629598FDCA012DAE59C2708E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24B97B7C1D93D6CA005D1047 /* MapKit.framework */,
+				245BCFA81D93D4AB00028C40 /* libsqlite3.0.tbd */,
+				245BCF861D93D34F00028C40 /* libActionSheetPicker-3.0.a */,
+				245BCF871D93D34F00028C40 /* libAFNetworking.a */,
+				245BCF881D93D34F00028C40 /* libFLEX.a */,
+				245BCF891D93D34F00028C40 /* libFMDB.a */,
+				245BCF8A1D93D34F00028C40 /* libFontAwesome.a */,
+				245BCF8B1D93D34F00028C40 /* libJazzHands.a */,
+				245BCF8C1D93D34F00028C40 /* libLKDBHelper.a */,
+				245BCF8D1D93D34F00028C40 /* libMasonry.a */,
+				245BCF8E1D93D34F00028C40 /* libMBProgressHUD.a */,
+				245BCF8F1D93D34F00028C40 /* libMJExtension.a */,
+				245BCF901D93D34F00028C40 /* libMJRefresh.a */,
+				245BCF911D93D34F00028C40 /* libNYXImagesKit.a */,
+				245BCF921D93D34F00028C40 /* libReactiveCocoa.a */,
+				245BCF931D93D34F00028C40 /* libRESideMenu.a */,
+				245BCF941D93D34F00028C40 /* libSDWebImage.a */,
+				245BCF951D93D34F00028C40 /* libSSKeychain.a */,
+				245BCF961D93D34F00028C40 /* libTMCache.a */,
 				24EABBA41D92761B00AF2A02 /* Security.framework */,
 				248F2E8A1D79606200BB982F /* AssetsLibrary.framework */,
 				248F2E881D79603600BB982F /* AVFoundation.framework */,
@@ -1546,6 +1591,7 @@
 				24AFDC2A1D9238FF00B2F1B9 /* TitleBarView.m in Sources */,
 				24AFDC231D9238FF00B2F1B9 /* AMapViewController.m in Sources */,
 				248A5DB41C85C3C30095A4FB /* main.m in Sources */,
+				242815F01D9388BC006120ED /* BusinessSalesOrderController.m in Sources */,
 				24AFDC661D92390000B2F1B9 /* QrCodeIdentityController.m in Sources */,
 				24AFDC701D92390000B2F1B9 /* CameraData.m in Sources */,
 				24AFDC211D9238FF00B2F1B9 /* InventorySearchView.m in Sources */,
@@ -1630,11 +1676,13 @@
 				24AFDC2C1D9238FF00B2F1B9 /* SideMenuController.m in Sources */,
 				24AFDC621D92390000B2F1B9 /* WorkOrderCell.m in Sources */,
 				24AFDC3E1D9238FF00B2F1B9 /* PickupNoticeCell.m in Sources */,
-				24AFDC241D9238FF00B2F1B9 /* GisLocation.m in Sources */,
+				245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */,
 				24AFDC1E1D9238FF00B2F1B9 /* PropertyData.m in Sources */,
+				242815F61D938AA8006120ED /* BusinessSalesOrderView.m in Sources */,
 				24AFDC581D92390000B2F1B9 /* FormTemplateCell.m in Sources */,
 				240EC95A1D7FB2B7008A5696 /* EnumUtil.m in Sources */,
 				242815E41D936C9F006120ED /* CheckCell.m in Sources */,
+				242815F31D9388FD006120ED /* BusinessSalesOrder.m in Sources */,
 				24AFDC171D9238FF00B2F1B9 /* CommodityItem.m in Sources */,
 				24AFDC2F1D9238FF00B2F1B9 /* IntroductionViewController.m in Sources */,
 				24AFDC101D9238FF00B2F1B9 /* InventorySearchCell.m in Sources */,
@@ -1735,6 +1783,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1774,6 +1823,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1791,9 +1841,12 @@
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp;
 				PRODUCT_NAME = "e服务365";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -1808,9 +1861,12 @@
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inforshare.qmcp;
 				PRODUCT_NAME = "e服务365";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

@@ -134,4 +134,14 @@
  *  @return 结果
  */
 +(BOOL)deleteImage:(NSString *)imageName;
+
+
+/**
+ 判断是否是手机号码
+
+ @param mobileNum 手机号码
+
+ @return bool
+ */
++ (BOOL)isMobileNumber:(NSString *)mobileNum ;
 @end

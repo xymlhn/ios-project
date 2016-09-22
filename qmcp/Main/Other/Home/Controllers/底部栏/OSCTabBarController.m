@@ -22,6 +22,7 @@
 #import "SearchViewController.h"
 #import "AMapViewController.h"
 #import "AppManager.h"
+#import "BusinessSalesOrderController.h"
 @interface OSCTabBarController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     WorkOrderListController *newsViewCtl;
@@ -81,14 +82,14 @@
                                  [self addNavigationItemForViewController:gis],
                                  [self addNavigationItemForViewController:help]];
     }else{
-        _titles = @[@"工单",@"订单", @"地图", @"帮助"];
+        _titles = @[@"订单",@"工单", @"地图", @"帮助"];
         _images = @[@"tabbar-news", @"tabbar-discover", @"tabbar-discover", @"tabbar-me"];
         SwipableViewController *workOrderSVC = [[SwipableViewController alloc] initWithTitle:@"工单"
                                                                                 andSubTitles:@[@"未完成", @"待上传",]
                                                                               andControllers:@[newsViewCtl, hotNewsViewCtl]
                                                                                  underTabbar:YES];
-        self.viewControllers = @[[self addNavigationItemForViewController:workOrderSVC],
-                                 [self addNavigationItemForViewController:saleOrderSVC],
+        self.viewControllers = @[[self addNavigationItemForViewController:saleOrderSVC],
+                                 [self addNavigationItemForViewController:workOrderSVC],
                                  [self addNavigationItemForViewController:gis],
                                  [self addNavigationItemForViewController:help]];
     }
@@ -148,8 +149,10 @@
 
 //TODO: 搜索系统
 -(void)onClickSearchButton{
-    SearchViewController *info = [SearchViewController new];
-    [self setContentViewController:info];
+//    SearchViewController *info = [SearchViewController new];
+//    [self setContentViewController:info];
+    BusinessSalesOrderController *controller = [BusinessSalesOrderController new];
+    [self setContentViewController:controller];
 }
 
 - (void)setContentViewController:(UIViewController *)viewController

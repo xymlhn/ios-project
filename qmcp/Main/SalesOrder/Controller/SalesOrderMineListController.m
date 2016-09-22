@@ -73,14 +73,15 @@
             if(error != nil){
                 [self refreshTableView:arr];
             }
+            [_tableView.mj_header endRefreshing];
         }];
     }];
 }
 
 -(void)refreshTableView:(NSMutableArray *)arr{
-    [self.tableView.mj_header endRefreshing];
     self.salesOrderList = arr;
     [self.tableView reloadData];
+    
 }
 
 #pragma mark - Table view data source

@@ -10,7 +10,7 @@
 
 #import <SSKeychain.h>
 
-NSString * const kService = @"QMCP";
+NSString * const kService = @"com.inforshare.qmcp";
 NSString * const kAccount = @"account";
 NSString * const kLogin = @"login";
 NSString * const kSound = @"sound";

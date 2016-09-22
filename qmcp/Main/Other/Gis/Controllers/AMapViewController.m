@@ -148,15 +148,15 @@
 }
 
 -(void)sendLocation{
-    __weak typeof(self) weakSelf = self;
-
-    NSDictionary *dict = [_gisLocationArray mj_keyValues];
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOCATION];
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
-        if (!error) {
-            [weakSelf.gisLocationArray removeAllObjects];
-        }
-    }];
+//    __weak typeof(self) weakSelf = self;
+//
+//    NSArray *array= [GisLocation mj_keyValuesArrayWithObjectArray:_gisLocationArray];
+//    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOCATION];
+//    [HttpUtil post:URLString param:array finish:^(NSDictionary *obj, NSString *error) {
+//        if (!error) {
+//            [weakSelf.gisLocationArray removeAllObjects];
+//        }
+//    }];
 }
 
 @end

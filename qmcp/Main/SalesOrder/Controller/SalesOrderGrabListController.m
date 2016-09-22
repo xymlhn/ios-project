@@ -65,12 +65,12 @@
             if(error != nil){
                 [self refreshTableView:arr];
             }
+            [_tableView.mj_header endRefreshing];
         }];
     }];
 }
 
 - (void)refreshTableView:(NSMutableArray *)arr{
-    [_tableView.mj_header endRefreshing];
     _salesOrderList = arr;
     [self.tableView reloadData];
 }

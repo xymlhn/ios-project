@@ -72,8 +72,8 @@
     AMapViewController *gis = [[AMapViewController alloc] init];
     HelpViewController *help = [[HelpViewController alloc] init];
     SwipableViewController *saleOrderSVC = [[SwipableViewController alloc] initWithTitle:@"订单"
-                                                                            andSubTitles:@[@"抢单", @"绑定"]
-                                                                          andControllers:@[grabViewCtl, bindViewCtl]
+                                                                            andSubTitles:@[@"我的订单", @"待接订单"]
+                                                                          andControllers:@[bindViewCtl,grabViewCtl]
                                                                              underTabbar:YES];
     if ([[AppManager getInstance] getUser].cooperationMode == CooperationModeSingle) {
         _titles = @[@"订单", @"地图", @"帮助"];

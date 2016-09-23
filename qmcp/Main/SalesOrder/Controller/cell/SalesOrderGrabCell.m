@@ -36,21 +36,21 @@
 }
 
 //重写属性的setter方法，给子控件赋值
-- (void)setSalesOrderSnapshot:(SalesOrderSnapshot *)salesOrderSnapshot
+- (void)setSalesOrder:(SalesOrder *)salesOrder
 {
-    if(salesOrderSnapshot != nil){
-        _typeText.text = [EnumUtil salesOrderTypeString:salesOrderSnapshot.type];
-        if(salesOrderSnapshot.type == SalesOrderTypeOnsite){
+    if(salesOrder != nil){
+        _typeText.text = [EnumUtil salesOrderTypeString:salesOrder.type];
+        if(salesOrder.type == SalesOrderTypeOnsite){
             _typeText.backgroundColor = [UIColor nameColor];
-        }else if(salesOrderSnapshot.type == SalesOrderTypeShop){
+        }else if(salesOrder.type == SalesOrderTypeShop){
             _typeText.backgroundColor = [UIColor orangeColor];
         }else{
             _typeText.backgroundColor = [UIColor greenColor];
         }
-        _commodityNameText.text = [salesOrderSnapshot.commodityNames componentsJoinedByString:@","];;
-        _codeText.text = salesOrderSnapshot.code;
-        _nameText.text = salesOrderSnapshot.addressSnapshot.contacts;
-        _phoneText.text = salesOrderSnapshot.addressSnapshot.mobilePhone;
+        _commodityNameText.text = [salesOrder.commodityNames componentsJoinedByString:@","];;
+        _codeText.text = salesOrder.code;
+        _nameText.text = salesOrder.addressSnapshot.contacts;
+        _phoneText.text = salesOrder.addressSnapshot.mobilePhone;
         NSString *title = @"接单";
         [_grabBtn setTitle:title forState:UIControlStateNormal];
     }

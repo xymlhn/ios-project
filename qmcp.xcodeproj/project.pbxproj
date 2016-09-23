@@ -57,6 +57,11 @@
 		242815F01D9388BC006120ED /* BusinessSalesOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */; };
 		242815F31D9388FD006120ED /* BusinessSalesOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815F21D9388FD006120ED /* BusinessSalesOrder.m */; };
 		242815F61D938AA8006120ED /* BusinessSalesOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815F51D938AA8006120ED /* BusinessSalesOrderView.m */; };
+		245A39321D94C02A00B5CE70 /* SalesOrderInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */; };
+		245A39351D94C08800B5CE70 /* SalesOrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A39341D94C08800B5CE70 /* SalesOrderInfoView.m */; };
+		245A39381D94D7FE00B5CE70 /* SalesOrderCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A39371D94D7FE00B5CE70 /* SalesOrderCameraController.m */; };
+		245A393B1D94F77B00B5CE70 /* SalesOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A393A1D94F77B00B5CE70 /* SalesOrderStepController.m */; };
+		245A393E1D94F9CC00B5CE70 /* SalesOrderStepEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A393D1D94F9CC00B5CE70 /* SalesOrderStepEditController.m */; };
 		245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 245BCF841D93CBCE00028C40 /* GisLocation.m */; };
 		248A5DB41C85C3C30095A4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A5DB31C85C3C30095A4FB /* main.m */; };
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
@@ -274,6 +279,16 @@
 		242815F21D9388FD006120ED /* BusinessSalesOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSalesOrder.m; sourceTree = "<group>"; };
 		242815F41D938AA8006120ED /* BusinessSalesOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessSalesOrderView.h; path = qmcp/Main/SalesOrder/Model/BusinessSalesOrderView.h; sourceTree = SOURCE_ROOT; };
 		242815F51D938AA8006120ED /* BusinessSalesOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessSalesOrderView.m; path = qmcp/Main/SalesOrder/Model/BusinessSalesOrderView.m; sourceTree = SOURCE_ROOT; };
+		245A39301D94C02A00B5CE70 /* SalesOrderInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderInfoController.h; sourceTree = "<group>"; };
+		245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderInfoController.m; sourceTree = "<group>"; };
+		245A39331D94C08800B5CE70 /* SalesOrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SalesOrderInfoView.h; path = qmcp/Main/SalesOrder/Controller/SalesOrderInfoView.h; sourceTree = SOURCE_ROOT; };
+		245A39341D94C08800B5CE70 /* SalesOrderInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SalesOrderInfoView.m; path = qmcp/Main/SalesOrder/Controller/SalesOrderInfoView.m; sourceTree = SOURCE_ROOT; };
+		245A39361D94D7FE00B5CE70 /* SalesOrderCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderCameraController.h; sourceTree = "<group>"; };
+		245A39371D94D7FE00B5CE70 /* SalesOrderCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderCameraController.m; sourceTree = "<group>"; };
+		245A39391D94F77B00B5CE70 /* SalesOrderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderStepController.h; sourceTree = "<group>"; };
+		245A393A1D94F77B00B5CE70 /* SalesOrderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderStepController.m; sourceTree = "<group>"; };
+		245A393C1D94F9CC00B5CE70 /* SalesOrderStepEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderStepEditController.h; sourceTree = "<group>"; };
+		245A393D1D94F9CC00B5CE70 /* SalesOrderStepEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderStepEditController.m; sourceTree = "<group>"; };
 		245BCF831D93CBCE00028C40 /* GisLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisLocation.h; sourceTree = "<group>"; };
 		245BCF841D93CBCE00028C40 /* GisLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GisLocation.m; sourceTree = "<group>"; };
 		245BCF861D93D34F00028C40 /* libActionSheetPicker-3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libActionSheetPicker-3.0.a"; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/ActionSheetPicker-3.0/libActionSheetPicker-3.0.a"; sourceTree = "<group>"; };
@@ -883,7 +898,6 @@
 			children = (
 				24AFDB301D9238FF00B2F1B9 /* Controllers */,
 				24AFDB331D9238FF00B2F1B9 /* Models */,
-				24AFDB371D9238FF00B2F1B9 /* Search */,
 			);
 			name = "Gis(地图)";
 			path = Gis;
@@ -905,13 +919,6 @@
 				245BCF841D93CBCE00028C40 /* GisLocation.m */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		24AFDB371D9238FF00B2F1B9 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Search;
 			sourceTree = "<group>";
 		};
 		24AFDB381D9238FF00B2F1B9 /* Help(帮助) */ = {
@@ -1182,6 +1189,14 @@
 				24AFDB9B1D9238FF00B2F1B9 /* SalesOrderGrabListController.m */,
 				242815EE1D9388BC006120ED /* BusinessSalesOrderController.h */,
 				242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */,
+				245A39301D94C02A00B5CE70 /* SalesOrderInfoController.h */,
+				245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */,
+				245A39361D94D7FE00B5CE70 /* SalesOrderCameraController.h */,
+				245A39371D94D7FE00B5CE70 /* SalesOrderCameraController.m */,
+				245A39391D94F77B00B5CE70 /* SalesOrderStepController.h */,
+				245A393A1D94F77B00B5CE70 /* SalesOrderStepController.m */,
+				245A393C1D94F9CC00B5CE70 /* SalesOrderStepEditController.h */,
+				245A393D1D94F9CC00B5CE70 /* SalesOrderStepEditController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1221,6 +1236,8 @@
 			children = (
 				242815F41D938AA8006120ED /* BusinessSalesOrderView.h */,
 				242815F51D938AA8006120ED /* BusinessSalesOrderView.m */,
+				245A39331D94C08800B5CE70 /* SalesOrderInfoView.h */,
+				245A39341D94C08800B5CE70 /* SalesOrderInfoView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1576,6 +1593,7 @@
 				24AFDC881D9239BB00B2F1B9 /* PickupViewController.m in Sources */,
 				24AFDC631D92390000B2F1B9 /* WorkOrderStepCell.m in Sources */,
 				24AFDC311D9238FF00B2F1B9 /* User.m in Sources */,
+				245A39381D94D7FE00B5CE70 /* SalesOrderCameraController.m in Sources */,
 				24AFDC501D9238FF00B2F1B9 /* SearchView.m in Sources */,
 				24AFDC181D9238FF00B2F1B9 /* CommodityProperty.m in Sources */,
 				24AFDC491D9238FF00B2F1B9 /* SalesOrderGrabListController.m in Sources */,
@@ -1610,6 +1628,7 @@
 				24AFDC2E1D9238FF00B2F1B9 /* InitViewController.m in Sources */,
 				24AFDC3C1D9238FF00B2F1B9 /* SettingViewController.m in Sources */,
 				24AFDC3F1D9238FF00B2F1B9 /* PickupData.m in Sources */,
+				245A39351D94C08800B5CE70 /* SalesOrderInfoView.m in Sources */,
 				242815DB1D936BE7006120ED /* ChooseView.m in Sources */,
 				240EC94C1D7FB2B7008A5696 /* UISearchBar+Common.m in Sources */,
 				24AFDC731D92390000B2F1B9 /* FormTemplateBrife.m in Sources */,
@@ -1647,6 +1666,7 @@
 				24AFDC5B1D92390000B2F1B9 /* NumberCell.m in Sources */,
 				24AFDC601D92390000B2F1B9 /* TextSingleCell.m in Sources */,
 				24AFDC671D92390000B2F1B9 /* WorkOrderCameraController.m in Sources */,
+				245A393B1D94F77B00B5CE70 /* SalesOrderStepController.m in Sources */,
 				24AFDC5A1D92390000B2F1B9 /* LabelCell.m in Sources */,
 				242815D61D936BE7006120ED /* ImageViewerController.m in Sources */,
 				240EC9501D7FB2B7008A5696 /* AddressManager.m in Sources */,
@@ -1691,6 +1711,7 @@
 				240EC9491D7FB2B7008A5696 /* UIColor+Util.m in Sources */,
 				240EC9571D7FB2B7008A5696 /* SalesOrderManager.m in Sources */,
 				24AFDC7C1D92390000B2F1B9 /* WorkOrderStepView.m in Sources */,
+				245A39321D94C02A00B5CE70 /* SalesOrderInfoController.m in Sources */,
 				240EC9721D7FB2DC008A5696 /* BaseWorkOrderViewController.m in Sources */,
 				24AFDC821D92399E00B2F1B9 /* PickupView.m in Sources */,
 				24AFDC5F1D92390000B2F1B9 /* TextMultiCell.m in Sources */,
@@ -1713,6 +1734,7 @@
 				240EC9541D7FB2B7008A5696 /* InventoryManager.m in Sources */,
 				24AFDC461D9238FF00B2F1B9 /* SalesOrderGrabCell.m in Sources */,
 				24AFDC191D9238FF00B2F1B9 /* CommoditySnapshot.m in Sources */,
+				245A393E1D94F9CC00B5CE70 /* SalesOrderStepEditController.m in Sources */,
 				24AFDC7B1D92390000B2F1B9 /* WorkOrderStepEditView.m in Sources */,
 				24AFDC651D92390000B2F1B9 /* CommodityStepController.m in Sources */,
 				24AFDC401D9238FF00B2F1B9 /* PickupItem.m in Sources */,

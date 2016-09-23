@@ -55,4 +55,14 @@
     return result;
 }
 
+-(SalesOrderSearchResult *)salesOrderChangeToSearchResult:(SalesOrder *)salesOrder{
+    SalesOrderSearchResult *ssr = [SalesOrderSearchResult new];
+    ssr.code = salesOrder.code;
+    ssr.appointmentTime = salesOrder.appointmentTime;
+    ssr.commodityNames = [salesOrder.commodityNames componentsJoinedByString:@","];
+    ssr.storePricingReviewFlag = salesOrder.storePricingReviewFlag;
+    
+    [_resultList addObject:ssr];
+    return ssr;
+}
 @end

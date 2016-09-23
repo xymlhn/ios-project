@@ -11,6 +11,7 @@
 #import "SalesOrder.h"
 #import "SalesOrderMineCell.h"
 #import "SalesOrderManager.h"
+#import "SalesOrderInfoController.h"
 @interface SalesOrderMineListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *salesOrderList;
@@ -70,9 +71,7 @@
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[SalesOrderManager getInstance] getSalesOrderMineByLastUpdateTime:[Config getSalesOrderMineTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
-            if(error != nil){
-                [self refreshTableView:arr];
-            }
+            [self refreshTableView:arr];
             [_tableView.mj_header endRefreshing];
         }];
     }];
@@ -98,8 +97,8 @@
     //1 创建可重用的自定义的cell
     SalesOrderMineCell *cell = [SalesOrderMineCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
-    SalesOrderSnapshot *salesOrderSnapshot = self.salesOrderList[row];
-    cell.salesOrderSnapshot = salesOrderSnapshot;
+    SalesOrder *salesOrderSnapshot = self.salesOrderList[row];
+    cell.salesOrder = salesOrderSnapshot;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //3 返回
     return cell;
@@ -107,14 +106,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
-    
+    SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
+    SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
+        [self.salesOrderList removeObject:salesOrder];
+        [self.tableView reloadData];
+    }];
+    info.code = salesOrder.code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 
 
--(void)dealloc {
-
-}
 
 
 @end

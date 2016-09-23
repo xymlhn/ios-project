@@ -1,17 +1,17 @@
 //
-//  WorkOrderInfoView.m
+//  SalesOrderInfoView.m
 //  qmcp
 //
-//  Created by 谢永明 on 16/4/8.
+//  Created by 谢永明 on 2016/9/23.
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "WorkOrderInfoView.h"
+#import "SalesOrderInfoView.h"
 
-@implementation WorkOrderInfoView
+@implementation SalesOrderInfoView
 
 + (instancetype)viewInstance{
-    WorkOrderInfoView *workOrderInfoView = [WorkOrderInfoView new];
+    SalesOrderInfoView *workOrderInfoView = [SalesOrderInfoView new];
     return workOrderInfoView;
 }
 
@@ -37,6 +37,24 @@
     [self initStarBtn];
     _view = self;
     return self;
+}
+
+-(void)setSalesOrder:(SalesOrder *)salesOrder
+{
+    switch (salesOrder.type) {
+        case SalesOrderTypeOnsite:
+            [self initOnsiteBottomView];
+            break;
+        case SalesOrderTypeShop:
+            [self initServiceBottomView];
+            break;
+        case SalesOrderTypeRemote:
+            [self initServiceBottomView];
+            break;
+        default:
+            break;
+    }
+    
 }
 
 //编号
@@ -200,7 +218,7 @@
     UILabel *locationIcon = [UILabel new];
     [locationIcon setFont:[UIFont fontWithName:@"FontAwesome" size:12]];
     locationIcon.text = @"";
-     locationIcon.textAlignment = NSTextAlignmentCenter;
+    locationIcon.textAlignment = NSTextAlignmentCenter;
     locationIcon.textColor = [UIColor nameColor];
     [_codeView addSubview:locationIcon];
     
@@ -479,26 +497,10 @@
     
 }
 
--(void)setWorkOrder:(WorkOrder *)workOrder
-{
-    switch (workOrder.type) {
-        case WorkOrderTypeOnsite:
-            [self initOnsiteBottomView];
-            break;
-        case WorkOrderTypeService:
-            [self initServiceBottomView];
-            break;
-        default:
-            break;
-    }
-    
-}
-
 -(void)initOnsiteBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    bottomView.userInteractionEnabled = NO;
     [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
@@ -620,7 +622,7 @@
         make.right.equalTo(bottomView);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-
+    
     
 }
 
@@ -628,7 +630,6 @@
 -(void)initServiceBottomView
 {
     UIView *bottomView = [UIView new];
-    bottomView.userInteractionEnabled = NO;
     bottomView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomView];
     
@@ -745,7 +746,6 @@
         make.right.equalTo(bottomView);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-
+    
 }
-
 @end

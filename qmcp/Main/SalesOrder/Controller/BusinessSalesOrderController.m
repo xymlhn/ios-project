@@ -31,7 +31,10 @@
         hub.labelText = @"正在下单";
         hub.userInteractionEnabled = NO;
         
-        BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text phone:_businessSalesOrderView.phoneValue.text address:_businessSalesOrderView.addressValue.text remark:_businessSalesOrderView.remarkValue.text];
+        BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text
+                                                                                    phone:_businessSalesOrderView.phoneValue.text
+                                                                                  address:_businessSalesOrderView.addressValue.text
+                                                                                   remark:_businessSalesOrderView.remarkValue.text];
         
         NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_BUSINESSSALESORDER];
         NSDictionary *dict = [businessSalesOrder mj_keyValues];

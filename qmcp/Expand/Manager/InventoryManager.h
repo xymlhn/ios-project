@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SalesOrderSearchResult.h"
+#import "SalesOrder.h"
 typedef void(^SalesOrderSearchHandler)(NSMutableArray<SalesOrderSearchResult *> *array, NSString *error);
 @interface InventoryManager : NSObject
 @property (nonatomic,strong) NSString *currentSalesOrderCode;
@@ -30,4 +31,14 @@ typedef void(^SalesOrderSearchHandler)(NSMutableArray<SalesOrderSearchResult *> 
  *  @return 订单
  */
 -(SalesOrderSearchResult *)getSalesOrderSearchResultByCode:(NSString *)code;
+
+
+/**
+ 添加清点订单
+
+ @param result 清点订单
+
+ @return bool
+ */
+-(SalesOrderSearchResult *)salesOrderChangeToSearchResult:(SalesOrder *) salesOrder;
 @end

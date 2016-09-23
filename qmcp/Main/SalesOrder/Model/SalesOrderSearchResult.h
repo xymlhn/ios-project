@@ -12,7 +12,7 @@
 
 @interface SalesOrderSearchResult : NSObject
 @property (nonatomic,copy) NSString *code;
-@property (nonatomic,copy) NSDate *appointmentTime;
+@property (nonatomic,copy) NSString *appointmentTime;
 @property (nonatomic,copy) NSString *commodityNames;
 @property (nonatomic,assign) BOOL storePricingReviewFlag;
 @property (nonatomic,assign) BOOL itemConfirmed;

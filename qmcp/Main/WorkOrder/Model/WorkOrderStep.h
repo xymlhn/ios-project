@@ -20,6 +20,8 @@
 
 @property (nonatomic, copy) NSString *workOrderCode;
 
+@property (nonatomic, copy) NSString *salesOrderCode;
+
 @property (nonatomic, copy) NSString *submitUser;
 
 @property (nonatomic, copy) NSString *stepName;

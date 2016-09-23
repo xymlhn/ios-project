@@ -23,9 +23,9 @@ typedef NS_ENUM(NSInteger, ExceptionType) {
 };
 
 typedef NS_ENUM(NSInteger, SalesOrderType) {
-    SalesOrderTypeOnsite = 10,//上门
-    SalesOrderTypeShop = 20,//到店
-    SalesOrderTypeUnknown = 30,//到店
+    SalesOrderTypeShop = 10,//到店
+    SalesOrderTypeOnsite = 20,//上门
+    SalesOrderTypeRemote = 30,//远程
 };
 
 typedef NS_ENUM(NSInteger, PaymentStatus) {
@@ -34,6 +34,15 @@ typedef NS_ENUM(NSInteger, PaymentStatus) {
     PaymentStatusClosed = 30,//已关闭
     PaymentStatusRefunded = 100,//已退款
 };
+
+typedef NS_ENUM(NSInteger, OnSiteStatus) {
+    OnSiteStatusNone = 0,//无
+    OnSiteStatusWaiting = 10,//未确认
+    OnSiteStatusNotDepart = 20,//未出发
+    OnSiteStatusOnRoute = 30,//已出发
+    OnSiteStatusArrived = 40,//已到场
+};
+
 typedef void(^CompletionHandler)(NSDictionary *dict, NSString *error);
 typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #ifndef Header_h

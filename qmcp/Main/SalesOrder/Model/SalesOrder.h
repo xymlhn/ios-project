@@ -15,9 +15,13 @@
 
 @property (nonatomic, copy) NSString *code;
 
+@property (nonatomic, copy) NSString *organizationName;
+
 @property (nonatomic, copy) NSString *remark;
 
 @property (nonatomic, copy) NSString *appointmentTime;
+
+@property (nonatomic, copy) NSString *qrCodeUrl;
 
 @property (nonatomic, assign) BOOL fixedPriceFlag;
 
@@ -30,6 +34,8 @@
 @property (nonatomic, assign) SalesOrderType type;
 
 @property (nonatomic, retain) AddressSnapshot *addressSnapshot;
+
+@property (nonatomic, assign) OnSiteStatus onSiteStatus;
 
 @property (nonatomic, strong) NSArray<NSString *> *commodityNames;
 

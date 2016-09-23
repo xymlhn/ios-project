@@ -39,14 +39,14 @@
             case WorkOrderTypeOnsite:
                 switch (_workOrder.onSiteStatus) {
                     case OnSiteStatusWaiting:
-                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
                         break;
                     case OnSiteStatusNotDepart:
-                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                         
                         break;
                     case OnSiteStatusOnRoute:
-                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:WorkOrderTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                         break;
 
                     default:
@@ -72,7 +72,7 @@
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
     _infoView.workOrder = _workOrder;
-    [self setTextWithWorkOrder:_workOrder];
+    [self setInfo:_workOrder];
     
     _infoView.stepBtn.userInteractionEnabled = YES;
     [_infoView.stepBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stepBtnClick:)]];
@@ -88,7 +88,7 @@
 }
 
 
--(void)setTextWithWorkOrder:(WorkOrder *)workOrder
+-(void)setInfo:(WorkOrder *)workOrder
 {
     _infoView.remarkText.text = workOrder.salesOrderSnapshot.remark;
     _infoView.serviceText.text = workOrder.salesOrderSnapshot.organizationName;
@@ -142,7 +142,7 @@
  *  @param timeStamp     TimeStamp枚举
  *  @param time          date
  */
--(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStamp:(WorkOrderTimeStamp)timeStamp andDate:(NSString *)time{
+-(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在提交数据";
@@ -196,6 +196,7 @@
 }
 
 #pragma mark - IBAction
+
 -(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
 {
     if(_workOrder.type == WorkOrderTypeOnsite){
@@ -315,7 +316,7 @@
                 hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
                 
-                [self updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:WorkOrderTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
+                [self updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:OnSiteTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
                 
             }
         }else{
@@ -334,7 +335,7 @@
 }
 
 
--(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(WorkOrderTimeStamp)timeStamp andDate:(NSString *)time{
+-(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在完结工单";

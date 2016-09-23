@@ -19,6 +19,10 @@
             break;
         case SalesOrderTypeOnsite:
             str = @"上门";
+            break;
+        case SalesOrderTypeRemote:
+            str = @"远程";
+            break;
         default:
             break;
     }

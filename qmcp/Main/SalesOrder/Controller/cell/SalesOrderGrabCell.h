@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SalesOrderSnapshot.h"
+#import "SalesOrder.h"
 @interface SalesOrderGrabCell : UITableViewCell
 
 @property(nonatomic,strong)UILabel *typeText;
@@ -16,7 +16,7 @@
 @property(nonatomic,strong)UILabel *nameText;
 @property(nonatomic,strong)UILabel *phoneText;
 @property(nonatomic,strong)UIButton *grabBtn;
-@property (nonatomic, strong) SalesOrderSnapshot *salesOrderSnapshot;
+@property (nonatomic, strong) SalesOrder *salesOrder;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 @end

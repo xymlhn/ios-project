@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseWorkOrderViewController.h"
+#import "BaseViewController.h"
 
-@interface WorkOrderFormController : BaseWorkOrderViewController
+@interface WorkOrderFormController : BaseViewController
 
 @property (nonatomic,copy)NSString *formTemplateId;
-
+@property(nonatomic, copy) NSString *workOrderCode;
 @end

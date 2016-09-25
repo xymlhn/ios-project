@@ -51,23 +51,48 @@
 + (void)showSettingAlertStr:(NSString *)tipStr{
     //iOS8+系统下可跳转到‘设置’页面，否则只弹出提示窗即可
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1) {
-//        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:tipStr];
-//        [alertView bk_setCancelButtonWithTitle:@"取消" handler:nil];
-//        [alertView bk_addButtonWithTitle:@"设置" handler:nil];
-//        [alertView bk_setDidDismissBlock:^(UIAlertView *alert, NSInteger index) {
-//            if (index == 1) {
-//                UIApplication *app = [UIApplication sharedApplication];
-//                NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-//                if ([app canOpenURL:settingsURL]) {
-//                    [app openURL:settingsURL];
-//                }
-//            }
-//        }];
-//        [alertView show];
-        kTipAlert(@"%@", tipStr);
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:tipStr preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            UIApplication *app = [UIApplication sharedApplication];
+                            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                            if ([app canOpenURL:settingsURL]) {
+                                [app openURL:settingsURL];
+                            }
+        }];
+        
+        [alertController addAction:cancelAction];
+        [alertController addAction:okAction];
+        [[self getCurrentVC] presentViewController:alertController animated:YES completion:nil];
+        
     }else{
         kTipAlert(@"%@", tipStr);
     }
+}
+
++ (UIViewController *)getCurrentVC
+{
+    UIViewController *result = nil;
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tempWindow in windows)
+        {
+            if (tempWindow.windowLevel == UIWindowLevelNormal)
+            {
+                window = tempWindow;
+                break;
+            }
+        }
+    }
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+        result = nextResponder;
+    else
+        result = window.rootViewController;
+    return result;
 }
 
 @end

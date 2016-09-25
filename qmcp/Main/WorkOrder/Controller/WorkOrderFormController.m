@@ -91,7 +91,7 @@
 
 -(void)loadData
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     _workOrderFormList = [[FormManager getInstance]formTemplateField:_formTemplateId];
     [[FormManager getInstance] handleFormTable:_workOrderFormList formTemplateId:_formTemplateId];

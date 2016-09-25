@@ -43,9 +43,9 @@
 
 -(void)loadData
 {
-    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
+    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
     _workOrder = [WorkOrder searchWithWhere:workWhere][0];
 }
 
@@ -58,7 +58,7 @@
 
     long size = _workOrderStepList.count + 1;
     step.stepName = [NSString stringWithFormat:@"步骤%lu",size];
-    step.workOrderCode = [super workOrderCode];
+    step.workOrderCode = _workOrderCode;
     step.submitTime = [Utils formatDate:[NSDate new]];
     step.userOpenId = [[AppManager getInstance] getUser].userOpenId;
     [step saveToDB];
@@ -110,7 +110,7 @@
         }
         [weakSelf.stepView.tableView reloadData];
     }];
-    info.workOrderCode = [super workOrderCode];
+    info.workOrderCode = _workOrderCode;
     info.workOrderStepCode = stepId;
     info.type = type;
     info.hidesBottomBarWhenPushed = YES;

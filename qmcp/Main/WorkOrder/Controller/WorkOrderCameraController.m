@@ -49,7 +49,7 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在获取摄像头";
     hub.userInteractionEnabled = NO;
-    [[CameraManager getInstance] getCurrentCameraByWorkOrderCode:[super workOrderCode] finishBlock:^(NSDictionary *obj, NSString *error) {
+    [[CameraManager getInstance] getCurrentCameraByWorkOrderCode:_workOrderCode finishBlock:^(NSDictionary *obj, NSString *error) {
         if(!error){
             if(!obj){
                 hub.mode = MBProgressHUDModeCustomView;
@@ -116,7 +116,7 @@
         MBProgressHUD *hub = [Utils createHUD];
         hub.labelText = @"打开摄像头中...";
         hub.userInteractionEnabled = NO;
-        [[CameraManager getInstance] switchCameraByWorkOrderCode:[super workOrderCode] withCameraCode:cameraData.cameraCode cameraStatus:YES finishBlock:^(NSDictionary *obj, NSString *error) {
+        [[CameraManager getInstance] switchCameraByWorkOrderCode:_workOrderCode withCameraCode:cameraData.cameraCode cameraStatus:YES finishBlock:^(NSDictionary *obj, NSString *error) {
             if (!error) {
                 CameraData *data = [CameraData mj_objectWithKeyValues:obj];
                 for(CameraData *cameraData in _cameraArr){
@@ -145,7 +145,7 @@
             MBProgressHUD *hub = [Utils createHUD];
             hub.labelText = @"关闭摄像头";
             hub.userInteractionEnabled = NO;
-            [[CameraManager getInstance] switchCameraByWorkOrderCode:[super workOrderCode] withCameraCode:_currentCamera.cameraCode cameraStatus:NO finishBlock:^(NSDictionary *obj, NSString *error) {
+            [[CameraManager getInstance] switchCameraByWorkOrderCode:_workOrderCode withCameraCode:_currentCamera.cameraCode cameraStatus:NO finishBlock:^(NSDictionary *obj, NSString *error) {
                 if (!error) {
                     CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
                     for(CameraData *cameraData in _cameraArr){

@@ -12,7 +12,7 @@
 
 @protocol ThrowLineToolDelegate;
 
-@interface ThrowLineTool : NSObject
+@interface ThrowLineTool : NSObject<CAAnimationDelegate>
 
 @property (nonatomic, assign) id<ThrowLineToolDelegate>delegate;
 @property (nonatomic, retain) UIView *showingView;

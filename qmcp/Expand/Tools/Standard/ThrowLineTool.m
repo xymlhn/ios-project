@@ -35,7 +35,6 @@ static ThrowLineTool *s_sharedInstance = nil;
 {
     self.showingView = obj;
     
-//    [UIView commitAnimations];
     //初始化抛物线path
     CGMutablePathRef path = CGPathCreateMutable();
     CGFloat cpx = (start.x + end.x) / 2;
@@ -55,7 +54,6 @@ static ThrowLineTool *s_sharedInstance = nil;
     //旋转
     CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     rotateAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI, 0, 0, 1)];
-//    rotateAnimation.autoreverses = YES;
     rotateAnimation.repeatCount = MAXFLOAT;
     rotateAnimation.duration = 0.3;
     
@@ -65,7 +63,6 @@ static ThrowLineTool *s_sharedInstance = nil;
     groupAnimation.delegate = self;
     
     groupAnimation.repeatCount = 1;
-  //  groupAnimation.repeatCount = MAXFLOAT;
     
     groupAnimation.duration = duration;
     groupAnimation.removedOnCompletion = NO;
@@ -79,12 +76,8 @@ static ThrowLineTool *s_sharedInstance = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(animationDidFinish:)]) {
         [self.delegate performSelector:@selector(animationDidFinish:) withObject:self.showingView];
     }
-//    self.showingView = nil;
 }
 
 
 
 @end
-// 版权属于原作者
-// http://code4app.com (cn) http://code4app.net (en)
-// 发布代码于最专业的源码分享网站: Code4App.com

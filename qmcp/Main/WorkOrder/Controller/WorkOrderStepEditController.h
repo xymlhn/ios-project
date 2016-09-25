@@ -6,11 +6,14 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "BaseWorkOrderViewController.h"
+#import "BaseViewController.h"
 #import "WorkOrderStep.h"
-@interface WorkOrderStepEditController : BaseWorkOrderViewController
+@interface WorkOrderStepEditController : BaseViewController
 
 @property (copy, nonatomic) void(^doneBlock)(WorkOrderStep *step,SaveType type);
+@property(nonatomic, copy) NSString *workOrderCode;
+@property(nonatomic, copy) NSString *workOrderStepCode;
+@property (nonatomic, assign) SaveType type;
 
 + (instancetype) doneBlock:(void(^)(WorkOrderStep *step,SaveType type))block;
 @end

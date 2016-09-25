@@ -39,14 +39,14 @@
             case WorkOrderTypeOnsite:
                 switch (_workOrder.onSiteStatus) {
                     case OnSiteStatusWaiting:
-                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
                         break;
                     case OnSiteStatusNotDepart:
-                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                         
                         break;
                     case OnSiteStatusOnRoute:
-                        [self updateTimeStampWithWorkOrderCode:[super workOrderCode] andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
+                        [self updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                         break;
 
                     default:
@@ -67,9 +67,9 @@
 
 -(void)loadData
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
-    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
+    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
     _infoView.workOrder = _workOrder;
     [self setInfo:_workOrder];
@@ -206,7 +206,7 @@
     }
     
     WorkOrderStepController *info = [WorkOrderStepController new];
-    info.workOrderCode = [super workOrderCode];
+    info.workOrderCode = _workOrderCode;;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -214,7 +214,7 @@
 - (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
 {
     WorkOrderCameraController *info =[WorkOrderCameraController new];
-    info.workOrderCode = [super workOrderCode];
+    info.workOrderCode = _workOrderCode;;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -226,7 +226,7 @@
         }
     }
     WorkOrderFormsController *info =[WorkOrderFormsController new];
-    info.workOrderCode = [super workOrderCode];
+    info.workOrderCode = _workOrderCode;;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }

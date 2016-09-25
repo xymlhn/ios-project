@@ -36,7 +36,6 @@
 		240EC9611D7FB2B7008A5696 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9371D7FB2B7008A5696 /* Utils.m */; };
 		240EC9701D7FB2DC008A5696 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96B1D7FB2DC008A5696 /* BaseView.m */; };
 		240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96D1D7FB2DC008A5696 /* BaseViewController.m */; };
-		240EC9721D7FB2DC008A5696 /* BaseWorkOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96F1D7FB2DC008A5696 /* BaseWorkOrderViewController.m */; };
 		240EC9881D7FB456008A5696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240EC9861D7FB456008A5696 /* LaunchScreen.storyboard */; };
 		242815D31D936BE7006120ED /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B71D936BE7006120ED /* AddressViewController.m */; };
 		242815D41D936BE7006120ED /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B91D936BE7006120ED /* CheckBoxViewController.m */; };
@@ -237,8 +236,6 @@
 		240EC96B1D7FB2DC008A5696 /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
 		240EC96C1D7FB2DC008A5696 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		240EC96D1D7FB2DC008A5696 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		240EC96E1D7FB2DC008A5696 /* BaseWorkOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWorkOrderViewController.h; sourceTree = "<group>"; };
-		240EC96F1D7FB2DC008A5696 /* BaseWorkOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWorkOrderViewController.m; sourceTree = "<group>"; };
 		240EC9871D7FB456008A5696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		240EC98B1D7FB491008A5696 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		242815B61D936BE7006120ED /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
@@ -663,8 +660,6 @@
 				240EC96B1D7FB2DC008A5696 /* BaseView.m */,
 				240EC96C1D7FB2DC008A5696 /* BaseViewController.h */,
 				240EC96D1D7FB2DC008A5696 /* BaseViewController.m */,
-				240EC96E1D7FB2DC008A5696 /* BaseWorkOrderViewController.h */,
-				240EC96F1D7FB2DC008A5696 /* BaseWorkOrderViewController.m */,
 			);
 			name = "Base(基类)";
 			path = Base;
@@ -1712,7 +1707,6 @@
 				240EC9571D7FB2B7008A5696 /* SalesOrderManager.m in Sources */,
 				24AFDC7C1D92390000B2F1B9 /* WorkOrderStepView.m in Sources */,
 				245A39321D94C02A00B5CE70 /* SalesOrderInfoController.m in Sources */,
-				240EC9721D7FB2DC008A5696 /* BaseWorkOrderViewController.m in Sources */,
 				24AFDC821D92399E00B2F1B9 /* PickupView.m in Sources */,
 				24AFDC5F1D92390000B2F1B9 /* TextMultiCell.m in Sources */,
 				24AFDC5D1D92390000B2F1B9 /* PJRSignatureView.m in Sources */,

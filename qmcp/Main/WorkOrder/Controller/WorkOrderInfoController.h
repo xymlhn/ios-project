@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseWorkOrderViewController.h"
-@interface WorkOrderInfoController : BaseWorkOrderViewController
+#import "BaseViewController.h"
+@interface WorkOrderInfoController : BaseViewController
 
+@property(nonatomic, copy) NSString *workOrderCode;
 @end

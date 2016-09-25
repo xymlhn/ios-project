@@ -6,8 +6,10 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "BaseWorkOrderViewController.h"
+#import "BaseViewController.h"
 
-@interface WorkOrderCameraController : BaseWorkOrderViewController
+@interface WorkOrderCameraController : BaseViewController
+
+@property(nonatomic, copy) NSString *workOrderCode;
 
 @end

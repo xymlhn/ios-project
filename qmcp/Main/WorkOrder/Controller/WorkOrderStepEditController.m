@@ -43,9 +43,9 @@
 
 -(void)loadData
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
-    NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",super.workOrderStepCode];
+    NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",_workOrderStepCode];
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
 
     _attachments = [NSMutableArray new];
@@ -105,7 +105,7 @@
     
     if (self.doneBlock) {
     
-        switch ([super type]) {
+        switch (_type) {
             case SaveTypeAdd:
                 _step.content = _editView.editText.text;
                 if([_step updateToDB]){
@@ -141,7 +141,7 @@
 #pragma mark - IBAction
 - (void)postWorkOrderStep
 {
-    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",super.workOrderCode];
+    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
     [self postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
 }
@@ -218,7 +218,7 @@
                 [self deleteAttachment:attachment];
         }
         [self.navigationController popViewControllerAnimated:YES];
-        super.type = SaveTypeDelete;
+        _type = SaveTypeDelete;
     }
 }
 
@@ -278,7 +278,7 @@
     [picker dismissViewControllerAnimated:YES completion:^ {
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
-        attachment.workOrderStepCode = [super workOrderStepCode];
+        attachment.workOrderStepCode = _workOrderStepCode;
         attachment.sort = 20;
         attachment.type = 10;
         NSString *type = [info objectForKey:UIImagePickerControllerMediaType];

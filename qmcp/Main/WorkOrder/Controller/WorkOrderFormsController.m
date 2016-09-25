@@ -49,7 +49,7 @@
 
 -(void)loadData
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",super.workOrderCode];
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     _workOrderFormList = [NSMutableArray new];
     
@@ -107,7 +107,7 @@
 {
     FormTemplateBrife *formTemplateBrife = _workOrderFormList[indexPath.row];
     WorkOrderFormController *info =[WorkOrderFormController new];
-    info.workOrderCode = [super workOrderCode];
+    info.workOrderCode = _workOrderCode;
     info.formTemplateId = formTemplateBrife.formTemplateCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];

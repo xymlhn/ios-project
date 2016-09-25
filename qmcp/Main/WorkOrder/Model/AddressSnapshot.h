@@ -16,6 +16,6 @@
 
 @property (nonatomic, copy) NSString *mobilePhone;
 
-@property (nonatomic, copy) NSString *addressDetail;
+@property (nonatomic, copy) NSString *fullAddress;
 
 @end

@@ -98,7 +98,7 @@
     _salesOrderInfoView.serviceText.text = salesOrder.organizationName;
     _salesOrderInfoView.appointmentTimeText.text = salesOrder.appointmentTime;
     
-    _salesOrderInfoView.locationText.text = salesOrder.addressSnapshot.addressDetail;
+    _salesOrderInfoView.locationText.text = salesOrder.addressSnapshot.fullAddress;
     _salesOrderInfoView.passwordText.text = salesOrder.addressSnapshot.mobilePhone;
     _salesOrderInfoView.userNameText.text = salesOrder.addressSnapshot.contacts;
     _salesOrderInfoView.codeContent.text = salesOrder.code;

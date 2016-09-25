@@ -94,7 +94,7 @@
     _infoView.serviceText.text = workOrder.salesOrderSnapshot.organizationName;
     _infoView.appointmentTimeText.text = workOrder.salesOrderSnapshot.appointmentTime;
     
-    _infoView.locationText.text = workOrder.salesOrderSnapshot.addressSnapshot.addressDetail;
+    _infoView.locationText.text = workOrder.salesOrderSnapshot.addressSnapshot.fullAddress;
     _infoView.passwordText.text = workOrder.salesOrderSnapshot.addressSnapshot.mobilePhone;
     _infoView.userNameText.text = workOrder.salesOrderSnapshot.addressSnapshot.contacts;
     _infoView.codeContent.text = workOrder.code;

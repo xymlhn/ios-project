@@ -58,9 +58,7 @@
 
 -(void)loadData
 {
-    _hub = [Utils createHUD];
-    _hub.labelText = @"加载中...";
-    _hub.userInteractionEnabled = NO;
+
     _workOrderList = [NSMutableArray new];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
@@ -72,10 +70,6 @@
     [_workOrderList removeAllObjects];
     [_tableView.mj_header endRefreshing];
     
-    _hub.mode = MBProgressHUDModeCustomView;
-    _hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-    _hub.labelText = [NSString stringWithFormat:@"加载成功"];
-    [_hub hide:YES afterDelay:kEndSucceedDelayTime];
     switch (_status) {
         case WorkOrderStatusCompleted:
             

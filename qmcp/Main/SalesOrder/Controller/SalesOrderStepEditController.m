@@ -76,6 +76,10 @@
 {
     _editView.delBtn.userInteractionEnabled = YES;
     [_editView.delBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delBtnClick:)]];
+    
+    _editView.saveBtn.userInteractionEnabled = YES;
+    [_editView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
+    
     _editView.collectionView.delegate = self;
     _editView.collectionView.dataSource = self;
     _editView.editText.delegate = self;
@@ -138,7 +142,7 @@
 }
 
 #pragma mark - IBAction
-- (void)postWorkOrderStep
+- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
     NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_code];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
@@ -147,11 +151,11 @@
 - (void)postInfo:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在上传工单步骤";
+    hub.labelText = @"正在上传步骤";
     hub.userInteractionEnabled = NO;
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,_code];
-    [HttpUtil post:URLString param:steps finish:^(NSDictionary *obj, NSString *error) {
+    NSMutableArray *arrayM = [WorkOrderStep mj_keyValuesArrayWithObjectArray:steps];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTSALESORDERSTEP,_code];
+    [HttpUtil post:URLString param:arrayM finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -174,7 +178,7 @@
                             [attachment updateToDB];
                             if(i == attachments.count)
                             {
-                                hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                hub.labelText = [NSString stringWithFormat:@"上传附件成功"];
                                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
                             }
                         }else{
@@ -187,7 +191,7 @@
                 }
             }else
             {
-                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+                hub.labelText = [NSString stringWithFormat:@"上传步骤成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }
         }else{

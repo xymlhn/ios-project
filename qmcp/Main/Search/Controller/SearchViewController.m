@@ -23,16 +23,14 @@
 
 -(void)loadView{
     _searchView = [SearchView viewInstance];
-    _searchView.searchBar.delegate = self;
-    self.navigationItem.title = @"搜索";
-    
-    _searchView.tableView.delegate = self;
-    _searchView.tableView.dataSource = self;
     self.view = _searchView;
+    self.navigationItem.title = @"搜索";
 }
 
 -(void)bindListener{
-    
+    _searchView.searchBar.delegate = self;
+    _searchView.tableView.delegate = self;
+    _searchView.tableView.dataSource = self;
 }
 
 -(void)loadData{

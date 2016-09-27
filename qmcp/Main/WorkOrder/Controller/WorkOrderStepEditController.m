@@ -77,6 +77,10 @@
 {
     _editView.delBtn.userInteractionEnabled = YES;
     [_editView.delBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delBtnClick:)]];
+    
+    _editView.saveBtn.userInteractionEnabled = YES;
+    [_editView.saveBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
+    
     _editView.collectionView.delegate = self;
     _editView.collectionView.dataSource = self;
     _editView.editText.delegate = self;
@@ -139,7 +143,7 @@
 }
 
 #pragma mark - IBAction
-- (void)postWorkOrderStep
+- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];

@@ -129,7 +129,7 @@
 }
 
 -(void)loadData{
-    NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
+    NSArray *accountAndPassword = [Config getUserNameAndPassword];
     _loginView.userNameText.text = accountAndPassword? accountAndPassword[0] : @"";
     _loginView.passWordText.text = accountAndPassword? accountAndPassword[1] : @"";
     [self validUsernameAndPassword];
@@ -167,7 +167,7 @@
             // 字典转模型
             User *account = [User mj_objectWithKeyValues:data];
             if(account.authenticated){
-                [Config saveOwnAccount:username andPassword:password];
+                [Config saveUserName:username andPassword:password];
                 [Config saveLoginStatus:true];
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];

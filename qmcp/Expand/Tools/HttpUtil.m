@@ -167,7 +167,7 @@
         int type = [[dic valueForKey:@"exceptionType"] intValue];
         NSLog(@"\n=============header==================\n%@\n",[EnumUtil exceptionTypeString:type] );
         if (type == (int)ExceptionTypeNotLogin)  {
-            NSArray *accountAndPassword = [Config getOwnAccountAndPassword];
+            NSArray *accountAndPassword = [Config getUserNameAndPassword];
             NSString *name = accountAndPassword? accountAndPassword[0] : @"";
             NSString *password = accountAndPassword? accountAndPassword[1] : @"";
             [[AppManager getInstance] reLoginWithUserName:name andPassword:password finishBlock:^(id data, NSString *error) {

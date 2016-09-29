@@ -1342,6 +1342,8 @@
 		24AFDBB21D9238FF00B2F1B9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				24AFDBE81D9238FF00B2F1B9 /* WorkOrderListController.h */,
+				24AFDBE91D9238FF00B2F1B9 /* WorkOrderListController.m */,
 				24AFDBDA1D9238FF00B2F1B9 /* ChooseViewController.h */,
 				24AFDBDB1D9238FF00B2F1B9 /* ChooseViewController.m */,
 				24AFDBDC1D9238FF00B2F1B9 /* CommodityStepController.h */,
@@ -1356,8 +1358,6 @@
 				24AFDBE51D9238FF00B2F1B9 /* WorkOrderFormsController.m */,
 				24AFDBE61D9238FF00B2F1B9 /* WorkOrderInfoController.h */,
 				24AFDBE71D9238FF00B2F1B9 /* WorkOrderInfoController.m */,
-				24AFDBE81D9238FF00B2F1B9 /* WorkOrderListController.h */,
-				24AFDBE91D9238FF00B2F1B9 /* WorkOrderListController.m */,
 				24AFDBEA1D9238FF00B2F1B9 /* WorkOrderStepController.h */,
 				24AFDBEB1D9238FF00B2F1B9 /* WorkOrderStepController.m */,
 				24AFDBEC1D9238FF00B2F1B9 /* WorkOrderStepEditController.h */,

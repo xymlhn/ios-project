@@ -8,7 +8,7 @@
 
 #import "Config.h"
 
-#import <SSKeychain.h>
+#import <SAMKeychain.h>
 
 NSString * const kService = @"com.inforshare.qmcp";
 NSString * const kAccount = @"account";
@@ -41,21 +41,21 @@ NSString * const kCommodityStep = @"commodityStep";
 
 }
 
-+ (void)saveOwnAccount:(NSString *)account andPassword:(NSString *)password
++ (void)saveUserName:(NSString *)name andPassword:(NSString *)password
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:account ?: @"" forKey:kAccount];
+    [userDefaults setObject:name ?: @"" forKey:kAccount];
     
     #ifdef DEBUG
         [userDefaults setObject:password ?: @"" forKey:kService];
     #else
-        [SSKeychain setPassword:password ?: @"" forService:kService account:account];
+        [SAMKeychain setPassword:password ?: @"" forService:kService account:account];
     #endif
     [userDefaults synchronize];
 }
 
 
-+ (NSArray *)getOwnAccountAndPassword
++ (NSArray *)getUserNameAndPassword
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *account = [userDefaults objectForKey:kAccount];
@@ -64,10 +64,9 @@ NSString * const kCommodityStep = @"commodityStep";
         NSString *password =  [userDefaults objectForKey:kService] == nil ? @"" : [userDefaults objectForKey:kService];
         if (account) {return @[account, password];}
     #else
-        NSString *password = [SSKeychain passwordForService:kService account:account] ?: @"";
+        NSString *password = [SAMKeychain passwordForService:kService account:account] ?: @"";
         if (account) {return @[account, password];}
     #endif
-    
     
     return nil;
 }

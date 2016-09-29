@@ -32,10 +32,7 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.view.mas_top).with.offset(-10);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.bottom.equalTo(self.view.mas_bottom);
+        make.edges.equalTo(self.view);
     }];
     
 }
@@ -48,10 +45,17 @@
     [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime]  finishBlock:^(NSMutableArray *arr, NSString *error) {
         if(error == nil){
             [self refreshTableView:arr];
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"加载成功"];
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            if([arr count] > 0){
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.labelText = @"加载成功";
+                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            }else{
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.labelText = @"当前没有订单";
+                [hub hide:YES afterDelay:kEndFailedDelayTime];
+            }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];

@@ -26,10 +26,7 @@
     self.backgroundColor = [UIColor whiteColor];
     [self addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.mas_top).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.edges.equalTo(self);
     }];
     
     _addBtn = [UILabel new];

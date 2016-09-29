@@ -21,14 +21,14 @@
  *  @param account  账号
  *  @param password 密码
  */
-+ (void)saveOwnAccount:(NSString *)account andPassword:(NSString *)password;
++ (void)saveUserName:(NSString *)name andPassword:(NSString *)password;
 
 /**
  *  获取登录账户跟密码
  *
  *  @return 账号密码数组
  */
-+ (NSArray *)getOwnAccountAndPassword;
++ (NSArray *)getUserNameAndPassword;
 
 /**
  *  设置登录状态

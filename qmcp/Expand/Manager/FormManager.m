@@ -75,7 +75,7 @@
                             formTemplateBrife.key = formTemplate.formTemplateId;
                             formTemplateBrife.name = formTemplate.formTemplateName;
                             formTemplateBrife.formTemplateCode = formTemplate.formTemplateId;
-                            formTemplateBrife.formSort = [self getFormSort:formTemplate.formTemplateId];
+                            formTemplateBrife.formSort = [self p_getFormSort:formTemplate.formTemplateId];
                             [brife addObject:formTemplateBrife];
                         }
                     }
@@ -93,8 +93,8 @@
 }
 
 -(void)handleFormTable:(NSMutableArray<FormTemplateField *> *)formList formTemplateId:(NSString *)formTemplateId{
-    if(![self isExistsFormData:formTemplateId]){
-        int tableNumber = [self formTableNumber:formList];
+    if(![self p_isExistsFormData:formTemplateId]){
+        int tableNumber = [self p_formTableNumber:formList];
         for (int i = 0; i < tableNumber; i++) {
             [self replaceFormTable:formList];
         }
@@ -158,7 +158,7 @@
  *
  *  @return 完成类型
  */
--(FormSort)getFormSort:(NSString *)formTemplateId{
+-(FormSort)p_getFormSort:(NSString *)formTemplateId{
     FormSort formSort = FormSortCreate;
     if([_formDataDict objectForKey:formTemplateId] != nil){
         formSort = FormSortUpdate;
@@ -178,7 +178,7 @@
  *
  *  @return boolean
  */
--(BOOL)isExistsFormData:(NSString *)formTemplateId{
+-(BOOL)p_isExistsFormData:(NSString *)formTemplateId{
     if([_formDataDict objectForKey:formTemplateId] != nil){
         return YES;
     }else{
@@ -193,7 +193,7 @@
  *
  *  @return int
  */
--(int)formTableNumber:(NSMutableArray<FormTemplateField *> *)formList{
+-(int)p_formTableNumber:(NSMutableArray<FormTemplateField *> *)formList{
     int number = 0;
     for (FormTemplateField *field in formList) {
         if(field.controlType == FormTemplateControlTypeTable){

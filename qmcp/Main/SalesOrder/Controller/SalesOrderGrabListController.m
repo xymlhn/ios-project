@@ -15,7 +15,6 @@
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray<SalesOrder *> *salesOrderList;
-
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -95,7 +94,7 @@
     //2 设置cell内部的子控件
     SalesOrder *salesOrderSnapshot = _salesOrderList[row];
     cell.grabBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self grabSalesOrder:salesOrderSnapshot];
+        [self p_grabSalesOrder:salesOrderSnapshot];
         return [RACSignal empty];
     }];
     cell.salesOrder = salesOrderSnapshot;
@@ -109,7 +108,7 @@
     
 }
 
--(void)grabSalesOrder:(SalesOrder *)salesOrderSnapshot
+-(void)p_grabSalesOrder:(SalesOrder *)salesOrderSnapshot
 {
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];

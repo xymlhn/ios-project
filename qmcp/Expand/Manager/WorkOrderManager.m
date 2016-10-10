@@ -120,7 +120,7 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
             }
             
         }
-        [[WorkOrderManager getInstance] sortAllWorkOrder];
+        [[WorkOrderManager getInstance] p_sortAllWorkOrder];
     }];
     
 }
@@ -128,7 +128,7 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
 /**
  *  处理所有的工单并派发到界面
  */
-- (void)sortAllWorkOrder{
+- (void)p_sortAllWorkOrder{
     User *user = [[AppManager getInstance] getUser];
     NSString *workWhere = [NSString stringWithFormat:@"userId = '%@'",user.userOpenId];
     _workOrders = [WorkOrder searchWithWhere:workWhere];

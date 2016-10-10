@@ -67,11 +67,11 @@
 /**
  *  用户名密码验证
  */
--(void)validUsernameAndPassword
+-(void)p_validUsernameAndPassword
 {
     RACSignal *validUsernameSignal = [_loginView.userNameText.rac_textSignal
                                       map:^id(NSString *text) {
-                                          return @([self isValidUsername:text]);
+                                          return @([self p_isValidUsername:text]);
                                       }];
     RAC(_loginView.userNameText, textColor) =[validUsernameSignal map:^id(NSNumber *usernameValid){
         return[usernameValid boolValue] ? [UIColor blackColor]:[UIColor redColor];
@@ -79,7 +79,7 @@
     
     RACSignal *validPasswordSignal = [_loginView.passWordText.rac_textSignal
                                       map:^id(NSString *text) {
-                                          return @([self isValidPassword:text]);
+                                          return @([self p_isValidPassword:text]);
                                       }];
     RACSignal *signUpActiveSignal =
     [RACSignal combineLatest:@[validUsernameSignal, validPasswordSignal]
@@ -99,7 +99,7 @@
  *
  *  @return bool
  */
--(BOOL)isValidUsername:(NSString *)text
+-(BOOL)p_isValidUsername:(NSString *)text
 {
     NSString * regex = @"^[A-Za-z0-9@]{1,20}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -114,7 +114,7 @@
  *
  *  @return bool
  */
--(BOOL)isValidPassword:(NSString *)text
+-(BOOL)p_isValidPassword:(NSString *)text
 {
     return text.length > 0;
 }
@@ -132,7 +132,7 @@
     NSArray *accountAndPassword = [Config getUserNameAndPassword];
     _loginView.userNameText.text = accountAndPassword? accountAndPassword[0] : @"";
     _loginView.passWordText.text = accountAndPassword? accountAndPassword[1] : @"";
-    [self validUsernameAndPassword];
+    [self p_validUsernameAndPassword];
 }
 #pragma mark - 键盘操作
 

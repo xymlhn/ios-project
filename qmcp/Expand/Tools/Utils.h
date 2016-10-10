@@ -144,4 +144,14 @@
  @return bool
  */
 + (BOOL)isMobileNumber:(NSString *)mobileNum ;
+
+
+/**
+ 判断文字是否是空
+
+ @param text 输入文字
+
+ @return bool
+ */
++(BOOL)isTextNull:(NSString *)text;
 @end

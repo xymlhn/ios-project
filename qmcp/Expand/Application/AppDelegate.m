@@ -32,7 +32,7 @@ const static int databaseVersion = 0;
     int currentDataBaseVersion = [Config getDatabaseVersion];
     if(!( currentDataBaseVersion == 0)){
         if(!(currentDataBaseVersion == databaseVersion)){
-            [self updateDataBase];
+            [self p_updateDataBase];
             [Config setDatabaseVersion:databaseVersion];
             [Config setInitSetting];
         }
@@ -68,17 +68,17 @@ const static int databaseVersion = 0;
     
     [self.window makeKeyAndVisible];
     //注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reLogin:) name:kReloginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_reLogin:) name:kReloginNotification object:nil];
     return YES;
 }
 
 
--(void)updateDataBase{
+-(void)p_updateDataBase{
     LKDBHelper* globalHelper = [WorkOrder getUsingLKDBHelper];
     [globalHelper dropAllTable];
 }
 
-- (void)reLogin:(NSNotification *)text{
+- (void)p_reLogin:(NSNotification *)text{
 
     NSString *info = text.userInfo[@"info"];
     if([info isEqualToString:@"0"]){

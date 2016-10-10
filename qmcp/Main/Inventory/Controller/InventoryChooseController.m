@@ -57,7 +57,7 @@
     }
     
     _inventoryChooseView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityList.count];
-    _inventoryChooseView.priceLabel.text = [self calculatePrice];
+    _inventoryChooseView.priceLabel.text = [self p_calculatePrice];
 }
 
 -(void)saveData{
@@ -99,7 +99,7 @@
         commodity.code = [[NSUUID UUID] UUIDString];
         [_chooseCommodityList addObject:commodity];
         _inventoryChooseView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityList.count];
-        _inventoryChooseView.priceLabel.text = [self calculatePrice];
+        _inventoryChooseView.priceLabel.text = [self p_calculatePrice];
     }
 }
 
@@ -108,7 +108,7 @@
  *
  *  @return 总价格
  */
--(NSString *)calculatePrice{
+-(NSString *)p_calculatePrice{
     float price = 0.0f;
     for (CommoditySnapshot *snapshot in _chooseCommodityList) {
         price += [snapshot.price floatValue];
@@ -130,7 +130,7 @@
         _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
         [_chooseCommodityList addObject:_currentCommoditySnapshot];
         _inventoryChooseView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityList.count];
-        _inventoryChooseView.priceLabel.text = [self calculatePrice];
+        _inventoryChooseView.priceLabel.text = [self p_calculatePrice];
     }else{
         _currentCommoditySnapshot = nil;
         _standardsView.priceLab.text = @"";

@@ -131,7 +131,7 @@
     }
     
 }
--(void)updateStep{
+-(void)p_updateStep{
     
     [_attachments removeObject:_plusIcon];
     _step.attachments = _attachments;
@@ -146,9 +146,9 @@
 {
     NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_code];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
-    [self postInfo:steps];
+    [self p_postInfo:steps];
 }
-- (void)postInfo:(NSArray *)steps{
+- (void)p_postInfo:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传步骤";
@@ -291,7 +291,7 @@
             [Utils saveImage:image andName:attachment.key];
         }
         [_attachments insertObject:attachment atIndex:0];
-        [self updateStep];
+        [self p_updateStep];
         [_editView.collectionView reloadData];
     }];
     

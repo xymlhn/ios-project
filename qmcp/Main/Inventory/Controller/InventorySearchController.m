@@ -78,7 +78,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *result = searchBar.text;
     
-    [self searchWorkOrderByCode:result];
+    [self p_searchWorkOrderByCode:result];
     
 }
 
@@ -95,7 +95,7 @@
     [UIView commitAnimations];
 }
 
--(void)searchWorkOrderByCode:(NSString *)string{
+-(void)p_searchWorkOrderByCode:(NSString *)string{
     
     [_searchView.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;
@@ -175,7 +175,7 @@
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
                 hub.labelText = @"获取成功";
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
-                [weakSelf pushInfoView:salesOrderSearchResult.code];
+                [weakSelf p_pushInfoView:salesOrderSearchResult.code];
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -187,7 +187,7 @@
     }
 }
 
-- (void)pushInfoView:(NSString *)salesOrderCode{
+- (void)p_pushInfoView:(NSString *)salesOrderCode{
     InventoryController *info = [InventoryController new];
     info.salesOrderCode = salesOrderCode;
     info.hidesBottomBarWhenPushed = YES;

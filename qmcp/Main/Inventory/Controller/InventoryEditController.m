@@ -152,7 +152,7 @@
 
 }
 
--(void)updateStep{
+-(void)p_updateStep{
     
     [_attachments removeObject:_plusIcon];
     _itemSnapshot.attachments = _attachments;
@@ -207,7 +207,7 @@
         }
         
         [_attachments insertObject:attachment atIndex:0];
-        [self updateStep];
+        [self p_updateStep];
         [_inventoryEditView.photoCollectionView reloadData];
     }];
     

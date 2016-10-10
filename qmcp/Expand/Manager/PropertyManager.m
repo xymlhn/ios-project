@@ -138,7 +138,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
 
 -(BOOL)isExistProperty:(NSString *)code
 {
-    return [_commodityPropertyDict objectForKey:code] != nil && [self isExistCommodityItem:code];
+    return [_commodityPropertyDict objectForKey:code] != nil && [self p_isExistCommodityItem:code];
 }
 
 /**
@@ -148,7 +148,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *
  *  @return bool
  */
--(BOOL)isExistCommodityItem:(NSString *)code{
+-(BOOL)p_isExistCommodityItem:(NSString *)code{
     BOOL flag = false;
     for (CommodityItem *item in self.commodityItemArr) {
         if([item.commodityCode isEqualToString:code])
@@ -166,7 +166,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *
  *  @return 服务数组
  */
--(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode
+-(NSArray *)p_getCommodityPropertyByCommodityCode:(NSString *)commodityCode
 {
     NSArray *arr = [NSArray new];
     for (NSString *key in _commodityPropertyDict) {
@@ -190,17 +190,17 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
     }else{
         [_commodityPropertyChooseDict setObject:data forKey:propertyName];
     }
-    return [self handleChoose];
+    return [self p_handleChoose];
 }
 /**
  *  处理已点击的规格
  */
--(NSArray *)handleChoose{
+-(NSArray *)p_handleChoose{
     [_propertyDataArr removeAllObjects];
     for (NSString *key in _commodityPropertyChooseDict) {
         [_propertyDataArr addObject:_commodityPropertyChooseDict[key]];
     }
-    return [self findAvailableItemProperty:_propertyDataArr];
+    return [self p_findAvailableItemProperty:_propertyDataArr];
 }
 
 /**
@@ -208,7 +208,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *
  *  @param propertyDataArr 规格数组
  */
--(NSArray *)findAvailableItemProperty:(NSMutableArray *)propertyDataArr
+-(NSArray *)p_findAvailableItemProperty:(NSMutableArray *)propertyDataArr
 {
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"commodityCode == %@",_currentCommodityCode];
     NSArray* conditionArr = [_commodityItemArr filteredArrayUsingPredicate:predicate];
@@ -263,7 +263,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
     NSNotification * notice = [NSNotification notificationWithName:@"priceUpdate" object:nil userInfo:dict];
     //发送消息
     [[NSNotificationCenter defaultCenter]postNotification:notice];
-    return [self sortProperties:conditionArr];
+    return [self p_sortProperties:conditionArr];
 }
 
 /**
@@ -271,7 +271,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *
  *  @param properties 规格数组
  */
--(NSArray *)sortProperties:(NSArray *)properties{
+-(NSArray *)p_sortProperties:(NSArray *)properties{
     NSArray *commodityPropertyArr = [self getCommodityPropertyArr:_currentCommodityCode];
     CommodityProperty *p1 = commodityPropertyArr.count > 0 ? commodityPropertyArr[0] : [CommodityProperty new];
     CommodityProperty *p2 = commodityPropertyArr.count > 1 ? commodityPropertyArr[1] : [CommodityProperty new];
@@ -314,12 +314,12 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
         }
     }
     
-    [self compareOldArray:p1.propertyContent withNewArray:arr1];
-    [self compareOldArray:p2.propertyContent withNewArray:arr2];
-    [self compareOldArray:p3.propertyContent withNewArray:arr3];
-    [self compareOldArray:p4.propertyContent withNewArray:arr4];
-    [self compareOldArray:p5.propertyContent withNewArray:arr5];
-    [self compareOldArray:p6.propertyContent withNewArray:arr6];
+    [self p_compareOldArray:p1.propertyContent withNewArray:arr1];
+    [self p_compareOldArray:p2.propertyContent withNewArray:arr2];
+    [self p_compareOldArray:p3.propertyContent withNewArray:arr3];
+    [self p_compareOldArray:p4.propertyContent withNewArray:arr4];
+    [self p_compareOldArray:p5.propertyContent withNewArray:arr5];
+    [self p_compareOldArray:p6.propertyContent withNewArray:arr6];
     return commodityPropertyArr;
 }
 /**
@@ -328,7 +328,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *  @param arr1 旧规格
  *  @param arr2 筛选过后规格
  */
--(void)compareOldArray:(NSMutableArray *)arr1 withNewArray:(NSMutableArray *)arr2
+-(void)p_compareOldArray:(NSMutableArray *)arr1 withNewArray:(NSMutableArray *)arr2
 {
     for (NSString *str in arr1) {
         if(arr2.count == 0 || ![arr2 containsObject:str]){

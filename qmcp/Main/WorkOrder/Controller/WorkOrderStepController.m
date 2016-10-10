@@ -65,7 +65,7 @@
     [self pushWorkOrderStepEditControllerWithWorkOrderStepId:step.id andType:SaveTypeAdd];
 }
 
--(void)appendWorkOrder:(WorkOrderStep *)workOrderStep{
+-(void)p_appendWorkOrder:(WorkOrderStep *)workOrderStep{
     BOOL flag = NO;
     for(int i = 0;i < [_workOrderStepList count];i++){
         NSString *code = _workOrderStepList[i].id;
@@ -85,7 +85,7 @@
         
         switch (type) {
             case SaveTypeAdd:
-                [weakSelf appendWorkOrder:step];
+                [weakSelf p_appendWorkOrder:step];
                 break;
             case SaveTypeUpdate:
                 for (WorkOrderStep *temp in _workOrderStepList) {

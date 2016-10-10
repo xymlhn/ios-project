@@ -74,7 +74,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *result = searchBar.text;
     
-    [self searchWorkOrderByCode:result andCondition:[Config getSearch]];
+    [self p_searchWorkOrderByCode:result andCondition:[Config getSearch]];
 
 }
 
@@ -91,7 +91,7 @@
     [UIView commitAnimations];
 }
 
--(void)searchWorkOrderByCode:(NSString *)string
+-(void)p_searchWorkOrderByCode:(NSString *)string
                 andCondition:(BOOL)condition{
     
     [_searchView.searchBar resignFirstResponder];
@@ -162,7 +162,7 @@
     WorkOrderSearchResult *workOrderSearchResult = self.resultList[row];
     if(workOrderSearchResult.dispatchToMeFlag && workOrderSearchResult.status != WorkOrderStatusCompleted){
         WorkOrder *workOrder = [[WorkOrderManager getInstance] findWorkOrderByCode:workOrderSearchResult.code];
-        [self pushInfoView:workOrder.code];
+        [self p_pushInfoView:workOrder.code];
     }else{
         
     }
@@ -170,7 +170,7 @@
     
 }
 
-- (void)pushInfoView:(NSString *)code
+- (void)p_pushInfoView:(NSString *)code
 {
     WorkOrderInfoController *info = [WorkOrderInfoController new];
     info.workOrderCode = code;

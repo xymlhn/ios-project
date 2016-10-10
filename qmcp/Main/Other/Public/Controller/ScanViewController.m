@@ -41,7 +41,7 @@
     
     RACSignal *validSignal = [_scanView.scanText.rac_textSignal
                               map:^id(NSString *text) {
-                                  return @([self isValidText:text]);
+                                  return @([Utils isTextNull:text]);
                               }];
     
     [validSignal subscribeNext:^(NSNumber*signupActive){
@@ -64,10 +64,6 @@
     
 }
 
--(BOOL)isValidText:(NSString *)text
-{
-    return text.length > 0;
-}
 
 +(instancetype)doneBlock:(void (^)(NSString *))block{
     

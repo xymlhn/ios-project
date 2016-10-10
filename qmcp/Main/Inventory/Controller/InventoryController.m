@@ -76,13 +76,13 @@
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer{
      __weak typeof(self) weakSelf = self;
     SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
-        [weakSelf reportSignImage:signImage];
+        [weakSelf p_reportSignImage:signImage];
     }];
     [self presentViewController:signController animated: YES completion:nil];
     
 }
 
--(void) reportSignImage:(UIImage *)image{
+-(void) p_reportSignImage:(UIImage *)image{
     if(image){
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
@@ -93,14 +93,14 @@
         _salesOrderSearchResult.itemConfirmed = YES;
         _salesOrderSearchResult.signatureImageKey = attachment.key;
         
-        [self postWorkOrderInventoryWitCode:_salesOrderCode];
+        [self p_postWorkOrderInventoryWitCode:_salesOrderCode];
     }else{
         [Utils showHudTipStr:@"请重新签名!"];
     }
     
 }
 
--(void)postWorkOrderInventoryWitCode:(NSString *)code{
+-(void)p_postWorkOrderInventoryWitCode:(NSString *)code{
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传清点数据";
     hub.userInteractionEnabled = NO;

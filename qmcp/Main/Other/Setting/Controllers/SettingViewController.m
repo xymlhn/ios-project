@@ -85,7 +85,7 @@
         
         switch (indexPath.row) {
             case 0:
-                [cell setCacheSize:[self diskCacheSizeStr]];
+                [cell setCacheSize:[self p_diskCacheSizeStr]];
                 break;
                 
             default:
@@ -148,7 +148,7 @@
             break;
     }
 }
--(NSString *) diskCacheSizeStr{
+-(NSString *) p_diskCacheSizeStr{
     NSUInteger size = [[SDImageCache sharedImageCache] getSize];
     size += [Utils getResponseCacheSize];
     return [NSString stringWithFormat:@"%.2f M", size/ 1024.0/ 1024.0];

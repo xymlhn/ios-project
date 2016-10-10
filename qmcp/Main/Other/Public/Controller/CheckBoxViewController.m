@@ -48,7 +48,7 @@
         [self dissmiss];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.doneBlock) {
-                self.doneBlock([self handleChooseValue]);
+                self.doneBlock([self p_handleChooseValue]);
             }
         });
         return [RACSignal empty];
@@ -60,7 +60,7 @@
     
 }
 
--(NSString *)handleChooseValue{
+-(NSString *)p_handleChooseValue{
 
     NSMutableString *value = [NSMutableString new];
     for (int i = 0; i < self.statusList.count; i++) {

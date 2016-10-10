@@ -289,4 +289,8 @@
     
     return [regextestmobile evaluateWithObject:mobileNum];
 }
+
++(BOOL)isTextNull:(NSString *)text{
+    return text == nil || [text isEqualToString:@""];
+}
 @end

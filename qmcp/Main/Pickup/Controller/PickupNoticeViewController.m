@@ -53,7 +53,7 @@
  *
  *  @param controller
  */
--(void)pushWorkOrderInfoUI:(UIViewController *)controller{
+-(void)p_pushWorkOrderInfoUI:(UIViewController *)controller{
     controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -62,7 +62,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self handleResult:searchBar.text];
+    [self p_handleResult:searchBar.text];
     searchBar.text =  @"";
     [searchBar resignFirstResponder];
 }
@@ -95,18 +95,18 @@
      __weak typeof(self) weakSelf = self;
     if([Config getQuickScan]){
         ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
-            [weakSelf handleResult:textValue];
+            [weakSelf p_handleResult:textValue];
         }];
-        [self pushWorkOrderInfoUI:scanViewController];
+        [self p_pushWorkOrderInfoUI:scanViewController];
     }else{
         QrCodeViewController *qrCodeViewController = [QrCodeViewController doneBlock:^(NSString *textValue) {
-            [weakSelf handleResult:textValue];
+            [weakSelf p_handleResult:textValue];
         }];
-        [self pushWorkOrderInfoUI:qrCodeViewController];
+        [self p_pushWorkOrderInfoUI:qrCodeViewController];
     }
 }
 
--(void)handleResult:(NSString *)result
+-(void)p_handleResult:(NSString *)result
 {
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"加载中...";

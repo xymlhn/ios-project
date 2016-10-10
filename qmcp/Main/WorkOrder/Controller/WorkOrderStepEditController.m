@@ -98,7 +98,7 @@
     
 }
 
--(void)deleteAttachment:(Attachment *)attachment
+-(void)p_deleteAttachment:(Attachment *)attachment
 {
     [Utils deleteImage:attachment.key];
     [attachment deleteToDB];
@@ -147,9 +147,9 @@
 {
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     NSArray *steps = [WorkOrderStep searchWithWhere:where];
-    [self postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
+    [self p_postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
 }
-- (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepsArray:(NSArray *)steps{
+- (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepsArray:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
@@ -219,7 +219,7 @@
     if([_step deleteToDB]){
         for (Attachment *attachment in _attachments) {
             if(!attachment.isPlus)
-                [self deleteAttachment:attachment];
+                [self p_deleteAttachment:attachment];
         }
         [self.navigationController popViewControllerAnimated:YES];
         _type = SaveTypeDelete;

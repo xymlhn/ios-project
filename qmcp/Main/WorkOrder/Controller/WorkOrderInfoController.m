@@ -39,14 +39,14 @@
             case WorkOrderTypeOnsite:
                 switch (_workOrder.onSiteStatus) {
                     case OnSiteStatusWaiting:
-                        [self updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
+                        [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
                         break;
                     case OnSiteStatusNotDepart:
-                        [self updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
+                        [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                         
                         break;
                     case OnSiteStatusOnRoute:
-                        [self updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
+                        [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                         break;
 
                     default:
@@ -72,7 +72,7 @@
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
     _infoView.workOrder = _workOrder;
-    [self setInfo:_workOrder];
+    [self p_setInfo:_workOrder];
     
     _infoView.stepBtn.userInteractionEnabled = YES;
     [_infoView.stepBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stepBtnClick:)]];
@@ -88,7 +88,7 @@
 }
 
 
--(void)setInfo:(WorkOrder *)workOrder
+-(void)p_setInfo:(WorkOrder *)workOrder
 {
     _infoView.remarkText.text = workOrder.salesOrderSnapshot.remark;
     _infoView.serviceText.text = workOrder.salesOrderSnapshot.organizationName;
@@ -142,7 +142,7 @@
  *  @param timeStamp     TimeStamp枚举
  *  @param time          date
  */
--(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
+-(void)p_updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在提交数据";
@@ -264,7 +264,7 @@
     }];
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [weakSelf postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList];
+        [weakSelf p_postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList];
     }];
     
     [alertController addAction:cancelAction];
@@ -273,7 +273,7 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps{
+- (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
@@ -316,7 +316,7 @@
                 hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
                 
-                [self updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:OnSiteTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
+                [self p_updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:OnSiteTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
                 
             }
         }else{
@@ -335,7 +335,7 @@
 }
 
 
--(void)updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
+-(void)p_updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在完结工单";

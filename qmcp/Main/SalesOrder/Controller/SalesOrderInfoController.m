@@ -45,14 +45,14 @@
             case SalesOrderTypeOnsite:
                 switch (_salesOrder.onSiteStatus) {
                     case OnSiteStatusWaiting:
-                        [self updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
+                        [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
                         break;
                     case OnSiteStatusNotDepart:
-                        [self updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
+                        [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                         
                         break;
                     case OnSiteStatusOnRoute:
-                        [self updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
+                        [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                         break;
                         
                     default:
@@ -136,7 +136,7 @@
     
 }
 
--(void)updateTimeStampWithCode:(NSString *)_salesOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
+-(void)p_updateTimeStampWithCode:(NSString *)_salesOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在提交数据";
@@ -194,7 +194,7 @@
     }];
     
     UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [weakSelf completeSalesOrder];
+        [weakSelf p_completeSalesOrder];
     }];
     
     [alertController addAction:cancelAction];
@@ -203,7 +203,7 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(void)completeSalesOrder{
+-(void)p_completeSalesOrder{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在完成订单";

@@ -34,7 +34,7 @@
     _index2 = 0;
     _index3 = 0;
     _provinceArr = [[AddressManager getInstance] getProvince];
-    [self calculateAddress];
+    [self p_calculateAddress];
 }
 
 -(void)setupView{
@@ -78,7 +78,7 @@
 }
 
 // 根据传进来的下标数组计算对应的三个数组
-- (void)calculateAddress{
+- (void)p_calculateAddress{
     _countryArr = [[AddressManager getInstance] getCity:_index1];
     _districtArr = [[AddressManager getInstance] getDistanceByProvinceIndex:_index1 andCityIndex:_index2];
 }
@@ -153,7 +153,7 @@
             self.index2 = 0;
             self.index3 = 0;
             // 滚动的时候都要进行一次数组的刷新
-            [self calculateAddress];
+            [self p_calculateAddress];
             [pickerView reloadComponent:1];
             [pickerView reloadComponent:2];
             [pickerView selectRow:0 inComponent:1 animated:YES];
@@ -164,7 +164,7 @@
         case 1:{
             self.index2 = row;
             self.index3 = 0;
-            [self calculateAddress];
+            [self p_calculateAddress];
             [pickerView selectRow:0 inComponent:2 animated:YES];
             [pickerView reloadComponent:2];
         }

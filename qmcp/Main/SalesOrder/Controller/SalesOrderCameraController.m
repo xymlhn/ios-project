@@ -110,7 +110,6 @@
     NSUInteger tag = switchButton.tag;
     CameraData *cameraData = _cameraArr[tag];
     
-    
     if(!_currentCamera){
         MBProgressHUD *hub = [Utils createHUD];
         hub.labelText = @"打开摄像头中...";

@@ -69,12 +69,12 @@
     
     RACSignal *validAddressSignal = [_businessSalesOrderView.addressValue.rac_textSignal
                                       map:^id(NSString *text) {
-                                          return @(![self isTextNull:text]);
+                                          return @(![Utils isTextNull:text]);
                                       }];
     
     RACSignal *validUserSignal = [_businessSalesOrderView.nameValue.rac_textSignal
                                   map:^id(NSString *text) {
-                                      return @(![self isTextNull:text]);
+                                      return @(![Utils isTextNull:text]);
                                   }];
     
     RACSignal *signUpActiveSignal = [RACSignal combineLatest:@[validPhoneSignal, validUserSignal,validAddressSignal]
@@ -88,16 +88,5 @@
 
 }
 
-
-/**
- 文字是否为空
-
- @param text string
-
- @return bool
- */
--(BOOL)isTextNull:(NSString *)text{
-    return text == nil || [text isEqualToString:@""];
-}
 
 @end

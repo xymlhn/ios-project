@@ -48,6 +48,12 @@ typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #ifndef Header_h
 #define Header_h
 
+#ifdef DEBUG
+#define NSLog(FORMAT, ...) fprintf(stderr,"\n %s:%d   %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__, [[[NSString alloc] initWithData:[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] dataUsingEncoding:NSUTF8StringEncoding] encoding:NSNonLossyASCIIStringEncoding] UTF8String]);
+#else
+#define NSLog(...)
+#endif
+
 #define kEndSucceedDelayTime 0.5
 #define kEndFailedDelayTime 1.5
 #define kScreen_Bounds [UIScreen mainScreen].bounds

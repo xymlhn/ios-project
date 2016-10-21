@@ -23,6 +23,7 @@
 #import "AMapViewController.h"
 #import "AppManager.h"
 #import "BusinessSalesOrderController.h"
+#import "MeViewController.h"
 @interface OSCTabBarController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     WorkOrderListController *newsViewCtl;
@@ -69,28 +70,25 @@
     grabViewCtl = [SalesOrderGrabListController new];
     bindViewCtl = [SalesOrderMineListController new];
  
-    AMapViewController *gis = [[AMapViewController alloc] init];
-    HelpViewController *help = [[HelpViewController alloc] init];
+    MeViewController *help = [[MeViewController alloc] init];
     SwipableViewController *saleOrderSVC = [[SwipableViewController alloc] initWithTitle:@"订单"
                                                                             andSubTitles:@[@"我的订单", @"待接订单"]
                                                                           andControllers:@[bindViewCtl,grabViewCtl]
                                                                              underTabbar:YES];
     if ([[AppManager getInstance] getUser].cooperationMode == CooperationModeSingle) {
-        _titles = @[@"订单", @"地图", @"帮助"];
-        _images = @[@"tabbar-discover", @"tabbar-discover", @"tabbar-me"];
+        _titles = @[@"订单", @"我"];
+        _images = @[@"tabbar-discover", @"tabbar-me"];
         self.viewControllers = @[[self addNavigationItemForViewController:saleOrderSVC],
-                                 [self addNavigationItemForViewController:gis],
                                  [self addNavigationItemForViewController:help]];
     }else{
-        _titles = @[@"订单",@"工单", @"地图", @"帮助"];
-        _images = @[@"tabbar-news", @"tabbar-discover", @"tabbar-discover", @"tabbar-me"];
+        _titles = @[@"订单",@"工单", @"我"];
+        _images = @[@"tabbar-news", @"tabbar-discover", @"tabbar-me"];
         SwipableViewController *workOrderSVC = [[SwipableViewController alloc] initWithTitle:@"工单"
                                                                                 andSubTitles:@[@"未完成", @"待上传",]
                                                                               andControllers:@[newsViewCtl, hotNewsViewCtl]
                                                                                  underTabbar:YES];
         self.viewControllers = @[[self addNavigationItemForViewController:saleOrderSVC],
                                  [self addNavigationItemForViewController:workOrderSVC],
-                                 [self addNavigationItemForViewController:gis],
                                  [self addNavigationItemForViewController:help]];
     }
 
@@ -131,10 +129,10 @@
 - (UINavigationController *)addNavigationItemForViewController:(UIViewController *)viewController
 {
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    
-    viewController.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigationbar-sidebar"]
-                                                                                        style:UIBarButtonItemStylePlain
-                                                                                       target:self action:@selector(onClickMenuButton)];
+//    
+//    viewController.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigationbar-sidebar"]
+//                                                                                        style:UIBarButtonItemStylePlain
+//                                                                                       target:self action:@selector(onClickMenuButton)];
     viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"]
                                                                                         style:UIBarButtonItemStylePlain
                                                                                        target:self action:@selector(onClickSearchButton)];
@@ -143,7 +141,7 @@
 
 - (void)onClickMenuButton
 {
-    [self.sideMenuViewController presentLeftMenuViewController];
+    //[self.sideMenuViewController presentLeftMenuViewController];
 }
 
 

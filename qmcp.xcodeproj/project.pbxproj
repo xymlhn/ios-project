@@ -93,6 +93,8 @@
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E881D79603600BB982F /* AVFoundation.framework */; };
 		248F2E8B1D79606200BB982F /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E8A1D79606200BB982F /* AssetsLibrary.framework */; };
+		24A40FF01DB9B46B00736F6C /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A40FEF1DB9B46B00736F6C /* MeViewController.m */; };
+		24A40FF31DB9B78A00736F6C /* MeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A40FF21DB9B78A00736F6C /* MeView.m */; };
 		24AFD7F21D92337300B2F1B9 /* address.json in Resources */ = {isa = PBXBuildFile; fileRef = 24AFD7F11D92337300B2F1B9 /* address.json */; };
 		24AFD7F81D92339200B2F1B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFD7F51D92339200B2F1B9 /* AppDelegate.m */; };
 		24AFDC111D9238FF00B2F1B9 /* InventoryChooseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB091D9238FF00B2F1B9 /* InventoryChooseController.m */; };
@@ -366,6 +368,10 @@
 		248A5DBE1C85C3C30095A4FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		248F2E881D79603600BB982F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		248F2E8A1D79606200BB982F /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		24A40FEE1DB9B46B00736F6C /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
+		24A40FEF1DB9B46B00736F6C /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
+		24A40FF11DB9B78A00736F6C /* MeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeView.h; sourceTree = "<group>"; };
+		24A40FF21DB9B78A00736F6C /* MeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeView.m; sourceTree = "<group>"; };
 		24AFD7F11D92337300B2F1B9 /* address.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = address.json; sourceTree = "<group>"; };
 		24AFD7F41D92339200B2F1B9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		24AFD7F51D92339200B2F1B9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -845,6 +851,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		24A40FEB1DB9B43E00736F6C /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				24A40FEC1DB9B43E00736F6C /* Controller */,
+				24A40FED1DB9B43E00736F6C /* View */,
+			);
+			path = Me;
+			sourceTree = "<group>";
+		};
+		24A40FEC1DB9B43E00736F6C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				24A40FEE1DB9B46B00736F6C /* MeViewController.h */,
+				24A40FEF1DB9B46B00736F6C /* MeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		24A40FED1DB9B43E00736F6C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				24A40FF11DB9B78A00736F6C /* MeView.h */,
+				24A40FF21DB9B78A00736F6C /* MeView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		24AFD7EF1D9232B100B2F1B9 /* Main(主要) */ = {
 			isa = PBXGroup;
 			children = (
@@ -951,6 +984,7 @@
 		24AFDB2E1D9238FF00B2F1B9 /* Other(其他) */ = {
 			isa = PBXGroup;
 			children = (
+				24A40FEB1DB9B43E00736F6C /* Me */,
 				24AFDB2F1D9238FF00B2F1B9 /* Gis(地图) */,
 				24AFDB381D9238FF00B2F1B9 /* Help(帮助) */,
 				24AFDB3C1D9238FF00B2F1B9 /* Home(主页) */,
@@ -1676,6 +1710,7 @@
 				24AFDC6A1D92390000B2F1B9 /* WorkOrderInfoController.m in Sources */,
 				24AFDC151D9238FF00B2F1B9 /* Commodity.m in Sources */,
 				246643141D9A12E8009402A2 /* WorkOrderCell.m in Sources */,
+				24A40FF01DB9B46B00736F6C /* MeViewController.m in Sources */,
 				24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */,
 				246643131D9A12E8009402A2 /* WorkOrderCameraCell.m in Sources */,
 				24AFDC111D9238FF00B2F1B9 /* InventoryChooseController.m in Sources */,
@@ -1722,6 +1757,7 @@
 				24AFDC4C1D9238FF00B2F1B9 /* SalesOrderSearchResult.m in Sources */,
 				240EC94E1D7FB2B7008A5696 /* UIView+Util.m in Sources */,
 				246643101D9A12E8009402A2 /* SelectCell.m in Sources */,
+				24A40FF31DB9B78A00736F6C /* MeView.m in Sources */,
 				240EC94D1D7FB2B7008A5696 /* UIView+Frame.m in Sources */,
 				246642D41D9A1285009402A2 /* SalesOrderGrabCell.m in Sources */,
 				24AFDC781D92390000B2F1B9 /* WorkOrderStep.m in Sources */,

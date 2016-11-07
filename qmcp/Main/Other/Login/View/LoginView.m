@@ -52,6 +52,8 @@
     
     UIView *userNameView = [UIView new];
     userNameView.backgroundColor = [UIColor whiteColor];
+    userNameView.layer.cornerRadius = 4;
+    userNameView.layer.masksToBounds = YES;
     [topView addSubview:userNameView];
     [userNameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(25);
@@ -67,7 +69,7 @@
     [userNameView addSubview:userIcon];
     [userIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(userNameView.mas_centerY);
-        make.left.equalTo(userNameView.mas_left).with.offset(5);
+        make.left.equalTo(userNameView.mas_left).with.offset(10);
         make.width.equalTo(@20);
     }];
     _userNameText = [UITextField new];
@@ -86,6 +88,8 @@
     }];
     
     UIView *passwordView = [UIView new];
+    passwordView.layer.cornerRadius = 4;
+    passwordView.layer.masksToBounds = YES;
     passwordView.backgroundColor = [UIColor whiteColor];
     [topView addSubview:passwordView];
     [passwordView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,7 +106,7 @@
     [passwordView addSubview:paswordIcon];
     [paswordIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(passwordView.mas_centerY);
-        make.left.equalTo(passwordView.mas_left).with.offset(5);
+        make.left.equalTo(passwordView.mas_left).with.offset(10);
         make.width.equalTo(@20);
     }];
     

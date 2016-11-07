@@ -851,12 +851,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		24A40FEB1DB9B43E00736F6C /* Me */ = {
+		24A40FEB1DB9B43E00736F6C /* Me(我) */ = {
 			isa = PBXGroup;
 			children = (
 				24A40FEC1DB9B43E00736F6C /* Controller */,
 				24A40FED1DB9B43E00736F6C /* View */,
 			);
+			name = "Me(我)";
 			path = Me;
 			sourceTree = "<group>";
 		};
@@ -984,7 +985,7 @@
 		24AFDB2E1D9238FF00B2F1B9 /* Other(其他) */ = {
 			isa = PBXGroup;
 			children = (
-				24A40FEB1DB9B43E00736F6C /* Me */,
+				24A40FEB1DB9B43E00736F6C /* Me(我) */,
 				24AFDB2F1D9238FF00B2F1B9 /* Gis(地图) */,
 				24AFDB381D9238FF00B2F1B9 /* Help(帮助) */,
 				24AFDB3C1D9238FF00B2F1B9 /* Home(主页) */,

@@ -141,7 +141,8 @@
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                     hub.labelText = error;
-                    [hub hide:YES afterDelay:kEndFailedDelayTime];                }
+                    [hub hide:YES afterDelay:kEndFailedDelayTime];
+                }
             }];
         }
         

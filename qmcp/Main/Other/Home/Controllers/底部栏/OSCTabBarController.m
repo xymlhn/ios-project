@@ -20,10 +20,17 @@
 #import "PropertyManager.h"
 #import "Config.h"
 #import "SearchViewController.h"
-#import "AMapViewController.h"
 #import "AppManager.h"
 #import "BusinessSalesOrderController.h"
 #import "MeViewController.h"
+#import "YCXMenu.h"
+#import "ScanViewController.h"
+#import "InventorySearchController.h"
+#import "QrCodeViewController.h"
+#import "PickupViewController.h"
+#import "WorkOrderInfoController.h"
+#import "PickupNoticeViewController.h"
+#import "WorkOrderManager.h"
 @interface OSCTabBarController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     WorkOrderListController *newsViewCtl;
@@ -35,6 +42,7 @@
 @property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *images;
+@property (nonatomic , strong) NSMutableArray *menuItems;
 @end
 
 @implementation OSCTabBarController
@@ -129,28 +137,28 @@
 - (UINavigationController *)addNavigationItemForViewController:(UIViewController *)viewController
 {
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-//    
-//    viewController.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigationbar-sidebar"]
-//                                                                                        style:UIBarButtonItemStylePlain
-//                                                                                       target:self action:@selector(onClickMenuButton)];
-    viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search"]
+
+    viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_add"]
                                                                                         style:UIBarButtonItemStylePlain
                                                                                        target:self action:@selector(onClickSearchButton)];
     return navigationController;
 }
 
-- (void)onClickMenuButton
-{
-    //[self.sideMenuViewController presentLeftMenuViewController];
-}
-
-
 //TODO: 搜索系统
 -(void)onClickSearchButton{
 //    SearchViewController *info = [SearchViewController new];
 //    [self setContentViewController:info];
-    BusinessSalesOrderController *controller = [BusinessSalesOrderController new];
-    [self setContentViewController:controller];
+
+    [YCXMenu setTintColor:[UIColor blackColor]];
+
+    [YCXMenu setSelectedColor:[UIColor redColor]];
+    if ([YCXMenu isShow]){
+        [YCXMenu dismissMenu];
+    } else {
+        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 55, 50, 0) menuItems:self.menuItems selected:^(NSInteger index, YCXMenuItem *item) {
+            NSLog(@"%@",item);
+        }];
+    }
 }
 
 - (void)setContentViewController:(UIViewController *)viewController
@@ -159,5 +167,102 @@
     UINavigationController *nav = (UINavigationController *)((UITabBarController *)self.sideMenuViewController.contentViewController).selectedViewController;
     [nav pushViewController:viewController animated:YES];
     [self.sideMenuViewController hideMenuViewController];
+}
+
+- (NSMutableArray *)menuItems {
+
+    if (!_menuItems) {
+        YCXMenuItem *salesToOrder = [YCXMenuItem menuItem:@"商家下单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(salesToOrderClick)];
+        YCXMenuItem *inventoryitem = [YCXMenuItem menuItem:@"清点物品" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(inventoryClick)];
+        YCXMenuItem *qritem = [YCXMenuItem menuItem:@"扫描接单" image:[UIImage imageNamed:@"menu_scan_icon"] target:self action:@selector(qrCodeClick)];
+        YCXMenuItem *completeitem = [YCXMenuItem menuItem:@"完成物品" image:[UIImage imageNamed:@"menu_notice_icon"] target:self action:@selector(completeClick)];
+        YCXMenuItem *pickupitem = [YCXMenuItem menuItem:@"客户取件" image:[UIImage imageNamed:@"menu_pick_icon"] target:self action:@selector(pickupClick)];
+        _menuItems = [@[salesToOrder,inventoryitem,qritem,completeitem,pickupitem] mutableCopy];
+    }
+    return _menuItems;
+}
+
+-(void)salesToOrderClick{
+    BusinessSalesOrderController *controller = [BusinessSalesOrderController new];
+    [self setContentViewController:controller];
+}
+
+-(void)inventoryClick{
+
+    InventorySearchController *view = [InventorySearchController new];
+    [self setContentViewController:view];
+}
+
+-(void)qrCodeClick{
+    __weak typeof(self) weakSelf = self;
+    if([Config getQuickScan]){
+        ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
+            [weakSelf handleResult:textValue];
+        }];
+        [self setContentViewController:scanViewController];
+    }else{
+        QrCodeViewController *qrCodeViewController = [QrCodeViewController doneBlock:^(NSString *textValue) {
+            [weakSelf handleResult:textValue];
+        }];
+        [self setContentViewController:qrCodeViewController];
+    }
+}
+
+-(void)completeClick{
+    PickupNoticeViewController *view = [PickupNoticeViewController new];
+    [self setContentViewController:view];
+}
+
+-(void)pickupClick{
+    PickupViewController *view = [PickupViewController new];
+    [self setContentViewController:view];
+}
+
+#pragma mark code
+- (void)reportQrCodeResult:(NSString *)result
+{
+    [self handleResult:result];
+}
+
+- (void)reportScanResult:(NSString *)result
+{
+    [self handleResult:result];
+}
+
+-(void)handleResult:(NSString *)result
+{
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"扫描中...";
+    hub.userInteractionEnabled = NO;
+    [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
+        if (!error) {
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+            hub.labelText = [NSString stringWithFormat:@"扫描成功"];
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
+            [workOrder saveToDB];
+            [[WorkOrderManager getInstance] sortAllWorkOrder];
+            [self pushWorkOrderInfoUI:workOrder.code];
+            
+        }else{
+            
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
+        }
+    }];
+}
+/**
+ * 跳转到WorkOrderInfo界面
+ *
+ *  @param code 工单code
+ */
+-(void)pushWorkOrderInfoUI:(NSString *)code{
+    WorkOrderInfoController *info = [WorkOrderInfoController new];
+    info.workOrderCode = code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 @end

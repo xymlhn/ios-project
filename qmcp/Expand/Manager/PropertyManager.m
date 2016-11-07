@@ -166,7 +166,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *
  *  @return 服务数组
  */
--(NSArray *)p_getCommodityPropertyByCommodityCode:(NSString *)commodityCode
+-(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode
 {
     NSArray *arr = [NSArray new];
     for (NSString *key in _commodityPropertyDict) {

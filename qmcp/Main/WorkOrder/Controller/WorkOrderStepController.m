@@ -62,7 +62,7 @@
     step.submitTime = [Utils formatDate:[NSDate new]];
     step.userOpenId = [[AppManager getInstance] getUser].userOpenId;
     [step saveToDB];
-    [self pushWorkOrderStepEditControllerWithWorkOrderStepId:step.id andType:SaveTypeAdd];
+    [self pushWorkOrderStepEditController:step.id withType:SaveTypeAdd];
 }
 
 -(void)p_appendWorkOrder:(WorkOrderStep *)workOrderStep{
@@ -78,7 +78,7 @@
     }
 }
 
--(void)pushWorkOrderStepEditControllerWithWorkOrderStepId:(NSString *)stepId andType:(SaveType)type
+-(void)pushWorkOrderStepEditController:(NSString *)stepId withType:(SaveType)type
 {
      __weak typeof(self) weakSelf = self;
     WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, SaveType type) {
@@ -142,7 +142,7 @@
 
 {
     WorkOrderStep *step = self.workOrderStepList[indexPath.row];
-    [self pushWorkOrderStepEditControllerWithWorkOrderStepId:step.id andType:SaveTypeUpdate];
+    [self pushWorkOrderStepEditController:step.id withType:SaveTypeUpdate];
 }
 
 

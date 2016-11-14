@@ -8,7 +8,7 @@
 
 #import "QrCodeViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "PchHeader.h"
 
 #define SCANVIEW_EdgeTop 70.0
 #define SCANVIEW_EdgeLeft 50.0
@@ -86,8 +86,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     dispatch_queue_t dispatchQueue;
     dispatchQueue = dispatch_queue_create(kScanQRCodeQueueName, NULL);
     [captureMetadataOutput setMetadataObjectsDelegate:self queue:dispatchQueue];
-    // 设置元数据类型 AVMetadataObjectTypeQRCode
-    [captureMetadataOutput setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
+    captureMetadataOutput.metadataObjectTypes=@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code];
     
     // 创建输出对象
     _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
@@ -117,10 +116,9 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     if (metadataObjects != nil && [metadataObjects count] > 0) {
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         NSString *result;
-        if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
-            result = metadataObj.stringValue;
-        } else {
-            NSLog(@"不是二维码");
+        result = metadataObj.stringValue;
+        if (result == nil) {
+            kTipAlert(@"条码无数据");
         }
        
         dispatch_async(dispatch_get_main_queue(), ^{

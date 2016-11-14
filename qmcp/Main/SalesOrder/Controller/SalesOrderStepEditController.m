@@ -25,7 +25,7 @@
 @property (nonatomic, strong) SalesOrder *salesOrder;
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderStepEditView *editView;
-@property (nonatomic, strong)NSMutableArray *dataArray;//数据
+@property (nonatomic, strong) NSMutableArray *dataArray;//数据
 @property (nonatomic, strong) Attachment *plusIcon;
 
 @end
@@ -97,7 +97,7 @@
     
 }
 
--(void)deleteAttachment:(Attachment *)attachment
+-(void)p_deleteAttachment:(Attachment *)attachment
 {
     [Utils deleteImage:attachment.key];
     [attachment deleteToDB];
@@ -217,7 +217,7 @@
     if([_step deleteToDB]){
         for (Attachment *attachment in _attachments) {
             if(!attachment.isPlus)
-                [self deleteAttachment:attachment];
+                [self p_deleteAttachment:attachment];
         }
         [self.navigationController popViewControllerAnimated:YES];
         _saveType = SaveTypeDelete;
@@ -331,13 +331,16 @@
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoCell * cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
     Attachment *attachment = _attachments[indexPath.row];
     if(attachment.isPlus){
         [self plusBtnClick];
     }else{
-        ImageViewerController *imgViewweVC = [[ImageViewerController alloc] initWithImage:cell.image.image];
-        [self presentViewController:imgViewweVC animated:YES completion:nil];
+        ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
+            [self p_deleteAttachment:attachment];
+            [_attachments removeObject:attachment];
+            [_editView.collectionView reloadData];
+        }];
+        [self presentViewController:ivc animated:YES completion:nil];
     }
     
 }

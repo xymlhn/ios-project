@@ -61,7 +61,7 @@
     [workView addSubview:_workSwitch];
     
     UIView *workLine = [UIView new];
-    workLine.backgroundColor = [UIColor blackColor];
+    workLine.backgroundColor = [UIColor grayColor];
     [workView addSubview:workLine];
     
     //地图
@@ -90,7 +90,7 @@
     [_mapBtn addSubview:mapArrow];
     
     UIView *mapLine = [UIView new];
-    mapLine.backgroundColor = [UIColor blackColor];
+    mapLine.backgroundColor = [UIColor grayColor];
     [_mapBtn addSubview:mapLine];
     
     //帮助
@@ -144,7 +144,7 @@
     [_settingBtn addSubview:settingArrow];
     
     UIView *settingLine = [UIView new];
-    settingLine.backgroundColor = [UIColor blackColor];
+    settingLine.backgroundColor = [UIColor grayColor];
     [_settingBtn addSubview:settingLine];
     
     //登出
@@ -196,7 +196,7 @@
         make.top.equalTo(topView.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
+        make.height.mas_equalTo(@45);
     }];
     
     [workIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -219,7 +219,7 @@
         make.bottom.equalTo(workView.mas_bottom).with.offset(0);
         make.left.equalTo(workView.mas_left).with.offset(10);
         make.right.equalTo(workView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     //地图
@@ -227,7 +227,7 @@
         make.top.equalTo(workView.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
+        make.height.mas_equalTo(@45);
     }];
     
     [mapIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -250,7 +250,7 @@
         make.bottom.equalTo(_mapBtn.mas_bottom).with.offset(0);
         make.left.equalTo(_mapBtn.mas_left).with.offset(10);
         make.right.equalTo(_mapBtn.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     //帮助
@@ -258,7 +258,7 @@
         make.top.equalTo(_mapBtn.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
+        make.height.mas_equalTo(@45);
     }];
     
     [helpIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -282,7 +282,7 @@
         make.top.equalTo(_helpBtn.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
+        make.height.mas_equalTo(@45);
     }];
     
     [settingIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -305,7 +305,7 @@
         make.bottom.equalTo(_settingBtn.mas_bottom).with.offset(0);
         make.left.equalTo(_settingBtn.mas_left).with.offset(10);
         make.right.equalTo(_settingBtn.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     //退出
@@ -313,7 +313,7 @@
         make.top.equalTo(_settingBtn.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
+        make.height.mas_equalTo(@45);
     }];
     
     [logoutIcon mas_makeConstraints:^(MASConstraintMaker *make){

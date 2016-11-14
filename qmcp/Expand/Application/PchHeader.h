@@ -54,6 +54,7 @@ typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #define NSLog(...)
 #endif
 
+#define kLineHeight @0.5
 #define kEndSucceedDelayTime 0.5
 #define kEndFailedDelayTime 1.5
 #define kScreen_Bounds [UIScreen mainScreen].bounds

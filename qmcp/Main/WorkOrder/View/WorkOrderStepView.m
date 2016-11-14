@@ -21,7 +21,6 @@
     if (!self) return nil;
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;
-    _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     self.backgroundColor = [UIColor whiteColor];
     [self addSubview:_tableView];

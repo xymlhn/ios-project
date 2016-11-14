@@ -11,7 +11,7 @@
 
 #import "ImageViewerController.h"
 #import "Utils.h"
-
+#import "Masonry.h"
 #import <SDWebImageManager.h>
 #import <UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
@@ -19,11 +19,10 @@
 @interface ImageViewerController () <UIScrollViewDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSURL *imageURL;
-@property (nonatomic, strong) UIImage *image;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIButton *saveButton;
+@property (nonatomic, strong) UIButton *delButton;
 @property (nonatomic, assign) BOOL zoomOut;
 
 @property (nonatomic, strong) MBProgressHUD *HUD;
@@ -56,15 +55,7 @@
     return self;
 }
 
-- (instancetype)initWithImage:(UIImage *)image
-{
-    self = [self init];
-    if (self) {
-        _image = image;
-    }
-    
-    return self;
-}
+
 
 #pragma mark - life cycle
 
@@ -77,10 +68,11 @@
     [self configureScrollView];
     [self configureImageView];
     
-    if (_image) {
-        _imageView.image = _image;
-        _imageView.frame = [self frameForImage:_image];
-        _scrollView.contentSize = [self contentSizeForImage:_image];
+    if (_key) {
+         UIImage *image = [Utils loadImage:_key];
+        _imageView.image = image;
+        _imageView.frame = [self frameForImage:image];
+        _scrollView.contentSize = [self contentSizeForImage:image];
     } else {
         if (![[SDWebImageManager sharedManager] cachedImageExistsForURL:_imageURL]) {
             _HUD = [Utils createHUD];
@@ -102,13 +94,18 @@
                              }];
     }
     
-    _saveButton = [UIButton new];
-    CGFloat X = self.view.frame.size.width;
-    CGFloat Y = self.view.frame.size.height;
-    _saveButton.frame = CGRectMake(X-60, Y-45, 30, 30);
-    [_saveButton setImage:[UIImage imageNamed:@"picture_download"] forState:UIControlStateNormal];
-    [_saveButton addTarget:self action:@selector(downloadPicture) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_saveButton];
+    _delButton = [UIButton new];
+    [_delButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [self.view addSubview:_delButton];
+    [_delButton mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(self.view.mas_top).with.offset(15);
+        make.right.equalTo(self.view.mas_right).with.offset(-15);
+        make.width.mas_equalTo(@30);
+        make.height.mas_equalTo(@30);
+    }];
+    [_delButton addTarget:self action:@selector(showDelCancelAlert) forControlEvents:UIControlEventTouchUpInside];
+    [_delButton setHidden:_key==nil?YES:NO];
+    
 }
 
 - (void)configureScrollView
@@ -119,10 +116,6 @@
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_scrollView];
-    
-//    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
-//    panGestureRecognizer.delegate = self;
-//    [_scrollView addGestureRecognizer:panGestureRecognizer];
 }
 
 - (void)configureImageView
@@ -138,7 +131,6 @@
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap)];
     [singleTap requireGestureRecognizerToFail:doubleTap];
-//    [_imageView addGestureRecognizer:singleTap];
     [self.view addGestureRecognizer:singleTap];
 }
 
@@ -151,7 +143,6 @@
 
 - (CGRect)frameForImage:(UIImage *)image
 {
-//    if (!image) {return CGRectZero;}
     
     CGFloat width = self.view.bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -309,38 +300,48 @@
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
 }
 
 //下载保存图片
-- (void)downloadPicture
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"下载图片至手机相册" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+- (void)deletePicture{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //调用代理对象的协议方法来实现数据传递
+        [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.doneBlock) {
+            self.doneBlock(_key);
+        }
+    });
+}
+- (void)showDelCancelAlert {
+    NSString *title = @"提示";
+    NSString *message = @"是否删除图片？";
+    NSString *cancelButtonTitle = @"否";
+    NSString *otherButtonTitle = @"是";
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    [alertView show];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf deletePicture];
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:otherAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
-    }
++(instancetype)initWithImageKey:(NSString *)key doneBlock:(void (^)(NSString *))block{
+    
+    ImageViewerController *vc = [[ImageViewerController alloc] init];
+    vc.doneBlock = block;
+    vc.key = key;
+    return vc;
 }
 
-- (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    MBProgressHUD *HUD = [Utils createHUD];
-    HUD.mode = MBProgressHUDModeCustomView;
-    
-    if (!error) {
-        HUD.labelText = @"保存成功";
-    } else {
-        HUD.labelText = [NSString stringWithFormat:@"%@", [error description]];
-    }
-    
-    [HUD hide:YES afterDelay:1];
-}
 
 @end

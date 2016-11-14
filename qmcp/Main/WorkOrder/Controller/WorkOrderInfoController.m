@@ -146,10 +146,10 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在提交数据";
-    hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,workOrderCode];
     
-    [[WorkOrderManager getInstance] updateTimeStampWithCode:workOrderCode andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
+    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             weakSelf.workOrder.isFailed = NO;
             [weakSelf.workOrder saveToDB];
@@ -183,15 +183,13 @@
             weakSelf.workOrder.isFailed = YES;
             [weakSelf.workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
-           
+            
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
-
     }];
-    
     
 }
 
@@ -281,7 +279,8 @@
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
     
-    [[WorkOrderManager getInstance] postWorkOrderStepWithCode:workOrder.code andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,workOrder];
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -341,8 +340,8 @@
     hub.labelText = @"正在完结工单";
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
-     
-    [[WorkOrderManager getInstance] updateTimeStampWithCode:workOrderCode andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,workOrderCode];
+    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             hub.labelText = [NSString stringWithFormat:@"完结工单成功"];
             [hub hide:YES afterDelay:1];
@@ -360,6 +359,7 @@
             [hub hide:YES afterDelay:1];
         }
     }];
+
     
     
 }

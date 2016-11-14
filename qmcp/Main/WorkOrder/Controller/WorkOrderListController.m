@@ -81,6 +81,7 @@
         default:
             break;
     }
+    
     [self.tableView reloadData];
 }
 

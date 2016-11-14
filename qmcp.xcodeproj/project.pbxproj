@@ -1520,7 +1520,7 @@
 				TargetAttributes = {
 					248A5DAE1C85C3C30095A4FB = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = BESGN79JZM;
+						DevelopmentTeam = Q9G4J826UF;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1890,7 +1890,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BESGN79JZM;
+				DEVELOPMENT_TEAM = Q9G4J826UF;
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1910,7 +1910,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = BESGN79JZM;
+				DEVELOPMENT_TEAM = Q9G4J826UF;
 				INFOPLIST_FILE = qmcp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

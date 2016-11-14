@@ -40,15 +40,7 @@ extern NSString *const WorkOrderUpdateNotification;
  */
 -(void) getCommodityStepByLastUpdateTime:(NSString *) dateStr;
 
-/**
- *  上传工单一般步骤
- *
- *  @param workOrder 工单
- *  @param steps     工单步骤
- */
-- (void)postWorkOrderStepWithCode:(NSString *)code
-                        andParams:(NSDictionary *)params
-                      finishBlock:(CompletionHandler)completion;
+
 
 /**
  *  上传清点单数据
@@ -61,16 +53,6 @@ extern NSString *const WorkOrderUpdateNotification;
                           finishBlock:(CompletionHandler)completion;
 
 
-/**
- *  更新
- *
- *  @param workOrderCode 工单code
- *  @param params        请求参数
- *  @param block         回调
- */
--(void)updateTimeStampWithCode:(NSString *)code
-                     andParams:(NSDictionary *)params
-                   finishBlock:(CompletionHandler)completion;
 
 /**
  *  根据工单code获取工单

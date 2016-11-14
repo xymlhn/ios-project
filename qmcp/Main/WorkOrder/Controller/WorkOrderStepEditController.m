@@ -25,7 +25,7 @@
 @property (nonatomic, strong) WorkOrder *workOrder;
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) WorkOrderStepEditView *editView;
-@property (nonatomic, strong)NSMutableArray *dataArray;//数据
+@property (nonatomic, strong) NSMutableArray *dataArray;//数据
 @property (nonatomic, strong) Attachment *plusIcon;
 
 
@@ -156,8 +156,9 @@
     hub.userInteractionEnabled = NO;
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
-
-    [[WorkOrderManager getInstance] postWorkOrderStepWithCode:workOrder.code andParams:dict finishBlock:^(NSDictionary *dict, NSString *error) {
+    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,workOrder];
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -204,9 +205,9 @@
             [hub hide:YES afterDelay:kEndFailedDelayTime];
             
         }
-
+        
     }];
-    
+
 }
 - (void)plusBtnClick{
     
@@ -333,13 +334,15 @@
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoCell * cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
     Attachment *attachment = _attachments[indexPath.row];
     if(attachment.isPlus){
         [self plusBtnClick];
     }else{
-        ImageViewerController *imgViewweVC = [[ImageViewerController alloc] initWithImage:cell.image.image];
-        [self presentViewController:imgViewweVC animated:YES completion:nil];
+        ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
+            [self p_deleteAttachment:attachment];
+            [_editView.collectionView reloadData];
+        }];
+        [self presentViewController:ivc animated:YES completion:nil];
     }
     
 }

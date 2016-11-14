@@ -58,7 +58,7 @@
         make.bottom.equalTo(_codeView.mas_bottom).with.offset(0);
         make.left.equalTo(_codeView.mas_left).with.offset(0);
         make.right.equalTo(_codeView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     UILabel *codeTitle = [UILabel new];
     codeTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
@@ -106,7 +106,7 @@
         make.bottom.equalTo(_userView.mas_bottom).with.offset(0);
         make.left.equalTo(_userView.mas_left).with.offset(0);
         make.right.equalTo(_userView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     UIView *codeMidLine = [UIView new];
@@ -116,7 +116,7 @@
         make.bottom.equalTo(_userView.mas_bottom).with.offset(0);
         make.top.equalTo(_userView.mas_top).with.offset(0);
         make.centerX.equalTo(_userView.mas_centerX).with.offset(0);
-        make.width.mas_equalTo(@1);
+        make.width.mas_equalTo(kLineHeight);
     }];
     
     UILabel *userIcon = [UILabel new];
@@ -194,7 +194,7 @@
         make.bottom.equalTo(_locationView.mas_bottom).with.offset(0);
         make.left.equalTo(_locationView.mas_left).with.offset(0);
         make.right.equalTo(_locationView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     UILabel *locationIcon = [UILabel new];
@@ -246,7 +246,7 @@
         make.bottom.equalTo(_typeView.mas_bottom).with.offset(0);
         make.left.equalTo(_typeView.mas_left).with.offset(0);
         make.right.equalTo(_typeView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     UIView *codeMidLine = [UIView new];
@@ -256,7 +256,7 @@
         make.bottom.equalTo(_typeView.mas_bottom).with.offset(0);
         make.top.equalTo(_typeView.mas_top).with.offset(0);
         make.centerX.equalTo(_typeView.mas_centerX).with.offset(0);
-        make.width.mas_equalTo(@1);
+        make.width.mas_equalTo(kLineHeight);
     }];
     
     UILabel *typeTitle = [UILabel new];
@@ -333,7 +333,7 @@
         make.bottom.equalTo(_appointmentTimeView.mas_bottom).with.offset(0);
         make.left.equalTo(_appointmentTimeView.mas_left).with.offset(0);
         make.right.equalTo(_appointmentTimeView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     UILabel *appointmentTitle = [UILabel new];
     appointmentTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
@@ -382,7 +382,7 @@
         make.bottom.equalTo(_serviceView.mas_bottom).with.offset(0);
         make.left.equalTo(_serviceView.mas_left).with.offset(0);
         make.right.equalTo(_serviceView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     UILabel *serviceTitle = [UILabel new];
     serviceTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
@@ -430,7 +430,7 @@
         make.bottom.equalTo(_remarkView.mas_bottom).with.offset(0);
         make.left.equalTo(_remarkView.mas_left).with.offset(0);
         make.right.equalTo(_remarkView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     UILabel *remarkTitle = [UILabel new];
     remarkTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
@@ -574,7 +574,7 @@
         make.top.equalTo(bottomView.mas_top).with.offset(0);
         make.left.equalTo(bottomView.mas_left).with.offset(0);
         make.right.equalTo(bottomView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){
@@ -700,7 +700,7 @@
         make.top.equalTo(bottomView.mas_top).with.offset(0);
         make.left.equalTo(bottomView.mas_left).with.offset(0);
         make.right.equalTo(bottomView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){

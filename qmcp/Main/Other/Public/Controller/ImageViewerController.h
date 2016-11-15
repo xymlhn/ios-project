@@ -11,9 +11,8 @@
 @interface ImageViewerController : UIViewController
 @property (copy, nonatomic) void(^doneBlock)(NSString *textValue);
 
-@property (nonatomic, copy) NSString *key;
-
 + (instancetype)initWithImageKey:(NSString *)key doneBlock:(void(^)(NSString *textValue))block;
-- (instancetype)initWithImageURL:(NSURL *)imageURL;
++ (instancetype)initWithImageKey:(NSString *)key showDelete:(BOOL)show;
+- (instancetype)initWithImageURL:(NSURL *)imageURL showDelete:(BOOL)show;
 
 @end

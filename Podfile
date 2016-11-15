@@ -19,5 +19,6 @@ target:qmcp do
     pod 'AMap2DMap','4.1.0'
     pod 'AMapLocation','2.1.0'
     pod 'YCXMenu', '~> 0.0.11'
+    pod 'SDAutoLayout', '~> 2.1.3'
     pod 'FLEX', :configurations => ['Debug']
 end

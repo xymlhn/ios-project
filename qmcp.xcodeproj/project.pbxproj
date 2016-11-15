@@ -56,9 +56,11 @@
 		242815F31D9388FD006120ED /* BusinessSalesOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815F21D9388FD006120ED /* BusinessSalesOrder.m */; };
 		245A39321D94C02A00B5CE70 /* SalesOrderInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */; };
 		245A39381D94D7FE00B5CE70 /* SalesOrderCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A39371D94D7FE00B5CE70 /* SalesOrderCameraController.m */; };
-		245A393B1D94F77B00B5CE70 /* SalesOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A393A1D94F77B00B5CE70 /* SalesOrderStepController.m */; };
 		245A393E1D94F9CC00B5CE70 /* SalesOrderStepEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A393D1D94F9CC00B5CE70 /* SalesOrderStepEditController.m */; };
 		245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 245BCF841D93CBCE00028C40 /* GisLocation.m */; };
+		245F756B1DDABE5100FB51FA /* SalesOrderStepController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F756A1DDABE5100FB51FA /* SalesOrderStepController.m */; };
+		245F756E1DDABF5D00FB51FA /* SDTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */; };
+		245F75711DDABFE700FB51FA /* SDTimeLineCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */; };
 		246642D41D9A1285009402A2 /* SalesOrderGrabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */; };
 		246642D51D9A1285009402A2 /* SalesOrderMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D31D9A1285009402A2 /* SalesOrderMineCell.m */; };
 		246642DA1D9A12CA009402A2 /* BusinessSalesOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */; };
@@ -174,6 +176,8 @@
 		24AFDC821D92399E00B2F1B9 /* PickupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC801D92399E00B2F1B9 /* PickupView.m */; };
 		24AFDC871D9239BB00B2F1B9 /* PickupNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC841D9239BB00B2F1B9 /* PickupNoticeViewController.m */; };
 		24AFDC881D9239BB00B2F1B9 /* PickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC861D9239BB00B2F1B9 /* PickupViewController.m */; };
+		24DC6A1D1DDAD20700CD0684 /* SDTimeLineCellOperationMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DC6A171DDAD20700CD0684 /* SDTimeLineCellOperationMenu.m */; };
+		24DC6A1E1DDAD20700CD0684 /* SDWeiXinPhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DC6A1A1DDAD20700CD0684 /* SDWeiXinPhotoContainerView.m */; };
 		24EABBA61D92778900AF2A02 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24EABBA41D92761B00AF2A02 /* Security.framework */; };
 		4E9323A4E0576734EEAEBB57 /* libPods-qmcp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4305545D42B817C3FA72B687 /* libPods-qmcp.a */; };
 /* End PBXBuildFile section */
@@ -278,8 +282,6 @@
 		245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderInfoController.m; sourceTree = "<group>"; };
 		245A39361D94D7FE00B5CE70 /* SalesOrderCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderCameraController.h; sourceTree = "<group>"; };
 		245A39371D94D7FE00B5CE70 /* SalesOrderCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderCameraController.m; sourceTree = "<group>"; };
-		245A39391D94F77B00B5CE70 /* SalesOrderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderStepController.h; sourceTree = "<group>"; };
-		245A393A1D94F77B00B5CE70 /* SalesOrderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderStepController.m; sourceTree = "<group>"; };
 		245A393C1D94F9CC00B5CE70 /* SalesOrderStepEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderStepEditController.h; sourceTree = "<group>"; };
 		245A393D1D94F9CC00B5CE70 /* SalesOrderStepEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderStepEditController.m; sourceTree = "<group>"; };
 		245BCF831D93CBCE00028C40 /* GisLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisLocation.h; sourceTree = "<group>"; };
@@ -302,6 +304,12 @@
 		245BCF951D93D34F00028C40 /* libSSKeychain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSSKeychain.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/SSKeychain/libSSKeychain.a"; sourceTree = "<group>"; };
 		245BCF961D93D34F00028C40 /* libTMCache.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTMCache.a; path = "../../../Library/Developer/Xcode/DerivedData/qmcp-hjrzkpatbhdtzzfgyahcmuntgzma/Build/Products/Debug-iphonesimulator/TMCache/libTMCache.a"; sourceTree = "<group>"; };
 		245BCFA81D93D4AB00028C40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		245F75691DDABE5100FB51FA /* SalesOrderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderStepController.h; sourceTree = "<group>"; };
+		245F756A1DDABE5100FB51FA /* SalesOrderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderStepController.m; sourceTree = "<group>"; };
+		245F756C1DDABF5D00FB51FA /* SDTimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeLineCell.h; sourceTree = "<group>"; };
+		245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineCell.m; sourceTree = "<group>"; };
+		245F756F1DDABFE700FB51FA /* SDTimeLineCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeLineCellModel.h; sourceTree = "<group>"; };
+		245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineCellModel.m; sourceTree = "<group>"; };
 		246642D01D9A1285009402A2 /* SalesOrderGrabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabCell.h; sourceTree = "<group>"; };
 		246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabCell.m; sourceTree = "<group>"; };
 		246642D21D9A1285009402A2 /* SalesOrderMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderMineCell.h; sourceTree = "<group>"; };
@@ -531,6 +539,10 @@
 		24AFDC851D9239BB00B2F1B9 /* PickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupViewController.h; sourceTree = "<group>"; };
 		24AFDC861D9239BB00B2F1B9 /* PickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupViewController.m; sourceTree = "<group>"; };
 		24B97B7C1D93D6CA005D1047 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		24DC6A161DDAD20700CD0684 /* SDTimeLineCellOperationMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeLineCellOperationMenu.h; sourceTree = "<group>"; };
+		24DC6A171DDAD20700CD0684 /* SDTimeLineCellOperationMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineCellOperationMenu.m; sourceTree = "<group>"; };
+		24DC6A191DDAD20700CD0684 /* SDWeiXinPhotoContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWeiXinPhotoContainerView.h; sourceTree = "<group>"; };
+		24DC6A1A1DDAD20700CD0684 /* SDWeiXinPhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWeiXinPhotoContainerView.m; sourceTree = "<group>"; };
 		24EABBA41D92761B00AF2A02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4305545D42B817C3FA72B687 /* libPods-qmcp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-qmcp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6083A9B27AC8F265DD41E322 /* Pods-qmcp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qmcp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qmcp/Pods-qmcp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1287,8 +1299,8 @@
 				245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */,
 				245A39361D94D7FE00B5CE70 /* SalesOrderCameraController.h */,
 				245A39371D94D7FE00B5CE70 /* SalesOrderCameraController.m */,
-				245A39391D94F77B00B5CE70 /* SalesOrderStepController.h */,
-				245A393A1D94F77B00B5CE70 /* SalesOrderStepController.m */,
+				245F75691DDABE5100FB51FA /* SalesOrderStepController.h */,
+				245F756A1DDABE5100FB51FA /* SalesOrderStepController.m */,
 				245A393C1D94F9CC00B5CE70 /* SalesOrderStepEditController.h */,
 				245A393D1D94F9CC00B5CE70 /* SalesOrderStepEditController.m */,
 			);
@@ -1298,6 +1310,8 @@
 		24AFDB9C1D9238FF00B2F1B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				245F756F1DDABFE700FB51FA /* SDTimeLineCellModel.h */,
+				245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */,
 				24AFDB9D1D9238FF00B2F1B9 /* SalesOrderMine.h */,
 				24AFDB9E1D9238FF00B2F1B9 /* SalesOrderMine.m */,
 				24AFDB9F1D9238FF00B2F1B9 /* SalesOrderConfirm.h */,
@@ -1317,6 +1331,10 @@
 		24AFDBA51D9238FF00B2F1B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24DC6A151DDAD20700CD0684 /* OperationMenu */,
+				24DC6A181DDAD20700CD0684 /* PhotoContainer */,
+				245F756C1DDABF5D00FB51FA /* SDTimeLineCell.h */,
+				245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */,
 				246642CF1D9A1285009402A2 /* cell */,
 				246642D61D9A12CA009402A2 /* BusinessSalesOrderView.h */,
 				246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */,
@@ -1444,6 +1462,24 @@
 				24AFDC0D1D9238FF00B2F1B9 /* WorkOrderStepView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		24DC6A151DDAD20700CD0684 /* OperationMenu */ = {
+			isa = PBXGroup;
+			children = (
+				24DC6A161DDAD20700CD0684 /* SDTimeLineCellOperationMenu.h */,
+				24DC6A171DDAD20700CD0684 /* SDTimeLineCellOperationMenu.m */,
+			);
+			path = OperationMenu;
+			sourceTree = "<group>";
+		};
+		24DC6A181DDAD20700CD0684 /* PhotoContainer */ = {
+			isa = PBXGroup;
+			children = (
+				24DC6A191DDAD20700CD0684 /* SDWeiXinPhotoContainerView.h */,
+				24DC6A1A1DDAD20700CD0684 /* SDWeiXinPhotoContainerView.m */,
+			);
+			path = PhotoContainer;
 			sourceTree = "<group>";
 		};
 		629598FDCA012DAE59C2708E /* Frameworks */ = {
@@ -1700,7 +1736,6 @@
 				2466430D1D9A12E8009402A2 /* NumberCell.m in Sources */,
 				24AFDC671D92390000B2F1B9 /* WorkOrderCameraController.m in Sources */,
 				246643111D9A12E8009402A2 /* TextMultiCell.m in Sources */,
-				245A393B1D94F77B00B5CE70 /* SalesOrderStepController.m in Sources */,
 				242815D61D936BE7006120ED /* ImageViewerController.m in Sources */,
 				240EC9501D7FB2B7008A5696 /* AddressManager.m in Sources */,
 				24AFD7F81D92339200B2F1B9 /* AppDelegate.m in Sources */,
@@ -1715,6 +1750,7 @@
 				24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */,
 				246643131D9A12E8009402A2 /* WorkOrderCameraCell.m in Sources */,
 				24AFDC111D9238FF00B2F1B9 /* InventoryChooseController.m in Sources */,
+				245F756E1DDABF5D00FB51FA /* SDTimeLineCell.m in Sources */,
 				246643031D9A12E8009402A2 /* CheckBoxCell.m in Sources */,
 				242815D81D936BE7006120ED /* ScanViewController.m in Sources */,
 				242815ED1D9381B4006120ED /* QrCodeImageController.m in Sources */,
@@ -1731,6 +1767,7 @@
 				246643061D9A12E8009402A2 /* CommodityStepCell.m in Sources */,
 				24AFDC4A1D9238FF00B2F1B9 /* SalesOrderMine.m in Sources */,
 				24AFDC2C1D9238FF00B2F1B9 /* SideMenuController.m in Sources */,
+				24DC6A1D1DDAD20700CD0684 /* SDTimeLineCellOperationMenu.m in Sources */,
 				245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */,
 				24AFDC1E1D9238FF00B2F1B9 /* PropertyData.m in Sources */,
 				240EC95A1D7FB2B7008A5696 /* EnumUtil.m in Sources */,
@@ -1748,6 +1785,7 @@
 				24AFDC771D92390000B2F1B9 /* WorkOrderSearchResult.m in Sources */,
 				24AFDC3B1D9238FF00B2F1B9 /* SettingViewCell.m in Sources */,
 				24AFDC321D9238FF00B2F1B9 /* LoginView.m in Sources */,
+				245F756B1DDABE5100FB51FA /* SalesOrderStepController.m in Sources */,
 				24AFDC161D9238FF00B2F1B9 /* CommodityBrife.m in Sources */,
 				240EC94A1D7FB2B7008A5696 /* UIImage+Common.m in Sources */,
 				24AFDC131D9238FF00B2F1B9 /* InventoryEditController.m in Sources */,
@@ -1758,6 +1796,7 @@
 				24AFDC4C1D9238FF00B2F1B9 /* SalesOrderSearchResult.m in Sources */,
 				240EC94E1D7FB2B7008A5696 /* UIView+Util.m in Sources */,
 				246643101D9A12E8009402A2 /* SelectCell.m in Sources */,
+				24DC6A1E1DDAD20700CD0684 /* SDWeiXinPhotoContainerView.m in Sources */,
 				24A40FF31DB9B78A00736F6C /* MeView.m in Sources */,
 				240EC94D1D7FB2B7008A5696 /* UIView+Frame.m in Sources */,
 				246642D41D9A1285009402A2 /* SalesOrderGrabCell.m in Sources */,
@@ -1778,6 +1817,7 @@
 				246643041D9A12E8009402A2 /* ChooseCommodityCell.m in Sources */,
 				246643081D9A12E8009402A2 /* DateTimeCell.m in Sources */,
 				24AFDC1F1D9238FF00B2F1B9 /* InventoryChooseView.m in Sources */,
+				245F75711DDABFE700FB51FA /* SDTimeLineCellModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

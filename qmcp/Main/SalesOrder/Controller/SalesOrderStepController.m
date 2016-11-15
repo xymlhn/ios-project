@@ -1,28 +1,40 @@
 //
-//  SalesOrderStepController.m
+//  SalesOrderStepTableViewController.m
 //  qmcp
 //
-//  Created by 谢永明 on 2016/9/23.
+//  Created by 谢永明 on 2016/11/15.
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
 #import "SalesOrderStepController.h"
-#import "WorkOrderStepView.h"
-#import "SalesOrder.h"
 #import "WorkOrderStep.h"
-#import "AppManager.h"
-#import "WorkOrderStepCell.h"
+#import "SalesOrder.h"
+#import "SDTimeLineCell.h"
+#import "Attachment.h"
+#import "SDTimeLineCellModel.h"
 #import "SalesOrderStepEditController.h"
+#import "UITableView+SDAutoTableViewCellHeight.h"
+#import "WorkOrderStepView.h"
+#import "AppManager.h"
+#define kTimeLineTableViewCellId @"SDTimeLineCell"
 @interface SalesOrderStepController ()<UITableViewDataSource,UITableViewDelegate>
+
 @property (nonatomic, retain) NSMutableArray<WorkOrderStep *> *stepList;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) WorkOrderStepView *stepView;
 @property (nonatomic, strong) SalesOrder *salesOrder;
+
 @end
 
 @implementation SalesOrderStepController
+- (NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray new];
+    }
+    return _dataArray;
+}
 
-
-#pragma mark - BaseWorkOrderViewController
 -(void)loadView
 {
     _stepView = [WorkOrderStepView viewInstance];
@@ -45,6 +57,76 @@
     _stepList = [WorkOrderStep searchWithWhere:where];
     NSString *salesWhere = [NSString stringWithFormat:@"code = '%@'",_code];
     _salesOrder = [SalesOrder searchSingleWithWhere:salesWhere orderBy:nil];
+     [self.dataArray addObjectsFromArray:[self creatModels]];
+}
+
+- (NSMutableArray *)creatModels
+{
+
+    NSMutableArray *resArr = [NSMutableArray new];
+    
+    for (WorkOrderStep *step in _stepList) {
+        
+        SDTimeLineCellModel *model = [SDTimeLineCellModel new];
+        model.iconName = @"default－portrait";
+        model.name = _salesOrder.addressSnapshot.contacts;
+        model.msgContent = step.content;
+        model.timeText = step.submitTime;
+        NSMutableArray *picImageNamesArray = [NSMutableArray new];
+        for (Attachment *attachment in step.attachments) {
+            [picImageNamesArray addObject:attachment.key];
+        }
+        model.picNamesArray = picImageNamesArray;
+        [resArr addObject:model];
+    }
+    
+    return resArr;
+}
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SDTimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:kTimeLineTableViewCellId];
+    cell.indexPath = indexPath;
+    __weak typeof(self) weakSelf = self;
+    if (!cell.moreButtonClickedBlock) {
+        [cell setMoreButtonClickedBlock:^(NSIndexPath *indexPath) {
+            SDTimeLineCellModel *model = weakSelf.dataArray[indexPath.row];
+            model.isOpening = !model.isOpening;
+            [weakSelf.stepView.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+    }
+    
+    cell.model = self.dataArray[indexPath.row];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    id model = self.dataArray[indexPath.row];
+    return [self.stepView.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[SDTimeLineCell class] contentViewWidth:[self cellContentViewWith]];
+}
+
+- (CGFloat)cellContentViewWith
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    // 适配ios7横屏
+    if ([UIApplication sharedApplication].statusBarOrientation != UIInterfaceOrientationPortrait && [[UIDevice currentDevice].systemVersion floatValue] < 8) {
+        width = [UIScreen mainScreen].bounds.size.height;
+    }
+    return width;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    WorkOrderStep *step = self.stepList[indexPath.row];
+    [self p_pushWorkOrderStepEditController:step.id andType:SaveTypeUpdate];
 }
 
 #pragma mark - IBAction
@@ -74,7 +156,6 @@
         [_stepList addObject:workOrderStep];
     }
 }
-
 -(void)p_pushWorkOrderStepEditController:(NSString *)stepId andType:(SaveType)type
 {
     __weak typeof(self) weakSelf = self;
@@ -105,6 +186,8 @@
             default:
                 break;
         }
+        [weakSelf.dataArray removeAllObjects];
+        [weakSelf.dataArray addObjectsFromArray:[weakSelf creatModels]];
         [weakSelf.stepView.tableView reloadData];
     }];
     info.code = _code;
@@ -113,33 +196,4 @@
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
-
-#pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.stepList.count;
-}
-
-//返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger row = indexPath.row;
-    WorkOrderStepCell *cell = [WorkOrderStepCell cellWithTableView:tableView];
-    WorkOrderStep *step = self.stepList[row];
-    cell.workOrderStep = step;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    //3 返回
-    return cell;
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-
-{
-    WorkOrderStep *step = self.stepList[indexPath.row];
-    [self p_pushWorkOrderStepEditController:step.id andType:SaveTypeUpdate];
-}
-
 @end

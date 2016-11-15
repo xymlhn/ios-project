@@ -13,6 +13,7 @@
 #import "SalesOrderStepController.h"
 #import "InventoryManager.h"
 #import "InventoryController.h"
+#import "SalesOrderStepController.h"
 @interface SalesOrderInfoController ()
 
 @property (nonatomic, retain) SalesOrderInfoView *salesOrderInfoView;
@@ -230,7 +231,6 @@
 #pragma mark - IBAction
 -(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    
     SalesOrderStepController *info = [SalesOrderStepController new];
     info.code = _code;
     info.hidesBottomBarWhenPushed = YES;

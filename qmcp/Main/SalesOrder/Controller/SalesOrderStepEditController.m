@@ -316,12 +316,11 @@
     static NSString *identify = @"PhotoCell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     Attachment *attachment = _attachments[indexPath.row];
+
     if(attachment.isPlus){
-        UIImage *image = [UIImage imageNamed:@"plus_photo.png"];
-        cell.image.image = image;
+        cell.image.image = [UIImage imageNamed:@"plus_photo.png"];
     }else{
-        UIImage *image = [Utils loadImage:attachment.key];
-        cell.image.image = image;
+        cell.image.image = [Utils loadImage:attachment.key];
     }
     
     return cell;

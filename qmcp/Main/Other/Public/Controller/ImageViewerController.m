@@ -19,12 +19,12 @@
 @interface ImageViewerController () <UIScrollViewDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSURL *imageURL;
-
+@property (nonatomic, copy) NSString *key;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIButton *delButton;
 @property (nonatomic, assign) BOOL zoomOut;
-
+@property (nonatomic, assign) BOOL *showDelete;
 @property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
@@ -45,17 +45,16 @@
     return self;
 }
 
-- (instancetype)initWithImageURL:(NSURL *)imageURL
+- (instancetype)initWithImageURL:(NSURL *)imageURL showDelete:(BOOL)show
 {
     self = [self init];
     if (self) {
         _imageURL = imageURL;
+        _showDelete = &show;
     }
     
     return self;
 }
-
-
 
 #pragma mark - life cycle
 
@@ -104,7 +103,7 @@
         make.height.mas_equalTo(@30);
     }];
     [_delButton addTarget:self action:@selector(showDelCancelAlert) forControlEvents:UIControlEventTouchUpInside];
-    [_delButton setHidden:_key==nil?YES:NO];
+    [_delButton setHidden:_showDelete];
     
 }
 
@@ -343,5 +342,11 @@
     return vc;
 }
 
++(instancetype)initWithImageKey:(NSString *)key showDelete:(BOOL)show{
+    ImageViewerController *vc = [[ImageViewerController alloc] init];
+    vc.key = key;
+    vc.showDelete = &(show);
+    return vc;
+}
 
 @end

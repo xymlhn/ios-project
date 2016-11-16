@@ -53,33 +53,79 @@
 
 #pragma mark - IBAction
 - (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
-    __weak typeof(self) weakSelf = self;
+    
     ItemSnapshot *itemSnapshot = [ItemSnapshot new];
     itemSnapshot.salesOrderItemCode = [[NSUUID UUID] UUIDString];
     long size = _itemSnapshotList.count + 1;
     itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
     itemSnapshot.salesOrderCode = _salesOrderCode;
     [itemSnapshot saveToDB];
+    [self p_pushInventoryEditController:itemSnapshot.salesOrderItemCode andType:SaveTypeAdd];
     
-    InventoryEditController *info = [InventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
-        if(!isDelete){
-            [weakSelf.itemSnapshotList addObject:item];
-            [weakSelf.inventoryView.tableView reloadData];
-        }
-    }];
-    info.itemSnapshotCode = itemSnapshot.salesOrderItemCode;
-    info.salesOrderCode = _salesOrderCode;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
 }
 
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer{
+    if (_itemSnapshotList.count == 0) {
+        return;
+    }
      __weak typeof(self) weakSelf = self;
     SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
         [weakSelf p_reportSignImage:signImage];
     }];
     [self presentViewController:signController animated: YES completion:nil];
     
+}
+
+-(void)p_appendInventory:(ItemSnapshot *)item{
+    BOOL flag = NO;
+    for(int i = 0;i < _itemSnapshotList.count;i++){
+        NSString *code = _itemSnapshotList[i].code;
+        if([code isEqualToString:item.code]){
+            flag = YES;
+        }
+    }
+    if(!flag){
+        [_itemSnapshotList addObject:item];
+    }
+}
+
+-(void)p_pushInventoryEditController:(NSString *)itemSnapshotCode andType:(SaveType)type{
+    __weak typeof(self) weakSelf = self;
+    InventoryEditController *info = [InventoryEditController doneBlock:^(ItemSnapshot *item,SaveType type) {
+        switch (type) {
+            case SaveTypeAdd:
+                [weakSelf p_appendInventory:item];
+                break;
+            case SaveTypeUpdate:
+                for (ItemSnapshot *temp in _itemSnapshotList) {
+                    if([temp.code isEqualToString:item.code]){
+                        item.remark = temp.remark;
+                        item.salesOrderItemCode = temp.salesOrderItemCode;
+                        item.commodities = temp.commodities;
+                        item.attachments = temp.attachments;
+                        break;
+                    }
+                }
+                
+                break;
+            case SaveTypeDelete:
+                for (ItemSnapshot *temp in weakSelf.itemSnapshotList) {
+                    if([temp.code isEqualToString:item.code]){
+                        [weakSelf.itemSnapshotList removeObject:temp];
+                        break;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        [weakSelf.inventoryView.tableView reloadData];
+    }];
+    info.salesOrderCode = _salesOrderCode;
+    info.itemSnapshotCode = itemSnapshotCode;
+    info.saveType = type;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 
 -(void) p_reportSignImage:(UIImage *)image{
@@ -103,14 +149,11 @@
 -(void)p_postWorkOrderInventoryWitCode:(NSString *)code{
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传清点数据";
-    hub.userInteractionEnabled = NO;
-
     NSMutableArray *itemArray = [ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList];
-    
     NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_salesOrderSearchResult.itemConfirmed],
                                     @"signatureImageKey":_salesOrderSearchResult.signatureImageKey,@"itemSnapshots":itemArray};
 
-    [[WorkOrderManager getInstance] postWorkOrderInventoryWithCode:code andParams:inventoryDict finishBlock:^(NSDictionary *dict, NSString *error) {
+    [[WorkOrderManager getInstance] postInventoryData:code andParams:inventoryDict finishBlock:^(NSDictionary *dict, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (ItemSnapshot *item in _itemSnapshotList) {
@@ -167,7 +210,6 @@
     return self.itemSnapshotList.count;
 }
 
-//返回每行显示的cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     InventoryCell *cell = [InventoryCell cellWithTableView:tableView];
@@ -178,16 +220,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    __weak typeof(self) weakSelf = self;
-    InventoryEditController *info = [InventoryEditController doneBlock:^(BOOL isDelete, ItemSnapshot *item) {
-        [weakSelf loadData];
-        [weakSelf.inventoryView.tableView reloadData];
-    }];
     ItemSnapshot *itemSnapshot = self.itemSnapshotList[indexPath.row];
-    info.itemSnapshotCode = itemSnapshot.salesOrderItemCode;
-    info.salesOrderCode = _salesOrderCode;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
+    [self p_pushInventoryEditController:itemSnapshot.salesOrderItemCode andType:SaveTypeUpdate];
     
 }
 
@@ -198,11 +232,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        if([_itemSnapshotList[indexPath.row] deleteToDB]){
+        ItemSnapshot *itemSnapshot = _itemSnapshotList[indexPath.row];
+        if([itemSnapshot deleteToDB]){
+            for (Attachment *attachment in itemSnapshot.attachments) {
+                 [Utils deleteImage:attachment.key];
+            }
             [_itemSnapshotList removeObjectAtIndex:indexPath.row];
             [_inventoryView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
-        
     }
 }
 

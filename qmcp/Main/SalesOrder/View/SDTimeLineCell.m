@@ -32,16 +32,15 @@
 #import "UIView+SDAutoLayout.h"
 #import "SDWeiXinPhotoContainerView.h"
 #import "SDTimeLineCellOperationMenu.h"
-
+#import <SDWebImageManager.h>
+#import <UIImageView+WebCache.h>
 
 const CGFloat contentLabelFontSize = 15;
 CGFloat maxContentLabelHeight = 0; // 根据具体font而定
 
 NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLineCellOperationButtonClickedNotification";
 
-@implementation SDTimeLineCell
-
-{
+@implementation SDTimeLineCell{
     UIImageView *_iconView;
     UILabel *_nameLable;
     UILabel *_contentLabel;
@@ -178,6 +177,7 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     _model = model;
     
     _iconView.image = [UIImage imageNamed:model.iconName];
+    
     _nameLable.text = model.name;
     _contentLabel.text = model.msgContent;
     _picContainerView.picPathStringsArray = model.picNamesArray;

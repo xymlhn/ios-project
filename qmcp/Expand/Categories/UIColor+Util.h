@@ -31,6 +31,8 @@
 + (UIColor *)contentTextColor;
 + (UIColor *)borderColor;
 + (UIColor *)refreshControlColor;
-
++ (UIColor *)appBlueColor;
++ (UIColor *)arrowColor;
++ (UIColor *)mainTextColor;
 + (UIColor *)colorWithHexString:(NSString *)stringToConvert;
 @end

@@ -2,12 +2,11 @@
 //  MeView.m
 //  qmcp
 //
-//  Created by 谢永明 on 2016/10/21.
-//  Copyright © 2016年 inforshare. All rights reserved.
+//  Created by 谢永明 on kFontAwesomeIcon16/10/21.
+//  Copyright © kFontAwesomeIcon16年 inforshare. All rights reserved.
 //
 
 #import "MeView.h"
-
 @implementation MeView
 
 + (instancetype)viewInstance{
@@ -18,7 +17,7 @@
 - (id)init {
     self = [super init];
     if (!self) return nil;
-    self.backgroundColor = [UIColor grayColor];
+    self.backgroundColor = [UIColor themeColor];
     
     UIView *topView = [UIView new];
     topView.backgroundColor = [UIColor whiteColor];
@@ -33,10 +32,10 @@
     [topView addSubview:_nickName];
     
     UILabel *topArrow = [UILabel new];
-    [topArrow setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    [topArrow setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
     topArrow.text = @"";
     topArrow.textAlignment = NSTextAlignmentCenter;
-    topArrow.textColor = [UIColor blackColor];
+    topArrow.textColor = [UIColor arrowColor];
     [topView addSubview:topArrow];
     
     //上班
@@ -45,23 +44,23 @@
     [self addSubview:workView];
     
     UILabel *workText = [UILabel new];
-    workText.font = [UIFont systemFontOfSize:12];
+    workText.font = [UIFont systemFontOfSize:kShisipt];
     workText.text = @"上班";
-    workText.textColor = [UIColor blackColor];
+    workText.textColor = [UIColor mainTextColor];
     [workView addSubview:workText];
 
     UILabel *workIcon = [UILabel new];
-    [workIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    [workIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
     workIcon.text = @"";
     workIcon.textAlignment = NSTextAlignmentCenter;
-    workIcon.textColor = [UIColor blueColor];
+    workIcon.textColor = [UIColor appBlueColor];
     [workView addSubview:workIcon];
     
     _workSwitch = [UISwitch new];
     [workView addSubview:_workSwitch];
     
     UIView *workLine = [UIView new];
-    workLine.backgroundColor = [UIColor grayColor];
+    workLine.backgroundColor = [UIColor themeColor];
     [workView addSubview:workLine];
     
     //地图
@@ -70,27 +69,27 @@
     [self addSubview:_mapBtn];
     
     UILabel *mapIcon = [UILabel new];
-    [mapIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    [mapIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
     mapIcon.text = @"";
     mapIcon.textAlignment = NSTextAlignmentCenter;
-    mapIcon.textColor = [UIColor blueColor];
+    mapIcon.textColor = [UIColor appBlueColor];
     [_mapBtn addSubview:mapIcon];
     
     UILabel *mapText = [UILabel new];
-    mapText.font = [UIFont systemFontOfSize:12];
+    mapText.font = [UIFont systemFontOfSize:kShisipt];
     mapText.text = @"地图";
-    mapText.textColor = [UIColor blackColor];
+    mapText.textColor = [UIColor mainTextColor];
     [_mapBtn addSubview:mapText];
     
     UILabel *mapArrow = [UILabel new];
-    [mapArrow setFont:[UIFont fontWithName:@"FontAwesome" size:15]];
+    [mapArrow setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
     mapArrow.text = @"";
     mapArrow.textAlignment = NSTextAlignmentCenter;
-    mapArrow.textColor = [UIColor blackColor];
+    mapArrow.textColor = [UIColor arrowColor];
     [_mapBtn addSubview:mapArrow];
     
     UIView *mapLine = [UIView new];
-    mapLine.backgroundColor = [UIColor grayColor];
+    mapLine.backgroundColor = [UIColor themeColor];
     [_mapBtn addSubview:mapLine];
     
     //帮助
@@ -99,23 +98,23 @@
     [self addSubview:_helpBtn];
     
     UILabel *helpIcon = [UILabel new];
-    [helpIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    [helpIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
     helpIcon.text = @"";
     helpIcon.textAlignment = NSTextAlignmentCenter;
-    helpIcon.textColor = [UIColor blueColor];
+    helpIcon.textColor = [UIColor appBlueColor];
     [_helpBtn addSubview:helpIcon];
     
     UILabel *helpText = [UILabel new];
     helpText.font = [UIFont systemFontOfSize:12];
     helpText.text = @"帮助";
-    helpText.textColor = [UIColor blackColor];
+    helpText.textColor = [UIColor mainTextColor];
     [_helpBtn addSubview:helpText];
     
     UILabel *helpArrow = [UILabel new];
-    [helpArrow setFont:[UIFont fontWithName:@"FontAwesome" size:15]];
+    [helpArrow setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
     helpArrow.text = @"";
     helpArrow.textAlignment = NSTextAlignmentCenter;
-    helpArrow.textColor = [UIColor blackColor];
+    helpArrow.textColor = [UIColor arrowColor];
     [_helpBtn addSubview:helpArrow];
     
     //设置
@@ -124,27 +123,27 @@
     [self addSubview:_settingBtn];
     
     UILabel *settingIcon = [UILabel new];
-    [settingIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    [settingIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
     settingIcon.text = @"";
     settingIcon.textAlignment = NSTextAlignmentCenter;
-    settingIcon.textColor = [UIColor blueColor];
+    settingIcon.textColor = [UIColor appBlueColor];
     [_settingBtn addSubview:settingIcon];
     
     UILabel *settingText = [UILabel new];
-    settingText.font = [UIFont systemFontOfSize:12];
+    settingText.font = [UIFont systemFontOfSize:kShisipt];
     settingText.text = @"设置";
-    settingText.textColor = [UIColor blackColor];
+    settingText.textColor = [UIColor mainTextColor];
     [_settingBtn addSubview:settingText];
     
     UILabel *settingArrow = [UILabel new];
-    [settingArrow setFont:[UIFont fontWithName:@"FontAwesome" size:15]];
+    [settingArrow setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
     settingArrow.text = @"";
     settingArrow.textAlignment = NSTextAlignmentCenter;
-    settingArrow.textColor = [UIColor blackColor];
+    settingArrow.textColor = [UIColor arrowColor];
     [_settingBtn addSubview:settingArrow];
     
     UIView *settingLine = [UIView new];
-    settingLine.backgroundColor = [UIColor grayColor];
+    settingLine.backgroundColor = [UIColor themeColor];
     [_settingBtn addSubview:settingLine];
     
     //登出
@@ -153,16 +152,16 @@
     [self addSubview:_logoutBtn];
     
     UILabel *logoutIcon = [UILabel new];
-    [logoutIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    [logoutIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
     logoutIcon.text = @"";
     logoutIcon.textAlignment = NSTextAlignmentCenter;
-    logoutIcon.textColor = [UIColor blueColor];
+    logoutIcon.textColor = [UIColor appBlueColor];
     [_logoutBtn addSubview:logoutIcon];
     
     UILabel *logoutText = [UILabel new];
-    logoutText.font = [UIFont systemFontOfSize:12];
+    logoutText.font = [UIFont systemFontOfSize:kShisipt];
     logoutText.text = @"退出";
-    logoutText.textColor = [UIColor blackColor];
+    logoutText.textColor = [UIColor mainTextColor];
     [_logoutBtn addSubview:logoutText];
     
     
@@ -183,7 +182,7 @@
     [_nickName mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(topView.mas_centerY);
         make.left.equalTo(_userIcon.mas_right).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@120);
+        make.width.equalTo(@15);
     }];
     
     [topArrow mas_makeConstraints:^(MASConstraintMaker *make){
@@ -196,7 +195,7 @@
         make.top.equalTo(topView.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@45);
+        make.height.mas_equalTo(@40);
     }];
     
     [workIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -227,7 +226,7 @@
         make.top.equalTo(workView.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@45);
+        make.height.mas_equalTo(@40);
     }];
     
     [mapIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -258,7 +257,7 @@
         make.top.equalTo(_mapBtn.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@45);
+        make.height.mas_equalTo(@40);
     }];
     
     [helpIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -282,7 +281,7 @@
         make.top.equalTo(_helpBtn.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@45);
+        make.height.mas_equalTo(@40);
     }];
     
     [settingIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -313,7 +312,7 @@
         make.top.equalTo(_settingBtn.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@45);
+        make.height.mas_equalTo(@40);
     }];
     
     [logoutIcon mas_makeConstraints:^(MASConstraintMaker *make){

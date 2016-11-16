@@ -47,11 +47,11 @@ const static int databaseVersion = 0;
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
-    [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x15A230]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x15A230]} forState:UIControlStateSelected];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x7E8891]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appBlueColor]} forState:UIControlStateSelected];
+    [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
-    [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
    

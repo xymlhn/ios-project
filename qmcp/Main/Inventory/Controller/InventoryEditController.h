@@ -11,13 +11,14 @@
 
 @interface InventoryEditController : BaseViewController
 
+@property (nonatomic, assign) SaveType saveType;
 
 @property (nonatomic, copy) NSString *salesOrderCode;
 
 @property (nonatomic, copy) NSString *itemSnapshotCode;
 
-@property (copy, nonatomic) void(^doneBlock)(BOOL isDelete, ItemSnapshot *item);
+@property (copy, nonatomic) void(^doneBlock)(ItemSnapshot *item,SaveType type);
 
-+ (instancetype) doneBlock:(void(^)(BOOL isDelete, ItemSnapshot *item))block;
++ (instancetype) doneBlock:(void(^)(ItemSnapshot *item,SaveType type))block;
 
 @end

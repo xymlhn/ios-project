@@ -306,8 +306,8 @@
 		245BCFA81D93D4AB00028C40 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		245F75691DDABE5100FB51FA /* SalesOrderStepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderStepController.h; sourceTree = "<group>"; };
 		245F756A1DDABE5100FB51FA /* SalesOrderStepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderStepController.m; sourceTree = "<group>"; };
-		245F756C1DDABF5D00FB51FA /* SDTimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeLineCell.h; sourceTree = "<group>"; };
-		245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineCell.m; sourceTree = "<group>"; };
+		245F756C1DDABF5D00FB51FA /* SDTimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDTimeLineCell.h; path = ../SDTimeLineCell.h; sourceTree = "<group>"; };
+		245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDTimeLineCell.m; path = ../SDTimeLineCell.m; sourceTree = "<group>"; };
 		245F756F1DDABFE700FB51FA /* SDTimeLineCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeLineCellModel.h; sourceTree = "<group>"; };
 		245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineCellModel.m; sourceTree = "<group>"; };
 		246642D01D9A1285009402A2 /* SalesOrderGrabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabCell.h; sourceTree = "<group>"; };
@@ -729,6 +729,8 @@
 		246642CF1D9A1285009402A2 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				245F756C1DDABF5D00FB51FA /* SDTimeLineCell.h */,
+				245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */,
 				246642D01D9A1285009402A2 /* SalesOrderGrabCell.h */,
 				246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */,
 				246642D21D9A1285009402A2 /* SalesOrderMineCell.h */,
@@ -1333,8 +1335,6 @@
 			children = (
 				24DC6A151DDAD20700CD0684 /* OperationMenu */,
 				24DC6A181DDAD20700CD0684 /* PhotoContainer */,
-				245F756C1DDABF5D00FB51FA /* SDTimeLineCell.h */,
-				245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */,
 				246642CF1D9A1285009402A2 /* cell */,
 				246642D61D9A12CA009402A2 /* BusinessSalesOrderView.h */,
 				246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */,

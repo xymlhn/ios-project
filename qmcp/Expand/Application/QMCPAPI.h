@@ -51,7 +51,7 @@
 
 
 //*********************清点接口*******************//
-#define QMCPAPI_POSTWORKORDERINVENTORY   @"i/a/api/salesorder/item/"
+#define QMCPAPI_POSTINVENTORY   @"i/a/api/salesorder/item/"
 
 //*********************摄像头接口*******************//
 //获取当前账号所有摄像头

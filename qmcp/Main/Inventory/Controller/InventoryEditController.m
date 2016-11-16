@@ -28,6 +28,7 @@
 #import "QrCodeViewController.h"
 #import "InventoryChooseController.h"
 #import "Helper.h"
+#import "ImageViewerController.h"
 @interface InventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,
                                                 UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 
@@ -35,7 +36,6 @@
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) InventoryEditView *inventoryEditView;
 @property (nonatomic, assign) BOOL unLock;
-@property (nonatomic, assign) BOOL isDelete;
 @property (nonatomic, strong) Attachment *plusIcon;
 
 @end
@@ -64,7 +64,7 @@
     [_inventoryEditView.remarkText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     _inventoryEditView.lockIcon.userInteractionEnabled = YES;
-    [_inventoryEditView.lockIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
+    [_inventoryEditView.lockIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lockIconClick:)]];
 
     _inventoryEditView.commodityView.userInteractionEnabled = YES;
     [_inventoryEditView.commodityView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
@@ -95,13 +95,12 @@
     _attachments = [NSMutableArray new];
     if(_itemSnapshot.attachments != nil){
         [_attachments addObjectsFromArray:_itemSnapshot.attachments];
-        if(_attachments.count < 6){
-            _plusIcon = [Attachment new];
-            _plusIcon.isPlus = true;
-            [_attachments insertObject:_plusIcon atIndex:_attachments.count];
-        }
     }
-    
+    if(_attachments.count < 6){
+        _plusIcon = [Attachment new];
+        _plusIcon.isPlus = true;
+        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
+    }
     _inventoryEditView.qrText.text = _itemSnapshot.code;
     _inventoryEditView.remarkText.text = _itemSnapshot.remark;
     _inventoryEditView.goodNameText.text = _itemSnapshot.name;
@@ -110,17 +109,36 @@
 }
 
 -(void)saveData{
-    _itemSnapshot.code = _inventoryEditView.qrText.text;
-    _itemSnapshot.remark = _inventoryEditView.remarkText.text;
-    _itemSnapshot.name = _inventoryEditView.goodNameText.text;
     
-    [_itemSnapshot updateToDB];
     if (self.doneBlock) {
-        self.doneBlock(_isDelete,_itemSnapshot);
+        switch (_saveType) {
+            case SaveTypeAdd:
+                _itemSnapshot.code = _inventoryEditView.qrText.text;
+                _itemSnapshot.remark = _inventoryEditView.remarkText.text;
+                _itemSnapshot.name = _inventoryEditView.goodNameText.text;
+                if([_itemSnapshot updateToDB]){
+                    self.doneBlock(_itemSnapshot,SaveTypeAdd);
+                }
+                break;
+            case SaveTypeUpdate:
+                _itemSnapshot.code = _inventoryEditView.qrText.text;
+                _itemSnapshot.remark = _inventoryEditView.remarkText.text;
+                _itemSnapshot.name = _inventoryEditView.goodNameText.text;
+                if([_itemSnapshot updateToDB]){
+                    self.doneBlock(_itemSnapshot,SaveTypeAdd);
+                }
+                break;
+            case SaveTypeDelete:
+                self.doneBlock(_itemSnapshot,SaveTypeDelete);
+                break;
+            default:
+                break;
+        }
+        
     }
 }
 
-+(instancetype)doneBlock:(void (^)(BOOL ,ItemSnapshot *))block{
++(instancetype)doneBlock:(void(^)(ItemSnapshot *item,SaveType type))block{
     
     InventoryEditController *vc = [[InventoryEditController alloc] init];
     vc.doneBlock = block;
@@ -217,32 +235,58 @@
 #pragma mark -UICollectionViewDataSource
 
 //指定单元格的个数 ，这个是一个组里面有多少单元格，e.g : 一个单元格就是一张图片
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
     return _attachments.count;
 }
 
 //构建单元格
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identify = @"cell";
+    static NSString *identify = @"PhotoCell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     Attachment *attachment = _attachments[indexPath.row];
-    UIImage *image = [Utils loadImage:attachment.key];
-    cell.image.image = image;
+    
+    if(attachment.isPlus){
+        cell.image.image = [UIImage imageNamed:@"plus_photo.png"];
+    }else{
+        cell.image.image = [Utils loadImage:attachment.key];
+    }
+    
     return cell;
+    
 }
 
-
 //UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    PhotoCell * cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [Utils showImage:cell.image.image];
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Attachment *attachment = _attachments[indexPath.row];
+    if(attachment.isPlus){
+        [self plusBtnClick];
+    }else{
+        ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
+            [self p_deleteAttachment:attachment];
+            [_attachments removeObject:attachment];
+            [_inventoryEditView.photoCollectionView reloadData];
+        }];
+        [self presentViewController:ivc animated:YES completion:nil];
+    }
     
+}
+- (void)plusBtnClick{
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+    [actionSheet showInView:self.view];
 }
 
 -(void)handleQrCode:(NSString *)qrCode{
     _inventoryEditView.qrText.text = qrCode;
 }
 
+-(void)p_deleteAttachment:(Attachment *)attachment
+{
+    [Utils deleteImage:attachment.key];
+    [attachment deleteToDB];
+}
 #pragma mark - 键盘操作
 
 - (void)hidenKeyboard{
@@ -264,11 +308,10 @@
 
 //返回按钮监听
 - (BOOL)navigationShouldPopOnBackButton {
-    if (true) {
+    if ([_inventoryEditView.qrText.text isEqualToString:@""] || _attachments.count < 2) {
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"二维码为空/还未拍照,是否放弃编辑?" preferredStyle:UIAlertControllerStyleAlert];
         [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [_itemSnapshot deleteToDB];
-            _isDelete = YES;
+            _saveType = SaveTypeDelete;
             [self.navigationController popViewControllerAnimated:YES];
         }]];
         

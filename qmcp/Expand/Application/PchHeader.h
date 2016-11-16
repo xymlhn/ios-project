@@ -54,6 +54,12 @@ typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #define NSLog(...)
 #endif
 
+#define kShisipt 14
+#define kShiwupt 15
+#define kJiupt  9
+#define kFontAwesomeIcon 15
+#define kFontAwesomeArrow 17
+
 #define kLineHeight @0.5
 #define kEndSucceedDelayTime 0.5
 #define kEndFailedDelayTime 1.5

@@ -60,13 +60,9 @@
      [self.dataArray addObjectsFromArray:[self creatModels]];
 }
 
-- (NSMutableArray *)creatModels
-{
-
+- (NSMutableArray *)creatModels{
     NSMutableArray *resArr = [NSMutableArray new];
-    
     for (WorkOrderStep *step in _stepList) {
-        
         SDTimeLineCellModel *model = [SDTimeLineCellModel new];
         model.iconName = @"default－portrait";
         model.name = _salesOrder.addressSnapshot.contacts;
@@ -86,13 +82,11 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SDTimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:kTimeLineTableViewCellId];
     cell.indexPath = indexPath;
     __weak typeof(self) weakSelf = self;
@@ -156,8 +150,7 @@
         [_stepList addObject:workOrderStep];
     }
 }
--(void)p_pushWorkOrderStepEditController:(NSString *)stepId andType:(SaveType)type
-{
+-(void)p_pushWorkOrderStepEditController:(NSString *)stepId andType:(SaveType)type{
     __weak typeof(self) weakSelf = self;
     SalesOrderStepEditController *info = [SalesOrderStepEditController doneBlock:^(WorkOrderStep *step, SaveType type) {
         

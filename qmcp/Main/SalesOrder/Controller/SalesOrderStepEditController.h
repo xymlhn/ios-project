@@ -14,7 +14,6 @@
 
 @property (nonatomic, copy) NSString *stepId;
 
-
 @property (nonatomic, assign) SaveType saveType;
 
 @property (copy, nonatomic) void(^doneBlock)(WorkOrderStep *step,SaveType type);

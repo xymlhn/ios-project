@@ -10,6 +10,8 @@
 
 @interface CommoditySnapshot : NSObject
 
+@property (nonatomic, copy) NSString *code;
+
 @property (nonatomic, copy) NSString *commodityCode;
 
 @property (nonatomic, copy) NSString *commodityName;
@@ -23,8 +25,6 @@
 @property (nonatomic, copy) NSString *commodityContent;
 
 @property (nonatomic, copy) NSString *workOrderCode;
-
-@property (nonatomic, copy) NSString *code;
 
 @property (nonatomic, copy) NSString *price;
 

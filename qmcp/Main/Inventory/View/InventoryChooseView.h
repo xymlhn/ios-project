@@ -11,9 +11,6 @@
 @interface InventoryChooseView : BaseView
 
 @property(nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) UIView *bottomView;
-@property (nonatomic,strong) UILabel *numberLabel;
-@property (nonatomic,strong) UILabel *priceLabel;
 + (instancetype)viewInstance;
 
 @end

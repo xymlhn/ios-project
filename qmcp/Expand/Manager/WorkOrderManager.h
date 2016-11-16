@@ -43,18 +43,6 @@ extern NSString *const WorkOrderUpdateNotification;
 
 
 /**
- *  上传清点数据
- *
- *  @param params     参数
- *  @param completion 回调
- */
--(void)postInventoryData:(NSString *)code
-                            andParams:(NSDictionary *)params
-                          finishBlock:(CompletionHandler)completion;
-
-
-
-/**
  *  根据工单code获取工单
  *
  *  @param itemCode 工单code

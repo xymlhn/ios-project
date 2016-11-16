@@ -941,14 +941,14 @@
 		24AFDB001D9238FF00B2F1B9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				24AFDB081D9238FF00B2F1B9 /* InventoryChooseController.h */,
-				24AFDB091D9238FF00B2F1B9 /* InventoryChooseController.m */,
+				24AFDB0E1D9238FF00B2F1B9 /* InventorySearchController.h */,
+				24AFDB0F1D9238FF00B2F1B9 /* InventorySearchController.m */,
 				24AFDB0A1D9238FF00B2F1B9 /* InventoryController.h */,
 				24AFDB0B1D9238FF00B2F1B9 /* InventoryController.m */,
 				24AFDB0C1D9238FF00B2F1B9 /* InventoryEditController.h */,
 				24AFDB0D1D9238FF00B2F1B9 /* InventoryEditController.m */,
-				24AFDB0E1D9238FF00B2F1B9 /* InventorySearchController.h */,
-				24AFDB0F1D9238FF00B2F1B9 /* InventorySearchController.m */,
+				24AFDB081D9238FF00B2F1B9 /* InventoryChooseController.h */,
+				24AFDB091D9238FF00B2F1B9 /* InventoryChooseController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

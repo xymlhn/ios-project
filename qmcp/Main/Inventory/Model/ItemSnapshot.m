@@ -17,7 +17,7 @@
 
 + (NSDictionary *)mj_objectClassInArray
 {
-    return @{@"commodities":@"Commodity",
+    return @{@"commodities":@"CommoditySnapshot",
              @"attachments":@"Attachment"};
 }
 @end

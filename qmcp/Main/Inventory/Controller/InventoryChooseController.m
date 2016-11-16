@@ -28,6 +28,14 @@
 
 @implementation InventoryChooseController
 
+
++ (instancetype) doneBlock:(void(^)(NSMutableArray *commodies))block{
+    InventoryChooseController *vc = [[InventoryChooseController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
 #pragma mark - BaseWorkOrderViewController
 -(void)loadView{
     _inventoryChooseView = [InventoryChooseView viewInstance];
@@ -39,9 +47,6 @@
     _inventoryChooseView.tableView.delegate = self;
     _inventoryChooseView.tableView.dataSource = self;
     
-    _inventoryChooseView.bottomView.userInteractionEnabled = YES;
-    [_inventoryChooseView.bottomView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomViewClick:)]];
-    
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(priceUpdate:) name:@"priceUpdate" object:nil];
 }
@@ -50,25 +55,16 @@
     NSString *itemWhere = [NSString stringWithFormat:@"salesOrderItemCode = '%@'",_itemSnapshotCode];
     _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
     _commodityList = [[PropertyManager getInstance]getAllLocalCommoditySnapshot];
-    if(_itemSnapshot.commodities == nil){
-        _chooseCommodityList = [NSMutableArray new];
-    }else{
-        _chooseCommodityList = _itemSnapshot.commodities;
+    _chooseCommodityList = [NSMutableArray new];
+    if(_itemSnapshot.commodities != nil){
+        [_chooseCommodityList addObjectsFromArray:_itemSnapshot.commodities];
     }
-    
-    _inventoryChooseView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityList.count];
-    _inventoryChooseView.priceLabel.text = [self p_calculatePrice];
 }
 
 -(void)saveData{
     _itemSnapshot.commodities = _chooseCommodityList;
     [_itemSnapshot updateToDB];
-
-}
-
-#pragma mark - IBAction
-- (void)bottomViewClick:(UITapGestureRecognizer *)recognizer{
-   
+    self.doneBlock(_chooseCommodityList);
 }
 
 #pragma mark - Table view data source
@@ -98,8 +94,7 @@
     }else{
         commodity.code = [[NSUUID UUID] UUIDString];
         [_chooseCommodityList addObject:commodity];
-        _inventoryChooseView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityList.count];
-        _inventoryChooseView.priceLabel.text = [self p_calculatePrice];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -128,9 +123,6 @@
         _currentCommoditySnapshot.itemProperties = itemProperties;
         _currentCommoditySnapshot.price = price;
         _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
-        [_chooseCommodityList addObject:_currentCommoditySnapshot];
-        _inventoryChooseView.numberLabel.text = [NSString stringWithFormat:@"%lu",_chooseCommodityList.count];
-        _inventoryChooseView.priceLabel.text = [self p_calculatePrice];
     }else{
         _currentCommoditySnapshot = nil;
         _standardsView.priceLab.text = @"";
@@ -173,8 +165,10 @@
 
 -(void)StandardsView:(StandardsView *)standardView CustomBtnClickAction:(UIButton *)sender{
     if (sender.tag == 0) {
-        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:1.6 andHeight:150 andScale:20];
+        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:0.5 andHeight:150 andScale:20];
+        _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
         [_chooseCommodityList addObject:_currentCommoditySnapshot];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else{
         [standardView dismiss];
@@ -197,9 +191,9 @@
         StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
         [titleArr addObject:tempModel];
     }
-    
-    standardView.standardArr = titleArr;
-    [standardView standardsViewReload];
+//    
+//    standardView.standardArr = titleArr;
+//    [standardView standardsViewReload];
     
 }
 //设置自定义btn的属性

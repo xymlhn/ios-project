@@ -120,7 +120,7 @@
     if(data != nil){
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSString *message = [content valueForKey:@"message"];
-        if (message == nil) {
+        if (message == nil || [message isKindOfClass:[NSNull class]]) {
             message = @"服务器发生未知错误!";
         }
         

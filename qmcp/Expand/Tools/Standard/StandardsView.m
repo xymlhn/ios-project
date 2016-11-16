@@ -578,13 +578,11 @@
         }
     }
     
-    
-    
 }
 ////抛物线结束
 - (void)animationDidFinish:(UIView *)view
 {
-
+    [self dismiss];
 }
 
 

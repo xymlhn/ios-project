@@ -14,4 +14,7 @@
 
 @property (nonatomic, copy) NSString *itemSnapshotCode;
 
+@property (copy, nonatomic) void(^doneBlock)(NSMutableArray *commodies);
+
++ (instancetype) doneBlock:(void(^)(NSMutableArray *commodies))block;
 @end

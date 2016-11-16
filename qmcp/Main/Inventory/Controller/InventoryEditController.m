@@ -148,8 +148,9 @@
 
 #pragma mark - IBAction
 - (void)commodityViewClick:(UITapGestureRecognizer *)recognizer{
-    
-    InventoryChooseController *info = [InventoryChooseController new];
+    InventoryChooseController *info = [InventoryChooseController doneBlock:^(NSMutableArray *commodies) {
+        _itemSnapshot.commodities = commodies;
+    }];
     info.itemSnapshotCode = _itemSnapshot.salesOrderItemCode;
     info.salesOrderCode = _salesOrderCode;
     info.hidesBottomBarWhenPushed = YES;

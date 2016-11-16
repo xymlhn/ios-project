@@ -76,6 +76,7 @@
 #define QMCPAPI_SALESORDERCOMPLETE       @"i/a/api/salesorder/complete/"
 //商家下单
 #define QMCPAPI_BUSINESSSALESORDER       @"/i/a/api/salesorder/create"
+//搜索清点订单
 #define QMCPAPI_SALESORDERSEARCH         @"i/a/api/salesorder/check"
 #define QMCPAPI_SALESORDERITEM           @"i/a/api/salesorder/commodityItem/"
 #define QMCPAPI_POSTSALESORDERSTEP       @"i/a/api/salesorder/"

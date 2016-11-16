@@ -202,17 +202,6 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
     
 }
 
-
--(void)postInventoryData:(NSString *)code
-                            andParams:(NSDictionary *)params
-                          finishBlock:(CompletionHandler)completion{
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTINVENTORY,code];
-    [HttpUtil post:URLString param:params finish:^(NSDictionary *obj, NSString *error) {
-        completion(obj,error);
-    }];
-}
-
 -(void)searchWorkOrderWithString:(NSString *)string
                     andCondition:(BOOL)condition
                      finishBlock:(CompletionHandler)completion{

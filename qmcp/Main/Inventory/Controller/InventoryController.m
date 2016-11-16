@@ -139,21 +139,22 @@
         _salesOrderSearchResult.itemConfirmed = YES;
         _salesOrderSearchResult.signatureImageKey = attachment.key;
         
-        [self p_postWorkOrderInventoryWitCode:_salesOrderCode];
+        [self p_postInventoryDataWitCode:_salesOrderCode];
     }else{
         [Utils showHudTipStr:@"请重新签名!"];
     }
     
 }
 
--(void)p_postWorkOrderInventoryWitCode:(NSString *)code{
+-(void)p_postInventoryDataWitCode:(NSString *)code{
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传清点数据";
     NSMutableArray *itemArray = [ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList];
     NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_salesOrderSearchResult.itemConfirmed],
                                     @"signatureImageKey":_salesOrderSearchResult.signatureImageKey,@"itemSnapshots":itemArray};
 
-    [[WorkOrderManager getInstance] postInventoryData:code andParams:inventoryDict finishBlock:^(NSDictionary *dict, NSString *error) {
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTINVENTORY,code];
+    [HttpUtil post:URLString param:inventoryDict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (ItemSnapshot *item in _itemSnapshotList) {

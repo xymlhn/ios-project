@@ -40,7 +40,7 @@
 #define QMCPAPI_TIMESTAMP                @"i/a/api/workorder/timestamp/"
 //根据物品code获取工单
 #define QMCPAPI_GETWORKORDERBYITEMCODE   @"i/a/api/workorder/item/"
-
+//搜索工单
 #define QMCPAPI_SEARCH                   @"i/a/api/workorder/search"
 
 #define QMCPAPI_COMMODITYSTEP            @"i/a/api/commodity/step?lastUpdateTime="

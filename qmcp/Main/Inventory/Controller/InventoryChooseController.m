@@ -54,7 +54,7 @@
 -(void)loadData{
     NSString *itemWhere = [NSString stringWithFormat:@"salesOrderItemCode = '%@'",_itemSnapshotCode];
     _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
-    _commodityList = [[PropertyManager getInstance]getAllLocalCommoditySnapshot];
+    _commodityList = [[PropertyManager getInstance] getAllLocalCommoditySnapshot];
     _chooseCommodityList = [NSMutableArray new];
     if(_itemSnapshot.commodities != nil){
         [_chooseCommodityList addObjectsFromArray:_itemSnapshot.commodities];

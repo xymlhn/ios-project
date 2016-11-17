@@ -984,14 +984,14 @@
 			isa = PBXGroup;
 			children = (
 				246643161D9A1304009402A2 /* cell */,
-				24AFDB261D9238FF00B2F1B9 /* InventoryChooseView.h */,
-				24AFDB271D9238FF00B2F1B9 /* InventoryChooseView.m */,
-				24AFDB281D9238FF00B2F1B9 /* InventoryEditView.h */,
-				24AFDB291D9238FF00B2F1B9 /* InventoryEditView.m */,
 				24AFDB2A1D9238FF00B2F1B9 /* InventorySearchView.h */,
 				24AFDB2B1D9238FF00B2F1B9 /* InventorySearchView.m */,
 				24AFDB2C1D9238FF00B2F1B9 /* InventoryView.h */,
 				24AFDB2D1D9238FF00B2F1B9 /* InventoryView.m */,
+				24AFDB281D9238FF00B2F1B9 /* InventoryEditView.h */,
+				24AFDB291D9238FF00B2F1B9 /* InventoryEditView.m */,
+				24AFDB261D9238FF00B2F1B9 /* InventoryChooseView.h */,
+				24AFDB271D9238FF00B2F1B9 /* InventoryChooseView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

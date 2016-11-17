@@ -51,7 +51,7 @@
 
     UILabel *workIcon = [UILabel new];
     [workIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
-    workIcon.text = @"";
+    workIcon.text = @"";
     workIcon.textAlignment = NSTextAlignmentCenter;
     workIcon.textColor = [UIColor appBlueColor];
     [workView addSubview:workIcon];
@@ -70,7 +70,7 @@
     
     UILabel *mapIcon = [UILabel new];
     [mapIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
-    mapIcon.text = @"";
+    mapIcon.text = @"";
     mapIcon.textAlignment = NSTextAlignmentCenter;
     mapIcon.textColor = [UIColor appBlueColor];
     [_mapBtn addSubview:mapIcon];
@@ -99,7 +99,7 @@
     
     UILabel *helpIcon = [UILabel new];
     [helpIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
-    helpIcon.text = @"";
+    helpIcon.text = @"";
     helpIcon.textAlignment = NSTextAlignmentCenter;
     helpIcon.textColor = [UIColor appBlueColor];
     [_helpBtn addSubview:helpIcon];
@@ -124,7 +124,7 @@
     
     UILabel *settingIcon = [UILabel new];
     [settingIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
-    settingIcon.text = @"";
+    settingIcon.text = @"";
     settingIcon.textAlignment = NSTextAlignmentCenter;
     settingIcon.textColor = [UIColor appBlueColor];
     [_settingBtn addSubview:settingIcon];
@@ -153,7 +153,7 @@
     
     UILabel *logoutIcon = [UILabel new];
     [logoutIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
-    logoutIcon.text = @"";
+    logoutIcon.text = @"";
     logoutIcon.textAlignment = NSTextAlignmentCenter;
     logoutIcon.textColor = [UIColor appBlueColor];
     [_logoutBtn addSubview:logoutIcon];
@@ -201,6 +201,7 @@
     [workIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(workView.mas_centerY);
         make.left.equalTo(workView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@20);
     }];
     
     [workText mas_makeConstraints:^(MASConstraintMaker *make){
@@ -232,6 +233,7 @@
     [mapIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_mapBtn.mas_centerY);
         make.left.equalTo(_mapBtn.mas_left).with.offset(kPaddingLeftWidth);
+         make.width.equalTo(@20);
     }];
     
     [mapText mas_makeConstraints:^(MASConstraintMaker *make){
@@ -263,6 +265,7 @@
     [helpIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_helpBtn.mas_centerY);
         make.left.equalTo(_helpBtn.mas_left).with.offset(kPaddingLeftWidth);
+         make.width.equalTo(@20);
     }];
     
     [helpText mas_makeConstraints:^(MASConstraintMaker *make){
@@ -287,6 +290,7 @@
     [settingIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_settingBtn.mas_centerY);
         make.left.equalTo(_settingBtn.mas_left).with.offset(kPaddingLeftWidth);
+         make.width.equalTo(@20);
     }];
     
     [settingText mas_makeConstraints:^(MASConstraintMaker *make){
@@ -318,6 +322,7 @@
     [logoutIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_logoutBtn.mas_centerY);
         make.left.equalTo(_logoutBtn.mas_left).with.offset(kPaddingLeftWidth);
+         make.width.equalTo(@20);
     }];
     
     [logoutText mas_makeConstraints:^(MASConstraintMaker *make){

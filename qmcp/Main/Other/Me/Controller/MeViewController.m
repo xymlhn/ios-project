@@ -11,6 +11,8 @@
 #import "AppManager.h"
 #import "LoginViewController.h"
 #import "SettingViewController.h"
+#import "AMapViewController.h"
+#import "HelpViewController.h"
 @interface MeViewController ()
 @property (nonatomic, strong) MeView *meView;
 @end
@@ -30,10 +32,23 @@
     
     _meView.settingBtn.userInteractionEnabled = YES;
     [_meView.settingBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(settingBtnClick:)]];
+    
+    _meView.mapBtn.userInteractionEnabled = YES;
+    [_meView.mapBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mapBtnClick:)]];
+    
+    _meView.helpBtn.userInteractionEnabled = YES;
+    [_meView.helpBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(helpBtnClick:)]];
+    
+    [_meView.workSwitch setOn:[Config isWork]];
+    [_meView.workSwitch addTarget:self action:@selector(onWorkAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - IBAction
 - (void)logoutBtnClick:(UITapGestureRecognizer *)recognizer{
+    if([Config isWork]){
+        [Utils showHudTipStr:@"请下班后再登出!"];
+        return;
+    }
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"登出中...";
     hub.userInteractionEnabled = NO;
@@ -58,6 +73,47 @@
 
 - (void)settingBtnClick:(UITapGestureRecognizer *)recognizer{
     SettingViewController *setting = [SettingViewController new];
+    setting.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:setting animated:YES];
 }
+- (void)mapBtnClick:(UITapGestureRecognizer *)recognizer{
+    AMapViewController *setting = [AMapViewController new];
+    setting.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:setting animated:YES];
+}
+
+- (void)helpBtnClick:(UITapGestureRecognizer *)recognizer{
+    HelpViewController *setting = [HelpViewController new];
+    setting.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:setting animated:YES];
+}
+
+-(void)onWorkAction:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.userInteractionEnabled = NO;
+    
+    NSDictionary *dict = @{@"isOnWork":[NSNumber numberWithBool:[Config isWork]]};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ISONWORK];
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
+        if (!error) {
+            
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+            NSString *tips = [Config isWork] ? @"下班成功" : @"上班成功";
+            hub.labelText = tips;
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            [Config setWork:![Config isWork]];
+            
+        }else{
+            [weakSelf.meView.workSwitch setOn:[Config isWork]];
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
+        }
+    }];
+}
+
 @end

@@ -9,6 +9,8 @@
 #import "BusinessSalesOrderController.h"
 #import "BusinessSalesOrder.h"
 #import "BusinessSalesOrderView.h"
+#import "SalesOrder.h"
+#import "SalesOrderInfoController.h"
 @interface BusinessSalesOrderController ()
 
 @property (nonatomic, strong) BusinessSalesOrderView *businessSalesOrderView;
@@ -17,6 +19,12 @@
 
 @implementation BusinessSalesOrderController
 
++(instancetype)doneBlock:(void (^)(NSString *))block{
+    BusinessSalesOrderController *vc = [[BusinessSalesOrderController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
 -(void)loadView{
     
     _businessSalesOrderView = [BusinessSalesOrderView viewInstance];
@@ -25,8 +33,9 @@
 }
 
 -(void)bindListener{
+    
     _businessSalesOrderView.orderButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        
+        __weak typeof(self) weakSelf = self;
         MBProgressHUD *hub = [Utils createHUD];
         hub.labelText = @"正在下单";
         hub.userInteractionEnabled = NO;
@@ -40,9 +49,23 @@
         NSDictionary *dict = [businessSalesOrder mj_keyValues];
         [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
             if (!error) {
-                
+                SalesOrder *salesOrder = [SalesOrder mj_objectWithKeyValues:obj];
+                salesOrder.addressSnapshot.code = salesOrder.code;
+                salesOrder.isMine = YES;
+                [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
+                    css.code = [NSUUID UUID].UUIDString;
+                }];
+                [salesOrder saveToDB];
                 hub.labelText = [NSString stringWithFormat:@"下单成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
+               
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    //调用代理对象的协议方法来实现数据传递
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                    if (weakSelf.doneBlock) {
+                        self.doneBlock(salesOrder.code);
+                    }
+                });
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -56,8 +79,6 @@
     }];
 
 }
-
-
 
 
 -(void)loadData{

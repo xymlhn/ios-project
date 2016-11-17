@@ -21,6 +21,7 @@
     self.backgroundColor = [UIColor whiteColor];
     _tableView = [UITableView new];
     _tableView.rowHeight = 50;
+    _tableView.separatorColor = [UIColor lineColor];
     _tableView.backgroundColor = [UIColor themeColor];
     [self addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){

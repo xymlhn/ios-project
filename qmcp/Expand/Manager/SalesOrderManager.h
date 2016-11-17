@@ -12,7 +12,7 @@
 
 @interface SalesOrderManager : NSObject
 
-
+extern NSString *const SalesOrderUpdateNotification;
 + (SalesOrderManager *) getInstance;
 
 /**

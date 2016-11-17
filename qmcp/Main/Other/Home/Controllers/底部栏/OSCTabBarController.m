@@ -31,6 +31,8 @@
 #import "WorkOrderInfoController.h"
 #import "PickupNoticeViewController.h"
 #import "WorkOrderManager.h"
+#import "SalesOrderManager.h"
+#import "SalesOrderInfoController.h"
 @interface OSCTabBarController () <UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     WorkOrderListController *newsViewCtl;
@@ -183,7 +185,17 @@
 }
 
 -(void)salesToOrderClick{
-    BusinessSalesOrderController *controller = [BusinessSalesOrderController new];
+    __weak typeof(self) weakSelf = self;
+    BusinessSalesOrderController *controller = [BusinessSalesOrderController doneBlock:^(NSString *code) {
+        NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter]postNotification:notice];
+        SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
+            NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter]postNotification:notice];
+        }];
+        info.code = code;
+        [weakSelf setContentViewController:info];
+    }];
     [self setContentViewController:controller];
 }
 

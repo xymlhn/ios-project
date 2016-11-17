@@ -10,4 +10,7 @@
 
 @interface BusinessSalesOrderController : BaseViewController
 
+@property (copy, nonatomic) void(^doneBlock)(NSString *code);
++ (instancetype) doneBlock:(void(^)(NSString *code))block;
+
 @end

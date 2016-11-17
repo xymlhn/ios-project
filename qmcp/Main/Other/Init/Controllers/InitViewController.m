@@ -46,7 +46,4 @@
         [[NSNotificationCenter defaultCenter]postNotification:notice];
     }];
 }
--(void)bindListener{
-        
-}
 @end

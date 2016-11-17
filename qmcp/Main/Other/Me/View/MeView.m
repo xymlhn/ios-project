@@ -60,7 +60,7 @@
     [workView addSubview:_workSwitch];
     
     UIView *workLine = [UIView new];
-    workLine.backgroundColor = [UIColor themeColor];
+    workLine.backgroundColor = [UIColor lineColor];
     [workView addSubview:workLine];
     
     //地图
@@ -89,7 +89,7 @@
     [_mapBtn addSubview:mapArrow];
     
     UIView *mapLine = [UIView new];
-    mapLine.backgroundColor = [UIColor themeColor];
+    mapLine.backgroundColor = [UIColor lineColor];
     [_mapBtn addSubview:mapLine];
     
     //帮助
@@ -143,7 +143,7 @@
     [_settingBtn addSubview:settingArrow];
     
     UIView *settingLine = [UIView new];
-    settingLine.backgroundColor = [UIColor themeColor];
+    settingLine.backgroundColor = [UIColor lineColor];
     [_settingBtn addSubview:settingLine];
     
     //登出

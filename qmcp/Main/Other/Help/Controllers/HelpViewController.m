@@ -53,7 +53,7 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     _hub.mode = MBProgressHUDModeCustomView;
     _hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-    _hub.labelText = [NSString stringWithFormat:@"加载成功"];
+    _hub.labelText = [NSString stringWithFormat:@"加载完成"];
     [_hub hide:YES afterDelay:kEndSucceedDelayTime];
 }
 

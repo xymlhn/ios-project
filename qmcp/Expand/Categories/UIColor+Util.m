@@ -128,7 +128,7 @@
 
 + (UIColor *)lineColor
 {
-    return [UIColor colorWithHex:0x2bc157];
+    return [UIColor colorWithRed:238.0/255 green:238.0/255 blue:238.0/255 alpha:1.0];
 }
 
 + (UIColor *)borderColor

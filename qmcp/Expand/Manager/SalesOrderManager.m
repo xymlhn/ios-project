@@ -19,6 +19,7 @@
 #import "TMCache.h"
 #import "MBProgressHUD.h"
 
+NSString *const SalesOrderUpdateNotification = @"salesOrderUpdate";
 @interface SalesOrderManager()
 
 @end

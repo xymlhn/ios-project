@@ -44,6 +44,7 @@
     _tableView = [UITableView new];
     _tableView.rowHeight = 80;
     _tableView.backgroundColor = [UIColor themeColor];
+    _tableView.separatorColor = [UIColor lineColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];

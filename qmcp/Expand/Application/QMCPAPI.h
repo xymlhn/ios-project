@@ -20,7 +20,7 @@
 #define QMCPAPI_PUSHID                   @"i/a/api/push/id/"
 #define QMCPAPI_ATTACHMENT               @"i/a/api/attachment/"
 #define QMCPAPI_ISONWORK                 @"i/a/api/isonwork"
-#define QMCPAPI_LOCATION                 @"/i/a/api/gis/location/"
+#define QMCPAPI_LOCATION                 @"i/a/api/gis/location/"
 #define QMCPAPI_IMAGEURL                 @"i/a/api/attachment/get"
 #define QMCPAPI_USERICONURL              @"i/a/api/user/info/portrait/"
 #define QMCPAPI_MANUAL                   @"api/appoperationmanual"

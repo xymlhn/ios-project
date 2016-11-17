@@ -24,6 +24,7 @@
 {
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;
+    _tableView.separatorColor = [UIColor lineColor];
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -31,12 +32,20 @@
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(self.view);
     }];
-    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(salesOrderUpdate:) name:SalesOrderUpdateNotification object:nil];
 }
 
--(void)bindListener{
-    
+#pragma mark - Notification
+- (void)salesOrderUpdate:(NSNotification *)text{
+    self.salesOrderList = [[SalesOrderManager getInstance] sortSalesOrder:YES];
+    [self.tableView reloadData];
 }
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 -(NSMutableArray *)salesOrderList{
     if(_salesOrderList == nil)

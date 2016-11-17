@@ -20,5 +20,6 @@ target:qmcp do
     pod 'AMapLocation','2.1.0'
     pod 'YCXMenu', '~> 0.0.11'
     pod 'SDAutoLayout', '~> 2.1.3'
+    pod 'GTSDK'
     pod 'FLEX', :configurations => ['Debug']
 end

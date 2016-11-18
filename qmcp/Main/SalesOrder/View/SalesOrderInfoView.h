@@ -39,10 +39,11 @@
 @property (nonatomic,strong) UIButton *starBtn;
 
 @property (nonatomic,strong ) UILabel     *stepBtn;
-@property (nonatomic,strong ) UILabel     *saveBtn;
+@property (nonatomic,strong ) UILabel     *refreshBtn;
 @property (nonatomic,strong ) UILabel     *formBtn;
 @property (nonatomic,strong ) UILabel     *cameraBtn;
 @property (nonatomic,strong ) UILabel     *qrCodeBtn;
+@property (nonatomic,strong ) UILabel     *inventoryBtn;
 
 @property (nonatomic,strong) UIView *view;
 @property (nonatomic, strong) SalesOrder *salesOrder;

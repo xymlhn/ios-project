@@ -25,7 +25,6 @@
 
 @property (nonatomic, strong) NSMutableArray<FormTemplateField* > *workOrderFormList;
 @property (nonatomic, strong) WorkOrderFormView *workOrderFormView;
-@property (nonatomic, strong) WorkOrder *workOrder;
 @property (nonatomic, copy) NSString *currentPlusFormTemplateId;
 @property (nonatomic,assign) NSUInteger currentPlusOrder;
 
@@ -91,8 +90,6 @@
 
 -(void)loadData
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
-    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     _workOrderFormList = [[FormManager getInstance]formTemplateField:_formTemplateId];
     [[FormManager getInstance] handleFormTable:_workOrderFormList formTemplateId:_formTemplateId];
 }

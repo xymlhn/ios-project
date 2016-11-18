@@ -10,6 +10,6 @@
 
 @interface WorkOrderFormsController : BaseViewController
 
-@property(nonatomic, copy) NSString *workOrderCode;
+@property(nonatomic, copy) NSString *code;
 
 @end

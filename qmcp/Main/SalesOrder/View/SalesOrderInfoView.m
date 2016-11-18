@@ -507,6 +507,19 @@
     codeBottomLine.backgroundColor = [UIColor grayColor];
     [bottomView addSubview:codeBottomLine];
     
+    _inventoryBtn = [UILabel new];
+    [_inventoryBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _inventoryBtn.text = @"";
+    _inventoryBtn.textColor = [UIColor nameColor];
+    _inventoryBtn.textAlignment = NSTextAlignmentCenter;
+    [bottomView addSubview:_inventoryBtn];
+    
+    UILabel *inventoryLabel = [UILabel new];
+    inventoryLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    inventoryLabel.text = @"清点";
+    inventoryLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:inventoryLabel];
+
     _qrCodeBtn = [UILabel new];
     [_qrCodeBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
     _qrCodeBtn.text = @"";
@@ -527,11 +540,11 @@
     _stepBtn.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:_stepBtn];
     
-    UILabel *addLabel = [UILabel new];
-    addLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    addLabel.text = @"步骤";
-    addLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:addLabel];
+    UILabel *stepLabel = [UILabel new];
+    stepLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    stepLabel.text = @"步骤";
+    stepLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:stepLabel];
     
     _formBtn = [UILabel new];
     [_formBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
@@ -546,24 +559,19 @@
     formLabel.textColor = [UIColor blackColor];
     [bottomView addSubview:formLabel];
     
-    _saveBtn = [UILabel new];
-    [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _saveBtn.text = @"";
-    _saveBtn.textAlignment = NSTextAlignmentCenter;
-    _saveBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_saveBtn];
+    _refreshBtn = [UILabel new];
+    [_refreshBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _refreshBtn.text = @"";
+    _refreshBtn.textAlignment = NSTextAlignmentCenter;
+    _refreshBtn.textColor = [UIColor nameColor];
+    [bottomView addSubview:_refreshBtn];
     
-    UILabel *saveLabel = [UILabel new];
-    saveLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    saveLabel.text = @"保存";
-    saveLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:saveLabel];
+    UILabel *refreshLabel = [UILabel new];
+    refreshLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    refreshLabel.text = @"刷新";
+    refreshLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:refreshLabel];
     
-    UILabel *inventoryLabel = [UILabel new];
-    inventoryLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    inventoryLabel.text = @"清点";
-    inventoryLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:inventoryLabel];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
@@ -579,14 +587,23 @@
         make.height.mas_equalTo(kLineHeight);
     }];
     
-    [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_inventoryBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(bottomView).with.offset(0);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
+    [inventoryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_inventoryBtn.mas_bottom);
+        make.centerX.equalTo(_inventoryBtn.mas_centerX);
+    }];
     
-    [formLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_formBtn.mas_bottom);
-        make.centerX.equalTo(_formBtn.mas_centerX);
+    [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(_inventoryBtn.mas_right).with.offset(0);
+        make.width.equalTo(_inventoryBtn);
+        make.top.equalTo(bottomView.mas_top).offset(3);
+    }];
+    [stepLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_stepBtn.mas_bottom);
+        make.centerX.equalTo(_stepBtn.mas_centerX);
     }];
     
     [_formBtn mas_makeConstraints:^(MASConstraintMaker *make){
@@ -594,9 +611,9 @@
         make.left.equalTo(_stepBtn.mas_right);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-    [addLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_stepBtn.mas_bottom);
-        make.centerX.equalTo(_stepBtn.mas_centerX);
+    [formLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_formBtn.mas_bottom);
+        make.centerX.equalTo(_formBtn.mas_centerX);
     }];
     
     [_qrCodeBtn mas_makeConstraints:^(MASConstraintMaker *make){
@@ -610,19 +627,16 @@
         make.centerX.equalTo(_qrCodeBtn.mas_centerX);
     }];
     
-    
-    [saveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_saveBtn.mas_bottom);
-        make.centerX.equalTo(_saveBtn.mas_centerX);
-    }];
-    
-    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_refreshBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.width.equalTo(_qrCodeBtn);
         make.left.equalTo(_qrCodeBtn.mas_right);
         make.right.equalTo(bottomView);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-    
+    [refreshLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_refreshBtn.mas_bottom);
+        make.centerX.equalTo(_refreshBtn.mas_centerX);
+    }];
     
 }
 
@@ -636,6 +650,19 @@
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor grayColor];
     [bottomView addSubview:codeBottomLine];
+    
+    _inventoryBtn = [UILabel new];
+    [_inventoryBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _inventoryBtn.text = @"";
+    _inventoryBtn.textColor = [UIColor nameColor];
+    _inventoryBtn.textAlignment = NSTextAlignmentCenter;
+    [bottomView addSubview:_inventoryBtn];
+    
+    UILabel *inventoryLabel = [UILabel new];
+    inventoryLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    inventoryLabel.text = @"清点";
+    inventoryLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:inventoryLabel];
     
     _cameraBtn = [UILabel new];
     [_cameraBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
@@ -657,11 +684,11 @@
     _stepBtn.textAlignment = NSTextAlignmentCenter;
     [bottomView addSubview:_stepBtn];
     
-    UILabel *addLabel = [UILabel new];
-    addLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    addLabel.text = @"步骤";
-    addLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:addLabel];
+    UILabel *stepLabel = [UILabel new];
+    stepLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    stepLabel.text = @"步骤";
+    stepLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:stepLabel];
     
     _formBtn = [UILabel new];
     [_formBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
@@ -676,18 +703,18 @@
     formLabel.textColor = [UIColor blackColor];
     [bottomView addSubview:formLabel];
     
-    _saveBtn = [UILabel new];
-    [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _saveBtn.text = @"";
-    _saveBtn.textAlignment = NSTextAlignmentCenter;
-    _saveBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_saveBtn];
+    _refreshBtn = [UILabel new];
+    [_refreshBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    _refreshBtn.text = @"";
+    _refreshBtn.textAlignment = NSTextAlignmentCenter;
+    _refreshBtn.textColor = [UIColor nameColor];
+    [bottomView addSubview:_refreshBtn];
     
-    UILabel *saveLabel = [UILabel new];
-    saveLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    saveLabel.text = @"保存";
-    saveLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:saveLabel];
+    UILabel *refreshLabel = [UILabel new];
+    refreshLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    refreshLabel.text = @"刷新";
+    refreshLabel.textColor = [UIColor blackColor];
+    [bottomView addSubview:refreshLabel];
     
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
@@ -703,10 +730,23 @@
         make.right.equalTo(bottomView.mas_right).with.offset(0);
         make.height.mas_equalTo(kLineHeight);
     }];
-    
-    [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_inventoryBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(bottomView).with.offset(0);
         make.top.equalTo(bottomView.mas_top).offset(3);
+    }];
+    [inventoryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_inventoryBtn.mas_bottom);
+        make.centerX.equalTo(_inventoryBtn.mas_centerX);
+    }];
+    [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(_inventoryBtn.mas_right).with.offset(0);
+        make.width.equalTo(_inventoryBtn);
+        make.top.equalTo(bottomView.mas_top).offset(3);
+    }];
+    
+    [stepLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_stepBtn.mas_bottom);
+        make.centerX.equalTo(_stepBtn.mas_centerX);
     }];
     
     [formLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -719,10 +759,7 @@
         make.left.equalTo(_stepBtn.mas_right);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-    [addLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_stepBtn.mas_bottom);
-        make.centerX.equalTo(_stepBtn.mas_centerX);
-    }];
+
     
     [_cameraBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.width.equalTo(_stepBtn);
@@ -735,12 +772,12 @@
         make.centerX.equalTo(_cameraBtn.mas_centerX);
     }];
     
-    [saveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_saveBtn.mas_bottom);
-        make.centerX.equalTo(_saveBtn.mas_centerX);
+    [refreshLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_refreshBtn.mas_bottom);
+        make.centerX.equalTo(_refreshBtn.mas_centerX);
     }];
     
-    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_refreshBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.width.equalTo(_cameraBtn);
         make.left.equalTo(_cameraBtn.mas_right);
         make.right.equalTo(bottomView);

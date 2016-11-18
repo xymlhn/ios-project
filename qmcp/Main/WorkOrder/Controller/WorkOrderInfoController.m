@@ -224,7 +224,7 @@
         }
     }
     WorkOrderFormsController *info =[WorkOrderFormsController new];
-    info.workOrderCode = _workOrderCode;;
+    info.code = _workOrder.salesOrderSnapshot.code;;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }

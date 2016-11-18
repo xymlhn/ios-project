@@ -12,5 +12,5 @@
 @interface WorkOrderFormController : BaseViewController
 
 @property (nonatomic,copy)NSString *formTemplateId;
-@property(nonatomic, copy) NSString *workOrderCode;
+@property(nonatomic, copy) NSString *code;
 @end

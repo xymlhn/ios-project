@@ -13,6 +13,7 @@
 #import "InventoryManager.h"
 #import "InventoryController.h"
 #import "WorkOrderStepController.h"
+#import "WorkOrderFormsController.h"
 #import "YCXMenu.h"
 @interface SalesOrderInfoController ()
 
@@ -97,6 +98,12 @@
     
     _salesOrderInfoView.qrCodeBtn.userInteractionEnabled = YES;
     [_salesOrderInfoView.qrCodeBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrCodeBtnClick:)]];
+    
+    _salesOrderInfoView.refreshBtn.userInteractionEnabled = YES;
+    [_salesOrderInfoView.refreshBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshBtnClick:)]];
+    
+    _salesOrderInfoView.inventoryBtn.userInteractionEnabled = YES;
+    [_salesOrderInfoView.inventoryBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inventoryBtnClick:)]];
     
 }
 
@@ -226,35 +233,13 @@
 }
 
 #pragma mark - IBAction
--(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
+-(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    WorkOrderStepController *info = [WorkOrderStepController new];
-    info.code = _code;
-    info.funcType = FuncTypeSalesOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
+   
 
-- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    WorkOrderCameraController *info =[WorkOrderCameraController new];
-    info.code = _code;
-    info.funcType = FuncTypeSalesOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
 }
-- (void)formBtnClick:(UITapGestureRecognizer *)recognizer
+-(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer
 {
-//    if(__salesOrder.type == _salesOrderTypeOnsite){
-//        if(__salesOrder.onSiteStatus != OnSiteStatusArrived){
-//            return;
-//        }
-//    }
-//    _salesOrderFormsController *info =[_salesOrderFormsController new];
-//    info._salesOrderCode = [super _salesOrderCode];
-//    info.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:info animated:YES];
-    
     [InventoryManager getInstance].currentSalesOrderCode = _code;
     SalesOrderSearchResult *ssr = [[InventoryManager getInstance] salesOrderChangeToSearchResult:_salesOrder];
     __weak typeof(self) weakSelf = self;
@@ -282,7 +267,36 @@
         }
         
     }];
+}
 
+-(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
+{
+    WorkOrderStepController *info = [WorkOrderStepController new];
+    info.code = _code;
+    info.funcType = FuncTypeSalesOrder;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
+
+- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
+{
+    WorkOrderCameraController *info =[WorkOrderCameraController new];
+    info.code = _code;
+    info.funcType = FuncTypeSalesOrder;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
+- (void)formBtnClick:(UITapGestureRecognizer *)recognizer
+{
+    if(_salesOrder.type == SalesOrderTypeOnsite){
+        if(_salesOrder.onSiteStatus != OnSiteStatusArrived){
+            return;
+        }
+    }
+    WorkOrderFormsController *info = [WorkOrderFormsController new];
+    info.code = _code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
 }
 
 

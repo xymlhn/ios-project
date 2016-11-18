@@ -9,21 +9,28 @@
 #ifndef iosapp_QMCPAPI_h
 #define iosapp_QMCPAPI_h
 
-//#define QMCPAPI_ADDRESS             @"http://192.168.13.25:8080/"
-//#define QMCPAPI_ADDRESS             @"http://inforshare.vicp.cc:8000/"
-#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
+#define QMCPAPI_ADDRESS             @"http://192.168.13.25:8080/"
+//#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
 
+//*********************基础接口*******************//
+//登录
 #define QMCPAPI_LOGIN                    @"api/login"
+//登出
 #define QMCPAPI_LOGOUT                   @"api/logout"
+//提交个推id
 #define QMCPAPI_GETUI                    @"i/a/api/push/id"
 #define QMCPAPI_SERVER_TIME              @"a/api/servertime"
 #define QMCPAPI_NICKNAME                 @"i/a/api/user/nickname"
-#define QMCPAPI_PUSHID                   @"i/a/api/push/id/"
 #define QMCPAPI_ATTACHMENT               @"i/a/api/attachment/"
+//上班
 #define QMCPAPI_ISONWORK                 @"i/a/api/isonwork"
+//gps
 #define QMCPAPI_LOCATION                 @"i/a/api/gis/location/"
+//获取图片url
 #define QMCPAPI_IMAGEURL                 @"i/a/api/attachment/get"
+//用户头像
 #define QMCPAPI_USERICONURL              @"i/a/api/user/info/portrait/"
+//帮助
 #define QMCPAPI_MANUAL                   @"api/appoperationmanual"
 
 #define QMCPAPI_COMMODITYITEM            @"i/a/api/commodity/item?lastUpdateTime="
@@ -52,7 +59,11 @@
 
 
 //*********************清点接口*******************//
+//提交清点数据
 #define QMCPAPI_POSTINVENTORY   @"i/a/api/salesorder/item/"
+//搜索清点订单
+#define QMCPAPI_SALESORDERSEARCH         @"i/a/api/salesorder/check"
+#define QMCPAPI_SALESORDERITEM           @"i/a/api/salesorder/commodityItem/"
 
 //*********************摄像头接口*******************//
 //获取当前账号所有摄像头
@@ -79,16 +90,17 @@
 #define QMCPAPI_SALESORDERCOMPLETE       @"i/a/api/salesorder/complete/"
 //商家下单
 #define QMCPAPI_BUSINESSSALESORDER       @"/i/a/api/salesorder/create"
-//搜索清点订单
-#define QMCPAPI_SALESORDERSEARCH         @"i/a/api/salesorder/check"
-#define QMCPAPI_SALESORDERITEM           @"i/a/api/salesorder/commodityItem/"
 //提交订单步骤
 #define QMCPAPI_POSTSALESORDERSTEP       @"i/a/api/salesorder/"
 
 //*********************表单接口*******************//
+//获取表单模板
 #define QMCPAPI_FORMTEMPLATE             @"i/a/api/salesorder/form/template?salesOrderCode="
+//获取表单数据
 #define QMCPAPI_FORMDATA                 @"i/a/api/salesorder/form/data?salesOrderCode="
+//提交表单数据
 #define QMCPAPI_SAVE_FORMDATA            @"i/a/api/salesorder/form/data"
+//删除表单数据
 #define QMCPAPI_DELETE_FORMDATA          @"i/a/api/salesorder/form/data/"
 
 

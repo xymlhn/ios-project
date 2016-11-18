@@ -15,8 +15,7 @@
 #import "ActionSheetPicker.h"
 
 @interface WorkOrderFormsController ()<UICollectionViewDelegate,UICollectionViewDataSource>
-@property (nonatomic, strong) UICollectionView *collectionView;;
-@property (nonatomic, copy) WorkOrder *workOrder;
+@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray<FormTemplateBrife *> * workOrderFormList;
 @end
 
@@ -49,14 +48,13 @@
 
 -(void)loadData
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
-    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
+
     _workOrderFormList = [NSMutableArray new];
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在获取表单数据";
     hub.userInteractionEnabled = NO;
-    [[FormManager getInstance] getFormTemplateAndFormData:_workOrder.salesOrderSnapshot.code finishBlock:^(NSMutableArray *arr, NSString *error) {
+    [[FormManager getInstance] getFormTemplateAndFormData:_code finishBlock:^(NSMutableArray *arr, NSString *error) {
         if (error == nil) {
             
             _workOrderFormList = arr;
@@ -107,7 +105,7 @@
 {
     FormTemplateBrife *formTemplateBrife = _workOrderFormList[indexPath.row];
     WorkOrderFormController *info =[WorkOrderFormController new];
-    info.workOrderCode = _workOrderCode;
+    info.code = _code;
     info.formTemplateId = formTemplateBrife.formTemplateCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];

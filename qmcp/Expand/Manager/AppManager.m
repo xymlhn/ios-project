@@ -129,7 +129,7 @@ NSString *const kUserCache = @"user";
 -(void) pushId:(NSString *)pushId
 {
     NSDictionary *dict = @{@"pushId":pushId};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_PUSHID];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_GETUI];
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (error == nil) {
             NSLog(@"success");

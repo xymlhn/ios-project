@@ -588,7 +588,7 @@
 		240EC8FC1D7FB234008A5696 /* Expand(扩展) */ = {
 			isa = PBXGroup;
 			children = (
-				24AFD7F31D92339200B2F1B9 /* Application */,
+				24AFD7F31D92339200B2F1B9 /* Application(系统) */,
 				24AFD7F01D92337300B2F1B9 /* Resources(资源) */,
 				240EC9691D7FB2DC008A5696 /* Base(基类) */,
 				240EC8FD1D7FB2B7008A5696 /* Categories(分类) */,
@@ -939,7 +939,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		24AFD7F31D92339200B2F1B9 /* Application */ = {
+		24AFD7F31D92339200B2F1B9 /* Application(系统) */ = {
 			isa = PBXGroup;
 			children = (
 				24AFD7F41D92339200B2F1B9 /* AppDelegate.h */,
@@ -947,6 +947,7 @@
 				24AFD7F61D92339200B2F1B9 /* PchHeader.h */,
 				24AFD7F71D92339200B2F1B9 /* QMCPAPI.h */,
 			);
+			name = "Application(系统)";
 			path = Application;
 			sourceTree = "<group>";
 		};

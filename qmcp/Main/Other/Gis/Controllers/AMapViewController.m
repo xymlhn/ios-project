@@ -21,7 +21,6 @@
 
 @property (nonatomic,strong)MAMapView *mapView;
 @property (nonatomic,strong)AMapLocationManager *locationManager;
-@property (nonatomic,strong) NSMutableArray<GisLocation *> *gisLocationArray;
 
 @end
 
@@ -36,7 +35,6 @@
     _mapView.showsUserLocation = YES;    //YES 为打开定位，NO为关闭定位
     _mapView.userTrackingMode = MAUserTrackingModeFollow;
     _mapView.pausesLocationUpdatesAutomatically = NO;
-    _mapView.allowsBackgroundLocationUpdates = YES;//iOS9以上系统必须配置
     [_mapView setZoomLevel:16.1 animated:YES];
     [self.view addSubview:_mapView];
 
@@ -45,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _gisLocationArray = [NSMutableArray new];
+    
     self.locationManager = [[AMapLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
@@ -68,25 +66,10 @@
 
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
 {
-    GisLocation *tempLocation = [GisLocation new];
-    tempLocation.lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-    tempLocation.lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
-    tempLocation.recTime = [Utils formatDate:[NSDate new]];
-    [_gisLocationArray addObject:tempLocation];
-    [self sendLocation];
+   
 
 }
 
--(void)sendLocation{
-    __weak typeof(self) weakSelf = self;
 
-    NSArray *array= [GisLocation mj_keyValuesArrayWithObjectArray:_gisLocationArray];
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOCATION];
-    [HttpUtil post:URLString param:array finish:^(NSDictionary *obj, NSString *error) {
-        if (!error) {
-            [weakSelf.gisLocationArray removeAllObjects];
-        }
-    }];
-}
 
 @end

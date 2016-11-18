@@ -19,9 +19,16 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import "WorkOrderManager.h"
 
+//release个推
 #define kGtAppId           @"dLHszaMpIBAyRlw6rszPh6"
 #define kGtAppKey          @"EjKuxC6UEr6giWA4E8LYVA"
 #define kGtAppSecret       @"k3omeDKdwa6Ggzvnm8ziW9"
+
+//debug个推
+//#define kGtAppId           @"yxTFMPHTpv6T8rfKta9SX8"
+//#define kGtAppKey          @"kefJFWJynJ8WEB92REUqu5"
+//#define kGtAppSecret       @"w06kLRipvH9dZqKaCR7E25"
+
 #define kAMapKey           @"7a4c3ed3ea57b1213553024955a50a10"
 const static int databaseVersion = 0;
 @interface AppDelegate ()
@@ -133,22 +140,22 @@ const static int databaseVersion = 0;
     [GeTuiSdk resume];
     completionHandler(UIBackgroundFetchResultNewData);
 }
+
+
+/** SDK遇到错误回调 */
+- (void)GeTuiSdkDidOccurError:(NSError *)error {
+    [Utils showHudTipStr:[error localizedDescription]];
+}
+
 /** SDK启动成功返回cid */
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId {
     NSLog(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
     NSDictionary *dict = @{@"pushId":clientId};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_GETUI];
     [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *dict, NSString *error) {
-        if (error) {
-            NSLog(@"%@",error);
-        }
+        
     }];
     
-}
-
-/** SDK遇到错误回调 */
-- (void)GeTuiSdkDidOccurError:(NSError *)error {
-    [Utils showHudTipStr:[error localizedDescription]];
 }
 
 /** SDK收到透传消息回调 */
@@ -190,7 +197,12 @@ const static int databaseVersion = 0;
      **/
     [GeTuiSdk sendFeedbackMessage:90001 andTaskId:taskId andMsgId:msgId];
 }
-
+/** APP已经接收到“远程”通知(推送) - 透传推送消息  */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+    // 处理APNs代码，通过userInfo可以取到推送的信息（包括内容，角标，自定义参数等）。如果需要弹窗等其他操作，则需要自行编码。
+    NSLog(@"\n>>>[Receive RemoteNotification - Background Fetch]:%@\n\n",userInfo);
+    completionHandler(UIBackgroundFetchResultNewData);
+}
 -(void)p_updateDataBase{
     LKDBHelper* globalHelper = [WorkOrder getUsingLKDBHelper];
     [globalHelper dropAllTable];

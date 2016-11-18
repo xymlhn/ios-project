@@ -49,7 +49,7 @@ NSString * const kCommodityStep = @"commodityStep";
     #ifdef DEBUG
         [userDefaults setObject:password ?: @"" forKey:kService];
     #else
-        [SAMKeychain setPassword:password ?: @"" forService:kService account:account];
+        [SAMKeychain setPassword:password ?: @"" forService:kService account:name];
     #endif
     [userDefaults synchronize];
 }

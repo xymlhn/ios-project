@@ -174,12 +174,22 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_WORKORDER,code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
-            WorkOrder *workOrder = [WorkOrder mj_objectWithKeyValues:obj];
-            [workOrder saveToDB];
+            WorkOrder *order = [WorkOrder mj_objectWithKeyValues:obj];
+            order.salesOrderSnapshot.addressSnapshot.code = order.code;
+            [order.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
+                css.code = [NSUUID UUID].UUIDString;
+            }];
+            order.userId = [[AppManager getInstance] getUser].userOpenId;
+            [order saveToDB];
             [self sortAllWorkOrder];
         }
     }];
     
+}
+
+-(BOOL)deleteWorkOrderByCode:(NSString *)code{
+    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",code];
+    return [WorkOrder deleteWithWhere:workWhere];
 }
 
 -(void)postAttachment:(Attachment *)attachment

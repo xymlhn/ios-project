@@ -11,9 +11,9 @@
 @interface WorkOrderStepEditController : BaseViewController
 
 @property (copy, nonatomic) void(^doneBlock)(WorkOrderStep *step,SaveType type);
-@property(nonatomic, copy) NSString *workOrderCode;
-@property(nonatomic, copy) NSString *workOrderStepCode;
+@property(nonatomic, copy) NSString *code;
+@property(nonatomic, copy) NSString *stepCode;
 @property (nonatomic, assign) SaveType type;
-
+@property (nonatomic, assign) FuncType funcType;
 + (instancetype) doneBlock:(void(^)(WorkOrderStep *step,SaveType type))block;
 @end

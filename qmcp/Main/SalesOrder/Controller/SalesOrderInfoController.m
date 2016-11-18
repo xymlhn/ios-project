@@ -9,11 +9,11 @@
 #import "SalesOrderInfoController.h"
 #import "SalesOrderInfoView.h"
 #import "QrCodeIdentityController.h"
-#import "SalesOrderCameraController.h"
-#import "SalesOrderStepController.h"
+#import "WorkOrderCameraController.h"
 #import "InventoryManager.h"
 #import "InventoryController.h"
-#import "SalesOrderStepController.h"
+#import "WorkOrderStepController.h"
+#import "YCXMenu.h"
 @interface SalesOrderInfoController ()
 
 @property (nonatomic, retain) SalesOrderInfoView *salesOrderInfoView;
@@ -31,6 +31,19 @@
     
 }
 
+-(void)onClickLeftButton{
+    [YCXMenu setTintColor:[UIColor blackColor]];
+    
+    [YCXMenu setSelectedColor:[UIColor redColor]];
+    if ([YCXMenu isShow]){
+        [YCXMenu dismissMenu];
+    } else {
+        NSArray *menuItems = @[[YCXMenuItem menuItem:@"完结订单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(completeClick)]];
+        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 0, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
+            NSLog(@"%@",item);
+        }];
+    }
+}
 -(void)loadView{
     
     _salesOrderInfoView = [SalesOrderInfoView new];
@@ -38,40 +51,34 @@
     self.title = @"订单详细";
 }
 
+-(void)setupView{
+    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_add"]
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self action:@selector(onClickLeftButton)];
+}
 
 -(void)bindListener{
-    
     _salesOrderInfoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        switch (_salesOrder.type) {
-            case SalesOrderTypeOnsite:
-                switch (_salesOrder.onSiteStatus) {
-                    case OnSiteStatusWaiting:
-                        [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
-                        break;
-                    case OnSiteStatusNotDepart:
-                        [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
-                        
-                        break;
-                    case OnSiteStatusOnRoute:
-                        [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
-                        break;
-                        
-                    default:
-                        [self showOkayCancelAlert];
-                        break;
-                }
+        
+        switch (_salesOrder.onSiteStatus) {
+            case OnSiteStatusNone:
+            case OnSiteStatusNotDepart:
+            case OnSiteStatusWaiting:
+                [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                 break;
-            case SalesOrderTypeShop:
-                [self showOkayCancelAlert];
-                break;
-            case SalesOrderTypeRemote:
-                [self showOkayCancelAlert];
+            case OnSiteStatusOnRoute:
+                [self p_updateTimeStampWithCode:_code andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                 break;
             default:
                 break;
         }
+        
         return [RACSignal empty];
     }];
+}
+
+-(void)completeClick{
+   [self showOkayCancelAlert];
 }
 
 -(void)loadData{
@@ -103,37 +110,33 @@
     _salesOrderInfoView.passwordText.text = salesOrder.addressSnapshot.mobilePhone;
     _salesOrderInfoView.userNameText.text = salesOrder.addressSnapshot.contacts;
     _salesOrderInfoView.codeContent.text = salesOrder.code;
-    NSString *title;
-   
     _salesOrderInfoView.typeText.text = [EnumUtil salesOrderTypeString:salesOrder.type];
     switch (salesOrder.type) {
         case SalesOrderTypeOnsite:
             switch (_salesOrder.onSiteStatus) {
+                case OnSiteStatusNone:
                 case OnSiteStatusWaiting:
-                    title = @"接收";
-                    break;
                 case OnSiteStatusNotDepart:
-                    title = @"出发";
+                    [_salesOrderInfoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
                     break;
                 case OnSiteStatusOnRoute:
-                    title = @"到达";
+                    [_salesOrderInfoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
                     break;
                 default:
-                    title = @"完成订单";
+                    [_salesOrderInfoView.starBtn setHidden:YES];
                     break;
             }
             
             break;
         case SalesOrderTypeShop:
-            title = @"完成订单";
+            [_salesOrderInfoView.starBtn setHidden:YES];
             break;
         case SalesOrderTypeRemote:
-            title = @"完成订单";
+            [_salesOrderInfoView.starBtn setHidden:YES];
             break;
         default:
             break;
     }
-    [_salesOrderInfoView.starBtn setTitle:title forState:UIControlStateNormal];
     
 }
 
@@ -144,32 +147,26 @@
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,_code];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDER_TIMESTAMP,_code];
     [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
             switch (weakSelf.salesOrder.onSiteStatus) {
+                case OnSiteStatusNone:
                 case OnSiteStatusWaiting:
-                    [weakSelf.salesOrderInfoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    weakSelf.salesOrder.onSiteStatus = OnSiteStatusNotDepart;
-                    [weakSelf.salesOrder saveToDB];
-                    break;
                 case OnSiteStatusNotDepart:
                     [weakSelf.salesOrderInfoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
                     weakSelf.salesOrder.onSiteStatus = OnSiteStatusOnRoute;
                     [weakSelf.salesOrder saveToDB];
                     break;
                 case OnSiteStatusOnRoute:
-                    [weakSelf.salesOrderInfoView.starBtn setTitle:@"完结" forState:UIControlStateNormal];
+                    [weakSelf.salesOrderInfoView.starBtn setHidden:YES];
                     weakSelf.salesOrder.onSiteStatus = OnSiteStatusArrived;
                     [weakSelf.salesOrder saveToDB];
                     [self loadData];
                     break;
                 default:
-                    [weakSelf.salesOrderInfoView.starBtn setTitle:@"完结" forState:UIControlStateNormal];
-                    weakSelf.salesOrder.onSiteStatus = OnSiteStatusArrived;
-                    [weakSelf.salesOrder saveToDB];
                     break;
             }
         }else{
@@ -231,16 +228,18 @@
 #pragma mark - IBAction
 -(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    SalesOrderStepController *info = [SalesOrderStepController new];
+    WorkOrderStepController *info = [WorkOrderStepController new];
     info.code = _code;
+    info.funcType = FuncTypeSalesOrder;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
 
 - (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    SalesOrderCameraController *info =[SalesOrderCameraController new];
+    WorkOrderCameraController *info =[WorkOrderCameraController new];
     info.code = _code;
+    info.funcType = FuncTypeSalesOrder;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }

@@ -15,6 +15,7 @@
 
 #define QMCPAPI_LOGIN                    @"api/login"
 #define QMCPAPI_LOGOUT                   @"api/logout"
+#define QMCPAPI_GETUI                    @"i/a/api/push/id"
 #define QMCPAPI_SERVER_TIME              @"a/api/servertime"
 #define QMCPAPI_NICKNAME                 @"i/a/api/user/nickname"
 #define QMCPAPI_PUSHID                   @"i/a/api/push/id/"
@@ -55,13 +56,13 @@
 
 //*********************摄像头接口*******************//
 //获取当前账号所有摄像头
-#define QMCPAPI_ALL_CAMERA               @"i/a/api/camera/"
+#define QMCPAPI_ALL_CAMERA                         @"i/a/api/camera/"
 //获取当前工单已开摄像头
-#define QMCPAPI_CURRENT_CAMERA           @"i/a/api/camera/workorder/"
+#define QMCPAPI_WORKORDER_CURRENT_CAMERA           @"i/a/api/camera/workorder/"
+//获取当前顶单已开摄像头
+#define QMCPAPI_SALESORDER_CURRENT_CAMERA           @"i/a/api/camera/salesorder/"
 //切换工单摄像头
-#define QMCPAPI_CAMERA_SWITCH            @"i/a/api/camera/switch/workorder/"
-//获取当前工单已开摄像头
-#define QMCPAPI_CURRENT_SALESORDER_CAMERA           @"i/a/api/camera/salesorder/"
+#define QMCPAPI_CAMERA_WORKORDER_SWITCH             @"i/a/api/camera/switch/workorder/"
 //切换订单摄像头
 #define QMCPAPI_CAMERA_SALESORDER_SWITCH            @"i/a/api/camera/switch/salesorder/"
 
@@ -72,6 +73,8 @@
 #define QMCPAPI_SALESORDERCONFIRM        @"i/a/api/salesorder/confirm?lastUpdateTime="
 //接单
 #define QMCPAPI_SALESORDERGRAB           @"i/a/api/salesorder/confirm/"
+//订单时间戳
+#define QMCPAPI_SALESORDER_TIMESTAMP     @"i/a/api/salesorder/timestamp/"
 //完成订单
 #define QMCPAPI_SALESORDERCOMPLETE       @"i/a/api/salesorder/complete/"
 //商家下单
@@ -79,6 +82,7 @@
 //搜索清点订单
 #define QMCPAPI_SALESORDERSEARCH         @"i/a/api/salesorder/check"
 #define QMCPAPI_SALESORDERITEM           @"i/a/api/salesorder/commodityItem/"
+//提交订单步骤
 #define QMCPAPI_POSTSALESORDERSTEP       @"i/a/api/salesorder/"
 
 //*********************表单接口*******************//

@@ -142,14 +142,12 @@
 
     viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_add"]
                                                                                         style:UIBarButtonItemStylePlain
-                                                                                       target:self action:@selector(onClickSearchButton)];
+                                                                                       target:self action:@selector(onClickMainLeftButton)];
     return navigationController;
 }
 
-//TODO: 搜索系统
--(void)onClickSearchButton{
-//    SearchViewController *info = [SearchViewController new];
-//    [self setContentViewController:info];
+
+-(void)onClickMainLeftButton{
 
     [YCXMenu setTintColor:[UIColor blackColor]];
 

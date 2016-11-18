@@ -18,6 +18,7 @@
 #import "CommodityStepController.h"
 #import "CommoditySnapshot.h"
 #import "Helper.h"
+#import "SalesOrder.h"
 @interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,
                                             UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
 
@@ -27,7 +28,7 @@
 @property (nonatomic, strong) WorkOrderStepEditView *editView;
 @property (nonatomic, strong) NSMutableArray *dataArray;//数据
 @property (nonatomic, strong) Attachment *plusIcon;
-
+@property (nonatomic, strong) SalesOrder *salesOrder;
 
 @end
 
@@ -43,9 +44,15 @@
 
 -(void)loadData
 {
-    NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
-    _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
-    NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",_workOrderStepCode];
+    if(_funcType == FuncTypeWorkOrder){
+        NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_code];
+        _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
+    }else{
+        NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_code];
+        _salesOrder = [SalesOrder searchSingleWithWhere:workWhere orderBy:nil];
+    }
+    
+    NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",_stepCode];
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
 
     _attachments = [NSMutableArray new];
@@ -145,20 +152,83 @@
 #pragma mark - IBAction
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
-    NSArray *steps = [WorkOrderStep searchWithWhere:where];
-    [self p_postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
+    if(_funcType == FuncTypeWorkOrder){
+        NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_code];
+        NSArray *steps = [WorkOrderStep searchWithWhere:where];
+        [self p_postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
+    }else{
+        NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_code];
+        NSArray *steps = [WorkOrderStep searchWithWhere:where];
+        [self p_postInfo:steps];
+    }
 }
+- (void)p_postInfo:(NSArray *)steps{
+    
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.labelText = @"正在上传步骤";
+    hub.userInteractionEnabled = NO;
+    NSMutableArray *arrayM = [WorkOrderStep mj_keyValuesArrayWithObjectArray:steps];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTSALESORDERSTEP,_code];
+    [HttpUtil post:URLString param:arrayM finish:^(NSDictionary *obj, NSString *error) {
+        if (!error) {
+            NSMutableArray *attachments = [NSMutableArray new];
+            for (WorkOrderStep *step in steps) {
+                for(Attachment *attachment in step.attachments)
+                {
+                    if(!attachment.isUpload){
+                        [attachments addObject:attachment];
+                    }
+                }
+            }
+            if(attachments.count > 0){
+                int i= 0;
+                for(Attachment *attachment in attachments)
+                {
+                    i++;
+                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
+                    [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
+                        if (!error) {
+                            attachment.isUpload = YES;
+                            [attachment updateToDB];
+                            if(i == attachments.count)
+                            {
+                                hub.labelText = [NSString stringWithFormat:@"上传附件成功"];
+                                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                            }
+                        }else{
+                            hub.mode = MBProgressHUDModeCustomView;
+                            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                            hub.labelText = error;
+                            [hub hide:YES afterDelay:kEndFailedDelayTime];
+                        }
+                    }];
+                }
+            }else
+            {
+                hub.labelText = [NSString stringWithFormat:@"上传步骤成功"];
+                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            }
+        }else{
+            
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.labelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            
+        }
+        
+    }];
+    
+}
+
 - (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepsArray:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在上传工单步骤";
     hub.userInteractionEnabled = NO;
-    NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
-    NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,workOrder];
-    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
+    NSMutableArray *arrayM = [WorkOrderStep mj_keyValuesArrayWithObjectArray:steps];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,_code];
+    [HttpUtil post:URLString param:arrayM finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (WorkOrderStep *step in steps) {
@@ -283,7 +353,7 @@
     [picker dismissViewControllerAnimated:YES completion:^ {
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
-        attachment.workOrderStepCode = _workOrderStepCode;
+        attachment.workOrderStepCode = _stepCode;
         attachment.sort = 20;
         attachment.type = 10;
         NSString *type = [info objectForKey:UIImagePickerControllerMediaType];

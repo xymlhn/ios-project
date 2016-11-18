@@ -20,47 +20,20 @@ extern NSString *const kCameraNotification;
  */
 -(void)getAllSystemCamera;
 
-/**
- *  获取当前工单摄像头
- *
- *  @param workOrderCode 工单code
- */
--(void)getCurrentCameraByWorkOrderCode:(NSString *)workOrderCode
-                           finishBlock:(CompletionHandler)completion;
 
 /**
- *  切换当前工单摄像头
+ *  切换当前摄像头
  *
  *  @param workOrderCode 工单code
  *  @param cameraCode    摄像头code
  *  @param ison          开关状态
  */
--(void)switchCameraByWorkOrderCode:(NSString *)workOrderCode
+-(void)switchCameraByCode:(NSString *)code
                     withCameraCode:(NSString *)cameraCode
+                       andFuncType:(FuncType)funcType
                       cameraStatus:(bool)isOn
                        finishBlock:(CompletionHandler)completion;
 
-
-/**
- 获取当前订单摄像头
-
- @param code       订单code
- @param completion 回调
- */
--(void)getCurrentCameraBySalesOrderCode:(NSString *)code
-                            finishBlock:(CompletionHandler)completion;
-
-/**
- *  切换当前订单摄像头
- *
- *  @param workOrderCode 订单code
- *  @param cameraCode    摄像头code
- *  @param ison          开关状态
- */
--(void)switchCameraBySalesOrderCode:(NSString *)workOrderCode
-                    withCameraCode:(NSString *)cameraCode
-                      cameraStatus:(bool)isOn
-                       finishBlock:(CompletionHandler)completion;
 
 /**
  *  获取当前门店所有摄像头

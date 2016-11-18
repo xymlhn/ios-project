@@ -11,6 +11,12 @@ typedef NS_ENUM(NSInteger, SaveType) {
     SaveTypeUpdate = 30,
 };
 
+typedef NS_ENUM(NSInteger, FuncType) {
+    FuncTypeWorkOrder = 10,
+    FuncTypeSalesOrder = 20,
+
+};
+
 typedef NS_ENUM(NSInteger, ExceptionType) {
     ExceptionTypeNone = 0,
     ExceptionTypeNotLogin = 10,

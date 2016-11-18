@@ -11,5 +11,6 @@
 
 @interface WorkOrderStepController : BaseViewController
 
-@property(nonatomic, copy) NSString *workOrderCode;
+@property(nonatomic, copy) NSString *code;
+@property (nonatomic, assign) FuncType funcType;
 @end

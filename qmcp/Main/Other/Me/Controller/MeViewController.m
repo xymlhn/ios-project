@@ -58,7 +58,7 @@
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.labelText = [NSString stringWithFormat:@"登出成功"];
             [hub hide:YES];
-            [[AppManager getInstance]clearUserDataWhenLogout];
+            [[AppManager getInstance] clearUserDataWhenLogout];
             LoginViewController *loginNav = [LoginViewController new];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
             [self presentViewController:nav animated:YES completion:nil];

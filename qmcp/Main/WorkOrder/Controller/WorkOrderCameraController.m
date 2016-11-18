@@ -49,11 +49,19 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在获取摄像头";
     hub.userInteractionEnabled = NO;
-    [[CameraManager getInstance] getCurrentCameraByWorkOrderCode:_workOrderCode finishBlock:^(NSDictionary *obj, NSString *error) {
+
+    NSString *URLString;
+    if (_funcType == FuncTypeWorkOrder) {
+        URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_WORKORDER_CURRENT_CAMERA,_code];
+    }else{
+        URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDER_CURRENT_CAMERA,_code];
+    }
+    
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             if(!obj){
                 hub.mode = MBProgressHUDModeCustomView;
-                hub.labelText = @"当前工单没有设置摄像头";
+                hub.labelText = @"还未设置摄像头";
                 [hub hide:YES afterDelay:kEndFailedDelayTime];
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
@@ -116,9 +124,10 @@
         MBProgressHUD *hub = [Utils createHUD];
         hub.labelText = @"打开摄像头中...";
         hub.userInteractionEnabled = NO;
-        [[CameraManager getInstance] switchCameraByWorkOrderCode:_workOrderCode withCameraCode:cameraData.cameraCode cameraStatus:YES finishBlock:^(NSDictionary *obj, NSString *error) {
+        
+        [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:cameraData.cameraCode andFuncType:_funcType cameraStatus:YES finishBlock:^(NSDictionary *dict, NSString *error) {
             if (!error) {
-                CameraData *data = [CameraData mj_objectWithKeyValues:obj];
+                CameraData *data = [CameraData mj_objectWithKeyValues:dict];
                 for(CameraData *cameraData in _cameraArr){
                     if([cameraData.cameraCode isEqualToString:data.cameraCode]){
                         cameraData.isChoose = true;
@@ -139,15 +148,18 @@
                 [hub hide:YES afterDelay:kEndFailedDelayTime];
             }
         }];
+        
+   
     }else{
         
         if([_currentCamera.cameraCode isEqualToString:cameraData.cameraCode]){
             MBProgressHUD *hub = [Utils createHUD];
             hub.labelText = @"关闭摄像头";
             hub.userInteractionEnabled = NO;
-            [[CameraManager getInstance] switchCameraByWorkOrderCode:_workOrderCode withCameraCode:_currentCamera.cameraCode cameraStatus:NO finishBlock:^(NSDictionary *obj, NSString *error) {
+            
+            [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:_currentCamera.cameraCode andFuncType:_funcType cameraStatus:NO finishBlock:^(NSDictionary *dict, NSString *error) {
                 if (!error) {
-                    CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
+                    CameraData *currentCamera = [CameraData mj_objectWithKeyValues:dict];
                     for(CameraData *cameraData in _cameraArr){
                         if([cameraData.cameraCode isEqualToString:currentCamera.cameraCode]){
                             cameraData.isChoose = NO;
@@ -167,6 +179,7 @@
                     hub.labelText = error;
                     [hub hide:YES afterDelay:kEndFailedDelayTime];
                 }
+
             }];
         }else{
             [self.tableView reloadData];

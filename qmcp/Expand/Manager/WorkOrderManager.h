@@ -83,6 +83,14 @@ extern NSString *const WorkOrderUpdateNotification;
 -(void)getWorkOrderByCode:(NSString *)code;
 
 /**
+ 根据工单code，删除工单
+
+ @param code 
+ @return bool
+ */
+-(BOOL)deleteWorkOrderByCode:(NSString *)code;
+
+/**
  *  搜索工单
  *
  *  @param string    字符

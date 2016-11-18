@@ -17,11 +17,12 @@
 #import "IntroductionViewController.h"
 #import "Utils.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import "WorkOrderManager.h"
 
-#define kGtAppId           @"iMahVVxurw6BNr7XSn9EF2"
-#define kGtAppKey          @"yIPfqwq6OMAPp6dkqgLpG5"
-#define kGtAppSecret       @"G0aBqAD6t79JfzTB6Z5lo5"
-#define kAMapKey           @"d69621b023e41d75c2890b727d3ff29c"
+#define kGtAppId           @"dLHszaMpIBAyRlw6rszPh6"
+#define kGtAppKey          @"EjKuxC6UEr6giWA4E8LYVA"
+#define kGtAppSecret       @"k3omeDKdwa6Ggzvnm8ziW9"
+#define kAMapKey           @"7a4c3ed3ea57b1213553024955a50a10"
 const static int databaseVersion = 0;
 @interface AppDelegate ()
 
@@ -39,6 +40,8 @@ const static int databaseVersion = 0;
         [Config setInitSetting];
     }
     [Config setDatabaseVersion:databaseVersion];
+    //个推
+    [self p_initGeTui];
     //高德地图
     [AMapServices sharedServices].apiKey = kAMapKey;
 
@@ -132,14 +135,20 @@ const static int databaseVersion = 0;
 }
 /** SDK启动成功返回cid */
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId {
-    //个推SDK已注册，返回clientId
     NSLog(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
+    NSDictionary *dict = @{@"pushId":clientId};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_GETUI];
+    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *dict, NSString *error) {
+        if (error) {
+            NSLog(@"%@",error);
+        }
+    }];
+    
 }
 
 /** SDK遇到错误回调 */
 - (void)GeTuiSdkDidOccurError:(NSError *)error {
-    //个推错误报告，集成步骤发生的任何错误都在这里通知，如果集成后，无法正常收到消息，查看这里的通知。
-    NSLog(@"\n>>>[GexinSdk error]:%@\n\n", [error localizedDescription]);
+    [Utils showHudTipStr:[error localizedDescription]];
 }
 
 /** SDK收到透传消息回调 */
@@ -151,9 +160,26 @@ const static int databaseVersion = 0;
                                               length:payloadData.length
                                             encoding:NSUTF8StringEncoding];
     }
+    NSLog(@"\n>>>[GexinSdk ReceivePayload]:%@\n\n", payloadMsg);
+    if (payloadMsg != nil && !offLine) {
+        NSArray *array = [payloadMsg componentsSeparatedByString:@" "];
+        if ([[[AppManager getInstance]getUser].userOpenId isEqualToString:array[0]]) {
+            if ([array[1] isEqualToString:@"assign"]) {
+                [[WorkOrderManager getInstance] getWorkOrderByCode:array[2]];
+            }else if ([array[1] isEqualToString:@"unassign"]){
+                BOOL flag = [[WorkOrderManager getInstance] deleteWorkOrderByCode:array[2]];
+                if (flag) {
+                    [[WorkOrderManager getInstance] sortAllWorkOrder];
+                }
+            }else if ([array[1] isEqualToString:@"logout"]){
+                [[AppManager getInstance] clearUserDataWhenLogout];
+                LoginViewController *loginNav = [LoginViewController new];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
+                self.window.rootViewController = nav;
+            }
+        }
+    }
     
-    NSString *msg = [NSString stringWithFormat:@"taskId=%@,messageId:%@,payloadMsg:%@%@",taskId,msgId, payloadMsg,offLine ? @"<离线消息>" : @""];
-    NSLog(@"\n>>>[GexinSdk ReceivePayload]:%@\n\n", msg);
     
     /**
      *汇报个推自定义事件
@@ -179,6 +205,7 @@ const static int databaseVersion = 0;
         self.window.rootViewController= rootNav;
     }else{
         [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
+        [[AppManager getInstance] clearUserDataWhenLogout];
         LoginViewController *loginNav = [LoginViewController new];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
         self.window.rootViewController = nav;

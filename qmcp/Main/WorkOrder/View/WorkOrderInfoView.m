@@ -494,11 +494,11 @@
     
 }
 
+
 -(void)initOnsiteBottomView
 {
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
-    bottomView.userInteractionEnabled = NO;
     [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
@@ -620,7 +620,7 @@
         make.right.equalTo(bottomView);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-
+    
     
 }
 
@@ -628,7 +628,6 @@
 -(void)initServiceBottomView
 {
     UIView *bottomView = [UIView new];
-    bottomView.userInteractionEnabled = NO;
     bottomView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomView];
     
@@ -745,7 +744,7 @@
         make.right.equalTo(bottomView);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-
+    
 }
 
 @end

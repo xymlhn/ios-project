@@ -15,6 +15,7 @@
 #import "WorkOrderCameraController.h"
 #import "WorkOrderStep.h"
 #import "QrCodeIdentityController.h"
+#import "YCXMenu.h"
 @interface WorkOrderInfoController ()
 @property (nonatomic,strong)WorkOrderInfoView *infoView;
 @property (nonatomic,copy)WorkOrder *workOrder;
@@ -32,30 +33,24 @@
     self.title = @"信息";
  
 }
+
+-(void)setupView{
+    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_add"]
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self action:@selector(onClickLeftButton)];
+}
 -(void)bindListener
 {
+    
     _infoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        switch (_workOrder.type) {
-            case WorkOrderTypeOnsite:
-                switch (_workOrder.onSiteStatus) {
-                    case OnSiteStatusWaiting:
-                        [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampAcknowledge andDate:[Utils formatDate:[NSDate new]]];
-                        break;
-                    case OnSiteStatusNotDepart:
-                        [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
-                        
-                        break;
-                    case OnSiteStatusOnRoute:
-                        [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
-                        break;
-
-                    default:
-                        [self showOkayCancelAlert];
-                        break;
-                }
+        switch (_workOrder.onSiteStatus) {
+                case OnSiteStatusNone:
+                case OnSiteStatusNotDepart:
+                case OnSiteStatusWaiting:
+                [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                 break;
-            case WorkOrderTypeService:
-                [self showOkayCancelAlert];
+                case OnSiteStatusOnRoute:
+                [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                 break;
             default:
                 break;
@@ -71,7 +66,6 @@
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
-    _infoView.workOrder = _workOrder;
     [self p_setInfo:_workOrder];
     
     _infoView.stepBtn.userInteractionEnabled = YES;
@@ -85,8 +79,27 @@
     
     _infoView.qrCodeBtn.userInteractionEnabled = YES;
     [_infoView.qrCodeBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrCodeBtnClick:)]];
+    
 }
 
+
+-(void)onClickLeftButton{
+    [YCXMenu setTintColor:[UIColor blackColor]];
+    
+    [YCXMenu setSelectedColor:[UIColor redColor]];
+    if ([YCXMenu isShow]){
+        [YCXMenu dismissMenu];
+    } else {
+        NSArray *menuItems = @[[YCXMenuItem menuItem:@"完结订单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(completeClick)]];
+        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 0, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
+            NSLog(@"%@",item);
+        }];
+    }
+}
+
+-(void)completeClick{
+    [self showOkayCancelAlert];
+}
 
 -(void)p_setInfo:(WorkOrder *)workOrder
 {
@@ -98,40 +111,31 @@
     _infoView.passwordText.text = workOrder.salesOrderSnapshot.addressSnapshot.mobilePhone;
     _infoView.userNameText.text = workOrder.salesOrderSnapshot.addressSnapshot.contacts;
     _infoView.codeContent.text = workOrder.code;
-    NSString *title;
-    if(workOrder.status == WorkOrderStatusCompleted)
-    {
-        title = @"查看";
-    }else{
-         _infoView.typeText.text = [EnumUtil workOrderTypeString:workOrder.type];
-        switch (workOrder.type) {
+    _infoView.workOrder = workOrder;
+    switch (_workOrder.type) {
             case WorkOrderTypeOnsite:
                 switch (_workOrder.onSiteStatus) {
-                    case OnSiteStatusWaiting:
-                        title = @"接收";
+                        case OnSiteStatusNone:
+                        case OnSiteStatusWaiting:
+                        case OnSiteStatusNotDepart:
+                        [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
                         break;
-                    case OnSiteStatusNotDepart:
-                        title = @"出发";
-                        break;
-                    case OnSiteStatusOnRoute:
-                        title = @"到达";
+                        case OnSiteStatusOnRoute:
+                        [_infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
                         break;
                     default:
-                        title = @"完结";
+                        [_infoView.starBtn setHidden:YES];
                         break;
                 }
-
-                break;
+            
+            break;
             case WorkOrderTypeService:
-
-                title = @"完结";
-                
-                break;
-            default:
-                break;
-        }
-        [_infoView.starBtn setTitle:title forState:UIControlStateNormal];
+                [_infoView.starBtn setHidden:YES];
+            break;
+        default:
+            break;
     }
+    
     
 }
 
@@ -156,34 +160,28 @@
             [[WorkOrderManager getInstance] sortAllWorkOrder];
             hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            
             switch (weakSelf.workOrder.onSiteStatus) {
-                case OnSiteStatusWaiting:
-                    [weakSelf.infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    weakSelf.workOrder.onSiteStatus = OnSiteStatusNotDepart;
-                    [weakSelf.workOrder saveToDB];
+                    case OnSiteStatusNone:
+                    case OnSiteStatusWaiting:
+                    case OnSiteStatusNotDepart:
+                        [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
+                        weakSelf.workOrder.onSiteStatus = OnSiteStatusOnRoute;
+                        [weakSelf.workOrder saveToDB];
                     break;
-                case OnSiteStatusNotDepart:
-                    [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                    weakSelf.workOrder.onSiteStatus = OnSiteStatusOnRoute;
-                    [weakSelf.workOrder saveToDB];
-                    break;
-                case OnSiteStatusOnRoute:
-                    [weakSelf.infoView.starBtn setTitle:@"完结" forState:UIControlStateNormal];
-                    weakSelf.workOrder.onSiteStatus = OnSiteStatusArrived;
-                    [weakSelf.workOrder saveToDB];
-                    [self loadData];
+                    case OnSiteStatusOnRoute:
+                        [weakSelf.infoView.starBtn setHidden:YES];
+                        weakSelf.workOrder.onSiteStatus = OnSiteStatusArrived;
+                        [weakSelf.workOrder saveToDB];
+                        [weakSelf loadData];
                     break;
                 default:
-                    [weakSelf.infoView.starBtn setTitle:@"完结" forState:UIControlStateNormal];
-                    weakSelf.workOrder.status = WorkOrderStatusOnSite;
-                    [weakSelf.workOrder saveToDB];
                     break;
             }
         }else{
             weakSelf.workOrder.isFailed = YES;
             [weakSelf.workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
-            
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.labelText = error;
@@ -204,7 +202,8 @@
     }
     
     WorkOrderStepController *info = [WorkOrderStepController new];
-    info.workOrderCode = _workOrderCode;;
+    info.code = _workOrderCode;
+    info.funcType = FuncTypeWorkOrder;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -212,7 +211,8 @@
 - (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
 {
     WorkOrderCameraController *info =[WorkOrderCameraController new];
-    info.workOrderCode = _workOrderCode;;
+    info.code = _workOrderCode;
+    info.funcType = FuncTypeWorkOrder;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }

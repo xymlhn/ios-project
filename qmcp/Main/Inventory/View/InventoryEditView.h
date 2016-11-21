@@ -29,6 +29,7 @@
 @property (nonatomic,strong) UILabel *commodityLabel;
 @property (nonatomic,strong) UIView *commodityView;
 
-
+@property (nonatomic,strong)UIButton *delBtn;
+@property (nonatomic,strong)UIButton *saveBtn;
 + (instancetype)viewInstance;
 @end

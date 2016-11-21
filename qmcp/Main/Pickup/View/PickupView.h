@@ -12,7 +12,7 @@
 @property(nonatomic,strong) UISearchBar *searchBar;
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) UILabel *qrButton;
-@property(nonatomic,strong) UILabel *signButton;
+@property(nonatomic,strong) UIButton *signBtn;
 
 @property(nonatomic,strong) UILabel *codeText;
 @property(nonatomic,strong) UILabel *nameText;

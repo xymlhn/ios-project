@@ -20,8 +20,9 @@
 #import "UITableView+SDAutoTableViewCellHeight.h"
 #import "AppManager.h"
 #import "SalesOrder.h"
+#import "UIScrollView+EmptyDataSet.h"
 #define kTimeLineTableViewCellId @"SDTimeLineCell"
-@interface WorkOrderStepController ()<UITableViewDataSource,UITableViewDelegate>
+@interface WorkOrderStepController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (nonatomic, retain) NSMutableArray<WorkOrderStep *> *workOrderStepList;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -52,7 +53,10 @@
 {
     _stepView.tableView.delegate = self;
     _stepView.tableView.dataSource = self;
-    _stepView.addBtn.userInteractionEnabled = YES;
+    _stepView.tableView.tableHeaderView = [UIView new];
+    _stepView.tableView.tableFooterView = [UIView new];
+    _stepView.tableView.emptyDataSetSource = self;
+    _stepView.tableView.emptyDataSetDelegate = self;
     [_stepView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
 
 }
@@ -90,6 +94,18 @@
     }
     
     return resArr;
+}
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"default－portrait"];
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"请添加步骤";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 #pragma mark - IBAction
 
@@ -171,6 +187,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
     return self.dataArray.count;
 }
 

@@ -23,7 +23,7 @@
     self.backgroundColor = [UIColor whiteColor];
     
     [self initTopView];
-    [self initBottomView];
+    [self setupBottomView];
     
     return self;
     
@@ -177,57 +177,58 @@
     }];
 }
 
--(void)initBottomView
-{
+//底部按钮
+-(void)setupBottomView{
     UIView *bottomView = [UIView new];
-    
+    bottomView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomView];
+    
+    UIView *codeBottomLine = [UIView new];
+    codeBottomLine.backgroundColor = [UIColor lineColor];
+    [bottomView addSubview:codeBottomLine];
+    
+    _delBtn = [UIButton new];
+    [_delBtn.layer setMasksToBounds:YES];
+    [_delBtn.layer setCornerRadius:3.0];
+    [_delBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _delBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
+    [_delBtn setTitle:@"删除" forState:UIControlStateNormal];
+    _delBtn.backgroundColor = [UIColor appBlueColor];
+    [bottomView addSubview:_delBtn];
+    
+    _saveBtn = [UIButton new];
+    [_saveBtn.layer setMasksToBounds:YES];
+    [_saveBtn.layer setCornerRadius:3.0];
+    [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _saveBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
+    [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+    _saveBtn.backgroundColor = [UIColor appBlueColor];
+    [bottomView addSubview:_saveBtn];
+    
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
+        make.height.mas_equalTo(@44);
     }];
-    
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [bottomView addSubview:codeBottomLine];
     [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(bottomView.mas_top).with.offset(0);
         make.left.equalTo(bottomView.mas_left).with.offset(0);
         make.right.equalTo(bottomView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
-    
-    _delBtn = [UILabel new];
-    [_delBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _delBtn.text = @"";
-    _delBtn.textAlignment = NSTextAlignmentCenter;
-    _delBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_delBtn];
-
-
-    _saveBtn = [UILabel new];
-    [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _saveBtn.text = @"";
-    _saveBtn.textAlignment = NSTextAlignmentCenter;
-    _saveBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_saveBtn];
-    
     [_delBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(bottomView.mas_left);
         make.centerY.equalTo(bottomView.mas_centerY);
+        make.left.equalTo(bottomView.mas_left).offset(kPaddingLeftWidth);
+        make.right.equalTo(bottomView.mas_centerX).offset(-kPaddingLeftWidth/2);
+        make.height.equalTo(@30);
     }];
-    
-    
-   
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.right.equalTo(bottomView.mas_right);
-        make.left.equalTo(_delBtn.mas_right);
-        make.width.equalTo(_delBtn);
         make.centerY.equalTo(bottomView.mas_centerY);
-       
+        make.left.equalTo(bottomView.mas_centerX).offset(kPaddingLeftWidth/2);
+        make.right.equalTo(bottomView.mas_right).offset(-kPaddingLeftWidth);
+        make.height.equalTo(@30);
     }];
-    
 }
+
 @end

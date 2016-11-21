@@ -12,8 +12,8 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic,strong)UILabel *addBtn;
-@property (nonatomic,strong)UILabel *signBtn;
+@property (nonatomic,strong)UIButton *addBtn;
+@property (nonatomic,strong)UIButton *signBtn;
 
 + (instancetype)viewInstance;
 @end

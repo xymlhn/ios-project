@@ -21,5 +21,6 @@ target:qmcp do
     pod 'YCXMenu', '~> 0.0.11'
     pod 'SDAutoLayout', '~> 2.1.3'
     pod 'GTSDK'
+    pod 'DZNEmptyDataSet'
     pod 'FLEX', :configurations => ['Debug']
 end

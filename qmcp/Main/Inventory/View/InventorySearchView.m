@@ -33,7 +33,7 @@
     
     _tableView = [UITableView new];
     _tableView.rowHeight = 80;
-    _tableView.backgroundColor = [UIColor themeColor];
+    _tableView.backgroundColor = [UIColor whiteColor];
     [containView addSubview:_tableView];
     
     [_searchBar mas_makeConstraints:^(MASConstraintMaker *make) {

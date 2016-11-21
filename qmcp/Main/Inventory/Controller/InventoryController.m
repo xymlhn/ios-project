@@ -18,7 +18,9 @@
 #import "WorkOrderManager.h"
 #import "SalesOrderSearchResult.h"
 #import "InventoryManager.h"
-@interface InventoryController ()<UITableViewDataSource,UITableViewDelegate>
+#import "UIScrollView+EmptyDataSet.h"
+
+@interface InventoryController ()<UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (nonatomic, strong) NSMutableArray<ItemSnapshot *> *itemSnapshotList;
 @property (nonatomic, strong) InventoryView *inventoryView;
@@ -37,7 +39,10 @@
 -(void)bindListener{
     _inventoryView.tableView.delegate = self;
     _inventoryView.tableView.dataSource = self;
-    
+    _inventoryView.tableView.tableHeaderView = [UIView new];
+    _inventoryView.tableView.tableFooterView = [UIView new];
+    _inventoryView.tableView.emptyDataSetSource = self;
+    _inventoryView.tableView.emptyDataSetDelegate = self;
     _inventoryView.addBtn.userInteractionEnabled = YES;
     [_inventoryView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
 
@@ -50,7 +55,18 @@
     NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_salesOrderSearchResult.code];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
 }
-
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"default－portrait"];
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"请添加物品";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
 #pragma mark - IBAction
 - (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
     

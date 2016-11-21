@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic,strong ) UILabel *addBtn;
+@property (nonatomic,strong ) UIButton *addBtn;
 
 
 + (instancetype)viewInstance;

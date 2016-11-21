@@ -84,6 +84,20 @@
         }
         return [RACSignal empty];
     }];
+    
+    _inventoryEditView.saveBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        if([self p_beforeSaveHandle]){
+            _saveType = SaveTypeUpdate;
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        return [RACSignal empty];
+    }];
+    
+    _inventoryEditView.delBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        _saveType = SaveTypeDelete;
+        [self.navigationController popViewControllerAnimated:YES];
+        return [RACSignal empty];
+    }];
 }
 
 -(void)loadData
@@ -307,8 +321,12 @@
 }
 
 
-//返回按钮监听
-- (BOOL)navigationShouldPopOnBackButton {
+/**
+ 保存前处理
+
+ @return bool
+ */
+-(BOOL)p_beforeSaveHandle{
     if ([_inventoryEditView.qrText.text isEqualToString:@""] || _attachments.count < 2) {
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"二维码为空/还未拍照,是否放弃编辑?" preferredStyle:UIAlertControllerStyleAlert];
         [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -321,7 +339,13 @@
         }]];
         [self presentViewController:alertControl animated:YES completion:nil];
         return NO;
+    }else{
+        return YES;
     }
-    return YES;
+}
+
+//返回按钮监听
+- (BOOL)navigationShouldPopOnBackButton {
+    return [self p_beforeSaveHandle];
 }
 @end

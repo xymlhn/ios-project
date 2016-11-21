@@ -13,9 +13,9 @@
 #import "InventoryManager.h"
 #import "CommoditySnapshot.h"
 #import "InventoryController.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-
-@interface InventorySearchController()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface InventorySearchController()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property(nonatomic,strong) InventorySearchView *searchView;
 @property(nonatomic,strong) NSMutableArray<SalesOrderSearchResult *> *resultList;
@@ -30,6 +30,10 @@
     
     _searchView.tableView.delegate = self;
     _searchView.tableView.dataSource = self;
+    _searchView.tableView.tableHeaderView = [UIView new];
+    _searchView.tableView.tableFooterView = [UIView new];
+    _searchView.tableView.emptyDataSetSource = self;
+    _searchView.tableView.emptyDataSetDelegate = self;
     self.view = _searchView;
 }
 
@@ -47,7 +51,18 @@
     }
     return _resultList;
 }
-
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"default－portrait"];
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"请添加步骤";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
 #pragma mark UISearchBarDelegate
 
 //搜索框中的内容发生改变时 回调（即要搜索的内容改变）

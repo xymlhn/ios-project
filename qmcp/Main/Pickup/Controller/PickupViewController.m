@@ -19,7 +19,8 @@
 #import "PickupSignature.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AppManager.h"
-@interface PickupViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+#import "UIScrollView+EmptyDataSet.h"
+@interface PickupViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @property (nonatomic,strong) PickupView *pickView;
 @property (nonatomic,strong) NSMutableArray<PickupItem *> *pickupItemArray;
 @property (nonatomic,strong) PickupData *pickupData;
@@ -37,13 +38,17 @@
     _pickView.qrButton.userInteractionEnabled = YES;
     [_pickView.qrButton addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrBtnClick:)]];
     
-    _pickView.signButton.userInteractionEnabled = YES;
-    [_pickView.signButton addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signBtnClick:)]];
+    _pickView.signBtn.userInteractionEnabled = YES;
+    [_pickView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signBtnClick:)]];
     
     _pickView.searchBar.delegate = self;
     
     _pickView.tableView.delegate = self;
     _pickView.tableView.dataSource = self;
+    _pickView.tableView.tableHeaderView = [UIView new];
+    _pickView.tableView.tableFooterView = [UIView new];
+    _pickView.tableView.emptyDataSetSource = self;
+    _pickView.tableView.emptyDataSetDelegate = self;
 }
 
 -(void)loadData{
@@ -56,6 +61,19 @@
         _pickupItemArray = [NSMutableArray new];
     }
     return _pickupItemArray;
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"default－portrait"];
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"请添加步骤";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 #pragma mark - UISearchBarDelegate
 

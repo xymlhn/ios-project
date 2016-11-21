@@ -13,8 +13,8 @@
 #import "PickupManager.h"
 #import "ItemComplete.h"
 #import "PickupNoticeCell.h"
-
-@interface PickupNoticeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+#import "UIScrollView+EmptyDataSet.h"
+@interface PickupNoticeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @property (nonatomic,strong) PickupNoticeView *pickupNoticeView;
 @property (nonatomic,strong) NSMutableArray<ItemComplete *> *itemCompleteArray;
 @end
@@ -33,7 +33,10 @@
     
     _pickupNoticeView.tableView.delegate = self;
     _pickupNoticeView.tableView.dataSource = self;
-    
+    _pickupNoticeView.tableView.tableHeaderView = [UIView new];
+    _pickupNoticeView.tableView.tableFooterView = [UIView new];
+    _pickupNoticeView.tableView.emptyDataSetSource = self;
+    _pickupNoticeView.tableView.emptyDataSetDelegate = self;
     _pickupNoticeView.searchBar.delegate = self;
 }
 
@@ -46,6 +49,19 @@
         _itemCompleteArray = [NSMutableArray new];
     }
     return _itemCompleteArray;
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"default－portrait"];
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"请添加步骤";
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 /**

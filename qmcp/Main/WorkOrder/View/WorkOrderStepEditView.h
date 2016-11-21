@@ -11,8 +11,8 @@
 @interface WorkOrderStepEditView : BaseView
 
 @property (nonatomic,strong) UITextView *editText;
-@property (nonatomic,strong) UILabel *saveBtn;
-@property (nonatomic,strong) UILabel *delBtn;
+@property (nonatomic,strong) UIButton *saveBtn;
+@property (nonatomic,strong) UIButton *delBtn;
 @property (nonatomic,strong) UIView *fastView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 

@@ -137,56 +137,45 @@
         make.bottom.equalTo(containView.mas_bottom).with.offset(0);
     }];
     
-    [self initBottomView];
+    [self setupBottomView];
     return self;
 }
 
-
--(void)initBottomView
-{
+//底部按钮
+-(void)setupBottomView{
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
+    codeBottomLine.backgroundColor = [UIColor lineColor];
     [bottomView addSubview:codeBottomLine];
     
-    _signButton = [UILabel new];
-    [_signButton setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _signButton.text = @"";
-    _signButton.textColor = [UIColor nameColor];
-    _signButton.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_signButton];
-    
-    
-    UILabel *signLabel = [UILabel new];
-    signLabel.font = [UIFont systemFontOfSize:12];
-    signLabel.text = @"签名";
-    signLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:signLabel];
+    _signBtn = [UIButton new];
+    [_signBtn.layer setMasksToBounds:YES];
+    [_signBtn.layer setCornerRadius:3.0];
+    [_signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _signBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
+    [_signBtn setTitle:@"签名" forState:UIControlStateNormal];
+    _signBtn.backgroundColor = [UIColor appBlueColor];
+    [bottomView addSubview:_signBtn];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@50);
+        make.height.mas_equalTo(@44);
     }];
-    
     [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(bottomView.mas_top).with.offset(0);
         make.left.equalTo(bottomView.mas_left).with.offset(0);
         make.right.equalTo(bottomView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
-    
-    [_signButton mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(bottomView.mas_top).offset(3);
-        make.centerX.equalTo(bottomView.mas_centerX);
-    }];
-    [signLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_signButton.mas_bottom);
-        make.centerX.equalTo(_signButton.mas_centerX);
+    [_signBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.center.equalTo(bottomView);
+        make.width.equalTo(@200);
+        make.height.equalTo(@30);
     }];
 }
 

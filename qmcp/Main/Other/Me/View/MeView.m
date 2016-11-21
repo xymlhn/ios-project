@@ -182,7 +182,7 @@
     [_nickName mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(topView.mas_centerY);
         make.left.equalTo(_userIcon.mas_right).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@15);
+        make.width.equalTo(@55);
     }];
     
     [topArrow mas_makeConstraints:^(MASConstraintMaker *make){

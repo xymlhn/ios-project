@@ -35,9 +35,9 @@
 }
 
 -(void)setupView{
-    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_add"]
-                                                                               style:UIBarButtonItemStylePlain
-                                                                              target:self action:@selector(onClickLeftButton)];
+    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                            target:self
+                                                                                            action:@selector(onRightButtonClick)];
 }
 -(void)bindListener
 {
@@ -83,9 +83,8 @@
 }
 
 
--(void)onClickLeftButton{
+-(void)onRightButtonClick{
     [YCXMenu setTintColor:[UIColor blackColor]];
-    
     [YCXMenu setSelectedColor:[UIColor redColor]];
     if ([YCXMenu isShow]){
         [YCXMenu dismissMenu];

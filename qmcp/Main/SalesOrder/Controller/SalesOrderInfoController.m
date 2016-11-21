@@ -33,19 +33,6 @@
     
 }
 
--(void)onClickLeftButton{
-    [YCXMenu setTintColor:[UIColor blackColor]];
-    
-    [YCXMenu setSelectedColor:[UIColor redColor]];
-    if ([YCXMenu isShow]){
-        [YCXMenu dismissMenu];
-    } else {
-        NSArray *menuItems = @[[YCXMenuItem menuItem:@"完结订单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(completeClick)]];
-        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 0, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
-            NSLog(@"%@",item);
-        }];
-    }
-}
 -(void)loadView{
     
     _salesOrderInfoView = [SalesOrderInfoView new];
@@ -54,9 +41,10 @@
 }
 
 -(void)setupView{
-    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_add"]
-                                                                               style:UIBarButtonItemStylePlain
-                                                                              target:self action:@selector(onClickLeftButton)];
+    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                            target:self
+                                                                                            action:@selector(onRightButtonClick)];
+    
 }
 
 -(void)bindListener{
@@ -234,6 +222,20 @@
 }
 
 #pragma mark - IBAction
+-(void)onRightButtonClick{
+    [YCXMenu setTintColor:[UIColor blackColor]];
+    
+    [YCXMenu setSelectedColor:[UIColor redColor]];
+    if ([YCXMenu isShow]){
+        [YCXMenu dismissMenu];
+    } else {
+        NSArray *menuItems = @[[YCXMenuItem menuItem:@"完结订单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(completeClick)]];
+        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 0, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
+            NSLog(@"%@",item);
+        }];
+    }
+}
+
 -(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer{
       __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];

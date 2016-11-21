@@ -17,6 +17,9 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 @interface MeViewController ()
 @property (nonatomic, strong) MeView *meView;
+@property (nonatomic, strong) User *user;
+
+
 @end
 
 @implementation MeViewController
@@ -46,13 +49,15 @@
 }
 
 -(void)loadData{
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,[[AppManager getInstance] getUser].userOpenId];
+    _user =[[AppManager getInstance] getUser];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,_user.userOpenId];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
         if(!error){
             [_meView.userIcon sd_setImageWithURL:[NSURL URLWithString:dict[@"success"]]
                          placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
         }
     }];
+    _meView.nickName.text = _user.userNickName;
 }
 
 #pragma mark - IBAction

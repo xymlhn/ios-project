@@ -140,14 +140,14 @@
 {
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
 
-    viewController.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_add"]
-                                                                                        style:UIBarButtonItemStylePlain
-                                                                                       target:self action:@selector(onClickMainLeftButton)];
+    viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                            target:self
+                                                                                            action:@selector(onClickMainRightButton)];
     return navigationController;
 }
 
 
--(void)onClickMainLeftButton{
+-(void)onClickMainRightButton{
 
     [YCXMenu setTintColor:[UIColor blackColor]];
 

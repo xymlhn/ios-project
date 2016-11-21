@@ -13,6 +13,8 @@
 #import "SettingViewController.h"
 #import "AMapViewController.h"
 #import "HelpViewController.h"
+#import "AppManager.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface MeViewController ()
 @property (nonatomic, strong) MeView *meView;
 @end
@@ -41,6 +43,16 @@
     
     [_meView.workSwitch setOn:[Config isWork]];
     [_meView.workSwitch addTarget:self action:@selector(onWorkAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)loadData{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,[[AppManager getInstance] getUser].userOpenId];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
+        if(!error){
+            [_meView.userIcon sd_setImageWithURL:[NSURL URLWithString:dict[@"success"]]
+                         placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
+        }
+    }];
 }
 
 #pragma mark - IBAction

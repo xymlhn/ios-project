@@ -143,6 +143,9 @@
                                urlPath:(NSString *)urlpath
                                 finish:(CompletionHandler)completion{
     NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+    if (obj == nil) {
+        obj = @{@"success":[[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding]};
+    }
     DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, obj);
     if(![self handleHeader:task]){
         completion(obj ,nil);

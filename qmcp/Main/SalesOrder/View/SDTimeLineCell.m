@@ -32,9 +32,10 @@
 #import "UIView+SDAutoLayout.h"
 #import "SDWeiXinPhotoContainerView.h"
 #import "SDTimeLineCellOperationMenu.h"
-#import <SDWebImageManager.h>
-#import <UIImageView+WebCache.h>
-
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "HttpUtil.h"
+#import "QMCPAPI.h"
+#import "AppManager.h"
 const CGFloat contentLabelFontSize = 15;
 CGFloat maxContentLabelHeight = 0; // 根据具体font而定
 
@@ -177,7 +178,13 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     _model = model;
     
     _iconView.image = [UIImage imageNamed:model.iconName];
-    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,[[AppManager getInstance] getUser].userOpenId];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
+        if(!error){
+            [_iconView sd_setImageWithURL:[NSURL URLWithString:dict[@"success"]]
+                                placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
+        }
+    }];
     _nameLable.text = model.name;
     _contentLabel.text = model.msgContent;
     _picContainerView.picPathStringsArray = model.picNamesArray;

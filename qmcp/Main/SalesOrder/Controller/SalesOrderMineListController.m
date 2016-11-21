@@ -59,25 +59,25 @@
 {
     self.salesOrderList = [[SalesOrderManager getInstance] sortSalesOrder:YES];
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"加载中...";
+    hub.detailsLabelText = @"加载中...";
     [[SalesOrderManager getInstance] getSalesOrderMineByLastUpdateTime:[Config getSalesOrderMineTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
         if(error == nil){
             [self refreshTableView:arr];
             if([arr count] > 0){
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.labelText = @"加载成功";
+                hub.detailsLabelText = @"加载成功";
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.labelText = @"当前没有订单";
+                hub.detailsLabelText = @"当前没有订单";
                 [hub hide:YES afterDelay:kEndFailedDelayTime];
             }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
         
@@ -120,13 +120,34 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
-    SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
-        [self.salesOrderList removeObject:salesOrder];
-        [self.tableView reloadData];
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.detailsLabelText = @"正在获取订单详细信息";
+    hub.userInteractionEnabled = NO;
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,salesOrder.code];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+        if(!error){
+            hub.detailsLabelText = @"";
+            [hub hide:YES];
+            SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
+            [[SalesOrderManager getInstance]updateSalesOrder:tempSalesOrder];
+            SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
+                [weakSelf.salesOrderList removeObject:salesOrder];
+                [weakSelf.tableView reloadData];
+            }];
+            info.code = salesOrder.code;
+            info.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:info animated:YES];
+            
+        }else{
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.detailsLabelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
+        }
+        
     }];
-    info.code = salesOrder.code;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
+
 }
 
 

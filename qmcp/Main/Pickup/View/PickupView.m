@@ -32,7 +32,7 @@
     _headView = [UIView new];
     [_headView setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:_headView];
-    
+    [_headView setHidden:YES];
     _codeText = [UILabel new];
     _codeText.text = @"订单编号";
     _codeText.font = [UIFont systemFontOfSize:15];//采用系统默认文字设置大小
@@ -73,7 +73,7 @@
     
     _tableView = [UITableView new];
     _tableView.rowHeight = 80;
-    _tableView.backgroundColor = [UIColor themeColor];
+    _tableView.backgroundColor = [UIColor whiteColor];
     [containView addSubview:_tableView];
     
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {

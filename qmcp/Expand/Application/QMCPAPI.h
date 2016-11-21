@@ -93,6 +93,7 @@
 //提交订单步骤
 #define QMCPAPI_POSTSALESORDERSTEP       @"i/a/api/salesorder/"
 
+#define QMCPAPI_SALESORDERDETAIL         @"/i/a/api/salesorder/"
 //*********************表单接口*******************//
 //获取表单模板
 #define QMCPAPI_FORMTEMPLATE             @"i/a/api/salesorder/form/template?salesOrderCode="

@@ -34,6 +34,15 @@ NSString *const SalesOrderUpdateNotification = @"salesOrderUpdate";
     return shared_manager;
 }
 
+-(BOOL)updateSalesOrder:(SalesOrder *)salesOrder{
+    salesOrder.addressSnapshot.code = salesOrder.code;
+    salesOrder.isMine = YES;
+    [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
+        css.code = [NSUUID UUID].UUIDString;
+    }];
+    return [salesOrder saveToDB];
+}
+
 -(void)getSalesOrderMineByLastUpdateTime:(NSString *)lastupdateTime
                              finishBlock:(SalesOrderCompletion)completion{
     
@@ -53,12 +62,7 @@ NSString *const SalesOrderUpdateNotification = @"salesOrderUpdate";
                 }
                 
                 for (SalesOrder *salesOrder in salesOrderMine.uncompleted) {
-                    salesOrder.addressSnapshot.code = salesOrder.code;
-                    salesOrder.isMine = YES;
-                    [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
-                        css.code = [NSUUID UUID].UUIDString;
-                    }];
-                    [salesOrder saveToDB];
+                    [self updateSalesOrder:salesOrder];
                 }
                 
             }

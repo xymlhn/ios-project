@@ -14,6 +14,7 @@
 #import "InventoryController.h"
 #import "WorkOrderStepController.h"
 #import "WorkOrderFormsController.h"
+#import "SalesOrderManager.h"
 #import "YCXMenu.h"
 @interface SalesOrderInfoController ()
 
@@ -233,28 +234,44 @@
 }
 
 #pragma mark - IBAction
--(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer
-{
-   
+-(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer{
+      __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.detailsLabelText = @"正在刷新";
+    hub.userInteractionEnabled = NO;
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,_code];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+        if(!error){
+            hub.detailsLabelText = @"刷新成功";
+            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
+            weakSelf.salesOrder = tempSalesOrder;
+            [[SalesOrderManager getInstance] updateSalesOrder:tempSalesOrder];
+            [weakSelf setInfo:tempSalesOrder];
+        }else{
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.detailsLabelText = error;
+            [hub hide:YES afterDelay:kEndFailedDelayTime];
+        }
+        
+    }];
 
 }
--(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer
-{
+-(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer{
     [InventoryManager getInstance].currentSalesOrderCode = _code;
     SalesOrderSearchResult *ssr = [[InventoryManager getInstance] salesOrderChangeToSearchResult:_salesOrder];
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在获取";
+    hub.detailsLabelText = @"正在获取清点信息";
     hub.userInteractionEnabled = NO;
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,_code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             NSArray<CommoditySnapshot *> *commoditySnapshots = [CommoditySnapshot mj_objectArrayWithKeyValuesArray:obj];
             ssr.commodityItemList = commoditySnapshots;
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = @"获取成功";
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.detailsLabelText = @"";
+            [hub hide:YES];
             InventoryController *info = [InventoryController new];
             info.salesOrderCode = _code;
             info.hidesBottomBarWhenPushed = YES;
@@ -262,15 +279,14 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
         
     }];
 }
 
--(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
-{
+-(void)stepBtnClick:(UITapGestureRecognizer *)recognizer{
     WorkOrderStepController *info = [WorkOrderStepController new];
     info.code = _code;
     info.funcType = FuncTypeSalesOrder;
@@ -278,16 +294,14 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
-- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer{
     WorkOrderCameraController *info =[WorkOrderCameraController new];
     info.code = _code;
     info.funcType = FuncTypeSalesOrder;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
-- (void)formBtnClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)formBtnClick:(UITapGestureRecognizer *)recognizer{
     if(_salesOrder.type == SalesOrderTypeOnsite){
         if(_salesOrder.onSiteStatus != OnSiteStatusArrived){
             return;
@@ -300,10 +314,8 @@
 }
 
 
--(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer
-{
+-(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer{
     QrCodeIdentityController *controller = [QrCodeIdentityController new];
-    
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     controller.qrCodeUrl = _salesOrder.qrCodeUrl;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {

@@ -37,7 +37,7 @@
     _businessSalesOrderView.orderButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         __weak typeof(self) weakSelf = self;
         MBProgressHUD *hub = [Utils createHUD];
-        hub.labelText = @"正在下单";
+        hub.detailsLabelText = @"正在下单";
         hub.userInteractionEnabled = NO;
         
         BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text
@@ -56,7 +56,7 @@
                     css.code = [NSUUID UUID].UUIDString;
                 }];
                 [salesOrder saveToDB];
-                hub.labelText = [NSString stringWithFormat:@"下单成功"];
+                hub.detailsLabelText = [NSString stringWithFormat:@"下单成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
                
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -69,7 +69,7 @@
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.labelText = error;
+                hub.detailsLabelText = error;
                 [hub hide:YES afterDelay:kEndFailedDelayTime];
             }
         }];

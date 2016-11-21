@@ -165,7 +165,7 @@
 - (void)p_postInfo:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在上传步骤";
+    hub.detailsLabelText = @"正在上传步骤";
     hub.userInteractionEnabled = NO;
     NSMutableArray *arrayM = [WorkOrderStep mj_keyValuesArrayWithObjectArray:steps];
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTSALESORDERSTEP,_code];
@@ -185,34 +185,34 @@
                 for(Attachment *attachment in attachments)
                 {
                     i++;
-                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
+                    hub.detailsLabelText = [NSString stringWithFormat:@"正在上传附件"];
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
                             if(i == attachments.count)
                             {
-                                hub.labelText = [NSString stringWithFormat:@"上传附件成功"];
+                                hub.detailsLabelText = [NSString stringWithFormat:@"上传附件成功"];
                                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
                             }
                         }else{
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = error;
+                            hub.detailsLabelText = error;
                             [hub hide:YES afterDelay:kEndFailedDelayTime];
                         }
                     }];
                 }
             }else
             {
-                hub.labelText = [NSString stringWithFormat:@"上传步骤成功"];
+                hub.detailsLabelText = [NSString stringWithFormat:@"上传步骤成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }
         }else{
             
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
             
         }
@@ -224,7 +224,7 @@
 - (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepsArray:(NSArray *)steps{
     
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在上传工单步骤";
+    hub.detailsLabelText = @"正在上传工单步骤";
     hub.userInteractionEnabled = NO;
     NSMutableArray *arrayM = [WorkOrderStep mj_keyValuesArrayWithObjectArray:steps];
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,_code];
@@ -244,34 +244,34 @@
                 for(Attachment *attachment in attachments)
                 {
                     i++;
-                    hub.labelText = [NSString stringWithFormat:@"正在上传附件"];
+                    hub.detailsLabelText = [NSString stringWithFormat:@"正在上传附件"];
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
                             if(i == attachments.count)
                             {
-                                hub.labelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                hub.detailsLabelText = [NSString stringWithFormat:@"上传工单附件成功"];
                                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
                             }
                         }else{
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = error;
+                            hub.detailsLabelText = error;
                             [hub hide:YES afterDelay:kEndFailedDelayTime];
                         }
                     }];
                 }
             }else
             {
-                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+                hub.detailsLabelText = [NSString stringWithFormat:@"上传工单步骤成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }
         }else{
             
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
             
         }

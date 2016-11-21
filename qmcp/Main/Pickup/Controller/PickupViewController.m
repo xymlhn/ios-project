@@ -154,13 +154,13 @@
 -(void)p_handleResult:(NSString *)result
 {
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"加载中...";
+    hub.detailsLabelText = @"加载中...";
     __weak typeof(self) weakSelf = self;
     [[PickupManager getInstance] getPickupItemByCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"加载成功"];
+            hub.detailsLabelText = [NSString stringWithFormat:@"加载成功"];
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
             _pickupData = [PickupData mj_objectWithKeyValues:obj];
             NSArray<PickupItem *> * items = [PickupItem mj_objectArrayWithKeyValuesArray:_pickupData.items];
@@ -172,14 +172,16 @@
                 [weakSelf.pickupItemArray addObjectsFromArray:items];
                 [weakSelf.pickView.tableView reloadData];
             }
+            [weakSelf.pickView.headView setHidden:NO];
             weakSelf.pickView.nameText.text = [NSString stringWithFormat:@"%@%@",@"客户名:",_pickupData.addressSnapshot.contacts] ;
             weakSelf.pickView.phoneText.text = [NSString stringWithFormat:@"%@%@",@"联系电话:",_pickupData.addressSnapshot.mobilePhone] ;
             weakSelf.pickView.codeText.text = [NSString stringWithFormat:@"%@%@",@"订单编号:",_pickupData.salesOrderCode] ;
         }else{
             weakSelf.pickupData = nil;
+            [weakSelf.pickView.headView setHidden:YES];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
@@ -190,22 +192,21 @@
 -(void)p_postPickupData:(PickupSignature *)pickupSignature
 {
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"完成中...";
+    hub.detailsLabelText = @"完成中...";
     hub.userInteractionEnabled = NO;
-    
+     __weak typeof(self) weakSelf = self;
     [[PickupManager getInstance] postPickupSignature:pickupSignature finishBlock:^(NSDictionary *obj, NSString *error) {
-        
-        
         if (!error) {
+            [weakSelf.pickView.headView setHidden:YES];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"成功"];
+            hub.detailsLabelText = [NSString stringWithFormat:@"成功"];
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
         }else{
-
+            [weakSelf.pickView.headView setHidden:YES];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];

@@ -97,7 +97,7 @@
     [_searchView.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在搜索";
+    hub.detailsLabelText = @"正在搜索";
     hub.userInteractionEnabled = NO;
 
     [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSString *error) {
@@ -112,13 +112,13 @@
                 message = @"搜索不到工单";
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.labelText = message;
+                hub.detailsLabelText = message;
                 [hub hide:YES afterDelay:kEndFailedDelayTime];
             }else{
                 message = @"搜索成功";
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.labelText = message;
+                hub.detailsLabelText = message;
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }
             
@@ -127,7 +127,7 @@
             [weakSelf.searchView.tableView reloadData];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];

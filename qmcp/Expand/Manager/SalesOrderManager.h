@@ -40,4 +40,12 @@ extern NSString *const SalesOrderUpdateNotification;
  @return 订单列表
  */
 - (NSMutableArray *)sortSalesOrder:(BOOL)isMine;
+
+/**
+ 跟新我的订单
+
+ @param salesOrder 订单
+ @return bool
+ */
+-(BOOL)updateSalesOrder:(SalesOrder *)salesOrder;
 @end

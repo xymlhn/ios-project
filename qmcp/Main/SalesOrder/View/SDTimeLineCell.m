@@ -128,7 +128,7 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     _nameLable.sd_layout
     .leftSpaceToView(_iconView, margin)
     .topEqualToView(_iconView)
-    .heightIs(18);
+    .heightIs(15);
     [_nameLable setSingleLineAutoResizeWithMaxWidth:200];
     
     _contentLabel.sd_layout
@@ -179,9 +179,9 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     
     _iconView.image = [UIImage imageNamed:model.iconName];
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,[[AppManager getInstance] getUser].userOpenId];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
+    [HttpUtil get:URLString param:nil finishString:^(NSString *dict, NSString *error) {
         if(!error){
-            [_iconView sd_setImageWithURL:[NSURL URLWithString:dict[@"success"]]
+            [_iconView sd_setImageWithURL:[NSURL URLWithString:dict]
                                 placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
         }
     }];

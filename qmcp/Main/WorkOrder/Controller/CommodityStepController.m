@@ -45,7 +45,7 @@
     
     //用0代表收起，非0（不一定是1）代表展开，默认都是收起的
     for (int i = 0; i < self.dataArray.count; i++) {
-        [self.isExpland addObject:@0];
+        [self.isExpland addObject:@1];
     }
 }
 
@@ -98,20 +98,32 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIButton *headerSection = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+    headView.backgroundColor = [UIColor themeColor];
+
+    UIButton *headerSection = [UIButton new];
+    [headerSection setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    headerSection.titleLabel.font = [UIFont systemFontOfSize:12];
+    headerSection.titleLabel.textAlignment = NSTextAlignmentLeft;
     headerSection.tag = 666+section;
+    [headView addSubview:headerSection];
+    
+    [headerSection mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(headView.mas_top).with.offset(0);
+        make.left.equalTo(headView.mas_left).with.offset(0);
+        make.right.equalTo(headView.mas_right).with.offset(0);
+        make.bottom.equalTo(headView.mas_bottom).with.offset(0);
+    }];
     
     CommodityStep *commodityStep = self.dataArray[section][0];
     //标题
     [headerSection setTitle:commodityStep.commodityName forState:UIControlStateNormal];
-    
     [headerSection addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-    return headerSection;
+    return headView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44;
+    return 30;
 }
 
 - (void)buttonAction:(UIButton *)button {

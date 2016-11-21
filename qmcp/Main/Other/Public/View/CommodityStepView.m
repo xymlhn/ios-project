@@ -40,7 +40,8 @@
     }];
     
     _tableView = [UITableView new];
-    _tableView.backgroundColor = [UIColor themeColor];
+    _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.rowHeight = 30;
     [alphaView addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(alphaView);

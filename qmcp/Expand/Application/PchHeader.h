@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger, OnSiteStatus) {
 };
 
 typedef void(^CompletionHandler)(NSDictionary *dict, NSString *error);
+typedef void(^CompletionStringHandler)(NSString *string, NSString *error);
 typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #ifndef Header_h
 #define Header_h

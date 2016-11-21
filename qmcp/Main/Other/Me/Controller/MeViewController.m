@@ -51,9 +51,9 @@
 -(void)loadData{
     _user =[[AppManager getInstance] getUser];
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,_user.userOpenId];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
+    [HttpUtil get:URLString param:nil finishString:^(NSString *str, NSString *error) {
         if(!error){
-            [_meView.userIcon sd_setImageWithURL:[NSURL URLWithString:dict[@"success"]]
+            [_meView.userIcon sd_setImageWithURL:[NSURL URLWithString:str]
                          placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
         }
     }];

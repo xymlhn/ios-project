@@ -160,6 +160,9 @@
             <PersistentString
                value = "[[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding]">
             </PersistentString>
+            <PersistentString
+               value = "obj[@&quot;success&quot;]">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState

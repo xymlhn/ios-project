@@ -83,7 +83,7 @@
             tempLocation.lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
             tempLocation.recTime = [Utils formatDate:[NSDate new]];
             [self.gisLocationArray addObject:tempLocation];
-            [self p_sendLocation];
+           // [self p_sendLocation];
         }
     }
     

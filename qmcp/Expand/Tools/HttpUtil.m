@@ -53,6 +53,24 @@
     
 }
 
++(void)get:(NSString *)urlpath
+     param:(id)dict
+    finishString:(CompletionStringHandler)completion{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    urlpath = [urlpath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    DebugLog(@"\n===========request===========\n%@\n%@:\n%@", @"get", urlpath, dict);
+    [manager GET:urlpath parameters:dict progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
+        [self handleSuccessWithResponseObject:responseObject task:session urlPath:urlpath finishString:completion];
+        
+    }failure:^(NSURLSessionDataTask * task, NSError * error){
+        [self handleFailureWithError:error task:task urlPath:urlpath finishString:completion];
+    }];
+    
+}
+
 +(void)postFile:(NSString *)urlpath
            file:(NSData *)data
            name:(NSString *)name
@@ -130,6 +148,29 @@
     }
 }
 
++(void)handleFailureWithError:(NSError *)error
+                         task:(NSURLSessionDataTask *)task
+                      urlPath:(NSString *)urlpath
+                       finishString:(CompletionStringHandler)completion{
+    
+    [self handleHeader:task];
+    DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, error);
+    NSString *description = error.userInfo[@"NSLocalizedDescription"];
+    NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
+    
+    if(data != nil){
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSString *message = [content valueForKey:@"message"];
+        if (message == nil || [message isKindOfClass:[NSNull class]]) {
+            message = @"服务器发生未知错误!";
+        }
+        
+        completion(nil ,message);
+    }else{
+        completion(nil,description);
+    }
+}
+
 /**
  *  处理成功的请求
  *
@@ -143,9 +184,21 @@
                                urlPath:(NSString *)urlpath
                                 finish:(CompletionHandler)completion{
     NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-    if (obj == nil) {
-        obj = @{@"success":[[NSString alloc] initWithData:responseObject  encoding:NSUTF8StringEncoding]};
+    DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, obj);
+    if(![self handleHeader:task]){
+        completion(obj ,nil);
+    }else{
+        completion(obj,@"错误");
     }
+    
+}
+
++(void)handleSuccessWithResponseObject:(id)responseObject
+                                  task:(NSURLSessionDataTask *)task
+                               urlPath:(NSString *)urlpath
+                                finishString:(CompletionStringHandler)completion{
+    NSString *obj = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+
     DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, obj);
     if(![self handleHeader:task]){
         completion(obj ,nil);

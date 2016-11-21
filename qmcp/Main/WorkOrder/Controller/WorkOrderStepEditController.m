@@ -44,14 +44,22 @@
 
 -(void)loadData
 {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     if(_funcType == FuncTypeWorkOrder){
         NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_code];
         _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
+        for (CommoditySnapshot *snapshot in _workOrder.salesOrderCommoditySnapshots) {
+            [dict setObject:snapshot.commodityName forKey:snapshot.commodityCode];
+        }
+        
     }else{
         NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_code];
         _salesOrder = [SalesOrder searchSingleWithWhere:workWhere orderBy:nil];
+        for (CommoditySnapshot *snapshot in _salesOrder.salesOrderCommoditySnapshots) {
+            [dict setObject:snapshot.commodityName forKey:snapshot.commodityCode];
+        }
     }
-    
+    _dataArray = [[WorkOrderManager getInstance] getCommodityByCommodityCode:dict];
     NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",_stepCode];
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
 
@@ -65,11 +73,7 @@
     }
     _editView.editText.text = _step.content;
 
-    NSMutableDictionary *dict = [NSMutableDictionary new];
-    for (CommoditySnapshot *snapshot in _workOrder.salesOrderCommoditySnapshots) {
-        [dict setObject:snapshot.commodityName forKey:snapshot.commodityCode];
-    }
-    _dataArray = [[WorkOrderManager getInstance] getCommodityByCommodityCode:dict];
+   
     
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{

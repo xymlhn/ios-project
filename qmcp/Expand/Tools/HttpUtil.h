@@ -30,9 +30,13 @@
  *  @param dict    参数
  *  @param block      回调
  */
-+(void) get:(NSString *)urlpath
++(void)get:(NSString *)urlpath
       param:(id)dict
      finish:(CompletionHandler)completion;
+
++(void)get:(NSString *)urlpath
+     param:(id)dict
+    finishString:(CompletionStringHandler)completion;
 
 
 /**

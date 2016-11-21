@@ -78,7 +78,7 @@
     for (WorkOrderStep *step in _workOrderStepList) {
         SDTimeLineCellModel *model = [SDTimeLineCellModel new];
         model.iconName = @"default－portrait";
-        model.name = _workOrder.salesOrderSnapshot.addressSnapshot.contacts;
+        model.name = step.submitUser;
         model.msgContent = step.content;
         model.timeText = step.submitTime;
         NSMutableArray *picImageNamesArray = [NSMutableArray new];
@@ -104,6 +104,7 @@
     }else{
         step.salesOrderCode = _code;
     }
+    step.submitUser = [[AppManager getInstance] getUser].userNickName;
     step.submitTime = [Utils formatDate:[NSDate new]];
     step.userOpenId = [[AppManager getInstance] getUser].userOpenId;
     [step saveToDB];

@@ -150,12 +150,7 @@ const static int databaseVersion = 0;
 /** SDK启动成功返回cid */
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId {
     NSLog(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
-    NSDictionary *dict = @{@"pushId":clientId};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_GETUI];
-    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *dict, NSString *error) {
-        
-    }];
-    
+    [Config setPushId:clientId];    
 }
 
 /** SDK收到透传消息回调 */

@@ -16,6 +16,7 @@
 #import "WorkOrderFormsController.h"
 #import "SalesOrderManager.h"
 #import "YCXMenu.h"
+#import "AgreePriceChangeController.h"
 @interface SalesOrderInfoController ()
 
 @property (nonatomic, retain) SalesOrderInfoView *salesOrderInfoView;
@@ -65,6 +66,44 @@
         
         return [RACSignal empty];
     }];
+    
+    _salesOrderInfoView.agreeBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        __weak typeof(self) weakSelf = self;
+        AgreePriceChangeController *controller = [AgreePriceChangeController doneBlock:^(NSString *price, NSString *remark) {
+            MBProgressHUD *hub = [Utils createHUD];
+            hub.labelText = @"正在提交数据";
+            NSDictionary *dict = @{@"agreementPrice":price,@"remark":remark};
+            NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERAGREEPRICE,_code];
+            [HttpUtil post:URLString param:dict finish:^(NSDictionary *dict, NSString *error) {
+                if(!error){
+                    hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
+                    [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                    weakSelf.salesOrder.agreementPrice = price;
+                    [[SalesOrderManager getInstance] updateSalesOrder:weakSelf.salesOrder];
+                    [weakSelf setInfo:weakSelf.salesOrder];
+                }else{
+                    hub.mode = MBProgressHUDModeCustomView;
+                    hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                    hub.labelText = error;
+                    [hub hide:YES afterDelay:kEndFailedDelayTime];
+                }
+            }];
+
+        }];
+        controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+            controller.providesPresentationContextTransitionStyle = YES;
+            controller.definesPresentationContext = YES;
+            controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+            [self.tabBarController presentViewController:controller animated:YES completion:nil];
+            
+        } else {
+            self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+            [self presentViewController:controller animated:NO completion:nil];
+            self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        }
+        return [RACSignal empty];
+    }];
 }
 
 -(void)completeClick{
@@ -107,6 +146,7 @@
     _salesOrderInfoView.userNameText.text = salesOrder.addressSnapshot.contacts;
     _salesOrderInfoView.codeContent.text = salesOrder.code;
     _salesOrderInfoView.typeText.text = [EnumUtil salesOrderTypeString:salesOrder.type];
+    _salesOrderInfoView.agreePriceText.text = salesOrder.agreementPrice;
     switch (salesOrder.type) {
         case SalesOrderTypeOnsite:
             switch (_salesOrder.onSiteStatus) {

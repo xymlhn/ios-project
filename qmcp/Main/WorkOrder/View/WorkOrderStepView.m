@@ -32,7 +32,7 @@
     
     [self setupBottomView];
     return self;
-    
+
 }
 
 //底部按钮

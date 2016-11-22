@@ -73,34 +73,6 @@ NSString *const kUserCache = @"user";
   
 }
 
--(void)loginWithUserName:(NSString *)userName
-             andPassword:(NSString *)password
-             finishBlock:(CompletionHandler)completion{
-    // 请求参数
-    NSDictionary *dic = @{ @"user":userName,@"pwd":password};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGIN];
-
-    [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
-        completion(obj,error);
-    }];
-}
-
-
--(void)logoutWithBlock:(void (^)(NSDictionary *data, NSString *error))block{
-    // 请求参数
-    NSDictionary *dic = @{};
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
-    
-    [HttpUtil post:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
-        if (error == nil) {
-            block(obj,nil);
-
-        }else{
-            block(nil,error);
-        }
-    }];
-}
-
 -(void) getServerTimeWithBlock:(CompletionHandler)completion{
 
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_SERVER_TIME];

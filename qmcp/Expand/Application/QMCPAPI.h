@@ -9,8 +9,8 @@
 #ifndef iosapp_QMCPAPI_h
 #define iosapp_QMCPAPI_h
 
-#define QMCPAPI_ADDRESS             @"http://192.168.13.25:8080/"
-//#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
+//#define QMCPAPI_ADDRESS             @"http://192.168.13.25:8080/"
+#define QMCPAPI_ADDRESS                  @"https://www.efw365.com/"
 
 //*********************基础接口*******************//
 //登录
@@ -92,8 +92,10 @@
 #define QMCPAPI_BUSINESSSALESORDER       @"/i/a/api/salesorder/create"
 //提交订单步骤
 #define QMCPAPI_POSTSALESORDERSTEP       @"i/a/api/salesorder/"
-
+//订单详细
 #define QMCPAPI_SALESORDERDETAIL         @"/i/a/api/salesorder/"
+//更改协议价
+#define QMCPAPI_SALESORDERAGREEPRICE     @"/i/a/api/salesorder/agreementprice/"
 //*********************表单接口*******************//
 //获取表单模板
 #define QMCPAPI_FORMTEMPLATE             @"i/a/api/salesorder/form/template?salesOrderCode="

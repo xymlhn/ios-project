@@ -26,6 +26,7 @@ NSString * const kCommodityPropertyTime = @"commodityPropertyTime";
 NSString * const kDatabaseVersion = @"databaseVersion";
 NSString * const kWork = @"work";
 NSString * const kCommodityStep = @"commodityStep";
+NSString * const kPushId = @"pushId";
 @implementation Config
 
 +(void)setInitSetting{
@@ -76,7 +77,6 @@ NSString * const kCommodityStep = @"commodityStep";
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults boolForKey:kLogin];
-    return YES;
 }
 
 
@@ -240,7 +240,16 @@ NSString * const kCommodityStep = @"commodityStep";
     return str == nil ?@"":str;
 }
 
-
++(void)setPushId:(NSString *)pushId
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:pushId forKey:kPushId];
+}
++(NSString *)getPushId{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *str = [user objectForKey:kPushId];
+    return str == nil ?@"":str;
+}
 
 
 

@@ -67,13 +67,13 @@
         return;
     }
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"登出中...";
-    hub.userInteractionEnabled = NO;
-    [[AppManager getInstance] logoutWithBlock:^(NSDictionary *data, NSString *error) {
+    hub.detailsLabelText = @"登出中...";
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
+    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.labelText = [NSString stringWithFormat:@"登出成功"];
+            hub.detailsLabelText = [NSString stringWithFormat:@"登出成功"];
             [hub hide:YES];
             [[AppManager getInstance] clearUserDataWhenLogout];
             LoginViewController *loginNav = [LoginViewController new];
@@ -82,7 +82,7 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
+            hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];

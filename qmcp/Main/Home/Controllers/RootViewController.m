@@ -56,10 +56,19 @@
     //数据初始化
     [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
     [[WorkOrderManager getInstance] getCommodityStepByLastUpdateTime:[Config getCommodityStep]];
+    
     [[PropertyManager getInstance] getCommodityItemByLastUpdateTime:[Config getCommodityItem]];
+
     [[PropertyManager getInstance] getCommoditySnapshotByLastUpdateTime:[Config getCommoditySnapshot]];
+    //获取步骤所有描述
     [[PropertyManager getInstance] getCommodityPropertyByLastUpdateTime:[Config getCommodityProperty]];
+    //获取门店所有摄像头
     [[CameraManager getInstance] getAllSystemCamera];
+    
+    //推送个推id
+    NSDictionary *dict = @{@"pushId":[Config getPushId]};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_GETUI];
+    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *dict, NSString *error) {}];
 }
 
 - (void)didReceiveMemoryWarning {

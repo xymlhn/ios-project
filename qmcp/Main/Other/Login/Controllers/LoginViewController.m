@@ -160,12 +160,15 @@
     NSString *password = _loginView.passWordText.text;
     MBProgressHUD *hub = [Utils createHUD];
     hub.labelText = @"正在登录";
-    hub.userInteractionEnabled = NO;
     
-    [[AppManager getInstance] loginWithUserName:username andPassword:password finishBlock:^(id data, NSString *error) {
+    // 请求参数
+    NSDictionary *dic = @{ @"user":username,@"pwd":password};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGIN];
+    
+    [HttpUtil postFormData:URLString param:dic finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             // 字典转模型
-            User *account = [User mj_objectWithKeyValues:data];
+            User *account = [User mj_objectWithKeyValues:obj];
             if(account.authenticated){
                 [Config saveUserName:username andPassword:password];
                 [Config saveLoginStatus:true];
@@ -192,6 +195,7 @@
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
     }];
+
 }
 
 @end

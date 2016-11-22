@@ -92,6 +92,10 @@
 +(void)setWork:(BOOL)work;
 +(BOOL)isWork;
 
+//个推id
++(void)setPushId:(NSString *)pushId;
++(NSString *)getPushId;
+
 //服务常用步骤
 +(void)setCommodityStep:(NSString*)step;
 +(NSString *)getCommodityStep;

@@ -16,22 +16,6 @@
 extern NSString *const kReloginNotification;  //登录通知
 
 + (AppManager *) getInstance;
-/**
- *  系统登出
- *
- *  @param viewController 当前控制器
- */
--(void) logoutWithBlock:(CompletionHandler)block;
-/**
- *  系统登入
- *
- *  @param viewController 当前控制器
- *  @param userName       用户名
- *  @param password       密码
- */
--(void) loginWithUserName:(NSString *)userName
-              andPassword:(NSString *)password
-              finishBlock:(CompletionHandler)completion;
 
 /**
  *  获取服务器时间

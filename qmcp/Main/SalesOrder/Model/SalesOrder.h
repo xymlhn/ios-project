@@ -47,7 +47,7 @@
 
 @property (nonatomic, assign) BOOL isMine;
 
-@property (nonatomic, copy) NSString *agreementPrice;
+@property (nonatomic, copy) NSString *agreementPrice;   
 
 @property (nonatomic, copy) NSString *discountAmount;
 

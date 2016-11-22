@@ -36,6 +36,12 @@
 @property (nonatomic,strong) UIView   *remarkView;
 @property (nonatomic,strong) UILabel  *remarkText;
 
+@property (nonatomic,strong) UIView   *agreePriceView;
+@property (nonatomic,strong) UILabel  *agreePriceText;
+@property (nonatomic, strong) UIButton *agreeBtn;
+
+
+
 @property (nonatomic,strong) UIButton *starBtn;
 
 @property (nonatomic,strong ) UILabel     *stepBtn;

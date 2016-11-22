@@ -33,7 +33,7 @@
     [self initAppointmentTimeView];
     [self initServiceView];
     [self initRemarkView];
-    
+    [self initAgreePriceView];
     [self initStarBtn];
     _view = self;
     return self;
@@ -474,6 +474,71 @@
         make.centerY.equalTo(_remarkView.mas_centerY);
         make.left.equalTo(remarkTitle.mas_right).with.offset(5);
         make.right.equalTo(_remarkView.mas_right).with.offset(-5);
+        make.height.equalTo(@20);
+    }];
+}
+
+//协议价
+-(void)initAgreePriceView
+{
+    _agreePriceView = [UIView new];
+    [_containView addSubview:_agreePriceView];
+    [_agreePriceView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_remarkView.mas_bottom).with.offset(0);
+        make.left.equalTo(_containView.mas_left).with.offset(0);
+        make.right.equalTo(_containView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@30);
+    }];
+    
+    UIView *codeBottomLine = [UIView new];
+    codeBottomLine.backgroundColor = [UIColor grayColor];
+    [_agreePriceView addSubview:codeBottomLine];
+    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_agreePriceView.mas_bottom).with.offset(0);
+        make.left.equalTo(_agreePriceView.mas_left).with.offset(0);
+        make.right.equalTo(_agreePriceView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    UILabel *agreeTitle = [UILabel new];
+    agreeTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    agreeTitle.text = @"协议价";
+    agreeTitle.textColor = [UIColor nameColor];
+    [_agreePriceView addSubview:agreeTitle];
+    
+    _agreePriceText = [UILabel new];
+    _agreePriceText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
+    _agreePriceText.text = @"";
+    _agreePriceText.textColor = [UIColor blackColor];
+    [_agreePriceView addSubview:_agreePriceText];
+    
+    _agreeBtn = [UIButton new];
+    _agreeBtn.layer.masksToBounds = YES;
+    _agreeBtn.backgroundColor = [UIColor nameColor];
+    _agreeBtn.layer.cornerRadius = 3.0;
+    [_agreeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _agreeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [_agreeBtn setTitle:@"修改" forState:UIControlStateNormal];
+     [_agreePriceView addSubview:_agreeBtn];
+    
+    [_agreeBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_agreePriceView.mas_centerY);
+        make.right.equalTo(_agreePriceView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(@22);
+        make.width.mas_equalTo(@50);
+    }];
+    
+    
+    [agreeTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_agreePriceView.mas_centerY);
+        make.left.equalTo(_agreePriceView.mas_left).with.offset(5);
+        make.width.equalTo(@50);
+        make.height.equalTo(@20);
+    }];
+    
+    [_agreePriceText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_agreePriceView.mas_centerY);
+        make.left.equalTo(agreeTitle.mas_right).with.offset(5);
+        make.right.equalTo(_agreePriceView.mas_right).with.offset(-5);
         make.height.equalTo(@20);
     }];
 }

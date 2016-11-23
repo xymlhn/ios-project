@@ -17,7 +17,6 @@
     
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:window];
-    HUD.label.font = [UIFont boldSystemFontOfSize:12];
     HUD.userInteractionEnabled = NO;
     [window addSubview:HUD];
     [HUD showAnimated:YES];

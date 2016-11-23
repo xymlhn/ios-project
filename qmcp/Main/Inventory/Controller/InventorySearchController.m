@@ -177,7 +177,7 @@
     }else{
         [InventoryManager getInstance].currentSalesOrderCode = salesOrderSearchResult.code;
         __weak typeof(self) weakSelf = self;
-        MBProgressHUD *hub = [Utils createHUD];
+        MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hub.detailsLabel.text = @"正在获取";
         hub.userInteractionEnabled = NO;
         NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,salesOrderSearchResult.code];

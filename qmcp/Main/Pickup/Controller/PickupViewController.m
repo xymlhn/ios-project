@@ -171,7 +171,7 @@
 
 -(void)p_handleResult:(NSString *)result
 {
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"加载中...";
     __weak typeof(self) weakSelf = self;
     [[PickupManager getInstance] getPickupItemByCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
@@ -209,7 +209,7 @@
 
 -(void)p_postPickupData:(PickupSignature *)pickupSignature
 {
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"完成中...";
     hub.userInteractionEnabled = NO;
      __weak typeof(self) weakSelf = self;

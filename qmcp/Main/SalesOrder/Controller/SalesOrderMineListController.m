@@ -84,7 +84,9 @@
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[SalesOrderManager getInstance] getSalesOrderMineByLastUpdateTime:[Config getSalesOrderMineTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
-            [self refreshTableView:arr];
+            if(!error){
+                [self refreshTableView:arr];
+            }
             [_tableView.mj_header endRefreshing];
         }];
     }];

@@ -124,7 +124,7 @@
 
 -(void)p_handleResult:(NSString *)result
 {
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"请求中...";
     hub.userInteractionEnabled = NO;
     __weak typeof(self) weakSelf = self;

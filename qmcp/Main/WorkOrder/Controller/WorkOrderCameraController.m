@@ -121,7 +121,7 @@
     
 
     if(!_currentCamera){
-        MBProgressHUD *hub = [Utils createHUD];
+        MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hub.detailsLabel.text = @"打开摄像头中...";
         hub.userInteractionEnabled = NO;
         
@@ -153,7 +153,7 @@
     }else{
         
         if([_currentCamera.cameraCode isEqualToString:cameraData.cameraCode]){
-            MBProgressHUD *hub = [Utils createHUD];
+            MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             hub.detailsLabel.text = @"关闭摄像头";
             hub.userInteractionEnabled = NO;
             

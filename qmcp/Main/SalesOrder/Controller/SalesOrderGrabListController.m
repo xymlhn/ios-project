@@ -53,7 +53,7 @@
                 [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             }else{
                 hub.detailsLabel.text = @"当前没有待抢订单！";
-                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
@@ -65,7 +65,7 @@
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[SalesOrderManager getInstance] getSalesOrderConfirm:^(NSMutableArray *arr, NSString *error) {
-            if(error != nil){
+            if(!error){
                 [self refreshTableView:arr];
             }
             [_tableView.mj_header endRefreshing];

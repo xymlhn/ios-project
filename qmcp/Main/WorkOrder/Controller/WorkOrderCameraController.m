@@ -47,7 +47,7 @@
     _cameraArr = [[CameraManager getInstance] getAllCameraData];
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"正在获取摄像头";
+    hub.detailsLabel.text = @"正在获取摄像头";
     hub.userInteractionEnabled = NO;
 
     NSString *URLString;
@@ -61,13 +61,13 @@
         if(!error){
             if(!obj){
                 hub.mode = MBProgressHUDModeCustomView;
-                hub.detailsLabelText = @"还未设置摄像头";
-                [hub hide:YES afterDelay:kEndFailedDelayTime];
+                hub.detailsLabel.text = @"还未设置摄像头";
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.detailsLabelText = [NSString stringWithFormat:@"获取摄像头成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"获取摄像头成功"];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 
                 CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
                 for(CameraData *cameraData in weakSelf.cameraArr){
@@ -81,8 +81,8 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 }
@@ -122,7 +122,7 @@
 
     if(!_currentCamera){
         MBProgressHUD *hub = [Utils createHUD];
-        hub.detailsLabelText = @"打开摄像头中...";
+        hub.detailsLabel.text = @"打开摄像头中...";
         hub.userInteractionEnabled = NO;
         
         [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:cameraData.cameraCode andFuncType:_funcType cameraStatus:YES finishBlock:^(NSDictionary *dict, NSString *error) {
@@ -137,15 +137,15 @@
                 [self.tableView reloadData];
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.detailsLabelText = @"打开摄像头成功";
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = @"打开摄像头成功";
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 
             }else{
                 [self.tableView reloadData];
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.detailsLabelText = error;
-                [hub hide:YES afterDelay:kEndFailedDelayTime];
+                hub.detailsLabel.text = error;
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }
         }];
         
@@ -154,7 +154,7 @@
         
         if([_currentCamera.cameraCode isEqualToString:cameraData.cameraCode]){
             MBProgressHUD *hub = [Utils createHUD];
-            hub.detailsLabelText = @"关闭摄像头";
+            hub.detailsLabel.text = @"关闭摄像头";
             hub.userInteractionEnabled = NO;
             
             [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:_currentCamera.cameraCode andFuncType:_funcType cameraStatus:NO finishBlock:^(NSDictionary *dict, NSString *error) {
@@ -169,15 +169,15 @@
                     [self.tableView reloadData];
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                    hub.detailsLabelText = @"关闭摄像头成功";
-                    [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                    hub.detailsLabel.text = @"关闭摄像头成功";
+                    [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                     
                 }else{
                     
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                    hub.detailsLabelText = error;
-                    [hub hide:YES afterDelay:kEndFailedDelayTime];
+                    hub.detailsLabel.text = error;
+                    [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                 }
 
             }];

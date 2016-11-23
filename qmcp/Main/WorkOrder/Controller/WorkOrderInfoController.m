@@ -147,7 +147,7 @@
 -(void)p_updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在提交数据";
+    hub.detailsLabel.text = @"正在提交数据";
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,workOrderCode];
     
@@ -156,8 +156,8 @@
             weakSelf.workOrder.isFailed = NO;
             [weakSelf.workOrder saveToDB];
             [[WorkOrderManager getInstance] sortAllWorkOrder];
-            hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.detailsLabel.text = [NSString stringWithFormat:@"提交数据成功"];
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             
             switch (weakSelf.workOrder.onSiteStatus) {
                     case OnSiteStatusNone:
@@ -182,8 +182,8 @@
             [[WorkOrderManager getInstance] sortAllWorkOrder];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     
@@ -272,7 +272,7 @@
 - (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在上传工单步骤";
+    hub.detailsLabel.text = @"正在上传工单步骤";
     hub.userInteractionEnabled = NO;
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
@@ -303,15 +303,15 @@
                             [[WorkOrderManager getInstance] sortAllWorkOrder];
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.labelText = error;
-                            [hub hide:YES afterDelay:kEndFailedDelayTime];
+                            hub.detailsLabel.text = error;
+                            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                         }
                     }];
                 }
             }else
             {
-                hub.labelText = [NSString stringWithFormat:@"上传工单步骤成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"上传工单步骤成功"];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 
                 [self p_updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:OnSiteTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
                 
@@ -322,8 +322,8 @@
             [[WorkOrderManager getInstance] sortAllWorkOrder];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             
         }
 
@@ -335,14 +335,14 @@
 -(void)p_updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在完结工单";
+    hub.detailsLabel.text = @"正在完结工单";
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,workOrderCode];
     [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
-            hub.labelText = [NSString stringWithFormat:@"完结工单成功"];
-            [hub hide:YES afterDelay:1];
+            hub.detailsLabel.text = [NSString stringWithFormat:@"完结工单成功"];
+            [hub hideAnimated:YES afterDelay:1];
             
             [weakSelf.workOrder deleteToDB];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
@@ -353,8 +353,8 @@
             [weakSelf.workOrder saveToDB];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:1];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:1];
         }
     }];
 

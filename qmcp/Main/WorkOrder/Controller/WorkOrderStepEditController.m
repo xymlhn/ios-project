@@ -182,7 +182,7 @@
 - (void)p_postInfo:(NSArray *)steps{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"正在上传步骤";
+    hub.detailsLabel.text = @"正在上传步骤";
     NSMutableArray *arrayM = [WorkOrderStep mj_keyValuesArrayWithObjectArray:steps];
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTSALESORDERSTEP,_code];
     [HttpUtil post:URLString param:arrayM finish:^(NSDictionary *obj, NSString *error) {
@@ -201,31 +201,31 @@
                 for(Attachment *attachment in attachments)
                 {
                     i++;
-                    hub.detailsLabelText = [NSString stringWithFormat:@"正在上传附件"];
+                    hub.detailsLabel.text = [NSString stringWithFormat:@"正在上传附件"];
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
                             if(i == attachments.count){
-                                hub.detailsLabelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                hub.detailsLabel.text = [NSString stringWithFormat:@"上传工单附件成功"];
                                 hub.mode = MBProgressHUDModeCustomView;
                                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                                 [weakSelf.navigationController popViewControllerAnimated:YES];
                                 [weakSelf p_doneSave];
                             }
                         }else{
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.detailsLabelText = error;
-                            [hub hide:YES afterDelay:kEndFailedDelayTime];
+                            hub.detailsLabel.text = error;
+                            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                         }
                     }];
                 }
             }else
             {
-                hub.detailsLabelText = [NSString stringWithFormat:@"上传步骤成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"上传步骤成功"];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
                 [weakSelf p_doneSave];
             }
@@ -233,8 +233,8 @@
             
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             
         }
         
@@ -245,7 +245,7 @@
 - (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepsArray:(NSArray *)steps{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"正在上传工单步骤";
+    hub.detailsLabel.text = @"正在上传工单步骤";
     NSMutableArray *arrayM = [WorkOrderStep mj_keyValuesArrayWithObjectArray:steps];
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTWORKORDERSTEP,_code];
     [HttpUtil post:URLString param:arrayM finish:^(NSDictionary *obj, NSString *error) {
@@ -262,39 +262,38 @@
                 int i= 0;
                 for(Attachment *attachment in attachments){
                     i++;
-                    hub.detailsLabelText = [NSString stringWithFormat:@"正在上传附件"];
+                    hub.detailsLabel.text = [NSString stringWithFormat:@"正在上传附件"];
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
                             if(i == attachments.count){
-                                hub.detailsLabelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                hub.detailsLabel.text = [NSString stringWithFormat:@"上传工单附件成功"];
                                 hub.mode = MBProgressHUDModeCustomView;
                                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                                 [weakSelf.navigationController popViewControllerAnimated:YES];
                                 [weakSelf p_doneSave];
                             }
                         }else{
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.detailsLabelText = error;
-                            [hub hide:YES afterDelay:kEndFailedDelayTime];
+                            hub.detailsLabel.text = error;
+                            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                         }
                     }];
                 }
             }else{
-                hub.detailsLabelText = [NSString stringWithFormat:@"上传工单步骤成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"上传工单步骤成功"];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
                 [weakSelf p_doneSave];
             }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
-            
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
         
     }];

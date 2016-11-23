@@ -179,8 +179,8 @@
  */
 -(void)p_postInventoryDataWitCode:(NSString *)code{
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"正在上传清点数据";
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hub.detailsLabel.text = @"正在上传清点数据";
     NSMutableArray *itemArray = [ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList];
     NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_salesOrderSearchResult.itemConfirmed],
                                     @"signatureImageKey":_salesOrderSearchResult.signatureImageKey,@"itemSnapshots":itemArray};
@@ -200,17 +200,17 @@
                 int i= 0;
                 for(Attachment *attachment in attachments){
                     i++;
-                    hub.detailsLabelText = [NSString stringWithFormat:@"正在上传附件"];
+                    hub.detailsLabel.text = [NSString stringWithFormat:@"正在上传附件"];
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
                             if(i == attachments.count){
-                                hub.detailsLabelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                hub.detailsLabel.text = [NSString stringWithFormat:@"上传工单附件成功"];
                                 hub.mode = MBProgressHUDModeCustomView;
                                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                                [hub hide:YES afterDelay:kEndSucceedDelayTime];
-                                //图片要全部上传完了才能开始删，不然有些已经上传的图片删了本地看不见 ？？？
+                                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
+                                //图片要全部上传完了才能开始删，不然失败有些已经上传的图片删了本地看不见 ？？？
                                 for (Attachment *delAttachment in attachments) {
                                     [Utils deleteImage:delAttachment.key];
                                 }
@@ -223,8 +223,8 @@
                             [Utils deleteImage:_salesOrderSearchResult.signatureImageKey];
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                            hub.detailsLabelText = error;
-                            [hub hide:YES afterDelay:kEndFailedDelayTime];
+                            hub.detailsLabel.text = error;
+                            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                         }
                     }];
                 }
@@ -233,15 +233,15 @@
                     weakSelf.doneBlock(YES);
                 }
                 [self.navigationController popViewControllerAnimated:YES];
-                hub.detailsLabelText = [NSString stringWithFormat:@"上传清点数据成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"上传清点数据成功"];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             }
         }else{
             [Utils deleteImage:_salesOrderSearchResult.signatureImageKey];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             
         }
     }];

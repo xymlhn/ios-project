@@ -114,7 +114,7 @@
     [_searchView.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"正在搜索";
+    hub.detailsLabel.text = @"正在搜索";
     hub.userInteractionEnabled = NO;
     
     [[InventoryManager getInstance] getSalesOrderSearchResult:string finishBlock:^(NSMutableArray<SalesOrderSearchResult *> *array, NSString *error) {
@@ -125,14 +125,14 @@
                 message = @"搜索不到工单";
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.detailsLabelText = message;
-                [hub hide:YES afterDelay:kEndFailedDelayTime];
+                hub.detailsLabel.text = message;
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }else{
                 message = @"搜索成功";
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.detailsLabelText = message;
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = message;
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             }
             [weakSelf.searchView.tableView reloadData];
             
@@ -141,8 +141,8 @@
             [weakSelf.searchView.tableView reloadData];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     
@@ -178,7 +178,7 @@
         [InventoryManager getInstance].currentSalesOrderCode = salesOrderSearchResult.code;
         __weak typeof(self) weakSelf = self;
         MBProgressHUD *hub = [Utils createHUD];
-        hub.detailsLabelText = @"正在获取";
+        hub.detailsLabel.text = @"正在获取";
         hub.userInteractionEnabled = NO;
         NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,salesOrderSearchResult.code];
         [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -187,14 +187,14 @@
                 salesOrderSearchResult.commodityItemList = commoditySnapshots;
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.detailsLabelText = @"获取成功";
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = @"获取成功";
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 [weakSelf p_pushInfoView:salesOrderSearchResult.code];
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.detailsLabelText = error;
-                [hub hide:YES afterDelay:kEndFailedDelayTime];
+                hub.detailsLabel.text = error;
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }
 
         }];

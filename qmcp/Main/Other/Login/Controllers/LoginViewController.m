@@ -158,8 +158,8 @@
 {
     NSString *username = _loginView.userNameText.text;
     NSString *password = _loginView.passWordText.text;
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在登录";
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hub.detailsLabel.text = @"正在登录";
     
     // 请求参数
     NSDictionary *dic = @{ @"user":username,@"pwd":password};
@@ -174,8 +174,8 @@
                 [Config saveLoginStatus:true];
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.labelText = [NSString stringWithFormat:@"登录成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"登录成功"];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 [[AppManager getInstance]setUser:account];
                 [[TMCache sharedCache] setObject:account forKey:@"user"];
                 UIStoryboard *discoverSB = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -185,14 +185,14 @@
                 
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.labelText = [NSString stringWithFormat:@"账号或密码错误"];
-                [hub hide:YES afterDelay:kEndFailedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"账号或密码错误"];
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 

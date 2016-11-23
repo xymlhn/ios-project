@@ -38,7 +38,7 @@
     _businessSalesOrderView.orderButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         __weak typeof(self) weakSelf = self;
         MBProgressHUD *hub = [Utils createHUD];
-        hub.detailsLabelText = @"正在下单";
+        hub.detailsLabel.text = @"正在下单";
         hub.userInteractionEnabled = NO;
         
         BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text
@@ -52,8 +52,8 @@
             if (!error) {
                 SalesOrder *salesOrder = [SalesOrder mj_objectWithKeyValues:obj];
                 [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:salesOrder];
-                hub.detailsLabelText = [NSString stringWithFormat:@"下单成功"];
-                [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"下单成功"];
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 //调用代理对象的协议方法来实现数据传递
                 [weakSelf.navigationController popViewControllerAnimated:YES];
                 if (weakSelf.doneBlock) {
@@ -62,8 +62,8 @@
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.detailsLabelText = error;
-                [hub hide:YES afterDelay:kEndFailedDelayTime];
+                hub.detailsLabel.text = error;
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }
         }];
         return [RACSignal empty];

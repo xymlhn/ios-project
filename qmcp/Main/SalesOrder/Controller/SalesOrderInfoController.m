@@ -70,21 +70,21 @@
         __weak typeof(self) weakSelf = self;
         AgreePriceChangeController *controller = [AgreePriceChangeController doneBlock:^(NSString *price, NSString *remark) {
             MBProgressHUD *hub = [Utils createHUD];
-            hub.labelText = @"正在提交数据";
+            hub.detailsLabel.text = @"正在提交数据";
             NSDictionary *dict = @{@"agreementPrice":price,@"remark":remark};
             NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERAGREEPRICE,_code];
             [HttpUtil post:URLString param:dict finish:^(NSDictionary *dict, NSString *error) {
                 if(!error){
-                    hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
-                    [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                    hub.detailsLabel.text = [NSString stringWithFormat:@"提交数据成功"];
+                    [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                     weakSelf.salesOrder.agreementPrice = price;
                     [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:weakSelf.salesOrder];
                     [weakSelf setInfo:weakSelf.salesOrder];
                 }else{
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                    hub.labelText = error;
-                    [hub hide:YES afterDelay:kEndFailedDelayTime];
+                    hub.detailsLabel.text = error;
+                    [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                 }
             }];
 
@@ -178,15 +178,15 @@
 -(void)p_updateTimeStampWithCode:(NSString *)_salesOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在提交数据";
+    hub.detailsLabel.text = @"正在提交数据";
     hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDER_TIMESTAMP,_code];
     [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
-            hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.detailsLabel.text = [NSString stringWithFormat:@"提交数据成功"];
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             switch (weakSelf.salesOrder.onSiteStatus) {
                 case OnSiteStatusNone:
                 case OnSiteStatusWaiting:
@@ -208,8 +208,8 @@
             [weakSelf.salesOrder saveToDB];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     
@@ -239,13 +239,13 @@
 -(void)p_completeSalesOrder{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.labelText = @"正在完成订单";
+    hub.detailsLabel.text = @"正在完成订单";
     hub.userInteractionEnabled = NO;
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCOMPLETE,_code];
     [HttpUtil post:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
         if(error == nil){
-            hub.labelText = [NSString stringWithFormat:@"完成订单成功"];
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.detailsLabel.text = [NSString stringWithFormat:@"完成订单成功"];
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             [weakSelf.salesOrder deleteToDB];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             if (weakSelf.doneBlock) {
@@ -255,8 +255,8 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 }
@@ -278,13 +278,13 @@
 -(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer{
       __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"正在刷新";
+    hub.detailsLabel.text = @"正在刷新";
     hub.userInteractionEnabled = NO;
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,_code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
-            hub.detailsLabelText = @"刷新成功";
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.detailsLabel.text = @"刷新成功";
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
             weakSelf.salesOrder = tempSalesOrder;
             [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
@@ -292,8 +292,8 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
         
     }];
@@ -309,15 +309,15 @@
     SalesOrderSearchResult *ssr = [[InventoryManager getInstance] salesOrderChangeToSearchResult:_salesOrder];
     [[InventoryManager getInstance] appendSalesOrderSearchResult:ssr];
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"正在获取清点信息";
+    hub.detailsLabel.text = @"正在获取清点信息";
     hub.userInteractionEnabled = NO;
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,_code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             NSArray<CommoditySnapshot *> *commoditySnapshots = [CommoditySnapshot mj_objectArrayWithKeyValuesArray:obj];
             ssr.commodityItemList = commoditySnapshots;
-            hub.detailsLabelText = @"";
-            [hub hide:YES];
+            hub.detailsLabel.text = @"";
+            [hub hideAnimated:YES];
             InventoryController *info = [InventoryController doneBlock:^(BOOL signFlag) {
                 weakSelf.salesOrder.signedFlag = signFlag;
             }];
@@ -327,8 +327,8 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     
     }];

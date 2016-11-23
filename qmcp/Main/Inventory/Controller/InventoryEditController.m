@@ -347,6 +347,10 @@
  @return bool
  */
 -(BOOL)p_beforeSaveHandle{
+    if(_unLock){
+        [Utils showHudTipStr:@"请将二维码锁上保存"];
+        return NO;
+    }
     if ([_inventoryEditView.qrText.text isEqualToString:@""] || _attachments.count < 2) {
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"二维码为空/还未拍照,是否放弃编辑?" preferredStyle:UIAlertControllerStyleAlert];
         [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

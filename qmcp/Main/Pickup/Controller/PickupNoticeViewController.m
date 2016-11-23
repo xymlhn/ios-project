@@ -125,20 +125,20 @@
 -(void)p_handleResult:(NSString *)result
 {
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"请求中...";
+    hub.detailsLabel.text = @"请求中...";
     hub.userInteractionEnabled = NO;
     __weak typeof(self) weakSelf = self;
     [[PickupManager getInstance] itemCompleteByCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
         if (!error) {
-            [hub hide:YES];
+            [hub hideAnimated:YES];
             ItemComplete *itemComplete = [ItemComplete mj_objectWithKeyValues:obj];
             [weakSelf.itemCompleteArray insertObject:itemComplete atIndex:0];
             [weakSelf.pickupNoticeView.tableView reloadData];
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
     

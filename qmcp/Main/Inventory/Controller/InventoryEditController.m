@@ -43,6 +43,22 @@
 @implementation InventoryEditController
 
 #pragma mark - BaseWorkOrderViewController
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // 禁用返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // 开启返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+}
 -(void)loadView
 {
      _inventoryEditView = [InventoryEditView viewInstance];
@@ -96,6 +112,7 @@
     _inventoryEditView.delBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         _saveType = SaveTypeDelete;
         [self.navigationController popViewControllerAnimated:YES];
+        [self p_doneSave];
         return [RACSignal empty];
     }];
 }
@@ -103,7 +120,7 @@
 -(void)loadData
 {
     _inventoryEditView.qrText.enabled = _unLock;
-    NSString *itemWhere = [NSString stringWithFormat:@"salesOrderItemCode = '%@'",_itemSnapshotCode];
+    NSString *itemWhere = [NSString stringWithFormat:@"itemSnapshotCode = '%@'",_itemSnapshotCode];
     _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
     
     _attachments = [NSMutableArray new];
@@ -122,8 +139,11 @@
 
 }
 
--(void)saveData{
-    
+
+/**
+ 返回上一个界面处理
+ */
+-(void)p_doneSave{
     if (self.doneBlock) {
         switch (_saveType) {
             case SaveTypeAdd:
@@ -139,7 +159,7 @@
                 _itemSnapshot.remark = _inventoryEditView.remarkText.text;
                 _itemSnapshot.name = _inventoryEditView.goodNameText.text;
                 if([_itemSnapshot updateToDB]){
-                    self.doneBlock(_itemSnapshot,SaveTypeAdd);
+                    self.doneBlock(_itemSnapshot,SaveTypeUpdate);
                 }
                 break;
             case SaveTypeDelete:
@@ -165,7 +185,7 @@
     InventoryChooseController *info = [InventoryChooseController doneBlock:^(NSMutableArray *commodies) {
         _itemSnapshot.commodities = commodies;
     }];
-    info.itemSnapshotCode = _itemSnapshot.salesOrderItemCode;
+    info.itemSnapshotCode = _itemSnapshot.itemSnapshotCode;
     info.salesOrderCode = _salesOrderCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
@@ -322,7 +342,7 @@
 
 
 /**
- 保存前处理
+ 保存前提示处理
 
  @return bool
  */
@@ -332,6 +352,7 @@
         [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             _saveType = SaveTypeDelete;
             [self.navigationController popViewControllerAnimated:YES];
+            [self p_doneSave];
         }]];
         
         [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -340,6 +361,7 @@
         [self presentViewController:alertControl animated:YES completion:nil];
         return NO;
     }else{
+        [self p_doneSave];
         return YES;
     }
 }

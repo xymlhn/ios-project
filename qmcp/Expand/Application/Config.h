@@ -68,10 +68,6 @@
 +(void)setWorkOrderTime:(NSString *)lastupdateTime;
 +(NSString *)getWorkOrderTime;
 
-//抢单更新时间
-+(void)setSalesOrderGrabTime:(NSString *)lastupdateTime;
-+(NSString *)getSalesOrderGrabTime;
-
 //物品组合更新时间
 +(void)setCommodityItem:(NSString *)lastupdateTime;
 +(NSString *)getCommodityItem;

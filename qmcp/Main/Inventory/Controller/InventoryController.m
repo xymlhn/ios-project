@@ -47,12 +47,12 @@
     [_inventoryView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
 
     _inventoryView.signBtn.userInteractionEnabled = YES;
-    [_inventoryView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saveBtnClick:)]];
+    [_inventoryView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signBtnClick:)]];
 }
 
 -(void)loadData{
     _salesOrderSearchResult = [[InventoryManager getInstance] getSalesOrderSearchResultByCode:_salesOrderCode];
-    NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_salesOrderSearchResult.code];
+    NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_salesOrderCode];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
 }
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
@@ -67,20 +67,30 @@
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+
+
++(instancetype)doneBlock:(void(^)(BOOL signFlag))block{
+    
+    InventoryController *vc = [[InventoryController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
 #pragma mark - IBAction
 - (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
     
     ItemSnapshot *itemSnapshot = [ItemSnapshot new];
-    itemSnapshot.salesOrderItemCode = [[NSUUID UUID] UUIDString];
+    itemSnapshot.itemSnapshotCode = [[NSUUID UUID] UUIDString];
     long size = _itemSnapshotList.count + 1;
     itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
     itemSnapshot.salesOrderCode = _salesOrderCode;
     [itemSnapshot saveToDB];
-    [self p_pushInventoryEditController:itemSnapshot.salesOrderItemCode andType:SaveTypeAdd];
+    [self p_pushInventoryEditController:itemSnapshot.itemSnapshotCode andType:SaveTypeAdd];
     
 }
 
-- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer{
+- (void)signBtnClick:(UITapGestureRecognizer *)recognizer{
     if (_itemSnapshotList.count == 0) {
         return;
     }
@@ -95,8 +105,8 @@
 -(void)p_appendInventory:(ItemSnapshot *)item{
     BOOL flag = NO;
     for(int i = 0;i < _itemSnapshotList.count;i++){
-        NSString *code = _itemSnapshotList[i].code;
-        if([code isEqualToString:item.code]){
+        NSString *itemSnapshotCode = _itemSnapshotList[i].itemSnapshotCode;
+        if([itemSnapshotCode isEqualToString:item.itemSnapshotCode]){
             flag = YES;
         }
     }
@@ -114,11 +124,11 @@
                 break;
             case SaveTypeUpdate:
                 for (ItemSnapshot *temp in _itemSnapshotList) {
-                    if([temp.code isEqualToString:item.code]){
-                        item.remark = temp.remark;
-                        item.salesOrderItemCode = temp.salesOrderItemCode;
-                        item.commodities = temp.commodities;
-                        item.attachments = temp.attachments;
+                    if([temp.itemSnapshotCode isEqualToString:item.itemSnapshotCode]){
+                        temp.remark = item.remark;
+                        temp.code = item.code;
+                        temp.commodities = item.commodities;
+                        temp.attachments = item.attachments;
                         break;
                     }
                 }
@@ -126,7 +136,7 @@
                 break;
             case SaveTypeDelete:
                 for (ItemSnapshot *temp in weakSelf.itemSnapshotList) {
-                    if([temp.code isEqualToString:item.code]){
+                    if([temp.itemSnapshotCode isEqualToString:item.itemSnapshotCode]){
                         [weakSelf.itemSnapshotList removeObject:temp];
                         break;
                     }
@@ -162,20 +172,24 @@
     
 }
 
+/**
+ 上传清点数据
+
+ @param code 订单code
+ */
 -(void)p_postInventoryDataWitCode:(NSString *)code{
+    __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabelText = @"正在上传清点数据";
     NSMutableArray *itemArray = [ItemSnapshot mj_keyValuesArrayWithObjectArray:_itemSnapshotList];
     NSDictionary *inventoryDict = @{@"itemConfirmed":[NSNumber numberWithBool:_salesOrderSearchResult.itemConfirmed],
                                     @"signatureImageKey":_salesOrderSearchResult.signatureImageKey,@"itemSnapshots":itemArray};
-
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_POSTINVENTORY,code];
     [HttpUtil post:URLString param:inventoryDict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             NSMutableArray *attachments = [NSMutableArray new];
             for (ItemSnapshot *item in _itemSnapshotList) {
-                for(Attachment *attachment in item.attachments)
-                {
+                for(Attachment *attachment in item.attachments){
                     if(!attachment.isUpload){
                         [attachments addObject:attachment];
                     }
@@ -184,20 +198,29 @@
             }
             if(attachments.count > 0){
                 int i= 0;
-                for(Attachment *attachment in attachments)
-                {
+                for(Attachment *attachment in attachments){
                     i++;
                     hub.detailsLabelText = [NSString stringWithFormat:@"正在上传附件"];
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
                             [attachment updateToDB];
-                            if(i == attachments.count)
-                            {
+                            if(i == attachments.count){
                                 hub.detailsLabelText = [NSString stringWithFormat:@"上传工单附件成功"];
+                                hub.mode = MBProgressHUDModeCustomView;
+                                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
                                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
+                                //图片要全部上传完了才能开始删，不然有些已经上传的图片删了本地看不见 ？？？
+                                for (Attachment *delAttachment in attachments) {
+                                    [Utils deleteImage:delAttachment.key];
+                                }
+                                if (weakSelf.doneBlock) {
+                                    weakSelf.doneBlock(YES);
+                                }
+                                [self.navigationController popViewControllerAnimated:YES];
                             }
                         }else{
+                            [Utils deleteImage:_salesOrderSearchResult.signatureImageKey];
                             hub.mode = MBProgressHUDModeCustomView;
                             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
                             hub.detailsLabelText = error;
@@ -205,12 +228,16 @@
                         }
                     }];
                 }
-            }else
-            {
-                hub.detailsLabelText = [NSString stringWithFormat:@"上传工单步骤成功"];
+            }else{
+                if (weakSelf.doneBlock) {
+                    weakSelf.doneBlock(YES);
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+                hub.detailsLabelText = [NSString stringWithFormat:@"上传清点数据成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }
         }else{
+            [Utils deleteImage:_salesOrderSearchResult.signatureImageKey];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.detailsLabelText = error;
@@ -238,7 +265,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ItemSnapshot *itemSnapshot = self.itemSnapshotList[indexPath.row];
-    [self p_pushInventoryEditController:itemSnapshot.salesOrderItemCode andType:SaveTypeUpdate];
+    [self p_pushInventoryEditController:itemSnapshot.itemSnapshotCode andType:SaveTypeUpdate];
     
 }
 

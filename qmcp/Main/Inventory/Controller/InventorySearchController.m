@@ -27,18 +27,17 @@
     _searchView = [InventorySearchView viewInstance];
     _searchView.searchBar.delegate = self;
     self.navigationItem.title = @"搜索";
-    
+    self.view = _searchView;
+}
+
+-(void)bindListener{
     _searchView.tableView.delegate = self;
     _searchView.tableView.dataSource = self;
     _searchView.tableView.tableHeaderView = [UIView new];
     _searchView.tableView.tableFooterView = [UIView new];
     _searchView.tableView.emptyDataSetSource = self;
     _searchView.tableView.emptyDataSetDelegate = self;
-    self.view = _searchView;
-}
 
--(void)bindListener{
-    
 }
 
 -(void)loadData{

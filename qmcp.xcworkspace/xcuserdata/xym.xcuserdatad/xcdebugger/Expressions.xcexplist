@@ -20,6 +20,14 @@
          contextName = "-[CommodityStepController tableView:cellForRowAtIndexPath:]:CommodityStepController.m">
       </ContextState>
       <ContextState
+         contextName = "+[HttpUtil handleHeader:]:HttpUtil.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[dic valueForKey:@&quot;exceptionType&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[SalesOrderGrabCell setSalesOrderSnapshot:]:SalesOrderGrabCell.m">
          <PersistentStrings>
             <PersistentString
@@ -39,13 +47,13 @@
          contextName = "__31+[WorkOrderManager getInstance]_block_invoke:WorkOrderManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "shared_manager.commodityStepDict">
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
             </PersistentString>
             <PersistentString
                value = "_commodityStepDict">
             </PersistentString>
             <PersistentString
-               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
+               value = "shared_manager.commodityStepDict">
             </PersistentString>
             <PersistentString
                value = "shared_manager">
@@ -78,10 +86,10 @@
          contextName = "-[WorkOrderManager getCommodityByCommodityCode:]:WorkOrderManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.commodityStepDict">
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
             </PersistentString>
             <PersistentString
-               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
+               value = "self.commodityStepDict">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -162,6 +170,9 @@
             </PersistentString>
             <PersistentString
                value = "obj[@&quot;success&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = " [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

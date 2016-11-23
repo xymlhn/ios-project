@@ -25,7 +25,6 @@
 		240EC9561D7FB2B7008A5696 /* PropertyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC91E1D7FB2B7008A5696 /* PropertyManager.m */; };
 		240EC9571D7FB2B7008A5696 /* SalesOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9201D7FB2B7008A5696 /* SalesOrderManager.m */; };
 		240EC9581D7FB2B7008A5696 /* WorkOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9221D7FB2B7008A5696 /* WorkOrderManager.m */; };
-		240EC9591D7FB2B7008A5696 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9251D7FB2B7008A5696 /* Config.m */; };
 		240EC95A1D7FB2B7008A5696 /* EnumUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9271D7FB2B7008A5696 /* EnumUtil.m */; };
 		240EC95B1D7FB2B7008A5696 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9291D7FB2B7008A5696 /* Helper.m */; };
 		240EC95C1D7FB2B7008A5696 /* HttpUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC92B1D7FB2B7008A5696 /* HttpUtil.m */; };
@@ -37,7 +36,7 @@
 		240EC9701D7FB2DC008A5696 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96B1D7FB2DC008A5696 /* BaseView.m */; };
 		240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96D1D7FB2DC008A5696 /* BaseViewController.m */; };
 		240EC9881D7FB456008A5696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240EC9861D7FB456008A5696 /* LaunchScreen.storyboard */; };
-		2418634E1DE3E06A006C7AC5 /* AgressPriceChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418634D1DE3E06A006C7AC5 /* AgressPriceChangeView.m */; };
+		2418634E1DE3E06A006C7AC5 /* AgreePriceChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */; };
 		241863511DE3E461006C7AC5 /* AgreePriceChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241863501DE3E461006C7AC5 /* AgreePriceChangeController.m */; };
 		242815D31D936BE7006120ED /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B71D936BE7006120ED /* AddressViewController.m */; };
 		242815D41D936BE7006120ED /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B91D936BE7006120ED /* CheckBoxViewController.m */; };
@@ -60,6 +59,7 @@
 		245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 245BCF841D93CBCE00028C40 /* GisLocation.m */; };
 		245F756E1DDABF5D00FB51FA /* SDTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */; };
 		245F75711DDABFE700FB51FA /* SDTimeLineCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */; };
+		2460DCC51DE44E81006F6F64 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 2460DCC41DE44E81006F6F64 /* Config.m */; };
 		246642D41D9A1285009402A2 /* SalesOrderGrabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */; };
 		246642D51D9A1285009402A2 /* SalesOrderMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D31D9A1285009402A2 /* SalesOrderMineCell.m */; };
 		246642DA1D9A12CA009402A2 /* BusinessSalesOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */; };
@@ -132,7 +132,6 @@
 		24AFDC481D9238FF00B2F1B9 /* SalesOrderMineListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB991D9238FF00B2F1B9 /* SalesOrderMineListController.m */; };
 		24AFDC491D9238FF00B2F1B9 /* SalesOrderGrabListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB9B1D9238FF00B2F1B9 /* SalesOrderGrabListController.m */; };
 		24AFDC4A1D9238FF00B2F1B9 /* SalesOrderMine.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDB9E1D9238FF00B2F1B9 /* SalesOrderMine.m */; };
-		24AFDC4B1D9238FF00B2F1B9 /* SalesOrderConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDBA01D9238FF00B2F1B9 /* SalesOrderConfirm.m */; };
 		24AFDC4C1D9238FF00B2F1B9 /* SalesOrderSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDBA21D9238FF00B2F1B9 /* SalesOrderSearchResult.m */; };
 		24AFDC4D1D9238FF00B2F1B9 /* SalesOrderSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDBA41D9238FF00B2F1B9 /* SalesOrderSnapshot.m */; };
 		24AFDC641D92390000B2F1B9 /* ChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDBDB1D9238FF00B2F1B9 /* ChooseViewController.m */; };
@@ -229,8 +228,6 @@
 		240EC9201D7FB2B7008A5696 /* SalesOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderManager.m; sourceTree = "<group>"; };
 		240EC9211D7FB2B7008A5696 /* WorkOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderManager.h; sourceTree = "<group>"; };
 		240EC9221D7FB2B7008A5696 /* WorkOrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderManager.m; sourceTree = "<group>"; };
-		240EC9241D7FB2B7008A5696 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
-		240EC9251D7FB2B7008A5696 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		240EC9261D7FB2B7008A5696 /* EnumUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumUtil.h; sourceTree = "<group>"; };
 		240EC9271D7FB2B7008A5696 /* EnumUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumUtil.m; sourceTree = "<group>"; };
 		240EC9281D7FB2B7008A5696 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
@@ -253,8 +250,8 @@
 		240EC96D1D7FB2DC008A5696 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		240EC9871D7FB456008A5696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		240EC98B1D7FB491008A5696 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2418634C1DE3E06A006C7AC5 /* AgressPriceChangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgressPriceChangeView.h; sourceTree = "<group>"; };
-		2418634D1DE3E06A006C7AC5 /* AgressPriceChangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgressPriceChangeView.m; sourceTree = "<group>"; };
+		2418634C1DE3E06A006C7AC5 /* AgreePriceChangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreePriceChangeView.h; sourceTree = "<group>"; };
+		2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreePriceChangeView.m; sourceTree = "<group>"; };
 		2418634F1DE3E461006C7AC5 /* AgreePriceChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreePriceChangeController.h; sourceTree = "<group>"; };
 		241863501DE3E461006C7AC5 /* AgreePriceChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreePriceChangeController.m; sourceTree = "<group>"; };
 		242815B61D936BE7006120ED /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
@@ -317,6 +314,8 @@
 		245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDTimeLineCell.m; path = ../SDTimeLineCell.m; sourceTree = "<group>"; };
 		245F756F1DDABFE700FB51FA /* SDTimeLineCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeLineCellModel.h; sourceTree = "<group>"; };
 		245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineCellModel.m; sourceTree = "<group>"; };
+		2460DCC31DE44E81006F6F64 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		2460DCC41DE44E81006F6F64 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
 		246642D01D9A1285009402A2 /* SalesOrderGrabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabCell.h; sourceTree = "<group>"; };
 		246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabCell.m; sourceTree = "<group>"; };
 		246642D21D9A1285009402A2 /* SalesOrderMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderMineCell.h; sourceTree = "<group>"; };
@@ -460,8 +459,6 @@
 		24AFDB9B1D9238FF00B2F1B9 /* SalesOrderGrabListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabListController.m; sourceTree = "<group>"; };
 		24AFDB9D1D9238FF00B2F1B9 /* SalesOrderMine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderMine.h; sourceTree = "<group>"; };
 		24AFDB9E1D9238FF00B2F1B9 /* SalesOrderMine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderMine.m; sourceTree = "<group>"; };
-		24AFDB9F1D9238FF00B2F1B9 /* SalesOrderConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderConfirm.h; sourceTree = "<group>"; };
-		24AFDBA01D9238FF00B2F1B9 /* SalesOrderConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderConfirm.m; sourceTree = "<group>"; };
 		24AFDBA11D9238FF00B2F1B9 /* SalesOrderSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderSearchResult.h; sourceTree = "<group>"; };
 		24AFDBA21D9238FF00B2F1B9 /* SalesOrderSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderSearchResult.m; sourceTree = "<group>"; };
 		24AFDBA31D9238FF00B2F1B9 /* SalesOrderSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderSnapshot.h; sourceTree = "<group>"; };
@@ -662,8 +659,6 @@
 			children = (
 				240EC92F1D7FB2B7008A5696 /* Standard */,
 				240EC92C1D7FB2B7008A5696 /* SMPageControl */,
-				240EC9241D7FB2B7008A5696 /* Config.h */,
-				240EC9251D7FB2B7008A5696 /* Config.m */,
 				240EC9261D7FB2B7008A5696 /* EnumUtil.h */,
 				240EC9271D7FB2B7008A5696 /* EnumUtil.m */,
 				240EC9281D7FB2B7008A5696 /* Helper.h */,
@@ -942,6 +937,8 @@
 				24AFD7F41D92339200B2F1B9 /* AppDelegate.h */,
 				24AFD7F51D92339200B2F1B9 /* AppDelegate.m */,
 				24AFD7F61D92339200B2F1B9 /* PchHeader.h */,
+				2460DCC31DE44E81006F6F64 /* Config.h */,
+				2460DCC41DE44E81006F6F64 /* Config.m */,
 				24AFD7F71D92339200B2F1B9 /* QMCPAPI.h */,
 			);
 			name = "Application(系统)";
@@ -1278,8 +1275,6 @@
 				245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */,
 				24AFDB9D1D9238FF00B2F1B9 /* SalesOrderMine.h */,
 				24AFDB9E1D9238FF00B2F1B9 /* SalesOrderMine.m */,
-				24AFDB9F1D9238FF00B2F1B9 /* SalesOrderConfirm.h */,
-				24AFDBA01D9238FF00B2F1B9 /* SalesOrderConfirm.m */,
 				24AFDBA11D9238FF00B2F1B9 /* SalesOrderSearchResult.h */,
 				24AFDBA21D9238FF00B2F1B9 /* SalesOrderSearchResult.m */,
 				24AFDBA31D9238FF00B2F1B9 /* SalesOrderSnapshot.h */,
@@ -1302,8 +1297,8 @@
 				246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */,
 				246642D81D9A12CA009402A2 /* SalesOrderInfoView.h */,
 				246642D91D9A12CA009402A2 /* SalesOrderInfoView.m */,
-				2418634C1DE3E06A006C7AC5 /* AgressPriceChangeView.h */,
-				2418634D1DE3E06A006C7AC5 /* AgressPriceChangeView.m */,
+				2418634C1DE3E06A006C7AC5 /* AgreePriceChangeView.h */,
+				2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1686,7 +1681,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24AFDC4B1D9238FF00B2F1B9 /* SalesOrderConfirm.m in Sources */,
 				242815DD1D936BE7006120ED /* QrCodeBindView.m in Sources */,
 				24AFDC681D92390000B2F1B9 /* WorkOrderFormController.m in Sources */,
 				241863511DE3E461006C7AC5 /* AgreePriceChangeController.m in Sources */,
@@ -1718,7 +1712,6 @@
 				2466431D1D9A1304009402A2 /* InventoryCell.m in Sources */,
 				240EC9601D7FB2B7008A5696 /* ThrowLineTool.m in Sources */,
 				242815D91D936BE7006120ED /* SignViewController.m in Sources */,
-				240EC9591D7FB2B7008A5696 /* Config.m in Sources */,
 				240EC9521D7FB2B7008A5696 /* CameraManager.m in Sources */,
 				24AFDC121D9238FF00B2F1B9 /* InventoryController.m in Sources */,
 				24AFDC871D9239BB00B2F1B9 /* PickupNoticeViewController.m in Sources */,
@@ -1780,7 +1773,7 @@
 				24E7E9461DE2C047001DFA33 /* SearchView.m in Sources */,
 				24AFDC151D9238FF00B2F1B9 /* Commodity.m in Sources */,
 				246643141D9A12E8009402A2 /* WorkOrderCell.m in Sources */,
-				2418634E1DE3E06A006C7AC5 /* AgressPriceChangeView.m in Sources */,
+				2418634E1DE3E06A006C7AC5 /* AgreePriceChangeView.m in Sources */,
 				24A40FF01DB9B46B00736F6C /* MeViewController.m in Sources */,
 				24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */,
 				246643131D9A12E8009402A2 /* WorkOrderCameraCell.m in Sources */,
@@ -1800,6 +1793,7 @@
 				240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */,
 				24AFDC721D92390000B2F1B9 /* FormTemplate.m in Sources */,
 				246643061D9A12E8009402A2 /* CommodityStepCell.m in Sources */,
+				2460DCC51DE44E81006F6F64 /* Config.m in Sources */,
 				24AFDC4A1D9238FF00B2F1B9 /* SalesOrderMine.m in Sources */,
 				24DC6A1D1DDAD20700CD0684 /* SDTimeLineCellOperationMenu.m in Sources */,
 				245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */,

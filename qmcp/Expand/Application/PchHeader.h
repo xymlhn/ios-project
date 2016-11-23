@@ -67,7 +67,9 @@ typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #define kFontAwesomeIcon 15
 #define kFontAwesomeArrow 17
 
+#define kServiceError @"服务器发生未知错误"
 #define kLineHeight @0.5
+#define kBottomHeight 44
 #define kEndSucceedDelayTime 0.5
 #define kEndFailedDelayTime 1.5
 #define kScreen_Bounds [UIScreen mainScreen].bounds

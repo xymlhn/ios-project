@@ -44,8 +44,7 @@
 -(void)setupView{
     self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                             target:self
-                                                                                            action:@selector(onRightButtonClick)];
-    
+                                                                                            action:@selector(rightBtnClick)];
 }
 
 -(void)bindListener{
@@ -79,7 +78,7 @@
                     hub.labelText = [NSString stringWithFormat:@"提交数据成功"];
                     [hub hide:YES afterDelay:kEndSucceedDelayTime];
                     weakSelf.salesOrder.agreementPrice = price;
-                    [[SalesOrderManager getInstance] updateSalesOrder:weakSelf.salesOrder];
+                    [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:weakSelf.salesOrder];
                     [weakSelf setInfo:weakSelf.salesOrder];
                 }else{
                     hub.mode = MBProgressHUDModeCustomView;
@@ -249,9 +248,10 @@
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
             [weakSelf.salesOrder deleteToDB];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-            if (self.doneBlock) {
-                self.doneBlock(_code);
+            if (weakSelf.doneBlock) {
+                weakSelf.doneBlock(_code);
             }
+            
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -262,9 +262,8 @@
 }
 
 #pragma mark - IBAction
--(void)onRightButtonClick{
+-(void)rightBtnClick{
     [YCXMenu setTintColor:[UIColor blackColor]];
-    
     [YCXMenu setSelectedColor:[UIColor redColor]];
     if ([YCXMenu isShow]){
         [YCXMenu dismissMenu];
@@ -288,7 +287,7 @@
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
             SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
             weakSelf.salesOrder = tempSalesOrder;
-            [[SalesOrderManager getInstance] updateSalesOrder:tempSalesOrder];
+            [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
             [weakSelf setInfo:tempSalesOrder];
         }else{
             hub.mode = MBProgressHUDModeCustomView;
@@ -301,9 +300,14 @@
 
 }
 -(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer{
+    if(_salesOrder.signedFlag){
+        [Utils showHudTipStr:@"该订单已清点"];
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
     [InventoryManager getInstance].currentSalesOrderCode = _code;
     SalesOrderSearchResult *ssr = [[InventoryManager getInstance] salesOrderChangeToSearchResult:_salesOrder];
-    __weak typeof(self) weakSelf = self;
+    [[InventoryManager getInstance] appendSalesOrderSearchResult:ssr];
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabelText = @"正在获取清点信息";
     hub.userInteractionEnabled = NO;
@@ -314,7 +318,9 @@
             ssr.commodityItemList = commoditySnapshots;
             hub.detailsLabelText = @"";
             [hub hide:YES];
-            InventoryController *info = [InventoryController new];
+            InventoryController *info = [InventoryController doneBlock:^(BOOL signFlag) {
+                weakSelf.salesOrder.signedFlag = signFlag;
+            }];
             info.salesOrderCode = _code;
             info.hidesBottomBarWhenPushed = YES;
             [weakSelf.navigationController pushViewController:info animated:YES];
@@ -324,7 +330,7 @@
             hub.detailsLabelText = error;
             [hub hide:YES afterDelay:kEndFailedDelayTime];
         }
-        
+    
     }];
 }
 

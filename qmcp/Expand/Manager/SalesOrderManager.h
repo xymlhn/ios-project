@@ -23,13 +23,13 @@ extern NSString *const SalesOrderUpdateNotification;
 -(void)getSalesOrderMineByLastUpdateTime:(NSString *)lastupdateTime
                              finishBlock:(SalesOrderCompletion)completion;
 
+
 /**
- *  获取接单数据
- *
- *  @param lastupdateTime 时间
+ 获取接单数据
+
+ @param completion <#completion description#>
  */
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
-                                finishBlock:(SalesOrderCompletion)completion;
+-(void)getSalesOrderConfirm:(SalesOrderCompletion)completion;
 
 
 /**
@@ -39,7 +39,7 @@ extern NSString *const SalesOrderUpdateNotification;
 
  @return 订单列表
  */
-- (NSMutableArray *)sortSalesOrder:(BOOL)isMine;
+- (NSMutableArray *)getAllSalesOrder;
 
 /**
  跟新我的订单
@@ -47,5 +47,5 @@ extern NSString *const SalesOrderUpdateNotification;
  @param salesOrder 订单
  @return bool
  */
--(BOOL)updateSalesOrder:(SalesOrder *)salesOrder;
+-(BOOL)saveOrUpdateSalesOrder:(SalesOrder *)salesOrder;
 @end

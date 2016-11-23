@@ -11,6 +11,7 @@
 #import "BusinessSalesOrderView.h"
 #import "SalesOrder.h"
 #import "SalesOrderInfoController.h"
+#import "SalesOrderManager.h"
 @interface BusinessSalesOrderController ()
 
 @property (nonatomic, strong) BusinessSalesOrderView *businessSalesOrderView;
@@ -50,22 +51,14 @@
         [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
             if (!error) {
                 SalesOrder *salesOrder = [SalesOrder mj_objectWithKeyValues:obj];
-                salesOrder.addressSnapshot.code = salesOrder.code;
-                salesOrder.isMine = YES;
-                [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
-                    css.code = [NSUUID UUID].UUIDString;
-                }];
-                [salesOrder saveToDB];
+                [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:salesOrder];
                 hub.detailsLabelText = [NSString stringWithFormat:@"下单成功"];
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
-               
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    //调用代理对象的协议方法来实现数据传递
-                    [weakSelf.navigationController popViewControllerAnimated:YES];
-                    if (weakSelf.doneBlock) {
-                        self.doneBlock(salesOrder.code);
-                    }
-                });
+                //调用代理对象的协议方法来实现数据传递
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                if (weakSelf.doneBlock) {
+                    self.doneBlock(salesOrder.code);
+                }
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -73,8 +66,6 @@
                 [hub hide:YES afterDelay:kEndFailedDelayTime];
             }
         }];
-
-        
         return [RACSignal empty];
     }];
 

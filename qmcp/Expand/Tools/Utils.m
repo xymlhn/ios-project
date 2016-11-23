@@ -200,7 +200,9 @@
 }
 
 + (UIImage*)loadImage:(NSString *)imageName{
-    
+    if(imageName == nil){
+        return [UIImage imageNamed:@"default－portrait"];
+    }
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString* path = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithString: imageName] ];

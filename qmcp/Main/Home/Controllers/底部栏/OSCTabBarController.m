@@ -185,8 +185,6 @@
 -(void)salesToOrderClick{
     __weak typeof(self) weakSelf = self;
     BusinessSalesOrderController *controller = [BusinessSalesOrderController doneBlock:^(NSString *code) {
-        NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter]postNotification:notice];
         SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
             NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];

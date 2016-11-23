@@ -10,8 +10,8 @@
 
 @interface GisLocation : NSObject
 
-@property (nonatomic,copy) NSString *lon;
-@property (nonatomic,copy) NSString *lat;
+@property (nonatomic,copy) NSString *longitude;
+@property (nonatomic,copy) NSString *latitude;
 @property (nonatomic,copy) NSString *recTime;
 
 @end

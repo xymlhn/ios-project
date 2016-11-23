@@ -7,15 +7,15 @@
 //
 
 #import "AgreePriceChangeController.h"
-#import "AgressPriceChangeView.h"
+#import "AgreePriceChangeView.h"
 @interface AgreePriceChangeController ()
-@property (nonatomic, strong) AgressPriceChangeView *changeView;
+@property (nonatomic, strong) AgreePriceChangeView *changeView;
 @end
 
 @implementation AgreePriceChangeController
 
 -(void)loadView{
-    _changeView = [AgressPriceChangeView viewInstance];
+    _changeView = [AgreePriceChangeView viewInstance];
     self.view = _changeView;
 }
 

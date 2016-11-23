@@ -23,11 +23,13 @@
 
 @property (nonatomic, copy) NSString *qrCodeUrl;
 
+@property (nonatomic, copy) NSString *brandName;
+
 @property (nonatomic, assign) BOOL fixedPriceFlag;
 
 @property (nonatomic, assign) BOOL appointmentResult;
 
-@property (nonatomic, assign) BOOL itemConfirmed;
+@property (nonatomic, assign) BOOL signedFlag;
 
 @property (nonatomic, assign) float totalAmount;
 
@@ -44,8 +46,6 @@
 @property (nonatomic, assign) BOOL confirmationFlag;
 
 @property (nonatomic, assign) BOOL isRead;
-
-@property (nonatomic, assign) BOOL isMine;
 
 @property (nonatomic, copy) NSString *agreementPrice;   
 

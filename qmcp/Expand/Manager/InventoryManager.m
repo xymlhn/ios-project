@@ -25,6 +25,9 @@
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         shared_manager = [[self alloc] init];
+        if(shared_manager.resultList == nil){
+            shared_manager.resultList = [NSMutableArray new];
+        }
     });
     return shared_manager;
 }
@@ -61,8 +64,16 @@
     ssr.appointmentTime = salesOrder.appointmentTime;
     ssr.commodityNames = [salesOrder.commodityNames componentsJoinedByString:@","];
     ssr.storePricingReviewFlag = salesOrder.storePricingReviewFlag;
-    
-    [_resultList addObject:ssr];
     return ssr;
+}
+
+-(void)appendSalesOrderSearchResult:(SalesOrderSearchResult *)salesOrderSearchResult{
+    [_resultList enumerateObjectsUsingBlock:^(SalesOrderSearchResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.code isEqualToString:salesOrderSearchResult.code]) {
+            *stop = YES;
+            [_resultList removeObject:obj];
+        }
+    }];
+    [_resultList addObject:salesOrderSearchResult];
 }
 @end

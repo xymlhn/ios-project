@@ -38,7 +38,7 @@
 
 #pragma mark - Notification
 - (void)salesOrderUpdate:(NSNotification *)text{
-    self.salesOrderList = [[SalesOrderManager getInstance] sortSalesOrder:YES];
+    self.salesOrderList = [[SalesOrderManager getInstance] getAllSalesOrder];
     [self.tableView reloadData];
 }
 
@@ -57,7 +57,7 @@
 
 -(void)loadData
 {
-    self.salesOrderList = [[SalesOrderManager getInstance] sortSalesOrder:YES];
+    self.salesOrderList = [[SalesOrderManager getInstance] getAllSalesOrder];
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabelText = @"加载中...";
     [[SalesOrderManager getInstance] getSalesOrderMineByLastUpdateTime:[Config getSalesOrderMineTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
@@ -130,7 +130,7 @@
             hub.detailsLabelText = @"";
             [hub hide:YES];
             SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
-            [[SalesOrderManager getInstance]updateSalesOrder:tempSalesOrder];
+            [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
             SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
                 [weakSelf.salesOrderList removeObject:salesOrder];
                 [weakSelf.tableView reloadData];
@@ -140,6 +140,10 @@
             [weakSelf.navigationController pushViewController:info animated:YES];
             
         }else{
+            if(![error isEqualToString:kServiceError]){
+                [weakSelf.salesOrderList removeObject:salesOrder];
+                [weakSelf.tableView reloadData];
+            }
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.detailsLabelText = error;

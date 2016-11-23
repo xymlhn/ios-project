@@ -23,7 +23,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     urlpath = [urlpath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    DebugLog(@"\n===========request===========\n%@\n%@:\n%@", @"post", urlpath, dict);
+    DebugLog(@"\n======================request======================\n%@\n%@:\n%@", @"post", urlpath, dict);
     [manager POST:urlpath parameters:dict progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
        [self handleSuccessWithResponseObject:responseObject task:session urlPath:urlpath finish:completion];
         
@@ -43,7 +43,7 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     urlpath = [urlpath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    DebugLog(@"\n===========request===========\n%@\n%@:\n%@", @"get", urlpath, dict);
+    DebugLog(@"\n======================request======================\n%@\n%@:\n%@", @"get", urlpath, dict);
     [manager GET:urlpath parameters:dict progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
        [self handleSuccessWithResponseObject:responseObject task:session urlPath:urlpath finish:completion];
         
@@ -61,7 +61,7 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     urlpath = [urlpath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    DebugLog(@"\n===========request===========\n%@\n%@:\n%@", @"get", urlpath, dict);
+    DebugLog(@"\n======================request======================\n%@\n%@:\n%@", @"get", urlpath, dict);
     [manager GET:urlpath parameters:dict progress:nil success:^(NSURLSessionDataTask * session, id responseObject){
         [self handleSuccessWithResponseObject:responseObject task:session urlPath:urlpath finishString:completion];
         
@@ -82,7 +82,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     urlpath = [urlpath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    DebugLog(@"\n===========request===========\n%@\n%@:\n%@", @"post", urlpath, dict);
+    DebugLog(@"\n======================request======================\n%@\n%@:\n%@", @"post", urlpath, dict);
     [manager POST:urlpath parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         [formData appendPartWithFileData:data name:name fileName:fileName  mimeType:@"image/jpeg"];
@@ -104,7 +104,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     urlpath = [urlpath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    DebugLog(@"\n===========request===========\n%@\n%@:\n%@", @"post", urlpath, dict);
+    DebugLog(@"\n======================request======================\n%@\n%@:\n%@", @"post", urlpath, dict);
     [manager POST:urlpath parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData){
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -131,7 +131,7 @@
                        finish:(CompletionHandler)completion{
     
     [self handleHeader:task];
-    DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, error);
+    DebugLog(@"\n======================response======================\n%@:\n%@", urlpath, error);
     NSString *description = error.userInfo[@"NSLocalizedDescription"];
     NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
     
@@ -139,7 +139,7 @@
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSString *message = [content valueForKey:@"message"];
         if (message == nil || [message isKindOfClass:[NSNull class]]) {
-            message = @"服务器发生未知错误!";
+            message = kServiceError;
         }
         
         completion(nil ,message);
@@ -154,7 +154,7 @@
                        finishString:(CompletionStringHandler)completion{
     
     [self handleHeader:task];
-    DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, error);
+    DebugLog(@"\n======================response======================\n%@:\n%@", urlpath, error);
     NSString *description = error.userInfo[@"NSLocalizedDescription"];
     NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
     
@@ -162,7 +162,7 @@
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSString *message = [content valueForKey:@"message"];
         if (message == nil || [message isKindOfClass:[NSNull class]]) {
-            message = @"服务器发生未知错误!";
+            message = kServiceError;
         }
         
         completion(nil ,message);
@@ -184,11 +184,11 @@
                                urlPath:(NSString *)urlpath
                                 finish:(CompletionHandler)completion{
     NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-    DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, obj);
+    DebugLog(@"\n======================response======================\n%@:\n%@", urlpath, obj);
     if(![self handleHeader:task]){
         completion(obj ,nil);
     }else{
-        completion(obj,@"错误");
+        completion(obj,kServiceError);
     }
     
 }
@@ -199,11 +199,11 @@
                                 finishString:(CompletionStringHandler)completion{
     NSString *obj = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 
-    DebugLog(@"\n===========response===========\n%@:\n%@", urlpath, obj);
+    DebugLog(@"\n======================response======================\n%@:\n%@", urlpath, obj);
     if(![self handleHeader:task]){
         completion(obj ,nil);
     }else{
-        completion(obj,@"错误");
+        completion(obj,kServiceError);
     }
     
 }
@@ -222,14 +222,18 @@
     id failure = [dic valueForKey:@"failure"];
     if(failure){
         int type = [[dic valueForKey:@"exceptionType"] intValue];
-        NSLog(@"\n=============header==================\n%@\n",[EnumUtil exceptionTypeString:type] );
+        NSLog(@"\n========================header=============================\n%@\n",[EnumUtil exceptionTypeString:type] );
         if (type == (int)ExceptionTypeNotLogin)  {
             NSArray *accountAndPassword = [Config getUserNameAndPassword];
             NSString *name = accountAndPassword? accountAndPassword[0] : @"";
             NSString *password = accountAndPassword? accountAndPassword[1] : @"";
-            [[AppManager getInstance] reLoginWithUserName:name andPassword:password finishBlock:^(id data, NSString *error) {
-                if(error){
-                    [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
+            [[AppManager getInstance] reLoginWithUserName:name andPassword:password finishBlock:^(NSDictionary *data, NSString *error) {
+                if(error ){
+                    NSDictionary *dict = @{@"info":@"1"};
+                    //创建一个消息对象
+                    NSNotification * notice = [NSNotification notificationWithName:kReloginNotification object:nil userInfo:dict];
+                    //发送消息
+                    [[NSNotificationCenter defaultCenter]postNotification:notice];
                 }
             }];
         }

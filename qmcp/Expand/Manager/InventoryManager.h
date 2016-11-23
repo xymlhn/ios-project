@@ -41,4 +41,12 @@ typedef void(^SalesOrderSearchHandler)(NSMutableArray<SalesOrderSearchResult *> 
  @return bool
  */
 -(SalesOrderSearchResult *)salesOrderChangeToSearchResult:(SalesOrder *) salesOrder;
+
+
+/**
+ 添加salesOrderResult
+
+ @param salesOrderSearchResult salesOrderSearchResult description
+ */
+-(void)appendSalesOrderSearchResult:(SalesOrderSearchResult *)salesOrderSearchResult;
 @end

@@ -10,11 +10,11 @@
 
 @interface ItemSnapshot : NSObject
 
-@property (nonatomic, copy) NSString *salesOrderItemCode;
+@property (nonatomic, copy) NSString *itemSnapshotCode; //物品code，主键
 
 @property (nonatomic, copy) NSString *name;
 
-@property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *code; //二维码
 
 @property (nonatomic, copy) NSString *remark;
 

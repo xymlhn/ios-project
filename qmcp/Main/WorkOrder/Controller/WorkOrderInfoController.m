@@ -37,20 +37,19 @@
 -(void)setupView{
     self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                             target:self
-                                                                                            action:@selector(onRightButtonClick)];
+                                                                                            action:@selector(rightBtnClick)];
 }
 -(void)bindListener
 {
-    
     _infoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         switch (_workOrder.onSiteStatus) {
                 case OnSiteStatusNone:
                 case OnSiteStatusNotDepart:
                 case OnSiteStatusWaiting:
-                [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
+                    [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                 break;
                 case OnSiteStatusOnRoute:
-                [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
+                    [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                 break;
             default:
                 break;
@@ -83,7 +82,7 @@
 }
 
 
--(void)onRightButtonClick{
+-(void)rightBtnClick{
     [YCXMenu setTintColor:[UIColor blackColor]];
     [YCXMenu setSelectedColor:[UIColor redColor]];
     if ([YCXMenu isShow]){

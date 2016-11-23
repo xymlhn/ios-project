@@ -18,7 +18,6 @@ NSString * const kVibre = @"vibre";
 NSString * const kQuickScan = @"quickScan";
 NSString * const kSearch = @"search";
 NSString * const kSalesOrderBindTime = @"bindTime";
-NSString * const kSalesOrderGrabTime = @"grabTime";
 NSString * const kWorkOrderTime = @"workOrderTime";
 NSString * const kCommodityItemTime = @"commodityItemTime";
 NSString * const kCommoditySnapshotTime = @"commoditySnapshotTime";
@@ -33,7 +32,6 @@ NSString * const kPushId = @"pushId";
     [self saveLoginStatus:NO];
     [self setWorkOrderTime:@""];
     [self setSaleOrderMineTime:@""];
-    [self setSalesOrderGrabTime:@""];
     [self setCommodityProperty:@""];
     [self setCommodityItem:@""];
     [self setSearch:NO];
@@ -157,20 +155,6 @@ NSString * const kPushId = @"pushId";
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *str = [user objectForKey:kWorkOrderTime];
-    return str == nil ?@"":str;
-}
-
-
-+(void)setSalesOrderGrabTime:(NSString *)lastupdateTime
-{
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    [user setObject:lastupdateTime forKey:kSalesOrderGrabTime];
-}
-
-+(NSString *)getSalesOrderGrabTime
-{
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *str = [user objectForKey:kSalesOrderGrabTime];
     return str == nil ?@"":str;
 }
 

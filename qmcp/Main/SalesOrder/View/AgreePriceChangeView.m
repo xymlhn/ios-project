@@ -6,13 +6,13 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "AgressPriceChangeView.h"
+#import "AgreePriceChangeView.h"
 
-@implementation AgressPriceChangeView
+@implementation AgreePriceChangeView
 
 
 + (instancetype)viewInstance{
-    AgressPriceChangeView *checkBoxView = [AgressPriceChangeView new];
+    AgreePriceChangeView *checkBoxView = [AgreePriceChangeView new];
     return checkBoxView;
 }
 

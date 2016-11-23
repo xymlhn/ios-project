@@ -20,7 +20,7 @@
     if (!self) return nil;
     self.backgroundColor = [UIColor whiteColor];
     _tableView = [UITableView new];
-    _tableView.rowHeight = 50;
+    _tableView.rowHeight = 80;
     _tableView.separatorColor = [UIColor lineColor];
     _tableView.backgroundColor = [UIColor themeColor];
     [self addSubview:_tableView];
@@ -28,7 +28,7 @@
         make.top.equalTo(self.mas_top).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-40);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-kBottomHeight);
     }];
     [self setupBottomView];
     return self;

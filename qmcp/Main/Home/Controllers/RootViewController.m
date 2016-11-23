@@ -88,11 +88,11 @@
             _lastUploadTime = [NSDate new];
             _lastLocation = location;
             GisLocation *tempLocation = [GisLocation new];
-            tempLocation.lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-            tempLocation.lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
+            tempLocation.latitude = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
+            tempLocation.longitude = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
             tempLocation.recTime = [Utils formatDate:[NSDate new]];
             [self.gisLocationArray addObject:tempLocation];
-           // [self p_sendLocation];
+            [self p_sendLocation];
         }
     }
     

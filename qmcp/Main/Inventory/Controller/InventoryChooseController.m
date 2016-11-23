@@ -190,8 +190,7 @@
         }
         StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
         [titleArr addObject:tempModel];
-    }
-//    
+    }    
 //    standardView.standardArr = titleArr;
 //    [standardView standardsViewReload];
     

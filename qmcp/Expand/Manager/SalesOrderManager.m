@@ -13,7 +13,6 @@
 #import "NSObject+LKDBHelper.h"
 #import "MJExtension.h"
 #import "SalesOrder.h"
-#import "SalesOrderConfirm.h"
 #import "Config.h"
 #import "Utils.h"
 #import "TMCache.h"
@@ -34,9 +33,8 @@ NSString *const SalesOrderUpdateNotification = @"salesOrderUpdate";
     return shared_manager;
 }
 
--(BOOL)updateSalesOrder:(SalesOrder *)salesOrder{
+-(BOOL)saveOrUpdateSalesOrder:(SalesOrder *)salesOrder{
     salesOrder.addressSnapshot.code = salesOrder.code;
-    salesOrder.isMine = YES;
     [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
         css.code = [NSUUID UUID].UUIDString;
     }];
@@ -62,12 +60,12 @@ NSString *const SalesOrderUpdateNotification = @"salesOrderUpdate";
                 }
                 
                 for (SalesOrder *salesOrder in salesOrderMine.uncompleted) {
-                    [self updateSalesOrder:salesOrder];
+                    [self saveOrUpdateSalesOrder:salesOrder];
                 }
                 
             }
 
-            completion([self sortSalesOrder:YES],nil);
+            completion([self getAllSalesOrder],nil);
             
         }else{
             completion(nil,error);
@@ -77,10 +75,9 @@ NSString *const SalesOrderUpdateNotification = @"salesOrderUpdate";
 }
 
 
-- (NSMutableArray *)sortSalesOrder:(BOOL)isMine{
+- (NSMutableArray *)getAllSalesOrder{
     
-    NSString *salesOrderWhere = [NSString stringWithFormat:@"isMine = '%@'",[NSNumber numberWithBool:isMine]];
-    NSMutableArray *salesOrders = [SalesOrder searchWithWhere:salesOrderWhere];
+    NSMutableArray *salesOrders = [SalesOrder searchWithWhere:nil];
 
     [salesOrders sortUsingComparator:^NSComparisonResult(SalesOrder *  _Nonnull obj1, SalesOrder *  _Nonnull obj2) {
         int a1 = [[obj1.code componentsSeparatedByString:@"-"][1] intValue];
@@ -90,33 +87,21 @@ NSString *const SalesOrderUpdateNotification = @"salesOrderUpdate";
     return salesOrders;
 }
 
--(void)getSalesOrderConfirmByLastUpdateTime:(NSString *)lastupdateTime
-                                finishBlock:(SalesOrderCompletion)completion{
+-(void)getSalesOrderConfirm:(SalesOrderCompletion)completion{
     
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCONFIRM,lastupdateTime];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCONFIRM];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
-            [Config setSalesOrderGrabTime:[Utils formatDate:[NSDate new]]];
-            SalesOrderConfirm *salesOrderConfirm = [SalesOrderConfirm mj_objectWithKeyValues:obj];
-           
-            for (NSString *code in salesOrderConfirm.haveAssign) {
-                NSString *where = [NSString stringWithFormat:@"code = '%@'",code];
-                [SalesOrder deleteWithWhere:where];
-            }
-            NSArray<SalesOrder *> *unArr = [SalesOrder mj_objectArrayWithKeyValuesArray:salesOrderConfirm.unassigned];
-            for (SalesOrder *salesOrder in unArr) {
-                salesOrder.addressSnapshot.code = salesOrder.code;
-                [salesOrder.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
-                    css.code = [NSUUID UUID].UUIDString;
-                }];
-                salesOrder.isMine = NO;
-                [salesOrder saveToDB];
-            }
-            
-            completion([self sortSalesOrder:NO],nil);
+            NSMutableArray<SalesOrder *> *salesOrders = [SalesOrder mj_objectArrayWithKeyValuesArray:obj];
+            [salesOrders sortUsingComparator:^NSComparisonResult(SalesOrder *  _Nonnull obj1, SalesOrder *  _Nonnull obj2) {
+                int a1 = [[obj1.code componentsSeparatedByString:@"-"][1] intValue];
+                int a2 = [[obj2.code componentsSeparatedByString:@"-"][1] intValue];
+                return a1 < a2;
+            }];
+            completion(salesOrders,nil);
             
         }else{
-            completion([self sortSalesOrder:NO],error);
+            completion(nil,error);
         }
     }];
     

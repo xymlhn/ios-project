@@ -12,6 +12,7 @@
 #import "SalesOrder.h"
 #import "SalesOrderGrabCell.h"
 #import "SalesOrderManager.h"
+#import "SalesOrderInfoController.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray<SalesOrder *> *salesOrderList;
@@ -38,22 +39,20 @@
 }
 
 -(void)loadData{
-    self.salesOrderList = [[SalesOrderManager getInstance] sortSalesOrder:NO];
+
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabelText = @"加载中...";
     hub.userInteractionEnabled = NO;
-    [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime]  finishBlock:^(NSMutableArray *arr, NSString *error) {
+    [[SalesOrderManager getInstance] getSalesOrderConfirm:^(NSMutableArray *arr, NSString *error) {
         if(error == nil){
             [self refreshTableView:arr];
             if([arr count] > 0){
                 hub.mode = MBProgressHUDModeCustomView;
-                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.customView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"HUD-done"]];
                 hub.detailsLabelText = @"加载成功";
                 [hub hide:YES afterDelay:kEndSucceedDelayTime];
             }else{
-                hub.mode = MBProgressHUDModeCustomView;
-                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.detailsLabelText = @"当前没有订单";
+                hub.detailsLabelText = @"当前没有待抢订单！";
                 [hub hide:YES afterDelay:kEndFailedDelayTime];
             }
         }else{
@@ -65,7 +64,7 @@
         
     }];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[SalesOrderManager getInstance] getSalesOrderConfirmByLastUpdateTime:[Config getSalesOrderGrabTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
+        [[SalesOrderManager getInstance] getSalesOrderConfirm:^(NSMutableArray *arr, NSString *error) {
             if(error != nil){
                 [self refreshTableView:arr];
             }
@@ -109,27 +108,32 @@
     
 }
 
--(void)p_grabSalesOrder:(SalesOrder *)salesOrderSnapshot
+-(void)p_grabSalesOrder:(SalesOrder *)salesOrder
 {
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabelText = @"接单中...";
-    hub.userInteractionEnabled = NO;
     
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERGRAB,salesOrderSnapshot.code];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERGRAB,salesOrder.code];
     NSDictionary *dict = @{@"grab":[NSNumber numberWithBool:YES]};
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
-            
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.detailsLabelText = [NSString stringWithFormat:@"接单成功"];
             [hub hide:YES afterDelay:kEndSucceedDelayTime];
-            
-        }else{
-            
-            [weakSelf.salesOrderList removeObject:salesOrderSnapshot];
+            [weakSelf.salesOrderList removeObject:salesOrder];
             [weakSelf.tableView reloadData];
+            [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:salesOrder];
+            
+            SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
+                NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
+                [[NSNotificationCenter defaultCenter]postNotification:notice];
+            }];
+            info.code = salesOrder.code;
+            info.hidesBottomBarWhenPushed = YES;
+            [weakSelf.navigationController pushViewController:info animated:YES];
+        }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.detailsLabelText = error;

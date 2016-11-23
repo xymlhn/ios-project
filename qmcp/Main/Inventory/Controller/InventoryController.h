@@ -13,4 +13,7 @@
 
 @property (nonatomic,copy) NSString *salesOrderCode;
 
+@property (copy, nonatomic) void(^doneBlock)(BOOL signFlag);
+
++ (instancetype) doneBlock:(void(^)(BOOL signFlag))block;
 @end

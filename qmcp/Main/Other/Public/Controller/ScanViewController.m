@@ -41,7 +41,7 @@
     
     RACSignal *validSignal = [_scanView.scanText.rac_textSignal
                               map:^id(NSString *text) {
-                                  return @([Utils isTextNull:text]);
+                                  return @(![Utils isTextNull:text]);
                               }];
     
     [validSignal subscribeNext:^(NSNumber*signupActive){

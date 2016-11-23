@@ -35,7 +35,7 @@
         make.right.equalTo(self.view);
     }];
     _hub = [Utils createHUD];
-    _hub.detailsLabelText = @"正在加载";
+    _hub.detailsLabel.text = @"正在加载";
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_MANUAL];
     NSURL* url = [NSURL URLWithString:URLString];//创建URL
     NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
@@ -53,15 +53,15 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     _hub.mode = MBProgressHUDModeCustomView;
     _hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-    _hub.detailsLabelText = [NSString stringWithFormat:@"加载完成"];
-    [_hub hide:YES afterDelay:kEndSucceedDelayTime];
+    _hub.detailsLabel.text = [NSString stringWithFormat:@"加载完成"];
+    [_hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     _hub.mode = MBProgressHUDModeCustomView;
     _hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-    _hub.detailsLabelText = @"加载失败";
-    [_hub hide:YES afterDelay:kEndFailedDelayTime];
+    _hub.detailsLabel.text = @"加载失败";
+    [_hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
 }
 
 @end

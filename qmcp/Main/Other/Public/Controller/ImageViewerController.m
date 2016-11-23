@@ -86,7 +86,7 @@
                                   _HUD.progress = (CGFloat)receivedSize / (CGFloat)expectedSize;
                               }
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 [_HUD hide:YES];
+                                 [_HUD hideAnimated:YES];
                                  
                                  _imageView.frame = [self frameForImage:image];
                                  _scrollView.contentSize = [self contentSizeForImage:image];
@@ -191,7 +191,7 @@
 
 - (void)handleSingleTap
 {
-    [_HUD hide:YES];
+    [_HUD hideAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

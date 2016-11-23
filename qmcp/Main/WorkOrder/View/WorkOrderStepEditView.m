@@ -8,7 +8,7 @@
 
 #import "WorkOrderStepEditView.h"
 #import "PhotoCell.h"
-
+#import <UITextView+Placeholder/UITextView+Placeholder.h>
 @implementation WorkOrderStepEditView
 
 + (instancetype)viewInstance{
@@ -33,6 +33,8 @@
     _editText = [UITextView new];
     _editText.font = [UIFont systemFontOfSize:14];
     _editText.textColor = [UIColor blackColor];
+    _editText.placeholder = @"请输入";
+    _editText.placeholderColor = [UIColor lightGrayColor];
     [self addSubview:_editText];
     
     _fastView = [UIView new];

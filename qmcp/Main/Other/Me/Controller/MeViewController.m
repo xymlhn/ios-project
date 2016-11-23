@@ -67,14 +67,14 @@
         return;
     }
     MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabelText = @"登出中...";
+    hub.detailsLabel.text = @"登出中...";
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
     [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.detailsLabelText = [NSString stringWithFormat:@"登出成功"];
-            [hub hide:YES];
+            hub.detailsLabel.text = [NSString stringWithFormat:@"登出成功"];
+            [hub hideAnimated:YES];
             [[AppManager getInstance] clearUserDataWhenLogout];
             LoginViewController *loginNav = [LoginViewController new];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
@@ -82,8 +82,8 @@
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 }
@@ -119,16 +119,16 @@
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             NSString *tips = [Config isWork] ? @"下班成功" : @"上班成功";
-            hub.labelText = tips;
-            [hub hide:YES afterDelay:kEndSucceedDelayTime];
+            hub.detailsLabel.text = tips;
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             [Config setWork:![Config isWork]];
             
         }else{
             [weakSelf.meView.workSwitch setOn:[Config isWork]];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.labelText = error;
-            [hub hide:YES afterDelay:kEndFailedDelayTime];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
 }

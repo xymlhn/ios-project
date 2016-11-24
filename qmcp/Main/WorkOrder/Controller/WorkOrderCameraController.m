@@ -26,7 +26,6 @@
     self.title = @"摄像头";
     _tableView = [UITableView new];
     _tableView.rowHeight = 45;
-    _tableView.separatorStyle = NO;
     _tableView.backgroundColor = [UIColor themeColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -48,7 +47,7 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在获取摄像头";
-    hub.userInteractionEnabled = NO;
+    
 
     NSString *URLString;
     if (_funcType == FuncTypeWorkOrder) {
@@ -154,7 +153,7 @@
         if([_currentCamera.cameraCode isEqualToString:cameraData.cameraCode]){
             MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             hub.detailsLabel.text = @"关闭摄像头";
-            hub.userInteractionEnabled = NO;
+            
             
             [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:_currentCamera.cameraCode andFuncType:_funcType cameraStatus:NO finishBlock:^(NSDictionary *dict, NSString *error) {
                 if (!error) {

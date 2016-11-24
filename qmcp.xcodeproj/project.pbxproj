@@ -21,7 +21,6 @@
 		240EC9521D7FB2B7008A5696 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9161D7FB2B7008A5696 /* CameraManager.m */; };
 		240EC9531D7FB2B7008A5696 /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9181D7FB2B7008A5696 /* FormManager.m */; };
 		240EC9541D7FB2B7008A5696 /* InventoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC91A1D7FB2B7008A5696 /* InventoryManager.m */; };
-		240EC9551D7FB2B7008A5696 /* PickupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC91C1D7FB2B7008A5696 /* PickupManager.m */; };
 		240EC9561D7FB2B7008A5696 /* PropertyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC91E1D7FB2B7008A5696 /* PropertyManager.m */; };
 		240EC9571D7FB2B7008A5696 /* SalesOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9201D7FB2B7008A5696 /* SalesOrderManager.m */; };
 		240EC9581D7FB2B7008A5696 /* WorkOrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC9221D7FB2B7008A5696 /* WorkOrderManager.m */; };
@@ -220,8 +219,6 @@
 		240EC9181D7FB2B7008A5696 /* FormManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormManager.m; sourceTree = "<group>"; };
 		240EC9191D7FB2B7008A5696 /* InventoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryManager.h; sourceTree = "<group>"; };
 		240EC91A1D7FB2B7008A5696 /* InventoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryManager.m; sourceTree = "<group>"; };
-		240EC91B1D7FB2B7008A5696 /* PickupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupManager.h; sourceTree = "<group>"; };
-		240EC91C1D7FB2B7008A5696 /* PickupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupManager.m; sourceTree = "<group>"; };
 		240EC91D1D7FB2B7008A5696 /* PropertyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyManager.h; sourceTree = "<group>"; };
 		240EC91E1D7FB2B7008A5696 /* PropertyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyManager.m; sourceTree = "<group>"; };
 		240EC91F1D7FB2B7008A5696 /* SalesOrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderManager.h; sourceTree = "<group>"; };
@@ -641,8 +638,6 @@
 				240EC9181D7FB2B7008A5696 /* FormManager.m */,
 				240EC9191D7FB2B7008A5696 /* InventoryManager.h */,
 				240EC91A1D7FB2B7008A5696 /* InventoryManager.m */,
-				240EC91B1D7FB2B7008A5696 /* PickupManager.h */,
-				240EC91C1D7FB2B7008A5696 /* PickupManager.m */,
 				240EC91D1D7FB2B7008A5696 /* PropertyManager.h */,
 				240EC91E1D7FB2B7008A5696 /* PropertyManager.m */,
 				240EC91F1D7FB2B7008A5696 /* SalesOrderManager.h */,
@@ -1756,7 +1751,6 @@
 				240EC9581D7FB2B7008A5696 /* WorkOrderManager.m in Sources */,
 				24AFDC3A1D9238FF00B2F1B9 /* CacheCell.m in Sources */,
 				242815DC1D936BE7006120ED /* CommodityStepView.m in Sources */,
-				240EC9551D7FB2B7008A5696 /* PickupManager.m in Sources */,
 				2466430D1D9A12E8009402A2 /* NumberCell.m in Sources */,
 				24AFDC671D92390000B2F1B9 /* WorkOrderCameraController.m in Sources */,
 				246643111D9A12E8009402A2 /* TextMultiCell.m in Sources */,

@@ -109,7 +109,7 @@
 {
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    hub.userInteractionEnabled = NO;
+    
     
     NSDictionary *dict = @{@"isOnWork":[NSNumber numberWithBool:[Config isWork]]};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ISONWORK];

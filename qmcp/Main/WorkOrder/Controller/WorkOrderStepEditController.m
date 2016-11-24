@@ -126,6 +126,9 @@
 {
     [Utils deleteImage:attachment.key];
     [attachment deleteToDB];
+    [_attachments removeObject:attachment];
+    _step.attachments = _attachments;
+    [_step updateToDB];
 }
 
 
@@ -160,6 +163,7 @@
     
     [_attachments removeObject:_plusIcon];
     _step.attachments = _attachments;
+    _step.content = _editView.editText.text;
     [_step updateToDB];
     if(_attachments.count < 6){
         [_attachments insertObject:_plusIcon atIndex:_attachments.count];
@@ -169,6 +173,7 @@
 #pragma mark - IBAction
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
+    [self updateStep];
     if(_funcType == FuncTypeWorkOrder){
         NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_code];
         NSArray *steps = [WorkOrderStep searchWithWhere:where];
@@ -205,7 +210,7 @@
                     [[WorkOrderManager getInstance] postAttachment:attachment finishBlock:^(NSDictionary *obj,NSString *error) {
                         if (!error) {
                             attachment.isUpload = YES;
-                            [attachment updateToDB];
+                            [attachment saveToDB];
                             if(i == attachments.count){
                                 hub.detailsLabel.text = [NSString stringWithFormat:@"上传工单附件成功"];
                                 hub.mode = MBProgressHUDModeCustomView;

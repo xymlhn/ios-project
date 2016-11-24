@@ -42,7 +42,7 @@
 
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"加载中...";
-    hub.userInteractionEnabled = NO;
+    
     [[SalesOrderManager getInstance] getSalesOrderConfirm:^(NSMutableArray *arr, NSString *error) {
         if(error == nil){
             [self refreshTableView:arr];

@@ -39,8 +39,6 @@
         __weak typeof(self) weakSelf = self;
         MBProgressHUD *hub = [Utils createHUD];
         hub.detailsLabel.text = @"正在下单";
-        hub.userInteractionEnabled = NO;
-        
         BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text
                                                                                     phone:_businessSalesOrderView.phoneValue.text
                                                                                   address:_businessSalesOrderView.addressValue.text

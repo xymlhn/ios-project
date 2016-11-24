@@ -179,7 +179,7 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在提交数据";
-    hub.userInteractionEnabled = NO;
+    
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDER_TIMESTAMP,_code];
@@ -240,7 +240,7 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在完成订单";
-    hub.userInteractionEnabled = NO;
+   
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCOMPLETE,_code];
     [HttpUtil post:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
         if(error == nil){
@@ -279,7 +279,7 @@
       __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在刷新";
-    hub.userInteractionEnabled = NO;
+   
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,_code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
@@ -310,7 +310,7 @@
     [[InventoryManager getInstance] appendSalesOrderSearchResult:ssr];
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在获取清点信息";
-    hub.userInteractionEnabled = NO;
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,_code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){

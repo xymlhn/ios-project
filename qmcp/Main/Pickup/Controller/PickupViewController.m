@@ -12,7 +12,6 @@
 #import "QrCodeViewController.h"
 #import "SignViewController.h"
 #import "Attachment.h"
-#import "PickupManager.h"
 #import "PickupItem.h"
 #import "PickupCell.h"
 #import "PickupData.h"
@@ -42,7 +41,6 @@
     [_pickView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signBtnClick:)]];
     
     _pickView.searchBar.delegate = self;
-    
     _pickView.tableView.delegate = self;
     _pickView.tableView.dataSource = self;
     _pickView.tableView.tableHeaderView = [UIView new];
@@ -137,6 +135,11 @@
     [self presentViewController:signController animated: YES completion:nil];
 }
 
+/**
+ 签名图片
+
+ @param image 图片
+ */
 -(void)p_reportSignImage:(UIImage *)image
 {
     if(image){
@@ -169,12 +172,18 @@
 }
 
 
+/**
+ 处理返回字符串
+
+ @param result result description
+ */
 -(void)p_handleResult:(NSString *)result
 {
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"加载中...";
     __weak typeof(self) weakSelf = self;
-    [[PickupManager getInstance] getPickupItemByCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_PICKUPITEM,result];
+    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
@@ -204,16 +213,21 @@
         }
     }];
     
-    
 }
 
+/**
+ 提交取件数据
+
+ @param pickupSignature pickupSignature
+ */
 -(void)p_postPickupData:(PickupSignature *)pickupSignature
 {
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"完成中...";
-    hub.userInteractionEnabled = NO;
      __weak typeof(self) weakSelf = self;
-    [[PickupManager getInstance] postPickupSignature:pickupSignature finishBlock:^(NSDictionary *obj, NSString *error) {
+    NSDictionary *obj = [pickupSignature mj_keyValues];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_PICKUPSIGNATURE];
+    [HttpUtil post:URLString param:obj finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [weakSelf.pickView.headView setHidden:YES];
             hub.mode = MBProgressHUDModeCustomView;
@@ -228,6 +242,5 @@
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
-    
 }
 @end

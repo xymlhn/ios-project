@@ -184,7 +184,6 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
             [self sortAllWorkOrder];
         }
     }];
-    
 }
 
 -(BOOL)deleteWorkOrderByCode:(NSString *)code{

@@ -125,7 +125,7 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在获取订单详细信息";
-    hub.userInteractionEnabled = NO;
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,salesOrder.code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){

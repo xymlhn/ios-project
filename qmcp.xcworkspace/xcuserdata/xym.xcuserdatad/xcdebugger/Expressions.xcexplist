@@ -34,6 +34,14 @@
          contextName = "-[CommodityStepController tableView:cellForRowAtIndexPath:]:CommodityStepController.m">
       </ContextState>
       <ContextState
+         contextName = "__71-[WorkOrderStepEditController collectionView:didSelectItemAtIndexPath:]_block_invoke:WorkOrderStepEditController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_attachments">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[SalesOrderGrabCell setSalesOrderSnapshot:]:SalesOrderGrabCell.m">
          <PersistentStrings>
             <PersistentString
@@ -53,13 +61,13 @@
          contextName = "__31+[WorkOrderManager getInstance]_block_invoke:WorkOrderManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "shared_manager.commodityStepDict">
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
             </PersistentString>
             <PersistentString
                value = "_commodityStepDict">
             </PersistentString>
             <PersistentString
-               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
+               value = "shared_manager.commodityStepDict">
             </PersistentString>
             <PersistentString
                value = "shared_manager">
@@ -95,10 +103,10 @@
          contextName = "-[WorkOrderManager getCommodityByCommodityCode:]:WorkOrderManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.commodityStepDict">
+               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
             </PersistentString>
             <PersistentString
-               value = "[[TMCache sharedCache] objectForKey:kCommodityStepCache]">
+               value = "self.commodityStepDict">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -114,9 +122,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[SalesOrderGrabListController tableView:numberOfRowsInSection:]:SalesOrderGrabListController.m">
-      </ContextState>
-      <ContextState
          contextName = "-[RootViewController amapLocationManager:didUpdateLocation:]:RootViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -126,6 +131,9 @@
                value = "[self p_isOverTime:_lastUploadTime second:[NSDate new]]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SalesOrderGrabListController tableView:numberOfRowsInSection:]:SalesOrderGrabListController.m">
       </ContextState>
       <ContextState
          contextName = "__53-[WorkOrderManager getCommodityStepByLastUpdateTime:]_block_invoke:WorkOrderManager.m">

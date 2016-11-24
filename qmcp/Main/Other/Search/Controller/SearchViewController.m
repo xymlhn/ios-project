@@ -114,7 +114,7 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在搜索";
-    hub.userInteractionEnabled = NO;
+    
 
     [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSString *error) {
         if(!error){

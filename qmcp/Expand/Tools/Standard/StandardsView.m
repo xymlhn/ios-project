@@ -131,7 +131,7 @@
     
     /*购买或加入购物车数量*/
     self.numberTextFied = [[UITextField alloc] init];
-    self.numberTextFied.text = [NSString stringWithFormat:@"%ld",self.buyNum];
+    self.numberTextFied.text = [NSString stringWithFormat:@"%ld",(long)self.buyNum];
     self.numberTextFied.font = [UIFont systemFontOfSize:14];
     self.numberTextFied.textColor = [UIColor blackColor];
     self.numberTextFied.textAlignment = NSTextAlignmentCenter;
@@ -206,7 +206,7 @@
 -(void)setBuyNum:(NSInteger)buyNum
 {
     _buyNum = buyNum;
-    self.numberTextFied.text = [NSString stringWithFormat:@"%ld",buyNum];
+    self.numberTextFied.text = [NSString stringWithFormat:@"%ld",(long)buyNum];
 }
 
 -(NSInteger)buyNum
@@ -563,7 +563,7 @@
              duration:duration];
     
 
-    [self performSelector:@selector(viewSetHidden:) withObject:[NSString stringWithFormat:@"%ld",tempImgView.tag] afterDelay:duration - 0.11111];
+    [self performSelector:@selector(viewSetHidden:) withObject:[NSString stringWithFormat:@"%ld",(long)tempImgView.tag] afterDelay:duration - 0.11111];
 
 }
 
@@ -850,7 +850,7 @@
                 
                 btn.tag = indexPath.row*100 + i/*低16位 cell行数*/ | ([specArr[i].standardClassId intValue] << 16) /*高16位  分类id*/;
                 
-                NSString *key = [NSString stringWithFormat:@"%ld",indexPath.row];
+                NSString *key = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
                 
                 if ([specArr[i].standardClassId intValue] == [self.standardBtnClickDict[key] intValue]) {
                     btn.backgroundColor = [UIColor orangeColor];

@@ -241,7 +241,7 @@
 {
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"扫描中...";
-    hub.userInteractionEnabled = NO;
+    
     [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             hub.mode = MBProgressHUDModeCustomView;

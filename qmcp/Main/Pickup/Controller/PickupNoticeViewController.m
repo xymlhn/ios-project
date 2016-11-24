@@ -10,7 +10,6 @@
 #import "PickupNoticeView.h"
 #import "ScanViewController.h"
 #import "QrCodeViewController.h"
-#import "PickupManager.h"
 #import "ItemComplete.h"
 #import "PickupNoticeCell.h"
 #import "UIScrollView+EmptyDataSet.h"
@@ -126,9 +125,11 @@
 {
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"请求中...";
-    hub.userInteractionEnabled = NO;
     __weak typeof(self) weakSelf = self;
-    [[PickupManager getInstance] itemCompleteByCode:result finishBlock:^(NSDictionary *obj, NSString *error) {
+    
+    NSDictionary *dict = @{@"code":result};
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ITEM_COMPLETE];
+    [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [hub hideAnimated:YES];
             ItemComplete *itemComplete = [ItemComplete mj_objectWithKeyValues:obj];
@@ -141,7 +142,5 @@
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
-    
-    
 }
 @end

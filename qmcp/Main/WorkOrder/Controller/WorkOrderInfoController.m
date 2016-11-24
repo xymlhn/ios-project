@@ -273,7 +273,7 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在上传工单步骤";
-    hub.userInteractionEnabled = NO;
+    
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};
     NSDictionary *dict = @{@"code":workOrder.code,@"status":[NSNumber numberWithInteger:workOrder.status],@"processDetail":stepDict};
     
@@ -336,7 +336,6 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在完结工单";
-    hub.userInteractionEnabled = NO;
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,workOrderCode];
     [HttpUtil postFormData:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {

@@ -115,7 +115,6 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在搜索";
-    hub.userInteractionEnabled = NO;
     
     [[InventoryManager getInstance] getSalesOrderSearchResult:string finishBlock:^(NSMutableArray<SalesOrderSearchResult *> *array, NSString *error) {
         if(!error){
@@ -145,8 +144,6 @@
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
-    
-
     
 }
 
@@ -179,7 +176,7 @@
         __weak typeof(self) weakSelf = self;
         MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hub.detailsLabel.text = @"正在获取";
-        hub.userInteractionEnabled = NO;
+        
         NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,salesOrderSearchResult.code];
         [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
             if(!error){

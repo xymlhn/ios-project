@@ -123,7 +123,6 @@
     if(!_currentCamera){
         MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hub.detailsLabel.text = @"打开摄像头中...";
-        hub.userInteractionEnabled = NO;
         
         [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:cameraData.cameraCode andFuncType:_funcType cameraStatus:YES finishBlock:^(NSDictionary *dict, NSString *error) {
             if (!error) {

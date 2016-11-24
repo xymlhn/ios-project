@@ -71,7 +71,7 @@
         AgreePriceChangeController *controller = [AgreePriceChangeController doneBlock:^(NSString *price, NSString *remark) {
             MBProgressHUD *hub = [Utils createHUD];
             hub.detailsLabel.text = @"正在提交数据";
-            NSDictionary *dict = @{@"agreementPrice":price,@"remark":remark};
+            NSDictionary *dict = [price isEqualToString:@""]?@{@"remark":remark} : @{@"agreementPrice":price,@"remark":remark};
             NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERAGREEPRICE,_code];
             [HttpUtil post:URLString param:dict finish:^(NSDictionary *dict, NSString *error) {
                 if(!error){

@@ -7,7 +7,7 @@
 //
 
 #import "AgreePriceChangeView.h"
-
+#import <UITextView+Placeholder/UITextView+Placeholder.h>
 @implementation AgreePriceChangeView
 
 
@@ -53,6 +53,8 @@
     _remarkText.layer.borderColor = [UIColor arrowColor].CGColor;
     _remarkText.layer.borderWidth = 0.5;
     _remarkText.layer.cornerRadius =5.0;
+    _remarkText.placeholder = @"必填项";
+    _remarkText.placeholderColor = [UIColor lightGrayColor];
     [alphaView addSubview:_remarkText];
     
     _saveBtn = [UIButton new];

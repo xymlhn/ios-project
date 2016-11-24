@@ -162,6 +162,8 @@
 		24AFDC821D92399E00B2F1B9 /* PickupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC801D92399E00B2F1B9 /* PickupView.m */; };
 		24AFDC871D9239BB00B2F1B9 /* PickupNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC841D9239BB00B2F1B9 /* PickupNoticeViewController.m */; };
 		24AFDC881D9239BB00B2F1B9 /* PickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AFDC861D9239BB00B2F1B9 /* PickupViewController.m */; };
+		24D5C2DA1DE6C47100FEE938 /* InventoryShowContorller.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D5C2D91DE6C47100FEE938 /* InventoryShowContorller.m */; };
+		24D5C2DD1DE6C54800FEE938 /* InventoryShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D5C2DC1DE6C54800FEE938 /* InventoryShowView.m */; };
 		24DC45461DDD76840046E58B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DC45451DDD76840046E58B /* libc++.tbd */; };
 		24DC45481DDD768D0046E58B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DC45471DDD768D0046E58B /* libz.tbd */; };
 		24DC454A1DDD76990046E58B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DC45491DDD76990046E58B /* libsqlite3.tbd */; };
@@ -519,6 +521,10 @@
 		24AFDC851D9239BB00B2F1B9 /* PickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupViewController.h; sourceTree = "<group>"; };
 		24AFDC861D9239BB00B2F1B9 /* PickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupViewController.m; sourceTree = "<group>"; };
 		24B97B7C1D93D6CA005D1047 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		24D5C2D81DE6C47100FEE938 /* InventoryShowContorller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryShowContorller.h; sourceTree = "<group>"; };
+		24D5C2D91DE6C47100FEE938 /* InventoryShowContorller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryShowContorller.m; sourceTree = "<group>"; };
+		24D5C2DB1DE6C54800FEE938 /* InventoryShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryShowView.h; sourceTree = "<group>"; };
+		24D5C2DC1DE6C54800FEE938 /* InventoryShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InventoryShowView.m; sourceTree = "<group>"; };
 		24DC45451DDD76840046E58B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		24DC45471DDD768D0046E58B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		24DC45491DDD76990046E58B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -962,6 +968,8 @@
 				24AFDB0D1D9238FF00B2F1B9 /* InventoryEditController.m */,
 				24AFDB081D9238FF00B2F1B9 /* InventoryChooseController.h */,
 				24AFDB091D9238FF00B2F1B9 /* InventoryChooseController.m */,
+				24D5C2D81DE6C47100FEE938 /* InventoryShowContorller.h */,
+				24D5C2D91DE6C47100FEE938 /* InventoryShowContorller.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1005,6 +1013,8 @@
 				24AFDB291D9238FF00B2F1B9 /* InventoryEditView.m */,
 				24AFDB261D9238FF00B2F1B9 /* InventoryChooseView.h */,
 				24AFDB271D9238FF00B2F1B9 /* InventoryChooseView.m */,
+				24D5C2DB1DE6C54800FEE938 /* InventoryShowView.h */,
+				24D5C2DC1DE6C54800FEE938 /* InventoryShowView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1691,6 +1701,7 @@
 				24AFDC641D92390000B2F1B9 /* ChooseViewController.m in Sources */,
 				246643091D9A12E8009402A2 /* FooterCell.m in Sources */,
 				24AFDC301D9238FF00B2F1B9 /* LoginViewController.m in Sources */,
+				24D5C2DA1DE6C47100FEE938 /* InventoryShowContorller.m in Sources */,
 				24AFDC6C1D92390000B2F1B9 /* WorkOrderStepController.m in Sources */,
 				24AFDC7A1D92390000B2F1B9 /* WorkOrderInfoView.m in Sources */,
 				24AFDC231D9238FF00B2F1B9 /* AMapViewController.m in Sources */,
@@ -1711,6 +1722,7 @@
 				24AFDC121D9238FF00B2F1B9 /* InventoryController.m in Sources */,
 				24AFDC871D9239BB00B2F1B9 /* PickupNoticeViewController.m in Sources */,
 				24AFDC2E1D9238FF00B2F1B9 /* InitViewController.m in Sources */,
+				24D5C2DD1DE6C54800FEE938 /* InventoryShowView.m in Sources */,
 				24AFDC3C1D9238FF00B2F1B9 /* SettingViewController.m in Sources */,
 				246643051D9A12E8009402A2 /* CommodityCell.m in Sources */,
 				24AFDC3F1D9238FF00B2F1B9 /* PickupData.m in Sources */,

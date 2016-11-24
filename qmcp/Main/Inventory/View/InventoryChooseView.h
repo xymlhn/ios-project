@@ -11,6 +11,8 @@
 @interface InventoryChooseView : BaseView
 
 @property(nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) UIButton *carBtn;
+
 + (instancetype)viewInstance;
 
 @end

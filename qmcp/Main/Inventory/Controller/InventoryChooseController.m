@@ -13,6 +13,7 @@
 #import "PropertyManager.h"
 #import "StandardsView.h"
 #import "CommodityProperty.h"
+#import "InventoryShowContorller.h"
 
 @interface InventoryChooseController ()<UITableViewDelegate,UITableViewDataSource,StandardsViewDelegate>
 
@@ -46,13 +47,32 @@
 -(void)bindListener{
     _inventoryChooseView.tableView.delegate = self;
     _inventoryChooseView.tableView.dataSource = self;
-    
+    _inventoryChooseView.carBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        
+        InventoryShowContorller *controller = [InventoryShowContorller doneBlock:^(NSMutableArray<CommoditySnapshot *> *commodies) {
+            
+        }];
+        controller.chooseCommodityList = _chooseCommodityList;
+        controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+            controller.providesPresentationContextTransitionStyle = YES;
+            controller.definesPresentationContext = YES;
+            controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+            [self.tabBarController presentViewController:controller animated:YES completion:nil];
+            
+        } else {
+            self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+            [self presentViewController:controller animated:NO completion:nil];
+            self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        }
+        return [RACSignal empty];
+    }];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(priceUpdate:) name:@"priceUpdate" object:nil];
 }
 
 -(void)loadData{
-    NSString *itemWhere = [NSString stringWithFormat:@"salesOrderItemCode = '%@'",_itemSnapshotCode];
+    NSString *itemWhere = [NSString stringWithFormat:@"itemSnapshotCode = '%@'",_itemSnapshotCode];
     _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
     _commodityList = [[PropertyManager getInstance] getAllLocalCommoditySnapshot];
     _chooseCommodityList = [NSMutableArray new];
@@ -61,11 +81,6 @@
     }
 }
 
--(void)saveData{
-    _itemSnapshot.commodities = _chooseCommodityList;
-    [_itemSnapshot updateToDB];
-    self.doneBlock(_chooseCommodityList);
-}
 
 #pragma mark - Table view data source
 
@@ -92,9 +107,20 @@
         _currentCommoditySnapshot = commodity;
         [_standardsView show];
     }else{
-        commodity.code = [[NSUUID UUID] UUIDString];
-        [_chooseCommodityList addObject:commodity];
-        [self.navigationController popViewControllerAnimated:YES];
+        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"确定选择" message:commodity.commodityName preferredStyle:UIAlertControllerStyleAlert];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            commodity.code = [[NSUUID UUID] UUIDString];
+            [_chooseCommodityList addObject:commodity];
+            _itemSnapshot.commodities = _chooseCommodityList;
+            if([_itemSnapshot updateToDB]){
+                [Utils showHudTipStr:@"添加服务成功"];
+            }
+        }]];
+        
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self presentViewController:alertControl animated:YES completion:nil];
     }
 }
 
@@ -119,12 +145,10 @@
         NSString *itemProperties = text.userInfo[@"property"];
         _standardsView.priceLab.text = [NSString stringWithFormat:@"价格:%@", price];
         _standardsView.goodNum.text = [NSString stringWithFormat:@"%@", itemProperties];
-        _currentCommoditySnapshot = [CommoditySnapshot new];
         _currentCommoditySnapshot.itemProperties = itemProperties;
         _currentCommoditySnapshot.price = price;
         _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
     }else{
-        _currentCommoditySnapshot = nil;
         _standardsView.priceLab.text = @"";
         _standardsView.goodNum.text = @"";
     }
@@ -168,7 +192,8 @@
         [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:0.5 andHeight:150 andScale:20];
         _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
         [_chooseCommodityList addObject:_currentCommoditySnapshot];
-        [self.navigationController popViewControllerAnimated:YES];
+        _itemSnapshot.commodities = _chooseCommodityList;
+        [_itemSnapshot updateToDB];
     }
     else{
         [standardView dismiss];

@@ -101,7 +101,7 @@
  */
 -(BOOL)p_isValidUsername:(NSString *)text
 {
-    NSString * regex = @"^[A-Za-z0-9@]{1,20}$";
+    NSString * regex = @"^[A-Za-z0-9-_@]{1,20}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL isMatch = [pred evaluateWithObject:text];
     return isMatch;

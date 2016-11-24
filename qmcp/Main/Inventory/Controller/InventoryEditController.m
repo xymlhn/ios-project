@@ -186,7 +186,6 @@
         _itemSnapshot.commodities = commodies;
     }];
     info.itemSnapshotCode = _itemSnapshot.itemSnapshotCode;
-    info.salesOrderCode = _salesOrderCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 

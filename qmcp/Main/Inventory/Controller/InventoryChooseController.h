@@ -10,8 +10,6 @@
 
 @interface InventoryChooseController : BaseViewController
 
-@property (nonatomic, copy) NSString *salesOrderCode;
-
 @property (nonatomic, copy) NSString *itemSnapshotCode;
 
 @property (copy, nonatomic) void(^doneBlock)(NSMutableArray *commodies);

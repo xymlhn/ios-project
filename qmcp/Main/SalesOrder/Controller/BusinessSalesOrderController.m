@@ -30,7 +30,7 @@
     
     _businessSalesOrderView = [BusinessSalesOrderView viewInstance];
     self.view = _businessSalesOrderView;
-     self.title = @"商家下单";
+    self.title = @"商家下单";
 }
 
 -(void)bindListener{
@@ -66,21 +66,21 @@
         }];
         return [RACSignal empty];
     }];
-
+    
 }
 
 
 -(void)loadData{
     RACSignal *validPhoneSignal = [_businessSalesOrderView.phoneValue.rac_textSignal
-                                      map:^id(NSString *text) {
-                                          return @([Utils isMobileNumber:text]);
-                                      }];
-
+                                   map:^id(NSString *text) {
+                                       return @([Utils isMobileNumber:text]);
+                                   }];
+    
     
     RACSignal *validAddressSignal = [_businessSalesOrderView.addressValue.rac_textSignal
-                                      map:^id(NSString *text) {
-                                          return @(![Utils isTextNull:text]);
-                                      }];
+                                     map:^id(NSString *text) {
+                                         return @(![Utils isTextNull:text]);
+                                     }];
     
     RACSignal *validUserSignal = [_businessSalesOrderView.nameValue.rac_textSignal
                                   map:^id(NSString *text) {
@@ -88,14 +88,14 @@
                                   }];
     
     RACSignal *signUpActiveSignal = [RACSignal combineLatest:@[validPhoneSignal, validUserSignal,validAddressSignal]
-                                                    reduce:^id(NSNumber*phoneValid, NSNumber *userValid,NSNumber* addressValid){
-                                                        return @([phoneValid boolValue]&&[userValid boolValue]&&[addressValid boolValue]);
-                                                    }];
+                                                      reduce:^id(NSNumber*phoneValid, NSNumber *userValid,NSNumber* addressValid){
+                                                          return @([phoneValid boolValue]&&[userValid boolValue]&&[addressValid boolValue]);
+                                                      }];
     [signUpActiveSignal subscribeNext:^(NSNumber*signupActive){
         _businessSalesOrderView.orderButton.backgroundColor = [signupActive boolValue] ? [UIColor nameColor] : [UIColor grayColor];
         _businessSalesOrderView.orderButton.enabled = [signupActive boolValue];
     }];
-
+    
 }
 
 

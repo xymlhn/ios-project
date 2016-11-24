@@ -20,7 +20,7 @@
 - (id)init {
     self = [super init];
     if (!self) return nil;
-   
+    
     self.backgroundColor = [UIColor whiteColor];
     UIView *containView = [UIView new];
     [containView setBackgroundColor:[UIColor whiteColor]];
@@ -30,7 +30,7 @@
     }];
     [self setupView];
     [self setupBottomView];
-
+    
     return self;
 }
 
@@ -169,7 +169,7 @@
     _commodityRightIcon.text = @"";
     _commodityRightIcon.textColor = [UIColor blackColor];
     [_commodityView addSubview:_commodityRightIcon];
-
+    
     [qrView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.mas_top).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);

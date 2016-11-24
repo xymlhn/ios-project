@@ -63,7 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self configureViews];
@@ -94,13 +94,13 @@
 #pragma Views
 - (void)configureViews{
     [self configureButtonsAndPageControl];
-
+    
     CGFloat scaleFactor = 1.0;
     CGFloat desginHeight = 667.0;//iPhone6 的设计尺寸
     if (!kDevice_Is_iPhone6 && !kDevice_Is_iPhone6Plus) {
         scaleFactor = kScreen_Height/desginHeight;
     }
-
+    
     for (int i = 0; i < self.numberOfPages; i++) {
         NSString *imageKey = [self imageKeyForIndex:i];
         NSString *viewKey = [self viewKeyForIndex:i];
@@ -130,7 +130,7 @@
 }
 
 - (void)configureButtonsAndPageControl{
-//    Button
+    //    Button
     UIColor *darkColor = [UIColor grayColor];
     CGFloat buttonWidth = kScreen_Width * 0.4;
     CGFloat buttonHeight = kScaleFrom_iPhone5_Desgin(38);
@@ -180,10 +180,10 @@
         make.bottom.equalTo(self.view).offset(-paddingToBottom);
     }];
     
-//    PageControl
+    //    PageControl
     UIImage *pageIndicatorImage = [UIImage imageNamed:@"intro_dot_unselected"];
     UIImage *currentPageIndicatorImage = [UIImage imageNamed:@"intro_dot_selected"];
-
+    
     if (!kDevice_Is_iPhone6 && !kDevice_Is_iPhone6Plus) {
         CGFloat desginWidth = 375.0;//iPhone6 的设计尺寸
         CGFloat scaleFactor = kScreen_Width/desginWidth;
@@ -244,7 +244,7 @@
         }
         if (tipView) {
             [self keepView:tipView onPages:@[@(index +1), @(index), @(index-1)] atTimes:@[@(index - 1), @(index), @(index +1)]];
-
+            
             IFTTTAlphaAnimation *tipAlphaAnimation = [IFTTTAlphaAnimation animationWithView:tipView];
             [tipAlphaAnimation addKeyframeForTime:index -0.5 alpha:0.f];
             [tipAlphaAnimation addKeyframeForTime:index alpha:1.f];

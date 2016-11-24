@@ -61,10 +61,10 @@
         make.left.equalTo(containView.mas_left).with.offset(kPaddingLeftWidth);
         make.right.equalTo(_jsSwitch.mas_left);
         make.centerY.equalTo(containView.mas_centerY);
-
+        
     }];
     
-
+    
 }
 
 @end

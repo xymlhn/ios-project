@@ -518,7 +518,7 @@
     [_agreeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _agreeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     [_agreeBtn setTitle:@"修改" forState:UIControlStateNormal];
-     [_agreePriceView addSubview:_agreeBtn];
+    [_agreePriceView addSubview:_agreeBtn];
     
     [_agreeBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_agreePriceView.mas_centerY);
@@ -584,7 +584,7 @@
     inventoryLabel.text = @"清点";
     inventoryLabel.textColor = [UIColor blackColor];
     [bottomView addSubview:inventoryLabel];
-
+    
     _qrCodeBtn = [UILabel new];
     [_qrCodeBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
     _qrCodeBtn.text = @"";
@@ -824,7 +824,7 @@
         make.left.equalTo(_stepBtn.mas_right);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-
+    
     
     [_cameraBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.width.equalTo(_stepBtn);

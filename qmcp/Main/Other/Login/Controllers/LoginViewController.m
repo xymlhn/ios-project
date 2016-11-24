@@ -44,7 +44,7 @@
     
     [_loginView.userNameText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [_loginView.passWordText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
-
+    
     
     //添加手势，点击屏幕其他区域关闭键盘的操作
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
@@ -62,7 +62,7 @@
         [self.navigationController pushViewController:setting animated:YES];
         return [RACSignal empty];
     }];
-
+    
 }
 /**
  *  用户名密码验证
@@ -195,7 +195,7 @@
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
-
+    
 }
 
 @end

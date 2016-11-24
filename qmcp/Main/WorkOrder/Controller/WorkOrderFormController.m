@@ -61,7 +61,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-
+    
 }
 
 
@@ -73,7 +73,7 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-     _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, 0, 0);
+    _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, 0, 0);
 }
 
 - (void)dealloc
@@ -85,7 +85,7 @@
 - (void)hidenKeyboard
 {
     [self.view endEditing:YES];
-
+    
 }
 
 -(void)loadData
@@ -219,7 +219,7 @@
             return 150;
             break;
     }
-
+    
 }
 
 #pragma mark - IBAction
@@ -234,7 +234,7 @@
 
 -(void)deleteBtnClick:(UITapGestureRecognizer *)recognizer{
     FormTemplateField *field = _workOrderFormList[recognizer.view.tag];
-
+    
     [self.workOrderFormList removeObjectsInArray:field.templateFields];
     [_workOrderFormView.tableView reloadData];
 }

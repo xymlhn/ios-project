@@ -126,6 +126,6 @@
         make.right.equalTo(bottomView.mas_right);
         make.top.equalTo(bottomView.mas_top).offset(3);
     }];
-
+    
 }
 @end

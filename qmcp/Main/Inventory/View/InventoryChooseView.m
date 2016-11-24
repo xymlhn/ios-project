@@ -33,7 +33,7 @@
         make.right.equalTo(self.mas_right).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
-
+    
     _carBtn = [UIButton new];
     _carBtn.layer.masksToBounds = YES;
     _carBtn.backgroundColor = [UIColor nameColor];

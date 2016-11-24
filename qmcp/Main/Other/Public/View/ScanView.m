@@ -56,7 +56,7 @@
         make.left.equalTo(containView.mas_left).with.offset(10);
         
     }];
-
+    
     return self;
 }
 

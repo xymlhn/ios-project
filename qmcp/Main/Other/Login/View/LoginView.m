@@ -48,7 +48,7 @@
         make.top.equalTo(logoIcon.mas_bottom).with.offset(15);
         make.centerX.equalTo(topView.mas_centerX);
     }];
-
+    
     
     UIView *userNameView = [UIView new];
     userNameView.backgroundColor = [UIColor whiteColor];

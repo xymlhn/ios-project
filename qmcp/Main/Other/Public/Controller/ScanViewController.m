@@ -29,15 +29,15 @@
 }
 -(void)bindListener{
     _scanView.scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)
-                            {
-                                [_scanView.scanText resignFirstResponder];
-                                [self.navigationController popViewControllerAnimated:YES];
-                                if (self.doneBlock) {
-                                    self.doneBlock(_scanView.scanText.text);
-                                }
-                                
-                                return [RACSignal empty];
-                            }];
+                                     {
+                                         [_scanView.scanText resignFirstResponder];
+                                         [self.navigationController popViewControllerAnimated:YES];
+                                         if (self.doneBlock) {
+                                             self.doneBlock(_scanView.scanText.text);
+                                         }
+                                         
+                                         return [RACSignal empty];
+                                     }];
     
     RACSignal *validSignal = [_scanView.scanText.rac_textSignal
                               map:^id(NSString *text) {

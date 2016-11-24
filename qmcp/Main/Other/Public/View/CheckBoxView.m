@@ -89,7 +89,7 @@
         make.right.equalTo(alphaView.mas_right);
     }];
     
-
+    
     
     return self;
 }

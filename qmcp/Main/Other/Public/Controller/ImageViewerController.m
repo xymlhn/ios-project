@@ -68,7 +68,7 @@
     [self configureImageView];
     
     if (_key) {
-         UIImage *image = [Utils loadImage:_key];
+        UIImage *image = [Utils loadImage:_key];
         _imageView.image = image;
         _imageView.frame = [self frameForImage:image];
         _scrollView.contentSize = [self contentSizeForImage:image];
@@ -177,10 +177,10 @@
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
     CGFloat offsetX = scrollView.bounds.size.width > scrollView.contentSize.width ?
-                      (scrollView.bounds.size.width - scrollView.contentSize.width) / 2 : 0;
+    (scrollView.bounds.size.width - scrollView.contentSize.width) / 2 : 0;
     
     CGFloat offsetY = scrollView.bounds.size.height > scrollView.contentSize.height ?
-                      (scrollView.bounds.size.height - scrollView.contentSize.height) / 2 : 0;
+    (scrollView.bounds.size.height - scrollView.contentSize.height) / 2 : 0;
     
     _imageView.center = CGPointMake(scrollView.contentSize.width / 2 + offsetX,
                                     scrollView.contentSize.height / 2 + offsetY);

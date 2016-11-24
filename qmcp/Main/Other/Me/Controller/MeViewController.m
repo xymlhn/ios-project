@@ -54,7 +54,7 @@
     [HttpUtil get:URLString param:nil finishString:^(NSString *str, NSString *error) {
         if(!error){
             [_meView.userIcon sd_setImageWithURL:[NSURL URLWithString:str]
-                         placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
+                                placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
         }
     }];
     _meView.nickName.text = _user.userNickName;

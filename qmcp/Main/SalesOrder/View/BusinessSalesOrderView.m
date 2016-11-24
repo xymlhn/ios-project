@@ -86,7 +86,7 @@
     _remarkTitle.text = @"备注";
     _remarkTitle.textColor = [UIColor blackColor];
     [self addSubview:_remarkTitle];
-
+    
     
     _remarkValue = [UITextView new];
     _remarkValue.font = [UIFont systemFontOfSize:13];
@@ -177,7 +177,7 @@
         make.right.equalTo(self.mas_right).with.offset(-10);
         make.height.equalTo(@60);
     }];
-
+    
     [_orderButton mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_remarkValue.mas_bottom).with.offset(20);
         make.left.equalTo(self.mas_left).with.offset(10);

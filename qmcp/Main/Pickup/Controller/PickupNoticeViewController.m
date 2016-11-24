@@ -40,7 +40,7 @@
 }
 
 -(void)loadData{
- 
+    
 }
 
 -(NSMutableArray<ItemComplete *> *)itemCompleteArray{
@@ -107,7 +107,7 @@
 #pragma mark - IBAction
 -(void)qrBtnClick:(UITapGestureRecognizer *)recognizer
 {
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     if([Config getQuickScan]){
         ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
             [weakSelf p_handleResult:textValue];

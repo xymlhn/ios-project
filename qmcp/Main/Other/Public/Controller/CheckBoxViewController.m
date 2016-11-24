@@ -61,7 +61,7 @@
 }
 
 -(NSString *)p_handleChooseValue{
-
+    
     NSMutableString *value = [NSMutableString new];
     for (int i = 0; i < self.statusList.count; i++) {
         if(self.statusList[i] == [NSNumber numberWithBool:YES]){
@@ -70,7 +70,7 @@
     }
     if(value.length > 0){
         [value deleteCharactersInRange:NSMakeRange(value.length-1, 1)];
-
+        
     }
     return value;
 }
@@ -102,13 +102,13 @@
     //1 创建可重用的自定义的cell
     CheckCell *cell = [CheckCell cellWithTableView:tableView];
     //2 设置cell内部的子控件
-
+    
     cell.jsText.text = self.valueList[row];
     NSNumber *status = self.statusList[row];
     [cell.jsSwitch setOn:[status boolValue]];
     cell.jsSwitch.tag = row;
     [cell.jsSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //3 返回
     return cell;

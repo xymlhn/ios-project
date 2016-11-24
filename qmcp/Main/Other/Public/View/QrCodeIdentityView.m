@@ -19,7 +19,7 @@
 - (id)init {
     self = [super init];
     if (!self) return nil;
- 
+    
     self.backgroundColor = [UIColor clearColor];
     
     UIView *alphaView = [UIView new];

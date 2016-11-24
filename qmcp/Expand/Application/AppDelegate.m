@@ -51,7 +51,7 @@ const static int databaseVersion = 0;
     [self p_initGeTui];
     //高德地图
     [AMapServices sharedServices].apiKey = kAMapKey;
-
+    
     /************ 控件外观设置 **************/
     NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
@@ -64,7 +64,7 @@ const static int databaseVersion = 0;
     [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-   
+    
     /************ 登录状态设置 **************/
     if (![Config getLoginStatus]) {
         IntroductionViewController *intro = [IntroductionViewController new];
@@ -150,7 +150,7 @@ const static int databaseVersion = 0;
 /** SDK启动成功返回cid */
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId {
     NSLog(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
-    [Config setPushId:clientId];    
+    [Config setPushId:clientId];
 }
 
 /** SDK收到透传消息回调 */
@@ -204,7 +204,7 @@ const static int databaseVersion = 0;
 }
 
 - (void)p_reLogin:(NSNotification *)text{
-
+    
     NSString *info = text.userInfo[@"info"];
     if([info isEqualToString:@"0"]){
         UIStoryboard *root = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -229,7 +229,7 @@ const static int databaseVersion = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

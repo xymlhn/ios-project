@@ -19,9 +19,8 @@
     self.view = _changeView;
 }
 
-
 -(void)bindListener{
-
+    
     _changeView.baseView.userInteractionEnabled = YES;
     [_changeView.baseView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dissmiss)]];
     _changeView.cancelBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
@@ -39,9 +38,9 @@
     
     
     RACSignal *validRemarkSignal = [_changeView.remarkText.rac_textSignal
-                                      map:^id(NSString *text) {
-                                          return @(text.length > 0);
-                                      }];
+                                    map:^id(NSString *text) {
+                                        return @(text.length > 0);
+                                    }];
     [validRemarkSignal subscribeNext:^(NSNumber*signupActive){
         _changeView.saveBtn.backgroundColor = [signupActive boolValue] ? [UIColor nameColor] : [UIColor grayColor];
         _changeView.saveBtn.enabled = [signupActive boolValue];

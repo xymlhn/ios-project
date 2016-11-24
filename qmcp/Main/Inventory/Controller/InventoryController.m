@@ -45,7 +45,7 @@
     _inventoryView.tableView.emptyDataSetDelegate = self;
     _inventoryView.addBtn.userInteractionEnabled = YES;
     [_inventoryView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
-
+    
     _inventoryView.signBtn.userInteractionEnabled = YES;
     [_inventoryView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signBtnClick:)]];
 }
@@ -95,7 +95,7 @@
     if (_itemSnapshotList.count == 0) {
         return;
     }
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
         [weakSelf p_reportSignImage:signImage];
     }];
@@ -152,7 +152,7 @@
 
 /**
  上传清点数据
-
+ 
  @param code 订单code
  */
 -(void)p_postInventoryDataWitCode:(NSString *)code{
@@ -257,7 +257,7 @@
         ItemSnapshot *itemSnapshot = _itemSnapshotList[indexPath.row];
         if([itemSnapshot deleteToDB]){
             for (Attachment *attachment in itemSnapshot.attachments) {
-                 [Utils deleteImage:attachment.key];
+                [Utils deleteImage:attachment.key];
             }
             [_itemSnapshotList removeObjectAtIndex:indexPath.row];
             [_inventoryView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

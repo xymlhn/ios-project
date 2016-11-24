@@ -87,7 +87,7 @@
                     [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                 }
             }];
-
+            
         }];
         controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
@@ -106,7 +106,7 @@
 }
 
 -(void)completeClick{
-   [self showOkayCancelAlert];
+    [self showOkayCancelAlert];
 }
 
 -(void)loadData{
@@ -240,7 +240,7 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在完成订单";
-   
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCOMPLETE,_code];
     [HttpUtil post:URLString param:nil finish:^(NSDictionary *dict, NSString *error) {
         if(error == nil){
@@ -276,10 +276,10 @@
 }
 
 -(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer{
-      __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在刷新";
-   
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,_code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
@@ -297,7 +297,7 @@
         }
         
     }];
-
+    
 }
 -(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer{
     if(_salesOrder.signedFlag){
@@ -330,7 +330,7 @@
             hub.detailsLabel.text = error;
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
-    
+        
     }];
 }
 

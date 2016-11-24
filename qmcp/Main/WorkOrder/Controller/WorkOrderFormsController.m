@@ -27,7 +27,7 @@
 {
     self.title = @"表单";
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     CGFloat itemW = (kScreen_Width - 12 * 3) / 2;
     CGFloat itemH = itemW * (175.0/284.0) + 10 +21 +5 +13 +5;
@@ -48,14 +48,13 @@
 
 -(void)loadData
 {
-
+    
     _workOrderFormList = [NSMutableArray new];
     
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在获取表单数据";
     [[FormManager getInstance] getFormTemplateAndFormData:_code finishBlock:^(NSMutableArray *arr, NSString *error) {
         if (error == nil) {
-            
             _workOrderFormList = arr;
             NSString *success;
             if(_workOrderFormList.count == 0){

@@ -37,7 +37,7 @@
     _searchView.tableView.tableFooterView = [UIView new];
     _searchView.tableView.emptyDataSetSource = self;
     _searchView.tableView.emptyDataSetDelegate = self;
-
+    
 }
 
 -(void)loadData{
@@ -193,7 +193,7 @@
                 hub.detailsLabel.text = error;
                 [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             }
-
+            
         }];
     }
 }

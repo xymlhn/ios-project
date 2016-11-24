@@ -31,7 +31,7 @@
     _infoView = [WorkOrderInfoView viewInstance];
     self.view = _infoView;
     self.title = @"信息";
- 
+    
 }
 
 -(void)setupView{
@@ -43,13 +43,13 @@
 {
     _infoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         switch (_workOrder.onSiteStatus) {
-                case OnSiteStatusNone:
-                case OnSiteStatusNotDepart:
-                case OnSiteStatusWaiting:
-                    [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
+            case OnSiteStatusNone:
+            case OnSiteStatusNotDepart:
+            case OnSiteStatusWaiting:
+                [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampEnroute andDate:[Utils formatDate:[NSDate new]]];
                 break;
-                case OnSiteStatusOnRoute:
-                    [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
+            case OnSiteStatusOnRoute:
+                [self p_updateTimeStampWithWorkOrderCode:_workOrderCode andTimeStamp:OnSiteTimeStampOnsite andDate:[Utils formatDate:[NSDate new]]];
                 break;
             default:
                 break;
@@ -111,24 +111,24 @@
     _infoView.codeContent.text = workOrder.code;
     _infoView.workOrder = workOrder;
     switch (_workOrder.type) {
-            case WorkOrderTypeOnsite:
-                switch (_workOrder.onSiteStatus) {
-                        case OnSiteStatusNone:
-                        case OnSiteStatusWaiting:
-                        case OnSiteStatusNotDepart:
-                        [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                        break;
-                        case OnSiteStatusOnRoute:
-                        [_infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                        break;
-                    default:
-                        [_infoView.starBtn setHidden:YES];
-                        break;
-                }
+        case WorkOrderTypeOnsite:
+            switch (_workOrder.onSiteStatus) {
+                case OnSiteStatusNone:
+                case OnSiteStatusWaiting:
+                case OnSiteStatusNotDepart:
+                    [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
+                    break;
+                case OnSiteStatusOnRoute:
+                    [_infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
+                    break;
+                default:
+                    [_infoView.starBtn setHidden:YES];
+                    break;
+            }
             
             break;
-            case WorkOrderTypeService:
-                [_infoView.starBtn setHidden:YES];
+        case WorkOrderTypeService:
+            [_infoView.starBtn setHidden:YES];
             break;
         default:
             break;
@@ -160,18 +160,18 @@
             [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             
             switch (weakSelf.workOrder.onSiteStatus) {
-                    case OnSiteStatusNone:
-                    case OnSiteStatusWaiting:
-                    case OnSiteStatusNotDepart:
-                        [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                        weakSelf.workOrder.onSiteStatus = OnSiteStatusOnRoute;
-                        [weakSelf.workOrder saveToDB];
+                case OnSiteStatusNone:
+                case OnSiteStatusWaiting:
+                case OnSiteStatusNotDepart:
+                    [weakSelf.infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
+                    weakSelf.workOrder.onSiteStatus = OnSiteStatusOnRoute;
+                    [weakSelf.workOrder saveToDB];
                     break;
-                    case OnSiteStatusOnRoute:
-                        [weakSelf.infoView.starBtn setHidden:YES];
-                        weakSelf.workOrder.onSiteStatus = OnSiteStatusArrived;
-                        [weakSelf.workOrder saveToDB];
-                        [weakSelf loadData];
+                case OnSiteStatusOnRoute:
+                    [weakSelf.infoView.starBtn setHidden:YES];
+                    weakSelf.workOrder.onSiteStatus = OnSiteStatusArrived;
+                    [weakSelf.workOrder saveToDB];
+                    [weakSelf loadData];
                     break;
                 default:
                     break;
@@ -231,7 +231,7 @@
 -(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer
 {
     QrCodeIdentityController *controller = [QrCodeIdentityController new];
-
+    
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     controller.qrCodeUrl = _workOrder.qrCodeUrl;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
@@ -326,7 +326,7 @@
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
             
         }
-
+        
     }];
     
 }
@@ -356,7 +356,7 @@
             [hub hideAnimated:YES afterDelay:1];
         }
     }];
-
+    
     
     
 }

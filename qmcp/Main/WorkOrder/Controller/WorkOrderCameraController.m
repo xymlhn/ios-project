@@ -33,11 +33,6 @@
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(self.view);
     }];
-
-}
-
--(void)bindListener
-{
     
 }
 
@@ -48,7 +43,7 @@
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在获取摄像头";
     
-
+    
     NSString *URLString;
     if (_funcType == FuncTypeWorkOrder) {
         URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_WORKORDER_CURRENT_CAMERA,_code];
@@ -118,7 +113,7 @@
     NSUInteger tag = switchButton.tag;
     CameraData *cameraData = _cameraArr[tag];
     
-
+    
     if(!_currentCamera){
         MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hub.detailsLabel.text = @"打开摄像头中...";
@@ -147,7 +142,7 @@
             }
         }];
         
-   
+        
     }else{
         
         if([_currentCamera.cameraCode isEqualToString:cameraData.cameraCode]){
@@ -177,7 +172,7 @@
                     hub.detailsLabel.text = error;
                     [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
                 }
-
+                
             }];
         }else{
             [self.tableView reloadData];

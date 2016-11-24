@@ -74,7 +74,7 @@
 }
 
 -(void)saveData{
-
+    
 }
 
 // 根据传进来的下标数组计算对应的三个数组
@@ -196,7 +196,7 @@
         [detailAddress appendString:thirfAddress];
     }
     _locationLabel.text = detailAddress;
-   
+    
 }
 
 

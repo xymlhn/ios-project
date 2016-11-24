@@ -46,7 +46,7 @@
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(alphaView);
     }];
-
+    
     return self;
 }
 

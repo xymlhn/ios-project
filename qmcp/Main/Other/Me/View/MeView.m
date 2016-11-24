@@ -48,7 +48,7 @@
     workText.text = @"上班";
     workText.textColor = [UIColor mainTextColor];
     [workView addSubview:workText];
-
+    
     UILabel *workIcon = [UILabel new];
     [workIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
     workIcon.text = @"";
@@ -233,7 +233,7 @@
     [mapIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_mapBtn.mas_centerY);
         make.left.equalTo(_mapBtn.mas_left).with.offset(kPaddingLeftWidth);
-         make.width.equalTo(@20);
+        make.width.equalTo(@20);
     }];
     
     [mapText mas_makeConstraints:^(MASConstraintMaker *make){
@@ -265,7 +265,7 @@
     [helpIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_helpBtn.mas_centerY);
         make.left.equalTo(_helpBtn.mas_left).with.offset(kPaddingLeftWidth);
-         make.width.equalTo(@20);
+        make.width.equalTo(@20);
     }];
     
     [helpText mas_makeConstraints:^(MASConstraintMaker *make){
@@ -290,7 +290,7 @@
     [settingIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_settingBtn.mas_centerY);
         make.left.equalTo(_settingBtn.mas_left).with.offset(kPaddingLeftWidth);
-         make.width.equalTo(@20);
+        make.width.equalTo(@20);
     }];
     
     [settingText mas_makeConstraints:^(MASConstraintMaker *make){
@@ -322,7 +322,7 @@
     [logoutIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_logoutBtn.mas_centerY);
         make.left.equalTo(_logoutBtn.mas_left).with.offset(kPaddingLeftWidth);
-         make.width.equalTo(@20);
+        make.width.equalTo(@20);
     }];
     
     [logoutText mas_makeConstraints:^(MASConstraintMaker *make){

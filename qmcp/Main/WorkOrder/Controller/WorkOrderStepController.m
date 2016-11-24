@@ -58,7 +58,7 @@
     _stepView.tableView.emptyDataSetSource = self;
     _stepView.tableView.emptyDataSetDelegate = self;
     [_stepView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
-
+    
 }
 
 -(void)loadData
@@ -131,7 +131,7 @@
 
 -(void)pushWorkOrderStepEditController:(WorkOrderStep *)worksStep withType:(SaveType)orignalType
 {
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, SaveType type) {
         
         switch (type) {

@@ -51,7 +51,7 @@
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(self.view);
     }];
-
+    
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(workOrderUpdate:) name:WorkOrderUpdateNotification object:nil];
     
@@ -59,7 +59,7 @@
 
 -(void)loadData
 {
-
+    
     _workOrderList = [NSMutableArray new];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];

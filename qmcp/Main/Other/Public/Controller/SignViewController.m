@@ -63,7 +63,7 @@
             }
         }
     });
-
+    
 }
 +(instancetype)doneBlock:(void (^)(UIImage *))block{
     

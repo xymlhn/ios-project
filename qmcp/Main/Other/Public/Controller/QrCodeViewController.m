@@ -29,7 +29,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     UIButton *_lightButton;//灯光按钮
     AVCaptureSession *_captureSession;
     AVCaptureVideoPreviewLayer *_videoPreviewLayer;
-
+    
     
 }
 
@@ -54,7 +54,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     [self startReading];
     //启动定时器
     [self createTimer];
-
+    
 }
 
 
@@ -120,7 +120,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
         if (result == nil) {
             kTipAlert(@"条码无数据");
         }
-       
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             //调用代理对象的协议方法来实现数据传递
             [self.navigationController popViewControllerAnimated:YES];
@@ -128,7 +128,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
                 self.doneBlock(result);
             }
         });
-    [self stopReading];
+        [self stopReading];
     }
     return;
 }
@@ -290,13 +290,13 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

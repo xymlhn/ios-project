@@ -64,7 +64,7 @@
 
 //搜索框中的内容发生改变时 回调（即要搜索的内容改变）
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-
+    
     if (_searchView.searchBar.text.length == 0) {
         [self setSearchControllerHidden:YES]; //控制下拉列表的隐现
     }else{
@@ -91,7 +91,7 @@
     NSString *result = searchBar.text;
     
     [self p_searchWorkOrderByCode:result andCondition:[Config getSearch]];
-
+    
 }
 
 //点击搜索框上的 取消按钮时 调用
@@ -108,14 +108,12 @@
 }
 
 -(void)p_searchWorkOrderByCode:(NSString *)string
-                andCondition:(BOOL)condition{
+                  andCondition:(BOOL)condition{
     
     [_searchView.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在搜索";
-    
-
     [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSString *error) {
         if(!error){
             [weakSelf.resultList removeAllObjects];
@@ -147,7 +145,7 @@
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
-
+    
     
 }
 

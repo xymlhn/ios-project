@@ -37,7 +37,7 @@ NSString * const kPushId = @"pushId";
     [self setSearch:NO];
     [self setCommoditySnapshot:@""];
     [self setCommodityStep:@""];
-
+    
 }
 
 + (void)saveUserName:(NSString *)name andPassword:(NSString *)password
@@ -45,11 +45,11 @@ NSString * const kPushId = @"pushId";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:name ?: @"" forKey:kAccount];
     
-    #ifdef DEBUG
-        [userDefaults setObject:password ?: @"" forKey:kService];
-    #else
-        [SAMKeychain setPassword:password ?: @"" forService:kService account:name];
-    #endif
+#ifdef DEBUG
+    [userDefaults setObject:password ?: @"" forKey:kService];
+#else
+    [SAMKeychain setPassword:password ?: @"" forService:kService account:name];
+#endif
     [userDefaults synchronize];
 }
 
@@ -59,13 +59,13 @@ NSString * const kPushId = @"pushId";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *account = [userDefaults objectForKey:kAccount];
     
-    #ifdef DEBUG
-        NSString *password =  [userDefaults objectForKey:kService] == nil ? @"" : [userDefaults objectForKey:kService];
-        if (account) {return @[account, password];}
-    #else
-        NSString *password = [SAMKeychain passwordForService:kService account:account] ?: @"";
-        if (account) {return @[account, password];}
-    #endif
+#ifdef DEBUG
+    NSString *password =  [userDefaults objectForKey:kService] == nil ? @"" : [userDefaults objectForKey:kService];
+    if (account) {return @[account, password];}
+#else
+    NSString *password = [SAMKeychain passwordForService:kService account:account] ?: @"";
+    if (account) {return @[account, password];}
+#endif
     
     return nil;
 }

@@ -215,9 +215,9 @@
         }
         StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
         [titleArr addObject:tempModel];
-    }    
-//    standardView.standardArr = titleArr;
-//    [standardView standardsViewReload];
+    }
+    //    standardView.standardArr = titleArr;
+    //    [standardView standardsViewReload];
     
 }
 //设置自定义btn的属性

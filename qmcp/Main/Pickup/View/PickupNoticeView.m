@@ -19,7 +19,7 @@
 - (id)init {
     self = [super init];
     if (!self) return nil;
-
+    
     self.backgroundColor = [UIColor whiteColor];
     
     UIView *containView = [UIView new];
@@ -92,7 +92,7 @@
         make.top.equalTo(_searchBar.mas_bottom).with.offset(0);
         make.bottom.equalTo(containView.mas_bottom).with.offset(0);
     }];
-
+    
     return self;
 }
 

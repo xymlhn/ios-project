@@ -30,7 +30,7 @@
 #import "Helper.h"
 #import "ImageViewerController.h"
 @interface InventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,
-                                                UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
+UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
 @property (nonatomic, strong) NSMutableArray *attachments;
@@ -60,7 +60,7 @@
 }
 -(void)loadView
 {
-     _inventoryEditView = [InventoryEditView viewInstance];
+    _inventoryEditView = [InventoryEditView viewInstance];
     self.view = _inventoryEditView;
     self.title = @"清点编辑";
 }
@@ -80,11 +80,11 @@
     
     _inventoryEditView.lockIcon.userInteractionEnabled = YES;
     [_inventoryEditView.lockIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lockIconClick:)]];
-
+    
     _inventoryEditView.commodityView.userInteractionEnabled = YES;
     [_inventoryEditView.commodityView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
     
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     _inventoryEditView.qrBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         if([Config getQuickScan]){
             ScanViewController *scanViewController = [ScanViewController doneBlock:^(NSString *textValue) {
@@ -129,12 +129,12 @@
     if(_itemSnapshot.attachments != nil){
         [_attachments addObjectsFromArray:_itemSnapshot.attachments];
     }
-
+    
     _inventoryEditView.qrText.text = _itemSnapshot.code;
     _inventoryEditView.remarkText.text = _itemSnapshot.remark;
     _inventoryEditView.goodNameText.text = _itemSnapshot.name;
     
-
+    
 }
 
 
@@ -182,7 +182,7 @@
     info.itemSnapshotCode = _itemSnapshot.itemSnapshotCode;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
-
+    
 }
 
 - (void)lockIconClick:(UITapGestureRecognizer *)recognizer{
@@ -319,7 +319,7 @@
 
 /**
  保存前提示处理
-
+ 
  @return bool
  */
 -(BOOL)p_beforeSaveHandle{

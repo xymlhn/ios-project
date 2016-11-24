@@ -58,7 +58,7 @@
     [[WorkOrderManager getInstance] getCommodityStepByLastUpdateTime:[Config getCommodityStep]];
     
     [[PropertyManager getInstance] getCommodityItemByLastUpdateTime:[Config getCommodityItem]];
-
+    
     [[PropertyManager getInstance] getCommoditySnapshotByLastUpdateTime:[Config getCommoditySnapshot]];
     //获取步骤所有描述
     [[PropertyManager getInstance] getCommodityPropertyByLastUpdateTime:[Config getCommodityProperty]];
@@ -77,7 +77,7 @@
 
 /**
  持续定位
-
+ 
  @param manager manager description
  @param location location description
  */
@@ -115,7 +115,7 @@
 
 /**
  比较两个时间是否超过number分钟
-
+ 
  @param first first description
  @param second second description
  @param number 分钟数

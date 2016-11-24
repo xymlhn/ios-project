@@ -137,7 +137,7 @@
 
 /**
  签名图片
-
+ 
  @param image 图片
  */
 -(void)p_reportSignImage:(UIImage *)image
@@ -174,7 +174,7 @@
 
 /**
  处理返回字符串
-
+ 
  @param result result description
  */
 -(void)p_handleResult:(NSString *)result
@@ -217,14 +217,14 @@
 
 /**
  提交取件数据
-
+ 
  @param pickupSignature pickupSignature
  */
 -(void)p_postPickupData:(PickupSignature *)pickupSignature
 {
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"完成中...";
-     __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     NSDictionary *obj = [pickupSignature mj_keyValues];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_PICKUPSIGNATURE];
     [HttpUtil post:URLString param:obj finish:^(NSDictionary *obj, NSString *error) {

@@ -39,7 +39,7 @@
 }
 
 -(void)loadData{
-
+    
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"加载中...";
     

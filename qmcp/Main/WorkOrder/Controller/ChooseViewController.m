@@ -18,7 +18,7 @@
 -(void)loadView{
     _chooseView = [ChooseView viewInstance];
     self.view = _chooseView;
-
+    
 }
 
 -(void)bindListener{

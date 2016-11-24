@@ -35,7 +35,7 @@
     _mapView.pausesLocationUpdatesAutomatically = NO;
     [_mapView setZoomLevel:16.1 animated:YES];
     [self.view addSubview:_mapView];
-
+    
 }
 
 - (void)mapView:(MAMapView *)mapView didAddAnnotationViews:(NSArray *)views{
@@ -46,7 +46,7 @@
         pre.image = [UIImage imageNamed:@"location.png"];
         [self.mapView updateUserLocationRepresentation:pre];
         view.calloutOffset = CGPointMake(0, 0);
-    } 
+    }
 }
 
 

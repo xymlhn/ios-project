@@ -42,15 +42,9 @@
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"正在获取摄像头";
-    
-    
-    NSString *URLString;
-    if (_funcType == FuncTypeWorkOrder) {
-        URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_WORKORDER_CURRENT_CAMERA,_code];
-    }else{
-        URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDER_CURRENT_CAMERA,_code];
-    }
-    
+    NSString *URLString  = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,
+                            _funcType == FuncTypeWorkOrder ?QMCPAPI_WORKORDER_CURRENT_CAMERA : QMCPAPI_SALESORDER_CURRENT_CAMERA,
+                            _code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if(!error){
             if(!obj){

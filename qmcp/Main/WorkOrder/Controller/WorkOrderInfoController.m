@@ -227,7 +227,6 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
-
 -(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer
 {
     QrCodeIdentityController *controller = [QrCodeIdentityController new];
@@ -246,7 +245,6 @@
         self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     }
 }
-
 
 - (void)showOkayCancelAlert {
     NSString *title = @"提示";

@@ -20,7 +20,7 @@
 #import "Helper.h"
 #import "SalesOrder.h"
 @interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,
-UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
+                                            UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) WorkOrderStep *step;
 @property (nonatomic, strong) WorkOrder *workOrder;
@@ -79,7 +79,7 @@ UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
     _editView.editText.text = _step.content;
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([text isEqualToString:@"\n"]){
+    if ([text isEqualToString:@"\n"]){ 
         [self hidenKeyboard];
         return NO;
     }
@@ -282,7 +282,7 @@ UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
         }
         
     }];
-    
+
 }
 
 
@@ -407,7 +407,7 @@ UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
             [_editView.collectionView reloadData];
         }];
         [self presentViewController:ivc animated:YES completion:nil];
-        
+
     }else{
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
         [actionSheet showInView:self.view];

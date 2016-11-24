@@ -127,8 +127,7 @@
     [Utils deleteImage:attachment.key];
     [attachment deleteToDB];
     [_attachments removeObject:attachment];
-    _step.attachments = _attachments;
-    [_step updateToDB];
+    [self p_updateStep];
 }
 
 
@@ -139,11 +138,6 @@
     if (self.doneBlock) {
         switch (_type) {
             case SaveTypeAdd:
-                _step.content = _editView.editText.text;
-                if([_step updateToDB]){
-                    self.doneBlock(_step,SaveTypeAdd);
-                }
-                break;
             case SaveTypeUpdate:
                 _step.content = _editView.editText.text;
                 if([_step updateToDB]){
@@ -151,7 +145,9 @@
                 }
                 break;
             case SaveTypeDelete:
-                self.doneBlock(_step,SaveTypeDelete);
+                if ([_step deleteToDB]) {
+                    self.doneBlock(_step,SaveTypeDelete);
+                }
                 break;
             default:
                 break;
@@ -159,7 +155,8 @@
         
     }
 }
--(void)updateStep{
+//去除加号后保存附件节点
+-(void)p_updateStep{
     
     [_attachments removeObject:_plusIcon];
     _step.attachments = _attachments;
@@ -173,7 +170,7 @@
 #pragma mark - IBAction
 - (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
 {
-    [self updateStep];
+    [self p_updateStep];
     if(_funcType == FuncTypeWorkOrder){
         NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_code];
         NSArray *steps = [WorkOrderStep searchWithWhere:where];
@@ -304,23 +301,16 @@
     }];
 
 }
-- (void)plusBtnClick{
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
-    [actionSheet showInView:self.view];
-}
+
 
 - (void)delBtnClick:(UITapGestureRecognizer *)recognizer{
-
-    if([_step deleteToDB]){
-        for (Attachment *attachment in _attachments) {
-            if(!attachment.isPlus)
-                [self p_deleteAttachment:attachment];
-        }
-        [self.navigationController popViewControllerAnimated:YES];
-        _type = SaveTypeDelete;
-        [self p_doneSave];
+    for (Attachment *attachment in _attachments) {
+        if(!attachment.isPlus)
+            [Utils deleteImage:attachment.key];
     }
+    [self.navigationController popViewControllerAnimated:YES];
+    _type = SaveTypeDelete;
+    [self p_doneSave];
 }
 
 - (void)fastViewClick:(UITapGestureRecognizer *)recognizer{
@@ -390,7 +380,7 @@
             [Utils saveImage:image andName:attachment.key];
         }
         [_attachments insertObject:attachment atIndex:0];
-        [self updateStep];
+        [self p_updateStep];
         [_editView.collectionView reloadData];
     }];
     
@@ -432,7 +422,8 @@
 {
     Attachment *attachment = _attachments[indexPath.row];
     if(attachment.isPlus){
-        [self plusBtnClick];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+        [actionSheet showInView:self.view];
     }else{
         ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
             [self p_deleteAttachment:attachment];

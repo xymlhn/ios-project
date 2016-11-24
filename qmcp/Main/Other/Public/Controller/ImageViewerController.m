@@ -94,7 +94,6 @@
     }
     
     _delButton = [UIButton new];
-    [_delButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
     [self.view addSubview:_delButton];
     [_delButton mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.view.mas_top).with.offset(15);

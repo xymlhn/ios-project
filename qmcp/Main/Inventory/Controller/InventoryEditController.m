@@ -113,6 +113,10 @@
         _saveType = SaveTypeDelete;
         [self.navigationController popViewControllerAnimated:YES];
         [self p_doneSave];
+        for (Attachment *attachment in _attachments) {
+            if(!attachment.isPlus)
+                [Utils deleteImage:attachment.key];
+        }
         return [RACSignal empty];
     }];
 }
@@ -147,13 +151,6 @@
     if (self.doneBlock) {
         switch (_saveType) {
             case SaveTypeAdd:
-                _itemSnapshot.code = _inventoryEditView.qrText.text;
-                _itemSnapshot.remark = _inventoryEditView.remarkText.text;
-                _itemSnapshot.name = _inventoryEditView.goodNameText.text;
-                if([_itemSnapshot updateToDB]){
-                    self.doneBlock(_itemSnapshot,SaveTypeAdd);
-                }
-                break;
             case SaveTypeUpdate:
                 _itemSnapshot.code = _inventoryEditView.qrText.text;
                 _itemSnapshot.remark = _inventoryEditView.remarkText.text;
@@ -163,7 +160,10 @@
                 }
                 break;
             case SaveTypeDelete:
-                self.doneBlock(_itemSnapshot,SaveTypeDelete);
+                if ([_itemSnapshot deleteToDB]) {
+                    self.doneBlock(_itemSnapshot,SaveTypeDelete);
+                }
+                
                 break;
             default:
                 break;
@@ -198,13 +198,7 @@
     _inventoryEditView.qrText.enabled = _unLock;
 }
 
-- (void)photoIconClick:(UITapGestureRecognizer *)recognizer{
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
-    [actionSheet showInView:self.view];
-
-}
-
+//去除加号后保存附件节点
 -(void)p_updateStep{
     
     [_attachments removeObject:_plusIcon];
@@ -294,34 +288,31 @@
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     Attachment *attachment = _attachments[indexPath.row];
     if(attachment.isPlus){
-        [self plusBtnClick];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+        [actionSheet showInView:self.view];
     }else{
         ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
-            [self p_deleteAttachment:attachment];
-            [_attachments removeObject:attachment];
+            [Utils deleteImage:attachment.key];
+            [attachment deleteToDB];
+            [weakSelf.attachments removeObject:attachment];
+            [weakSelf p_updateStep];
             [_inventoryEditView.photoCollectionView reloadData];
+           
         }];
         [self presentViewController:ivc animated:YES completion:nil];
     }
     
 }
-- (void)plusBtnClick{
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
-    [actionSheet showInView:self.view];
-}
+
 
 -(void)handleQrCode:(NSString *)qrCode{
     _inventoryEditView.qrText.text = qrCode;
 }
 
--(void)p_deleteAttachment:(Attachment *)attachment
-{
-    [Utils deleteImage:attachment.key];
-    [attachment deleteToDB];
-}
+
 #pragma mark - 键盘操作
 
 - (void)hidenKeyboard{

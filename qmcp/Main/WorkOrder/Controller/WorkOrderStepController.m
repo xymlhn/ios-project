@@ -124,49 +124,24 @@
     step.submitTime = [Utils formatDate:[NSDate new]];
     step.userOpenId = [[AppManager getInstance] getUser].userOpenId;
     [step saveToDB];
-    [self pushWorkOrderStepEditController:step.id withType:SaveTypeAdd];
+    [_workOrderStepList addObject:step];
+    [self pushWorkOrderStepEditController:step withType:SaveTypeAdd];
     
 }
 
--(void)p_appendStep:(WorkOrderStep *)workOrderStep{
-    BOOL flag = NO;
-    for(int i = 0;i < [_workOrderStepList count];i++){
-        NSString *code = _workOrderStepList[i].id;
-        if([code isEqualToString:workOrderStep.id]){
-            flag = YES;
-        }
-    }
-    if(!flag){
-        [_workOrderStepList addObject:workOrderStep];
-    }
-}
-
--(void)pushWorkOrderStepEditController:(NSString *)stepId withType:(SaveType)type
+-(void)pushWorkOrderStepEditController:(WorkOrderStep *)worksStep withType:(SaveType)orignalType
 {
      __weak typeof(self) weakSelf = self;
     WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, SaveType type) {
         
         switch (type) {
             case SaveTypeAdd:
-                [weakSelf p_appendStep:step];
-                break;
             case SaveTypeUpdate:
-                for (WorkOrderStep *temp in _workOrderStepList) {
-                    if([temp.id isEqualToString:step.id]){
-                        temp.content = step.content;
-                        temp.attachments = step.attachments;
-                        break;
-                    }
-                }
-
+                worksStep.content = step.content;
+                worksStep.attachments = step.attachments;
                 break;
             case SaveTypeDelete:
-                for (WorkOrderStep *temp in _workOrderStepList) {
-                    if([temp.id isEqualToString:step.id]){
-                        [weakSelf.workOrderStepList removeObject:temp];
-                        break;
-                    }
-                }
+                [weakSelf.workOrderStepList removeObject:worksStep];
                 break;
             default:
                 break;
@@ -176,8 +151,8 @@
         [weakSelf.stepView.tableView reloadData];
     }];
     info.code = _code;
-    info.stepCode = stepId;
-    info.type = type;
+    info.stepCode = worksStep.id;
+    info.type = orignalType;
     info.funcType = _funcType;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
@@ -229,7 +204,7 @@
 
 {
     WorkOrderStep *step = self.workOrderStepList[indexPath.row];
-    [self pushWorkOrderStepEditController:step.id withType:SaveTypeUpdate];
+    [self pushWorkOrderStepEditController:step withType:SaveTypeUpdate];
 }
 
 

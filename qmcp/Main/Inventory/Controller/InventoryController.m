@@ -86,7 +86,8 @@
     itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
     itemSnapshot.salesOrderCode = _salesOrderCode;
     [itemSnapshot saveToDB];
-    [self p_pushInventoryEditController:itemSnapshot.itemSnapshotCode andType:SaveTypeAdd];
+    [_itemSnapshotList addObject:itemSnapshot];
+    [self p_pushInventoryEditController:itemSnapshot andType:SaveTypeAdd];
     
 }
 
@@ -102,45 +103,22 @@
     
 }
 
--(void)p_appendInventory:(ItemSnapshot *)item{
-    BOOL flag = NO;
-    for(int i = 0;i < _itemSnapshotList.count;i++){
-        NSString *itemSnapshotCode = _itemSnapshotList[i].itemSnapshotCode;
-        if([itemSnapshotCode isEqualToString:item.itemSnapshotCode]){
-            flag = YES;
-        }
-    }
-    if(!flag){
-        [_itemSnapshotList addObject:item];
-    }
-}
-
--(void)p_pushInventoryEditController:(NSString *)itemSnapshotCode andType:(SaveType)type{
+-(void)p_pushInventoryEditController:(ItemSnapshot *)itemSnapshot andType:(SaveType)originalType{
     __weak typeof(self) weakSelf = self;
     InventoryEditController *info = [InventoryEditController doneBlock:^(ItemSnapshot *item,SaveType type) {
         switch (type) {
             case SaveTypeAdd:
-                [weakSelf p_appendInventory:item];
-                break;
             case SaveTypeUpdate:
-                for (ItemSnapshot *temp in _itemSnapshotList) {
-                    if([temp.itemSnapshotCode isEqualToString:item.itemSnapshotCode]){
-                        temp.remark = item.remark;
-                        temp.code = item.code;
-                        temp.commodities = item.commodities;
-                        temp.attachments = item.attachments;
-                        break;
-                    }
-                }
-                
+                itemSnapshot.remark = item.remark;
+                itemSnapshot.code = item.code;
+                itemSnapshot.commodities = item.commodities;
+                itemSnapshot.attachments = item.attachments;
                 break;
             case SaveTypeDelete:
-                for (ItemSnapshot *temp in weakSelf.itemSnapshotList) {
-                    if([temp.itemSnapshotCode isEqualToString:item.itemSnapshotCode]){
-                        [weakSelf.itemSnapshotList removeObject:temp];
-                        break;
-                    }
+                for (Attachment *attachment in itemSnapshot.attachments) {
+                    [Utils deleteImage:attachment.key];
                 }
+                [weakSelf.itemSnapshotList removeObject:itemSnapshot];
                 break;
             default:
                 break;
@@ -148,8 +126,8 @@
         [weakSelf.inventoryView.tableView reloadData];
     }];
     info.salesOrderCode = _salesOrderCode;
-    info.itemSnapshotCode = itemSnapshotCode;
-    info.saveType = type;
+    info.itemSnapshotCode = itemSnapshot.itemSnapshotCode;
+    info.saveType = originalType;
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -265,7 +243,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ItemSnapshot *itemSnapshot = self.itemSnapshotList[indexPath.row];
-    [self p_pushInventoryEditController:itemSnapshot.itemSnapshotCode andType:SaveTypeUpdate];
+    [self p_pushInventoryEditController:itemSnapshot andType:SaveTypeUpdate];
     
 }
 

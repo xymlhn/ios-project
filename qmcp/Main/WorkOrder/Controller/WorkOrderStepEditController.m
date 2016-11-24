@@ -20,7 +20,7 @@
 #import "Helper.h"
 #import "SalesOrder.h"
 @interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,
-                                            UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
+UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
 
 @property (nonatomic, strong) WorkOrderStep *step;
 @property (nonatomic, strong) WorkOrder *workOrder;
@@ -35,31 +35,27 @@
 @implementation WorkOrderStepEditController
 
 #pragma mark - BaseWorkOrderViewController
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     // 禁用返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     // 开启返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
 }
--(void)loadView
-{
+-(void)loadView{
     _editView =[WorkOrderStepEditView viewInstance];
     self.view = _editView;
     self.title = @"步骤编辑";
 }
 
--(void)loadData
-{
+-(void)loadData{
     NSMutableDictionary *dict = [NSMutableDictionary new];
     if(_funcType == FuncTypeWorkOrder){
         NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_code];
@@ -78,27 +74,19 @@
     _dataArray = [[WorkOrderManager getInstance] getCommodityByCommodityCode:dict];
     NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",_stepCode];
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
-
     _attachments = [NSMutableArray new];
-    
     [_attachments addObjectsFromArray:_step.attachments];
-    if(_attachments.count < 6){
-        _plusIcon = [Attachment new];
-        _plusIcon.isPlus = true;
-        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
-    }
     _editView.editText.text = _step.content;
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([text isEqualToString:@"\n"]){ 
+    if ([text isEqualToString:@"\n"]){
         [self hidenKeyboard];
         return NO;
     }
     return YES;
 }
 
--(void)bindListener
-{
+-(void)bindListener{
     _editView.delBtn.userInteractionEnabled = YES;
     [_editView.delBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delBtnClick:)]];
     
@@ -157,14 +145,9 @@
 }
 //去除加号后保存附件节点
 -(void)p_updateStep{
-    
-    [_attachments removeObject:_plusIcon];
     _step.attachments = _attachments;
     _step.content = _editView.editText.text;
     [_step updateToDB];
-    if(_attachments.count < 6){
-        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
-    }
 }
 
 #pragma mark - IBAction
@@ -299,14 +282,13 @@
         }
         
     }];
-
+    
 }
 
 
 - (void)delBtnClick:(UITapGestureRecognizer *)recognizer{
     for (Attachment *attachment in _attachments) {
-        if(!attachment.isPlus)
-            [Utils deleteImage:attachment.key];
+        [Utils deleteImage:attachment.key];
     }
     [self.navigationController popViewControllerAnimated:YES];
     _type = SaveTypeDelete;
@@ -396,7 +378,7 @@
 //指定单元格的个数 ，这个是一个组里面有多少单元格，e.g : 一个单元格就是一张图片
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _attachments.count;
+    return _attachments.count == kMaxImage ? _attachments.count : _attachments.count + 1;
 }
 
 //构建单元格
@@ -404,13 +386,11 @@
 {
     static NSString *identify = @"PhotoCell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
-    Attachment *attachment = _attachments[indexPath.row];
-    if(attachment.isPlus){
-        UIImage *image = [UIImage imageNamed:@"plus_photo.png"];
-        cell.image.image = image;
+    if (_attachments.count == kMaxImage || indexPath.row < _attachments.count) {
+        Attachment *attachment = _attachments[indexPath.row];
+        cell.image.image = [Utils loadImage:attachment.key];
     }else{
-        UIImage *image = [Utils loadImage:attachment.key];
-        cell.image.image = image;
+        cell.image.image = [UIImage imageNamed:@"plus_photo.png"];
     }
     
     return cell;
@@ -418,18 +398,19 @@
 }
 
 //UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    Attachment *attachment = _attachments[indexPath.row];
-    if(attachment.isPlus){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
-        [actionSheet showInView:self.view];
-    }else{
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (_attachments.count == kMaxImage || indexPath.row < _attachments.count) {
+        Attachment *attachment = _attachments[indexPath.row];
         ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
             [self p_deleteAttachment:attachment];
             [_editView.collectionView reloadData];
         }];
         [self presentViewController:ivc animated:YES completion:nil];
+        
+    }else{
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+        [actionSheet showInView:self.view];
     }
     
 }

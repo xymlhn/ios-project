@@ -28,6 +28,4 @@
 
 @property (nonatomic, assign) int type;
 
-@property (nonatomic, assign) BOOL isPlus;
-
 @end

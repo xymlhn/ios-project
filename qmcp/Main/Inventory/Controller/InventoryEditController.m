@@ -36,7 +36,6 @@
 @property (nonatomic, strong) NSMutableArray *attachments;
 @property (nonatomic, strong) InventoryEditView *inventoryEditView;
 @property (nonatomic, assign) BOOL unLock;
-@property (nonatomic, strong) Attachment *plusIcon;
 
 @end
 
@@ -114,8 +113,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         [self p_doneSave];
         for (Attachment *attachment in _attachments) {
-            if(!attachment.isPlus)
-                [Utils deleteImage:attachment.key];
+            [Utils deleteImage:attachment.key];
         }
         return [RACSignal empty];
     }];
@@ -131,11 +129,7 @@
     if(_itemSnapshot.attachments != nil){
         [_attachments addObjectsFromArray:_itemSnapshot.attachments];
     }
-    if(_attachments.count < 6){
-        _plusIcon = [Attachment new];
-        _plusIcon.isPlus = true;
-        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
-    }
+
     _inventoryEditView.qrText.text = _itemSnapshot.code;
     _inventoryEditView.remarkText.text = _itemSnapshot.remark;
     _inventoryEditView.goodNameText.text = _itemSnapshot.name;
@@ -199,13 +193,8 @@
 
 //去除加号后保存附件节点
 -(void)p_updateStep{
-    
-    [_attachments removeObject:_plusIcon];
     _itemSnapshot.attachments = _attachments;
     [_itemSnapshot updateToDB];
-    if(_attachments.count < 6){
-        [_attachments insertObject:_plusIcon atIndex:_attachments.count];
-    }
 }
 
 
@@ -246,8 +235,7 @@
         attachment.type = 10;
         NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
         //当选择的类型是图片
-        if ([type isEqualToString:@"public.image"])
-        {
+        if ([type isEqualToString:@"public.image"]){
             UIImage *image = info[UIImagePickerControllerEditedImage];
             [Utils saveImage:image andName:attachment.key];
         }
@@ -265,43 +253,41 @@
 //指定单元格的个数 ，这个是一个组里面有多少单元格，e.g : 一个单元格就是一张图片
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _attachments.count;
+    return _attachments.count == 6 ? _attachments.count : _attachments.count + 1;
 }
 
 //构建单元格
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"PhotoCell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
-    Attachment *attachment = _attachments[indexPath.row];
     
-    if(attachment.isPlus){
-        cell.image.image = [UIImage imageNamed:@"plus_photo.png"];
-    }else{
+    if (_attachments.count == kMaxImage || indexPath.row < _attachments.count) {
+        Attachment *attachment = _attachments[indexPath.row];
         cell.image.image = [Utils loadImage:attachment.key];
+    }else{
+        cell.image.image = [UIImage imageNamed:@"plus_photo.png"];
     }
-    
     return cell;
     
 }
 
 //UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     __weak typeof(self) weakSelf = self;
-    Attachment *attachment = _attachments[indexPath.row];
-    if(attachment.isPlus){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
-        [actionSheet showInView:self.view];
-    }else{
+    if (_attachments.count == kMaxImage || indexPath.row < _attachments.count) {
+        Attachment *attachment = _attachments[indexPath.row];
         ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
             [Utils deleteImage:attachment.key];
             [attachment deleteToDB];
             [weakSelf.attachments removeObject:attachment];
             [weakSelf p_updateStep];
             [_inventoryEditView.photoCollectionView reloadData];
-           
+            
         }];
         [self presentViewController:ivc animated:YES completion:nil];
+    }else{
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
+        [actionSheet showInView:self.view];
     }
     
 }
@@ -341,7 +327,7 @@
         [Utils showHudTipStr:@"请将二维码锁上保存"];
         return NO;
     }
-    if ([_inventoryEditView.qrText.text isEqualToString:@""] || _attachments.count < 2) {
+    if ([_inventoryEditView.qrText.text isEqualToString:@""] || _attachments.count == 0) {
         UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"二维码为空/还未拍照,是否放弃编辑?" preferredStyle:UIAlertControllerStyleAlert];
         [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             _saveType = SaveTypeDelete;

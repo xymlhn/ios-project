@@ -158,7 +158,7 @@
     
     self.priceLab.textColor = [UIColor redColor];
     self.priceLab.font = [UIFont systemFontOfSize:14];
-    self.priceLab.text =@"价格";
+    self.priceLab.text =@"价格:";
     
     [tempView addSubview:self.priceLab];
     
@@ -772,7 +772,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.standardArr.count + 1;
+    return self.standardArr.count ;
     
 }
 
@@ -872,31 +872,31 @@
         else
         {
 
-            cell.textLabel.text = @"购买数量";
-            cell.textLabel.textColor = [UIColor blackColor];
-            cell.textLabel.font = [UIFont systemFontOfSize:14];
-            
-            CGFloat btnWidth = 30;
-            
-            UIButton *plusBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 10 -btnWidth, 0, btnWidth, 30)];
-            CGPoint tempPoint = plusBtn.center;
-            [plusBtn addTarget:self action:@selector(buyNumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            tempPoint.y = _cellHeight/2/2;
-            plusBtn.center = tempPoint;
-            plusBtn.tag = 0;
-            [plusBtn setImage:[UIImage imageNamed:@"StandarsAdd"] forState:UIControlStateNormal];
-            [cell addSubview:plusBtn];
-            
-            self.numberTextFied.frame = CGRectMake(plusBtn.frame.origin.x - 40, plusBtn.center.y -10, 40, 20);
-            self.numberTextFied.textAlignment = NSTextAlignmentCenter;
-            self.numberTextFied.backgroundColor = [UIColor grayColor];
-            [cell addSubview:self.numberTextFied];
-            
-            UIButton *reduceBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.numberTextFied.frame.origin.x - btnWidth,plusBtn.center.y - plusBtn.frame.size.height/2 , plusBtn.frame.size.width, plusBtn.frame.size.height)];
-            [reduceBtn addTarget:self action:@selector(buyNumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            [reduceBtn setImage:[UIImage imageNamed:@"StandarsDel"] forState:UIControlStateNormal];
-            reduceBtn.tag = 1;
-            [cell addSubview:reduceBtn];
+//            cell.textLabel.text = @"购买数量";
+//            cell.textLabel.textColor = [UIColor blackColor];
+//            cell.textLabel.font = [UIFont systemFontOfSize:14];
+//            
+//            CGFloat btnWidth = 30;
+//            
+//            UIButton *plusBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 10 -btnWidth, 0, btnWidth, 30)];
+//            CGPoint tempPoint = plusBtn.center;
+//            [plusBtn addTarget:self action:@selector(buyNumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//            tempPoint.y = _cellHeight/2/2;
+//            plusBtn.center = tempPoint;
+//            plusBtn.tag = 0;
+//            [plusBtn setImage:[UIImage imageNamed:@"StandarsAdd"] forState:UIControlStateNormal];
+//            [cell addSubview:plusBtn];
+//            
+//            self.numberTextFied.frame = CGRectMake(plusBtn.frame.origin.x - 40, plusBtn.center.y -10, 40, 20);
+//            self.numberTextFied.textAlignment = NSTextAlignmentCenter;
+//            self.numberTextFied.backgroundColor = [UIColor grayColor];
+//            [cell addSubview:self.numberTextFied];
+//            
+//            UIButton *reduceBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.numberTextFied.frame.origin.x - btnWidth,plusBtn.center.y - plusBtn.frame.size.height/2 , plusBtn.frame.size.width, plusBtn.frame.size.height)];
+//            [reduceBtn addTarget:self action:@selector(buyNumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//            [reduceBtn setImage:[UIImage imageNamed:@"StandarsDel"] forState:UIControlStateNormal];
+//            reduceBtn.tag = 1;
+//            [cell addSubview:reduceBtn];
             
 //            
         }

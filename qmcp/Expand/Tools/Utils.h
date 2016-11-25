@@ -104,20 +104,6 @@
 
 
 /**
- *  删除response的cache
- *
- *  @return bool
- */
-+ (BOOL) deleteResponseCache;
-
-/**
- *  获取response的cache的size
- *
- *  @return 大小
- */
-+ (NSUInteger)getResponseCacheSize;
-
-/**
  *   根据图片名获取图片
  *
  *  @param imageName 图片名字

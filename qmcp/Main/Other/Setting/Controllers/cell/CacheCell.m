@@ -7,7 +7,8 @@
 //
 
 #import "CacheCell.h"
-
+#import "PchHeader.h"
+#import "UIColor+Util.h"
 @implementation CacheCell
 
 //创建自定义可重用的cell对象
@@ -50,11 +51,18 @@
     _sizeLabel.text = @"";
     _sizeLabel.textColor = [UIColor grayColor];
     [self.contentView addSubview:_sizeLabel];
-
+    
+    UILabel *arrow = [UILabel new];
+    [arrow setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
+    arrow.text = @"";
+    arrow.textAlignment = NSTextAlignmentCenter;
+    arrow.textColor = [UIColor arrowColor];
+    [self.contentView addSubview:arrow];
+    
     [_fontIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.height.equalTo(@30);
         make.width.equalTo(@30);
-        make.left.equalTo(self.contentView.mas_left).with.offset(10);
+        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
         make.centerY.equalTo(self.contentView.mas_centerY);
 
     }];
@@ -64,9 +72,15 @@
         make.left.equalTo(_fontIcon.mas_right).with.offset(5);
     }];
     
+    [arrow mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
+    }];
+    
     [_sizeLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-5);
+        make.right.equalTo(arrow.mas_left).with.offset(0);
+        make.width.equalTo(@50);
     }];
     
 }

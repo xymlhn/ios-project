@@ -66,7 +66,6 @@
 
 -(NSString *) p_diskCacheSizeStr{
     NSUInteger size = [[SDImageCache sharedImageCache] getSize];
-    size += [Utils getResponseCacheSize];
     return [NSString stringWithFormat:@"%.2f M", size/ 1024.0/ 1024.0];
 }
 
@@ -75,6 +74,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger row = 0;
     switch (section) {
@@ -152,6 +152,39 @@
     }
     
 }
+-(void)p_showAlert:(CacheCell *)cell{
+    UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定清除缓存?" preferredStyle:UIAlertControllerStyleAlert];
+    [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self clearDiskCache];
+    }]];
+    
+    [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:alertControl animated:YES completion:nil];
+}
 
+- (void)clearDiskCache{
+    [Utils showHudTipStr:@"正在清除缓存..."];
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+        [Utils showHudTipStr:@"清除缓存成功"];
+        [self.tableView reloadData];
+    }];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 2) {
+        CacheCell *cell = [CacheCell cellWithTableView:tableView];
+        switch (indexPath.row) {
+            case 0:
+                [self p_showAlert:cell];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
 
 @end

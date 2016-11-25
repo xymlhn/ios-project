@@ -93,6 +93,7 @@
     setting.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:setting animated:YES];
 }
+
 - (void)mapBtnClick:(UITapGestureRecognizer *)recognizer{
     AMapViewController *setting = [AMapViewController new];
     setting.hidesBottomBarWhenPushed = YES;
@@ -105,8 +106,7 @@
     [self.navigationController pushViewController:setting animated:YES];
 }
 
--(void)onWorkAction:(id)sender
-{
+-(void)onWorkAction:(id)sender{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     

@@ -10,8 +10,7 @@
 
 @implementation EnumUtil
 
-+(NSString *)salesOrderTypeString:(SalesOrderType)type
-{
++(NSString *)salesOrderTypeString:(SalesOrderType)type{
     NSString *str = @"";
     switch (type) {
         case SalesOrderTypeShop:
@@ -29,8 +28,7 @@
     return str;
 }
 
-+(NSString *)workOrderTypeString:(WorkOrderType)type
-{
++(NSString *)workOrderTypeString:(WorkOrderType)type{
     NSString *str = @"";
     switch (type) {
         case WorkOrderTypeOnsite:

@@ -15,8 +15,7 @@
 
 @implementation TitleBarView
 
-- (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles
-{
+- (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles{
     self = [super initWithFrame:frame];
     
     if (self) {
@@ -52,9 +51,7 @@
     return self;
 }
 
-
-- (void)onClick:(UIButton *)button
-{
+- (void)onClick:(UIButton *)button{
     if (_currentIndex != button.tag) {
         UIButton *preTitle = _titleButtons[_currentIndex];
         
@@ -69,8 +66,7 @@
     }
 }
 
-- (void)setTitleButtonsColor
-{
+- (void)setTitleButtonsColor{
     for (UIButton *button in self.subviews) {
         button.backgroundColor = [UIColor titleBarColor];
     }

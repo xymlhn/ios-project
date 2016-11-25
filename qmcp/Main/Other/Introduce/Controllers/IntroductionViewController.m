@@ -24,8 +24,7 @@
 
 @implementation IntroductionViewController
 
-- (instancetype)init
-{
+- (instancetype)init{
     if ((self = [super init])) {
         self.numberOfPages = 7;
         _iconsDict = [@{
@@ -59,9 +58,7 @@
     return [NSString stringWithFormat:@"%ld_view", (long)index];
 }
 
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -69,7 +66,6 @@
     [self configureViews];
     [self configureAnimations];
 }
-
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationPortrait;
@@ -84,8 +80,7 @@
 }
 
 #pragma mark Super
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self animateCurrentFrame];
     NSInteger nearestPage = floorf(self.pageOffset + 0.5);
     self.pageControl.currentPage = nearestPage;
@@ -211,7 +206,6 @@
     }];
 }
 
-
 #pragma mark Animations
 - (void)configureAnimations{
     [self configureTipAndTitleViewAnimations];
@@ -257,7 +251,6 @@
         }
     }
 }
-
 
 #pragma mark Action
 - (void)registerBtnClicked{

@@ -37,8 +37,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 
 @implementation QrCodeViewController
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
     [self stopTimer];
@@ -57,9 +56,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     
 }
 
-
-- (BOOL)startReading
-{
+- (BOOL)startReading{
     // 获取 AVCaptureDevice 实例
     NSError * error;
     AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -100,19 +97,16 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     return YES;
 }
 
-- (void)stopReading
-{
+- (void)stopReading{
     // 停止会话
     [_captureSession stopRunning];
     _captureSession = nil;
 }
 
-
 #pragma AVCaptureMetadataOutputObjectsDelegate
 
 -(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects
-      fromConnection:(AVCaptureConnection *)connection
-{
+      fromConnection:(AVCaptureConnection *)connection{
     if (metadataObjects != nil && [metadataObjects count] > 0) {
         AVMetadataMachineReadableCodeObject *metadataObj = [metadataObjects objectAtIndex:0];
         NSString *result;
@@ -141,12 +135,11 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     
 }
 
-- (void)createTimer
-{
+- (void)createTimer{
     _timer=[NSTimer scheduledTimerWithTimeInterval:2.2 target:self selector:@selector(moveUpAndDownLine) userInfo:nil repeats:YES];
 }
-- (void)stopTimer
-{
+
+- (void)stopTimer{
     if ([_timer isValid] == YES) {
         [_timer invalidate];
         _timer = nil;
@@ -155,8 +148,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 }
 
 //二维码的扫描区域
-- (void)setScanView
-{
+- (void)setScanView{
     _scanView=[[UIView alloc] initWithFrame:CGRectMake(0,0, VIEW_WIDTH,VIEW_HEIGHT )];
     _scanView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_scanView];
@@ -235,8 +227,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 }
 
 // 当地一根线到达底部时,第二根线开始下落运动,此时第一根线已经在顶部,当第一根线接着下落时,第二根线到达顶部.依次循环
-- (void)moveUpAndDownLine
-{
+- (void)moveUpAndDownLine{
     CGFloat Y = _QrCodeline.frame.origin.y;
     if (Y == SCANVIEW_EdgeTop) {
         [UIView animateWithDuration:2.2 animations:^{
@@ -264,8 +255,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     }
 }
 
-- (void)systemLightSwitch:(BOOL)open
-{
+- (void)systemLightSwitch:(BOOL)open{
     if (open) {
         [_lightButton setTitle:@"关闭闪光灯" forState:UIControlStateNormal];
     } else {
@@ -283,20 +273,9 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     }
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

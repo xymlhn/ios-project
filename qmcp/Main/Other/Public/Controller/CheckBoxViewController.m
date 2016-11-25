@@ -17,9 +17,12 @@
 @end
 @implementation CheckBoxViewController
 
--(void)loadView{
-    _checkBoxView = [CheckBoxView viewInstance];
-    self.view = _checkBoxView;
++(instancetype)doneBlock:(void (^)(NSString *))block{
+    
+    CheckBoxViewController *vc = [[CheckBoxViewController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
 }
 
 -(NSMutableArray<NSNumber *> *)statusList{
@@ -30,6 +33,11 @@
         }
     }
     return _statusList;
+}
+
+-(void)loadView{
+    _checkBoxView = [CheckBoxView viewInstance];
+    self.view = _checkBoxView;
 }
 
 -(void)bindListener{
@@ -75,29 +83,18 @@
     return value;
 }
 
-+(instancetype)doneBlock:(void (^)(NSString *))block{
-    
-    CheckBoxViewController *vc = [[CheckBoxViewController alloc] init];
-    vc.doneBlock = block;
-    return vc;
-    
-}
-
-
 - (void)dissmiss{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.valueList.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     CheckCell *cell = [CheckCell cellWithTableView:tableView];
@@ -113,8 +110,8 @@
     //3 返回
     return cell;
 }
--(void)switchAction:(id)sender
-{
+
+-(void)switchAction:(id)sender{
     UISwitch *switchButton = (UISwitch*)sender;
     NSUInteger tag = switchButton.tag;
     self.statusList[tag] = [NSNumber numberWithBool:switchButton.isOn];

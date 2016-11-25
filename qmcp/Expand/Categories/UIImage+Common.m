@@ -25,8 +25,7 @@
 
 
 //对图片尺寸进行压缩--
--(UIImage*)scaledToSize:(CGSize)targetSize
-{
+-(UIImage*)scaledToSize:(CGSize)targetSize{
     UIImage *sourceImage = self;
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
@@ -54,6 +53,7 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
+
 -(UIImage*)scaledToSize:(CGSize)targetSize highQuality:(BOOL)highQuality{
     if (highQuality) {
         targetSize = CGSizeMake(2*targetSize.width, 2*targetSize.height);
@@ -87,7 +87,6 @@
     
     return newImage;
 }
-
 
 + (UIImage *)imageWithFileType:(NSString *)fileType{
     fileType = [fileType lowercaseString];

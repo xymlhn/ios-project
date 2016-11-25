@@ -51,7 +51,6 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
     return shared_manager;
 }
 
-
 -(void)getCommodityStepByLastUpdateTime:(NSString *)dateStr{
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMMODITYSTEP,dateStr];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -125,9 +124,7 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
     
 }
 
-/**
- *  处理所有的工单并派发到界面
- */
+
 - (void)sortAllWorkOrder{
     User *user = [[AppManager getInstance] getUser];
     NSString *workWhere = [NSString stringWithFormat:@"userId = '%@'",user.userOpenId];

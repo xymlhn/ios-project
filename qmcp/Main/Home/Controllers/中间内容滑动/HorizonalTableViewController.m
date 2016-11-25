@@ -17,8 +17,7 @@ static NSString *kHorizonalCellID = @"HorizonalCell";
 
 @implementation HorizonalTableViewController
 
-- (instancetype)initWithViewControllers:(NSArray *)controllers
-{
+- (instancetype)initWithViewControllers:(NSArray *)controllers{
     self = [super init];
     if (self) {
         _controllers = [NSMutableArray arrayWithArray:controllers];
@@ -29,8 +28,7 @@ static NSString *kHorizonalCellID = @"HorizonalCell";
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     /***** 为解决iPhone 6 下的popviewcontroller后的问题而做的无奈之举，这样会引入新的问题，very ugly，亟待解决 *****/
@@ -47,18 +45,15 @@ static NSString *kHorizonalCellID = @"HorizonalCell";
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _controllers.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return tableView.frame.size.width;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kHorizonalCellID forIndexPath:indexPath];
     cell.contentView.transform = CGAffineTransformMakeRotation(M_PI_2);
     cell.contentView.backgroundColor = [UIColor themeColor];
@@ -73,25 +68,20 @@ static NSString *kHorizonalCellID = @"HorizonalCell";
 
 #pragma mark - <UIScrollViewDelegate>
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self scrollStop:YES];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self scrollStop:NO];
     if (_viewDidScroll) {
         _viewDidScroll();
     }
 }
 
-
-
 #pragma mark -
 
-- (void)scrollToViewAtIndex:(NSUInteger)index
-{
+- (void)scrollToViewAtIndex:(NSUInteger)index{
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
                           atScrollPosition:UITableViewScrollPositionNone
                                   animated:NO];
@@ -100,8 +90,7 @@ static NSString *kHorizonalCellID = @"HorizonalCell";
     if (_viewDidAppear) {_viewDidAppear(index);}
 }
 
-- (void)scrollStop:(BOOL)didScrollStop
-{
+- (void)scrollStop:(BOOL)didScrollStop{
     CGFloat horizonalOffset = self.tableView.contentOffset.y;
     CGFloat screenWidth = self.tableView.frame.size.width;
     CGFloat offsetRatio = (NSUInteger)horizonalOffset % (NSUInteger)screenWidth / screenWidth;

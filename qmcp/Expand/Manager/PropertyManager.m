@@ -67,8 +67,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
 }
 
 #pragma mark - network
--(void)getCommodityItemByLastUpdateTime:(NSString *)lastupdateTime
-{
+-(void)getCommodityItemByLastUpdateTime:(NSString *)lastupdateTime{
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMMODITYITEM,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
@@ -85,8 +84,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
     
 }
 
--(void)getCommoditySnapshotByLastUpdateTime:(NSString *)lastupdateTime
-{
+-(void)getCommoditySnapshotByLastUpdateTime:(NSString *)lastupdateTime{
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMMODITYSNAPSHOT,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
@@ -106,8 +104,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
     
 }
 
--(void)getCommodityPropertyByLastUpdateTime:(NSString *)lastupdateTime
-{
+-(void)getCommodityPropertyByLastUpdateTime:(NSString *)lastupdateTime{
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_COMODITYPROPERTY,lastupdateTime];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
@@ -126,8 +123,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
 }
 
 #pragma mark - UIViewController
--(NSArray *)getCommodityPropertyArr:(NSString *)code
-{
+-(NSArray *)getCommodityPropertyArr:(NSString *)code{
     NSArray *array = [NSArray new];
     if([_commodityPropertyDict objectForKey:code] != nil){
         NSString *json = [_commodityPropertyDict[code] mj_JSONString];
@@ -136,8 +132,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
     return array;
 }
 
--(BOOL)isExistProperty:(NSString *)code
-{
+-(BOOL)isExistProperty:(NSString *)code{
     return [_commodityPropertyDict objectForKey:code] != nil && [self p_isExistCommodityItem:code];
 }
 
@@ -166,8 +161,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *
  *  @return 服务数组
  */
--(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode
-{
+-(NSArray *)getCommodityPropertyByCommodityCode:(NSString *)commodityCode{
     NSArray *arr = [NSArray new];
     for (NSString *key in _commodityPropertyDict) {
         if([key isEqualToString:commodityCode]){
@@ -208,8 +202,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *
  *  @param propertyDataArr 规格数组
  */
--(NSArray *)p_findAvailableItemProperty:(NSMutableArray *)propertyDataArr
-{
+-(NSArray *)p_findAvailableItemProperty:(NSMutableArray *)propertyDataArr{
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"commodityCode == %@",_currentCommodityCode];
     NSArray* conditionArr = [_commodityItemArr filteredArrayUsingPredicate:predicate];
     if([propertyDataArr count] == 0){
@@ -328,8 +321,7 @@ NSString * const kCommoditySnapshot = @"commoditySnapshot";
  *  @param arr1 旧规格
  *  @param arr2 筛选过后规格
  */
--(void)p_compareOldArray:(NSMutableArray *)arr1 withNewArray:(NSMutableArray *)arr2
-{
+-(void)p_compareOldArray:(NSMutableArray *)arr1 withNewArray:(NSMutableArray *)arr2{
     for (NSString *str in arr1) {
         if(arr2.count == 0 || ![arr2 containsObject:str]){
             [arr1 removeObject:str];

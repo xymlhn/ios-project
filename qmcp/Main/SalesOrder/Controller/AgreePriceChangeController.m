@@ -14,6 +14,12 @@
 
 @implementation AgreePriceChangeController
 
++(instancetype)doneBlock:(void (^)(NSString *, NSString *))block{
+    AgreePriceChangeController *vc = [AgreePriceChangeController new];
+    vc.doneBlock = block;
+    return vc;
+}
+
 -(void)loadView{
     _changeView = [AgreePriceChangeView viewInstance];
     self.view = _changeView;
@@ -47,19 +53,11 @@
     }];
 }
 
-
-- (void)dissmiss{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 -(void)loadData{
     
 }
 
-+(instancetype)doneBlock:(void (^)(NSString *, NSString *))block{
-    AgreePriceChangeController *vc = [AgreePriceChangeController new];
-    vc.doneBlock = block;
-    return vc;
+- (void)dissmiss{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 @end

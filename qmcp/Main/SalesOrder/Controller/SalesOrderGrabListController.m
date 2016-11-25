@@ -22,9 +22,8 @@
 
 @implementation SalesOrderGrabListController
 
-
--(void)setupView
-{
+#pragma mark - BaseViewController
+-(void)setupView{
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;
     _tableView.backgroundColor = [UIColor themeColor];
@@ -73,6 +72,7 @@
     }];
 }
 
+//刷新列表
 - (void)refreshTableView:(NSMutableArray *)arr{
     _salesOrderList = arr;
     [self.tableView reloadData];
@@ -80,14 +80,12 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _salesOrderList.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     SalesOrderGrabCell *cell = [SalesOrderGrabCell cellWithTableView:tableView];
@@ -103,13 +101,13 @@
     return cell;
 }
 
+#pragma mark - 抢单
+/**
+ 抢单
 
--(void)bindListener{
-    
-}
-
--(void)p_grabSalesOrder:(SalesOrder *)salesOrder
-{
+ @param salesOrder 订单
+ */
+-(void)p_grabSalesOrder:(SalesOrder *)salesOrder{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"接单中...";
@@ -142,6 +140,5 @@
     }];
     
 }
-
 
 @end

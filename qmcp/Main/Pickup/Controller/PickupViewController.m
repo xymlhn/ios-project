@@ -27,6 +27,12 @@
 
 @implementation PickupViewController
 
+-(NSMutableArray<PickupItem *> *)pickupItemArray{
+    if(_pickupItemArray == nil){
+        _pickupItemArray = [NSMutableArray new];
+    }
+    return _pickupItemArray;
+}
 -(void)loadView{
     _pickView = [PickupView viewInstance];
     self.view = _pickView;
@@ -53,95 +59,34 @@
     
 }
 
-
--(NSMutableArray<PickupItem *> *)pickupItemArray{
-    if(_pickupItemArray == nil){
-        _pickupItemArray = [NSMutableArray new];
-    }
-    return _pickupItemArray;
-}
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
+#pragma mark - empty Table
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return [UIImage imageNamed:@"default－portrait"];
 }
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     NSString *text = @"请添加步骤";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+
 #pragma mark - UISearchBarDelegate
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self p_handleResult:searchBar.text];
     searchBar.text =  @"";
     [searchBar resignFirstResponder];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.pickupItemArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger row = indexPath.row;
-    PickupCell *cell = [PickupCell cellWithTableView:tableView];
-    PickupItem *pickupItem = self.pickupItemArray[row];
-    cell.pickupItem = pickupItem;
-    
-    [[AppManager getInstance]getImageUrlByKey:pickupItem.attachments[0].key andType:pickupItem.attachments[0].type finishBlock:^(NSDictionary *dict, NSString *error) {
-        [cell.icon sd_setImageWithURL:[NSURL URLWithString:dict[pickupItem.attachments[0].key]]
-                     placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
-    }];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
-}
-
-#pragma mark - IBAction
--(void)qrBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    __weak typeof(self) weakSelf = self;
-    if([Config getQuickScan]){
-        ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
-            [weakSelf p_handleResult:textValue];
-        }];
-        [self p_pushWorkOrderInfoUI:scanViewController];
-    }else{
-        QrCodeViewController *qrCodeViewController = [QrCodeViewController doneBlock:^(NSString *textValue) {
-            [weakSelf p_handleResult:textValue];
-        }];
-        [self p_pushWorkOrderInfoUI:qrCodeViewController];
-    }
-}
-
--(void)signBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    if(_pickupData == nil)
-    {
-        return;
-    }
-    __weak typeof(self) weakSelf = self;
-    SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
-        [weakSelf p_reportSignImage:signImage];
-    }];
-    [self presentViewController:signController animated: YES completion:nil];
-}
-
+#pragma mark - func
 /**
  签名图片
  
  @param image 图片
  */
--(void)p_reportSignImage:(UIImage *)image
-{
+-(void)p_reportSignImage:(UIImage *)image{
     if(image){
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
@@ -177,8 +122,7 @@
  
  @param result result description
  */
--(void)p_handleResult:(NSString *)result
-{
+-(void)p_handleResult:(NSString *)result{
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"加载中...";
     __weak typeof(self) weakSelf = self;
@@ -220,8 +164,7 @@
  
  @param pickupSignature pickupSignature
  */
--(void)p_postPickupData:(PickupSignature *)pickupSignature
-{
+-(void)p_postPickupData:(PickupSignature *)pickupSignature{
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"完成中...";
     __weak typeof(self) weakSelf = self;
@@ -243,4 +186,56 @@
         }
     }];
 }
+
+#pragma mark - IBAction
+-(void)qrBtnClick:(UITapGestureRecognizer *)recognizer{
+    __weak typeof(self) weakSelf = self;
+    if([Config getQuickScan]){
+        ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
+            [weakSelf p_handleResult:textValue];
+        }];
+        [self p_pushWorkOrderInfoUI:scanViewController];
+    }else{
+        QrCodeViewController *qrCodeViewController = [QrCodeViewController doneBlock:^(NSString *textValue) {
+            [weakSelf p_handleResult:textValue];
+        }];
+        [self p_pushWorkOrderInfoUI:qrCodeViewController];
+    }
+}
+
+-(void)signBtnClick:(UITapGestureRecognizer *)recognizer{
+    if(_pickupData == nil)
+    {
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
+    SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
+        [weakSelf p_reportSignImage:signImage];
+    }];
+    [self presentViewController:signController animated: YES completion:nil];
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.pickupItemArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger row = indexPath.row;
+    PickupCell *cell = [PickupCell cellWithTableView:tableView];
+    PickupItem *pickupItem = self.pickupItemArray[row];
+    cell.pickupItem = pickupItem;
+    
+    [[AppManager getInstance]getImageUrlByKey:pickupItem.attachments[0].key andType:pickupItem.attachments[0].type finishBlock:^(NSDictionary *dict, NSString *error) {
+        [cell.icon sd_setImageWithURL:[NSURL URLWithString:dict[pickupItem.attachments[0].key]]
+                     placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
+    }];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+
+
 @end

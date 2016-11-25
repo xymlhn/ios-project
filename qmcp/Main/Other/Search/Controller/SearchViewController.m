@@ -48,18 +48,27 @@
     }
     return _resultList;
 }
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+#pragma mark empty Table
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return [UIImage imageNamed:@"default－portrait"];
 }
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     NSString *text = @"请添加步骤";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+
+- (void)p_pushInfoView:(NSString *)code{
+    WorkOrderInfoController *info = [WorkOrderInfoController new];
+    info.workOrderCode = code;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
+
 #pragma mark UISearchBarDelegate
 
 //搜索框中的内容发生改变时 回调（即要搜索的内容改变）
@@ -151,14 +160,12 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.resultList.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     SearchViewCell *cell = [SearchViewCell cellWithTableView:tableView];
@@ -170,8 +177,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     WorkOrderSearchResult *workOrderSearchResult = self.resultList[row];
     if(workOrderSearchResult.dispatchToMeFlag && workOrderSearchResult.status != WorkOrderStatusCompleted){
@@ -184,11 +190,5 @@
     
 }
 
-- (void)p_pushInfoView:(NSString *)code
-{
-    WorkOrderInfoController *info = [WorkOrderInfoController new];
-    info.workOrderCode = code;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
+
 @end

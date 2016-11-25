@@ -34,8 +34,7 @@
 
 #pragma mark - UIViewController
 
--(void)loadView
-{
+-(void)loadView{
     _workOrderFormView = [WorkOrderFormView viewInstance];
     self.view = _workOrderFormView;
     self.title = @"表单编辑";
@@ -64,52 +63,38 @@
     
 }
 
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
+- (void)keyboardWillShow:(NSNotification *)notification{
     CGRect keyboardBounds = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, keyboardBounds.size.height, 0);
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification{
     _workOrderFormView.tableView.contentInset = UIEdgeInsetsMake(_workOrderFormView.tableView.contentInset.top, 0, 0, 0);
 }
 
-- (void)dealloc
-{
+- (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)hidenKeyboard
-{
+- (void)hidenKeyboard{
     [self.view endEditing:YES];
     
 }
 
--(void)loadData
-{
+-(void)loadData{
     _workOrderFormList = [[FormManager getInstance]formTemplateField:_formTemplateId];
     [[FormManager getInstance] handleFormTable:_workOrderFormList formTemplateId:_formTemplateId];
 }
 
-#pragma mark IBAction
-
--(void)saveBtnClick{
-    
-}
-
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.workOrderFormList.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     FormTemplateField *field = _workOrderFormList[row];
     UITableViewCell *cell;
@@ -237,6 +222,10 @@
     
     [self.workOrderFormList removeObjectsInArray:field.templateFields];
     [_workOrderFormView.tableView reloadData];
+}
+
+-(void)saveBtnClick{
+    
 }
 @end
 

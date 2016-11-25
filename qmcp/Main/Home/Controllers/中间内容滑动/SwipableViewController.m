@@ -14,18 +14,13 @@
 
 @end
 
-
-
 @implementation SwipableViewController
 
-
-- (instancetype)initWithTitle:(NSString *)title andSubTitles:(NSArray *)subTitles andControllers:(NSArray *)controllers
-{
+- (instancetype)initWithTitle:(NSString *)title andSubTitles:(NSArray *)subTitles andControllers:(NSArray *)controllers{
     return [self initWithTitle:title andSubTitles:subTitles andControllers:controllers underTabbar:NO];
 }
 
-- (instancetype)initWithTitle:(NSString *)title andSubTitles:(NSArray *)subTitles andControllers:(NSArray *)controllers underTabbar:(BOOL)underTabbar
-{
+- (instancetype)initWithTitle:(NSString *)title andSubTitles:(NSArray *)subTitles andControllers:(NSArray *)controllers underTabbar:(BOOL)underTabbar{
     self = [super init];
     if (self) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -94,18 +89,13 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor themeColor];
 }
 
-
-- (void)scrollToViewAtIndex:(NSUInteger)index
-{
+- (void)scrollToViewAtIndex:(NSUInteger)index{
     _viewPager.changeIndex(index);
 }
-
-
 
 @end

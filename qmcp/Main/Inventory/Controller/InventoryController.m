@@ -29,6 +29,14 @@
 
 @implementation InventoryController
 
++(instancetype)doneBlock:(void(^)(BOOL signFlag))block{
+    
+    InventoryController *vc = [[InventoryController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
 #pragma mark - BaseWorkOrderViewController
 -(void)loadView{
     _inventoryView = [InventoryView viewInstance];
@@ -55,12 +63,13 @@
     NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_salesOrderCode];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
 }
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+#pragma mark - empty Table
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return [UIImage imageNamed:@"default－portrait"];
 }
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     NSString *text = @"请添加物品";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
@@ -68,41 +77,7 @@
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
-
-+(instancetype)doneBlock:(void(^)(BOOL signFlag))block{
-    
-    InventoryController *vc = [[InventoryController alloc] init];
-    vc.doneBlock = block;
-    return vc;
-    
-}
-
-#pragma mark - IBAction
-- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
-    
-    ItemSnapshot *itemSnapshot = [ItemSnapshot new];
-    itemSnapshot.itemSnapshotCode = [[NSUUID UUID] UUIDString];
-    long size = _itemSnapshotList.count + 1;
-    itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
-    itemSnapshot.salesOrderCode = _salesOrderCode;
-    [itemSnapshot saveToDB];
-    [_itemSnapshotList addObject:itemSnapshot];
-    [self p_pushInventoryEditController:itemSnapshot andType:SaveTypeAdd];
-    
-}
-
-- (void)signBtnClick:(UITapGestureRecognizer *)recognizer{
-    if (_itemSnapshotList.count == 0) {
-        return;
-    }
-    __weak typeof(self) weakSelf = self;
-    SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
-        [weakSelf p_reportSignImage:signImage];
-    }];
-    [self presentViewController:signController animated: YES completion:nil];
-    
-}
-
+#pragma mark - func
 -(void)p_pushInventoryEditController:(ItemSnapshot *)itemSnapshot andType:(SaveType)originalType{
     __weak typeof(self) weakSelf = self;
     InventoryEditController *info = [InventoryEditController doneBlock:^(ItemSnapshot *item,SaveType type) {
@@ -223,6 +198,32 @@
             
         }
     }];
+}
+
+#pragma mark - IBAction
+- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
+    
+    ItemSnapshot *itemSnapshot = [ItemSnapshot new];
+    itemSnapshot.itemSnapshotCode = [[NSUUID UUID] UUIDString];
+    long size = _itemSnapshotList.count + 1;
+    itemSnapshot.name = [NSString stringWithFormat:@"物品%lu",size];
+    itemSnapshot.salesOrderCode = _salesOrderCode;
+    [itemSnapshot saveToDB];
+    [_itemSnapshotList addObject:itemSnapshot];
+    [self p_pushInventoryEditController:itemSnapshot andType:SaveTypeAdd];
+    
+}
+
+- (void)signBtnClick:(UITapGestureRecognizer *)recognizer{
+    if (_itemSnapshotList.count == 0) {
+        return;
+    }
+    __weak typeof(self) weakSelf = self;
+    SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
+        [weakSelf p_reportSignImage:signImage];
+    }];
+    [self presentViewController:signController animated: YES completion:nil];
+    
 }
 
 

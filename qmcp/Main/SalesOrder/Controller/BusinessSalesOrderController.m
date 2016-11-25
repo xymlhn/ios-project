@@ -13,9 +13,7 @@
 #import "SalesOrderInfoController.h"
 #import "SalesOrderManager.h"
 @interface BusinessSalesOrderController ()
-
 @property (nonatomic, strong) BusinessSalesOrderView *businessSalesOrderView;
-
 @end
 
 @implementation BusinessSalesOrderController
@@ -69,7 +67,6 @@
     
 }
 
-
 -(void)loadData{
     RACSignal *validPhoneSignal = [_businessSalesOrderView.phoneValue.rac_textSignal
                                    map:^id(NSString *text) {
@@ -97,6 +94,5 @@
     }];
     
 }
-
 
 @end

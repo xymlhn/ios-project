@@ -17,6 +17,13 @@
 
 @implementation ScanViewController
 
++(instancetype)doneBlock:(void (^)(NSString *))block{
+    
+    ScanViewController *vc = [[ScanViewController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
 
 -(void)loadData{
     
@@ -27,6 +34,7 @@
     _scanView = [ScanView viewInstance];
     self.view = _scanView;
 }
+
 -(void)bindListener{
     _scanView.scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input)
                                      {
@@ -52,8 +60,7 @@
     [_scanView.scanText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
 }
 
-- (void)returnOnKeyboard:(UITextField *)sender
-{
+- (void)returnOnKeyboard:(UITextField *)sender{
     [_scanView.scanText resignFirstResponder];
     if(_scanView.scanText.text.length > 0){
         [self.navigationController popViewControllerAnimated:YES];
@@ -65,11 +72,4 @@
 }
 
 
-+(instancetype)doneBlock:(void (^)(NSString *))block{
-    
-    ScanViewController *vc = [[ScanViewController alloc] init];
-    vc.doneBlock = block;
-    return vc;
-    
-}
 @end

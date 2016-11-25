@@ -22,6 +22,14 @@
 
 @implementation CommodityStepController
 
++(instancetype)doneBlock:(void (^)(NSString *))block{
+    
+    CommodityStepController *vc = [[CommodityStepController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
 -(void)loadView{
     _commodityStepView = [CommodityStepView viewInstance];
     self.view = _commodityStepView;
@@ -51,14 +59,6 @@
 
 - (void)dissmiss{
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-+(instancetype)doneBlock:(void (^)(NSString *))block{
-    
-    CommodityStepController *vc = [[CommodityStepController alloc] init];
-    vc.doneBlock = block;
-    return vc;
-    
 }
 
 #pragma mark - Table view data source

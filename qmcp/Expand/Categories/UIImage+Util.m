@@ -12,8 +12,7 @@
 
 // 同 - (UIImage *)jsq_imageMaskedWithColor:(UIColor *)maskColor
 
-- (UIImage *)imageMaskedWithColor:(UIColor *)maskColor
-{
+- (UIImage *)imageMaskedWithColor:(UIColor *)maskColor{
     NSParameterAssert(maskColor != nil);
     
     CGRect imageRect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
@@ -37,17 +36,15 @@
     return newImage;
 }
 
-
-- (UIImage *)cropToRect:(CGRect)rect
-{
+- (UIImage *)cropToRect:(CGRect)rect{
     CGImageRef imageRef   = CGImageCreateWithImageInRect([self CGImage], rect);
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     
     return croppedImage;
 }
-+ (instancetype)imageWithOriginalName:(NSString *)imageName
-{
+
++ (instancetype)imageWithOriginalName:(NSString *)imageName{
     UIImage *image = [UIImage imageNamed:imageName];
     
     return [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

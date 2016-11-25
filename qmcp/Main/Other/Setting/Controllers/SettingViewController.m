@@ -23,8 +23,7 @@
 @implementation SettingViewController
 
 
--(void)setupView
-{
+-(void)setupView{
     self.title = @"设置";
     _tableView = [UITableView new];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -33,18 +32,46 @@
         make.edges.equalTo(self.view);
     }];
 }
--(void)bindListener
-{
+
+-(void)bindListener{
     _tableView.delegate = self;
     _tableView.dataSource = self;
 }
--(void)loadData
-{
+
+-(void)loadData{
                                                                                                                        
 }
+
+#pragma mark - func
+-(void)switchAction:(id)sender{
+    UISwitch *switchButton = (UISwitch*)sender;
+    NSUInteger tag = switchButton.tag;
+    switch (tag) {
+        case 0:
+            [Config setSound:switchButton.on];
+            break;
+        case 1:
+            [Config setVibre:switchButton.on];
+            break;
+        case 10:
+            [Config setQuickScan:switchButton.on];
+            break;
+        case 11:
+            [Config setSearch:switchButton.on];
+            break;
+        default:
+            break;
+    }
+}
+
+-(NSString *) p_diskCacheSizeStr{
+    NSUInteger size = [[SDImageCache sharedImageCache] getSize];
+    size += [Utils getResponseCacheSize];
+    return [NSString stringWithFormat:@"%.2f M", size/ 1024.0/ 1024.0];
+}
+
 #pragma mark - Table view data source
 
-#pragma mark TableM
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
@@ -63,8 +90,7 @@
     return row;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 45;
 }
 
@@ -78,8 +104,7 @@
     return 20.0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2) {
         CacheCell *cell = [CacheCell cellWithTableView:tableView];
         
@@ -127,30 +152,6 @@
     }
     
 }
--(void)switchAction:(id)sender
-{
-    UISwitch *switchButton = (UISwitch*)sender;
-    NSUInteger tag = switchButton.tag;
-    switch (tag) {
-        case 0:
-            [Config setSound:switchButton.on];
-            break;
-        case 1:
-            [Config setVibre:switchButton.on];
-            break;
-        case 10:
-            [Config setQuickScan:switchButton.on];
-            break;
-        case 11:
-            [Config setSearch:switchButton.on];
-            break;
-        default:
-            break;
-    }
-}
--(NSString *) p_diskCacheSizeStr{
-    NSUInteger size = [[SDImageCache sharedImageCache] getSize];
-    size += [Utils getResponseCacheSize];
-    return [NSString stringWithFormat:@"%.2f M", size/ 1024.0/ 1024.0];
-}
+
+
 @end

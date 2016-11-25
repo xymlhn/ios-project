@@ -23,10 +23,13 @@
     return vc;
     
 }
+
 -(void)setChooseCommodityList:(NSMutableArray<CommoditySnapshot *> *)chooseCommodityList{
     _chooseCommodityList = chooseCommodityList;
 }
+
 #pragma mark - BaseWorkOrderViewController
+
 -(void)loadView{
     _showView = [InventoryShowView viewInstance];
     self.view = _showView;
@@ -58,7 +61,6 @@
     return self.chooseCommodityList.count;
 }
 
-//返回每行显示的cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     InventoryChooseCell *cell = [InventoryChooseCell cellWithTableView:tableView];

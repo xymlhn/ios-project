@@ -42,31 +42,39 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
 @implementation InventoryEditController
 
 #pragma mark - BaseWorkOrderViewController
-- (void)viewDidAppear:(BOOL)animated
-{
+
++(instancetype)doneBlock:(void(^)(ItemSnapshot *item,SaveType type))block{
+    
+    InventoryEditController *vc = [[InventoryEditController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     // 禁用返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
+
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     // 开启返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
 }
--(void)loadView
-{
+
+-(void)loadView{
     _inventoryEditView = [InventoryEditView viewInstance];
     self.view = _inventoryEditView;
     self.title = @"清点编辑";
 }
 
--(void)bindListener
-{
+#pragma mark - BaseViewController
+-(void)bindListener{
     _inventoryEditView.photoCollectionView.delegate = self;
     _inventoryEditView.photoCollectionView.dataSource = self;
     
@@ -119,8 +127,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     }];
 }
 
--(void)loadData
-{
+-(void)loadData{
     _inventoryEditView.qrText.enabled = _unLock;
     NSString *itemWhere = [NSString stringWithFormat:@"itemSnapshotCode = '%@'",_itemSnapshotCode];
     _itemSnapshot = [ItemSnapshot searchSingleWithWhere:itemWhere orderBy:nil];
@@ -137,7 +144,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     
 }
 
-
+#pragma mark - func
 /**
  返回上一个界面处理
  */
@@ -166,12 +173,44 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     }
 }
 
-+(instancetype)doneBlock:(void(^)(ItemSnapshot *item,SaveType type))block{
-    
-    InventoryEditController *vc = [[InventoryEditController alloc] init];
-    vc.doneBlock = block;
-    return vc;
-    
+//保存附件节点
+-(void)p_updateStep{
+    _itemSnapshot.attachments = _attachments;
+    [_itemSnapshot updateToDB];
+}
+
+
+-(void)handleQrCode:(NSString *)qrCode{
+    _inventoryEditView.qrText.text = qrCode;
+}
+
+/**
+ 保存前提示处理
+ 
+ @return bool
+ */
+-(BOOL)p_beforeSaveHandle{
+    if(_unLock){
+        [Utils showHudTipStr:@"请将二维码锁上保存"];
+        return NO;
+    }
+    if ([_inventoryEditView.qrText.text isEqualToString:@""] || _attachments.count == 0) {
+        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"二维码为空/还未拍照,是否放弃编辑?" preferredStyle:UIAlertControllerStyleAlert];
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            _saveType = SaveTypeDelete;
+            [self.navigationController popViewControllerAnimated:YES];
+            [self p_doneSave];
+        }]];
+        
+        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [self presentViewController:alertControl animated:YES completion:nil];
+        return NO;
+    }else{
+        [self p_doneSave];
+        return YES;
+    }
 }
 
 #pragma mark - IBAction
@@ -189,12 +228,6 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     _unLock = !_unLock;
     _inventoryEditView.lockIcon.text = _unLock ?  @"" :@"";
     _inventoryEditView.qrText.enabled = _unLock;
-}
-
-//去除加号后保存附件节点
--(void)p_updateStep{
-    _itemSnapshot.attachments = _attachments;
-    [_itemSnapshot updateToDB];
 }
 
 
@@ -251,8 +284,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
 #pragma mark -UICollectionViewDataSource
 
 //指定单元格的个数 ，这个是一个组里面有多少单元格，e.g : 一个单元格就是一张图片
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _attachments.count == 6 ? _attachments.count : _attachments.count + 1;
 }
 
@@ -293,11 +325,6 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
 }
 
 
--(void)handleQrCode:(NSString *)qrCode{
-    _inventoryEditView.qrText.text = qrCode;
-}
-
-
 #pragma mark - 键盘操作
 
 - (void)hidenKeyboard{
@@ -313,36 +340,6 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
         [_inventoryEditView.remarkText becomeFirstResponder];
     }else if(sender == _inventoryEditView.remarkText){
         [self hidenKeyboard];
-    }
-}
-
-
-/**
- 保存前提示处理
- 
- @return bool
- */
--(BOOL)p_beforeSaveHandle{
-    if(_unLock){
-        [Utils showHudTipStr:@"请将二维码锁上保存"];
-        return NO;
-    }
-    if ([_inventoryEditView.qrText.text isEqualToString:@""] || _attachments.count == 0) {
-        UIAlertController *alertControl = [UIAlertController alertControllerWithTitle:@"提示" message:@"二维码为空/还未拍照,是否放弃编辑?" preferredStyle:UIAlertControllerStyleAlert];
-        [alertControl addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            _saveType = SaveTypeDelete;
-            [self.navigationController popViewControllerAnimated:YES];
-            [self p_doneSave];
-        }]];
-        
-        [alertControl addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self presentViewController:alertControl animated:YES completion:nil];
-        return NO;
-    }else{
-        [self p_doneSave];
-        return YES;
     }
 }
 

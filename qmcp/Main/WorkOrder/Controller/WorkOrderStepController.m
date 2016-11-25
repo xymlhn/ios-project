@@ -33,50 +33,13 @@
 
 @implementation WorkOrderStepController
 
-- (NSMutableArray *)dataArray
-{
+- (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [NSMutableArray new];
     }
     return _dataArray;
 }
 
-#pragma mark - BaseWorkOrderViewController
--(void)loadView
-{
-    _stepView = [WorkOrderStepView viewInstance];
-    self.view = _stepView;
-    self.title = @"步骤";
-}
-
--(void)bindListener
-{
-    _stepView.tableView.delegate = self;
-    _stepView.tableView.dataSource = self;
-    _stepView.tableView.tableHeaderView = [UIView new];
-    _stepView.tableView.tableFooterView = [UIView new];
-    _stepView.tableView.emptyDataSetSource = self;
-    _stepView.tableView.emptyDataSetDelegate = self;
-    [_stepView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
-    
-}
-
--(void)loadData
-{
-    if (_funcType == FuncTypeWorkOrder) {
-        NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_code];
-        _workOrderStepList = [WorkOrderStep searchWithWhere:where];
-        NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_code];
-        _workOrder = [WorkOrder searchWithWhere:workWhere][0];
-    }else{
-        NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_code];
-        _workOrderStepList = [WorkOrderStep searchWithWhere:where];
-        NSString *salesWhere = [NSString stringWithFormat:@"code = '%@'",_code];
-        _salesOrder = [SalesOrder searchSingleWithWhere:salesWhere orderBy:nil];
-    }
-    
-    [self.dataArray addObjectsFromArray:[self creatModels]];
-}
 - (NSMutableArray *)creatModels{
     NSMutableArray *resArr = [NSMutableArray new];
     for (WorkOrderStep *step in _workOrderStepList) {
@@ -95,22 +58,56 @@
     
     return resArr;
 }
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+#pragma mark - BaseWorkOrderViewController
+-(void)loadView{
+    _stepView = [WorkOrderStepView viewInstance];
+    self.view = _stepView;
+    self.title = @"步骤";
+}
+
+-(void)bindListener{
+    _stepView.tableView.delegate = self;
+    _stepView.tableView.dataSource = self;
+    _stepView.tableView.tableHeaderView = [UIView new];
+    _stepView.tableView.tableFooterView = [UIView new];
+    _stepView.tableView.emptyDataSetSource = self;
+    _stepView.tableView.emptyDataSetDelegate = self;
+    [_stepView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
+    
+}
+
+-(void)loadData{
+    if (_funcType == FuncTypeWorkOrder) {
+        NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_code];
+        _workOrderStepList = [WorkOrderStep searchWithWhere:where];
+        NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_code];
+        _workOrder = [WorkOrder searchWithWhere:workWhere][0];
+    }else{
+        NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_code];
+        _workOrderStepList = [WorkOrderStep searchWithWhere:where];
+        NSString *salesWhere = [NSString stringWithFormat:@"code = '%@'",_code];
+        _salesOrder = [SalesOrder searchSingleWithWhere:salesWhere orderBy:nil];
+    }
+    
+    [self.dataArray addObjectsFromArray:[self creatModels]];
+}
+
+#pragma mark - empty Table
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return [UIImage imageNamed:@"default－portrait"];
 }
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     NSString *text = @"请添加步骤";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
-#pragma mark - IBAction
 
-- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer
-{
+#pragma mark - IBAction
+- (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
     WorkOrderStep *step = [WorkOrderStep new];
     step.id = [[NSUUID UUID] UUIDString];
     long size = _workOrderStepList.count + 1;
@@ -129,8 +126,7 @@
     
 }
 
--(void)pushWorkOrderStepEditController:(WorkOrderStep *)worksStep withType:(SaveType)orignalType
-{
+-(void)pushWorkOrderStepEditController:(WorkOrderStep *)worksStep withType:(SaveType)orignalType{
     __weak typeof(self) weakSelf = self;
     WorkOrderStepEditController *info = [WorkOrderStepEditController doneBlock:^(WorkOrderStep *step, SaveType type) {
         
@@ -159,16 +155,12 @@
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return self.dataArray.count;
 }
 
-//返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SDTimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:kTimeLineTableViewCellId];
     cell.indexPath = indexPath;
     __weak typeof(self) weakSelf = self;
@@ -189,8 +181,7 @@
     return [self.stepView.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[SDTimeLineCell class] contentViewWidth:[self cellContentViewWith]];
 }
 
-- (CGFloat)cellContentViewWith
-{
+- (CGFloat)cellContentViewWith{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
     // 适配ios7横屏
@@ -200,9 +191,7 @@
     return width;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkOrderStep *step = self.workOrderStepList[indexPath.row];
     [self pushWorkOrderStepEditController:step withType:SaveTypeUpdate];
 }

@@ -20,8 +20,7 @@
 @end
 
 @implementation SalesOrderMineListController
--(void)setupView
-{
+-(void)setupView{
     _tableView = [UITableView new];
     _tableView.rowHeight = 100;
     _tableView.separatorColor = [UIColor lineColor];
@@ -46,7 +45,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 -(NSMutableArray *)salesOrderList{
     if(_salesOrderList == nil)
     {
@@ -55,8 +53,7 @@
     return _salesOrderList;
 }
 
--(void)loadData
-{
+-(void)loadData{
     self.salesOrderList = [[SalesOrderManager getInstance] getAllSalesOrder];
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"加载中...";
@@ -91,7 +88,7 @@
         }];
     }];
 }
-
+//刷新列表
 -(void)refreshTableView:(NSMutableArray *)arr{
     self.salesOrderList = arr;
     [self.tableView reloadData];
@@ -100,14 +97,11 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.salesOrderList.count;
 }
 
-//返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     SalesOrderMineCell *cell = [SalesOrderMineCell cellWithTableView:tableView];
@@ -119,8 +113,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
@@ -155,8 +148,5 @@
     }];
     
 }
-
-
-
 
 @end

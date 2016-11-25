@@ -64,6 +64,7 @@
     }];
     
 }
+
 -(void)bindListener{
     _locationButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         self.picker = [[ActionSheetCustomPicker alloc]initWithTitle:@"选择地区" delegate:self showCancelButton:YES origin:self.view initialSelections:@[@(self.index1),@(self.index2),@(self.index3)]];

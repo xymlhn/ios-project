@@ -25,7 +25,6 @@
 
 @implementation SalesOrderInfoController
 
-
 +(instancetype)doneBlock:(void (^)(NSString *))block{
     
     SalesOrderInfoController *vc = [[SalesOrderInfoController alloc] init];
@@ -34,6 +33,7 @@
     
 }
 
+#pragma mark - BaseViewController
 -(void)loadView{
     
     _salesOrderInfoView = [SalesOrderInfoView new];
@@ -105,10 +105,6 @@
     }];
 }
 
--(void)completeClick{
-    [self showOkayCancelAlert];
-}
-
 -(void)loadData{
     NSString *salesWhere = [NSString stringWithFormat:@"code = '%@'",_code];
     _salesOrder = [SalesOrder searchSingleWithWhere:salesWhere orderBy:nil];
@@ -134,8 +130,8 @@
     
 }
 
--(void)setInfo:(SalesOrder *)salesOrder
-{
+#pragma mark - func
+-(void)setInfo:(SalesOrder *)salesOrder{
     _salesOrderInfoView.remarkText.text = salesOrder.remark;
     _salesOrderInfoView.serviceText.text = salesOrder.organizationName;
     _salesOrderInfoView.appointmentTimeText.text = salesOrder.appointmentTime;
@@ -215,27 +211,6 @@
     
 }
 
-- (void)showOkayCancelAlert {
-    NSString *title = @"提示";
-    NSString *message = @"是否完结工单？";
-    NSString *cancelButtonTitle = @"否";
-    NSString *otherButtonTitle = @"是";
-    __weak typeof(self) weakSelf = self;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }];
-    
-    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [weakSelf p_completeSalesOrder];
-    }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:otherAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
 -(void)p_completeSalesOrder{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
@@ -275,6 +250,27 @@
     }
 }
 
+-(void)completeClick{
+    NSString *title = @"提示";
+    NSString *message = @"是否完结工单？";
+    NSString *cancelButtonTitle = @"否";
+    NSString *otherButtonTitle = @"是";
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf p_completeSalesOrder];
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:otherAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 -(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
@@ -299,6 +295,7 @@
     }];
     
 }
+
 -(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer{
     if(_salesOrder.signedFlag){
         [Utils showHudTipStr:@"该订单已清点"];
@@ -349,6 +346,7 @@
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
+
 - (void)formBtnClick:(UITapGestureRecognizer *)recognizer{
     if(_salesOrder.type == SalesOrderTypeOnsite){
         if(_salesOrder.onSiteStatus != OnSiteStatusArrived){
@@ -360,7 +358,6 @@
     info.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:info animated:YES];
 }
-
 
 -(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer{
     QrCodeIdentityController *controller = [QrCodeIdentityController new];

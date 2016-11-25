@@ -60,84 +60,67 @@
     return [UIColor colorWithRed:33.0/255 green:150.0/255 blue:243.0/255 alpha:1.0];
 }
 
-+ (UIColor *)themeColor
-{
++ (UIColor *)themeColor{
     return [UIColor colorWithRed:238.0/255 green:238.0/255 blue:238.0/255 alpha:1.0];
 }
 
-+ (UIColor *)nameColor
-{
++ (UIColor *)nameColor{
     return [UIColor colorWithRed:46.0/255 green:145.0/255 blue:234.0/255 alpha:1.0];
 }
 
-+ (UIColor *)titleColor
-{
++ (UIColor *)titleColor{
     return [UIColor blackColor];
 }
 
-+ (UIColor *)separatorColor
-{
++ (UIColor *)separatorColor{
     return [UIColor colorWithRed:217.0/255 green:217.0/255 blue:223.0/255 alpha:1.0];
 }
 
-+ (UIColor *)cellsColor
-{
++ (UIColor *)cellsColor{
     return [UIColor whiteColor];
 }
 
-+ (UIColor *)titleBarColor
-{
++ (UIColor *)titleBarColor{
     return [UIColor colorWithRed:247.0/255 green:247.0/255 blue:247.0/255 alpha:1.0];
 }
 
-+ (UIColor *)contentTextColor
-{
++ (UIColor *)contentTextColor{
     return [UIColor colorWithHex:0x272727];
 }
 
-
-+ (UIColor *)selectTitleBarColor
-{
++ (UIColor *)selectTitleBarColor{
     return [UIColor colorWithHex:0xE1E1E1];
 }
 
-+ (UIColor *)navigationbarColor
-{
++ (UIColor *)navigationbarColor{
     return [UIColor colorWithHex:0x15A230];//0x009000
 }
 
-+ (UIColor *)selectCellSColor
-{
++ (UIColor *)selectCellSColor{
     return [UIColor colorWithRed:203.0/255 green:203.0/255 blue:203.0/255 alpha:1.0];
 }
 
-+ (UIColor *)labelTextColor
-{
++ (UIColor *)labelTextColor{
     return [UIColor whiteColor];
 }
 
-+ (UIColor *)teamButtonColor
-{
++ (UIColor *)teamButtonColor{
     return [UIColor colorWithRed:251.0/255 green:251.0/255 blue:253.0/255 alpha:1.0];
 }
 
-+ (UIColor *)infosBackViewColor
-{
++ (UIColor *)infosBackViewColor{
     return [UIColor clearColor];
 }
 
-+ (UIColor *)lineColor
-{
++ (UIColor *)lineColor{
     return [UIColor colorWithRed:238.0/255 green:238.0/255 blue:238.0/255 alpha:1.0];
 }
 
-+ (UIColor *)borderColor
-{
++ (UIColor *)borderColor{
     return [UIColor lightGrayColor];
 }
 
-+ (UIColor *)refreshControlColor
-{
++ (UIColor *)refreshControlColor{
     return [UIColor colorWithHex:0x21B04B];
 }
 

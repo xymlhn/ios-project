@@ -21,8 +21,7 @@
 
 @implementation WorkOrderListController
 
-- (instancetype)initWithStatus:(WorkOrderStatus)status
-{
+- (instancetype)initWithStatus:(WorkOrderStatus)status{
     if(self)
     {
         self = [super init];
@@ -32,15 +31,13 @@
 }
 
 #pragma mark - UIViewController
--(void)viewDidLoad
-{
+-(void)viewDidLoad{
     [super viewDidLoad];
     [self initView];
     [self loadData];
 }
 
--(void)initView
-{
+-(void)initView{
     _tableView = [UITableView new];
     _tableView.rowHeight = 80;
     _tableView.backgroundColor = [UIColor themeColor];
@@ -57,8 +54,7 @@
     
 }
 
--(void)loadData
-{
+-(void)loadData{
     
     _workOrderList = [NSMutableArray new];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -92,14 +88,12 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _workOrderList.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     WorkOrderCell *cell = [WorkOrderCell cellWithTableView:tableView];

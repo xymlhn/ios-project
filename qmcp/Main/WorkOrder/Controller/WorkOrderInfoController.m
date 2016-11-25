@@ -26,8 +26,7 @@
 @implementation WorkOrderInfoController
 
 #pragma mark - BaseWorkOrderViewController
--(void)loadView
-{
+-(void)loadView{
     _infoView = [WorkOrderInfoView viewInstance];
     self.view = _infoView;
     self.title = @"信息";
@@ -39,8 +38,8 @@
                                                                                             target:self
                                                                                             action:@selector(rightBtnClick)];
 }
--(void)bindListener
-{
+
+-(void)bindListener{
     _infoView.starBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         switch (_workOrder.onSiteStatus) {
             case OnSiteStatusNone:
@@ -59,8 +58,7 @@
     
 }
 
--(void)loadData
-{
+-(void)loadData{
     NSString *workWhere = [NSString stringWithFormat:@"code = '%@'",_workOrderCode];
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
@@ -82,6 +80,60 @@
 }
 
 
+#pragma mark - IBAction
+
+-(void)stepBtnClick:(UITapGestureRecognizer *)recognizer{
+    if(_workOrder.type == WorkOrderTypeOnsite){
+        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
+            return;
+        }
+    }
+    
+    WorkOrderStepController *info = [WorkOrderStepController new];
+    info.code = _workOrderCode;
+    info.funcType = FuncTypeWorkOrder;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
+
+- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer{
+    WorkOrderCameraController *info =[WorkOrderCameraController new];
+    info.code = _workOrderCode;
+    info.funcType = FuncTypeWorkOrder;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
+
+- (void)formBtnClick:(UITapGestureRecognizer *)recognizer{
+    if(_workOrder.type == WorkOrderTypeOnsite){
+        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
+            return;
+        }
+    }
+    WorkOrderFormsController *info =[WorkOrderFormsController new];
+    info.code = _workOrder.salesOrderSnapshot.code;;
+    info.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:info animated:YES];
+}
+
+-(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer{
+    QrCodeIdentityController *controller = [QrCodeIdentityController new];
+    
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    controller.qrCodeUrl = _workOrder.qrCodeUrl;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        controller.providesPresentationContextTransitionStyle = YES;
+        controller.definesPresentationContext = YES;
+        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self.tabBarController presentViewController:controller animated:YES completion:nil];
+        
+    } else {
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        [self presentViewController:controller animated:NO completion:nil];
+        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+}
+
 -(void)rightBtnClick{
     [YCXMenu setTintColor:[UIColor blackColor]];
     [YCXMenu setSelectedColor:[UIColor redColor]];
@@ -96,11 +148,25 @@
 }
 
 -(void)completeClick{
-    [self showOkayCancelAlert];
+    
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否完结工单？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    }];
+    
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakSelf p_postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList];
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:otherAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(void)p_setInfo:(WorkOrder *)workOrder
-{
+#pragma mark - func
+-(void)p_setInfo:(WorkOrder *)workOrder{
     _infoView.remarkText.text = workOrder.salesOrderSnapshot.remark;
     _infoView.serviceText.text = workOrder.salesOrderSnapshot.organizationName;
     _infoView.appointmentTimeText.text = workOrder.salesOrderSnapshot.appointmentTime;
@@ -189,84 +255,12 @@
     
 }
 
-#pragma mark - IBAction
+/**
+ 提交工单步骤
 
--(void)stepBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    if(_workOrder.type == WorkOrderTypeOnsite){
-        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
-            return;
-        }
-    }
-    
-    WorkOrderStepController *info = [WorkOrderStepController new];
-    info.code = _workOrderCode;
-    info.funcType = FuncTypeWorkOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
-- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    WorkOrderCameraController *info =[WorkOrderCameraController new];
-    info.code = _workOrderCode;
-    info.funcType = FuncTypeWorkOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-- (void)formBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    if(_workOrder.type == WorkOrderTypeOnsite){
-        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
-            return;
-        }
-    }
-    WorkOrderFormsController *info =[WorkOrderFormsController new];
-    info.code = _workOrder.salesOrderSnapshot.code;;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
--(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    QrCodeIdentityController *controller = [QrCodeIdentityController new];
-    
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    controller.qrCodeUrl = _workOrder.qrCodeUrl;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        controller.providesPresentationContextTransitionStyle = YES;
-        controller.definesPresentationContext = YES;
-        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self.tabBarController presentViewController:controller animated:YES completion:nil];
-        
-    } else {
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-        [self presentViewController:controller animated:NO completion:nil];
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    }
-}
-
-- (void)showOkayCancelAlert {
-    NSString *title = @"提示";
-    NSString *message = @"是否完结工单？";
-    NSString *cancelButtonTitle = @"否";
-    NSString *otherButtonTitle = @"是";
-    __weak typeof(self) weakSelf = self;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }];
-    
-    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [weakSelf p_postWorkOrderStepWithWorkOrder:_workOrder andStepArray:_workOrderStepList];
-    }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:otherAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
+ @param workOrder 工单
+ @param steps 工单步骤
+ */
 - (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
@@ -311,7 +305,7 @@
                 hub.detailsLabel.text = [NSString stringWithFormat:@"上传工单步骤成功"];
                 [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 
-                [self p_updateTimeStampWithWorkOrderCode:workOrder.code andTimeStampEnum:OnSiteTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
+                [self p_completeWorkOrder:workOrder.code andTimeStampEnum:OnSiteTimeStampComplete andDate:[Utils formatDate:[NSDate new]]];
                 
             }
         }else{
@@ -327,10 +321,17 @@
         
     }];
     
+
 }
 
+/**
+ 完结工单
 
--(void)p_updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStampEnum:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
+ @param workOrderCode 工单code
+ @param timeStamp 时间戳
+ @param time 时间
+ */
+-(void)p_completeWorkOrder:(NSString *)workOrderCode andTimeStampEnum:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在完结工单";

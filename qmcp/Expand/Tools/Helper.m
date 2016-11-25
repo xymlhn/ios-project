@@ -16,8 +16,7 @@
 
 @implementation Helper
 
-+ (BOOL)checkPhotoLibraryAuthorizationStatus
-{
++ (BOOL)checkPhotoLibraryAuthorizationStatus{
     if ([ALAssetsLibrary respondsToSelector:@selector(authorizationStatus)]) {
         ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
         if (ALAuthorizationStatusDenied == authStatus ||
@@ -29,8 +28,7 @@
     return YES;
 }
 
-+ (BOOL)checkCameraAuthorizationStatus
-{
++ (BOOL)checkCameraAuthorizationStatus{
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         kTipAlert(@"该设备不支持拍照");
         return NO;
@@ -70,8 +68,7 @@
     }
 }
 
-+ (UIViewController *)getCurrentVC
-{
++ (UIViewController *)getCurrentVC{
     UIViewController *result = nil;
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal)

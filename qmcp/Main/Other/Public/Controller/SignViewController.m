@@ -19,6 +19,14 @@
 
 @implementation SignViewController
 
++(instancetype)doneBlock:(void (^)(UIImage *))block{
+    
+    SignViewController *vc = [[SignViewController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
 -(void)loadView{
     self.title = @"签名";
     _signView = [SignView viewInstance];
@@ -29,9 +37,7 @@
     
 }
 
-
--(void)bindListener
-{
+-(void)bindListener{
     _signView.clearBtn.userInteractionEnabled = YES;
     [_signView.clearBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clearBtnClick:)]];
     
@@ -42,18 +48,16 @@
     [_signView.cancelBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelBtnClick:)]];
 }
 
-- (void)cancelBtnClick:(UITapGestureRecognizer *)recognizer
-{
+#pragma mark - IBAction
+- (void)cancelBtnClick:(UITapGestureRecognizer *)recognizer{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)clearBtnClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)clearBtnClick:(UITapGestureRecognizer *)recognizer{
     [_signView.signatureView clearSignature];
 }
 
-- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
-{
+- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer{
     [self dismissViewControllerAnimated:YES completion:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.doneBlock) {
@@ -63,13 +67,6 @@
             }
         }
     });
-    
-}
-+(instancetype)doneBlock:(void (^)(UIImage *))block{
-    
-    SignViewController *vc = [[SignViewController alloc] init];
-    vc.doneBlock = block;
-    return vc;
     
 }
 

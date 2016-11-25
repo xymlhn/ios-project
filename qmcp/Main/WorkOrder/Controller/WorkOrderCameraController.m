@@ -21,8 +21,7 @@
 @implementation WorkOrderCameraController
 
 #pragma mark - BaseWorkOrderViewController
--(void)setupView
-{
+-(void)setupView{
     self.title = @"摄像头";
     _tableView = [UITableView new];
     _tableView.rowHeight = 45;
@@ -36,8 +35,7 @@
     
 }
 
--(void)loadData
-{
+-(void)loadData{
     _cameraArr = [[CameraManager getInstance] getAllCameraData];
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
@@ -81,14 +79,12 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _cameraArr.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     WorkOrderCameraCell *cell = [WorkOrderCameraCell cellWithTableView:tableView];
@@ -101,8 +97,7 @@
     return cell;
 }
 
--(void)switchAction:(UISwitch*)switchButton
-{
+-(void)switchAction:(UISwitch*)switchButton{
     
     NSUInteger tag = switchButton.tag;
     CameraData *cameraData = _cameraArr[tag];

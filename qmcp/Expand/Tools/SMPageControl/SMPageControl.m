@@ -63,8 +63,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 @synthesize pageImageMasks = _pageImageMasks;
 @synthesize cgImageMasks = _cgImageMasks;
 
-+ (void)initialize
-{
++ (void)initialize{
 	NSString *reqSysVer = @"7.0";
 	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
 	if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
@@ -74,8 +73,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	}
 }
 
-- (void)_initialize
-{
+- (void)_initialize{
 	_numberOfPages = 0;
 	_tapBehavior = SMPageControlTapBehaviorStep;
     
@@ -98,8 +96,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	self.contentMode = UIViewContentModeRedraw;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (nil == self) {
 		return nil;
@@ -109,8 +106,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (nil == self) {
         return nil;
@@ -120,21 +116,18 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc{
 	if (_pageImageMask) {
 		CGImageRelease(_pageImageMask);
 	}	
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect{
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	[self _renderPages:context rect:rect];
 }
 
-- (void)_renderPages:(CGContextRef)context rect:(CGRect)rect
-{
+- (void)_renderPages:(CGContextRef)context rect:(CGRect)rect{
 	NSMutableArray *pageRects = [NSMutableArray arrayWithCapacity:self.numberOfPages];
     
 	if (_numberOfPages < 2 && _hidesForSinglePage) {
@@ -208,8 +201,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	
 }
 
-- (CGFloat)_leftOffset
-{
+- (CGFloat)_leftOffset{
 	CGRect rect = self.bounds;
 	CGSize size = [self sizeForNumberOfPages:self.numberOfPages];
 	CGFloat left = 0.0f;
@@ -227,8 +219,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return left;
 }
 
-- (CGFloat)_topOffsetForHeight:(CGFloat)height rect:(CGRect)rect
-{
+- (CGFloat)_topOffsetForHeight:(CGFloat)height rect:(CGRect)rect{
 	CGFloat top = 0.0f;
 	switch (_verticalAlignment) {
 		case SMPageControlVerticalAlignmentMiddle:
@@ -244,22 +235,19 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return top;
 }
 
-- (void)updateCurrentPageDisplay
-{
+- (void)updateCurrentPageDisplay{
 	_displayedPage = _currentPage;
 	[self setNeedsDisplay];
 }
 
-- (CGSize)sizeForNumberOfPages:(NSInteger)pageCount
-{
+- (CGSize)sizeForNumberOfPages:(NSInteger)pageCount{
 	CGFloat marginSpace = MAX(0, pageCount - 1) * _indicatorMargin;
 	CGFloat indicatorSpace = pageCount * _measuredIndicatorWidth;
 	CGSize size = CGSizeMake(marginSpace + indicatorSpace, _measuredIndicatorHeight);
 	return size;
 }
 
-- (CGRect)rectForPageIndicator:(NSInteger)pageIndex
-{
+- (CGRect)rectForPageIndicator:(NSInteger)pageIndex{
 	if (pageIndex < 0 || pageIndex >= _numberOfPages) {
 		return CGRectZero;
 	}
@@ -270,8 +258,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return rect;
 }
 
-- (void)_setImage:(UIImage *)image forPage:(NSInteger)pageIndex type:(SMPageControlImageType)type
-{
+- (void)_setImage:(UIImage *)image forPage:(NSInteger)pageIndex type:(SMPageControlImageType)type{
 	if (pageIndex < 0 || pageIndex >= _numberOfPages) {
 		return;
 	}
@@ -298,20 +285,17 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
     }
 }
 
-- (void)setImage:(UIImage *)image forPage:(NSInteger)pageIndex
-{
+- (void)setImage:(UIImage *)image forPage:(NSInteger)pageIndex{
     [self _setImage:image forPage:pageIndex type:SMPageControlImageTypeNormal];
 	[self _updateMeasuredIndicatorSizes];
 }
 
-- (void)setCurrentImage:(UIImage *)image forPage:(NSInteger)pageIndex
-{
+- (void)setCurrentImage:(UIImage *)image forPage:(NSInteger)pageIndex{
 	[self _setImage:image forPage:pageIndex type:SMPageControlImageTypeCurrent];;
 	[self _updateMeasuredIndicatorSizes];
 }
 
-- (void)setImageMask:(UIImage *)image forPage:(NSInteger)pageIndex
-{
+- (void)setImageMask:(UIImage *)image forPage:(NSInteger)pageIndex{
 	[self _setImage:image forPage:pageIndex type:SMPageControlImageTypeMask];
 	
 	if (nil == image) {
@@ -329,8 +313,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	}
 }
 
-- (id)_imageForPage:(NSInteger)pageIndex type:(SMPageControlImageType)type
-{
+- (id)_imageForPage:(NSInteger)pageIndex type:(SMPageControlImageType)type{
 	if (pageIndex < 0 || pageIndex >= _numberOfPages) {
 		return nil;
 	}
@@ -353,30 +336,25 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return dictionary[@(pageIndex)];
 }
 
-- (UIImage *)imageForPage:(NSInteger)pageIndex
-{
+- (UIImage *)imageForPage:(NSInteger)pageIndex{
 	return [self _imageForPage:pageIndex type:SMPageControlImageTypeNormal];
 }
 
-- (UIImage *)currentImageForPage:(NSInteger)pageIndex
-{
+- (UIImage *)currentImageForPage:(NSInteger)pageIndex{
 	return [self _imageForPage:pageIndex type:SMPageControlImageTypeCurrent];
 }
 
-- (UIImage *)imageMaskForPage:(NSInteger)pageIndex
-{
+- (UIImage *)imageMaskForPage:(NSInteger)pageIndex{
 	return [self _imageForPage:pageIndex type:SMPageControlImageTypeMask];
 }
 
-- (CGSize)sizeThatFits:(CGSize)size
-{
+- (CGSize)sizeThatFits:(CGSize)size{
 	CGSize sizeThatFits = [self sizeForNumberOfPages:self.numberOfPages];
 	sizeThatFits.height = MAX(sizeThatFits.height, _minHeight);
 	return sizeThatFits;
 }
 
-- (CGSize)intrinsicContentSize
-{
+- (CGSize)intrinsicContentSize{
 	if (_numberOfPages < 1 || (_numberOfPages < 2 && _hidesForSinglePage)) {
 		return CGSizeMake(UIViewNoIntrinsicMetric, 0.0f);
 	}
@@ -384,21 +362,18 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return intrinsicContentSize;
 }
 
-- (void)updatePageNumberForScrollView:(UIScrollView *)scrollView
-{
+- (void)updatePageNumberForScrollView:(UIScrollView *)scrollView{
 	NSInteger page = (int)floorf(scrollView.contentOffset.x / scrollView.bounds.size.width);
 	self.currentPage = page;
 }
 
-- (void)setScrollViewContentOffsetForCurrentPage:(UIScrollView *)scrollView animated:(BOOL)animated
-{
+- (void)setScrollViewContentOffsetForCurrentPage:(UIScrollView *)scrollView animated:(BOOL)animated{
 	CGPoint offset = scrollView.contentOffset;
 	offset.x = scrollView.bounds.size.width * self.currentPage;
 	[scrollView setContentOffset:offset animated:animated];
 }
 
-- (void)setStyleWithDefaults:(SMPageControlStyleDefaults)defaultStyle
-{
+- (void)setStyleWithDefaults:(SMPageControlStyleDefaults)defaultStyle{
 	switch (defaultStyle) {
 		case SMPageControlDefaultStyleModern:
 			self.indicatorDiameter = DEFAULT_INDICATOR_WIDTH_LARGE;
@@ -418,8 +393,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 
 #pragma mark -
 
-- (CGImageRef)createMaskForImage:(UIImage *)image CF_RETURNS_RETAINED
-{
+- (CGImageRef)createMaskForImage:(UIImage *)image CF_RETURNS_RETAINED{
 	size_t pixelsWide = image.size.width * image.scale;
 	size_t pixelsHigh = image.size.height * image.scale;
 	size_t bitmapBytesPerRow = (pixelsWide * 1);
@@ -434,14 +408,12 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return maskImage;
 }
 
-- (void)_updateMeasuredIndicatorSizeWithSize:(CGSize)size
-{
+- (void)_updateMeasuredIndicatorSizeWithSize:(CGSize)size{
 	_measuredIndicatorWidth = MAX(_measuredIndicatorWidth, size.width);
 	_measuredIndicatorHeight = MAX(_measuredIndicatorHeight, size.height);
 }
 
-- (void)_updateMeasuredIndicatorSizes
-{
+- (void)_updateMeasuredIndicatorSizes{
 	_measuredIndicatorWidth = _indicatorDiameter;
 	_measuredIndicatorHeight = _indicatorDiameter;
 	
@@ -475,8 +447,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 // We're using touchesEnded: because we want to mimick UIPageControl as close as possible
 // As of iOS 6, UIPageControl still (as far as we know) does not use a tap gesture recognizer. This means that actions like
 // touching down, sliding around, and releasing, still results in the page incrementing or decrementing.
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	UITouch *touch = [touches anyObject];
 	CGPoint point = [touch locationInView:self];
     
@@ -512,14 +483,12 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 
 #pragma mark - Accessors
 
-- (void)setFrame:(CGRect)frame
-{
+- (void)setFrame:(CGRect)frame{
 	[super setFrame:frame];
 	[self setNeedsDisplay];
 }
 
-- (void)setIndicatorDiameter:(CGFloat)indicatorDiameter
-{
+- (void)setIndicatorDiameter:(CGFloat)indicatorDiameter{
 	if (indicatorDiameter == _indicatorDiameter) {
 		return;
 	}
@@ -535,8 +504,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	[self setNeedsDisplay];
 }
 
-- (void)setIndicatorMargin:(CGFloat)indicatorMargin
-{
+- (void)setIndicatorMargin:(CGFloat)indicatorMargin{
 	if (indicatorMargin == _indicatorMargin) {
 		return;
 	}
@@ -545,8 +513,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	[self setNeedsDisplay];
 }
 
-- (void)setMinHeight:(CGFloat)minHeight
-{
+- (void)setMinHeight:(CGFloat)minHeight{
 	if (minHeight == _minHeight) {
 		return;
 	}
@@ -563,8 +530,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	[self setNeedsLayout];
 }
 
-- (void)setNumberOfPages:(NSInteger)numberOfPages
-{
+- (void)setNumberOfPages:(NSInteger)numberOfPages{
 	if (numberOfPages == _numberOfPages) {
 		return;
 	}
@@ -579,13 +545,11 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	[self setNeedsDisplay];
 }
 
-- (void)setCurrentPage:(NSInteger)currentPage
-{
+- (void)setCurrentPage:(NSInteger)currentPage{
 	[self setCurrentPage:currentPage sendEvent:NO canDefer:NO];
 }
 
-- (void)setCurrentPage:(NSInteger)currentPage sendEvent:(BOOL)sendEvent canDefer:(BOOL)defer
-{	
+- (void)setCurrentPage:(NSInteger)currentPage sendEvent:(BOOL)sendEvent canDefer:(BOOL)defer{
 	_currentPage = MIN(MAX(0, currentPage), _numberOfPages - 1);
 	self.accessibilityPageControl.currentPage = self.currentPage;
 	
@@ -601,8 +565,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	}
 }
 
-- (void)setCurrentPageIndicatorImage:(UIImage *)currentPageIndicatorImage
-{
+- (void)setCurrentPageIndicatorImage:(UIImage *)currentPageIndicatorImage{
 	if ([currentPageIndicatorImage isEqual:_currentPageIndicatorImage]) {
 		return;
 	}
@@ -612,8 +575,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	[self setNeedsDisplay];
 }
 
-- (void)setPageIndicatorImage:(UIImage *)pageIndicatorImage
-{
+- (void)setPageIndicatorImage:(UIImage *)pageIndicatorImage{
 	if ([pageIndicatorImage isEqual:_pageIndicatorImage]) {
 		return;
 	}
@@ -623,8 +585,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	[self setNeedsDisplay];
 }
 
-- (void)setPageIndicatorMaskImage:(UIImage *)pageIndicatorMaskImage
-{
+- (void)setPageIndicatorMaskImage:(UIImage *)pageIndicatorMaskImage{
 	if ([pageIndicatorMaskImage isEqual:_pageIndicatorMaskImage]) {
 		return;
 	}
@@ -641,8 +602,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	[self setNeedsDisplay];
 }
 
-- (NSMutableDictionary *)pageNames
-{
+- (NSMutableDictionary *)pageNames{
 	if (nil != _pageNames) {
 		return _pageNames;
 	}
@@ -651,8 +611,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return _pageNames;
 }
 
-- (NSMutableDictionary *)pageImages
-{
+- (NSMutableDictionary *)pageImages{
 	if (nil != _pageImages) {
 		return _pageImages;
 	}
@@ -661,8 +620,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return _pageImages;
 }
 
-- (NSMutableDictionary *)currentPageImages
-{
+- (NSMutableDictionary *)currentPageImages{
 	if (nil != _currentPageImages) {
 		return _currentPageImages;
 	}
@@ -671,8 +629,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return _currentPageImages;
 }
 
-- (NSMutableDictionary *)pageImageMasks
-{
+- (NSMutableDictionary *)pageImageMasks{
 	if (nil != _pageImageMasks) {
 		return _pageImageMasks;
 	}
@@ -681,8 +638,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return _pageImageMasks;
 }
 
-- (NSMutableDictionary *)cgImageMasks
-{
+- (NSMutableDictionary *)cgImageMasks{
 	if (nil != _cgImageMasks) {
 		return _cgImageMasks;
 	}
@@ -693,8 +649,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 
 #pragma mark - UIAccessibility
 
-- (void)setName:(NSString *)name forPage:(NSInteger)pageIndex
-{
+- (void)setName:(NSString *)name forPage:(NSInteger)pageIndex{
 	if (pageIndex < 0 || pageIndex >= _numberOfPages) {
 		return;
 	}
@@ -703,8 +658,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	
 }
 
-- (NSString *)nameForPage:(NSInteger)pageIndex
-{
+- (NSString *)nameForPage:(NSInteger)pageIndex{
 	if (pageIndex < 0 || pageIndex >= _numberOfPages) {
 		return nil;
 	}
@@ -712,8 +666,7 @@ static SMPageControlStyleDefaults _defaultStyleForSystemVersion;
 	return self.pageNames[@(pageIndex)];
 }
 
-- (void)updateAccessibilityValue
-{
+- (void)updateAccessibilityValue{
 	NSString *pageName = [self nameForPage:self.currentPage];
 	NSString *accessibilityValue = self.accessibilityPageControl.accessibilityValue;
 	

@@ -13,8 +13,7 @@
 static ThrowLineTool *s_sharedInstance = nil;
 @implementation ThrowLineTool
 
-+ (ThrowLineTool *)sharedTool
-{
++ (ThrowLineTool *)sharedTool{
     if (!s_sharedInstance) {
         s_sharedInstance = [[[self class] alloc] init];
     }
@@ -31,8 +30,7 @@ static ThrowLineTool *s_sharedInstance = nil;
  *  @param num view 变小的比例
  */
 - (void)throwObject:(UIView *)obj from:(CGPoint)start to:(CGPoint)end
-             height:(CGFloat)height andViewBoundsScale:(CGFloat)num duration:(CGFloat)duration
-{
+             height:(CGFloat)height andViewBoundsScale:(CGFloat)num duration:(CGFloat)duration{
     self.showingView = obj;
     
     //初始化抛物线path
@@ -71,8 +69,7 @@ static ThrowLineTool *s_sharedInstance = nil;
     
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
     if (self.delegate && [self.delegate respondsToSelector:@selector(animationDidFinish:)]) {
         [self.delegate performSelector:@selector(animationDidFinish:) withObject:self.showingView];
     }

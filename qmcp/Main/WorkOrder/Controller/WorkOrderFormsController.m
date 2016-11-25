@@ -23,8 +23,7 @@
 
 #pragma mark - UIViewController
 
--(void)setupView
-{
+-(void)setupView{
     self.title = @"表单";
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -46,8 +45,7 @@
     
 }
 
--(void)loadData
-{
+-(void)loadData{
     
     _workOrderFormList = [NSMutableArray new];
     
@@ -83,24 +81,20 @@
 #pragma mark -UICollectionViewDataSource
 
 //指定单元格的个数 ，这个是一个组里面有多少单元格，e.g : 一个单元格就是一张图片
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _workOrderFormList.count;
 }
 
 //构建单元格
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"FormTemplateCell";
     FormTemplateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     cell.formTemplateBrife = _workOrderFormList[indexPath.row];
     return cell;
 }
 
-
 //UICollectionView被选中时调用的方法
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     FormTemplateBrife *formTemplateBrife = _workOrderFormList[indexPath.row];
     WorkOrderFormController *info =[WorkOrderFormController new];
     info.code = _code;

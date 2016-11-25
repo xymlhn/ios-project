@@ -13,8 +13,7 @@
 #define GoodDetailScaleValue    0.9
 #define ItemsBaseColor  [UIColor whiteColor]
 
-@interface StandardsView ()<ThrowLineToolDelegate>
-{
+@interface StandardsView ()<ThrowLineToolDelegate>{
     CGFloat _cellHeight;
     NSInteger _cellNum;
     
@@ -39,20 +38,9 @@
 
 @end
 
-
 @implementation StandardsView
 
-
 @synthesize buyNum = _buyNum;
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 
 - (instancetype)init{
     self = [super init];
@@ -64,9 +52,7 @@
     return self;
 }
 
-
--(void)buildViews
-{
+-(void)buildViews{
 
     self.frame = [self screenBounds];
     coverView =  [[UIView alloc]initWithFrame:[self topView].bounds];
@@ -146,9 +132,7 @@
     
 }
 
-
--(void) initTableView
-{
+-(void) initTableView{
     UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
     //最上面显示的信息 数据
     self.priceLab.frame = CGRectMake(self.mainImgView.frame.size.width+self.mainImgView.frame.origin.x+10,
@@ -203,22 +187,18 @@
 
 #pragma mark - self property
 
--(void)setBuyNum:(NSInteger)buyNum
-{
+-(void)setBuyNum:(NSInteger)buyNum{
     _buyNum = buyNum;
     self.numberTextFied.text = [NSString stringWithFormat:@"%ld",(long)buyNum];
 }
 
--(NSInteger)buyNum
-{
+-(NSInteger)buyNum{
     _buyNum = [self.numberTextFied.text integerValue];
     return _buyNum;
 }
 
-
 /*设置自定义的button  原始btn功能有限建议自定义 或者说必需自定*/
--(void)setCustomBtns:(NSArray *)customBtns
-{
+-(void)setCustomBtns:(NSArray *)customBtns{
     _customBtns = customBtns;
     
     [cancelBtn removeFromSuperview];
@@ -255,24 +235,21 @@
     }
 }
 
--(void)setStandardArr:(NSArray<StandardModel *> *)standardArr
-{
+-(void)setStandardArr:(NSArray<StandardModel *> *)standardArr{
     _standardArr = standardArr;
     
     [_mainTableView reloadData];
 }
 
-
--(NSMutableDictionary *)standardBtnClickDict
-{
+-(NSMutableDictionary *)standardBtnClickDict{
     if (_standardBtnClickDict == nil) {
         _standardBtnClickDict = [NSMutableDictionary dictionary];
     }
     
     return _standardBtnClickDict;
 }
--(NSMutableArray *)tempImgViewArr
-{
+
+-(NSMutableArray *)tempImgViewArr{
     if(_tempImgViewArr == nil)
     {
         _tempImgViewArr = [NSMutableArray array];
@@ -281,8 +258,7 @@
     return _tempImgViewArr;
 }
 
--(NSMutableArray *)standardBtnArr
-{
+-(NSMutableArray *)standardBtnArr{
     if(_standardBtnArr == nil)
     {
         _standardBtnArr = [NSMutableArray array];
@@ -291,8 +267,7 @@
     return _standardBtnArr;
 }
 
--(NSMutableDictionary *)standardBtnDict
-{
+-(NSMutableDictionary *)standardBtnDict{
     if(_standardBtnDict == nil)
     {
         _standardBtnDict = [NSMutableDictionary new];
@@ -300,8 +275,7 @@
     return _standardBtnDict;
 }
 
-- (CGRect)screenBounds
-{
+- (CGRect)screenBounds{
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     
@@ -321,18 +295,15 @@
 #pragma mark - clicks
 
 
--(void)tapSelfViewAction:(id)sender
-{
+-(void)tapSelfViewAction:(id)sender{
     [self dismiss];
 }
 
--(void)tapShowViewAction:(id)sender
-{
+-(void)tapShowViewAction:(id)sender{
     [self endEditing:YES];
 }
 
--(void)buyNumBtnClick:(UIButton *)sender
-{
+-(void)buyNumBtnClick:(UIButton *)sender{
     if (sender.tag == 0) {
         self.buyNum = self.buyNum+1;
     }
@@ -348,16 +319,14 @@
     
 }
 //自定义按键点击
--(void)customBtnsClickAction:(UIButton *)sender
-{
+-(void)customBtnsClickAction:(UIButton *)sender{
     if([self.delegate respondsToSelector:@selector(StandardsView:CustomBtnClickAction:)])
     {
         [self.delegate StandardsView:self CustomBtnClickAction:sender];
     }
 }
 //规格键点击
--(void)standardBtnClick:(UIButton *)sender
-{
+-(void)standardBtnClick:(UIButton *)sender{
     sender.backgroundColor = [UIColor orangeColor];
     sender.selected = YES;
     NSNumber *key = [NSNumber numberWithInteger:(sender.tag & 0x0000ffff)/100 ];
@@ -382,9 +351,7 @@
 
 }
 
-
--(void)clickAction:(UIButton *)sender
-{
+-(void)clickAction:(UIButton *)sender{
     if(sender == sureBtn)
     {
         sureBtn.backgroundColor = [UIColor yellowColor];
@@ -443,8 +410,7 @@
 }
 #pragma mark - Animations
 
--(void)showAnimationFromLeft:(UIView *)view
-{
+-(void)showAnimationFromLeft:(UIView *)view{
     CGRect tempRect = view.frame;
     view.layer.anchorPoint = CGPointMake(0.5, 2.0);
     view.frame = tempRect;//重设frame，重新计算center  因为anchorpoint的设置会导致center的改变
@@ -457,8 +423,7 @@
 
 }
 
--(void)selfDismissAnimationToRight
-{
+-(void)selfDismissAnimationToRight{
     CGRect tempRect = showView.frame;
     showView.layer.anchorPoint = CGPointMake(0.5, 2.0);
     showView.frame = tempRect;//重设frame，重新计算center  因为anchorpoint的设置会导致center的改变
@@ -482,8 +447,7 @@
     }];
 }
 
--(void)selfShowAnimationFromLeft
-{
+-(void)selfShowAnimationFromLeft{
     
     CGRect tempRect = showView.frame;
     showView.layer.anchorPoint = CGPointMake(0.5, 2.0);
@@ -512,10 +476,8 @@
     
 }
 
-
 //设置指定view大小
--(void)setBackViewAnimationScale:(UIView *)backView andDuration:(NSTimeInterval)duration toValueX:(CGFloat)valueX andValueY:(CGFloat)valueY
-{
+-(void)setBackViewAnimationScale:(UIView *)backView andDuration:(NSTimeInterval)duration toValueX:(CGFloat)valueX andValueY:(CGFloat)valueY{
     CGAffineTransform t = backView.transform;
     
     [UIView animateWithDuration:duration animations:^{
@@ -526,8 +488,7 @@
 }
 
 //将某个view抛到某个地点
--(void)ThrowGoodTo:(CGPoint)destPoint andDuration:(NSTimeInterval)duration andHeight:(CGFloat)height andScale:(CGFloat)Scale
-{
+-(void)ThrowGoodTo:(CGPoint)destPoint andDuration:(NSTimeInterval)duration andHeight:(CGFloat)height andScale:(CGFloat)Scale{
     
     if(duration == 0)
     {
@@ -567,8 +528,7 @@
 
 }
 
--(void)viewSetHidden:(NSString *)tag
-{
+-(void)viewSetHidden:(NSString *)tag{
     for (UIImageView *tempImgView in self.tempImgViewArr) {
         
         if (tempImgView.tag == [tag intValue]) {
@@ -580,11 +540,9 @@
     
 }
 ////抛物线结束
-- (void)animationDidFinish:(UIView *)view
-{
+- (void)animationDidFinish:(UIView *)view{
     [self dismiss];
 }
-
 
 //显示view
 - (void)showAnimation {
@@ -744,21 +702,18 @@
 
 #pragma mark - self tools
 //根据字符串计算宽度
--(CGFloat)WidthWithString:(NSString*)string fontSize:(CGFloat)fontSize height:(CGFloat)height
-{
+-(CGFloat)WidthWithString:(NSString*)string fontSize:(CGFloat)fontSize height:(CGFloat)height{
     NSDictionary *attrs = @{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]};
     return  [string boundingRectWithSize:CGSizeMake(0, height) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size.width;
 }
 
 #pragma mark - api for custom
--(void)standardsViewReload
-{
+-(void)standardsViewReload{
     if(_mainTableView!=nil)
     {
         [_mainTableView reloadData];
     }
 }
-
 
 #pragma mark -  tableview  Delegate
 
@@ -986,28 +941,24 @@
     return NO;
 }
 
-- (UITableViewCellEditingStyle)tableView: (UITableView *)tableView editingStyleForRowAtIndexPath: (NSIndexPath *)indexPath
-{
+- (UITableViewCellEditingStyle)tableView: (UITableView *)tableView editingStyleForRowAtIndexPath: (NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleDelete;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
     return  YES;
 }
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  @"删除";
 }
 
 //设置选中的行所执行的动作
 
--(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return indexPath;
     
@@ -1018,8 +969,7 @@
 
 #define SectionHeight  0
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *tempView = [[UIView alloc] init];
     
    
@@ -1028,8 +978,7 @@
 }
 
 //设置section header 的高度
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0;
 }
 

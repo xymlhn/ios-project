@@ -34,8 +34,7 @@
     }
     return _gisLocationArray;
 }
-- (void)awakeFromNib
-{
+- (void)awakeFromNib{
     [super awakeFromNib];
     self.parallaxEnabled = NO;
     self.scaleContentView = YES;
@@ -81,8 +80,7 @@
  @param manager manager description
  @param location location description
  */
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
-{
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location{
     if (location != nil) {
         if(_lastUploadTime == nil|| [self p_compareTime:_lastUploadTime second:[NSDate new] andNumber:1] || [location distanceFromLocation:_lastLocation] > 0.02){
             _lastUploadTime = [NSDate new];

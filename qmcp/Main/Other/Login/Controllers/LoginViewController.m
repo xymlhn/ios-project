@@ -16,29 +16,27 @@
 #import "AddressViewController.h"
 @interface LoginViewController ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 
-@property LoginView *loginView;
+@property(nonatomic, strong) LoginView *loginView;
 
 @end
 
 @implementation LoginViewController
-- (void) viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
-- (void) viewWillDisappear:(BOOL)animated
-{
+
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
--(void)loadView
-{
+
+-(void)loadView{
     _loginView = [LoginView new];
     self.view = _loginView;
 }
 
--(void)bindListener
-{
+-(void)bindListener{
     _loginView.userNameText.delegate = self;
     _loginView.passWordText.delegate = self;
     
@@ -64,11 +62,11 @@
     }];
     
 }
+
 /**
  *  用户名密码验证
  */
--(void)p_validUsernameAndPassword
-{
+-(void)p_validUsernameAndPassword{
     RACSignal *validUsernameSignal = [_loginView.userNameText.rac_textSignal
                                       map:^id(NSString *text) {
                                           return @([self p_isValidUsername:text]);
@@ -99,8 +97,7 @@
  *
  *  @return bool
  */
--(BOOL)p_isValidUsername:(NSString *)text
-{
+-(BOOL)p_isValidUsername:(NSString *)text{
     NSString * regex = @"^[A-Za-z0-9-_@]{1,20}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL isMatch = [pred evaluateWithObject:text];
@@ -114,48 +111,11 @@
  *
  *  @return bool
  */
--(BOOL)p_isValidPassword:(NSString *)text
-{
+-(BOOL)p_isValidPassword:(NSString *)text{
     return text.length > 0;
 }
 
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    if (![_loginView.userNameText isFirstResponder] && ![_loginView.userNameText isFirstResponder]) {
-        return NO;
-    }
-    return YES;
-}
-
--(void)loadData{
-    NSArray *accountAndPassword = [Config getUserNameAndPassword];
-    _loginView.userNameText.text = accountAndPassword? accountAndPassword[0] : @"";
-    _loginView.passWordText.text = accountAndPassword? accountAndPassword[1] : @"";
-    [self p_validUsernameAndPassword];
-}
-#pragma mark - 键盘操作
-
-- (void)hidenKeyboard
-{
-    [_loginView.userNameText resignFirstResponder];
-    [_loginView.passWordText resignFirstResponder];
-}
-
-- (void)returnOnKeyboard:(UITextField *)sender
-{
-    if (sender == _loginView.userNameText) {
-        [_loginView.passWordText becomeFirstResponder];
-    } else if (sender == _loginView.passWordText) {
-        [self hidenKeyboard];
-        if (_loginView.loginBtn.enabled) {
-            [self loginBtnClick];
-        }
-    }
-}
-
--(void)loginBtnClick
-{
+-(void)loginBtnClick{
     NSString *username = _loginView.userNameText.text;
     NSString *password = _loginView.passWordText.text;
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -195,7 +155,37 @@
             [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
         }
     }];
-    
+
+}
+-(void)loadData{
+    NSArray *accountAndPassword = [Config getUserNameAndPassword];
+    _loginView.userNameText.text = accountAndPassword? accountAndPassword[0] : @"";
+    _loginView.passWordText.text = accountAndPassword? accountAndPassword[1] : @"";
+    [self p_validUsernameAndPassword];
+}
+#pragma mark - 键盘操作
+
+- (void)hidenKeyboard{
+    [_loginView.userNameText resignFirstResponder];
+    [_loginView.passWordText resignFirstResponder];
+}
+
+- (void)returnOnKeyboard:(UITextField *)sender{
+    if (sender == _loginView.userNameText) {
+        [_loginView.passWordText becomeFirstResponder];
+    } else if (sender == _loginView.passWordText) {
+        [self hidenKeyboard];
+        if (_loginView.loginBtn.enabled) {
+            [self loginBtnClick];
+        }
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if (![_loginView.userNameText isFirstResponder] && ![_loginView.userNameText isFirstResponder]) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

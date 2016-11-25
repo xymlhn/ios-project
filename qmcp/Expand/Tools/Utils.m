@@ -94,8 +94,7 @@
     return image;
 }
 
-+(NSString *)formatDate:(NSDate *)date
-{
++(NSString *)formatDate:(NSDate *)date{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     return [dateFormatter stringFromDate:date];
@@ -107,8 +106,7 @@
     return [dateFormatter stringFromDate:date];
 }
 
-+(NSDate *)stringToDate:(NSString *)date
-{
++(NSDate *)stringToDate:(NSString *)date{
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     return [fmt dateFromString:date];
@@ -150,6 +148,7 @@
     //返回新的改变大小后的图片
     return scaledImage;
 }
+
 +(UIImage *) imageCompressForSize:(UIImage *)sourceImage targetSize:(CGSize)size{
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
@@ -245,8 +244,7 @@
  *
  *  @return 路径
  */
-+ (NSString* )pathInCacheDirectory:(NSString *)fileName
-{
++ (NSString* )pathInCacheDirectory:(NSString *)fileName{
     NSArray *cachePaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [cachePaths objectAtIndex:0];
     return [cachePath stringByAppendingPathComponent:fileName];

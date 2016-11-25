@@ -33,8 +33,7 @@
 
 #pragma mark - init method
 
-- (instancetype)init
-{
+- (instancetype)init{
     self = [super init];
     if (self) {
         self.modalPresentationStyle = UIModalPresentationCustom;
@@ -45,8 +44,7 @@
     return self;
 }
 
-- (instancetype)initWithImageURL:(NSURL *)imageURL showDelete:(BOOL)show
-{
+- (instancetype)initWithImageURL:(NSURL *)imageURL showDelete:(BOOL)show{
     self = [self init];
     if (self) {
         _imageURL = imageURL;
@@ -58,8 +56,7 @@
 
 #pragma mark - life cycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor blackColor];
@@ -106,8 +103,7 @@
     
 }
 
-- (void)configureScrollView
-{
+- (void)configureScrollView{
     _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     _scrollView.delegate = self;
     _scrollView.maximumZoomScale = 2;
@@ -116,8 +112,7 @@
     [self.view addSubview:_scrollView];
 }
 
-- (void)configureImageView
-{
+- (void)configureImageView{
     _imageView = [UIImageView new];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
     _imageView.userInteractionEnabled = YES;
@@ -132,15 +127,13 @@
     [self.view addGestureRecognizer:singleTap];
 }
 
-- (CGSize)contentSizeForImage:(UIImage *)image
-{
+- (CGSize)contentSizeForImage:(UIImage *)image{
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat contentHeight = screenWidth * image.size.height / image.size.width;
     return CGSizeMake(screenWidth, contentHeight);
 }
 
-- (CGRect)frameForImage:(UIImage *)image
-{
+- (CGRect)frameForImage:(UIImage *)image{
     
     CGFloat width = self.view.bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -151,15 +144,13 @@
     return CGRectMake(0, y, width, imageHeight);
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
@@ -167,15 +158,13 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
     return _imageView;
 }
 
 // http://stackoverflow.com/questions/1316451/center-content-of-uiscrollview-when-smaller
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView{
     CGFloat offsetX = scrollView.bounds.size.width > scrollView.contentSize.width ?
     (scrollView.bounds.size.width - scrollView.contentSize.width) / 2 : 0;
     
@@ -188,14 +177,12 @@
 
 #pragma mark - handle gesture
 
-- (void)handleSingleTap
-{
+- (void)handleSingleTap{
     [_HUD hideAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)handleDoubleTap:(UIGestureRecognizer *)recognizer
-{
+- (void)handleDoubleTap:(UIGestureRecognizer *)recognizer{
     CGFloat power = _zoomOut ? 1/_scrollView.maximumZoomScale : _scrollView.maximumZoomScale;
     _zoomOut = !_zoomOut;
     
@@ -217,8 +204,7 @@
 
 // from https://github.com/ideaismobile/IDMPhotoBrowser
 
-- (void)panGestureRecognized:(id)sender
-{
+- (void)panGestureRecognized:(id)sender{
     CGFloat bottomOffset = _scrollView.contentSize.height - _scrollView.bounds.size.height;
     BOOL isInContentRegion = _scrollView.contentOffset.y > 0 && _scrollView.contentOffset.y < bottomOffset;
     

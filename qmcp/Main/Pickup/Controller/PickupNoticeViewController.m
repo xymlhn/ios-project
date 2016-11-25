@@ -20,6 +20,14 @@
 
 @implementation PickupNoticeViewController
 
+-(NSMutableArray<ItemComplete *> *)itemCompleteArray{
+    if (_itemCompleteArray == nil) {
+        _itemCompleteArray = [NSMutableArray new];
+    }
+    return _itemCompleteArray;
+}
+
+#pragma mark - BaseViewController
 -(void)loadView{
     _pickupNoticeView = [PickupNoticeView viewInstance];
     self.view = _pickupNoticeView;
@@ -43,19 +51,12 @@
     
 }
 
--(NSMutableArray<ItemComplete *> *)itemCompleteArray{
-    if (_itemCompleteArray == nil) {
-        _itemCompleteArray = [NSMutableArray new];
-    }
-    return _itemCompleteArray;
-}
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
+#pragma empty Table
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
     return [UIImage imageNamed:@"default－portrait"];
 }
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     NSString *text = @"请添加步骤";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
@@ -74,25 +75,20 @@
 }
 
 #pragma mark - UISearchBarDelegate
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self p_handleResult:searchBar.text];
     searchBar.text =  @"";
     [searchBar resignFirstResponder];
 }
 
-
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.itemCompleteArray.count;
 }
 
 //返回每行显示的cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
     //1 创建可重用的自定义的cell
     PickupNoticeCell *cell = [PickupNoticeCell cellWithTableView:tableView];
@@ -105,8 +101,7 @@
 }
 
 #pragma mark - IBAction
--(void)qrBtnClick:(UITapGestureRecognizer *)recognizer
-{
+-(void)qrBtnClick:(UITapGestureRecognizer *)recognizer{
     __weak typeof(self) weakSelf = self;
     if([Config getQuickScan]){
         ScanViewController *scanViewController =  [ScanViewController doneBlock:^(NSString *textValue) {
@@ -121,8 +116,7 @@
     }
 }
 
--(void)p_handleResult:(NSString *)result
-{
+-(void)p_handleResult:(NSString *)result{
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"请求中...";
     __weak typeof(self) weakSelf = self;

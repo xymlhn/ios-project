@@ -11,8 +11,7 @@
 @implementation MBProgressHUD (Util)
 
 #pragma mark 显示信息
-+ (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
-{
++ (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view{
     if (view == nil) view = [UIApplication sharedApplication].keyWindow;
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
@@ -34,8 +33,7 @@
     [self show:error icon:@"error.png" view:view];
 }
 
-+ (void)showSuccess:(NSString *)success toView:(UIView *)view
-{
++ (void)showSuccess:(NSString *)success toView:(UIView *)view{
     [self show:success icon:@"success.png" view:view];
 }
 

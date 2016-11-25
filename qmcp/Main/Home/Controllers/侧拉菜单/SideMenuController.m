@@ -52,21 +52,17 @@
     
 }
 
-
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [_titleArray count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 45;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SideMenuCell *cell = [SideMenuCell SideMenuCellWithTableView:tableView];
     
     cell.backgroundColor = [UIColor clearColor];
@@ -78,15 +74,15 @@
 
     return cell;
 }
-- (void)setContentViewController:(UIViewController *)viewController
-{
+
+- (void)setContentViewController:(UIViewController *)viewController{
     viewController.hidesBottomBarWhenPushed = YES;
     UINavigationController *nav = (UINavigationController *)((UITabBarController *)self.sideMenuViewController.contentViewController).selectedViewController;
     [nav pushViewController:viewController animated:NO];
     [self.sideMenuViewController hideMenuViewController];
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     __weak typeof(self) weakSelf = self;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *title = _titleArray[indexPath.row];
@@ -127,18 +123,15 @@
 }
 
 #pragma mark code
-- (void)reportQrCodeResult:(NSString *)result
-{
+- (void)reportQrCodeResult:(NSString *)result{
     [self handleResult:result];
 }
 
-- (void)reportScanResult:(NSString *)result
-{
+- (void)reportScanResult:(NSString *)result{
     [self handleResult:result];
 }
 
--(void)handleResult:(NSString *)result
-{
+-(void)handleResult:(NSString *)result{
     MBProgressHUD *hub = [Utils createHUD];
     hub.detailsLabel.text = @"扫描中...";
    
@@ -174,13 +167,11 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 160;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerView = [UIView new];
     headerView.backgroundColor = [UIColor clearColor];
     

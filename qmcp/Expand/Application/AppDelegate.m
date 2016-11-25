@@ -81,6 +81,7 @@ const static int databaseVersion = 0;
     return YES;
 }
 
+//------------------个推----------------------//
 -(void)p_initGeTui{
     [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:self];
     // 注册 APNs
@@ -141,7 +142,6 @@ const static int databaseVersion = 0;
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
-
 /** SDK遇到错误回调 */
 - (void)GeTuiSdkDidOccurError:(NSError *)error {
     [Utils showHudTipStr:[error localizedDescription]];
@@ -198,11 +198,14 @@ const static int databaseVersion = 0;
     NSLog(@"\n>>>[Receive RemoteNotification - Background Fetch]:%@\n\n",userInfo);
     completionHandler(UIBackgroundFetchResultNewData);
 }
+
+//------------------数据库----------------------//
 -(void)p_updateDataBase{
     LKDBHelper* globalHelper = [WorkOrder getUsingLKDBHelper];
     [globalHelper dropAllTable];
 }
 
+//------------------重登陆----------------------//
 - (void)p_reLogin:(NSNotification *)text{
     
     NSString *info = text.userInfo[@"info"];

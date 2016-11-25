@@ -13,14 +13,11 @@
 @interface SideMenuCell()
 @property (strong, nonatomic)  UILabel *icon;
 @property (strong, nonatomic)  UILabel *content;
-
 @end
 @implementation SideMenuCell
 
-
 //创建自定义可重用的cell对象
-+ (instancetype)SideMenuCellWithTableView:(UITableView *)tableView
-{
++ (instancetype)SideMenuCellWithTableView:(UITableView *)tableView{
     static NSString *reuseId = @"gb";
     SideMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
@@ -29,9 +26,7 @@
     return cell;
 }
 
-
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self initView];
@@ -39,8 +34,7 @@
     return self;
 }
 
--(void)initView
-{
+-(void)initView{
     _icon = [UILabel new];
     [_icon setFont:[UIFont fontWithName:@"FontAwesome" size:23]];
     _icon.text = @"";
@@ -64,8 +58,7 @@
 
 }
 
--(void)setContent:(NSString *)content andIcon:(NSString *)icon
-{
+-(void)setContent:(NSString *)content andIcon:(NSString *)icon{
     _content.text = content;
     _icon.text = icon;
     

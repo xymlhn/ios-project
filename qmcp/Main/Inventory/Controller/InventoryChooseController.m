@@ -81,6 +81,18 @@
     }
 }
 
+/**
+ *  已选服务总价格
+ *
+ *  @return 总价格
+ */
+-(NSString *)p_calculatePrice{
+    float price = 0.0f;
+    for (CommoditySnapshot *snapshot in _chooseCommodityList) {
+        price += [snapshot.price floatValue];
+    }
+    return [NSString stringWithFormat:@"总价: %g",price];
+}
 
 #pragma mark - Table view data source
 
@@ -124,18 +136,7 @@
     }
 }
 
-/**
- *  已选服务总价格
- *
- *  @return 总价格
- */
--(NSString *)p_calculatePrice{
-    float price = 0.0f;
-    for (CommoditySnapshot *snapshot in _chooseCommodityList) {
-        price += [snapshot.price floatValue];
-    }
-    return [NSString stringWithFormat:@"总价: %g",price];
-}
+
 
 #pragma mark - Notification
 - (void)priceUpdate:(NSNotification *)text{
@@ -158,8 +159,53 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(StandardsView *)buildStandardView:(NSString *)commodityCode
-{
+#pragma mark - standardView  delegate
+
+-(void)StandardsView:(StandardsView *)standardView CustomBtnClickAction:(UIButton *)sender{
+    if (sender.tag == 0) {
+        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:0.5 andHeight:150 andScale:20];
+        _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
+        [_chooseCommodityList addObject:_currentCommoditySnapshot];
+        _itemSnapshot.commodities = _chooseCommodityList;
+        [_itemSnapshot updateToDB];
+    }
+    else{
+        [standardView dismiss];
+    }
+}
+//点击规格代理
+-(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andStandName:(NSString *)standName andStandandClassName:(NSString *)standClassName andIndex:(NSInteger)index{
+    int order = (int)index;
+    NSArray *commodityPropertyArr =[[PropertyManager getInstance] appendCommodityChooseWithOrder:order andPropertyName:standName andPropertyContent:standClassName];
+    NSMutableArray *titleArr = [NSMutableArray new];
+    int i = 100;
+    for (CommodityProperty *property in commodityPropertyArr) {
+        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
+        for (NSString *str in property.propertyContent) {
+            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:[NSString stringWithFormat:@"%d",i ] andStandClassName:str];
+            [tempClassInfoArr addObject:tempClassInfo1];
+            i++;
+        }
+        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
+        [titleArr addObject:tempModel];
+    }
+    //    standardView.standardArr = titleArr;
+    //    [standardView standardsViewReload];
+    
+}
+
+//设置自定义btn的属性
+-(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn{
+    if (btn.tag == 0) {
+        btn.backgroundColor = [UIColor yellowColor];
+    }
+    else if (btn.tag == 1)
+    {
+        btn.backgroundColor = [UIColor orangeColor];
+    }
+}
+
+-(StandardsView *)buildStandardView:(NSString *)commodityCode{
     [[PropertyManager getInstance] releaseData];
     StandardsView *standview = [[StandardsView alloc] init];
     standview.delegate = self;
@@ -185,50 +231,5 @@
     standview.standardArr = titleArr;
     return standview;
 }
-#pragma mark - standardView  delegate
 
--(void)StandardsView:(StandardsView *)standardView CustomBtnClickAction:(UIButton *)sender{
-    if (sender.tag == 0) {
-        [standardView ThrowGoodTo:CGPointMake(200, 100) andDuration:0.5 andHeight:150 andScale:20];
-        _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
-        [_chooseCommodityList addObject:_currentCommoditySnapshot];
-        _itemSnapshot.commodities = _chooseCommodityList;
-        [_itemSnapshot updateToDB];
-    }
-    else{
-        [standardView dismiss];
-    }
-}
-//点击规格代理
--(void)Standards:(StandardsView *)standardView SelectBtnClick:(UIButton *)sender andStandName:(NSString *)standName andStandandClassName:(NSString *)standClassName andIndex:(NSInteger)index
-{
-    int order = (int)index;
-    NSArray *commodityPropertyArr =[[PropertyManager getInstance] appendCommodityChooseWithOrder:order andPropertyName:standName andPropertyContent:standClassName];
-    NSMutableArray *titleArr = [NSMutableArray new];
-    int i = 100;
-    for (CommodityProperty *property in commodityPropertyArr) {
-        NSMutableArray *tempClassInfoArr = [NSMutableArray new];
-        for (NSString *str in property.propertyContent) {
-            standardClassInfo *tempClassInfo1 = [standardClassInfo StandardClassInfoWith:[NSString stringWithFormat:@"%d",i ] andStandClassName:str];
-            [tempClassInfoArr addObject:tempClassInfo1];
-            i++;
-        }
-        StandardModel *tempModel = [StandardModel StandardModelWith:tempClassInfoArr andStandName:property.propertyName];
-        [titleArr addObject:tempModel];
-    }
-    //    standardView.standardArr = titleArr;
-    //    [standardView standardsViewReload];
-    
-}
-//设置自定义btn的属性
--(void)StandardsView:(StandardsView *)standardView SetBtn:(UIButton *)btn
-{
-    if (btn.tag == 0) {
-        btn.backgroundColor = [UIColor yellowColor];
-    }
-    else if (btn.tag == 1)
-    {
-        btn.backgroundColor = [UIColor orangeColor];
-    }
-}
 @end

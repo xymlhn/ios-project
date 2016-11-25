@@ -9,8 +9,7 @@
 #import "NSMutableArray+InsertArray.h"
 
 @implementation NSMutableArray (InsertArray)
-- (void)insertArray:(NSArray *)newAdditions atIndex:(int)index
-{
+- (void)insertArray:(NSArray *)newAdditions atIndex:(int)index{
     NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
     for(int i = index;i < newAdditions.count+index;i++)
     {

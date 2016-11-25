@@ -17,6 +17,13 @@
 
 @implementation QrCodeImageController
 
++(instancetype)doneBlock:(void (^)(NSString *))block{
+    
+    QrCodeImageController *vc = [[QrCodeImageController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
 
 -(void)setupView{
     _qrCodeBindView = [QrCodeBindView viewInstance];
@@ -36,14 +43,6 @@
 }
 
 -(void)loadData{
-    
-}
-
-+(instancetype)doneBlock:(void (^)(NSString *))block{
-    
-    QrCodeImageController *vc = [[QrCodeImageController alloc] init];
-    vc.doneBlock = block;
-    return vc;
     
 }
 

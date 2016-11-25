@@ -35,6 +35,14 @@
 @implementation WorkOrderStepEditController
 
 #pragma mark - BaseWorkOrderViewController
++(instancetype)doneBlock:(void (^)(WorkOrderStep *,SaveType type))block{
+    
+    WorkOrderStepEditController *vc = [[WorkOrderStepEditController alloc] init];
+    vc.doneBlock = block;
+    return vc;
+    
+}
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     // 禁用返回手势
@@ -42,6 +50,7 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     // 开启返回手势
@@ -49,12 +58,14 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
 }
+
 -(void)loadView{
     _editView =[WorkOrderStepEditView viewInstance];
     self.view = _editView;
     self.title = @"步骤编辑";
 }
 
+#pragma mark - BaseViewController
 -(void)loadData{
     NSMutableDictionary *dict = [NSMutableDictionary new];
     if(_funcType == FuncTypeWorkOrder){
@@ -78,13 +89,6 @@
     [_attachments addObjectsFromArray:_step.attachments];
     _editView.editText.text = _step.content;
 }
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([text isEqualToString:@"\n"]){ 
-        [self hidenKeyboard];
-        return NO;
-    }
-    return YES;
-}
 
 -(void)bindListener{
     _editView.delBtn.userInteractionEnabled = YES;
@@ -102,68 +106,7 @@
     
 }
 
-+(instancetype)doneBlock:(void (^)(WorkOrderStep *,SaveType type))block{
-    
-    WorkOrderStepEditController *vc = [[WorkOrderStepEditController alloc] init];
-    vc.doneBlock = block;
-    return vc;
-    
-}
-
--(void)p_deleteAttachment:(Attachment *)attachment
-{
-    [Utils deleteImage:attachment.key];
-    [attachment deleteToDB];
-    [_attachments removeObject:attachment];
-    [self p_updateStep];
-}
-
-
-/**
- 退出界面处理
- */
--(void)p_doneSave{
-    if (self.doneBlock) {
-        switch (_type) {
-            case SaveTypeAdd:
-            case SaveTypeUpdate:
-                _step.content = _editView.editText.text;
-                if([_step updateToDB]){
-                    self.doneBlock(_step,SaveTypeUpdate);
-                }
-                break;
-            case SaveTypeDelete:
-                if ([_step deleteToDB]) {
-                    self.doneBlock(_step,SaveTypeDelete);
-                }
-                break;
-            default:
-                break;
-        }
-        
-    }
-}
-//去除加号后保存附件节点
--(void)p_updateStep{
-    _step.attachments = _attachments;
-    _step.content = _editView.editText.text;
-    [_step updateToDB];
-}
-
-#pragma mark - IBAction
-- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer
-{
-    [self p_updateStep];
-    if(_funcType == FuncTypeWorkOrder){
-        NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_code];
-        NSArray *steps = [WorkOrderStep searchWithWhere:where];
-        [self p_postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
-    }else{
-        NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_code];
-        NSArray *steps = [WorkOrderStep searchWithWhere:where];
-        [self p_postInfo:steps];
-    }
-}
+#pragma mark - func
 - (void)p_postInfo:(NSArray *)steps{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -282,9 +225,60 @@
         }
         
     }];
-
+    
+}
+//删除附件
+-(void)p_deleteAttachment:(Attachment *)attachment{
+    [Utils deleteImage:attachment.key];
+    [attachment deleteToDB];
+    [_attachments removeObject:attachment];
+    [self p_updateStep];
 }
 
+/**
+ 退出界面处理
+ */
+-(void)p_doneSave{
+    if (self.doneBlock) {
+        switch (_type) {
+            case SaveTypeAdd:
+            case SaveTypeUpdate:
+                _step.content = _editView.editText.text;
+                if([_step updateToDB]){
+                    self.doneBlock(_step,SaveTypeUpdate);
+                }
+                break;
+            case SaveTypeDelete:
+                if ([_step deleteToDB]) {
+                    self.doneBlock(_step,SaveTypeDelete);
+                }
+                break;
+            default:
+                break;
+        }
+        
+    }
+}
+//去除加号后保存附件节点
+-(void)p_updateStep{
+    _step.attachments = _attachments;
+    _step.content = _editView.editText.text;
+    [_step updateToDB];
+}
+
+#pragma mark - IBAction
+- (void)saveBtnClick:(UITapGestureRecognizer *)recognizer{
+    [self p_updateStep];
+    if(_funcType == FuncTypeWorkOrder){
+        NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_code];
+        NSArray *steps = [WorkOrderStep searchWithWhere:where];
+        [self p_postWorkOrderStepWithWorkOrder:_workOrder andStepsArray:steps];
+    }else{
+        NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_code];
+        NSArray *steps = [WorkOrderStep searchWithWhere:where];
+        [self p_postInfo:steps];
+    }
+}
 
 - (void)delBtnClick:(UITapGestureRecognizer *)recognizer{
     for (Attachment *attachment in _attachments) {
@@ -346,8 +340,7 @@
 
 #pragma mark - UIImagePickerController
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:^ {
         Attachment *attachment = [Attachment new];
         attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
@@ -376,14 +369,12 @@
 #pragma mark -UICollectionViewDataSource
 
 //指定单元格的个数 ，这个是一个组里面有多少单元格，e.g : 一个单元格就是一张图片
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _attachments.count == kMaxImage ? _attachments.count : _attachments.count + 1;
 }
 
 //构建单元格
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"PhotoCell";
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
     if (_attachments.count == kMaxImage || indexPath.row < _attachments.count) {
@@ -416,11 +407,17 @@
 }
 
 #pragma mark - 键盘操作
-- (void)hidenKeyboard
-{
+- (void)hidenKeyboard{
     [_editView.editText resignFirstResponder];
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){
+        [self hidenKeyboard];
+        return NO;
+    }
+    return YES;
+}
 //返回按钮监听
 - (BOOL)navigationShouldPopOnBackButton {
     [self p_doneSave];

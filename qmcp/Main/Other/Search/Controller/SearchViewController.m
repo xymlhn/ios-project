@@ -167,13 +167,10 @@
 //返回每行显示的cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    //1 创建可重用的自定义的cell
     SearchViewCell *cell = [SearchViewCell cellWithTableView:tableView];
-    //2 设置cell内部的子控件
     WorkOrderSearchResult *workOrderSearchResult = self.resultList[row];
     cell.workOrderSearchResult = workOrderSearchResult;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //3 返回
     return cell;
 }
 
@@ -183,11 +180,7 @@
     if(workOrderSearchResult.dispatchToMeFlag && workOrderSearchResult.status != WorkOrderStatusCompleted){
         WorkOrder *workOrder = [[WorkOrderManager getInstance] findWorkOrderByCode:workOrderSearchResult.code];
         [self p_pushInfoView:workOrder.code];
-    }else{
-        
     }
-    
-    
 }
 
 

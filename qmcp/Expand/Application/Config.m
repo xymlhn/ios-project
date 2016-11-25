@@ -40,8 +40,7 @@ NSString * const kPushId = @"pushId";
     
 }
 
-+ (void)saveUserName:(NSString *)name andPassword:(NSString *)password
-{
++ (void)saveUserName:(NSString *)name andPassword:(NSString *)password{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:name ?: @"" forKey:kAccount];
     
@@ -53,9 +52,7 @@ NSString * const kPushId = @"pushId";
     [userDefaults synchronize];
 }
 
-
-+ (NSArray *)getUserNameAndPassword
-{
++ (NSArray *)getUserNameAndPassword{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *account = [userDefaults objectForKey:kAccount];
     
@@ -70,89 +67,67 @@ NSString * const kPushId = @"pushId";
     return nil;
 }
 
-
-+(BOOL) getLoginStatus
-{
++(BOOL) getLoginStatus{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults boolForKey:kLogin];
 }
-
-
-+(void) saveLoginStatus:(BOOL)login
-{
++(void) saveLoginStatus:(BOOL)login{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:login forKey:kLogin];
     [userDefaults synchronize];
 }
 
-+(void)setSound:(BOOL)on
-{
++(void)setSound:(BOOL)on{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setBool:on forKey:kSound];
 }
-
-+(BOOL)getSound
-{
++(BOOL)getSound{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     return [user boolForKey:kSound];
 }
 
-+(void)setVibre:(BOOL)on
-{
++(void)setVibre:(BOOL)on{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setBool:on forKey:kVibre];
 }
-
-+(BOOL)getVibre
-{
++(BOOL)getVibre{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     return [user boolForKey:kVibre];
 }
 
-+(void)setQuickScan:(BOOL)on
-{
++(void)setQuickScan:(BOOL)on{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setBool:on forKey:kQuickScan];
 }
-
-+(BOOL)getQuickScan
-{
++(BOOL)getQuickScan{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     return [user boolForKey:kQuickScan];
 }
 
-+(void)setSearch:(BOOL)on
-{
++(void)setSearch:(BOOL)on{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setBool:on forKey:kSearch];
 }
-
-+(BOOL)getSearch
-{
++(BOOL)getSearch{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     return [user boolForKey:kSearch];
 }
 
-+(void)setSaleOrderMineTime:(NSString *)lastupdateTime
-{
++(void)setSaleOrderMineTime:(NSString *)lastupdateTime{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:lastupdateTime forKey:kSalesOrderBindTime];
 }
-
 +(NSString *)getSalesOrderMineTime{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *str = [user objectForKey:kSalesOrderBindTime];
     return str == nil ?@"":str;
 }
 
-+(void)setWorkOrderTime:(NSString *)lastupdateTime
-{
++(void)setWorkOrderTime:(NSString *)lastupdateTime{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:lastupdateTime forKey:kWorkOrderTime];
 }
-
-+(NSString *)getWorkOrderTime
-{
++(NSString *)getWorkOrderTime{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *str = [user objectForKey:kWorkOrderTime];
     return str == nil ?@"":str;
@@ -190,21 +165,17 @@ NSString * const kPushId = @"pushId";
 }
 
 
-+(void)setDatabaseVersion:(int)version
-{
++(void)setDatabaseVersion:(int)version{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setInteger:version forKey:kDatabaseVersion];
 }
-
-+(int)getDatabaseVersion
-{
++(int)getDatabaseVersion{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSNumber *number = [user objectForKey:kDatabaseVersion];
     return [number intValue];
 }
 
-+(void)setWork:(BOOL)work
-{
++(void)setWork:(BOOL)work{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setBool:work forKey:kWork];
 }
@@ -213,8 +184,7 @@ NSString * const kPushId = @"pushId";
     return [user boolForKey:kWork];
 }
 
-+(void)setCommodityStep:(NSString*)step
-{
++(void)setCommodityStep:(NSString*)step{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:step forKey:kCommodityStep];
 }
@@ -224,8 +194,7 @@ NSString * const kPushId = @"pushId";
     return str == nil ?@"":str;
 }
 
-+(void)setPushId:(NSString *)pushId
-{
++(void)setPushId:(NSString *)pushId{
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:pushId forKey:kPushId];
 }

@@ -76,6 +76,7 @@
     [goodNameView addSubview:_goodNameLabel];
     
     _goodNameText = [UITextField new];
+    _goodNameText.returnKeyType = UIReturnKeyNext;
     _goodNameText.layer.borderColor= [UIColor grayColor].CGColor;
     _goodNameText.layer.borderWidth= 1.0f;
     _goodNameText.layer.cornerRadius = 5.0f;
@@ -99,6 +100,7 @@
     [remarkView addSubview:_remarkLabel];
     
     _remarkText = [UITextField new];
+    _remarkText.returnKeyType = UIReturnKeyNext;
     _remarkText.layer.borderColor= [UIColor grayColor].CGColor;
     _remarkText.layer.borderWidth= 1.0f;
     _remarkText.layer.cornerRadius = 5.0f;

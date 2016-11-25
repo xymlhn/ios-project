@@ -92,6 +92,12 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     _inventoryEditView.commodityView.userInteractionEnabled = YES;
     [_inventoryEditView.commodityView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
     
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    gesture.delegate = self;
+    [self.view addGestureRecognizer:gesture];
+    
     __weak typeof(self) weakSelf = self;
     _inventoryEditView.qrBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         if([Config getQuickScan]){
@@ -326,6 +332,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
 
 
 #pragma mark - 键盘操作
+
 
 - (void)hidenKeyboard{
     [_inventoryEditView.qrText resignFirstResponder];

@@ -75,6 +75,7 @@
     _userNameText = [UITextField new];
     _userNameText.clearButtonMode=UITextFieldViewModeWhileEditing;
     _userNameText.placeholder = @"请输入用户名";
+    _userNameText.returnKeyType = UIReturnKeyNext;
     _userNameText.font = [UIFont systemFontOfSize:18];
     [_userNameText setAutocorrectionType:UITextAutocorrectionTypeNo];
     [_userNameText setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -112,11 +113,12 @@
     
     _passWordText = [UITextField new];
     _passWordText.placeholder = @"请输入密码";
+    _passWordText.returnKeyType = UIReturnKeyDone;
     _passWordText.clearButtonMode=UITextFieldViewModeWhileEditing;
     [_passWordText setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _passWordText.font = [UIFont systemFontOfSize:18];
     _passWordText.keyboardType = UIKeyboardAppearanceDefault;
-    _passWordText.returnKeyType = UIReturnKeyDone;
+    _passWordText.returnKeyType = UIReturnKeySend;
     
     _passWordText.secureTextEntry = YES;
     [passwordView addSubview:_passWordText];

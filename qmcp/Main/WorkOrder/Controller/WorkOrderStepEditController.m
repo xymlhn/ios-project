@@ -20,7 +20,7 @@
 #import "Helper.h"
 #import "SalesOrder.h"
 @interface WorkOrderStepEditController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,
-                                            UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate>
+                                            UICollectionViewDataSource,UICollectionViewDelegate,UITextViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) WorkOrderStep *step;
 @property (nonatomic, strong) WorkOrder *workOrder;
@@ -104,6 +104,11 @@
     _editView.fastView.userInteractionEnabled = YES;
     [_editView.fastView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fastViewClick:)]];
     
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    gesture.delegate = self;
+    [self.view addGestureRecognizer:gesture];
 }
 
 #pragma mark - func

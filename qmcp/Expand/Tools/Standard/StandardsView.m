@@ -625,8 +625,7 @@
     
     
     switch (self.dismissAnimationType) {
-        case StandsViewDismissAnimationFlash:
-        {
+        case StandsViewDismissAnimationFlash:{
             CGAffineTransform t ;
             if (self.GoodDetailView != nil) {
                 t = self.GoodDetailView.transform;
@@ -649,8 +648,7 @@
 
         }
             break;
-        case StandsViewDismissAnimationDisFrombelow:
-        {
+        case StandsViewDismissAnimationDisFrombelow:{
             CGAffineTransform t ;
             if (self.GoodDetailView != nil) {
                 t = self.GoodDetailView.transform;
@@ -681,15 +679,12 @@
 
         }
             break;
-        case StandsViewDismissAnimationDisToRight:
-        {
+        case StandsViewDismissAnimationDisToRight:{
             [self selfDismissAnimationToRight];
         }
             break;
-        case StandsViewDismissAnimationCustom:
-        {
-            if([self.delegate respondsToSelector:@selector(CustomDismissAnimation)])
-            {
+        case StandsViewDismissAnimationCustom:{
+            if([self.delegate respondsToSelector:@selector(CustomDismissAnimation)]){
                 [self.delegate CustomDismissAnimation];
             }
         }
@@ -709,8 +704,7 @@
 
 #pragma mark - api for custom
 -(void)standardsViewReload{
-    if(_mainTableView!=nil)
-    {
+    if(_mainTableView!=nil){
         [_mainTableView reloadData];
     }
 }
@@ -737,9 +731,7 @@
 //设置每行调用的cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _cellHeight)];
-    
     if(self.standardArr == nil || self.standardArr.count == 0 )
         return cell;
     
@@ -883,10 +875,6 @@
         CGFloat maxBtnLength = oneLineBtnWidtnLimit - btnGap*2;//每个btn的最大长度
         CGFloat Btnx ;//每个btn的起始位置
         Btnx += btnGap;
-        
-//        NSString *strID = [NSString stringWithFormat:@"%@",dicGoodsDetail[@"spec_name"][indexPath.row][@"id"]];
-//        NSArray *specArr = [dicGoodsDetail[@"spec_value"] objectForKey:strID];
-        
         for (int i = 0; i < self.standardArr[indexPath.row].standardClassInfo.count; i++) {
             NSString *str = self.standardArr[indexPath.row].standardClassInfo[i].standardClassName;
             CGFloat btnWidth = [self WidthWithString:str fontSize:14 height:BtnHeight];
@@ -971,9 +959,6 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *tempView = [[UIView alloc] init];
-    
-   
-    
     return tempView;
 }
 

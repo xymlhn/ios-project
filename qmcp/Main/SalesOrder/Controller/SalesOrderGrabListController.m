@@ -84,12 +84,9 @@
     return _salesOrderList.count;
 }
 
-//返回每行显示的cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    //1 创建可重用的自定义的cell
     SalesOrderGrabCell *cell = [SalesOrderGrabCell cellWithTableView:tableView];
-    //2 设置cell内部的子控件
     SalesOrder *salesOrderSnapshot = _salesOrderList[row];
     cell.grabBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self p_grabSalesOrder:salesOrderSnapshot];
@@ -97,7 +94,6 @@
     }];
     cell.salesOrder = salesOrderSnapshot;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //3 返回
     return cell;
 }
 

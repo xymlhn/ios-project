@@ -251,17 +251,14 @@
 }
 
 -(void)completeClick{
-    NSString *title = @"提示";
-    NSString *message = @"是否完结工单？";
-    NSString *cancelButtonTitle = @"否";
-    NSString *otherButtonTitle = @"是";
+
     __weak typeof(self) weakSelf = self;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message: @"是否完结工单？" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }];
     
-    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:otherButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle: @"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [weakSelf p_completeSalesOrder];
     }];
     

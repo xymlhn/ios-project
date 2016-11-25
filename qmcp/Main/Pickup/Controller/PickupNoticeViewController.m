@@ -87,16 +87,12 @@
     return self.itemCompleteArray.count;
 }
 
-//返回每行显示的cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    //1 创建可重用的自定义的cell
     PickupNoticeCell *cell = [PickupNoticeCell cellWithTableView:tableView];
-    //2 设置cell内部的子控件
     ItemComplete *itemComplete = self.itemCompleteArray[row];
     cell.itemComplete = itemComplete;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //3 返回
     return cell;
 }
 

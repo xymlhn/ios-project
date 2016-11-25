@@ -106,6 +106,7 @@
     [self.navigationController pushViewController:setting animated:YES];
 }
 
+//上下班
 -(void)onWorkAction:(id)sender{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];

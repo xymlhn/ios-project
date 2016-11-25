@@ -44,7 +44,6 @@
     _searchView.tableView.tableFooterView = [UIView new];
     _searchView.tableView.emptyDataSetSource = self;
     _searchView.tableView.emptyDataSetDelegate = self;
-    
 }
 
 -(void)loadData{
@@ -139,7 +138,6 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *result = searchBar.text;
-    
     [self p_searchWorkOrderByCode:result];
     
 }
@@ -163,16 +161,12 @@
     return self.resultList.count;
 }
 
-//返回每行显示的cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    //1 创建可重用的自定义的cell
     InventorySearchCell *cell = [InventorySearchCell cellWithTableView:tableView];
-    //2 设置cell内部的子控件
     SalesOrderSearchResult *salesOrderSearchResult = self.resultList[row];
     cell.salesOrderSearchResult = salesOrderSearchResult;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //3 返回
     return cell;
 }
 

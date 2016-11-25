@@ -31,6 +31,7 @@
 
 -(void)initTopView{
     _editText = [UITextView new];
+     _editText.returnKeyType = UIReturnKeyDone;
     _editText.font = [UIFont systemFontOfSize:14];
     _editText.textColor = [UIColor blackColor];
     _editText.placeholder = @"请输入";

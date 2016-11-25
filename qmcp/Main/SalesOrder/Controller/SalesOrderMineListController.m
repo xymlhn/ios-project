@@ -103,13 +103,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    //1 创建可重用的自定义的cell
     SalesOrderMineCell *cell = [SalesOrderMineCell cellWithTableView:tableView];
-    //2 设置cell内部的子控件
     SalesOrder *salesOrderSnapshot = self.salesOrderList[row];
     cell.salesOrder = salesOrderSnapshot;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //3 返回
     return cell;
 }
 

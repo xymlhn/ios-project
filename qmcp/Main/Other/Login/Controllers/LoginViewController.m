@@ -177,6 +177,8 @@
         [self hidenKeyboard];
         if (_loginView.loginBtn.enabled) {
             [self loginBtnClick];
+        }else{
+            [self hidenKeyboard];
         }
     }
 }

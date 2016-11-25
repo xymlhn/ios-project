@@ -4,6 +4,7 @@
 //
 //  Created by 谢永明 on 2016/9/22.
 //  Copyright © 2016年 inforshare. All rights reserved.
+//  商家下单
 //
 
 #import "BusinessSalesOrderController.h"
@@ -12,7 +13,7 @@
 #import "SalesOrder.h"
 #import "SalesOrderInfoController.h"
 #import "SalesOrderManager.h"
-@interface BusinessSalesOrderController ()
+@interface BusinessSalesOrderController ()<UITextFieldDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic, strong) BusinessSalesOrderView *businessSalesOrderView;
 @end
 
@@ -24,8 +25,8 @@
     return vc;
     
 }
+
 -(void)loadView{
-    
     _businessSalesOrderView = [BusinessSalesOrderView viewInstance];
     self.view = _businessSalesOrderView;
     self.title = @"商家下单";
@@ -34,37 +35,20 @@
 -(void)bindListener{
     
     _businessSalesOrderView.orderButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        __weak typeof(self) weakSelf = self;
-        MBProgressHUD *hub = [Utils createHUD];
-        hub.detailsLabel.text = @"正在下单";
-        BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text
-                                                                                    phone:_businessSalesOrderView.phoneValue.text
-                                                                                  address:_businessSalesOrderView.addressValue.text
-                                                                                   remark:_businessSalesOrderView.remarkValue.text];
-        
-        NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_BUSINESSSALESORDER];
-        NSDictionary *dict = [businessSalesOrder mj_keyValues];
-        [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
-            if (!error) {
-                SalesOrder *salesOrder = [SalesOrder mj_objectWithKeyValues:obj];
-                [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:salesOrder];
-                hub.detailsLabel.text = [NSString stringWithFormat:@"下单成功"];
-                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
-                //调用代理对象的协议方法来实现数据传递
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                if (weakSelf.doneBlock) {
-                    self.doneBlock(salesOrder.code);
-                }
-            }else{
-                hub.mode = MBProgressHUDModeCustomView;
-                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-                hub.detailsLabel.text = error;
-                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
-            }
-        }];
+        [self p_businessSalesOrder];
         return [RACSignal empty];
     }];
     
+    //添加手势，点击屏幕其他区域关闭键盘的操作
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
+    gesture.numberOfTapsRequired = 1;
+    gesture.delegate = self;
+    [self.view addGestureRecognizer:gesture];
+    
+    [_businessSalesOrderView.phoneValue addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_businessSalesOrderView.nameValue addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_businessSalesOrderView.addressValue addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    _businessSalesOrderView.remarkValue.delegate = self;
 }
 
 -(void)loadData{
@@ -72,7 +56,9 @@
                                    map:^id(NSString *text) {
                                        return @([Utils isMobileNumber:text]);
                                    }];
-    
+    RAC(_businessSalesOrderView.phoneValue, textColor) =[validPhoneSignal map:^id(NSNumber *usernameValid){
+        return[usernameValid boolValue] ? [UIColor blackColor]:[UIColor redColor];
+    }];
     
     RACSignal *validAddressSignal = [_businessSalesOrderView.addressValue.rac_textSignal
                                      map:^id(NSString *text) {
@@ -95,4 +81,64 @@
     
 }
 
+//商家下单
+-(void)p_businessSalesOrder{
+    __weak typeof(self) weakSelf = self;
+    MBProgressHUD *hub = [Utils createHUD];
+    hub.detailsLabel.text = @"正在下单";
+    BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text
+                                                                                phone:_businessSalesOrderView.phoneValue.text
+                                                                              address:_businessSalesOrderView.addressValue.text
+                                                                               remark:_businessSalesOrderView.remarkValue.text];
+    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_BUSINESSSALESORDER];
+    NSDictionary *dict = [businessSalesOrder mj_keyValues];
+    [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {
+        if (!error) {
+            SalesOrder *salesOrder = [SalesOrder mj_objectWithKeyValues:obj];
+            [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:salesOrder];
+            hub.detailsLabel.text = [NSString stringWithFormat:@"下单成功"];
+            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
+            //调用代理对象的协议方法来实现数据传递
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            if (weakSelf.doneBlock) {
+                self.doneBlock(salesOrder.code);
+            }
+        }else{
+            hub.mode = MBProgressHUDModeCustomView;
+            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+            hub.detailsLabel.text = error;
+            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+        }
+    }];
+}
+
+#pragma mark - 键盘操作
+- (void)hidenKeyboard{
+    [self.view endEditing:YES];
+    
+}
+
+- (void)returnOnKeyboard:(UITextField *)sender{
+    if (sender == _businessSalesOrderView.phoneValue) {
+        [_businessSalesOrderView.nameValue becomeFirstResponder];
+    } else if (sender == _businessSalesOrderView.nameValue) {
+        [_businessSalesOrderView.addressValue becomeFirstResponder];
+    }else if(sender == _businessSalesOrderView.addressValue){
+        [_businessSalesOrderView.remarkValue becomeFirstResponder];
+    }
+}
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"] ){
+        if (_businessSalesOrderView.orderButton.enabled) {
+            [self p_businessSalesOrder];
+        }else{
+            [self hidenKeyboard];
+        }
+        return NO;
+    }
+    return YES;
+}
 @end

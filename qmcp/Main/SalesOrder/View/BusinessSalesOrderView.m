@@ -38,6 +38,7 @@
     _phoneValue = [UITextField new];
     _phoneValue.font = [UIFont systemFontOfSize:13];
     _phoneValue.placeholder = @"必填";
+    _phoneValue.returnKeyType = UIReturnKeyNext;
     _phoneValue.textColor = [UIColor blackColor];
     [phone addSubview:_phoneValue];
     
@@ -58,6 +59,7 @@
     _nameValue = [UITextField new];
     _nameValue.font = [UIFont systemFontOfSize:13];
     _nameValue.placeholder = @"必填";
+    _nameValue.returnKeyType = UIReturnKeyNext;
     _nameValue.textColor = [UIColor blackColor];
     [name addSubview:_nameValue];
     
@@ -78,6 +80,7 @@
     _addressValue = [UITextField new];
     _addressValue.font = [UIFont systemFontOfSize:13];
     _addressValue.placeholder = @"必填";
+    _addressValue.returnKeyType = UIReturnKeyNext;
     _addressValue.textColor = [UIColor blackColor];
     [address addSubview:_addressValue];
     
@@ -89,6 +92,7 @@
     
     
     _remarkValue = [UITextView new];
+    _remarkValue.returnKeyType = UIReturnKeyDone;
     _remarkValue.font = [UIFont systemFontOfSize:13];
     _remarkValue.textColor = [UIColor blackColor];
     _remarkValue.layer.borderColor = [UIColor grayColor].CGColor;

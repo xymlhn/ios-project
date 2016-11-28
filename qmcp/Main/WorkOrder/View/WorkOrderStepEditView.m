@@ -30,60 +30,44 @@
 }
 
 -(void)initTopView{
+    
     _editText = [UITextView new];
      _editText.returnKeyType = UIReturnKeyDone;
-    _editText.font = [UIFont systemFontOfSize:14];
-    _editText.textColor = [UIColor blackColor];
-    _editText.placeholder = @"请输入";
-    _editText.placeholderColor = [UIColor lightGrayColor];
+    _editText.font = [UIFont systemFontOfSize:kShisipt];
+    _editText.textColor = [UIColor mainTextColor];
+    _editText.placeholder = @"在此输入文字";
+    _editText.placeholderLabel.font =  [UIFont systemFontOfSize:kShisipt];
+    _editText.placeholderColor = [UIColor arrowColor];
     [self addSubview:_editText];
     
     _fastView = [UIView new];
     [self addSubview:_fastView];
     
     UIView *commodityLine = [UIView new];
-    commodityLine.backgroundColor = [UIColor grayColor];
+    commodityLine.backgroundColor = [UIColor lineColor];
     [_fastView addSubview:commodityLine];
     
     UIView *commodityTopLine = [UIView new];
-    commodityTopLine.backgroundColor = [UIColor grayColor];
+    commodityTopLine.backgroundColor = [UIColor lineColor];
     [_fastView addSubview:commodityTopLine];
     
-    UILabel *leftIcon = [UILabel new];
-    [leftIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    leftIcon.text = @"";
-    leftIcon.textAlignment = NSTextAlignmentCenter;
-    leftIcon.textColor = [UIColor blackColor];
-    [_fastView addSubview:leftIcon];
-    
     UILabel *fastLabel = [UILabel new];
+    fastLabel.font =  [UIFont systemFontOfSize:kShisanpt];
+    fastLabel.textColor = [UIColor mainTextColor];
     fastLabel.text = @"快速描述";
     [_fastView addSubview:fastLabel];
     
     UILabel *rightIcon = [UILabel new];
-    [rightIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    [rightIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
     rightIcon.text = @"";
-    
-    rightIcon.textColor = [UIColor blackColor];
+    rightIcon.textColor = [UIColor arrowColor];
     [_fastView addSubview:rightIcon];
     
-    UIView *photoView = [UIView new];
-    [self addSubview:photoView];
-    
-    UIView *photoLine = [UIView new];
-    photoLine.backgroundColor = [UIColor grayColor];
-    [photoView addSubview:photoLine];
-    
-    UILabel *photoIcon = [UILabel new];
-    [photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    photoIcon.text = @"";
-    photoIcon.textAlignment = NSTextAlignmentCenter;
-    photoIcon.textColor = [UIColor blackColor];
-    [photoView addSubview:photoIcon];
-    
     UILabel *photoLabel = [UILabel new];
-    photoLabel.text = @"相片";
-    [photoView addSubview:photoLabel];
+    photoLabel.text = @"实时拍照";
+    photoLabel.font =  [UIFont systemFontOfSize:kShisanpt];
+    photoLabel.textColor = [UIColor mainTextColor];
+    [self addSubview:photoLabel];
     
     CGFloat itemWH = (kScreen_Width - 12 * 4) / 3;
     //创建布局对象
@@ -102,9 +86,9 @@
     
     [_editText mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.mas_top).with.offset(10);
-        make.left.equalTo(self.mas_left).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.equalTo(@100);
+        make.height.equalTo(@95);
     }];
     
     [_fastView mas_makeConstraints:^(MASConstraintMaker *make){
@@ -113,17 +97,11 @@
         make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
     }];
-    
-    [leftIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_fastView.mas_centerY);
-        make.left.equalTo(_fastView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@30);
-    }];
+
     
     [fastLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_fastView.mas_centerY);
-        make.left.equalTo(leftIcon.mas_right).with.offset(5);
-        make.right.equalTo(rightIcon.mas_left).with.offset(5);
+        make.left.equalTo(_fastView.mas_left).with.offset(kPaddingLeftWidth);
     }];
     
     [rightIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -135,45 +113,25 @@
         make.top.equalTo(_fastView.mas_top).with.offset(0);
         make.left.equalTo(_fastView.mas_left).with.offset(0);
         make.right.equalTo(_fastView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     [commodityLine mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(_fastView.mas_bottom).with.offset(0);
         make.left.equalTo(_fastView.mas_left).with.offset(0);
         make.right.equalTo(_fastView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
-    [photoView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_fastView.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
-    }];
-    
-    [photoIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(photoView.mas_centerY);
-        make.left.equalTo(photoView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@30);
-    }];
     
     [photoLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(photoView.mas_centerY);
-        make.right.equalTo(photoView.mas_right).with.offset(-kPaddingLeftWidth);
-        make.left.equalTo(photoIcon.mas_right).with.offset(5);
+        make.top.equalTo(commodityLine.mas_bottom).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
     }];
-    
-    [photoLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(photoView.mas_bottom).with.offset(0);
-        make.left.equalTo(photoView.mas_left).with.offset(0);
-        make.right.equalTo(photoView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
-    }];
-    
+
     NSNumber *collectionH = [NSNumber numberWithInteger:itemWH * 2 + 12 *3] ;
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(photoView.mas_bottom).with.offset(10);
+        make.top.equalTo(photoLabel.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
         make.height.equalTo(collectionH);
@@ -192,7 +150,7 @@
     
     _delBtn = [UIButton new];
     [_delBtn.layer setMasksToBounds:YES];
-    [_delBtn.layer setCornerRadius:3.0];
+    [_delBtn.layer setCornerRadius:kBottomButtonCorner];
     [_delBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _delBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
     [_delBtn setTitle:@"删除" forState:UIControlStateNormal];
@@ -201,7 +159,7 @@
     
     _saveBtn = [UIButton new];
     [_saveBtn.layer setMasksToBounds:YES];
-    [_saveBtn.layer setCornerRadius:3.0];
+    [_saveBtn.layer setCornerRadius:kBottomButtonCorner];
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _saveBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
@@ -220,13 +178,13 @@
         make.right.equalTo(bottomView.mas_right).with.offset(0);
         make.height.mas_equalTo(kLineHeight);
     }];
-    [_delBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_left).offset(kPaddingLeftWidth);
         make.right.equalTo(bottomView.mas_centerX).offset(-kPaddingLeftWidth/2);
         make.height.equalTo(@30);
     }];
-    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_delBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_centerX).offset(kPaddingLeftWidth/2);
         make.right.equalTo(bottomView.mas_right).offset(-kPaddingLeftWidth);

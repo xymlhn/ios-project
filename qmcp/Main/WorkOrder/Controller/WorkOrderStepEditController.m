@@ -88,6 +88,7 @@
     _attachments = [NSMutableArray new];
     [_attachments addObjectsFromArray:_step.attachments];
     _editView.editText.text = _step.content;
+    [_editView.delBtn setTitle:_type == SaveTypeAdd? @"取消":@"删除" forState:UIControlStateNormal];
 }
 
 -(void)bindListener{

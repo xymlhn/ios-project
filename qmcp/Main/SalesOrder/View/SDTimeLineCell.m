@@ -36,6 +36,7 @@
 #import "HttpUtil.h"
 #import "QMCPAPI.h"
 #import "AppManager.h"
+#import "UIColor+Util.h"
 const CGFloat contentLabelFontSize = 15;
 CGFloat maxContentLabelHeight = 0; // 根据具体font而定
 
@@ -72,11 +73,12 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     _iconView = [UIImageView new];
     
     _nameLable = [UILabel new];
-    _nameLable.font = [UIFont systemFontOfSize:14];
-    _nameLable.textColor = [UIColor colorWithRed:(54 / 255.0) green:(71 / 255.0) blue:(121 / 255.0) alpha:0.9];
+    _nameLable.font = [UIFont systemFontOfSize:kShierpt];
+    _nameLable.textColor = [UIColor appBlueColor];
     
     _contentLabel = [UILabel new];
-    _contentLabel.font = [UIFont systemFontOfSize:contentLabelFontSize];
+    _contentLabel.font = [UIFont systemFontOfSize:kShisipt];
+    _contentLabel.textColor = [UIColor secondTextColor];
     _contentLabel.numberOfLines = 0;
     if (maxContentLabelHeight == 0) {
         maxContentLabelHeight = _contentLabel.font.lineHeight * 3;
@@ -95,7 +97,8 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     
     
     _timeLabel = [UILabel new];
-    _timeLabel.font = [UIFont systemFontOfSize:13];
+    _timeLabel.textColor = [UIColor arrowColor];
+    _timeLabel.font = [UIFont systemFontOfSize:kShierpt];
     
     
     _operationMenu = [SDTimeLineCellOperationMenu new];
@@ -133,7 +136,7 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     
     _contentLabel.sd_layout
     .leftEqualToView(_nameLable)
-    .topSpaceToView(_nameLable, margin)
+    .topSpaceToView(_nameLable, 5)
     .rightSpaceToView(contentView, margin)
     .autoHeightRatio(0);
     

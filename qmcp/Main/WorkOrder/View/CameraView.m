@@ -1,19 +1,19 @@
 //
-//  WorkOrderStepView.m
+//  CameraView.m
 //  qmcp
 //
-//  Created by 谢永明 on 16/4/8.
+//  Created by 谢永明 on 2016/11/28.
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "WorkOrderStepView.h"
+#import "CameraView.h"
 
-@implementation WorkOrderStepView
+@implementation CameraView
 
 + (instancetype)viewInstance{
-    WorkOrderStepView *workOrderStepView = [WorkOrderStepView new];
+    CameraView *cameraView = [CameraView new];
     
-    return workOrderStepView;
+    return cameraView;
 }
 
 - (id)init {
@@ -21,6 +21,7 @@
     if (!self) return nil;
     _tableView = [UITableView new];
     _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.rowHeight = 90;
     self.backgroundColor = [UIColor whiteColor];
     [self addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
@@ -32,7 +33,7 @@
     
     [self setupBottomView];
     return self;
-
+    
 }
 
 //底部按钮
@@ -44,15 +45,15 @@
     UIView *codeBottomLine = [UIView new];
     codeBottomLine.backgroundColor = [UIColor lineColor];
     [bottomView addSubview:codeBottomLine];
-
-    _addBtn = [UIButton new];
-    [_addBtn.layer setMasksToBounds:YES];
-    [_addBtn.layer setCornerRadius:kBottomButtonCorner];
-    [_addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _addBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
-    [_addBtn setTitle:@"新增步骤" forState:UIControlStateNormal];
-    _addBtn.backgroundColor = [UIColor appBlueColor];
-    [bottomView addSubview:_addBtn];
+    
+    _scanBtn = [UIButton new];
+    [_scanBtn.layer setMasksToBounds:YES];
+    [_scanBtn.layer setCornerRadius:kBottomButtonCorner];
+    [_scanBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _scanBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
+    [_scanBtn setTitle:@"扫一扫开启摄像头" forState:UIControlStateNormal];
+    _scanBtn.backgroundColor = [UIColor appBlueColor];
+    [bottomView addSubview:_scanBtn];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
@@ -66,11 +67,12 @@
         make.right.equalTo(bottomView.mas_right).with.offset(0);
         make.height.mas_equalTo(kLineHeight);
     }];
-    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_scanBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.center.equalTo(bottomView);
         make.width.equalTo(@300);
         make.height.equalTo(@40);
     }];
 }
+
 
 @end

@@ -54,6 +54,7 @@
 		242815ED1D9381B4006120ED /* QrCodeImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815EC1D9381B4006120ED /* QrCodeImageController.m */; };
 		242815F01D9388BC006120ED /* BusinessSalesOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */; };
 		242815F31D9388FD006120ED /* BusinessSalesOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815F21D9388FD006120ED /* BusinessSalesOrder.m */; };
+		244091651DEC2D2900B03735 /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 244091641DEC2D2900B03735 /* CameraView.m */; };
 		245A39321D94C02A00B5CE70 /* SalesOrderInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */; };
 		245BCF851D93CBCE00028C40 /* GisLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 245BCF841D93CBCE00028C40 /* GisLocation.m */; };
 		245F756E1DDABF5D00FB51FA /* SDTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */; };
@@ -287,6 +288,8 @@
 		242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSalesOrderController.m; sourceTree = "<group>"; };
 		242815F11D9388FD006120ED /* BusinessSalesOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessSalesOrder.h; sourceTree = "<group>"; };
 		242815F21D9388FD006120ED /* BusinessSalesOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSalesOrder.m; sourceTree = "<group>"; };
+		244091631DEC2D2900B03735 /* CameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraView.h; sourceTree = "<group>"; };
+		244091641DEC2D2900B03735 /* CameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
 		245A39301D94C02A00B5CE70 /* SalesOrderInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderInfoController.h; sourceTree = "<group>"; };
 		245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderInfoController.m; sourceTree = "<group>"; };
 		245BCF831D93CBCE00028C40 /* GisLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GisLocation.h; sourceTree = "<group>"; };
@@ -1387,6 +1390,8 @@
 				24AFDC0B1D9238FF00B2F1B9 /* WorkOrderStepEditView.m */,
 				24AFDC0C1D9238FF00B2F1B9 /* WorkOrderStepView.h */,
 				24AFDC0D1D9238FF00B2F1B9 /* WorkOrderStepView.m */,
+				244091631DEC2D2900B03735 /* CameraView.h */,
+				244091641DEC2D2900B03735 /* CameraView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1763,6 +1768,7 @@
 				240EC9581D7FB2B7008A5696 /* WorkOrderManager.m in Sources */,
 				24AFDC3A1D9238FF00B2F1B9 /* CacheCell.m in Sources */,
 				242815DC1D936BE7006120ED /* CommodityStepView.m in Sources */,
+				244091651DEC2D2900B03735 /* CameraView.m in Sources */,
 				2466430D1D9A12E8009402A2 /* NumberCell.m in Sources */,
 				24AFDC671D92390000B2F1B9 /* WorkOrderCameraController.m in Sources */,
 				246643111D9A12E8009402A2 /* TextMultiCell.m in Sources */,

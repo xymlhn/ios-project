@@ -41,34 +41,40 @@
 -(void)initView{
     
     _cameraIcon = [UILabel new];
-    [_cameraIcon setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
+    [_cameraIcon setFont:[UIFont fontWithName:@"FontAwesome" size:25]];
     _cameraIcon.text = @"";
     _cameraIcon.textColor = [UIColor nameColor];
     [self.contentView addSubview:_cameraIcon];
     
     _name = [UILabel new];
-    _name.font = [UIFont systemFontOfSize:12];//
+    _name.font = [UIFont systemFontOfSize:kShiwupt];
     _name.text = @"12305";
     _name.textColor = [UIColor blackColor];
     [self.contentView addSubview:_name];
-    _switchBtn = [UISwitch new];
+    
+    _switchBtn = [UIButton new];
+    _switchBtn.backgroundColor = [UIColor appBlueColor];
+    [_switchBtn setTitle:@"开启" forState:UIControlStateNormal];
+    _switchBtn.tintColor = [UIColor whiteColor];
+    [_switchBtn.layer setMasksToBounds:YES];
+    [_switchBtn.layer setCornerRadius:kBottomButtonCorner];
+    _switchBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
     [self.contentView addSubview:_switchBtn];
     
     [_cameraIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@30);
-        make.height.equalTo(@30);
     }];
     
     [_name mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
-        make.left.equalTo(_cameraIcon.mas_right).with.offset(10);
+        make.left.equalTo(_cameraIcon.mas_right).with.offset(25);
     }];
-    
-    
+
     [_switchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(_name.mas_centerY);
+        make.width.equalTo(@73);
+        make.height.equalTo(@33);
         make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
     }];
 }
@@ -78,8 +84,7 @@
 {
     if(cameraData != nil){
         _name.text = cameraData.cameraLocation;
-        _switchBtn.on = cameraData.isChoose;
-        
+        [_switchBtn setTitle:cameraData.isChoose?@"关闭":@"开启" forState:UIControlStateNormal];
         if(cameraData.isChoose){
             _cameraIcon.text = @"";
         }else{

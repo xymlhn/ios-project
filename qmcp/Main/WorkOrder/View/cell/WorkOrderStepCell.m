@@ -9,7 +9,7 @@
 #import "WorkOrderStepCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
-
+#import "PchHeader.h"
 @interface WorkOrderStepCell()
 @property(nonatomic, strong) UILabel *userNamaLabel;
 @property (nonatomic,strong)UIImageView *image;
@@ -58,16 +58,17 @@
     [_image setImage:[UIImage imageNamed:@"default－portrait"]];
     [self.contentView addSubview:_image];
     [_image mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.contentView.mas_top).with.offset(10);
-        make.left.equalTo(self.contentView.mas_left).with.offset(10);
-        make.width.equalTo(@35);
-        make.height.equalTo(@35);
+        make.top.equalTo(self.contentView.mas_top).with.offset(kPaddingTopWidth);
+        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
     }];
     
     _userNamaLabel = [UILabel new];
-    _userNamaLabel.font = [UIFont systemFontOfSize:12];
-    _userNamaLabel.textColor = [UIColor blueColor];
+    _userNamaLabel.font = [UIFont systemFontOfSize:kShierpt];
+    _userNamaLabel.textColor = [UIColor appBlueColor];
     [self.contentView addSubview:_userNamaLabel];
+    
     [_userNamaLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_image.mas_top).with.offset(0);
         make.left.equalTo(_image.mas_right).with.offset(10);
@@ -75,8 +76,8 @@
     }];
 
     _contentLabel = [UILabel new];
-    _contentLabel.font = [UIFont systemFontOfSize:12];
-    _contentLabel.textColor = [UIColor blackColor];
+    _contentLabel.font = [UIFont systemFontOfSize:kShisipt];
+    _contentLabel.textColor = [UIColor secondTextColor];
     [self.contentView addSubview:_contentLabel];
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_userNamaLabel.mas_bottom).with.offset(5);
@@ -85,8 +86,8 @@
     }];
     
     _timeLabel = [UILabel new];
-    _timeLabel.font = [UIFont systemFontOfSize:12];
-    _timeLabel.textColor = [UIColor blackColor];
+    _timeLabel.font = [UIFont systemFontOfSize:kShierpt];
+    _timeLabel.textColor = [UIColor arrowColor];
     [self.contentView addSubview:_timeLabel];
 
     [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make){

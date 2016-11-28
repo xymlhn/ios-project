@@ -154,6 +154,7 @@
     _signBtn = [UIButton new];
     [_signBtn.layer setMasksToBounds:YES];
     [_signBtn.layer setCornerRadius:3.0];
+    _signBtn.enabled = NO;
     [_signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _signBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
     [_signBtn setTitle:@"签名" forState:UIControlStateNormal];

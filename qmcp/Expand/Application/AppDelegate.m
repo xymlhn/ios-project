@@ -69,7 +69,6 @@ const static int databaseVersion = 0;
     if (![Config getLoginStatus]) {
         IntroductionViewController *intro = [IntroductionViewController new];
         self.window.rootViewController = intro;
-        
     }else{
         InitViewController *init = [InitViewController new];
         self.window.rootViewController = init;
@@ -120,11 +119,6 @@ const static int databaseVersion = 0;
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    } else {
-        UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert |
-                                                                       UIRemoteNotificationTypeSound |
-                                                                       UIRemoteNotificationTypeBadge);
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
     }
 }
 /** 远程通知注册成功委托 */

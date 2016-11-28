@@ -6,16 +6,16 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "AgreePriceChangeController.h"
+#import "SalesOrderAgreePriceController.h"
 #import "AgreePriceChangeView.h"
-@interface AgreePriceChangeController ()
+@interface SalesOrderAgreePriceController ()
 @property (nonatomic, strong) AgreePriceChangeView *changeView;
 @end
 
-@implementation AgreePriceChangeController
+@implementation SalesOrderAgreePriceController
 
 +(instancetype)doneBlock:(void (^)(NSString *, NSString *))block{
-    AgreePriceChangeController *vc = [AgreePriceChangeController new];
+    SalesOrderAgreePriceController *vc = [SalesOrderAgreePriceController new];
     vc.doneBlock = block;
     return vc;
 }
@@ -23,19 +23,14 @@
 -(void)loadView{
     _changeView = [AgreePriceChangeView viewInstance];
     self.view = _changeView;
+    self.title = @"协议价修改";
 }
 
 -(void)bindListener{
     
-    _changeView.baseView.userInteractionEnabled = YES;
-    [_changeView.baseView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dissmiss)]];
-    _changeView.cancelBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self dissmiss];
-        return [RACSignal empty];
-    }];
     
     _changeView.saveBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self dissmiss];
+        [self.navigationController popViewControllerAnimated:YES];
         if (self.doneBlock) {
             self.doneBlock(_changeView.priceText.text,_changeView.remarkText.text);
         }
@@ -57,7 +52,4 @@
     
 }
 
-- (void)dissmiss{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 @end

@@ -78,6 +78,13 @@
 }
 
 #pragma mark - func
+
+/**
+ 跳转物品编辑界面
+
+ @param itemSnapshot 物品
+ @param originalType 保存类型
+ */
 -(void)p_pushInventoryEditController:(ItemSnapshot *)itemSnapshot andType:(SaveType)originalType{
     __weak typeof(self) weakSelf = self;
     InventoryEditController *info = [InventoryEditController doneBlock:^(ItemSnapshot *item,SaveType type) {
@@ -107,27 +114,8 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
--(void) p_reportSignImage:(UIImage *)image{
-    if(image){
-        Attachment *attachment = [Attachment new];
-        attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
-        attachment.salesOrderCode = _salesOrderCode;
-        [Utils saveImage:image andName:attachment.key];
-        [attachment saveToDB];
-        
-        _salesOrderSearchResult.itemConfirmed = YES;
-        _salesOrderSearchResult.signatureImageKey = attachment.key;
-        
-        [self p_postInventoryDataWitCode:_salesOrderCode];
-    }else{
-        [Utils showHudTipStr:@"请重新签名!"];
-    }
-    
-}
-
 /**
  上传清点数据
- 
  @param code 订单code
  */
 -(void)p_postInventoryDataWitCode:(NSString *)code{
@@ -220,7 +208,19 @@
     }
     __weak typeof(self) weakSelf = self;
     SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
-        [weakSelf p_reportSignImage:signImage];
+        if(signImage){
+            Attachment *attachment = [Attachment new];
+            attachment.key = [NSString stringWithFormat:@"%@.jpg",[[NSUUID UUID] UUIDString]];
+            attachment.salesOrderCode = _salesOrderCode;
+            [Utils saveImage:signImage andName:attachment.key];
+            [attachment saveToDB];
+            
+            weakSelf.salesOrderSearchResult.itemConfirmed = YES;
+            weakSelf.salesOrderSearchResult.signatureImageKey = attachment.key;
+            [weakSelf p_postInventoryDataWitCode:_salesOrderCode];
+        }else{
+            [Utils showHudTipStr:@"请重新签名!"];
+        }
     }];
     [self presentViewController:signController animated: YES completion:nil];
     

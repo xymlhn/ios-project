@@ -16,7 +16,7 @@
 #import "WorkOrderFormsController.h"
 #import "SalesOrderManager.h"
 #import "YCXMenu.h"
-#import "AgreePriceChangeController.h"
+#import "SalesOrderAgreePriceController.h"
 @interface SalesOrderInfoController ()
 
 @property (nonatomic, retain) SalesOrderInfoView *salesOrderInfoView;
@@ -68,7 +68,7 @@
     
     _salesOrderInfoView.agreeBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         __weak typeof(self) weakSelf = self;
-        AgreePriceChangeController *controller = [AgreePriceChangeController doneBlock:^(NSString *price, NSString *remark) {
+        SalesOrderAgreePriceController *controller = [SalesOrderAgreePriceController doneBlock:^(NSString *price, NSString *remark) {
             MBProgressHUD *hub = [Utils createHUD];
             hub.detailsLabel.text = @"正在提交数据";
             NSDictionary *dict = [price isEqualToString:@""]?@{@"remark":remark} : @{@"agreementPrice":price,@"remark":remark};
@@ -89,18 +89,7 @@
             }];
             
         }];
-        controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-            controller.providesPresentationContextTransitionStyle = YES;
-            controller.definesPresentationContext = YES;
-            controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-            [self.tabBarController presentViewController:controller animated:YES completion:nil];
-            
-        } else {
-            self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-            [self presentViewController:controller animated:NO completion:nil];
-            self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        }
+        [self.navigationController pushViewController:controller animated:YES];
         return [RACSignal empty];
     }];
 }

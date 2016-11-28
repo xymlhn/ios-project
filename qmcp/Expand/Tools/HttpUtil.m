@@ -134,15 +134,18 @@
     DebugLog(@"\n======================response======================\n%@:\n%@", urlpath, error);
     NSString *description = error.userInfo[@"NSLocalizedDescription"];
     NSData *data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
-    
     if(data != nil){
         NSDictionary *content = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSString *message = [content valueForKey:@"message"];
+        NSString *data = [content valueForKey:@"data"];
         if (message == nil || [message isKindOfClass:[NSNull class]]) {
             message = kServiceError;
         }
-        
-        completion(nil ,message);
+        NSDictionary *dict;
+        if (data) {
+              dict = @{@"data":data};
+        }
+        completion(dict ,message);
     }else{
         completion(nil,description);
     }
@@ -217,13 +220,11 @@
  */
 +(BOOL)handleHeader:(NSURLSessionDataTask *) session{
     NSHTTPURLResponse *response = (NSHTTPURLResponse *)session.response;
-    NSDictionary *dic = response.allHeaderFields;
-    
-    id failure = [dic valueForKey:@"failure"];
+    NSDictionary *dic = [response allHeaderFields];
+    BOOL failure = [[dic valueForKey:@"failure"] boolValue];
     if(failure){
-        int type = [[dic valueForKey:@"exceptionType"] intValue];
-        NSLog(@"\n========================header=============================\n%@\n",[EnumUtil exceptionTypeString:type] );
-        if (type == (int)ExceptionTypeNotLogin)  {
+        int exceptionCode = [[dic valueForKey:@"exceptionCode"] intValue];
+        if (exceptionCode == (int)ExceptionTypeNotLogin)  {
             NSArray *accountAndPassword = [Config getUserNameAndPassword];
             NSString *name = accountAndPassword? accountAndPassword[0] : @"";
             NSString *password = accountAndPassword? accountAndPassword[1] : @"";
@@ -240,5 +241,6 @@
     }
     return failure;
 }
+
 
 @end

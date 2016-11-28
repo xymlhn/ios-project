@@ -18,14 +18,17 @@ typedef NS_ENUM(NSInteger, FuncType) {
 };
 
 typedef NS_ENUM(NSInteger, ExceptionType) {
-    ExceptionTypeNone = 0,
-    ExceptionTypeNotLogin = 10,
-    ExceptionTypeNoPermission = 20,
-    ExceptionTypeNOUrl = 30,
-    ExceptionTypeCommon = 100,
-    ExceptionTypeSalesOrderStatus = 10000,
-    ExceptionTypeWorkOrderStatus = 10001,
-    
+    ExceptionTypeNotLogin = 10, //未登录
+    ExceptionTypeNoPermission = 20, //未授权
+    ExceptionTypeNOUrl = 30, //地址错误
+    ExceptionTypeCommon = 100, //一般异常
+    ExceptionTypeSalesOrderStatus = 10000,//订单状态已为结束状态
+    ExceptionTypeWorkOrderStatus = 10001,//工单状态已为结束状态
+    ExceptionTypeGrabSalesOrderFinish = 10100,//该订单已结束
+    ExceptionTypeGrabSalesOrderGrabed = 10101,//该订单已被抢
+    ExceptionTypeItemCodeRepeat = 10300,//重复物品二维码
+    ExceptionTypeItemCodeUse = 10301,//物品二维码已使用
+    ExceptionTypeItemInfoUncompleted = 10302, //清点物品信息不完整
 };
 
 typedef NS_ENUM(NSInteger, SalesOrderType) {

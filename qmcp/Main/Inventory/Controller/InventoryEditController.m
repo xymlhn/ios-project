@@ -327,12 +327,19 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
         [actionSheet showInView:self.view];
     }
-    
 }
 
 
 #pragma mark - 键盘操作
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if (![_inventoryEditView.qrText isFirstResponder] &&
+        ![_inventoryEditView.goodNameText isFirstResponder] &&
+        ![_inventoryEditView.remarkText isFirstResponder]) {
+        return NO;
+    }
+    return YES;
+}
 
 - (void)hidenKeyboard{
     [_inventoryEditView.qrText resignFirstResponder];

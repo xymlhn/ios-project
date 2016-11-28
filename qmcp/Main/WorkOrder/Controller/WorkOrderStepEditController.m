@@ -412,6 +412,13 @@
 }
 
 #pragma mark - 键盘操作
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if (![_editView.editText isFirstResponder]) {
+        return NO;
+    }
+    return YES;
+}
 - (void)hidenKeyboard{
     [_editView.editText resignFirstResponder];
 }

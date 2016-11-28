@@ -43,9 +43,6 @@
     _pickView.qrButton.userInteractionEnabled = YES;
     [_pickView.qrButton addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrBtnClick:)]];
     
-    _pickView.signBtn.userInteractionEnabled = YES;
-    [_pickView.signBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signBtnClick:)]];
-    
     _pickView.searchBar.delegate = self;
     _pickView.tableView.delegate = self;
     _pickView.tableView.dataSource = self;
@@ -53,6 +50,17 @@
     _pickView.tableView.tableFooterView = [UIView new];
     _pickView.tableView.emptyDataSetSource = self;
     _pickView.tableView.emptyDataSetDelegate = self;
+    
+    _pickView.signBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        __weak typeof(self) weakSelf = self;
+        if(_pickView.signBtn.enabled){
+            SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
+                [weakSelf p_reportSignImage:signImage];
+            }];
+            [self presentViewController:signController animated: YES completion:nil];
+        }
+        return [RACSignal empty];
+    }];
 }
 
 -(void)loadData{
@@ -144,11 +152,13 @@
                 [weakSelf.pickView.tableView reloadData];
             }
             [weakSelf.pickView.headView setHidden:NO];
+            weakSelf.pickView.signBtn.enabled = YES;
             weakSelf.pickView.nameText.text = [NSString stringWithFormat:@"%@%@",@"客户名:",_pickupData.addressSnapshot.contacts] ;
             weakSelf.pickView.phoneText.text = [NSString stringWithFormat:@"%@%@",@"联系电话:",_pickupData.addressSnapshot.mobilePhone] ;
             weakSelf.pickView.codeText.text = [NSString stringWithFormat:@"%@%@",@"订单编号:",_pickupData.salesOrderCode] ;
         }else{
             weakSelf.pickupData = nil;
+            weakSelf.pickView.signBtn.enabled = NO;
             [weakSelf.pickView.headView setHidden:YES];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -173,12 +183,16 @@
     [HttpUtil post:URLString param:obj finish:^(NSDictionary *obj, NSString *error) {
         if (!error) {
             [weakSelf.pickView.headView setHidden:YES];
+            weakSelf.pickView.signBtn.enabled = YES;
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.detailsLabel.text = [NSString stringWithFormat:@"成功"];
             [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
+            [weakSelf.pickupItemArray removeAllObjects];
+            [weakSelf.pickView.tableView reloadData];
         }else{
             [weakSelf.pickView.headView setHidden:YES];
+            weakSelf.pickView.signBtn.enabled = NO;
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.detailsLabel.text = error;
@@ -203,18 +217,6 @@
     }
 }
 
--(void)signBtnClick:(UITapGestureRecognizer *)recognizer{
-    if(_pickupData == nil)
-    {
-        return;
-    }
-    __weak typeof(self) weakSelf = self;
-    SignViewController *signController = [SignViewController doneBlock:^(UIImage *signImage) {
-        [weakSelf p_reportSignImage:signImage];
-    }];
-    [self presentViewController:signController animated: YES completion:nil];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -235,7 +237,5 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
-
-
 
 @end

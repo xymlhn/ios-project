@@ -9,7 +9,7 @@
 
 #import "BaseViewController.h"
 
-@interface AgreePriceChangeController : BaseViewController
+@interface SalesOrderAgreePriceController : BaseViewController
 
 @property (copy, nonatomic) void(^doneBlock)(NSString *price,NSString *remark);
 

@@ -36,7 +36,7 @@
 		240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96D1D7FB2DC008A5696 /* BaseViewController.m */; };
 		240EC9881D7FB456008A5696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240EC9861D7FB456008A5696 /* LaunchScreen.storyboard */; };
 		2418634E1DE3E06A006C7AC5 /* AgreePriceChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */; };
-		241863511DE3E461006C7AC5 /* AgreePriceChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241863501DE3E461006C7AC5 /* AgreePriceChangeController.m */; };
+		241863511DE3E461006C7AC5 /* SalesOrderAgreePriceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241863501DE3E461006C7AC5 /* SalesOrderAgreePriceController.m */; };
 		242815D31D936BE7006120ED /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B71D936BE7006120ED /* AddressViewController.m */; };
 		242815D41D936BE7006120ED /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B91D936BE7006120ED /* CheckBoxViewController.m */; };
 		242815D61D936BE7006120ED /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815BD1D936BE7006120ED /* ImageViewerController.m */; };
@@ -251,8 +251,8 @@
 		240EC98B1D7FB491008A5696 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2418634C1DE3E06A006C7AC5 /* AgreePriceChangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreePriceChangeView.h; sourceTree = "<group>"; };
 		2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreePriceChangeView.m; sourceTree = "<group>"; };
-		2418634F1DE3E461006C7AC5 /* AgreePriceChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreePriceChangeController.h; sourceTree = "<group>"; };
-		241863501DE3E461006C7AC5 /* AgreePriceChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreePriceChangeController.m; sourceTree = "<group>"; };
+		2418634F1DE3E461006C7AC5 /* SalesOrderAgreePriceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderAgreePriceController.h; sourceTree = "<group>"; };
+		241863501DE3E461006C7AC5 /* SalesOrderAgreePriceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderAgreePriceController.m; sourceTree = "<group>"; };
 		242815B61D936BE7006120ED /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
 		242815B71D936BE7006120ED /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
 		242815B81D936BE7006120ED /* CheckBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxViewController.h; sourceTree = "<group>"; };
@@ -1267,8 +1267,8 @@
 				242815EF1D9388BC006120ED /* BusinessSalesOrderController.m */,
 				245A39301D94C02A00B5CE70 /* SalesOrderInfoController.h */,
 				245A39311D94C02A00B5CE70 /* SalesOrderInfoController.m */,
-				2418634F1DE3E461006C7AC5 /* AgreePriceChangeController.h */,
-				241863501DE3E461006C7AC5 /* AgreePriceChangeController.m */,
+				2418634F1DE3E461006C7AC5 /* SalesOrderAgreePriceController.h */,
+				241863501DE3E461006C7AC5 /* SalesOrderAgreePriceController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1688,7 +1688,7 @@
 			files = (
 				242815DD1D936BE7006120ED /* QrCodeBindView.m in Sources */,
 				24AFDC681D92390000B2F1B9 /* WorkOrderFormController.m in Sources */,
-				241863511DE3E461006C7AC5 /* AgreePriceChangeController.m in Sources */,
+				241863511DE3E461006C7AC5 /* SalesOrderAgreePriceController.m in Sources */,
 				246643261D9A1320009402A2 /* PickupNoticeCell.m in Sources */,
 				246642DB1D9A12CA009402A2 /* SalesOrderInfoView.m in Sources */,
 				24AFDC881D9239BB00B2F1B9 /* PickupViewController.m in Sources */,

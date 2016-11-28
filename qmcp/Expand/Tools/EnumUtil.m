@@ -80,7 +80,7 @@
 }
 
 +(NSString *)exceptionTypeString:(int)type{
-    NSString *str = @"";
+    NSString *str = @"未知异常";
 
     switch (type) {
         case ExceptionTypeNotLogin: {
@@ -97,6 +97,34 @@
         }
         case ExceptionTypeCommon: {
             str = @"服务器异常";
+            break;
+        }
+        case ExceptionTypeSalesOrderStatus: {
+            str = @"订单状态已为结束状态";
+            break;
+        }
+        case ExceptionTypeWorkOrderStatus: {
+            str = @"工单状态已为结束状态";
+            break;
+        }
+        case ExceptionTypeGrabSalesOrderFinish: {
+            str = @"该订单已结束";
+            break;
+        }
+        case ExceptionTypeGrabSalesOrderGrabed: {
+            str = @"该订单已被抢";
+            break;
+        }
+        case ExceptionTypeItemCodeRepeat: {
+            str = @"重复物品二维码";
+            break;
+        }
+        case ExceptionTypeItemCodeUse: {
+            str = @"物品二维码已使用";
+            break;
+        }
+        case ExceptionTypeItemInfoUncompleted: {
+            str = @"清点物品信息不完整";
             break;
         }
         default:

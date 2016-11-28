@@ -12,6 +12,9 @@
 @interface InventoryCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *remarkLabel;
+@property (nonatomic, strong) UILabel *priceLabel;
+@property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIImageView *headImage;
 
 

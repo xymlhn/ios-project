@@ -63,8 +63,6 @@
     
     newsViewCtl.view.backgroundColor = [UIColor themeColor];
     hotNewsViewCtl.view.backgroundColor = [UIColor themeColor];
-    
-    [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
 
 }
 

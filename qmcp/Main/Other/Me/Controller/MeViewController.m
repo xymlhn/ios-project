@@ -66,26 +66,34 @@
         [Utils showHudTipStr:@"请下班后再登出!"];
         return;
     }
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabel.text = @"登出中...";
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
-    [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        if(!error){
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-            hub.detailsLabel.text = [NSString stringWithFormat:@"登出成功"];
-            [hub hideAnimated:YES];
-            [[AppManager getInstance] clearUserDataWhenLogout];
-            LoginViewController *loginNav = [LoginViewController new];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
-            [self presentViewController:nav animated:YES completion:nil];
-        }else{
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabel.text = error;
-            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
-        }
-    }];
+    __weak typeof(self) weakSelf = self;
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"登出后不会删除任何历史数据，下次登录依然可以使用本账号。"                                                                             message: nil                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"退出登录" style: UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        MBProgressHUD *hub = [Utils createHUD];
+        hub.detailsLabel.text = @"登出中...";
+        NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
+        [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+            if(!error){
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+                hub.detailsLabel.text = [NSString stringWithFormat:@"登出成功"];
+                [hub hideAnimated:YES];
+                [[AppManager getInstance] clearUserDataWhenLogout];
+                LoginViewController *loginNav = [LoginViewController new];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
+                [weakSelf presentViewController:nav animated:YES completion:nil];
+            }else{
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.detailsLabel.text = error;
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+            }
+        }];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"取消" style: UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController: alertController animated: YES completion: nil];
+    
 }
 
 - (void)settingBtnClick:(UITapGestureRecognizer *)recognizer{

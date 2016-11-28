@@ -20,23 +20,41 @@
     self.backgroundColor = [UIColor themeColor];
     
     UIView *topView = [UIView new];
-    topView.backgroundColor = [UIColor whiteColor];
+    topView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"me_background"]];
     [self addSubview:topView];
     
     _userIcon = [UIImageView new];
+    _userIcon.layer.masksToBounds = YES;
+    _userIcon.layer.cornerRadius = 30;
     _userIcon.image = [UIImage imageNamed:@"default－portrait"];
     [self addSubview:_userIcon];
     
     _nickName = [UILabel new];
     _nickName.text = @"fuck";
+    _nickName.textAlignment = NSTextAlignmentCenter;
+    _nickName.font = [UIFont systemFontOfSize:kShiwupt];
+    _nickName.textColor = [UIColor whiteColor];
     [topView addSubview:_nickName];
     
-    UILabel *topArrow = [UILabel new];
-    [topArrow setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeIcon]];
-    topArrow.text = @"";
-    topArrow.textAlignment = NSTextAlignmentCenter;
-    topArrow.textColor = [UIColor arrowColor];
-    [topView addSubview:topArrow];
+    UIView *editView = [UIView new];
+     editView.backgroundColor = [UIColor whiteColor];
+    editView.layer.masksToBounds = YES;
+    editView.layer.cornerRadius = 10;
+    [self addSubview:editView];
+    
+    UILabel *editLabel = [UILabel new];
+    editLabel.font = [UIFont systemFontOfSize:kShierpt];
+    editLabel.text = @"编辑信息";
+    editLabel.textAlignment = NSTextAlignmentCenter;
+    editLabel.textColor = [UIColor appBlueColor];
+    [editView addSubview:editLabel];
+    
+    UILabel *editArrow = [UILabel new];
+    [editArrow setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
+    editArrow.text = @"";
+    editArrow.textAlignment = NSTextAlignmentCenter;
+    editArrow.textColor = [UIColor appBlueColor];
+    [editView addSubview:editArrow];
     
     //上班
     UIView *workView = [UIView new];
@@ -166,33 +184,46 @@
     
     
     [topView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.mas_top).with.offset(10);
+        make.top.equalTo(self.mas_top).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@80);
+        make.height.mas_equalTo(@150);
     }];
     
     [_userIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(topView.mas_centerY);
-        make.left.equalTo(topView.mas_left).with.offset(kPaddingLeftWidth);
+        make.centerX.equalTo(topView.mas_centerX);
+        make.top.equalTo(topView.mas_top).with.offset(16);
         make.width.equalTo(@60);
         make.height.equalTo(@60);
     }];
     
     [_nickName mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(topView.mas_centerY);
-        make.left.equalTo(_userIcon.mas_right).with.offset(kPaddingLeftWidth);
+        make.centerX.equalTo(topView.mas_centerX);
+        make.top.equalTo(_userIcon.mas_bottom).with.offset(10);
         make.width.equalTo(@55);
     }];
     
-    [topArrow mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(topView.mas_centerY);
-        make.right.equalTo(topView.mas_right).with.offset(-kPaddingLeftWidth);
+    [editView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_nickName.mas_bottom).with.offset(10);
+        make.centerX.equalTo(topView.mas_centerX);
+        make.height.mas_equalTo(@20);
+        make.width.mas_equalTo(@80);
+    }];
+    
+    [editLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerX.equalTo(editView.mas_centerX).with.offset(-3);
+        make.centerY.equalTo(editView.mas_centerY);
+    }];
+    
+    [editArrow mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(editView.mas_centerY);
+        make.right.equalTo(editView.mas_right).with.offset(-6);
+        make.width.equalTo(@6);
     }];
     
     //上班
     [workView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(topView.mas_bottom).with.offset(10);
+        make.top.equalTo(topView.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
@@ -200,13 +231,13 @@
     
     [workIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(workView.mas_centerY);
-        make.left.equalTo(workView.mas_left).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(workView.mas_left).with.offset(kMePaddingWidth);
         make.width.equalTo(@20);
     }];
     
     [workText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(workView.mas_centerY);
-        make.left.equalTo(workIcon.mas_right).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(workIcon.mas_right).with.offset(kPaddingLeftWidth*2);
         make.width.equalTo(@50);
     }];
     
@@ -238,13 +269,13 @@
     
     [mapText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_mapBtn.mas_centerY);
-        make.left.equalTo(mapIcon.mas_right).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(mapIcon.mas_right).with.offset(kPaddingLeftWidth*2);
         make.width.equalTo(@50);
     }];
     
     [mapArrow mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_mapBtn.mas_centerY);
-        make.right.equalTo(_mapBtn.mas_right).with.offset(-kPaddingLeftWidth);
+        make.right.equalTo(_mapBtn.mas_right).with.offset(-26);
     }];
     
     [mapLine mas_makeConstraints:^(MASConstraintMaker *make){
@@ -264,19 +295,19 @@
     
     [helpIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_helpBtn.mas_centerY);
-        make.left.equalTo(_helpBtn.mas_left).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(_helpBtn.mas_left).with.offset(kMePaddingWidth);
         make.width.equalTo(@20);
     }];
     
     [helpText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_helpBtn.mas_centerY);
-        make.left.equalTo(helpIcon.mas_right).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(helpIcon.mas_right).with.offset(kPaddingLeftWidth*2);
         make.width.equalTo(@50);
     }];
     
     [helpArrow mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_helpBtn.mas_centerY);
-        make.right.equalTo(_helpBtn.mas_right).with.offset(-kPaddingLeftWidth);
+        make.right.equalTo(_helpBtn.mas_right).with.offset(-26);
     }];
     
     //设置
@@ -295,13 +326,13 @@
     
     [settingText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_settingBtn.mas_centerY);
-        make.left.equalTo(mapIcon.mas_right).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(mapIcon.mas_right).with.offset(kPaddingLeftWidth *2);
         make.width.equalTo(@50);
     }];
     
     [settingArrow mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_settingBtn.mas_centerY);
-        make.right.equalTo(_settingBtn.mas_right).with.offset(-kPaddingLeftWidth);
+        make.right.equalTo(_settingBtn.mas_right).with.offset(-26);
     }];
     
     [settingLine mas_makeConstraints:^(MASConstraintMaker *make){
@@ -321,13 +352,13 @@
     
     [logoutIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_logoutBtn.mas_centerY);
-        make.left.equalTo(_logoutBtn.mas_left).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(_logoutBtn.mas_left).with.offset(kMePaddingWidth);
         make.width.equalTo(@20);
     }];
     
     [logoutText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_logoutBtn.mas_centerY);
-        make.left.equalTo(logoutIcon.mas_right).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(logoutIcon.mas_right).with.offset(kPaddingLeftWidth*2);
         make.width.equalTo(@50);
     }];
     return self;

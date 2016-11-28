@@ -53,16 +53,21 @@ const static int databaseVersion = 0;
     [AMapServices sharedServices].apiKey = kAMapKey;
     
     /************ 控件外观设置 **************/
-    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                NSFontAttributeName:[UIFont systemFontOfSize:kShiwupt]};
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor appBlueColor]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                         forBarMetrics:UIBarMetricsDefault];
     
     [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x7E8891]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appBlueColor]} forState:UIControlStateSelected];
     [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor nameColor]];
-    [[UINavigationBar appearance] setTranslucent:NO];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     /************ 登录状态设置 **************/
@@ -90,10 +95,6 @@ const static int databaseVersion = 0;
 /** 注册 APNs */
 - (void)registerRemoteNotification {
     /*
-     警告：Xcode8 的需要手动开启“TARGETS -> Capabilities -> Push Notifications”
-     */
-    
-    /*
      警告：该方法需要开发者自定义，以下代码根据 APP 支持的 iOS 系统不同，代码可以对应修改。
      以下为演示代码，注意根据实际需要修改，注意测试支持的 iOS 系统都能获取到 DeviceToken
      */
@@ -103,7 +104,7 @@ const static int databaseVersion = 0;
         center.delegate = self;
         [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionCarPlay) completionHandler:^(BOOL granted, NSError *_Nullable error) {
             if (!error) {
-                NSLog(@"request authorization succeeded!");
+                DebugLog(@"request authorization succeeded!");
             }
         }];
         
@@ -125,7 +126,7 @@ const static int databaseVersion = 0;
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"\n>>>[DeviceToken Success]:%@\n\n", token);
+    DebugLog(@"\n>>>[DeviceToken Success]:%@\n\n", token);
     
     //向个推服务器注册deviceToken
     [GeTuiSdk registerDeviceToken:token];
@@ -143,7 +144,7 @@ const static int databaseVersion = 0;
 
 /** SDK启动成功返回cid */
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId {
-    NSLog(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
+    DebugLog(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
     [Config setPushId:clientId];
 }
 
@@ -156,7 +157,7 @@ const static int databaseVersion = 0;
                                               length:payloadData.length
                                             encoding:NSUTF8StringEncoding];
     }
-    NSLog(@"\n>>>[GexinSdk ReceivePayload]:%@\n\n", payloadMsg);
+    DebugLog(@"\n>>>[GexinSdk ReceivePayload]:%@\n\n", payloadMsg);
     if (payloadMsg != nil && !offLine) {
         NSArray *array = [payloadMsg componentsSeparatedByString:@" "];
         if ([[[AppManager getInstance]getUser].userOpenId isEqualToString:array[0]]) {
@@ -175,21 +176,12 @@ const static int databaseVersion = 0;
             }
         }
     }
-    
-    
-    /**
-     *汇报个推自定义事件
-     *actionId：用户自定义的actionid，int类型，取值90001-90999。
-     *taskId：下发任务的任务ID。
-     *msgId： 下发任务的消息ID。
-     *返回值：BOOL，YES表示该命令已经提交，NO表示该命令未提交成功。注：该结果不代表服务器收到该条命令
-     **/
     [GeTuiSdk sendFeedbackMessage:90001 andTaskId:taskId andMsgId:msgId];
 }
 /** APP已经接收到“远程”通知(推送) - 透传推送消息  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
-    // 处理APNs代码，通过userInfo可以取到推送的信息（包括内容，角标，自定义参数等）。如果需要弹窗等其他操作，则需要自行编码。
-    NSLog(@"\n>>>[Receive RemoteNotification - Background Fetch]:%@\n\n",userInfo);
+
+    DebugLog(@"\n>>>[Receive RemoteNotification - Background Fetch]:%@\n\n",userInfo);
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -201,7 +193,6 @@ const static int databaseVersion = 0;
 
 //------------------重登陆----------------------//
 - (void)p_reLogin:(NSNotification *)text{
-    
     NSString *info = text.userInfo[@"info"];
     if([info isEqualToString:@"0"]){
         UIStoryboard *root = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

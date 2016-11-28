@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UITextView *remarkValue;
 
 @property (nonatomic, strong) UIButton *orderButton;
+@property (nonatomic, strong) UIButton *delBtn;
 
 
 + (instancetype)viewInstance;

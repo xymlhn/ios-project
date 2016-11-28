@@ -75,7 +75,7 @@
                                                           return @([phoneValid boolValue]&&[userValid boolValue]&&[addressValid boolValue]);
                                                       }];
     [signUpActiveSignal subscribeNext:^(NSNumber*signupActive){
-        _businessSalesOrderView.orderButton.backgroundColor = [signupActive boolValue] ? [UIColor nameColor] : [UIColor grayColor];
+        _businessSalesOrderView.orderButton.backgroundColor = [signupActive boolValue] ? [UIColor appBlueColor] : [UIColor buttonDisableColor];
         _businessSalesOrderView.orderButton.enabled = [signupActive boolValue];
     }];
     

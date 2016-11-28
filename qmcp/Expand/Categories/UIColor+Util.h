@@ -33,6 +33,10 @@
 + (UIColor *)refreshControlColor;
 + (UIColor *)appBlueColor;
 + (UIColor *)arrowColor;
++ (UIColor *)buttonDisableColor;
 + (UIColor *)mainTextColor;
 + (UIColor *)colorWithHexString:(NSString *)stringToConvert;
++ (UIColor *)cornerLineColor;
++ (UIColor *)secondTextColor;
++ (UIColor *)appRedColor;
 @end

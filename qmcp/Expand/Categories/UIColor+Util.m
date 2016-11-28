@@ -48,10 +48,29 @@
 
 #pragma mark - theme colors
 
+//#555555
 + (UIColor *)mainTextColor{
     return [UIColor colorWithRed:85.0/255 green:85.0/255 blue:85.0/255 alpha:1.0];
 }
+//#333333
++ (UIColor *)secondTextColor{
+    return [UIColor colorWithRed:51.0/255 green:51.0/255 blue:51.0/255 alpha:1.0];
+}
 
+//#FF4343
++ (UIColor *)appRedColor{
+    return [UIColor colorWithRed:255.0/255 green:67.0/255 blue:67.0/255 alpha:1.0];
+}
+//CCCCCC
++ (UIColor *)buttonDisableColor{
+    return [UIColor colorWithRed:204.0/255 green:204.0/255 blue:204.0/255 alpha:1.0];
+}
+//CCCCCC
++ (UIColor *)cornerLineColor{
+    return [UIColor colorWithRed:204.0/255 green:204.0/255 blue:204.0/255 alpha:1.0];
+}
+
+//777777
 + (UIColor *)arrowColor{
     return [UIColor colorWithRed:119.0/255 green:119.0/255 blue:119.0/255 alpha:1.0];
 }
@@ -59,7 +78,7 @@
 + (UIColor *)appBlueColor{
     return [UIColor colorWithRed:33.0/255 green:150.0/255 blue:243.0/255 alpha:1.0];
 }
-
+//EEEEEE
 + (UIColor *)themeColor{
     return [UIColor colorWithRed:238.0/255 green:238.0/255 blue:238.0/255 alpha:1.0];
 }

@@ -65,21 +65,29 @@ typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #endif
 
 #define kShisipt 14
+#define kShisanpt 13
 #define kShiwupt 15
+#define kShierpt 12
 #define kJiupt  9
 #define kFontAwesomeIcon 15
 #define kFontAwesomeArrow 17
 
 #define kServiceError @"服务器发生未知错误"
-#define kLineHeight @0.5
+#define kLineHeight 0.5
 #define kMaxImage 6
-#define kBottomHeight 44
+
+#define kBottomHeight 60
+#define kBottomButtonHeight 40
+#define kBottomButtonCorner 3.0
+#define kEditViewHeight 40
+#define kEditViewCorner 3.0
 #define kEndSucceedDelayTime 0.5
 #define kEndFailedDelayTime 1.5
 #define kScreen_Bounds [UIScreen mainScreen].bounds
 #define kScreen_Height [UIScreen mainScreen].bounds.size.height
 #define kScreen_Width [UIScreen mainScreen].bounds.size.width
-#define kPaddingLeftWidth 15.0
+#define kPaddingLeftWidth 10.0
+#define kMePaddingWidth 10.0
 #define kDevice_Is_iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 #define kDevice_Is_iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
 #define kDevice_Is_iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)

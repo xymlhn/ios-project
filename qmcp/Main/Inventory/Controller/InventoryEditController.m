@@ -29,7 +29,7 @@
 #import "InventoryChooseController.h"
 #import "Helper.h"
 #import "ImageViewerController.h"
-@interface InventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,
+@interface InventoryEditController ()<UINavigationControllerDelegate,UICollectionViewDataSource,UITextFieldDelegate,
 UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) ItemSnapshot *itemSnapshot;
@@ -236,33 +236,6 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     _inventoryEditView.qrText.enabled = _unLock;
 }
 
-
-#pragma mark UIActionSheetDelegate M
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 2) {
-        return;
-    }
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;//设置可编辑
-    
-    if (buttonIndex == 0) {
-        //        拍照
-        if (![Helper checkCameraAuthorizationStatus]) {
-            return;
-        }
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }else if (buttonIndex == 1){
-        //        相册
-        if (![Helper checkPhotoLibraryAuthorizationStatus]) {
-            return;
-        }
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    }
-    [self presentViewController:picker animated:YES completion:nil];
-    
-}
-
 #pragma mark - UIImagePickerController
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
@@ -324,8 +297,30 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
         }];
         [self presentViewController:ivc animated:YES completion:nil];
     }else{
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"添加图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"从相册选择", nil];
-        [actionSheet showInView:self.view];
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"添加图片"                                                                             message: nil                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
+        [alertController addAction: [UIAlertAction actionWithTitle: @"拍照" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            if (![Helper checkCameraAuthorizationStatus]) {
+                return;
+            }
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:picker animated:YES completion:nil];
+        }]];
+        [alertController addAction: [UIAlertAction actionWithTitle: @"从相册选取" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;//设置可编辑
+            if (![Helper checkPhotoLibraryAuthorizationStatus]) {
+                return;
+            }
+            picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            [self presentViewController:picker animated:YES completion:nil];
+        }]];
+        [alertController addAction: [UIAlertAction actionWithTitle: @"取消" style: UIAlertActionStyleCancel handler:nil]];
+        
+        [self presentViewController: alertController animated: YES completion: nil];
     }
 }
 

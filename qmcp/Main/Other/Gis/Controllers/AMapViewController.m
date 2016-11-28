@@ -29,6 +29,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+    self.title = @"地图";
     _mapView.delegate = self;
     _mapView.showsUserLocation = YES;    //YES 为打开定位，NO为关闭定位
     _mapView.userTrackingMode = MAUserTrackingModeFollow;

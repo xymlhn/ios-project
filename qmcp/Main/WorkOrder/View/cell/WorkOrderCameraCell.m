@@ -84,12 +84,8 @@
 {
     if(cameraData != nil){
         _name.text = cameraData.cameraLocation;
-        [_switchBtn setTitle:cameraData.isChoose?@"关闭":@"开启" forState:UIControlStateNormal];
-        if(cameraData.isChoose){
-            _cameraIcon.text = @"";
-        }else{
-            _cameraIcon.text = @"";
-        }
+        [_switchBtn setTitle:@"开启" forState:UIControlStateNormal];
+        _cameraIcon.text = @"";
     }
 }
 @end

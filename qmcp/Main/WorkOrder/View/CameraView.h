@@ -13,5 +13,10 @@
 
 @property (nonatomic,strong ) UIButton *scanBtn;
 
+@property (nonatomic,strong) UILabel *nameLabel;
+
+@property (nonatomic,strong) UIButton *switchBtn;
+
+-(void)updateConstraints:(BOOL)show;
 + (instancetype)viewInstance;
 @end

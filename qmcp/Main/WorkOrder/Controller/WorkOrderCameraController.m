@@ -16,7 +16,7 @@
 @interface WorkOrderCameraController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) CameraView *camreaView;
-@property (nonatomic, strong) NSMutableArray *cameraArr;
+@property (nonatomic, strong) NSMutableArray<CameraData *> *cameraArr;
 @property (nonatomic, strong) CameraData *currentCamera;
 @end
 
@@ -53,6 +53,11 @@
         }
         return [RACSignal empty];
     }];
+    
+    _camreaView.switchBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self closeCamera:_currentCamera];
+        return [RACSignal empty];
+    }];
 }
 
 -(void)handleQrCode:(NSString *)qrCode{
@@ -74,6 +79,7 @@
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.detailsLabel.text = @"还未设置摄像头";
                 [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+                [weakSelf.camreaView updateConstraints:NO];
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
                 hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
@@ -81,13 +87,18 @@
                 [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                 
                 CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
-                for(CameraData *cameraData in weakSelf.cameraArr){
-                    if([cameraData.cameraCode isEqualToString:currentCamera.cameraCode]){
-                        cameraData.isChoose = YES;
-                        weakSelf.currentCamera = cameraData;
+                [weakSelf.cameraArr enumerateObjectsUsingBlock:^(CameraData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if([obj.cameraCode isEqualToString:currentCamera.cameraCode]){
+                        weakSelf.currentCamera = obj;
+                        weakSelf.camreaView.nameLabel.text = obj.cameraLocation;
+                        [weakSelf.camreaView updateConstraints:YES];
+                        [weakSelf.cameraArr removeObject:obj];
                         [weakSelf.camreaView.tableView reloadData];
+                        *stop = YES;
                     }
-                }
+                    
+                }];
+                
             }
         }else{
             hub.mode = MBProgressHUDModeCustomView;
@@ -146,20 +157,23 @@
     [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:cameraData.cameraCode andFuncType:_funcType cameraStatus:YES finishBlock:^(NSDictionary *dict, NSString *error) {
         if (!error) {
             CameraData *data = [CameraData mj_objectWithKeyValues:dict];
-            for(CameraData *cameraData in _cameraArr){
-                if([cameraData.cameraCode isEqualToString:data.cameraCode]){
-                    cameraData.isChoose = true;
-                    _currentCamera = cameraData;
+            [weakSelf.cameraArr enumerateObjectsUsingBlock:^(CameraData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if([obj.cameraCode isEqualToString:data.cameraCode]){
+                    weakSelf.currentCamera = obj;
+                    weakSelf.camreaView.nameLabel.text = obj.cameraLocation;
+                    [weakSelf.cameraArr removeObject:obj];
+                    [weakSelf.camreaView.tableView reloadData];
+                     [weakSelf.camreaView updateConstraints:YES];
+                    *stop = YES;
                 }
-            }
-            [weakSelf.camreaView.tableView reloadData];
+                
+            }];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.detailsLabel.text = @"打开摄像头成功";
             [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             
         }else{
-            [weakSelf.camreaView.tableView reloadData];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.detailsLabel.text = error;
@@ -171,22 +185,14 @@
 
 -(void)closeCamera:(CameraData *)cameraData{
     __weak typeof(self) weakSelf = self;
-    
-    
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"关闭摄像头";
-    
-    
     [[CameraManager getInstance] switchCameraByCode:_code withCameraCode:_currentCamera.cameraCode andFuncType:_funcType cameraStatus:NO finishBlock:^(NSDictionary *dict, NSString *error) {
         if (!error) {
-            CameraData *currentCamera = [CameraData mj_objectWithKeyValues:dict];
-            for(CameraData *cameraData in _cameraArr){
-                if([cameraData.cameraCode isEqualToString:currentCamera.cameraCode]){
-                    cameraData.isChoose = NO;
-                }
-            }
-            _currentCamera = nil;
+            weakSelf.cameraArr = [[CameraManager getInstance] getAllCameraData];
+            weakSelf.currentCamera = nil;
             [weakSelf.camreaView.tableView reloadData];
+            [weakSelf.camreaView updateConstraints:NO];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
             hub.detailsLabel.text = @"关闭摄像头成功";

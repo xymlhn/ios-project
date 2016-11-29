@@ -15,7 +15,5 @@
 @property (nonatomic,copy) NSString *cameraDescription;
 @property (nonatomic,copy) NSString *rtmpUrl;
 @property (nonatomic,copy) NSString *m3u8Url;
-@property (nonatomic,assign) bool isChoose;
-
 
 @end

@@ -76,6 +76,9 @@ typedef void(^SalesOrderCompletion)(NSMutableArray *arr, NSString *error);
 #define kLineHeight 0.5
 #define kMaxImage 6
 
+#define kEditHeight 41
+#define kEditLeftWidth 17
+
 #define kBottomHeight 60
 #define kBottomButtonHeight 40
 #define kBottomButtonCorner 3.0

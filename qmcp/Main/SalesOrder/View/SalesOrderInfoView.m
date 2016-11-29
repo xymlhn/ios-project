@@ -18,558 +18,660 @@
 - (id)init {
     self = [super init];
     if (!self) return nil;
-    
     self.backgroundColor = [UIColor whiteColor];
-    _containView = [UIView new];
-    [_containView setBackgroundColor:[UIColor whiteColor]];
-    [self addSubview:_containView];
-    [_containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
+    
+    _scrollView = [UIScrollView new];
+    _scrollView.backgroundColor = [UIColor whiteColor];
+    _scrollView.pagingEnabled = NO;
+    [self addSubview:_scrollView];
+
+    [self setupOrderStatus];
+    [self setupCustomer];
+    [self setupSalesOrder];
+    [self setupOnSiteBtn];
+
+    [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+        make.bottom.mas_equalTo(_starBtn.mas_bottom).offset(kBottomHeight);
     }];
-    [self initCodeView];
-    [self initUserView];
-    [self initLocationView];
-    [self initTypeView];
-    [self initAppointmentTimeView];
-    [self initServiceView];
-    [self initRemarkView];
-    [self initAgreePriceView];
-    [self initStarBtn];
-    _view = self;
     return self;
 }
 
--(void)setSalesOrder:(SalesOrder *)salesOrder
-{
+
+-(void)setSalesOrder:(SalesOrder *)salesOrder{
+    switch (salesOrder.type) {
+        case SalesOrderTypeOnsite:
+            
+            break;
+        case SalesOrderTypeShop:
+            
+            break;
+        case SalesOrderTypeRemote:
+            
+            break;
+        default:
+            break;
+    }
+    
+    _remarkValue.text = salesOrder.remark;
+    _saleOrderServiceValue.text = salesOrder.organizationName;
+    _appointmentTimeValue.text = salesOrder.appointmentTime;
+    
+    _addressValue.text = salesOrder.addressSnapshot.fullAddress ;
+    _phoneValue.text = salesOrder.addressSnapshot.mobilePhone;
+    _nameValue.text = salesOrder.addressSnapshot.contacts;
+    _saleOrderCodeValue.text = salesOrder.code;
+    _agreePriceValue.text = salesOrder.agreementPrice;
     switch (salesOrder.type) {
         case SalesOrderTypeOnsite:
             [self initOnsiteBottomView];
+            switch (_salesOrder.onSiteStatus) {
+                case OnSiteStatusNone:
+                case OnSiteStatusWaiting:
+                case OnSiteStatusNotDepart:
+                    [_starBtn setTitle:@"出发" forState:UIControlStateNormal];
+                    break;
+                case OnSiteStatusOnRoute:
+                    [_starBtn setTitle:@"到达" forState:UIControlStateNormal];
+                    break;
+                default:
+                    [self p_updateConstraints];
+                    [_starBtn setHidden:YES];
+                    break;
+            }
+            
             break;
         case SalesOrderTypeShop:
+            [self p_updateConstraints];
             [self initServiceBottomView];
+            [_starBtn setHidden:YES];
             break;
         case SalesOrderTypeRemote:
+            [self p_updateConstraints];
             [self initServiceBottomView];
+            [_starBtn setHidden:YES];
             break;
         default:
             break;
     }
     
 }
-
-//编号
--(void)initCodeView
-{
-    _codeView = [UIView new];
-    [_containView addSubview:_codeView];
-    [_codeView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_containView.mas_top).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
-    
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_codeView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_codeView.mas_bottom).with.offset(0);
-        make.left.equalTo(_codeView.mas_left).with.offset(0);
-        make.right.equalTo(_codeView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    UILabel *codeTitle = [UILabel new];
-    codeTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    codeTitle.text = @"No.";
-    codeTitle.textColor = [UIColor nameColor];
-    [_codeView addSubview:codeTitle];
-    
-    _codeContent = [UILabel new];
-    _codeContent.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _codeContent.text = @"12305";
-    _codeContent.textColor = [UIColor blackColor];
-    [_codeView addSubview:_codeContent];
-    
-    [codeTitle mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_codeView.mas_centerY);
-        make.left.equalTo(_codeView.mas_left).with.offset(5);
-        make.width.equalTo(@20);
-        make.height.equalTo(@20);
-    }];
-    
-    
-    [_codeContent mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_codeView.mas_centerY);
-        make.left.equalTo(codeTitle.mas_right).with.offset(5);
-        make.right.equalTo(_codeView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
-    }];
-}
-//用户手机
--(void)initUserView
-{
-    _userView = [UIView new];
-    [_containView addSubview:_userView];
-    [_userView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_codeView.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
-    
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_userView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_userView.mas_bottom).with.offset(0);
-        make.left.equalTo(_userView.mas_left).with.offset(0);
-        make.right.equalTo(_userView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    
-    UIView *codeMidLine = [UIView new];
-    codeMidLine.backgroundColor = [UIColor grayColor];
-    [_userView addSubview:codeMidLine];
-    [codeMidLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_userView.mas_bottom).with.offset(0);
-        make.top.equalTo(_userView.mas_top).with.offset(0);
-        make.centerX.equalTo(_userView.mas_centerX).with.offset(0);
-        make.width.mas_equalTo(kLineHeight);
-    }];
-    
-    UILabel *userIcon = [UILabel new];
-    [userIcon setFont:[UIFont fontWithName:@"FontAwesome" size:12]];
-    userIcon.text = @"";
-    userIcon.textAlignment = NSTextAlignmentCenter;
-    userIcon.textColor = [UIColor nameColor];
-    [_userView addSubview:userIcon];
-    
-    _userNameText = [UILabel new];
-    _userNameText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _userNameText.text = @"12305";
-    _userNameText.textColor = [UIColor blackColor];
-    [_userView addSubview:_userNameText];
-    
-    [userIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_userView.mas_centerY);
-        make.left.equalTo(_userView.mas_left).with.offset(5);
-        make.width.equalTo(@20);
-        make.height.equalTo(@20);
-    }];
-    
-    
-    [_userNameText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_userView.mas_centerY);
-        make.left.equalTo(userIcon.mas_right).with.offset(5);
-        make.right.equalTo(_userView.mas_centerX).with.offset(-5);
-        make.height.equalTo(@20);
-    }];
-    
-    UILabel *passwordIcon = [UILabel new];
-    [passwordIcon setFont:[UIFont fontWithName:@"FontAwesome" size:15]];
-    passwordIcon.text = @"";
-    passwordIcon.textAlignment = NSTextAlignmentCenter;
-    passwordIcon.textColor = [UIColor nameColor];
-    [_userView addSubview:passwordIcon];
-    
-    _passwordText = [UILabel new];
-    _passwordText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _passwordText.text = @"12305";
-    _passwordText.textColor = [UIColor blackColor];
-    [_userView addSubview:_passwordText];
-    
-    [passwordIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_userView.mas_centerY);
-        make.left.equalTo(codeMidLine.mas_left).with.offset(5);
-        make.width.equalTo(@20);
-        make.height.equalTo(@20);
-    }];
-    
-    
-    [_passwordText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_userView.mas_centerY);
-        make.left.equalTo(passwordIcon.mas_right).with.offset(5);
-        make.right.equalTo(_userView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
-    }];
-}
-//地理位置
--(void)initLocationView
-{
-    _locationView = [UIView new];
-    [_containView addSubview:_locationView];
-    [_locationView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_userView.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
-    
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_locationView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_locationView.mas_bottom).with.offset(0);
-        make.left.equalTo(_locationView.mas_left).with.offset(0);
-        make.right.equalTo(_locationView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    
-    UILabel *locationIcon = [UILabel new];
-    [locationIcon setFont:[UIFont fontWithName:@"FontAwesome" size:12]];
-    locationIcon.text = @"";
-    locationIcon.textAlignment = NSTextAlignmentCenter;
-    locationIcon.textColor = [UIColor nameColor];
-    [_codeView addSubview:locationIcon];
-    
-    _locationText = [UILabel new];
-    _locationText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _locationText.text = @"12305";
-    _locationText.textColor = [UIColor blackColor];
-    [_locationView addSubview:_locationText];
-    
-    [locationIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_locationView.mas_centerY);
-        make.left.equalTo(_locationView.mas_left).with.offset(5);
-        make.width.equalTo(@20);
-        make.height.equalTo(@20);
-    }];
-    
-    
-    [_locationText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_locationView.mas_centerY);
-        make.left.equalTo(locationIcon.mas_right).with.offset(5);
-        make.right.equalTo(_locationView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
-    }];
-    
-}
-//类型状态
--(void)initTypeView
-{
-    _typeView = [UIView new];
-    [_containView addSubview:_typeView];
-    [_typeView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_locationView.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
-    
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_typeView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_typeView.mas_bottom).with.offset(0);
-        make.left.equalTo(_typeView.mas_left).with.offset(0);
-        make.right.equalTo(_typeView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    
-    UIView *codeMidLine = [UIView new];
-    codeMidLine.backgroundColor = [UIColor grayColor];
-    [_typeView addSubview:codeMidLine];
-    [codeMidLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_typeView.mas_bottom).with.offset(0);
-        make.top.equalTo(_typeView.mas_top).with.offset(0);
-        make.centerX.equalTo(_typeView.mas_centerX).with.offset(0);
-        make.width.mas_equalTo(kLineHeight);
-    }];
-    
-    UILabel *typeTitle = [UILabel new];
-    typeTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    typeTitle.text = @"类型";
-    typeTitle.textColor = [UIColor nameColor];
-    [_typeView addSubview:typeTitle];
-    
-    _typeText = [UILabel new];
-    _typeText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _typeText.text = @"12305";
-    _typeText.textColor = [UIColor blackColor];
-    [_typeView addSubview:_typeText];
-    
-    [typeTitle mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_typeView.mas_centerY);
-        make.left.equalTo(_typeView.mas_left).with.offset(5);
-        make.width.equalTo(@30);
-        make.height.equalTo(@20);
-    }];
-    
-    
-    [_typeText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_typeView.mas_centerY);
-        make.left.equalTo(typeTitle.mas_right).with.offset(5);
-        make.right.equalTo(_typeView.mas_centerX).with.offset(-5);
-        make.height.equalTo(@20);
-    }];
-    
-    UILabel *statusTitle = [UILabel new];
-    statusTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    statusTitle.text = @"状态";
-    statusTitle.textColor = [UIColor nameColor];
-    [_userView addSubview:statusTitle];
-    
-    _statusText = [UILabel new];
-    _statusText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _statusText.text = @"12305";
-    _statusText.textColor = [UIColor blackColor];
-    [_typeView addSubview:_statusText];
-    
-    [statusTitle mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_typeView.mas_centerY);
-        make.left.equalTo(codeMidLine.mas_left).with.offset(5);
-        make.width.equalTo(@30);
-        make.height.equalTo(@20);
-        
-    }];
-    
-    
-    [_statusText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_typeView.mas_centerY);
-        make.left.equalTo(statusTitle.mas_right).with.offset(5);
-        make.right.equalTo(_typeView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
+-(void)p_updateConstraints{
+    [_scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+        make.bottom.mas_equalTo(_orderView.mas_bottom).offset(kBottomHeight);
     }];
 }
 
-//预约时间
--(void)initAppointmentTimeView
-{
+//订单状态
+-(void)setupOrderStatus{
+    
+    _statusView = [UIView new];
+    _statusView.backgroundColor = [UIColor whiteColor];
+    [_scrollView addSubview:_statusView];
+    
+    UILabel *topLabel = [UILabel new];
+    topLabel.font = [UIFont systemFontOfSize:18];
+    topLabel.text = @"订单状态";
+    topLabel.textColor = [UIColor secondTextColor];
+    [_statusView addSubview:topLabel];
+    
+    _inventoryImage = [UIImageView new];
+    _inventoryImage.image = [UIImage imageNamed:@"default－portrait"];
+    [_statusView addSubview:_inventoryImage];
+    
+    _progressImage = [UIImageView new];
+    _progressImage.image = [UIImage imageNamed:@"default－portrait"];
+    [_statusView addSubview:_progressImage];
+    
+    _payImage = [UIImageView new];
+    _payImage.image = [UIImage imageNamed:@"default－portrait"];
+    [_statusView addSubview:_payImage];
+
+    [_statusView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_scrollView.mas_top).with.offset(0);
+        make.left.equalTo(_scrollView.mas_left).with.offset(0);
+        make.right.equalTo(_scrollView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@113);
+    }];
+    
+    [topLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_statusView.mas_top).with.offset(kPaddingTopWidth);
+        make.left.equalTo(_statusView.mas_left).with.offset(kPaddingLeftWidth);
+    }];
+    
+    [_inventoryImage mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(topLabel.mas_bottom).with.offset(kPaddingTopWidth);
+        make.left.equalTo(topLabel.mas_left).with.offset(0);
+        make.width.mas_equalTo(@50);
+        make.height.mas_equalTo(@50);
+    }];
+    
+    [_progressImage mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(topLabel.mas_bottom).with.offset(kPaddingTopWidth);
+        make.left.equalTo(_inventoryImage.mas_right).with.offset(kPaddingTopWidth);
+        make.width.mas_equalTo(@50);
+        make.height.mas_equalTo(@50);
+    }];
+    
+    [_payImage mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(topLabel.mas_bottom).with.offset(kPaddingTopWidth);
+        make.left.equalTo(_progressImage.mas_right).with.offset(kPaddingTopWidth);
+        make.width.mas_equalTo(@50);
+        make.height.mas_equalTo(@50);
+    }];
+}
+
+//客户信息
+-(void)setupCustomer{
+    UIView *separateView = [UIView new];
+    separateView.backgroundColor = [UIColor themeColor];
+    [_scrollView addSubview:separateView];
+    
+    _customView = [UIView new];
+    _customView.backgroundColor = [UIColor whiteColor];
+    [_scrollView addSubview:_customView];
+    
+    _nameView = [UIView new];
+    _nameView.backgroundColor = [UIColor whiteColor];
+    [_customView addSubview:_nameView];
+    
+    _nameTitle = [UILabel new];
+    _nameTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _nameTitle.text = @"客户名称";
+    _nameTitle.textColor = [UIColor secondTextColor];
+    [_nameView addSubview:_nameTitle];
+    
+    _nameValue = [UILabel new];
+    _nameValue.font = [UIFont systemFontOfSize:kShisipt];
+    _nameValue.text = @"";
+    _nameValue.textColor = [UIColor mainTextColor];
+    [_nameView addSubview:_nameValue];
+    
+    UIView *nameLine = [UIView new];
+    nameLine.backgroundColor = [UIColor lineColor];
+    [_nameView addSubview:nameLine];
+    
+    _phoneView = [UIView new];
+    _phoneView.backgroundColor = [UIColor whiteColor];
+    [_customView addSubview:_phoneView];
+    
+    _phoneTitle = [UILabel new];
+    _phoneTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _phoneTitle.text = @"联系方式";
+    _phoneTitle.textColor = [UIColor secondTextColor];
+    [_phoneView addSubview:_phoneTitle];
+    
+    _phoneValue = [UILabel new];
+    _phoneValue.font = [UIFont systemFontOfSize:kShisipt];
+    _phoneValue.text = @"";
+    _phoneValue.textColor = [UIColor mainTextColor];
+    [_phoneView addSubview:_phoneValue];
+    
+    UIView *phoneLine = [UIView new];
+    phoneLine.backgroundColor = [UIColor lineColor];
+    [_phoneView addSubview:phoneLine];
+    
+    _addressView = [UIView new];
+    _addressView.backgroundColor = [UIColor whiteColor];
+    [_customView addSubview:_addressView];
+    
+    _addressTitle = [UILabel new];
+    _addressTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _addressTitle.text = @"客户地址";
+    _addressTitle.textColor = [UIColor secondTextColor];
+    [_addressView addSubview:_addressTitle];
+    
+    _addressValue = [UILabel new];
+    _addressValue.font = [UIFont systemFontOfSize:kShisipt];
+    _addressValue.text = @"1234564";
+    _addressValue.textColor = [UIColor mainTextColor];
+    [_addressView addSubview:_addressValue];
+    
+    UIView *addressLine = [UIView new];
+    addressLine.backgroundColor = [UIColor lineColor];
+    [_addressView addSubview:addressLine];
+    
     _appointmentTimeView = [UIView new];
-    [_containView addSubview:_appointmentTimeView];
-    [_appointmentTimeView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_typeView.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
+    _appointmentTimeView.backgroundColor = [UIColor whiteColor];
+    [_customView addSubview:_appointmentTimeView];
     
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_appointmentTimeView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_appointmentTimeView.mas_bottom).with.offset(0);
-        make.left.equalTo(_appointmentTimeView.mas_left).with.offset(0);
-        make.right.equalTo(_appointmentTimeView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    UILabel *appointmentTitle = [UILabel new];
-    appointmentTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    appointmentTitle.text = @"预约时间";
-    appointmentTitle.textColor = [UIColor nameColor];
-    [_appointmentTimeView addSubview:appointmentTitle];
+    _appointmentTimeTitle = [UILabel new];
+    _appointmentTimeTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _appointmentTimeTitle.text = @"预约时间";
+    _appointmentTimeTitle.textColor = [UIColor secondTextColor];
+    [_appointmentTimeView addSubview:_appointmentTimeTitle];
     
-    _appointmentTimeText = [UILabel new];
-    _appointmentTimeText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _appointmentTimeText.text = @"12305";
-    _appointmentTimeText.textColor = [UIColor blackColor];
-    [_appointmentTimeView addSubview:_appointmentTimeText];
+    _appointmentTimeValue = [UILabel new];
+    _appointmentTimeValue.font = [UIFont systemFontOfSize:kShisipt];
+    _appointmentTimeValue.text = @"";
+    _appointmentTimeValue.textColor = [UIColor mainTextColor];
+    [_appointmentTimeView addSubview:_appointmentTimeValue];
     
-    [appointmentTitle mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_appointmentTimeView.mas_centerY);
-        make.left.equalTo(_appointmentTimeView.mas_left).with.offset(5);
-        make.width.equalTo(@50);
-        make.height.equalTo(@20);
-    }];
+    UIView *appointmentTimeLine = [UIView new];
+    appointmentTimeLine.backgroundColor = [UIColor lineColor];
+    [_appointmentTimeView addSubview:appointmentTimeLine];
     
-    
-    [_appointmentTimeText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_appointmentTimeView.mas_centerY);
-        make.left.equalTo(appointmentTitle.mas_right).with.offset(5);
-        make.right.equalTo(_appointmentTimeView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
-    }];
-}
-
-//服务项目
--(void)initServiceView
-{
-    _serviceView = [UIView new];
-    [_containView addSubview:_serviceView];
-    [_serviceView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_appointmentTimeView.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
-    
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_serviceView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_serviceView.mas_bottom).with.offset(0);
-        make.left.equalTo(_serviceView.mas_left).with.offset(0);
-        make.right.equalTo(_serviceView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    UILabel *serviceTitle = [UILabel new];
-    serviceTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    serviceTitle.text = @"服务项目";
-    serviceTitle.textColor = [UIColor nameColor];
-    [_serviceView addSubview:serviceTitle];
-    
-    _serviceText = [UILabel new];
-    _serviceText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _serviceText.text = @"12305";
-    _serviceText.textColor = [UIColor blackColor];
-    [_serviceView addSubview:_serviceText];
-    
-    [serviceTitle mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_serviceView.mas_centerY);
-        make.left.equalTo(_serviceView.mas_left).with.offset(5);
-        make.width.equalTo(@50);
-        make.height.equalTo(@20);
-    }];
-    
-    
-    [_serviceText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_serviceView.mas_centerY);
-        make.left.equalTo(serviceTitle.mas_right).with.offset(5);
-        make.right.equalTo(_serviceView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
-    }];
-}
-//客户留言
--(void)initRemarkView
-{
     _remarkView = [UIView new];
-    [_containView addSubview:_remarkView];
-    [_remarkView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_serviceView.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
+    _remarkView.backgroundColor = [UIColor whiteColor];
+    [_customView addSubview:_remarkView];
+    
+    _remarkTitle = [UILabel new];
+    _remarkTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _remarkTitle.text = @"客户备注";
+    _remarkTitle.textColor = [UIColor secondTextColor];
+    [_remarkView addSubview:_remarkTitle];
+    
+    _remarkValue = [UILabel new];
+    _remarkValue.font = [UIFont systemFontOfSize:kShisipt];
+    _remarkValue.text = @"";
+    _remarkValue.textColor = [UIColor mainTextColor];
+    [_remarkView addSubview:_remarkValue];
+    
+    [separateView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_statusView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@10);
     }];
     
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_remarkView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_remarkView.mas_bottom).with.offset(0);
-        make.left.equalTo(_remarkView.mas_left).with.offset(0);
-        make.right.equalTo(_remarkView.mas_right).with.offset(0);
+    [_customView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(separateView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self .mas_right).with.offset(0);
+        make.height.mas_equalTo(@205);
+    }];
+    
+    [_nameView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_customView.mas_top).with.offset(0);
+        make.left.equalTo(_customView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_customView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_nameTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_nameView.mas_centerY);
+        make.left.equalTo(_nameView.mas_left).with.offset(0);
+    }];
+    [_nameValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_nameView.mas_centerY);
+        make.left.equalTo(_nameTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    
+    [nameLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_nameView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
         make.height.mas_equalTo(kLineHeight);
     }];
-    UILabel *remarkTitle = [UILabel new];
-    remarkTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    remarkTitle.text = @"客户留言";
-    remarkTitle.textColor = [UIColor nameColor];
-    [_remarkView addSubview:remarkTitle];
     
-    _remarkText = [UILabel new];
-    _remarkText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _remarkText.text = @"12305";
-    _remarkText.textColor = [UIColor blackColor];
-    [_remarkView addSubview:_remarkText];
-    
-    [remarkTitle mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_remarkView.mas_centerY);
-        make.left.equalTo(_remarkView.mas_left).with.offset(5);
-        make.width.equalTo(@50);
-        make.height.equalTo(@20);
+    [_phoneView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_nameView.mas_bottom).with.offset(0);
+        make.left.equalTo(_customView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_customView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
     }];
     
-    
-    [_remarkText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_remarkView.mas_centerY);
-        make.left.equalTo(remarkTitle.mas_right).with.offset(5);
-        make.right.equalTo(_remarkView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
+    [_phoneTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_phoneView.mas_centerY);
+        make.left.equalTo(_phoneView.mas_left).with.offset(0);
     }];
+    [_phoneValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_phoneView.mas_centerY);
+        make.left.equalTo(_phoneTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    
+    [phoneLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_phoneView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    
+    [_addressView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_phoneView.mas_bottom).with.offset(0);
+        make.left.equalTo(_customView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_customView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_addressTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(_addressView.mas_left).with.offset(0);
+        make.centerY.equalTo(_addressView.mas_centerY);
+    }];
+    [_addressValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_addressView.mas_centerY);
+        make.left.equalTo(_addressTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    [addressLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_addressView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    [_appointmentTimeView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_addressView.mas_bottom).with.offset(0);
+        make.left.equalTo(_customView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_customView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_appointmentTimeTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_appointmentTimeView.mas_centerY);
+        make.left.equalTo(_appointmentTimeView.mas_left).with.offset(0);
+    }];
+    [_appointmentTimeValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_appointmentTimeView.mas_centerY);
+        make.left.equalTo(_appointmentTimeTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    [appointmentTimeLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_appointmentTimeView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    
+    [_remarkView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_appointmentTimeView.mas_bottom).with.offset(0);
+        make.left.equalTo(_customView.mas_left).with.offset(0);
+        make.right.equalTo(_customView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_remarkTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_remarkView.mas_centerY);
+        make.left.equalTo(_remarkView.mas_left).with.offset(kPaddingLeftWidth);
+    }];
+    [_remarkValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_remarkView.mas_centerY);
+        make.left.equalTo(_remarkTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    
 }
 
-//协议价
--(void)initAgreePriceView
-{
+//订单信息
+-(void)setupSalesOrder{
+    UIView *separateView = [UIView new];
+    separateView.backgroundColor = [UIColor themeColor];
+    [_scrollView addSubview:separateView];
+    
+    _orderView = [UIView new];
+    _orderView.backgroundColor = [UIColor whiteColor];
+    [_scrollView addSubview:_orderView];
+    
+    _saleOrderCodeView = [UIView new];
+    _saleOrderCodeView.backgroundColor = [UIColor whiteColor];
+    [_orderView addSubview:_saleOrderCodeView];
+    
+    _saleOrderCodeTitle = [UILabel new];
+    _saleOrderCodeTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderCodeTitle.text = @"订单编号";
+    _saleOrderCodeTitle.textColor = [UIColor secondTextColor];
+    [_saleOrderCodeView addSubview:_saleOrderCodeTitle];
+    
+    _saleOrderCodeValue = [UILabel new];
+    _saleOrderCodeValue.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderCodeValue.text = @"";
+    _saleOrderCodeValue.textColor = [UIColor mainTextColor];
+    [_saleOrderCodeView addSubview:_saleOrderCodeValue];
+    
+    UIView *codeLine = [UIView new];
+    codeLine.backgroundColor = [UIColor lineColor];
+    [_saleOrderCodeView addSubview:codeLine];
+    
+    _saleOrderServiceView = [UIView new];
+    _saleOrderServiceView.backgroundColor = [UIColor whiteColor];
+    [_orderView addSubview:_saleOrderServiceView];
+    
+    _saleOrderServiceTitle= [UILabel new];
+    _saleOrderServiceTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderServiceTitle.text = @"订单服务";
+    _saleOrderServiceTitle.textColor = [UIColor secondTextColor];
+    [_saleOrderServiceView addSubview:_saleOrderServiceTitle];
+    
+    _saleOrderServiceValue = [UILabel new];
+    _saleOrderServiceValue.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderServiceValue.text = @"";
+    _saleOrderServiceValue.textColor = [UIColor mainTextColor];
+    [_saleOrderServiceView addSubview:_saleOrderServiceValue];
+    
+    UIView *serviceLine = [UIView new];
+    serviceLine.backgroundColor = [UIColor lineColor];
+    [_saleOrderServiceView addSubview:serviceLine];
+    
+    _saleOrderTotalView = [UIView new];
+    _saleOrderTotalView.backgroundColor = [UIColor whiteColor];
+    [_orderView addSubview:_saleOrderTotalView];
+    
+    _saleOrderTotalTitle = [UILabel new];
+    _saleOrderTotalTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderTotalTitle.text = @"订单总额";
+    _saleOrderTotalTitle.textColor = [UIColor secondTextColor];
+    [_saleOrderTotalView addSubview:_saleOrderTotalTitle];
+    
+    _saleOrderTotalValue = [UILabel new];
+    _saleOrderTotalValue.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderTotalValue.text = @"";
+    _saleOrderTotalValue.textColor = [UIColor mainTextColor];
+    [_saleOrderTotalView addSubview:_saleOrderTotalValue];
+    
+    UIView *totalLine = [UIView new];
+    totalLine.backgroundColor = [UIColor lineColor];
+    [_saleOrderTotalView addSubview:totalLine];
+    
     _agreePriceView = [UIView new];
-    [_containView addSubview:_agreePriceView];
-    [_agreePriceView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_remarkView.mas_bottom).with.offset(0);
-        make.left.equalTo(_containView.mas_left).with.offset(0);
-        make.right.equalTo(_containView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@30);
-    }];
+    _agreePriceView.backgroundColor = [UIColor whiteColor];
+    [_orderView addSubview:_agreePriceView];
     
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [_agreePriceView addSubview:codeBottomLine];
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_agreePriceView.mas_bottom).with.offset(0);
-        make.left.equalTo(_agreePriceView.mas_left).with.offset(0);
-        make.right.equalTo(_agreePriceView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    UILabel *agreeTitle = [UILabel new];
-    agreeTitle.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    agreeTitle.text = @"协议价";
-    agreeTitle.textColor = [UIColor nameColor];
-    [_agreePriceView addSubview:agreeTitle];
+    _agreePriceTitle = [UILabel new];
+    _agreePriceTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _agreePriceTitle.text = @"协议价格";
+    _agreePriceTitle.textColor = [UIColor secondTextColor];
+    [_agreePriceView addSubview:_agreePriceTitle];
     
-    _agreePriceText = [UILabel new];
-    _agreePriceText.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    _agreePriceText.text = @"";
-    _agreePriceText.textColor = [UIColor blackColor];
-    [_agreePriceView addSubview:_agreePriceText];
+    _agreePriceValue = [UILabel new];
+    _agreePriceValue.font = [UIFont systemFontOfSize:kShisipt];
+    _agreePriceValue.text = @"";
+    _agreePriceValue.textColor = [UIColor mainTextColor];
+    [_agreePriceView addSubview:_agreePriceValue];
     
     _agreeBtn = [UIButton new];
     _agreeBtn.layer.masksToBounds = YES;
-    _agreeBtn.backgroundColor = [UIColor nameColor];
-    _agreeBtn.layer.cornerRadius = 3.0;
+    _agreeBtn.backgroundColor = [UIColor appBlueColor];
+    _agreeBtn.layer.cornerRadius = kBottomButtonCorner;
     [_agreeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _agreeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    _agreeBtn.titleLabel.font = [UIFont systemFontOfSize:kShierpt];
     [_agreeBtn setTitle:@"修改" forState:UIControlStateNormal];
-    [_agreePriceView addSubview:_agreeBtn];
+    [self addSubview:_agreeBtn];
+    
+    UIView *agreeLine = [UIView new];
+    agreeLine.backgroundColor = [UIColor lineColor];
+    [_agreePriceView addSubview:agreeLine];
+    
+    _saleOrderPayStatusView = [UIView new];
+    _saleOrderPayStatusView.backgroundColor = [UIColor whiteColor];
+    [_orderView addSubview:_saleOrderPayStatusView];
+    
+    _saleOrderPayStatusTitle = [UILabel new];
+    _saleOrderPayStatusTitle.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderPayStatusTitle.text = @"支付状态";
+    _saleOrderPayStatusTitle.textColor = [UIColor secondTextColor];
+    [_saleOrderPayStatusView addSubview:_saleOrderPayStatusTitle];
+    
+    _saleOrderPayStatusValue = [UILabel new];
+    _saleOrderPayStatusValue.font = [UIFont systemFontOfSize:kShisipt];
+    _saleOrderPayStatusValue.text = @"";
+    _saleOrderPayStatusValue.textColor = [UIColor mainTextColor];
+    [_saleOrderPayStatusView addSubview:_saleOrderPayStatusValue];
+    
+    [separateView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_customView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@10);
+    }];
+    
+    [_orderView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(separateView.mas_bottom).with.offset(0);
+        make.left.equalTo(_scrollView.mas_left).with.offset(0);
+        make.right.equalTo(_scrollView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@205);
+    }];
+    
+    [_saleOrderCodeView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_orderView.mas_top).with.offset(0);
+        make.left.equalTo(_orderView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_orderView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_saleOrderCodeTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderCodeView.mas_centerY);
+        make.left.equalTo(_saleOrderCodeView.mas_left).with.offset(0);
+    }];
+    [_saleOrderCodeValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderCodeView.mas_centerY);
+        make.left.equalTo(_saleOrderCodeTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    
+    [codeLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_saleOrderCodeView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    
+    [_saleOrderServiceView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_saleOrderCodeView.mas_bottom).with.offset(0);
+        make.left.equalTo(_orderView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_orderView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_saleOrderServiceTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderServiceView.mas_centerY);
+        make.left.equalTo(_saleOrderServiceView.mas_left).with.offset(0);
+    }];
+    [_saleOrderServiceValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderServiceView.mas_centerY);
+        make.left.equalTo(_saleOrderServiceTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    
+    [serviceLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_saleOrderServiceView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    
+    [_saleOrderTotalView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_saleOrderServiceView.mas_bottom).with.offset(0);
+        make.left.equalTo(_orderView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_orderView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_saleOrderTotalTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderTotalView.mas_centerY);
+        make.left.equalTo(_saleOrderTotalView.mas_left).with.offset(0);
+    }];
+    [_saleOrderTotalValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderTotalView.mas_centerY);
+        make.left.equalTo(_saleOrderTotalTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    
+    [totalLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_saleOrderTotalView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    
+    [_agreePriceView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_saleOrderTotalView.mas_bottom).with.offset(0);
+        make.left.equalTo(_orderView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_orderView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
+    }];
+    
+    [_agreePriceTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_agreePriceView.mas_centerY);
+        make.left.equalTo(_agreePriceView.mas_left).with.offset(0);
+    }];
+    [_agreePriceValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_agreePriceView.mas_centerY);
+        make.left.equalTo(_agreePriceTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
     
     [_agreeBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_agreePriceView.mas_centerY);
-        make.right.equalTo(_agreePriceView.mas_right).with.offset(-kPaddingLeftWidth);
-        make.height.mas_equalTo(@22);
-        make.width.mas_equalTo(@50);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.width.equalTo(@69);
+        make.height.equalTo(@26);
     }];
     
-    
-    [agreeTitle mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_agreePriceView.mas_centerY);
-        make.left.equalTo(_agreePriceView.mas_left).with.offset(5);
-        make.width.equalTo(@50);
-        make.height.equalTo(@20);
+    [agreeLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_agreePriceView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
-    [_agreePriceText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_agreePriceView.mas_centerY);
-        make.left.equalTo(agreeTitle.mas_right).with.offset(5);
-        make.right.equalTo(_agreePriceView.mas_right).with.offset(-5);
-        make.height.equalTo(@20);
+    [_saleOrderPayStatusView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_agreePriceView.mas_bottom).with.offset(0);
+        make.left.equalTo(_orderView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(_orderView.mas_right).with.offset(0);
+        make.height.mas_equalTo(kEditHeight);
     }];
+    
+    [_saleOrderPayStatusTitle mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderPayStatusView.mas_centerY);
+        make.left.equalTo(_saleOrderPayStatusView.mas_left).with.offset(0);
+    }];
+    [_saleOrderPayStatusValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_saleOrderPayStatusView.mas_centerY);
+        make.left.equalTo(_saleOrderPayStatusTitle.mas_right).with.offset(kEditLeftWidth);
+    }];
+    
 }
-
 //开始按钮
--(void)initStarBtn
-{
+-(void)setupOnSiteBtn{
+    
+    UIView *separateView = [UIView new];
+    separateView.backgroundColor = [UIColor themeColor];
+    [_scrollView addSubview:separateView];
+    
     _starBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_containView addSubview:_starBtn];
     _starBtn.layer.masksToBounds = YES;
-    _starBtn.backgroundColor = [UIColor nameColor];
+    _starBtn.backgroundColor = [UIColor appBlueColor];
     _starBtn.layer.cornerRadius = 40;
+    [_starBtn setTitle:@"上门" forState:UIControlStateNormal];
     [_starBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _starBtn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
+    _starBtn.titleLabel.font = [UIFont systemFontOfSize: kShiwupt];
+    [_scrollView addSubview:_starBtn];
+    
+    [separateView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_orderView.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(@10);
+    }];
+    
     [_starBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_remarkView.mas_bottom).with.offset(50);
-        make.centerX.equalTo(_containView.mas_centerX);
+        make.top.equalTo(separateView.mas_bottom).with.offset(10);
+        make.centerX.equalTo(self.mas_centerX);
         make.height.mas_equalTo(@80);
         make.width.mas_equalTo(@80);
     }];
-    
 }
 
--(void)initOnsiteBottomView
-{
+-(void)initOnsiteBottomView{
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
+    codeBottomLine.backgroundColor = [UIColor lineColor];
     [bottomView addSubview:codeBottomLine];
     
     _inventoryBtn = [UILabel new];
@@ -705,9 +807,7 @@
     
 }
 
-
--(void)initServiceBottomView
-{
+-(void)initServiceBottomView{
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomView];

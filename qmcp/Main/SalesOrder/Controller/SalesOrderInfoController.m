@@ -79,7 +79,7 @@
                     [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                     weakSelf.salesOrder.agreementPrice = price;
                     [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:weakSelf.salesOrder];
-                    [weakSelf setInfo:weakSelf.salesOrder];
+                    [weakSelf.salesOrderInfoView setSalesOrder:weakSelf.salesOrder];
                 }else{
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -92,13 +92,15 @@
         [self.navigationController pushViewController:controller animated:YES];
         return [RACSignal empty];
     }];
+    
 }
 
 -(void)loadData{
     NSString *salesWhere = [NSString stringWithFormat:@"code = '%@'",_code];
     _salesOrder = [SalesOrder searchSingleWithWhere:salesWhere orderBy:nil];
     _salesOrderInfoView.salesOrder = _salesOrder;
-    [self setInfo:_salesOrder];
+    [_salesOrderInfoView setSalesOrder:_salesOrder];
+    
     _salesOrderInfoView.stepBtn.userInteractionEnabled = YES;
     [_salesOrderInfoView.stepBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stepBtnClick:)]];
     
@@ -119,46 +121,6 @@
     
 }
 
-#pragma mark - func
--(void)setInfo:(SalesOrder *)salesOrder{
-    _salesOrderInfoView.remarkText.text = salesOrder.remark;
-    _salesOrderInfoView.serviceText.text = salesOrder.organizationName;
-    _salesOrderInfoView.appointmentTimeText.text = salesOrder.appointmentTime;
-    
-    _salesOrderInfoView.locationText.text = salesOrder.addressSnapshot.fullAddress;
-    _salesOrderInfoView.passwordText.text = salesOrder.addressSnapshot.mobilePhone;
-    _salesOrderInfoView.userNameText.text = salesOrder.addressSnapshot.contacts;
-    _salesOrderInfoView.codeContent.text = salesOrder.code;
-    _salesOrderInfoView.typeText.text = [EnumUtil salesOrderTypeString:salesOrder.type];
-    _salesOrderInfoView.agreePriceText.text = salesOrder.agreementPrice;
-    switch (salesOrder.type) {
-        case SalesOrderTypeOnsite:
-            switch (_salesOrder.onSiteStatus) {
-                case OnSiteStatusNone:
-                case OnSiteStatusWaiting:
-                case OnSiteStatusNotDepart:
-                    [_salesOrderInfoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    break;
-                case OnSiteStatusOnRoute:
-                    [_salesOrderInfoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                    break;
-                default:
-                    [_salesOrderInfoView.starBtn setHidden:YES];
-                    break;
-            }
-            
-            break;
-        case SalesOrderTypeShop:
-            [_salesOrderInfoView.starBtn setHidden:YES];
-            break;
-        case SalesOrderTypeRemote:
-            [_salesOrderInfoView.starBtn setHidden:YES];
-            break;
-        default:
-            break;
-    }
-    
-}
 
 -(void)p_updateTimeStampWithCode:(NSString *)_salesOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
@@ -270,7 +232,7 @@
             SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
             weakSelf.salesOrder = tempSalesOrder;
             [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
-            [weakSelf setInfo:tempSalesOrder];
+            [weakSelf.salesOrderInfoView setSalesOrder:tempSalesOrder];
         }else{
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];

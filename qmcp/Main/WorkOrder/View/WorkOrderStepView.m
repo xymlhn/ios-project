@@ -27,7 +27,7 @@
         make.top.equalTo(self.mas_top);
         make.right.equalTo(self.mas_right);
         make.left.equalTo(self.mas_left);
-        make.bottom.equalTo(self.mas_bottom).with.offset(kBottomHeight);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-kBottomHeight);
     }];
     
     [self setupBottomView];

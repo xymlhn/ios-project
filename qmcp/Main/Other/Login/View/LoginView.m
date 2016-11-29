@@ -144,31 +144,17 @@
     [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
     [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_loginBtn.layer setMasksToBounds:YES];
-    [_loginBtn.layer setCornerRadius:5.0];
-    _loginBtn.titleLabel.font = [UIFont systemFontOfSize: 18.0];
+    [_loginBtn.layer setCornerRadius:kBottomButtonCorner];
+    _loginBtn.titleLabel.font = [UIFont systemFontOfSize: kShiwupt];
     [_loginBtn setBackgroundColor: [UIColor nameColor]];
     [self addSubview:_loginBtn];
     [_loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(circleIcon.mas_bottom).with.offset(20);
-        make.left.equalTo(self.mas_left).with.offset(25);
-        make.right.equalTo(self.mas_right).with.offset(-25);
+        make.centerX.equalTo(self.mas_centerX);
+        make.width.equalTo(@300);
         make.height.equalTo(@40);
     }];
-    
-    _settingBtn = [UIButton new];
-    [_settingBtn setTitle:@"设置" forState:UIControlStateNormal];
-    [_settingBtn.layer setMasksToBounds:YES];
-    [_settingBtn.layer setCornerRadius:5.0];
-    [_settingBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _settingBtn.titleLabel.font = [UIFont systemFontOfSize: 18.0];
-    [_settingBtn setBackgroundColor: [UIColor orangeColor]];
-    [self addSubview:_settingBtn];
-    [_settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_loginBtn.mas_bottom).with.offset(15);
-        make.left.equalTo(self.mas_left).with.offset(25);
-        make.right.equalTo(self.mas_right).with.offset(-25);
-        make.height.equalTo(@40);
-    }];
+
     return self;
 }
 

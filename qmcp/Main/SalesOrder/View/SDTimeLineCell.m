@@ -180,8 +180,7 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
 {
     _model = model;
     
-    _iconView.image = [UIImage imageNamed:model.iconName];
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,[[AppManager getInstance] getUser].userOpenId];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,model.iconName];
     [HttpUtil get:URLString param:nil finishString:^(NSString *dict, NSString *error) {
         if(!error){
             [_iconView sd_setImageWithURL:[NSURL URLWithString:dict]
@@ -191,6 +190,7 @@ NSString *const kSDTimeLineCellOperationButtonClickedNotification = @"SDTimeLine
     _nameLable.text = model.name;
     _contentLabel.text = model.msgContent;
     _picContainerView.picPathStringsArray = model.picNamesArray;
+    _picContainerView.isUrl = model.isUrl;
     
     if (model.shouldShowMoreButton) { // 如果文字高度超过60
         _moreButton.sd_layout.heightIs(20);

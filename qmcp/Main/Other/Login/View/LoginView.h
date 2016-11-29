@@ -13,7 +13,6 @@
 @property (nonatomic,strong) UITextField *passWordText;
 
 @property (nonatomic,strong) UIButton *loginBtn;
-@property (nonatomic,strong) UIButton *settingBtn;
 
 + (instancetype)viewInstance;
 @end

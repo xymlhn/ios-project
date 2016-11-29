@@ -44,10 +44,11 @@
     NSMutableArray *resArr = [NSMutableArray new];
     for (WorkOrderStep *step in _workOrderStepList) {
         SDTimeLineCellModel *model = [SDTimeLineCellModel new];
-        model.iconName = @"default－portrait";
+        model.iconName = step.userOpenId;
         model.name = step.submitUser;
         model.msgContent = step.content;
         model.timeText = step.submitTime;
+        model.isUrl = ![step.userOpenId isEqualToString:[[AppManager getInstance] getUser].userOpenId];
         NSMutableArray *picImageNamesArray = [NSMutableArray new];
         for (Attachment *attachment in step.attachments) {
             [picImageNamesArray addObject:attachment.key];

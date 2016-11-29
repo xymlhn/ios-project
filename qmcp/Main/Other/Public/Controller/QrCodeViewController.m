@@ -14,8 +14,7 @@
 #define SCANVIEW_EdgeLeft 50.0
 #define TINTCOLOR_ALPHA 0.2 //浅色透明度
 #define DARKCOLOR_ALPHA 0.3 //深色透明度
-#define VIEW_WIDTH [UIScreen mainScreen].bounds.size.width
-#define VIEW_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 
 static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 @interface QrCodeViewController () <AVCaptureMetadataOutputObjectsDelegate>{
@@ -75,7 +74,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     // 初始化输出流
     AVCaptureMetadataOutput *captureMetadataOutput = [[AVCaptureMetadataOutput alloc] init];
     //设置扫描范围
-    captureMetadataOutput.rectOfInterest =CGRectMake((_scanCropView.frame.origin.y-10)/VIEW_HEIGHT, (_scanCropView.frame.origin.x-10)/VIEW_WIDTH, (_scanCropView.frame.size.width+10)/VIEW_HEIGHT, (_scanCropView.frame.size.height+10)/VIEW_WIDTH);
+    captureMetadataOutput.rectOfInterest =CGRectMake((_scanCropView.frame.origin.y-10)/kScreen_Height, (_scanCropView.frame.origin.x-10)/ kScreen_Width, (_scanCropView.frame.size.width+10)/kScreen_Height, (_scanCropView.frame.size.height+10)/kScreen_Width);
     // 添加输出流
     [_captureSession addOutput:captureMetadataOutput];
     
@@ -149,24 +148,24 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
 
 //二维码的扫描区域
 - (void)setScanView{
-    _scanView=[[UIView alloc] initWithFrame:CGRectMake(0,0, VIEW_WIDTH,VIEW_HEIGHT )];
+    _scanView=[[UIView alloc] initWithFrame:CGRectMake(0,0, kScreen_Width,kScreen_Height )];
     _scanView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_scanView];
     
     //最上部view
-    UIView *upView = [[UIView alloc] initWithFrame:CGRectMake(0,0, VIEW_WIDTH,SCANVIEW_EdgeTop)];
+    UIView *upView = [[UIView alloc] initWithFrame:CGRectMake(0,0, kScreen_Width,SCANVIEW_EdgeTop)];
     upView.alpha =TINTCOLOR_ALPHA;
     upView.backgroundColor = [UIColor blackColor];
     [_scanView addSubview:upView];
     
     //左侧的view
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, SCANVIEW_EdgeTop, SCANVIEW_EdgeLeft,VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft)];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, SCANVIEW_EdgeTop, SCANVIEW_EdgeLeft,kScreen_Width - 2 * SCANVIEW_EdgeLeft)];
     leftView.alpha =TINTCOLOR_ALPHA;
     leftView.backgroundColor = [UIColor blackColor];
     [_scanView addSubview:leftView];
     
     // 中间扫描区
-    _scanCropView=[[UIImageView alloc] initWithFrame:CGRectMake(SCANVIEW_EdgeLeft,SCANVIEW_EdgeTop, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft)];
+    _scanCropView=[[UIImageView alloc] initWithFrame:CGRectMake(SCANVIEW_EdgeLeft,SCANVIEW_EdgeTop, kScreen_Width - 2 * SCANVIEW_EdgeLeft, kScreen_Width - 2 * SCANVIEW_EdgeLeft)];
     //scanCropView.image=[UIImage imageNamed:@""];
     _scanCropView.layer.borderColor=[UIColor greenColor].CGColor;
     _scanCropView.layer.borderWidth=2.0;
@@ -174,13 +173,13 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     [_scanView addSubview:_scanCropView];
     
     //右侧的view
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(VIEW_WIDTH - SCANVIEW_EdgeLeft,SCANVIEW_EdgeTop, SCANVIEW_EdgeLeft, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft)];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(kScreen_Width - SCANVIEW_EdgeLeft,SCANVIEW_EdgeTop, SCANVIEW_EdgeLeft, kScreen_Width - 2 * SCANVIEW_EdgeLeft)];
     rightView.alpha =TINTCOLOR_ALPHA;
     rightView.backgroundColor = [UIColor blackColor];
     [_scanView addSubview:rightView];
     
     //底部view
-    UIView *downView = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop, VIEW_WIDTH, VIEW_HEIGHT - (VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop))];
+    UIView *downView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreen_Width - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop, kScreen_Width, kScreen_Height - (kScreen_Width - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop))];
     //downView.alpha = TINTCOLOR_ALPHA;
     downView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:TINTCOLOR_ALPHA];
     [_scanView addSubview:downView];
@@ -188,7 +187,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     //用于说明的label
     UILabel *labIntroudction= [[UILabel alloc] init];
     labIntroudction.backgroundColor = [UIColor clearColor];
-    labIntroudction.frame=CGRectMake(0,5, VIEW_WIDTH,20);
+    labIntroudction.frame=CGRectMake(0,5, kScreen_Width,20);
     labIntroudction.numberOfLines=1;
     labIntroudction.font=[UIFont systemFontOfSize:15.0];
     labIntroudction.textAlignment=NSTextAlignmentCenter;
@@ -198,7 +197,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     
     //用于开关灯操作的button
     _lightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _lightButton.frame =CGRectMake(0, 40, VIEW_WIDTH, 40);
+    _lightButton.frame =CGRectMake(0, 40, kScreen_Width, 40);
     [_lightButton setTitle:@"开启闪光灯" forState:UIControlStateNormal];
     [_lightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _lightButton.backgroundColor =[[UIColor blackColor] colorWithAlphaComponent:DARKCOLOR_ALPHA];
@@ -208,19 +207,19 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     [downView addSubview:_lightButton];
     
     //画中间的基准线
-    _QrCodeline = [[UIView alloc] initWithFrame:CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, VIEW_WIDTH- 2 * SCANVIEW_EdgeLeft, 2)];
+    _QrCodeline = [[UIView alloc] initWithFrame:CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, kScreen_Width- 2 * SCANVIEW_EdgeLeft, 2)];
     _QrCodeline.backgroundColor = [UIColor greenColor];
     [_scanView addSubview:_QrCodeline];
     
     //画中间的基准线
-    _QrCodeline1 = [[UIView alloc] initWithFrame:CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, VIEW_WIDTH- 2 * SCANVIEW_EdgeLeft, 2)];
+    _QrCodeline1 = [[UIView alloc] initWithFrame:CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, kScreen_Width- 2 * SCANVIEW_EdgeLeft, 2)];
     _QrCodeline1.backgroundColor = [UIColor greenColor];
     [_scanView addSubview:_QrCodeline1];
     
     // 先让第二根线运动一次,避免定时器执行的时差,让用户感到启动App后,横线就开始移动
     [UIView animateWithDuration:2.2 animations:^{
         
-        _QrCodeline1.frame = CGRectMake(SCANVIEW_EdgeLeft, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft, 1);
+        _QrCodeline1.frame = CGRectMake(SCANVIEW_EdgeLeft, kScreen_Width - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2, kScreen_Width - 2 * SCANVIEW_EdgeLeft, 1);
     }];
     
     
@@ -232,15 +231,15 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     if (Y == SCANVIEW_EdgeTop) {
         [UIView animateWithDuration:2.2 animations:^{
             
-            _QrCodeline.frame = CGRectMake(SCANVIEW_EdgeLeft, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft, 1);
+            _QrCodeline.frame = CGRectMake(SCANVIEW_EdgeLeft, kScreen_Width - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2, kScreen_Width - 2 * SCANVIEW_EdgeLeft, 1);
         }];
-        _QrCodeline1.frame = CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft, 1);
+        _QrCodeline1.frame = CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, kScreen_Width - 2 * SCANVIEW_EdgeLeft, 1);
     }
-    else if (Y == VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2) {
-        _QrCodeline.frame = CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft, 1);
+    else if (Y == kScreen_Width - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2) {
+        _QrCodeline.frame = CGRectMake(SCANVIEW_EdgeLeft, SCANVIEW_EdgeTop, kScreen_Width - 2 * SCANVIEW_EdgeLeft, 1);
         [UIView animateWithDuration:2.2 animations:^{
             
-            _QrCodeline1.frame = CGRectMake(SCANVIEW_EdgeLeft, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2, VIEW_WIDTH - 2 * SCANVIEW_EdgeLeft, 1);
+            _QrCodeline1.frame = CGRectMake(SCANVIEW_EdgeLeft, kScreen_Width - 2 * SCANVIEW_EdgeLeft + SCANVIEW_EdgeTop - 2, kScreen_Width - 2 * SCANVIEW_EdgeLeft, 1);
         }];
     }
     

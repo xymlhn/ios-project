@@ -36,6 +36,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *timeText;
 @property (nonatomic, copy) NSString *msgContent;
+@property (nonatomic, assign) BOOL isUrl;
 @property (nonatomic, strong) NSArray *picNamesArray;
 
 

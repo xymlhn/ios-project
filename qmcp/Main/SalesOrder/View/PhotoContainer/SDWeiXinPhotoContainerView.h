@@ -31,6 +31,7 @@
 
 @interface SDWeiXinPhotoContainerView : UIView
 
+@property (nonatomic, assign) BOOL isUrl;
 @property (nonatomic, strong) NSArray *picPathStringsArray;
 
 @end

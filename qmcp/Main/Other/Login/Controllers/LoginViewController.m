@@ -55,12 +55,6 @@
         return [RACSignal empty];
     }];
     
-    _loginView.settingBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        SettingViewController *setting = [SettingViewController new];
-        [self.navigationController pushViewController:setting animated:YES];
-        return [RACSignal empty];
-    }];
-    
 }
 
 /**

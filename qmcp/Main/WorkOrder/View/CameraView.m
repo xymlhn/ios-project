@@ -21,14 +21,14 @@
     if (!self) return nil;
     _tableView = [UITableView new];
     _tableView.backgroundColor = [UIColor whiteColor];
-    _tableView.rowHeight = 90;
+    _tableView.rowHeight = 60;
     self.backgroundColor = [UIColor whiteColor];
     [self addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.mas_top);
         make.right.equalTo(self.mas_right);
         make.left.equalTo(self.mas_left);
-        make.bottom.equalTo(self.mas_bottom).with.offset(kBottomHeight);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-kBottomHeight);
     }];
     
     [self setupBottomView];

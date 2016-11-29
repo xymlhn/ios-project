@@ -9,8 +9,8 @@
 #ifndef iosapp_QMCPAPI_h
 #define iosapp_QMCPAPI_h
 
-//#define QMCPAPI_ADDRESS             @"http://192.168.13.25:8080/"
-#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
+#define QMCPAPI_ADDRESS             @"http://192.168.13.25:8080/"
+//#define QMCPAPI_ADDRESS                  @"http://www.efw365.com/"
 
 //*********************基础接口*******************//
 //登录

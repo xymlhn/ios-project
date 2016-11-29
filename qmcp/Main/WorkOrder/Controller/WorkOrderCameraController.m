@@ -11,7 +11,8 @@
 #import "WorkOrderCameraCell.h"
 #import "CameraData.h"
 #import "CameraView.h"
-
+#import "ScanViewController.h"
+#import "QrCodeViewController.h"
 @interface WorkOrderCameraController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) CameraView *camreaView;
@@ -32,10 +33,21 @@
 -(void)bindListener{
     _camreaView.tableView.delegate = self;
     _camreaView.tableView.dataSource = self;
-    
+    __weak typeof(self) weakSelf = self;
     _camreaView.scanBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        if(_currentCamera){
-            [self closeCamera:_currentCamera];
+        if(!_currentCamera){
+            if([Config getQuickScan]){
+                ScanViewController *scanViewController = [ScanViewController doneBlock:^(NSString *textValue) {
+                    [weakSelf handleQrCode:textValue];
+                }];
+                [self.navigationController pushViewController:scanViewController animated:YES];
+            }else{
+                QrCodeViewController *info = [QrCodeViewController doneBlock:^(NSString *textValue) {
+                    [weakSelf handleQrCode:textValue];
+                }];
+                [self.navigationController pushViewController:info animated:YES];
+            }
+
         }else{
             [Utils showHudTipStr:@"请关闭当前摄像头"];
         }
@@ -43,6 +55,11 @@
     }];
 }
 
+-(void)handleQrCode:(NSString *)qrCode{
+    CameraData *cameraData = [CameraData new];
+    cameraData.cameraCode = qrCode;
+    [self openCamera:cameraData];
+}
 -(void)loadData{
     _cameraArr = [[CameraManager getInstance] getAllCameraData];
     __weak typeof(self) weakSelf = self;

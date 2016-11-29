@@ -7,30 +7,13 @@
 //
 
 
-/*
- 
- *********************************************************************************
- *
- * GSD_WeiXin
- *
- * QQ交流群: 459274049
- * Email : gsdios@126.com
- * GitHub: https://github.com/gsdios/GSD_WeiXin
- * 新浪微博:GSD_iOS
- *
- * 此“高仿微信”用到了很高效方便的自动布局库SDAutoLayout（一行代码搞定自动布局）
- * SDAutoLayout地址：https://github.com/gsdios/SDAutoLayout
- * SDAutoLayout视频教程：http://www.letv.com/ptv/vplay/24038772.html
- * SDAutoLayout用法示例：https://github.com/gsdios/SDAutoLayout/blob/master/README.md
- *
- *********************************************************************************
- 
- */
-
 #import "SDWeiXinPhotoContainerView.h"
 #import "Utils.h"
 #import "UIView+SDAutoLayout.h"
 #import "ImageViewerController.h"
+#import "HttpUtil.h"
+#import "QMCPAPI.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface SDWeiXinPhotoContainerView ()
 
 @property (nonatomic, strong) NSArray *imageViewsArray;
@@ -79,9 +62,13 @@
     CGFloat itemW = [self itemWidthForPicPathArray:_picPathStringsArray];
     CGFloat itemH = 0;
     if (_picPathStringsArray.count == 1) {
-        UIImage *image = [Utils loadImage:_picPathStringsArray.firstObject];
-        if (image.size.width) {
-            itemH = image.size.height / image.size.width * itemW;
+        if(!_isUrl){
+            UIImage *image = [Utils loadImage:_picPathStringsArray.firstObject];
+            if (image.size.width) {
+                itemH = image.size.height / image.size.width * itemW;
+            }
+        }else{
+            itemH = 180;
         }
     } else {
         itemH = itemW;
@@ -94,7 +81,17 @@
         long rowIndex = idx / perRowItemCount;
         UIImageView *imageView = [_imageViewsArray objectAtIndex:idx];
         imageView.hidden = NO;
-        imageView.image = [Utils loadImage:obj];
+        if (_isUrl) {
+            NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_USERICONURL,_picPathStringsArray.firstObject];
+            [HttpUtil get:URLString param:nil finishString:^(NSString *dict, NSString *error) {
+                if(!error){
+                    [imageView sd_setImageWithURL:[NSURL URLWithString:dict]
+                                 placeholderImage:[UIImage imageNamed:@"default－portrait.png"]];
+                }
+            }];
+        }else{
+            imageView.image = [Utils loadImage:obj];
+        }
         imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
     }];
     

@@ -7,9 +7,9 @@
 //
 
 #import "SalesOrderAgreePriceController.h"
-#import "AgreePriceChangeView.h"
+#import "SalesOrderAgreePriceView.h"
 @interface SalesOrderAgreePriceController ()
-@property (nonatomic, strong) AgreePriceChangeView *changeView;
+@property (nonatomic, strong) SalesOrderAgreePriceView *changeView;
 @end
 
 @implementation SalesOrderAgreePriceController
@@ -21,7 +21,7 @@
 }
 
 -(void)loadView{
-    _changeView = [AgreePriceChangeView viewInstance];
+    _changeView = [SalesOrderAgreePriceView viewInstance];
     self.view = _changeView;
     self.title = @"协议价修改";
 }

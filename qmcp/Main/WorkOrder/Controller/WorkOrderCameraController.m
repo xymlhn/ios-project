@@ -77,15 +77,13 @@
         if(!error){
             if(!obj){
                 hub.mode = MBProgressHUDModeCustomView;
-                hub.detailsLabel.text = @"还未设置摄像头";
-                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+                hub.detailsLabel.text = @"";
+                [hub hideAnimated:YES];
                 [weakSelf.camreaView updateConstraints:NO];
             }else{
                 hub.mode = MBProgressHUDModeCustomView;
-                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
-                hub.detailsLabel.text = [NSString stringWithFormat:@"获取摄像头成功"];
-                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
-                
+                hub.detailsLabel.text = @"";
+                [hub hideAnimated:YES];
                 CameraData *currentCamera = [CameraData mj_objectWithKeyValues:obj];
                 [weakSelf.cameraArr enumerateObjectsUsingBlock:^(CameraData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if([obj.cameraCode isEqualToString:currentCamera.cameraCode]){

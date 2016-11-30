@@ -7,7 +7,7 @@
 //
 
 #import "SalesOrderInfoView.h"
-
+#import "EnumUtil.h"
 @implementation SalesOrderInfoView
 
 + (instancetype)viewInstance{
@@ -39,20 +39,7 @@
 
 
 -(void)setSalesOrder:(SalesOrder *)salesOrder{
-    switch (salesOrder.type) {
-        case SalesOrderTypeOnsite:
-            
-            break;
-        case SalesOrderTypeShop:
-            
-            break;
-        case SalesOrderTypeRemote:
-            
-            break;
-        default:
-            break;
-    }
-    
+
     _remarkValue.text = salesOrder.remark;
     _saleOrderServiceValue.text = salesOrder.organizationName;
     _appointmentTimeValue.text = salesOrder.appointmentTime;
@@ -61,7 +48,12 @@
     _phoneValue.text = salesOrder.addressSnapshot.mobilePhone;
     _nameValue.text = salesOrder.addressSnapshot.contacts;
     _saleOrderCodeValue.text = salesOrder.code;
+    _saleOrderTotalValue.text = [NSString stringWithFormat:@"%f",salesOrder.totalAmount];
+    _saleOrderPayStatusValue.text = [EnumUtil payStatusString:salesOrder.paymentStatus];
+    _saleOrderServiceValue.text = [salesOrder.commodityNames componentsJoinedByString:@","];
     _agreePriceValue.text = salesOrder.agreementPrice;
+    
+    
     switch (salesOrder.type) {
         case SalesOrderTypeOnsite:
             [self initOnsiteBottomView];
@@ -96,6 +88,7 @@
     }
     
 }
+
 -(void)p_updateConstraints{
     [_scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);

@@ -35,7 +35,7 @@
 		240EC9701D7FB2DC008A5696 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96B1D7FB2DC008A5696 /* BaseView.m */; };
 		240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 240EC96D1D7FB2DC008A5696 /* BaseViewController.m */; };
 		240EC9881D7FB456008A5696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240EC9861D7FB456008A5696 /* LaunchScreen.storyboard */; };
-		2418634E1DE3E06A006C7AC5 /* AgreePriceChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */; };
+		2418634E1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418634D1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.m */; };
 		241863511DE3E461006C7AC5 /* SalesOrderAgreePriceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241863501DE3E461006C7AC5 /* SalesOrderAgreePriceController.m */; };
 		242815D31D936BE7006120ED /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B71D936BE7006120ED /* AddressViewController.m */; };
 		242815D41D936BE7006120ED /* CheckBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242815B91D936BE7006120ED /* CheckBoxViewController.m */; };
@@ -250,8 +250,8 @@
 		240EC96D1D7FB2DC008A5696 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		240EC9871D7FB456008A5696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		240EC98B1D7FB491008A5696 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2418634C1DE3E06A006C7AC5 /* AgreePriceChangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreePriceChangeView.h; sourceTree = "<group>"; };
-		2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreePriceChangeView.m; sourceTree = "<group>"; };
+		2418634C1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderAgreePriceView.h; sourceTree = "<group>"; };
+		2418634D1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderAgreePriceView.m; sourceTree = "<group>"; };
 		2418634F1DE3E461006C7AC5 /* SalesOrderAgreePriceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderAgreePriceController.h; sourceTree = "<group>"; };
 		241863501DE3E461006C7AC5 /* SalesOrderAgreePriceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderAgreePriceController.m; sourceTree = "<group>"; };
 		242815B61D936BE7006120ED /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
@@ -1305,8 +1305,8 @@
 				246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */,
 				246642D81D9A12CA009402A2 /* SalesOrderInfoView.h */,
 				246642D91D9A12CA009402A2 /* SalesOrderInfoView.m */,
-				2418634C1DE3E06A006C7AC5 /* AgreePriceChangeView.h */,
-				2418634D1DE3E06A006C7AC5 /* AgreePriceChangeView.m */,
+				2418634C1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.h */,
+				2418634D1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1785,7 +1785,7 @@
 				24E7E9461DE2C047001DFA33 /* SearchView.m in Sources */,
 				24AFDC151D9238FF00B2F1B9 /* Commodity.m in Sources */,
 				246643141D9A12E8009402A2 /* WorkOrderCell.m in Sources */,
-				2418634E1DE3E06A006C7AC5 /* AgreePriceChangeView.m in Sources */,
+				2418634E1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.m in Sources */,
 				24A40FF01DB9B46B00736F6C /* MeViewController.m in Sources */,
 				24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */,
 				246643131D9A12E8009402A2 /* WorkOrderCameraCell.m in Sources */,

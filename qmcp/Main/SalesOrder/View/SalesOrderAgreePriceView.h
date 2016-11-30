@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 
-@interface AgreePriceChangeView : BaseView
+@interface SalesOrderAgreePriceView : BaseView
 
 @property (nonatomic,strong) UIButton *cancelBtn;
 

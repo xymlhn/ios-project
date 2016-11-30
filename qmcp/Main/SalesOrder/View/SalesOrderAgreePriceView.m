@@ -6,13 +6,13 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "AgreePriceChangeView.h"
+#import "SalesOrderAgreePriceView.h"
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
-@implementation AgreePriceChangeView
+@implementation SalesOrderAgreePriceView
 
 
 + (instancetype)viewInstance{
-    AgreePriceChangeView *checkBoxView = [AgreePriceChangeView new];
+    SalesOrderAgreePriceView *checkBoxView = [SalesOrderAgreePriceView new];
     return checkBoxView;
 }
 
@@ -23,7 +23,6 @@
     
     self.backgroundColor = [UIColor whiteColor];
    
-    
     _priceText = [UITextField new];
     _priceText.font = [UIFont systemFontOfSize:12];
     _priceText.placeholder = @"请输入价格";

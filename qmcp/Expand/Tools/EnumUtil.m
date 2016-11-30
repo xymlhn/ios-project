@@ -133,4 +133,25 @@
     return str;
 }
 
++(NSString *)payStatusString:(PaymentStatus)status{
+     NSString *str = @"";
+    switch (status) {
+        case PaymentStatusWaiting:
+            str = @"待支付";
+            break;
+        case PaymentStatusSuccess:
+            str = @"已支付";
+            break;
+        case PaymentStatusClosed:
+            str = @"已关闭";
+            break;
+        case PaymentStatusRefunded:
+            str = @"已退款";
+            break;
+        default:
+            break;
+    }
+    return str;
+}
+
 @end

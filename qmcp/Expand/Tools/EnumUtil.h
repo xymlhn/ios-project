@@ -12,6 +12,7 @@
 #import "PchHeader.h"
 #import "FormTemplateBrife.h"
 #import "PickupItem.h"
+#import "SalesOrder.h"
 
 @interface EnumUtil : NSObject
 
@@ -22,6 +23,8 @@
 +(NSString *)formSortString:(FormSort)type;
 
 +(NSString *)pickupStatusString:(PickupStatus)type;
+
++(NSString *)payStatusString:(PaymentStatus)status;
 
 +(NSString *)exceptionTypeString:(int)type;
 @end

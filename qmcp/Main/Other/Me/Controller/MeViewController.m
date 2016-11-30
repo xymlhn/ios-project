@@ -18,14 +18,11 @@
 @interface MeViewController ()
 @property (nonatomic, strong) MeView *meView;
 @property (nonatomic, strong) User *user;
-
-
-@end
+@end  
 
 @implementation MeViewController
 
--(void)loadView
-{
+-(void)loadView{
     _meView = [MeView new];
     self.view = _meView;
     self.title = @"我";
@@ -91,8 +88,7 @@
         }];
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: @"取消" style: UIAlertActionStyleCancel handler:nil]];
-    
-    [self presentViewController: alertController animated: YES completion: nil];
+    [self presentViewController: alertController animated:YES completion: nil];
     
 }
 
@@ -118,8 +114,6 @@
 -(void)onWorkAction:(id)sender{
     __weak typeof(self) weakSelf = self;
     MBProgressHUD *hub = [Utils createHUD];
-    
-    
     NSDictionary *dict = @{@"isOnWork":[NSNumber numberWithBool:[Config isWork]]};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ISONWORK];
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {

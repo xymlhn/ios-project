@@ -22,20 +22,25 @@
     if (!self) return nil;
     
     self.backgroundColor = [UIColor whiteColor];
-   
+    
     _priceText = [UITextField new];
     _priceText.font = [UIFont systemFontOfSize:12];
     _priceText.placeholder = @"请输入价格";
-    _priceText.borderStyle=UITextBorderStyleRoundedRect;
-    _priceText.textColor = [UIColor blackColor];
+    _priceText.keyboardType = UIKeyboardTypeDecimalPad;
+    _priceText.layer.borderColor = [UIColor arrowColor].CGColor;
+    _priceText.layer.borderWidth = kLineHeight;
+    _priceText.layer.cornerRadius = kEditViewCorner;
+    _priceText.textColor = [UIColor secondTextColor];
+    _priceText.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 0)];
+    _priceText.leftViewMode = UITextFieldViewModeAlways;
     [self addSubview:_priceText];
     
     _remarkText = [UITextView new];
     _remarkText.font = [UIFont systemFontOfSize:12];
     _remarkText.textColor = [UIColor blackColor];
     _remarkText.layer.borderColor = [UIColor arrowColor].CGColor;
-    _remarkText.layer.borderWidth = 0.5;
-    _remarkText.layer.cornerRadius =5.0;
+    _remarkText.layer.borderWidth = kLineHeight;
+    _remarkText.layer.cornerRadius = kEditViewCorner;
     _remarkText.placeholder = @"必填项";
     _remarkText.placeholderColor = [UIColor lightGrayColor];
     [self addSubview:_remarkText];
@@ -43,7 +48,7 @@
     _saveBtn = [UIButton new];
     _saveBtn.layer.masksToBounds = YES;
     _saveBtn.backgroundColor = [UIColor nameColor];
-    _saveBtn.layer.cornerRadius = 3.0;
+    _saveBtn.layer.cornerRadius = kEditViewCorner;
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _saveBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];

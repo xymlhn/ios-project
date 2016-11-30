@@ -244,4 +244,53 @@
 +(BOOL)isTextNull:(NSString *)text{
     return text == nil || [text isEqualToString:@""];
 }
+
+
++ (void)validMoney:(NSString *)money textField:(UITextField *)textField{
+    static NSInteger const maxIntegerLength = 10;//最大整数位
+    static NSInteger const maxFloatLength=2;//最大精确到小数位
+    if (money.length) {
+        //第一个字符处理
+        //第一个字符为0,且长度>1时
+        if ([[money substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"0"]) {
+            if (money.length > 1) {
+                if ([[money substringWithRange:NSMakeRange(1, 1)] isEqualToString:@"0"]) {
+                    //如果第二个字符还是0,即"00",则无效,改为"0"
+                    textField.text = @"0";
+                }else if (![[money substringWithRange:NSMakeRange(1, 1)] isEqualToString:@"."]){
+                    //如果第二个字符不是".",比如"03",清除首位的"0"
+                    textField.text=[money substringFromIndex:1];
+                }
+            }
+        }
+        //第一个字符为"."时,改为"0."
+        else if ([[money substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"."]){
+            textField.text=@"0.";
+        }
+        //2个以上字符的处理
+        NSRange pointRange = [money rangeOfString:@"."];
+        NSRange pointsRange = [money rangeOfString:@".."];
+        if (pointsRange.length > 0) {
+            //含有2个小数点
+            textField.text=[money substringToIndex:money.length - 1];
+        }
+        else if (pointRange.length > 0){
+            //含有1个小数点时,并且已经输入了数字,则不能再次输入小数点
+            if ((pointRange.location != money.length-1) && ([[money substringFromIndex:money.length - 1] isEqualToString:@"."])) {
+                money = [money substringToIndex:money.length - 1];
+                textField.text = money;
+            }
+            if (pointRange.location + maxFloatLength < money.length) {
+                //输入位数超出精确度限制,进行截取
+                textField.text = [money substringToIndex:pointRange.location+maxFloatLength+1];
+            }
+        }
+        else{
+            if (money.length > maxIntegerLength) {
+                textField.text = [money substringToIndex:maxIntegerLength];
+            }
+        }
+        
+    }
+}
 @end

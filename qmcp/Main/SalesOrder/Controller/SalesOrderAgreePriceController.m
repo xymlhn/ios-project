@@ -28,7 +28,7 @@
 
 -(void)bindListener{
     
-    
+    __weak typeof(self) weakSelf = self;
     _changeView.saveBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self.navigationController popViewControllerAnimated:YES];
         if (self.doneBlock) {
@@ -46,10 +46,12 @@
         _changeView.saveBtn.backgroundColor = [signupActive boolValue] ? [UIColor nameColor] : [UIColor grayColor];
         _changeView.saveBtn.enabled = [signupActive boolValue];
     }];
+    
+    [_changeView.priceText.rac_textSignal subscribeNext:^(NSString *x) {
+        [Utils validMoney:x textField:weakSelf.changeView.priceText];
+    }];
 }
 
--(void)loadData{
-    
-}
+
 
 @end

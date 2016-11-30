@@ -184,6 +184,7 @@
 
 //底部按钮
 -(void)setupBottomView{
+    
     UIView *bottomView = [UIView new];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bottomView];

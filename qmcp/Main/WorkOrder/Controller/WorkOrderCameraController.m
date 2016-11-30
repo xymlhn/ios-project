@@ -99,6 +99,7 @@
                 
             }
         }else{
+            [weakSelf.camreaView updateConstraints:NO];
             hub.mode = MBProgressHUDModeCustomView;
             hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
             hub.detailsLabel.text = error;

@@ -39,7 +39,7 @@ const static int databaseVersion = 0;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     /************第三方插件配置 **************/
-    
+    [self p_setupAppearance];
     //数据库升级
     int currentDataBaseVersion = [Config getDatabaseVersion];
     if(currentDataBaseVersion != databaseVersion){
@@ -48,25 +48,10 @@ const static int databaseVersion = 0;
     }
     [Config setDatabaseVersion:databaseVersion];
     //个推
-    [self p_initGeTui];
+    [self p_setupGeTui];
     //高德地图
     [AMapServices sharedServices].apiKey = kAMapKey;
-    
-    /************ 控件外观设置 **************/
-    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                NSFontAttributeName:[UIFont systemFontOfSize:kShiwupt]};
-    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor appBlueColor]];
-    [[UINavigationBar appearance] setTranslucent:NO];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
-                                                         forBarMetrics:UIBarMetricsDefault];
-    
-    [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x7E8891]];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appBlueColor]} forState:UIControlStateSelected];
-    [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
+
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -85,13 +70,52 @@ const static int databaseVersion = 0;
     return YES;
 }
 
-//------------------个推----------------------//
--(void)p_initGeTui{
+//****************************控件外观设置****************************//
+-(void)p_setupAppearance{
+    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                NSFontAttributeName:[UIFont systemFontOfSize:kShiwupt]};
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor appBlueColor]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                         forBarMetrics:UIBarMetricsDefault];
+    
+    [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x7E8891]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appBlueColor]} forState:UIControlStateSelected];
+    [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
+}
+
+//****************************数据库****************************//
+-(void)p_updateDataBase{
+    LKDBHelper* globalHelper = [WorkOrder getUsingLKDBHelper];
+    [globalHelper dropAllTable];
+}
+
+//****************************重登陆****************************//
+- (void)p_reLogin:(NSNotification *)text{
+    NSString *info = text.userInfo[@"info"];
+    if([info isEqualToString:@"0"]){
+        UIStoryboard *root = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        RootViewController *rootNav = [root instantiateViewControllerWithIdentifier:@"Nav"];
+        self.window.rootViewController= rootNav;
+    }else{
+        [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
+        [[AppManager getInstance] clearUserDataWhenLogout];
+        LoginViewController *loginNav = [LoginViewController new];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
+        self.window.rootViewController = nav;
+    }
+}
+
+//****************************个推****************************//
+-(void)p_setupGeTui{
     [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:self];
     // 注册 APNs
     [self registerRemoteNotification];
 }
-
 /** 注册 APNs */
 - (void)registerRemoteNotification {
     /*
@@ -183,28 +207,6 @@ const static int databaseVersion = 0;
 
     DebugLog(@"\n>>>[Receive RemoteNotification - Background Fetch]:%@\n\n",userInfo);
     completionHandler(UIBackgroundFetchResultNewData);
-}
-
-//------------------数据库----------------------//
--(void)p_updateDataBase{
-    LKDBHelper* globalHelper = [WorkOrder getUsingLKDBHelper];
-    [globalHelper dropAllTable];
-}
-
-//------------------重登陆----------------------//
-- (void)p_reLogin:(NSNotification *)text{
-    NSString *info = text.userInfo[@"info"];
-    if([info isEqualToString:@"0"]){
-        UIStoryboard *root = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        RootViewController *rootNav = [root instantiateViewControllerWithIdentifier:@"Nav"];
-        self.window.rootViewController= rootNav;
-    }else{
-        [Utils showHudTipStr:@"重登陆失败，请手动登录！"];
-        [[AppManager getInstance] clearUserDataWhenLogout];
-        LoginViewController *loginNav = [LoginViewController new];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginNav];
-        self.window.rootViewController = nav;
-    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

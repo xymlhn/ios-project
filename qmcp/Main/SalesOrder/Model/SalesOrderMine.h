@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface SalesOrderMine : NSObject
-@property (nonatomic, copy)NSArray *uncompleted;
-@property (nonatomic, copy)NSArray *haveCompleted;
+@property (nonatomic, copy) NSArray *uncompleted;
+@property (nonatomic, copy) NSArray *haveCompleted;
 @end

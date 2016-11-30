@@ -140,4 +140,13 @@
  @return bool
  */
 +(BOOL)isTextNull:(NSString *)text;
+
+
+/**
+ 判断金钱是否合法
+
+ @param money 金钱
+ @param textField 输入框
+ */
++ (void)validMoney:(NSString *)money textField:(UITextField *)textField;
 @end

@@ -40,7 +40,7 @@
 -(void)initView{
     _tableView = [UITableView new];
     _tableView.rowHeight = 80;
-    _tableView.backgroundColor = [UIColor themeColor];
+    _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.separatorColor = [UIColor lineColor];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -69,7 +69,6 @@
     
     switch (_status) {
         case WorkOrderStatusCompleted:
-            
             [_workOrderList addObjectsFromArray:text.userInfo[@"failed"]];
             break;
         case WorkOrderStatusInProgress:

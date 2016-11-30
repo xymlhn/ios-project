@@ -36,6 +36,7 @@
     [self addSubview:phone];
     
     _phoneValue = [UITextField new];
+    _phoneValue.keyboardType = UIKeyboardTypePhonePad;
     _phoneValue.font = [UIFont systemFontOfSize:kShisanpt];
     _phoneValue.placeholder = @"必填";
     [_phoneValue setValue:[UIColor arrowColor] forKeyPath:@"_placeholderLabel.textColor"];

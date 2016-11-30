@@ -18,6 +18,6 @@
 
 @property (nonatomic, strong) UIButton *saveBtn;
 
-
 + (instancetype)viewInstance;
+
 @end

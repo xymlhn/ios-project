@@ -132,7 +132,7 @@
 }
 
 + (UIColor *)lineColor{
-    return [UIColor colorWithRed:238.0/255 green:238.0/255 blue:238.0/255 alpha:1.0];
+    return [UIColor colorWithRed:204.0/255 green:204.0/255 blue:204.0/255 alpha:1.0];
 }
 
 + (UIColor *)borderColor{

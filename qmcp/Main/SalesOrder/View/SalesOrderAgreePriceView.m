@@ -16,11 +16,9 @@
     return checkBoxView;
 }
 
-
 - (id)init {
     self = [super init];
     if (!self) return nil;
-    
     self.backgroundColor = [UIColor whiteColor];
     
     _priceText = [UITextField new];

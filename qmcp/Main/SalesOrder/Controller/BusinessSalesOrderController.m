@@ -52,12 +52,22 @@
 }
 
 -(void)loadData{
+    __weak typeof(self) weakSelf = self;
     RACSignal *validPhoneSignal = [_businessSalesOrderView.phoneValue.rac_textSignal
                                    map:^id(NSString *text) {
                                        return @([Utils isMobileNumber:text]);
                                    }];
     RAC(_businessSalesOrderView.phoneValue, textColor) =[validPhoneSignal map:^id(NSNumber *usernameValid){
         return[usernameValid boolValue] ? [UIColor blackColor]:[UIColor redColor];
+    }];
+    
+    //只能输入11位数字
+    [_businessSalesOrderView.phoneValue.rac_textSignal subscribeNext:^(NSString *number) {
+        if (number.length) {
+            if (number.length > 11) {
+                weakSelf.businessSalesOrderView.phoneValue.text = [number substringToIndex:11];
+            }
+        }
     }];
     
     RACSignal *validAddressSignal = [_businessSalesOrderView.addressValue.rac_textSignal

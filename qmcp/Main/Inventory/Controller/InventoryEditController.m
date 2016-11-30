@@ -80,15 +80,10 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     
     _inventoryEditView.qrText.delegate = self;
     _inventoryEditView.goodNameText.delegate = self;
-    _inventoryEditView.remarkText.delegate = self;
     
     [_inventoryEditView.qrText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [_inventoryEditView.goodNameText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    [_inventoryEditView.remarkText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    
-    _inventoryEditView.lockIcon.userInteractionEnabled = YES;
-    [_inventoryEditView.lockIcon addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lockIconClick:)]];
-    
+
     _inventoryEditView.commodityView.userInteractionEnabled = YES;
     [_inventoryEditView.commodityView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
     
@@ -129,6 +124,13 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
         for (Attachment *attachment in _attachments) {
             [Utils deleteImage:attachment.key];
         }
+        return [RACSignal empty];
+    }];
+    
+    _inventoryEditView.lockBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        _saveType = SaveTypeDelete;
+        _unLock = !_unLock;
+        _inventoryEditView.qrText.enabled = _unLock;
         return [RACSignal empty];
     }];
 }
@@ -230,11 +232,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     
 }
 
-- (void)lockIconClick:(UITapGestureRecognizer *)recognizer{
-    _unLock = !_unLock;
-    _inventoryEditView.lockIcon.text = _unLock ?  @"" :@"";
-    _inventoryEditView.qrText.enabled = _unLock;
-}
+
 
 #pragma mark - UIImagePickerController
 
@@ -347,8 +345,6 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
         [_inventoryEditView.goodNameText becomeFirstResponder];
     } else if (sender == _inventoryEditView.goodNameText) {
         [_inventoryEditView.remarkText becomeFirstResponder];
-    }else if(sender == _inventoryEditView.remarkText){
-        [self hidenKeyboard];
     }
 }
 

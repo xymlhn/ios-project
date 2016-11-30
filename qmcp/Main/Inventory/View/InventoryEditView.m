@@ -39,7 +39,7 @@
     [self addSubview:qrView];
     
     UIView *qrLine = [UIView new];
-    qrLine.backgroundColor = [UIColor grayColor];
+    qrLine.backgroundColor = [UIColor lineColor];
     [qrView addSubview:qrLine];
     
     _qrBtn = [UIButton new];
@@ -47,87 +47,60 @@
     [qrView addSubview:_qrBtn];
     
     _qrText = [UITextField new];
-    _qrText.layer.borderColor= [UIColor grayColor].CGColor;
-    _qrText.layer.borderWidth= 1.0f;
-    _qrText.layer.cornerRadius = 5.0f;
-    _qrText.font = [UIFont systemFontOfSize:12];
-    _qrText.textColor = [UIColor grayColor];
-    CGRect frame = _qrText.frame;
-    frame.size.width = 5.0f;
+    _qrText.layer.borderColor= [UIColor lineColor].CGColor;
+    _qrText.layer.borderWidth= kLineHeight;
+    _qrText.layer.cornerRadius = kEditViewCorner;
+    _qrText.font = [UIFont systemFontOfSize:kShisipt];
+    _qrText.textColor = [UIColor secondTextColor];
+    _qrText.placeholder = @"扫描或输入二维码绑定物品";
+    [_qrText setValue:[UIColor arrowColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [_qrText setValue:[UIFont systemFontOfSize:kShisipt] forKeyPath:@"_placeholderLabel.font"];
+    _qrText.returnKeyType = UIReturnKeyNext;
     _qrText.leftViewMode = UITextFieldViewModeAlways;
-    _qrText.leftView = [[UIView alloc] initWithFrame:frame];
+     _qrText.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 0)];
     [qrView addSubview:_qrText];
     
-    _lockIcon = [UILabel new];
-    [_lockIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    _lockIcon.text = @"";
-    _lockIcon.textColor = [UIColor blackColor];
-    [qrView addSubview:_lockIcon];
-    
-    UIView *goodNameView = [UIView new];
-    [self addSubview:goodNameView];
-    
-    UIView *goodNameLine = [UIView new];
-    goodNameLine.backgroundColor = [UIColor grayColor];
-    [goodNameView addSubview:goodNameLine];
+    _lockBtn = [UIButton new];
+    [_lockBtn setBackgroundImage:[UIImage imageNamed:@"qr_scan"] forState:UIControlStateNormal];
+    [qrView addSubview:_lockBtn];
     
     _goodNameLabel = [UILabel new];
-    _goodNameLabel.text = @"物品名";
-    [goodNameView addSubview:_goodNameLabel];
+    _goodNameLabel.font = [UIFont systemFontOfSize:kShisanpt];
+    _goodNameLabel.text = @"物品名称";
+    _goodNameLabel.textColor = [UIColor mainTextColor];
+    [self addSubview:_goodNameLabel];
     
     _goodNameText = [UITextField new];
     _goodNameText.returnKeyType = UIReturnKeyNext;
-    _goodNameText.layer.borderColor= [UIColor grayColor].CGColor;
-    _goodNameText.layer.borderWidth= 1.0f;
-    _goodNameText.layer.cornerRadius = 5.0f;
-    _goodNameText.font = [UIFont systemFontOfSize:12];
-    _goodNameText.textColor = [UIColor grayColor];
-    CGRect goodframe = _goodNameText.frame;
-    goodframe.size.width = 5.0f;
+    _goodNameText.layer.borderColor= [UIColor lineColor].CGColor;
+    _goodNameText.layer.borderWidth= kLineHeight;
+    _goodNameText.layer.cornerRadius = kEditViewCorner;
+    _goodNameText.font = [UIFont systemFontOfSize:kShisanpt];
+    _goodNameText.textColor = [UIColor mainTextColor];
     _goodNameText.leftViewMode = UITextFieldViewModeAlways;
-    _goodNameText.leftView = [[UIView alloc] initWithFrame:goodframe];
-    [goodNameView addSubview:_goodNameText];
-    
-    UIView *remarkView = [UIView new];
-    [self addSubview:remarkView];
-    
-    UIView *remarkLine = [UIView new];
-    remarkLine.backgroundColor = [UIColor grayColor];
-    [remarkView addSubview:remarkLine];
+    _goodNameText.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 0)];
+    [self addSubview:_goodNameText];
     
     _remarkLabel = [UILabel new];
+    _remarkLabel.font = [UIFont systemFontOfSize:kShisanpt];
+    _remarkLabel.textColor = [UIColor mainTextColor];
     _remarkLabel.text = @"备    注";
-    [remarkView addSubview:_remarkLabel];
+    [self addSubview:_remarkLabel];
     
-    _remarkText = [UITextField new];
-    _remarkText.returnKeyType = UIReturnKeyNext;
-    _remarkText.layer.borderColor= [UIColor grayColor].CGColor;
-    _remarkText.layer.borderWidth= 1.0f;
-    _remarkText.layer.cornerRadius = 5.0f;
-    _remarkText.font = [UIFont systemFontOfSize:12];
-    _remarkText.textColor = [UIColor grayColor];
-    CGRect remarkframe = _remarkText.frame;
-    remarkframe.size.width = 5.0f;
-    _remarkText.leftViewMode = UITextFieldViewModeAlways;
-    _remarkText.leftView = [[UIView alloc] initWithFrame:remarkframe];
-    [remarkView addSubview:_remarkText];
-    
-    UIView *photoView = [UIView new];
-    [self addSubview:photoView];
-    
-    UIView *photoLine = [UIView new];
-    photoLine.backgroundColor = [UIColor grayColor];
-    [photoView addSubview:photoLine];
-    
-    _photoIcon = [UILabel new];
-    [_photoIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    _photoIcon.text = @"";
-    _photoIcon.textColor = [UIColor blackColor];
-    [photoView addSubview:_photoIcon];
+    _remarkText = [UITextView new];
+    _remarkText.returnKeyType = UIReturnKeyDone;
+    _remarkText.layer.borderColor= [UIColor lineColor].CGColor;
+    _remarkText.layer.borderWidth= kLineHeight;
+    _remarkText.layer.cornerRadius = kEditViewCorner;
+    _remarkText.font = [UIFont systemFontOfSize:kShisanpt];
+    _remarkText.textColor = [UIColor secondTextColor];
+    [self addSubview:_remarkText];
     
     _photoLabel = [UILabel new];
-    _photoLabel.text = @"相片";
-    [photoView addSubview:_photoLabel];
+    _photoLabel.text = @"照片";
+    _photoLabel.textColor = [UIColor mainTextColor];
+    _photoLabel.font = [UIFont systemFontOfSize:kShisanpt];
+    [self addSubview:_photoLabel];
     
     CGFloat itemWH = (kScreen_Width - 12 * 4) / 3;
     //创建布局对象
@@ -176,117 +149,71 @@
         make.top.equalTo(self.mas_top).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
+        make.height.mas_equalTo(@76);
     }];
     
     [_qrBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(qrView.mas_centerY);
-        make.left.equalTo(qrView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@25);
-        make.height.equalTo(@25);
+        make.left.equalTo(qrView.mas_left).with.offset(20);
+        make.width.equalTo(@36);
+        make.height.equalTo(@36);
     }];
     
     [_qrText mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(qrView.mas_centerY);
-        make.left.equalTo(_qrBtn.mas_right).with.offset(kPaddingLeftWidth);
-        make.right.equalTo(_lockIcon.mas_left).with.offset(-kPaddingLeftWidth);
-        make.height.equalTo(@25);
+        make.left.equalTo(_qrBtn.mas_right).with.offset(20);
+        make.right.equalTo(_lockBtn.mas_left).with.offset(-12);
+        make.height.equalTo(@36);
     }];
     
-    [_lockIcon mas_makeConstraints:^(MASConstraintMaker *make){
+    [_lockBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(qrView.mas_centerY);
         make.right.equalTo(qrView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.width.equalTo(@36);
+        make.height.equalTo(@36);
+
     }];
     
     [qrLine mas_makeConstraints:^(MASConstraintMaker *make){
         make.bottom.equalTo(qrView.mas_bottom).with.offset(0);
         make.left.equalTo(qrView.mas_left).with.offset(0);
         make.right.equalTo(qrView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
-    }];
-    
-    [goodNameView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(qrView.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
+        make.height.mas_equalTo(kLineHeight);
     }];
     
     [_goodNameLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(goodNameView.mas_centerY);
-        make.left.equalTo(goodNameView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@60);
+        make.top.equalTo(qrView.mas_bottom).with.offset(kPaddingTopWidth);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
     }];
     
     [_goodNameText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(goodNameView.mas_centerY);
-        make.right.equalTo(goodNameView.mas_right).with.offset(-kPaddingLeftWidth);
-        make.left.equalTo(_goodNameLabel.mas_right).with.offset(5);
-        make.height.equalTo(@25);
-    }];
-    
-    [goodNameLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(goodNameView.mas_bottom).with.offset(0);
-        make.left.equalTo(goodNameView.mas_left).with.offset(0);
-        make.right.equalTo(goodNameView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
-    }];
-    
-    [remarkView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(goodNameView.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
+        make.top.equalTo(_goodNameLabel.mas_bottom).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.left.equalTo(_goodNameLabel.mas_left).with.offset(0);
+        make.height.equalTo(@36);
     }];
     
     [_remarkLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(remarkView.mas_centerY);
-        make.left.equalTo(remarkView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@60);
+        make.top.equalTo(_goodNameText.mas_bottom).with.offset(15);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
     }];
     
     [_remarkText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(remarkView.mas_centerY);
-        make.right.equalTo(remarkView.mas_right).with.offset(-kPaddingLeftWidth);
-        make.left.equalTo(_remarkLabel.mas_right).with.offset(5);
-        make.height.equalTo(@25);
-    }];
-    
-    [remarkLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(remarkView.mas_bottom).with.offset(0);
-        make.left.equalTo(remarkView.mas_left).with.offset(0);
-        make.right.equalTo(remarkView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
-    }];
-    
-    [photoView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(remarkView.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
-    }];
-    
-    [_photoIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(photoView.mas_centerY);
-        make.left.equalTo(photoView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@30);
+        make.top.equalTo(_remarkLabel.mas_bottom).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.left.equalTo(_remarkLabel.mas_left).with.offset(0);
+        make.height.equalTo(@84);
     }];
     
     [_photoLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(photoView.mas_centerY);
-        make.right.equalTo(photoView.mas_right).with.offset(-kPaddingLeftWidth);
-        make.left.equalTo(_photoIcon.mas_right).with.offset(5);
+        make.top.equalTo(_remarkText.mas_bottom).with.offset(kPaddingTopWidth);
+        make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
     }];
     
-    [photoLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(photoView.mas_bottom).with.offset(0);
-        make.left.equalTo(photoView.mas_left).with.offset(0);
-        make.right.equalTo(photoView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
-    }];
+
     NSNumber *collectionH = [NSNumber numberWithInteger:itemWH * 2 + 12 *3] ;
     [_photoCollectionView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(photoView.mas_bottom).with.offset(5);
+        make.top.equalTo(_photoLabel.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(5);
         make.right.equalTo(self.mas_right).with.offset(-5);
         make.height.equalTo(collectionH);

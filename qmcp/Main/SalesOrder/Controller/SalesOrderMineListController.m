@@ -22,7 +22,7 @@
 @implementation SalesOrderMineListController
 -(void)setupView{
     _tableView = [UITableView new];
-    _tableView.rowHeight = 100;
+    _tableView.rowHeight = 120;
     _tableView.separatorColor = [UIColor lineColor];
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.delegate = self;

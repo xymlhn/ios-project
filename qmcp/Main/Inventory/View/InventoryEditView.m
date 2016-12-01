@@ -297,7 +297,7 @@
     
     _delBtn = [UIButton new];
     [_delBtn.layer setMasksToBounds:YES];
-    [_delBtn.layer setCornerRadius:3.0];
+    [_delBtn.layer setCornerRadius:kBottomButtonCorner];
     [_delBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _delBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
     [_delBtn setTitle:@"删除" forState:UIControlStateNormal];
@@ -306,7 +306,7 @@
     
     _saveBtn = [UIButton new];
     [_saveBtn.layer setMasksToBounds:YES];
-    [_saveBtn.layer setCornerRadius:3.0];
+    [_saveBtn.layer setCornerRadius:kBottomButtonCorner];
     [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _saveBtn.titleLabel.font = [UIFont systemFontOfSize:kShisipt];
     [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
@@ -317,7 +317,7 @@
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@44);
+        make.height.mas_equalTo(kBottomHeight);
     }];
     [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(bottomView.mas_top).with.offset(0);
@@ -329,13 +329,13 @@
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_left).offset(kPaddingLeftWidth);
         make.right.equalTo(bottomView.mas_centerX).offset(-kPaddingLeftWidth/2);
-        make.height.equalTo(@30);
+        make.height.mas_equalTo(kBottomButtonHeight);
     }];
     [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_centerX).offset(kPaddingLeftWidth/2);
         make.right.equalTo(bottomView.mas_right).offset(-kPaddingLeftWidth);
-        make.height.equalTo(@30);
+        make.height.mas_equalTo(kBottomButtonHeight);
     }];
 }
 @end

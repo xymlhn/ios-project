@@ -11,11 +11,19 @@
 @interface SalesOrderCell : UITableViewCell
 
 @property(nonatomic,strong)UIImageView *typeImage;
+
 @property(nonatomic,strong)UILabel *codeText;
+
 @property(nonatomic,strong)UILabel *commodityNameText;
-@property(nonatomic,strong)UILabel *nameText;
-@property(nonatomic,strong)UILabel *phoneText;
+
+@property(nonatomic,strong)UILabel *appointmentTimeText;
+
 @property(nonatomic,strong)UIButton *grabBtn;
+
+@property (nonatomic,strong) UIImageView *inventoryImage;
+@property (nonatomic,strong) UIImageView *progressImage;
+@property (nonatomic,strong) UIImageView *payImage;
+
 @property (nonatomic, strong) SalesOrder *salesOrder;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;

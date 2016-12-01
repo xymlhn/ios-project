@@ -170,6 +170,8 @@
             NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
             [[NSNotificationCenter defaultCenter]postNotification:notice];
         }];
+        NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter]postNotification:notice];
         info.code = code;
         [weakSelf setContentViewController:info];
     }];

@@ -7,7 +7,7 @@
 //
 
 #import "InventoryView.h"
-
+#import "Utils.h"
 @implementation InventoryView
 
 + (instancetype)viewInstance{
@@ -58,7 +58,8 @@
     [_signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _signBtn.titleLabel.font = [UIFont systemFontOfSize:kShiwupt];
     [_signBtn setTitle:@"客户签名确认" forState:UIControlStateNormal];
-    _signBtn.backgroundColor = [UIColor appBlueColor];
+    [_signBtn setBackgroundImage:[Utils imageWithColor:[UIColor appBlueColor]] forState:UIControlStateNormal];
+    [_signBtn setBackgroundImage:[Utils imageWithColor:[UIColor buttonDisableColor]] forState:UIControlStateDisabled];
     [bottomView addSubview:_signBtn];
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){

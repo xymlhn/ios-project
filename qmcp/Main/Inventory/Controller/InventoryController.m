@@ -51,6 +51,7 @@
     _inventoryView.tableView.tableFooterView = [UIView new];
     _inventoryView.tableView.emptyDataSetSource = self;
     _inventoryView.tableView.emptyDataSetDelegate = self;
+    
     _inventoryView.addBtn.userInteractionEnabled = YES;
     [_inventoryView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(appendBtnClick:)]];
     
@@ -62,6 +63,9 @@
     _salesOrderSearchResult = [[InventoryManager getInstance] getSalesOrderSearchResultByCode:_salesOrderCode];
     NSString *where = [NSString stringWithFormat:@"salesOrderCode = '%@'",_salesOrderCode];
     _itemSnapshotList = [ItemSnapshot searchWithWhere:where];
+    if (_itemSnapshotList.count == 0) {
+        _inventoryView.signBtn.enabled = NO;
+    }
 }
 
 #pragma mark - empty Table
@@ -106,6 +110,7 @@
             default:
                 break;
         }
+        weakSelf.inventoryView.signBtn.enabled = weakSelf.itemSnapshotList.count == 0 ? NO : YES;
         [weakSelf.inventoryView.tableView reloadData];
     }];
     info.salesOrderCode = _salesOrderCode;
@@ -263,6 +268,7 @@
             }
             [_itemSnapshotList removeObjectAtIndex:indexPath.row];
             [_inventoryView.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            _inventoryView.signBtn.enabled = _itemSnapshotList.count == 0 ? NO : YES;
         }
     }
 }

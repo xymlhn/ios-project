@@ -149,4 +149,13 @@
  @param textField 输入框
  */
 + (void)validMoney:(NSString *)money textField:(UITextField *)textField;
+
+/**
+ 颜色转换为背景图片
+
+ @param color 颜色
+ @return 背景
+ */
++ (UIImage *)imageWithColor:(UIColor *)color ;
+
 @end

@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageViewerController : UIViewController
+
 @property (copy, nonatomic) void(^doneBlock)(NSString *textValue);
 
-+ (instancetype)initWithImageKey:(NSString *)key doneBlock:(void(^)(NSString *textValue))block;
-+ (instancetype)initWithImageKey:(NSString *)key showDelete:(BOOL)show;
-- (instancetype)initWithImageURL:(NSURL *)imageURL showDelete:(BOOL)show;
+
++ (instancetype)initWithImageKey:(NSString *)key isShow:(BOOL)show doneBlock:(void(^)(NSString *textValue))block;
++ (instancetype)initWithImageUrl:(NSURL *)url isShow:(BOOL)show doneBlock:(void(^)(NSString *textValue))block;
 
 @end

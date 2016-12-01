@@ -18,7 +18,7 @@
 
 @interface ImageViewerController () <UIScrollViewDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, copy) NSURL *imageURL;
 @property (nonatomic, copy) NSString *key;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
@@ -44,14 +44,20 @@
     return self;
 }
 
-- (instancetype)initWithImageURL:(NSURL *)imageURL showDelete:(BOOL)show{
-    self = [self init];
-    if (self) {
-        _imageURL = imageURL;
-        _showDelete = &show;
-    }
-    
-    return self;
++(instancetype)initWithImageKey:(NSString *)key isShow:(BOOL)show doneBlock:(void (^)(NSString *))block{
+    ImageViewerController *vc = [[ImageViewerController alloc] init];
+    vc.doneBlock = block;
+    vc.key = key;
+    vc.showDelete = &(show);
+    return vc;
+}
+
++(instancetype)initWithImageUrl:(NSURL *)url isShow:(BOOL)show doneBlock:(void (^)(NSString *))block{
+    ImageViewerController *vc = [[ImageViewerController alloc] init];
+    vc.doneBlock = block;
+    vc.imageURL = url;
+    vc.showDelete = &(show);
+    return vc;
 }
 
 #pragma mark - life cycle
@@ -162,8 +168,6 @@
     return _imageView;
 }
 
-// http://stackoverflow.com/questions/1316451/center-content-of-uiscrollview-when-smaller
-
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView{
     CGFloat offsetX = scrollView.bounds.size.width > scrollView.contentSize.width ?
     (scrollView.bounds.size.width - scrollView.contentSize.width) / 2 : 0;
@@ -201,8 +205,6 @@
     
     [_scrollView zoomToRect:rectToZoomTo animated:YES];
 }
-
-// from https://github.com/ideaismobile/IDMPhotoBrowser
 
 - (void)panGestureRecognized:(id)sender{
     CGFloat bottomOffset = _scrollView.contentSize.height - _scrollView.bounds.size.height;
@@ -319,19 +321,6 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-+(instancetype)initWithImageKey:(NSString *)key doneBlock:(void (^)(NSString *))block{
-    
-    ImageViewerController *vc = [[ImageViewerController alloc] init];
-    vc.doneBlock = block;
-    vc.key = key;
-    return vc;
-}
 
-+(instancetype)initWithImageKey:(NSString *)key showDelete:(BOOL)show{
-    ImageViewerController *vc = [[ImageViewerController alloc] init];
-    vc.key = key;
-    vc.showDelete = &(show);
-    return vc;
-}
 
 @end

@@ -285,13 +285,12 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     __weak typeof(self) weakSelf = self;
     if (_attachments.count == kMaxImage || indexPath.row < _attachments.count) {
         Attachment *attachment = _attachments[indexPath.row];
-        ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key doneBlock:^(NSString *textValue) {
+        ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key isShow:YES doneBlock:^(NSString *textValue) {
             [Utils deleteImage:attachment.key];
             [attachment deleteToDB];
             [weakSelf.attachments removeObject:attachment];
             [weakSelf p_updateStep];
             [_inventoryEditView.photoCollectionView reloadData];
-            
         }];
         [self presentViewController:ivc animated:YES completion:nil];
     }else{

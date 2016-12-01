@@ -108,7 +108,8 @@
 #pragma mark - private actions
 
 - (void)tapImageView:(UITapGestureRecognizer *)tap{
-    ImageViewerController *ivc = [ImageViewerController initWithImageKey:_picPathStringsArray[tap.view.tag] showDelete:NO];
+    ImageViewerController *ivc =[ImageViewerController initWithImageKey:_picPathStringsArray[tap.view.tag] isShow:NO doneBlock:^(NSString *textValue) {}];
+    
     id object = [self nextResponder];
     while (![object isKindOfClass:[UIViewController class]] && object != nil) {
         object = [object nextResponder];

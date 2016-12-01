@@ -22,21 +22,23 @@
     if (!self) return nil;
     
     self.backgroundColor = [UIColor whiteColor];
-    UIView *containView = [UIView new];
-    [containView setBackgroundColor:[UIColor whiteColor]];
-    [self addSubview:containView];
-    [containView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).with.insets(UIEdgeInsetsMake(0, 5, 5, 5));
-    }];
-    [self setupView];
-    [self setupBottomView];
+    _scrollView = [UIScrollView new];
+    _scrollView.backgroundColor = [UIColor whiteColor];
+    _scrollView.pagingEnabled = NO;
+    [self addSubview:_scrollView];
     
+    [self setupView];
+//    [self setupBottomView];
+    [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+        make.bottom.mas_equalTo(_commodityView.mas_bottom).offset(kBottomHeight);
+    }];
     return self;
 }
 
 -(void)setupView{
     UIView *qrView = [UIView new];
-    [self addSubview:qrView];
+    [_scrollView addSubview:qrView];
     
     UIView *qrLine = [UIView new];
     qrLine.backgroundColor = [UIColor lineColor];
@@ -68,7 +70,7 @@
     _goodNameLabel.font = [UIFont systemFontOfSize:kShisanpt];
     _goodNameLabel.text = @"物品名称";
     _goodNameLabel.textColor = [UIColor mainTextColor];
-    [self addSubview:_goodNameLabel];
+    [_scrollView addSubview:_goodNameLabel];
     
     _goodNameText = [UITextField new];
     _goodNameText.returnKeyType = UIReturnKeyNext;
@@ -79,13 +81,13 @@
     _goodNameText.textColor = [UIColor mainTextColor];
     _goodNameText.leftViewMode = UITextFieldViewModeAlways;
     _goodNameText.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 0)];
-    [self addSubview:_goodNameText];
+    [_scrollView addSubview:_goodNameText];
     
     _remarkLabel = [UILabel new];
     _remarkLabel.font = [UIFont systemFontOfSize:kShisanpt];
     _remarkLabel.textColor = [UIColor mainTextColor];
     _remarkLabel.text = @"备    注";
-    [self addSubview:_remarkLabel];
+    [_scrollView addSubview:_remarkLabel];
     
     _remarkText = [UITextView new];
     _remarkText.returnKeyType = UIReturnKeyDone;
@@ -94,13 +96,17 @@
     _remarkText.layer.cornerRadius = kEditViewCorner;
     _remarkText.font = [UIFont systemFontOfSize:kShisanpt];
     _remarkText.textColor = [UIColor secondTextColor];
-    [self addSubview:_remarkText];
+    [_scrollView addSubview:_remarkText];
     
     _photoLabel = [UILabel new];
     _photoLabel.text = @"照片";
     _photoLabel.textColor = [UIColor mainTextColor];
     _photoLabel.font = [UIFont systemFontOfSize:kShisanpt];
-    [self addSubview:_photoLabel];
+    [_scrollView addSubview:_photoLabel];
+    
+    _colView = [UIView new];
+    _colView.backgroundColor = [UIColor whiteColor];
+    [_scrollView addSubview:_colView];
     
     CGFloat itemWH = (kScreen_Width - 12 * 4) / 3;
     //创建布局对象
@@ -113,13 +119,13 @@
     _photoCollectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     _photoCollectionView.backgroundColor = [UIColor whiteColor];
     _photoCollectionView.scrollEnabled = NO;
-    [self addSubview:_photoCollectionView];
+    [_colView addSubview:_photoCollectionView];
     
     [_photoCollectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];
     
     
     _commodityView = [UIView new];
-    [self addSubview:_commodityView];
+    [_scrollView addSubview:_commodityView];
     
     UIView *commodityLine = [UIView new];
     commodityLine.backgroundColor = [UIColor grayColor];
@@ -146,9 +152,9 @@
     [_commodityView addSubview:_commodityRightIcon];
     
     [qrView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self.mas_top).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
+        make.top.equalTo(_scrollView.mas_top).with.offset(0);
+        make.left.equalTo(_scrollView.mas_left).with.offset(0);
+        make.right.equalTo(_scrollView.mas_right).with.offset(0);
         make.height.mas_equalTo(@76);
     }];
     
@@ -212,17 +218,25 @@
     
 
     NSNumber *collectionH = [NSNumber numberWithInteger:itemWH * 2 + 12 *3] ;
+    [_colView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_photoLabel.mas_bottom).with.offset(0);
+        make.left.equalTo(_scrollView.mas_left).with.offset(0);
+        make.right.equalTo(_scrollView.mas_right).with.offset(0);
+        make.height.equalTo(collectionH);
+    }];
+    
     [_photoCollectionView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_photoLabel.mas_bottom).with.offset(5);
-        make.left.equalTo(self.mas_left).with.offset(5);
-        make.right.equalTo(self.mas_right).with.offset(-5);
+        make.left.equalTo(_colView.mas_left).with.offset(0);
+        make.right.equalTo(_colView.mas_right).with.offset(0);
+        make.top.equalTo(_colView.mas_top).with.offset(0);
+        make.bottom.equalTo(_colView.mas_bottom).with.offset(0);
         make.height.equalTo(collectionH);
     }];
     
     [_commodityView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_photoCollectionView.mas_bottom).with.offset(5);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
+        make.top.equalTo(_colView.mas_bottom).with.offset(5);
+        make.left.equalTo(_scrollView.mas_left).with.offset(0);
+        make.right.equalTo(_scrollView.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
     }];
     

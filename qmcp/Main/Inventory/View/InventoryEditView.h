@@ -14,10 +14,10 @@
 @property (nonatomic,strong) UIButton *qrBtn;
 @property (nonatomic,strong) UITextField *qrText;
 @property (nonatomic,strong) UIButton *lockBtn;
-
+@property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) UILabel *goodNameLabel;
 @property (nonatomic,strong) UITextField *goodNameText;
-
+@property (nonatomic,strong) UIView *colView;
 @property (nonatomic,strong) UILabel *remarkLabel;
 @property (nonatomic,strong) UITextView *remarkText;
 

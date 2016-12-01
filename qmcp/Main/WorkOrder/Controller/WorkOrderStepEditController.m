@@ -382,7 +382,7 @@
     
     if (_attachments.count == kMaxImage || indexPath.row < _attachments.count) {
         Attachment *attachment = _attachments[indexPath.row];
-        ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key isShow:YES doneBlock:^(NSString *textValue) {
+        ImageViewerController *ivc = [ImageViewerController initWithImageKey:attachment.key isHide:NO doneBlock:^(NSString *textValue) {
             [self p_deleteAttachment:attachment];
             [_editView.collectionView reloadData];
         }];

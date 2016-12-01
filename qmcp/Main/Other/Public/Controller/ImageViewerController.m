@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIButton *delButton;
 @property (nonatomic, assign) BOOL zoomOut;
-@property (nonatomic, assign) BOOL *showDelete;
+@property (nonatomic, assign) BOOL *hideDel;
 @property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
@@ -44,19 +44,19 @@
     return self;
 }
 
-+(instancetype)initWithImageKey:(NSString *)key isShow:(BOOL)show doneBlock:(void (^)(NSString *))block{
++(instancetype)initWithImageKey:(NSString *)key isHide:(BOOL)show doneBlock:(void (^)(NSString *))block{
     ImageViewerController *vc = [[ImageViewerController alloc] init];
     vc.doneBlock = block;
     vc.key = key;
-    vc.showDelete = &(show);
+    vc.hideDel = &(show);
     return vc;
 }
 
-+(instancetype)initWithImageUrl:(NSURL *)url isShow:(BOOL)show doneBlock:(void (^)(NSString *))block{
++(instancetype)initWithImageUrl:(NSURL *)url isHide:(BOOL)show doneBlock:(void (^)(NSString *))block{
     ImageViewerController *vc = [[ImageViewerController alloc] init];
     vc.doneBlock = block;
     vc.imageURL = url;
-    vc.showDelete = &(show);
+    vc.hideDel = &(show);
     return vc;
 }
 
@@ -97,6 +97,7 @@
     }
     
     _delButton = [UIButton new];
+    [_delButton setBackgroundImage:[UIImage imageNamed:@"trash"] forState:UIControlStateNormal];
     [self.view addSubview:_delButton];
     [_delButton mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self.view.mas_top).with.offset(15);
@@ -105,7 +106,7 @@
         make.height.mas_equalTo(@30);
     }];
     [_delButton addTarget:self action:@selector(showDelCancelAlert) forControlEvents:UIControlEventTouchUpInside];
-    [_delButton setHidden:_showDelete];
+    [_delButton setHidden:!_hideDel];
     
 }
 

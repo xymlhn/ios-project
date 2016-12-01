@@ -124,7 +124,7 @@
             commodity.code = [[NSUUID UUID] UUIDString];
             [_chooseCommodityList addObject:commodity];
             _itemSnapshot.commodities = _chooseCommodityList;
-            if([_itemSnapshot updateToDB]){
+            if([_itemSnapshot saveToDB]){
                 [Utils showHudTipStr:@"添加服务成功"];
             }
         }]];
@@ -167,7 +167,7 @@
         _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
         [_chooseCommodityList addObject:_currentCommoditySnapshot];
         _itemSnapshot.commodities = _chooseCommodityList;
-        [_itemSnapshot updateToDB];
+        [_itemSnapshot saveToDB];
     }
     else{
         [standardView dismiss];
@@ -232,4 +232,11 @@
     return standview;
 }
 
+//返回按钮监听
+- (BOOL)navigationShouldPopOnBackButton {
+    if (self.doneBlock) {
+        self.doneBlock(_itemSnapshot.commodities);
+    }
+    return YES;
+}
 @end

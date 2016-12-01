@@ -70,7 +70,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
 -(void)loadView{
     _inventoryEditView = [InventoryEditView viewInstance];
     self.view = _inventoryEditView;
-    self.title = @"清点编辑";
+    self.title = @"新增物品";
 }
 
 #pragma mark - BaseViewController
@@ -84,8 +84,8 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     [_inventoryEditView.qrText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [_inventoryEditView.goodNameText addTarget:self action:@selector(returnOnKeyboard:) forControlEvents:UIControlEventEditingDidEndOnExit];
 
-    _inventoryEditView.commodityView.userInteractionEnabled = YES;
-    [_inventoryEditView.commodityView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
+    _inventoryEditView.addBtn.userInteractionEnabled = YES;
+    [_inventoryEditView.addBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(commodityViewClick:)]];
     
     //添加手势，点击屏幕其他区域关闭键盘的操作
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
@@ -128,7 +128,6 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     }];
     
     _inventoryEditView.lockBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        _saveType = SaveTypeDelete;
         _unLock = !_unLock;
         _inventoryEditView.qrText.enabled = _unLock;
         return [RACSignal empty];
@@ -148,7 +147,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     _inventoryEditView.qrText.text = _itemSnapshot.code;
     _inventoryEditView.remarkText.text = _itemSnapshot.remark;
     _inventoryEditView.goodNameText.text = _itemSnapshot.name;
-    
+    _inventoryEditView.commodityLabel.text = [NSString stringWithFormat:@"已选服务 %lu 项",_itemSnapshot.commodities == nil? 0 : _itemSnapshot.commodities.count];
     
 }
 
@@ -223,8 +222,10 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
 
 #pragma mark - IBAction
 - (void)commodityViewClick:(UITapGestureRecognizer *)recognizer{
+    __weak typeof(self) weakSelf = self;
     InventoryChooseController *info = [InventoryChooseController doneBlock:^(NSMutableArray *commodies) {
-        _itemSnapshot.commodities = commodies;
+        weakSelf.itemSnapshot.commodities = commodies;
+        weakSelf.inventoryEditView.commodityLabel.text = [NSString stringWithFormat:@"已选服务 %lu 项",_itemSnapshot.commodities == nil? 0 : _itemSnapshot.commodities.count];
     }];
     info.itemSnapshotCode = _itemSnapshot.itemSnapshotCode;
     info.hidesBottomBarWhenPushed = YES;

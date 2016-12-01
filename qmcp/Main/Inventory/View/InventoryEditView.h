@@ -22,9 +22,8 @@
 @property (nonatomic,strong) UITextView *remarkText;
 
 @property (nonatomic,strong) UILabel *photoLabel;
-
-@property (nonatomic,strong) UILabel *commodityLeftIcon;
-@property (nonatomic,strong) UILabel *commodityRightIcon;
+@property (nonatomic,strong) UIView *addBtn;
+@property (nonatomic,strong) UILabel *addLabel;
 @property (nonatomic,strong) UILabel *commodityLabel;
 @property (nonatomic,strong) UIView *commodityView;
 

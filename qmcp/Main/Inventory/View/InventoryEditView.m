@@ -28,7 +28,7 @@
     [self addSubview:_scrollView];
     
     [self setupView];
-//    [self setupBottomView];
+    [self setupBottomView];
     [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
         make.bottom.mas_equalTo(_commodityView.mas_bottom).offset(kBottomHeight);
@@ -125,31 +125,41 @@
     
     
     _commodityView = [UIView new];
+    _commodityView.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_commodityView];
     
     UIView *commodityLine = [UIView new];
-    commodityLine.backgroundColor = [UIColor grayColor];
+    commodityLine.backgroundColor = [UIColor lineColor];
     [_commodityView addSubview:commodityLine];
     
-    UIView *commodityTopLine = [UIView new];
-    commodityTopLine.backgroundColor = [UIColor grayColor];
-    [_commodityView addSubview:commodityTopLine];
-    
-    _commodityLeftIcon = [UILabel new];
-    [_commodityLeftIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    _commodityLeftIcon.text = @"";
-    _commodityLeftIcon.textColor = [UIColor blackColor];
-    [_commodityView addSubview:_commodityLeftIcon];
-    
     _commodityLabel = [UILabel new];
-    _commodityLabel.text = @"添加服务";
+    _commodityLabel.text = @"已选服务";
+    _commodityLabel.font = [UIFont systemFontOfSize:kShisanpt];
+    _commodityLabel.textColor = [UIColor mainTextColor];
     [_commodityView addSubview:_commodityLabel];
     
-    _commodityRightIcon = [UILabel new];
-    [_commodityRightIcon setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
-    _commodityRightIcon.text = @"";
-    _commodityRightIcon.textColor = [UIColor blackColor];
-    [_commodityView addSubview:_commodityRightIcon];
+    _addBtn = [UIView new];
+    [_addBtn.layer setMasksToBounds:YES];
+    [_addBtn.layer setCornerRadius:kBottomButtonCorner];
+    _addBtn.backgroundColor = [UIColor appBlueColor];
+    [_commodityView addSubview:_addBtn];
+    
+    UILabel *addIcon = [UILabel new];
+    [addIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
+    addIcon.text = @"";
+    addIcon.textAlignment = NSTextAlignmentCenter;
+    addIcon.textColor = [UIColor whiteColor];
+    [_addBtn addSubview:addIcon];
+    
+    _addLabel = [UILabel new];
+    _addLabel.font = [UIFont systemFontOfSize:kShiwupt];
+    _addLabel.text = @"新增服务";
+    _addLabel.textColor = [UIColor whiteColor];
+    [_addBtn addSubview:_addLabel];
+    
+    UIView *commodityBottomLine = [UIView new];
+    commodityBottomLine.backgroundColor = [UIColor lineColor];
+    [_commodityView addSubview:commodityBottomLine];
     
     [qrView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_scrollView.mas_top).with.offset(0);
@@ -239,36 +249,40 @@
         make.right.equalTo(_scrollView.mas_right).with.offset(0);
         make.height.mas_equalTo(@40);
     }];
-    
-    [_commodityLeftIcon mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_commodityView.mas_centerY);
-        make.left.equalTo(_commodityView.mas_left).with.offset(kPaddingLeftWidth);
-        make.width.equalTo(@30);
-    }];
-    
+
     [_commodityLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_commodityView.mas_centerY);
-        make.left.equalTo(_commodityLeftIcon.mas_right).with.offset(5);
-        make.right.equalTo(_commodityRightIcon.mas_left).with.offset(5);
+        make.left.equalTo(_commodityView.mas_left).with.offset(15);
     }];
     
-    [_commodityRightIcon mas_makeConstraints:^(MASConstraintMaker *make){
+    [_addBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(_commodityView.mas_centerY);
         make.right.equalTo(_commodityView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.width.equalTo(@125);
+        make.height.equalTo(@30);
     }];
     
-    [commodityTopLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_commodityView.mas_top).with.offset(0);
-        make.left.equalTo(_commodityView.mas_left).with.offset(0);
-        make.right.equalTo(_commodityView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+    [addIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_addBtn.mas_centerY);
+        make.left.equalTo(_addBtn.mas_left).with.offset(20);
+    }];
+    
+    [_addLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(_addBtn.mas_centerY);
+        make.left.equalTo(addIcon.mas_right).with.offset(8);
     }];
     
     [commodityLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_commodityView.mas_bottom).with.offset(0);
+        make.top.equalTo(_commodityView.mas_top).with.offset(0);
         make.left.equalTo(_commodityView.mas_left).with.offset(0);
         make.right.equalTo(_commodityView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@1);
+        make.height.mas_equalTo(kLineHeight);
+    }];
+    [commodityBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(_commodityView.mas_bottom).with.offset(0);
+        make.left.equalTo(_commodityView.mas_left).with.offset(15);
+        make.right.equalTo(_commodityView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.height.mas_equalTo(kLineHeight);
     }];
 }
 //底部按钮

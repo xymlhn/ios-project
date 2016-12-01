@@ -82,12 +82,12 @@
                                                                              underTabbar:YES];
     if ([[AppManager getInstance] getUser].cooperationMode == CooperationModeSingle) {
         _titles = @[@"订单", @"我"];
-        _images = @[@"tabbar-discover", @"tabbar-me"];
+        _images = @[@"tabbar-salesorder", @"tabbar-me"];
         self.viewControllers = @[[self addNavigationItemForViewController:saleOrderSVC],
                                  [self addNavigationItemForViewController:help]];
     }else{
         _titles = @[@"订单",@"工单", @"我"];
-        _images = @[@"tabbar-news", @"tabbar-discover", @"tabbar-me"];
+        _images = @[@"tabbar-salesorder", @"tabbar-workorder", @"tabbar-me"];
         SwipableViewController *workOrderSVC = [[SwipableViewController alloc] initWithTitle:@"工单"
                                                                                 andSubTitles:@[@"未完成", @"待上传",]
                                                                               andControllers:@[newsViewCtl, hotNewsViewCtl]
@@ -101,11 +101,11 @@
     
    
     self.tabBar.translucent = NO;
-    
+
     [self.tabBar.items enumerateObjectsUsingBlock:^(UITabBarItem *item, NSUInteger idx, BOOL *stop) {
         [item setTitle:_titles[idx]];
-        [item setImage:[UIImage imageNamed:_images[idx]]];
-        [item setSelectedImage:[UIImage imageNamed:[_images[idx] stringByAppendingString:@"-selected"]]];
+        [item setImage:[[UIImage imageNamed:_images[idx]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+        [item setSelectedImage:[[UIImage imageNamed:[_images[idx] stringByAppendingString:@"-selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     }];
     
     [self.tabBar addObserver:self

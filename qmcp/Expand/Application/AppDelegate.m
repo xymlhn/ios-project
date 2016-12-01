@@ -82,10 +82,8 @@ const static int databaseVersion = 0;
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
                                                          forBarMetrics:UIBarMetricsDefault];
-    
-    [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x7E8891]];
+
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appBlueColor]} forState:UIControlStateSelected];
-    [[UITabBar appearance] setBarTintColor:[UIColor titleBarColor]];
 }
 
 //****************************数据库****************************//

@@ -305,26 +305,10 @@
     }];
     controller.dataArray = _dataArray;
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        controller.providesPresentationContextTransitionStyle = YES;
-        controller.definesPresentationContext = YES;
-        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self.tabBarController presentViewController:controller animated:YES completion:nil];
-        
-    } else {
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-        [self presentViewController:controller animated:NO completion:nil];
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    }
-}
-
-#pragma mark UIActionSheetDelegate M
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 2) {
-        return;
-    }
-    
-    
+    controller.providesPresentationContextTransitionStyle = YES;
+    controller.definesPresentationContext = YES;
+    controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self.tabBarController presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerController
@@ -338,9 +322,8 @@
         attachment.type = 10;
         NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
         //当选择的类型是图片
-        if ([type isEqualToString:@"public.image"])
-        {
-            UIImage *image = [Utils scaleToSize:info[UIImagePickerControllerEditedImage] size:CGSizeMake(320.0f, 480.0f)];
+        if ([type isEqualToString:@"public.image"]){
+            UIImage *image = [Utils imageCompressForWidth:info[UIImagePickerControllerEditedImage] targetWidth:500.];
             [Utils saveImage:image andName:attachment.key];
         }
         [_attachments insertObject:attachment atIndex:0];

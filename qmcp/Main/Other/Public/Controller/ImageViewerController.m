@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIButton *delButton;
 @property (nonatomic, assign) BOOL zoomOut;
-@property (nonatomic, assign) BOOL *hideDel;
+@property (nonatomic, assign) BOOL hideDel;
 @property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
@@ -48,7 +48,7 @@
     ImageViewerController *vc = [[ImageViewerController alloc] init];
     vc.doneBlock = block;
     vc.key = key;
-    vc.hideDel = &(show);
+    vc.hideDel = show;
     return vc;
 }
 
@@ -56,7 +56,7 @@
     ImageViewerController *vc = [[ImageViewerController alloc] init];
     vc.doneBlock = block;
     vc.imageURL = url;
-    vc.hideDel = &(show);
+    vc.hideDel = show;
     return vc;
 }
 
@@ -106,7 +106,7 @@
         make.height.mas_equalTo(@30);
     }];
     [_delButton addTarget:self action:@selector(showDelCancelAlert) forControlEvents:UIControlEventTouchUpInside];
-    [_delButton setHidden:!_hideDel];
+    [_delButton setHidden:_hideDel];
     
 }
 

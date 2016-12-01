@@ -135,27 +135,14 @@
 
 }
 
-+(UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size{
-    // 创建一个bitmap的context
-    // 并把它设置成为当前正在使用的context
-    UIGraphicsBeginImageContext(size);
-    // 绘制改变大小的图片
-    [img drawInRect:CGRectMake(0,0, size.width, size.height)];
-    // 从当前context中创建一个改变大小后的图片
-    UIImage* scaledImage =UIGraphicsGetImageFromCurrentImageContext();
-    // 使当前的context出堆栈
-    UIGraphicsEndImageContext();
-    //返回新的改变大小后的图片
-    return scaledImage;
-}
-
-+(UIImage *) imageCompressForSize:(UIImage *)sourceImage targetSize:(CGSize)size{
++(UIImage *) imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth{
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
-    CGFloat targetWidth = size.width;
-    CGFloat targetHeight = size.height;
+    CGFloat targetWidth = defineWidth;
+    CGFloat targetHeight = height / (width / targetWidth);
+    CGSize size = CGSizeMake(targetWidth, targetHeight);
     CGFloat scaleFactor = 0.0;
     CGFloat scaledWidth = targetWidth;
     CGFloat scaledHeight = targetHeight;
@@ -177,24 +164,21 @@
             thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
         }
     }
-    
     UIGraphicsBeginImageContext(size);
-    
     CGRect thumbnailRect = CGRectZero;
     thumbnailRect.origin = thumbnailPoint;
     thumbnailRect.size.width = scaledWidth;
     thumbnailRect.size.height = scaledHeight;
-    [sourceImage drawInRect:thumbnailRect];
-    newImage = UIGraphicsGetImageFromCurrentImageContext();
     
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
     if(newImage == nil){
         NSLog(@"scale image fail");
     }
     
     UIGraphicsEndImageContext();
-    
     return newImage;
-    
 }
 
 + (UIImage*)loadImage:(NSString *)imageName{

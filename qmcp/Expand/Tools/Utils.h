@@ -89,18 +89,7 @@
  *
  *  @return 图片
  */
-+(UIImage *) imageCompressForSize:(UIImage *)sourceImage targetSize:(CGSize)size;
-
-
-/**
- *  图片固定比例压缩
- *
- *  @param img  图片源
- *  @param size 比例
- *
- *  @return 图片
- */
-+ (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size;
++(UIImage *) imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth;
 
 
 /**

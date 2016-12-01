@@ -247,7 +247,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
         NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
         //当选择的类型是图片
         if ([type isEqualToString:@"public.image"]){
-            UIImage *image = info[UIImagePickerControllerEditedImage];
+            UIImage *image = [Utils imageCompressForWidth:info[UIImagePickerControllerEditedImage] targetWidth:0.5];
             [Utils saveImage:image andName:attachment.key];
         }
         

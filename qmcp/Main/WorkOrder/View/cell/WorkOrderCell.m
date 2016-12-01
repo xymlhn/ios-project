@@ -11,7 +11,7 @@
 #import "Masonry.h"
 @interface WorkOrderCell ()
 
-@property(nonatomic,strong)UILabel *typeText;
+@property(nonatomic,strong)UIImageView *typeImage;
 @property(nonatomic,strong)UILabel *codeText;
 @property(nonatomic,strong)UILabel *commodityNameText;
 @property(nonatomic,strong)UILabel *nameText;
@@ -45,11 +45,8 @@
 
 -(void)initView{
     static int border = 10;
-    _typeText = [UILabel new];
-    _typeText.textColor = [UIColor whiteColor];
-    _typeText.textAlignment = NSTextAlignmentCenter;
-    _typeText.backgroundColor = [UIColor nameColor];
-    [self.contentView addSubview:_typeText];
+    _typeImage = [UIImageView new];
+    [self.contentView addSubview:_typeImage];
     
     _commodityNameText = [UILabel new];
     _commodityNameText.font = [UIFont systemFontOfSize:12];
@@ -79,7 +76,7 @@
     phoneIcon.textColor = [UIColor nameColor];
     [self.contentView addSubview:phoneIcon];
     
-    [_typeText mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_typeImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@60);
         make.height.equalTo(@60);
         make.left.equalTo(self.contentView.mas_left).with.offset(border);
@@ -87,18 +84,18 @@
     }];
     
     [_codeText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeText.mas_right).with.offset(border);
-        make.top.equalTo(_typeText.mas_top);
+        make.left.equalTo(_typeImage.mas_right).with.offset(border);
+        make.top.equalTo(_typeImage.mas_top);
     }];
     
     [_commodityNameText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeText.mas_right).with.offset(border);
+        make.left.equalTo(_typeImage.mas_right).with.offset(border);
         make.centerY.equalTo(self.contentView.mas_centerY);
     }];
     
     [userIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeText.mas_right).with.offset(border);
-        make.bottom.equalTo(_typeText.mas_bottom);
+        make.left.equalTo(_typeImage.mas_right).with.offset(border);
+        make.bottom.equalTo(_typeImage.mas_bottom);
     }];
     
     [_nameText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -125,12 +122,10 @@
         _codeText.text = workOrder.code;
         switch (workOrder.type) {
             case WorkOrderTypeOnsite:
-                _typeText.text = @"上门";
-                _typeText.backgroundColor = [UIColor orangeColor];
+                _typeImage.image = [UIImage imageNamed:@"type_shangmen"];
                 break;
             case WorkOrderTypeService:
-                _typeText.text = @"服务";
-                _typeText.backgroundColor = [UIColor nameColor];
+                _typeImage.image = [UIImage imageNamed:@"type_daodian"];
                 break;
             default:
                 break;

@@ -18,8 +18,11 @@ typedef NS_ENUM(NSInteger, FormSort) {
 @interface FormTemplateBrife : NSObject
 
 @property (nonatomic,copy) NSString *key;
+
 @property (nonatomic,copy) NSString *name;
+
 @property (nonatomic,assign) FormSort formSort;
+
 @property (nonatomic,copy) NSString *formTemplateCode;
 
 @end

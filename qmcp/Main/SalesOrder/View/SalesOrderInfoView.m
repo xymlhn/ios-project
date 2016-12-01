@@ -43,7 +43,6 @@
     _remarkValue.text = salesOrder.remark;
     _saleOrderServiceValue.text = salesOrder.organizationName;
     _appointmentTimeValue.text = salesOrder.appointmentTime;
-    
     _addressValue.text = salesOrder.addressSnapshot.fullAddress ;
     _phoneValue.text = salesOrder.addressSnapshot.mobilePhone;
     _nameValue.text = salesOrder.addressSnapshot.contacts;
@@ -53,6 +52,9 @@
     _saleOrderServiceValue.text = [salesOrder.commodityNames componentsJoinedByString:@","];
     _agreePriceValue.text = salesOrder.agreementPrice == nil ? @"待定" : salesOrder.agreementPrice;
     
+    _inventoryImage.image = [UIImage imageNamed:salesOrder.signedFlag ? @"sales_check_success":@"sales_check_fail"];
+    _progressImage.image = [UIImage imageNamed:salesOrder.processingFlag ? @"sales_progress_success":@"sales_progress_fail"];
+    _payImage.image = [UIImage imageNamed:salesOrder.paidFlag ? @"sales_pay_success":@"sales_pay_fail"];
     
     switch (salesOrder.type) {
         case SalesOrderTypeOnsite:

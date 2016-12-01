@@ -51,17 +51,14 @@ typedef NS_ENUM(NSInteger, OnSiteTimeStamp) {
 
 @property (nonatomic, copy) NSString *code;
 
-@property (nonatomic, copy) NSMutableArray *processDetail;
-
-@property (nonatomic, copy) NSMutableArray *salesOrderCommoditySnapshots;
-
 @property (nonatomic, copy) NSString *qrCodeUrl;
 
 @property (nonatomic, copy) NSString *signatureImageKey;
 
-@property (nonatomic, retain) SalesOrderSnapshot *salesOrderSnapshot;
+@property (nonatomic, copy) NSString *userOpenId;
 
-@property (nonatomic, retain) ItemSnapshot *itemSnapshot;
+@property (nonatomic, copy) NSString *userId;
+
 
 @property (nonatomic, assign) WorkOrderType type;
 
@@ -73,7 +70,11 @@ typedef NS_ENUM(NSInteger, OnSiteTimeStamp) {
 
 @property (nonatomic, assign) BOOL isFailed;
 
-@property (nonatomic, copy) NSString *userOpenId;
+@property (nonatomic, retain) SalesOrderSnapshot *salesOrderSnapshot;
 
-@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, retain) ItemSnapshot *itemSnapshot;
+
+@property (nonatomic, copy) NSMutableArray *processDetail;
+
+@property (nonatomic, copy) NSMutableArray *salesOrderCommoditySnapshots;
 @end

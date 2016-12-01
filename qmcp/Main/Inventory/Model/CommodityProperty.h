@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface CommodityProperty : NSObject
+
 @property (nonatomic,copy) NSString *propertyName;
+
 @property (nonatomic,strong) NSMutableArray *propertyContent;
+
 @end

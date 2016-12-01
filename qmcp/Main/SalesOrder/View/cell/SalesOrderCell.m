@@ -6,20 +6,20 @@
 //  Copyright © 2016年 inforshare. All rights reserved.
 //
 
-#import "SalesOrderGrabCell.h"
-#import "SalesOrderMineCell.h"
+#import "SalesOrderCell.h"
+#import "SalesOrderCell.h"
 #import "UIColor+Util.h"
 #import "Masonry.h"
 #import "MJExtension.h"
 #import "EnumUtil.h"
-@implementation SalesOrderGrabCell
+@implementation SalesOrderCell
 //创建自定义可重用的cell对象
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *reuseId = @"gb";
-    SalesOrderGrabCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    static NSString *reuseId = @"SalesOrderCell";
+    SalesOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (cell == nil) {
-        cell = [[SalesOrderGrabCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
+        cell = [[SalesOrderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
     }
     cell.selectedBackgroundView.backgroundColor = [UIColor themeColor];
     return cell;
@@ -39,13 +39,19 @@
 - (void)setSalesOrder:(SalesOrder *)salesOrder
 {
     if(salesOrder != nil){
-        _typeText.text = [EnumUtil salesOrderTypeString:salesOrder.type];
-        if(salesOrder.type == SalesOrderTypeOnsite){
-            _typeText.backgroundColor = [UIColor nameColor];
-        }else if(salesOrder.type == SalesOrderTypeShop){
-            _typeText.backgroundColor = [UIColor orangeColor];
-        }else{
-            _typeText.backgroundColor = [UIColor greenColor];
+        
+        switch (salesOrder.type) {
+            case SalesOrderTypeShop:
+                _typeImage.image = [UIImage imageNamed:@"type_daodian"];
+                break;
+            case SalesOrderTypeOnsite:
+                _typeImage.image = [UIImage imageNamed:@"type_shangmen"];
+                break;
+            case SalesOrderTypeRemote:
+                _typeImage.image = [UIImage imageNamed:@"type_yuancheng"];
+                break;
+            default:
+                break;
         }
         _commodityNameText.text = [salesOrder.commodityNames componentsJoinedByString:@","];;
         _codeText.text = salesOrder.code;
@@ -58,11 +64,8 @@
 
 -(void)initView{
     static int border = 10;
-    _typeText = [UILabel new];
-    _typeText.textColor = [UIColor whiteColor];
-    _typeText.textAlignment = NSTextAlignmentCenter;
-    _typeText.backgroundColor = [UIColor nameColor];
-    [self.contentView addSubview:_typeText];
+    _typeImage = [UIImageView new];
+    [self.contentView addSubview:_typeImage];
     
     _commodityNameText = [UILabel new];
     _commodityNameText.font = [UIFont systemFontOfSize:12];
@@ -99,9 +102,10 @@
     [_grabBtn.layer setBorderWidth:1.0];
     _grabBtn.layer.borderColor=[UIColor grayColor].CGColor;
     [_grabBtn setTitle:@"抢单" forState:UIControlStateNormal];
+    [_grabBtn setHidden:YES];
     [self.contentView addSubview:_grabBtn];
     
-    [_typeText mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_typeImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@60);
         make.height.equalTo(@60);
         make.left.equalTo(self.contentView.mas_left).with.offset(border);
@@ -109,18 +113,18 @@
     }];
     
     [_codeText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeText.mas_right).with.offset(border);
-        make.top.equalTo(_typeText.mas_top);
+        make.left.equalTo(_typeImage.mas_right).with.offset(border);
+        make.top.equalTo(_typeImage.mas_top);
     }];
     
     [_commodityNameText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeText.mas_right).with.offset(border);
+        make.left.equalTo(_typeImage.mas_right).with.offset(border);
         make.centerY.equalTo(self.contentView.mas_centerY);
     }];
     
     [userIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeText.mas_right).with.offset(border);
-        make.bottom.equalTo(_typeText.mas_bottom);
+        make.left.equalTo(_typeImage.mas_right).with.offset(border);
+        make.bottom.equalTo(_typeImage.mas_bottom);
     }];
     
     [_nameText mas_makeConstraints:^(MASConstraintMaker *make) {

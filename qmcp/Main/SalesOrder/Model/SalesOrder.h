@@ -25,13 +25,31 @@
 
 @property (nonatomic, copy) NSString *brandName;
 
+@property (nonatomic, copy) NSString *agreementPrice;
+
+@property (nonatomic, copy) NSString *discountAmount;   //折扣
+
+@property (nonatomic, copy) NSString *actuallyPaid;     //最终价格
+
 @property (nonatomic, assign) BOOL fixedPriceFlag;
 
 @property (nonatomic, assign) BOOL appointmentResult;
 
-@property (nonatomic, assign) BOOL signedFlag;
+@property (nonatomic, assign) BOOL signedFlag;      //是否清点
 
-@property (nonatomic, assign) float totalAmount;
+@property (nonatomic, assign) BOOL processingFlag;
+
+@property (nonatomic, assign) BOOL paidFlag;        //是否支付
+
+@property (nonatomic, assign) BOOL storePricingReviewFlag;      //商家核价
+
+@property (nonatomic, assign) BOOL confirmationFlag;
+
+@property (nonatomic, assign) BOOL isRead;      //是否已读
+
+@property (nonatomic, assign) float totalAmount;    //总价
+
+@property (nonatomic, assign) PaymentStatus paymentStatus;
 
 @property (nonatomic, assign) SalesOrderType type;
 
@@ -40,20 +58,6 @@
 @property (nonatomic, assign) OnSiteStatus onSiteStatus;
 
 @property (nonatomic, strong) NSArray<NSString *> *commodityNames;
-
-@property (nonatomic, assign) BOOL storePricingReviewFlag;
-
-@property (nonatomic, assign) BOOL confirmationFlag;
-
-@property (nonatomic, assign) BOOL isRead;
-
-@property (nonatomic, copy) NSString *agreementPrice;   
-
-@property (nonatomic, copy) NSString *discountAmount;
-
-@property (nonatomic, copy) NSString *actuallyPaid;
-
-@property (nonatomic, assign) PaymentStatus paymentStatus;
 
 @property (nonatomic, strong) NSArray<ItemSnapshot *> *itemSnapshots;
 

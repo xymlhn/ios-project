@@ -60,26 +60,12 @@
 		245F756E1DDABF5D00FB51FA /* SDTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */; };
 		245F75711DDABFE700FB51FA /* SDTimeLineCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */; };
 		2460DCC51DE44E81006F6F64 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 2460DCC41DE44E81006F6F64 /* Config.m */; };
-		246642D41D9A1285009402A2 /* SalesOrderGrabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */; };
-		246642D51D9A1285009402A2 /* SalesOrderMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D31D9A1285009402A2 /* SalesOrderMineCell.m */; };
+		246642D41D9A1285009402A2 /* SalesOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D11D9A1285009402A2 /* SalesOrderCell.m */; };
 		246642DA1D9A12CA009402A2 /* BusinessSalesOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */; };
 		246642DB1D9A12CA009402A2 /* SalesOrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642D91D9A12CA009402A2 /* SalesOrderInfoView.m */; };
-		246643031D9A12E8009402A2 /* CheckBoxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642DE1D9A12E8009402A2 /* CheckBoxCell.m */; };
 		246643041D9A12E8009402A2 /* ChooseCommodityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642E01D9A12E8009402A2 /* ChooseCommodityCell.m */; };
 		246643051D9A12E8009402A2 /* CommodityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642E21D9A12E8009402A2 /* CommodityCell.m */; };
 		246643061D9A12E8009402A2 /* CommodityStepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642E41D9A12E8009402A2 /* CommodityStepCell.m */; };
-		246643071D9A12E8009402A2 /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642E61D9A12E8009402A2 /* DateCell.m */; };
-		246643081D9A12E8009402A2 /* DateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642E81D9A12E8009402A2 /* DateTimeCell.m */; };
-		246643091D9A12E8009402A2 /* FooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642EA1D9A12E8009402A2 /* FooterCell.m */; };
-		2466430A1D9A12E8009402A2 /* FormTemplateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642EC1D9A12E8009402A2 /* FormTemplateCell.m */; };
-		2466430B1D9A12E8009402A2 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642EE1D9A12E8009402A2 /* HeaderCell.m */; };
-		2466430C1D9A12E8009402A2 /* LabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642F01D9A12E8009402A2 /* LabelCell.m */; };
-		2466430D1D9A12E8009402A2 /* NumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642F21D9A12E8009402A2 /* NumberCell.m */; };
-		2466430E1D9A12E8009402A2 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642F41D9A12E8009402A2 /* PhotoCell.m */; };
-		2466430F1D9A12E8009402A2 /* PJRSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642F61D9A12E8009402A2 /* PJRSignatureView.m */; };
-		246643101D9A12E8009402A2 /* SelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642F81D9A12E8009402A2 /* SelectCell.m */; };
-		246643111D9A12E8009402A2 /* TextMultiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642FA1D9A12E8009402A2 /* TextMultiCell.m */; };
-		246643121D9A12E8009402A2 /* TextSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642FC1D9A12E8009402A2 /* TextSingleCell.m */; };
 		246643131D9A12E8009402A2 /* WorkOrderCameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246642FE1D9A12E8009402A2 /* WorkOrderCameraCell.m */; };
 		246643141D9A12E8009402A2 /* WorkOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246643001D9A12E8009402A2 /* WorkOrderCell.m */; };
 		246643151D9A12E8009402A2 /* WorkOrderStepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246643021D9A12E8009402A2 /* WorkOrderStepCell.m */; };
@@ -89,6 +75,19 @@
 		246643251D9A1320009402A2 /* PickupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246643221D9A1320009402A2 /* PickupCell.m */; };
 		246643261D9A1320009402A2 /* PickupNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246643241D9A1320009402A2 /* PickupNoticeCell.m */; };
 		2466432E1D9A135B009402A2 /* CheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2466432D1D9A135B009402A2 /* CheckCell.m */; };
+		24874AE01DEFF15A00939110 /* CheckBoxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874AC71DEFF15A00939110 /* CheckBoxCell.m */; };
+		24874AE11DEFF15A00939110 /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874AC91DEFF15A00939110 /* DateCell.m */; };
+		24874AE21DEFF15A00939110 /* DateTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874ACB1DEFF15A00939110 /* DateTimeCell.m */; };
+		24874AE31DEFF15A00939110 /* FooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874ACD1DEFF15A00939110 /* FooterCell.m */; };
+		24874AE41DEFF15A00939110 /* FormTemplateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874ACF1DEFF15A00939110 /* FormTemplateCell.m */; };
+		24874AE51DEFF15A00939110 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874AD11DEFF15A00939110 /* HeaderCell.m */; };
+		24874AE61DEFF15A00939110 /* LabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874AD31DEFF15A00939110 /* LabelCell.m */; };
+		24874AE71DEFF15A00939110 /* NumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874AD51DEFF15A00939110 /* NumberCell.m */; };
+		24874AE81DEFF15A00939110 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874AD71DEFF15A00939110 /* PhotoCell.m */; };
+		24874AE91DEFF15A00939110 /* PJRSignatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874AD91DEFF15A00939110 /* PJRSignatureView.m */; };
+		24874AEA1DEFF15A00939110 /* SelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874ADB1DEFF15A00939110 /* SelectCell.m */; };
+		24874AEB1DEFF15A00939110 /* TextMultiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874ADD1DEFF15A00939110 /* TextMultiCell.m */; };
+		24874AEC1DEFF15A00939110 /* TextSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24874ADF1DEFF15A00939110 /* TextSingleCell.m */; };
 		248A5DB41C85C3C30095A4FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A5DB31C85C3C30095A4FB /* main.m */; };
 		248A5DBF1C85C3C30095A4FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248A5DBE1C85C3C30095A4FB /* Assets.xcassets */; };
 		248F2E891D79603600BB982F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248F2E881D79603600BB982F /* AVFoundation.framework */; };
@@ -318,46 +317,18 @@
 		245F75701DDABFE700FB51FA /* SDTimeLineCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeLineCellModel.m; sourceTree = "<group>"; };
 		2460DCC31DE44E81006F6F64 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		2460DCC41DE44E81006F6F64 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
-		246642D01D9A1285009402A2 /* SalesOrderGrabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderGrabCell.h; sourceTree = "<group>"; };
-		246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderGrabCell.m; sourceTree = "<group>"; };
-		246642D21D9A1285009402A2 /* SalesOrderMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderMineCell.h; sourceTree = "<group>"; };
-		246642D31D9A1285009402A2 /* SalesOrderMineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderMineCell.m; sourceTree = "<group>"; };
+		246642D01D9A1285009402A2 /* SalesOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderCell.h; sourceTree = "<group>"; };
+		246642D11D9A1285009402A2 /* SalesOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderCell.m; sourceTree = "<group>"; };
 		246642D61D9A12CA009402A2 /* BusinessSalesOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessSalesOrderView.h; sourceTree = "<group>"; };
 		246642D71D9A12CA009402A2 /* BusinessSalesOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSalesOrderView.m; sourceTree = "<group>"; };
 		246642D81D9A12CA009402A2 /* SalesOrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesOrderInfoView.h; sourceTree = "<group>"; };
 		246642D91D9A12CA009402A2 /* SalesOrderInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SalesOrderInfoView.m; sourceTree = "<group>"; };
-		246642DD1D9A12E8009402A2 /* CheckBoxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxCell.h; sourceTree = "<group>"; };
-		246642DE1D9A12E8009402A2 /* CheckBoxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxCell.m; sourceTree = "<group>"; };
 		246642DF1D9A12E8009402A2 /* ChooseCommodityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCommodityCell.h; sourceTree = "<group>"; };
 		246642E01D9A12E8009402A2 /* ChooseCommodityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCommodityCell.m; sourceTree = "<group>"; };
 		246642E11D9A12E8009402A2 /* CommodityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityCell.h; sourceTree = "<group>"; };
 		246642E21D9A12E8009402A2 /* CommodityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityCell.m; sourceTree = "<group>"; };
 		246642E31D9A12E8009402A2 /* CommodityStepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommodityStepCell.h; sourceTree = "<group>"; };
 		246642E41D9A12E8009402A2 /* CommodityStepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommodityStepCell.m; sourceTree = "<group>"; };
-		246642E51D9A12E8009402A2 /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
-		246642E61D9A12E8009402A2 /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
-		246642E71D9A12E8009402A2 /* DateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimeCell.h; sourceTree = "<group>"; };
-		246642E81D9A12E8009402A2 /* DateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTimeCell.m; sourceTree = "<group>"; };
-		246642E91D9A12E8009402A2 /* FooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterCell.h; sourceTree = "<group>"; };
-		246642EA1D9A12E8009402A2 /* FooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterCell.m; sourceTree = "<group>"; };
-		246642EB1D9A12E8009402A2 /* FormTemplateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTemplateCell.h; sourceTree = "<group>"; };
-		246642EC1D9A12E8009402A2 /* FormTemplateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplateCell.m; sourceTree = "<group>"; };
-		246642ED1D9A12E8009402A2 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
-		246642EE1D9A12E8009402A2 /* HeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
-		246642EF1D9A12E8009402A2 /* LabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelCell.h; sourceTree = "<group>"; };
-		246642F01D9A12E8009402A2 /* LabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelCell.m; sourceTree = "<group>"; };
-		246642F11D9A12E8009402A2 /* NumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCell.h; sourceTree = "<group>"; };
-		246642F21D9A12E8009402A2 /* NumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCell.m; sourceTree = "<group>"; };
-		246642F31D9A12E8009402A2 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
-		246642F41D9A12E8009402A2 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
-		246642F51D9A12E8009402A2 /* PJRSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJRSignatureView.h; sourceTree = "<group>"; };
-		246642F61D9A12E8009402A2 /* PJRSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJRSignatureView.m; sourceTree = "<group>"; };
-		246642F71D9A12E8009402A2 /* SelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCell.h; sourceTree = "<group>"; };
-		246642F81D9A12E8009402A2 /* SelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCell.m; sourceTree = "<group>"; };
-		246642F91D9A12E8009402A2 /* TextMultiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMultiCell.h; sourceTree = "<group>"; };
-		246642FA1D9A12E8009402A2 /* TextMultiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextMultiCell.m; sourceTree = "<group>"; };
-		246642FB1D9A12E8009402A2 /* TextSingleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextSingleCell.h; sourceTree = "<group>"; };
-		246642FC1D9A12E8009402A2 /* TextSingleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextSingleCell.m; sourceTree = "<group>"; };
 		246642FD1D9A12E8009402A2 /* WorkOrderCameraCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderCameraCell.h; sourceTree = "<group>"; };
 		246642FE1D9A12E8009402A2 /* WorkOrderCameraCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkOrderCameraCell.m; sourceTree = "<group>"; };
 		246642FF1D9A12E8009402A2 /* WorkOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkOrderCell.h; sourceTree = "<group>"; };
@@ -377,6 +348,32 @@
 		2466432C1D9A135B009402A2 /* CheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckCell.h; sourceTree = "<group>"; };
 		2466432D1D9A135B009402A2 /* CheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckCell.m; sourceTree = "<group>"; };
 		247D31D71C8D7C040048DD38 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		24874AC61DEFF15A00939110 /* CheckBoxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxCell.h; sourceTree = "<group>"; };
+		24874AC71DEFF15A00939110 /* CheckBoxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxCell.m; sourceTree = "<group>"; };
+		24874AC81DEFF15A00939110 /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
+		24874AC91DEFF15A00939110 /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
+		24874ACA1DEFF15A00939110 /* DateTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimeCell.h; sourceTree = "<group>"; };
+		24874ACB1DEFF15A00939110 /* DateTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTimeCell.m; sourceTree = "<group>"; };
+		24874ACC1DEFF15A00939110 /* FooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterCell.h; sourceTree = "<group>"; };
+		24874ACD1DEFF15A00939110 /* FooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterCell.m; sourceTree = "<group>"; };
+		24874ACE1DEFF15A00939110 /* FormTemplateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTemplateCell.h; sourceTree = "<group>"; };
+		24874ACF1DEFF15A00939110 /* FormTemplateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTemplateCell.m; sourceTree = "<group>"; };
+		24874AD01DEFF15A00939110 /* HeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
+		24874AD11DEFF15A00939110 /* HeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
+		24874AD21DEFF15A00939110 /* LabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelCell.h; sourceTree = "<group>"; };
+		24874AD31DEFF15A00939110 /* LabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelCell.m; sourceTree = "<group>"; };
+		24874AD41DEFF15A00939110 /* NumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberCell.h; sourceTree = "<group>"; };
+		24874AD51DEFF15A00939110 /* NumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberCell.m; sourceTree = "<group>"; };
+		24874AD61DEFF15A00939110 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		24874AD71DEFF15A00939110 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		24874AD81DEFF15A00939110 /* PJRSignatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJRSignatureView.h; sourceTree = "<group>"; };
+		24874AD91DEFF15A00939110 /* PJRSignatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJRSignatureView.m; sourceTree = "<group>"; };
+		24874ADA1DEFF15A00939110 /* SelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCell.h; sourceTree = "<group>"; };
+		24874ADB1DEFF15A00939110 /* SelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCell.m; sourceTree = "<group>"; };
+		24874ADC1DEFF15A00939110 /* TextMultiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMultiCell.h; sourceTree = "<group>"; };
+		24874ADD1DEFF15A00939110 /* TextMultiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextMultiCell.m; sourceTree = "<group>"; };
+		24874ADE1DEFF15A00939110 /* TextSingleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextSingleCell.h; sourceTree = "<group>"; };
+		24874ADF1DEFF15A00939110 /* TextSingleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextSingleCell.m; sourceTree = "<group>"; };
 		248A5DAF1C85C3C30095A4FB /* e服务365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e服务365.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		248A5DB31C85C3C30095A4FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		248A5DBE1C85C3C30095A4FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -758,10 +755,8 @@
 			children = (
 				245F756C1DDABF5D00FB51FA /* SDTimeLineCell.h */,
 				245F756D1DDABF5D00FB51FA /* SDTimeLineCell.m */,
-				246642D01D9A1285009402A2 /* SalesOrderGrabCell.h */,
-				246642D11D9A1285009402A2 /* SalesOrderGrabCell.m */,
-				246642D21D9A1285009402A2 /* SalesOrderMineCell.h */,
-				246642D31D9A1285009402A2 /* SalesOrderMineCell.m */,
+				246642D01D9A1285009402A2 /* SalesOrderCell.h */,
+				246642D11D9A1285009402A2 /* SalesOrderCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -769,38 +764,13 @@
 		246642DC1D9A12E8009402A2 /* cell */ = {
 			isa = PBXGroup;
 			children = (
-				246642DD1D9A12E8009402A2 /* CheckBoxCell.h */,
-				246642DE1D9A12E8009402A2 /* CheckBoxCell.m */,
+				24874AC51DEFF15A00939110 /* form */,
 				246642DF1D9A12E8009402A2 /* ChooseCommodityCell.h */,
 				246642E01D9A12E8009402A2 /* ChooseCommodityCell.m */,
 				246642E11D9A12E8009402A2 /* CommodityCell.h */,
 				246642E21D9A12E8009402A2 /* CommodityCell.m */,
 				246642E31D9A12E8009402A2 /* CommodityStepCell.h */,
 				246642E41D9A12E8009402A2 /* CommodityStepCell.m */,
-				246642E51D9A12E8009402A2 /* DateCell.h */,
-				246642E61D9A12E8009402A2 /* DateCell.m */,
-				246642E71D9A12E8009402A2 /* DateTimeCell.h */,
-				246642E81D9A12E8009402A2 /* DateTimeCell.m */,
-				246642E91D9A12E8009402A2 /* FooterCell.h */,
-				246642EA1D9A12E8009402A2 /* FooterCell.m */,
-				246642EB1D9A12E8009402A2 /* FormTemplateCell.h */,
-				246642EC1D9A12E8009402A2 /* FormTemplateCell.m */,
-				246642ED1D9A12E8009402A2 /* HeaderCell.h */,
-				246642EE1D9A12E8009402A2 /* HeaderCell.m */,
-				246642EF1D9A12E8009402A2 /* LabelCell.h */,
-				246642F01D9A12E8009402A2 /* LabelCell.m */,
-				246642F11D9A12E8009402A2 /* NumberCell.h */,
-				246642F21D9A12E8009402A2 /* NumberCell.m */,
-				246642F31D9A12E8009402A2 /* PhotoCell.h */,
-				246642F41D9A12E8009402A2 /* PhotoCell.m */,
-				246642F51D9A12E8009402A2 /* PJRSignatureView.h */,
-				246642F61D9A12E8009402A2 /* PJRSignatureView.m */,
-				246642F71D9A12E8009402A2 /* SelectCell.h */,
-				246642F81D9A12E8009402A2 /* SelectCell.m */,
-				246642F91D9A12E8009402A2 /* TextMultiCell.h */,
-				246642FA1D9A12E8009402A2 /* TextMultiCell.m */,
-				246642FB1D9A12E8009402A2 /* TextSingleCell.h */,
-				246642FC1D9A12E8009402A2 /* TextSingleCell.m */,
 				246642FD1D9A12E8009402A2 /* WorkOrderCameraCell.h */,
 				246642FE1D9A12E8009402A2 /* WorkOrderCameraCell.m */,
 				246642FF1D9A12E8009402A2 /* WorkOrderCell.h */,
@@ -842,6 +812,39 @@
 				2466432D1D9A135B009402A2 /* CheckCell.m */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		24874AC51DEFF15A00939110 /* form */ = {
+			isa = PBXGroup;
+			children = (
+				24874AC61DEFF15A00939110 /* CheckBoxCell.h */,
+				24874AC71DEFF15A00939110 /* CheckBoxCell.m */,
+				24874AC81DEFF15A00939110 /* DateCell.h */,
+				24874AC91DEFF15A00939110 /* DateCell.m */,
+				24874ACA1DEFF15A00939110 /* DateTimeCell.h */,
+				24874ACB1DEFF15A00939110 /* DateTimeCell.m */,
+				24874ACC1DEFF15A00939110 /* FooterCell.h */,
+				24874ACD1DEFF15A00939110 /* FooterCell.m */,
+				24874ACE1DEFF15A00939110 /* FormTemplateCell.h */,
+				24874ACF1DEFF15A00939110 /* FormTemplateCell.m */,
+				24874AD01DEFF15A00939110 /* HeaderCell.h */,
+				24874AD11DEFF15A00939110 /* HeaderCell.m */,
+				24874AD21DEFF15A00939110 /* LabelCell.h */,
+				24874AD31DEFF15A00939110 /* LabelCell.m */,
+				24874AD41DEFF15A00939110 /* NumberCell.h */,
+				24874AD51DEFF15A00939110 /* NumberCell.m */,
+				24874AD61DEFF15A00939110 /* PhotoCell.h */,
+				24874AD71DEFF15A00939110 /* PhotoCell.m */,
+				24874AD81DEFF15A00939110 /* PJRSignatureView.h */,
+				24874AD91DEFF15A00939110 /* PJRSignatureView.m */,
+				24874ADA1DEFF15A00939110 /* SelectCell.h */,
+				24874ADB1DEFF15A00939110 /* SelectCell.m */,
+				24874ADC1DEFF15A00939110 /* TextMultiCell.h */,
+				24874ADD1DEFF15A00939110 /* TextMultiCell.m */,
+				24874ADE1DEFF15A00939110 /* TextSingleCell.h */,
+				24874ADF1DEFF15A00939110 /* TextSingleCell.m */,
+			);
+			path = form;
 			sourceTree = "<group>";
 		};
 		248A5DA61C85C3C30095A4FB = {
@@ -1693,6 +1696,7 @@
 			files = (
 				242815DD1D936BE7006120ED /* QrCodeBindView.m in Sources */,
 				24AFDC681D92390000B2F1B9 /* WorkOrderFormController.m in Sources */,
+				24874AE21DEFF15A00939110 /* DateTimeCell.m in Sources */,
 				241863511DE3E461006C7AC5 /* SalesOrderAgreePriceController.m in Sources */,
 				246643261D9A1320009402A2 /* PickupNoticeCell.m in Sources */,
 				246642DB1D9A12CA009402A2 /* SalesOrderInfoView.m in Sources */,
@@ -1704,13 +1708,14 @@
 				24AFDC751D92390000B2F1B9 /* WorkOrder.m in Sources */,
 				24AFDC141D9238FF00B2F1B9 /* InventorySearchController.m in Sources */,
 				24AFDC641D92390000B2F1B9 /* ChooseViewController.m in Sources */,
-				246643091D9A12E8009402A2 /* FooterCell.m in Sources */,
 				24AFDC301D9238FF00B2F1B9 /* LoginViewController.m in Sources */,
 				24D5C2DA1DE6C47100FEE938 /* InventoryShowContorller.m in Sources */,
 				24AFDC6C1D92390000B2F1B9 /* WorkOrderStepController.m in Sources */,
+				24874AE01DEFF15A00939110 /* CheckBoxCell.m in Sources */,
 				24AFDC7A1D92390000B2F1B9 /* WorkOrderInfoView.m in Sources */,
 				24AFDC231D9238FF00B2F1B9 /* AMapViewController.m in Sources */,
 				248A5DB41C85C3C30095A4FB /* main.m in Sources */,
+				24874AE41DEFF15A00939110 /* FormTemplateCell.m in Sources */,
 				24E7E9391DE2C001001DFA33 /* OSCTabBarController.m in Sources */,
 				242815F01D9388BC006120ED /* BusinessSalesOrderController.m in Sources */,
 				2466431F1D9A1304009402A2 /* InventorySearchCell.m in Sources */,
@@ -1720,6 +1725,7 @@
 				24AFDC211D9238FF00B2F1B9 /* InventorySearchView.m in Sources */,
 				242815D71D936BE7006120ED /* QrCodeViewController.m in Sources */,
 				246642DA1D9A12CA009402A2 /* BusinessSalesOrderView.m in Sources */,
+				24874AE11DEFF15A00939110 /* DateCell.m in Sources */,
 				2466431D1D9A1304009402A2 /* InventoryCell.m in Sources */,
 				240EC9601D7FB2B7008A5696 /* ThrowLineTool.m in Sources */,
 				242815D91D936BE7006120ED /* SignViewController.m in Sources */,
@@ -1728,6 +1734,7 @@
 				24AFDC871D9239BB00B2F1B9 /* PickupNoticeViewController.m in Sources */,
 				24AFDC2E1D9238FF00B2F1B9 /* InitViewController.m in Sources */,
 				24D5C2DD1DE6C54800FEE938 /* InventoryShowView.m in Sources */,
+				24874AE51DEFF15A00939110 /* HeaderCell.m in Sources */,
 				24AFDC3C1D9238FF00B2F1B9 /* SettingViewController.m in Sources */,
 				246643051D9A12E8009402A2 /* CommodityCell.m in Sources */,
 				24AFDC3F1D9238FF00B2F1B9 /* PickupData.m in Sources */,
@@ -1738,40 +1745,39 @@
 				240EC95D1D7FB2B7008A5696 /* SMPageControl.m in Sources */,
 				240EC94F1D7FB2B7008A5696 /* UIViewController+BackButtonHandler.m in Sources */,
 				242815DA1D936BE7006120ED /* CheckBoxView.m in Sources */,
+				24874AEC1DEFF15A00939110 /* TextSingleCell.m in Sources */,
 				2466431E1D9A1304009402A2 /* InventoryChooseCell.m in Sources */,
 				240EC95E1D7FB2B7008A5696 /* StandardModel.m in Sources */,
 				242815DE1D936BE7006120ED /* QrCodeIdentityView.m in Sources */,
+				24874AEB1DEFF15A00939110 /* TextMultiCell.m in Sources */,
 				24AFDC711D92390000B2F1B9 /* FormData.m in Sources */,
-				2466430C1D9A12E8009402A2 /* LabelCell.m in Sources */,
 				24AFDC1D1D9238FF00B2F1B9 /* PropertyChoose.m in Sources */,
-				2466430F1D9A12E8009402A2 /* PJRSignatureView.m in Sources */,
 				242815D31D936BE7006120ED /* AddressViewController.m in Sources */,
 				24AFDC6E1D92390000B2F1B9 /* AddressSnapshot.m in Sources */,
 				240EC9561D7FB2B7008A5696 /* PropertyManager.m in Sources */,
-				2466430E1D9A12E8009402A2 /* PhotoCell.m in Sources */,
 				240EC94B1D7FB2B7008A5696 /* UIImage+Util.m in Sources */,
 				240EC9471D7FB2B7008A5696 /* MBProgressHUD+Util.m in Sources */,
 				24E7E9361DE2C001001DFA33 /* TitleBarView.m in Sources */,
 				246643251D9A1320009402A2 /* PickupCell.m in Sources */,
 				24AFDC421D9238FF00B2F1B9 /* PickupSignature.m in Sources */,
 				24E7E9331DE2C001001DFA33 /* RootViewController.m in Sources */,
+				24874AE61DEFF15A00939110 /* LabelCell.m in Sources */,
 				242815E71D936D0F006120ED /* SalesOrder.m in Sources */,
 				240EC95B1D7FB2B7008A5696 /* Helper.m in Sources */,
 				24AFDC6B1D92390000B2F1B9 /* WorkOrderListController.m in Sources */,
 				24E7E9371DE2C001001DFA33 /* SideMenuCell.m in Sources */,
+				24874AE91DEFF15A00939110 /* PJRSignatureView.m in Sources */,
 				24AFDC4D1D9238FF00B2F1B9 /* SalesOrderSnapshot.m in Sources */,
 				24AFDC1B1D9238FF00B2F1B9 /* ItemComplete.m in Sources */,
 				24AFDC251D9238FF00B2F1B9 /* HelpViewController.m in Sources */,
 				24AFDC481D9238FF00B2F1B9 /* SalesOrderMineListController.m in Sources */,
 				240EC9481D7FB2B7008A5696 /* NSMutableArray+InsertArray.m in Sources */,
-				246643071D9A12E8009402A2 /* DateCell.m in Sources */,
 				240EC9581D7FB2B7008A5696 /* WorkOrderManager.m in Sources */,
 				24AFDC3A1D9238FF00B2F1B9 /* CacheCell.m in Sources */,
 				242815DC1D936BE7006120ED /* CommodityStepView.m in Sources */,
 				244091651DEC2D2900B03735 /* CameraView.m in Sources */,
-				2466430D1D9A12E8009402A2 /* NumberCell.m in Sources */,
 				24AFDC671D92390000B2F1B9 /* WorkOrderCameraController.m in Sources */,
-				246643111D9A12E8009402A2 /* TextMultiCell.m in Sources */,
+				24874AE71DEFF15A00939110 /* NumberCell.m in Sources */,
 				24E7E9351DE2C001001DFA33 /* SwipableViewController.m in Sources */,
 				242815D61D936BE7006120ED /* ImageViewerController.m in Sources */,
 				240EC9501D7FB2B7008A5696 /* AddressManager.m in Sources */,
@@ -1780,28 +1786,25 @@
 				240EC95F1D7FB2B7008A5696 /* StandardsView.m in Sources */,
 				240EC9531D7FB2B7008A5696 /* FormManager.m in Sources */,
 				24AFDC1A1D9238FF00B2F1B9 /* CommodityStep.m in Sources */,
-				2466430A1D9A12E8009402A2 /* FormTemplateCell.m in Sources */,
 				24AFDC6A1D92390000B2F1B9 /* WorkOrderInfoController.m in Sources */,
 				24E7E9461DE2C047001DFA33 /* SearchView.m in Sources */,
 				24AFDC151D9238FF00B2F1B9 /* Commodity.m in Sources */,
 				246643141D9A12E8009402A2 /* WorkOrderCell.m in Sources */,
 				2418634E1DE3E06A006C7AC5 /* SalesOrderAgreePriceView.m in Sources */,
+				24874AE31DEFF15A00939110 /* FooterCell.m in Sources */,
 				24A40FF01DB9B46B00736F6C /* MeViewController.m in Sources */,
 				24AFDC411D9238FF00B2F1B9 /* PickupItemSignature.m in Sources */,
 				246643131D9A12E8009402A2 /* WorkOrderCameraCell.m in Sources */,
 				24AFDC111D9238FF00B2F1B9 /* InventoryChooseController.m in Sources */,
 				245F756E1DDABF5D00FB51FA /* SDTimeLineCell.m in Sources */,
-				246643031D9A12E8009402A2 /* CheckBoxCell.m in Sources */,
 				242815D81D936BE7006120ED /* ScanViewController.m in Sources */,
 				242815ED1D9381B4006120ED /* QrCodeImageController.m in Sources */,
-				2466430B1D9A12E8009402A2 /* HeaderCell.m in Sources */,
 				240EC9701D7FB2DC008A5696 /* BaseView.m in Sources */,
 				24AFDC791D92390000B2F1B9 /* WorkOrderFormView.m in Sources */,
 				24E7E9441DE2C047001DFA33 /* SearchViewController.m in Sources */,
 				240EC9611D7FB2B7008A5696 /* Utils.m in Sources */,
 				240EC95C1D7FB2B7008A5696 /* HttpUtil.m in Sources */,
 				24AFDC221D9238FF00B2F1B9 /* InventoryView.m in Sources */,
-				246643121D9A12E8009402A2 /* TextSingleCell.m in Sources */,
 				240EC9711D7FB2DC008A5696 /* BaseViewController.m in Sources */,
 				24AFDC721D92390000B2F1B9 /* FormTemplate.m in Sources */,
 				246643061D9A12E8009402A2 /* CommodityStepCell.m in Sources */,
@@ -1812,11 +1815,11 @@
 				24AFDC1E1D9238FF00B2F1B9 /* PropertyData.m in Sources */,
 				240EC95A1D7FB2B7008A5696 /* EnumUtil.m in Sources */,
 				24E7E9381DE2C001001DFA33 /* SideMenuController.m in Sources */,
-				246642D51D9A1285009402A2 /* SalesOrderMineCell.m in Sources */,
 				242815F31D9388FD006120ED /* BusinessSalesOrder.m in Sources */,
 				24AFDC171D9238FF00B2F1B9 /* CommodityItem.m in Sources */,
 				24AFDC2F1D9238FF00B2F1B9 /* IntroductionViewController.m in Sources */,
 				240EC9491D7FB2B7008A5696 /* UIColor+Util.m in Sources */,
+				24874AEA1DEFF15A00939110 /* SelectCell.m in Sources */,
 				240EC9571D7FB2B7008A5696 /* SalesOrderManager.m in Sources */,
 				24AFDC7C1D92390000B2F1B9 /* WorkOrderStepView.m in Sources */,
 				245A39321D94C02A00B5CE70 /* SalesOrderInfoController.m in Sources */,
@@ -1835,11 +1838,10 @@
 				24AFDC741D92390000B2F1B9 /* FormTemplateField.m in Sources */,
 				24AFDC4C1D9238FF00B2F1B9 /* SalesOrderSearchResult.m in Sources */,
 				240EC94E1D7FB2B7008A5696 /* UIView+Util.m in Sources */,
-				246643101D9A12E8009402A2 /* SelectCell.m in Sources */,
 				24DC6A1E1DDAD20700CD0684 /* SDWeiXinPhotoContainerView.m in Sources */,
 				24A40FF31DB9B78A00736F6C /* MeView.m in Sources */,
 				240EC94D1D7FB2B7008A5696 /* UIView+Frame.m in Sources */,
-				246642D41D9A1285009402A2 /* SalesOrderGrabCell.m in Sources */,
+				246642D41D9A1285009402A2 /* SalesOrderCell.m in Sources */,
 				24AFDC781D92390000B2F1B9 /* WorkOrderStep.m in Sources */,
 				240EC9541D7FB2B7008A5696 /* InventoryManager.m in Sources */,
 				24AFDC191D9238FF00B2F1B9 /* CommoditySnapshot.m in Sources */,
@@ -1852,8 +1854,8 @@
 				242815E01D936BE7006120ED /* SignView.m in Sources */,
 				24AFDC761D92390000B2F1B9 /* WorkOrderGroup.m in Sources */,
 				24AFDC811D92399E00B2F1B9 /* PickupNoticeView.m in Sources */,
+				24874AE81DEFF15A00939110 /* PhotoCell.m in Sources */,
 				246643041D9A12E8009402A2 /* ChooseCommodityCell.m in Sources */,
-				246643081D9A12E8009402A2 /* DateTimeCell.m in Sources */,
 				24AFDC1F1D9238FF00B2F1B9 /* InventoryChooseView.m in Sources */,
 				245F75711DDABFE700FB51FA /* SDTimeLineCellModel.m in Sources */,
 			);

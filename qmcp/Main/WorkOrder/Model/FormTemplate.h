@@ -11,11 +11,17 @@
 @interface FormTemplate : NSObject
 
 @property (nonatomic,copy) NSString *formTemplateName;
+
 @property (nonatomic,copy) NSString *formTemplateId;
+
 @property (nonatomic,copy) NSString *formTemplateCode;
+
 @property (nonatomic,copy) NSString *remark;
+
 @property (nonatomic,copy) NSString *parentCode;
+
 @property (nonatomic,assign) bool needToSignatureFlag;
+
 @property (nonatomic,strong) NSMutableArray<FormTemplateField *> *fields;
 
 @end

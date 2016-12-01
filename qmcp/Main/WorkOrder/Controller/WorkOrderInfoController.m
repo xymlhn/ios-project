@@ -118,20 +118,12 @@
 
 -(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer{
     QrCodeIdentityController *controller = [QrCodeIdentityController new];
-    
     controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     controller.qrCodeUrl = _workOrder.qrCodeUrl;
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        controller.providesPresentationContextTransitionStyle = YES;
-        controller.definesPresentationContext = YES;
-        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self.tabBarController presentViewController:controller animated:YES completion:nil];
-        
-    } else {
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-        [self presentViewController:controller animated:NO completion:nil];
-        self.view.window.rootViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    }
+    controller.providesPresentationContextTransitionStyle = YES;
+    controller.definesPresentationContext = YES;
+    controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self.tabBarController presentViewController:controller animated:YES completion:nil];
 }
 
 -(void)rightBtnClick{

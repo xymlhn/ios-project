@@ -28,10 +28,9 @@
 
 @property (nonatomic, copy) NSString *price;
 
-@property (nonatomic, assign) BOOL isSelect;
-
 @property (nonatomic, copy) NSString *itemProperties;
 
+@property (nonatomic, assign) BOOL isSelect;
 
 
 @end

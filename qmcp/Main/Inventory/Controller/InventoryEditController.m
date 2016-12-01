@@ -148,7 +148,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     _inventoryEditView.remarkText.text = _itemSnapshot.remark;
     _inventoryEditView.goodNameText.text = _itemSnapshot.name;
     _inventoryEditView.commodityLabel.text = [NSString stringWithFormat:@"已选服务 %lu 项",_itemSnapshot.commodities == nil? 0 : _itemSnapshot.commodities.count];
-    
+    [_inventoryEditView.delBtn setTitle:_saveType == SaveTypeAdd?@"取消":@"删除" forState:UIControlStateNormal];
 }
 
 #pragma mark - func

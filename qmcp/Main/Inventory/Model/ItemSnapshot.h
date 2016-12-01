@@ -18,13 +18,14 @@
 
 @property (nonatomic, copy) NSString *remark;
 
+@property (nonatomic, copy) NSString *salesOrderCode;
+
+@property (nonatomic, assign) BOOL isUse;
+
 @property (nonatomic, assign) float price;
 
 @property (nonatomic, copy) NSMutableArray *commodities;
 
 @property (nonatomic, copy) NSMutableArray *attachments;
 
-@property (nonatomic, copy) NSString *salesOrderCode;
-
-@property (nonatomic, assign) BOOL isUse;
 @end

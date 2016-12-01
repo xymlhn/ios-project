@@ -29,6 +29,8 @@
 
 @property (nonatomic, assign) BOOL itemConfirmed;
 
+@property (nonatomic, assign) BOOL storePricingReviewFlag;
+
 @property (nonatomic, assign) float totalAmount;
 
 @property (nonatomic, assign) SalesOrderType type;
@@ -36,7 +38,5 @@
 @property (nonatomic, retain) AddressSnapshot *addressSnapshot;
 
 @property (nonatomic, strong) NSArray *commodityNames;
-
-@property (nonatomic, assign) BOOL storePricingReviewFlag;
 
 @end

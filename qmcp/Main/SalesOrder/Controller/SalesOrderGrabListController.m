@@ -10,7 +10,7 @@
 #import "UIColor+Util.h"
 #import "MJRefresh.h"
 #import "SalesOrder.h"
-#import "SalesOrderGrabCell.h"
+#import "SalesOrderCell.h"
 #import "SalesOrderManager.h"
 #import "SalesOrderInfoController.h"
 @interface SalesOrderGrabListController ()<UITableViewDataSource,UITableViewDelegate>
@@ -86,7 +86,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    SalesOrderGrabCell *cell = [SalesOrderGrabCell cellWithTableView:tableView];
+    SalesOrderCell *cell = [SalesOrderCell cellWithTableView:tableView];
+    [cell.grabBtn setHidden:NO];
     SalesOrder *salesOrderSnapshot = _salesOrderList[row];
     cell.grabBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self p_grabSalesOrder:salesOrderSnapshot];

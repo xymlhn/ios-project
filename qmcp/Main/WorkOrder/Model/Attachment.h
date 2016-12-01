@@ -14,8 +14,6 @@
 
 @property (nonatomic, copy) NSString *workOrderStepCode;
 
-@property (nonatomic, assign) BOOL isUpload;
-
 @property (nonatomic, copy) NSString *itemSnapShotId;
 
 @property (nonatomic, copy) NSString *workOrderCode;
@@ -23,6 +21,8 @@
 @property (nonatomic, copy) NSString *salesOrderCode;
 
 @property (nonatomic, copy) NSString *imageUrl;
+
+@property (nonatomic, assign) BOOL isUpload;
 
 @property (nonatomic, assign) int sort;
 

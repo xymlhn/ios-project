@@ -12,11 +12,17 @@
 @interface WorkOrderSearchResult : NSObject
 
 @property (nonatomic,copy) NSString *code;
+
 @property (nonatomic,copy) NSString *title;
+
 @property (nonatomic,copy) NSString *salesOrderCode;
+
 @property (nonatomic,copy) NSString *salesOrderCreationTime;
+
 @property (nonatomic,assign) BOOL *dispatchToMeFlag;
+
 @property (nonatomic, assign) WorkOrderStatus status;
+
 @property (nonatomic, assign) WorkOrderType type;
 
 

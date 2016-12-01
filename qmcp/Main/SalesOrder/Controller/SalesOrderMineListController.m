@@ -9,7 +9,7 @@
 #import "SalesOrderMineListController.h"
 #import "MJRefresh.h"
 #import "SalesOrder.h"
-#import "SalesOrderMineCell.h"
+#import "SalesOrderCell.h"
 #import "SalesOrderManager.h"
 #import "SalesOrderInfoController.h"
 @interface SalesOrderMineListController ()<UITableViewDataSource,UITableViewDelegate>
@@ -103,7 +103,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = indexPath.row;
-    SalesOrderMineCell *cell = [SalesOrderMineCell cellWithTableView:tableView];
+    SalesOrderCell *cell = [SalesOrderCell cellWithTableView:tableView];
     SalesOrder *salesOrderSnapshot = self.salesOrderList[row];
     cell.salesOrder = salesOrderSnapshot;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

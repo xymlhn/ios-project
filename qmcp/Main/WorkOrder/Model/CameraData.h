@@ -11,9 +11,13 @@
 @interface CameraData : NSObject
 
 @property (nonatomic,copy) NSString *cameraCode;
+
 @property (nonatomic,copy) NSString *cameraLocation;
+
 @property (nonatomic,copy) NSString *cameraDescription;
+
 @property (nonatomic,copy) NSString *rtmpUrl;
+
 @property (nonatomic,copy) NSString *m3u8Url;
 
 @end

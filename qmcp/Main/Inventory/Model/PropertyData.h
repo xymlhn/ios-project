@@ -11,6 +11,7 @@
 @interface PropertyData : NSObject
 
 @property (nonatomic,copy) NSString *value;
+
 @property (nonatomic,assign) int order;
 
 @end

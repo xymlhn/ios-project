@@ -11,6 +11,7 @@
 @interface CommodityBrife : NSObject
 
 @property (nonatomic, copy) NSString *code;
+
 @property (nonatomic, strong) NSDictionary *steps;
 
 @end

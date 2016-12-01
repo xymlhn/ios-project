@@ -16,8 +16,6 @@
 
 @property (nonatomic, copy) NSString *submitTime;
 
-@property (nonatomic, copy) NSMutableArray *attachments;
-
 @property (nonatomic, copy) NSString *workOrderCode;
 
 @property (nonatomic, copy) NSString *salesOrderCode;
@@ -28,4 +26,5 @@
 
 @property (nonatomic, copy) NSString *userOpenId;
 
+@property (nonatomic, copy) NSMutableArray *attachments;
 @end

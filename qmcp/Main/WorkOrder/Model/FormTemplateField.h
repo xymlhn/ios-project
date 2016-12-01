@@ -28,24 +28,40 @@ typedef NS_ENUM(NSInteger, FormTemplateControlType) {
 
 @class FormTemplateField;
 @interface FormTemplateField : NSObject
+
 @property (nonatomic,copy) NSString *id;
+
 @property (nonatomic,copy) NSString *name;
+
 @property (nonatomic,copy) NSString *defaultValue;
+
 @property (nonatomic,copy) NSString *trueValue;
+
 @property (nonatomic,copy) NSString *remark;
+
 @property (nonatomic,copy) NSString *formDataId;
+
+@property (nonatomic,copy) NSString *tableTemplateId;
+
 @property (nonatomic,assign) FormTemplateControlType controlType;
+
 @property (nonatomic,assign) int order;
+
 @property (nonatomic,assign) int statisticsType;
+
+@property (nonatomic,assign) NSUInteger tempOrder;
+
 @property (nonatomic,assign) bool statisticsFlag;
+
 @property (nonatomic,assign) bool completeFlag;
 
 @property (nonatomic,assign) bool onlyCreatorRead;
+
 @property (nonatomic,assign) bool onlyCreatorWrite;
+
 @property (nonatomic,strong) NSMutableArray<NSString *> *valueList;
 
-@property (nonatomic,assign) NSUInteger tempOrder;
-@property (nonatomic,copy) NSString *tableTemplateId;
 @property (nonatomic,strong) NSMutableDictionary<NSString *,NSArray<FormTemplateField *> *> *tempMap;
+
 @property (nonatomic,strong) NSMutableArray *templateFields;
 @end

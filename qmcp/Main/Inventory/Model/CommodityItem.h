@@ -11,11 +11,17 @@
 @interface CommodityItem : NSObject
 
 @property (nonatomic,copy) NSString *commodityCode;
+
 @property (nonatomic,copy) NSString *commodityItemId;
+
 @property (nonatomic,copy) NSString *commodityItemCode;
+
 @property (nonatomic,copy) NSString *commodityItemName;
+
 @property (nonatomic,assign) BOOL availableFlag;
+
 @property (nonatomic,assign) int price;
+
 @property (nonatomic,copy) NSString *p1;
 @property (nonatomic,copy) NSString *p2;
 @property (nonatomic,copy) NSString *p3;

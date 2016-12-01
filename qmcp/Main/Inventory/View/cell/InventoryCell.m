@@ -101,9 +101,10 @@
     _titleLabel.text = [NSString stringWithFormat:@"二维码: %@",itemSnapshot.code];
     _nameLabel.text = [NSString stringWithFormat:@"名    称: %@",itemSnapshot.name];
     _remarkLabel.text = [NSString stringWithFormat:@"备    注: %@",itemSnapshot.remark?itemSnapshot.remark : @""];
-    _priceLabel.text = [NSString stringWithFormat:@"总    价:¥ %@",@"0"];
+    _priceLabel.text = [NSString stringWithFormat:@"总    价: ¥ %.2lf",itemSnapshot.price];
     Attachment *attachment = itemSnapshot.attachments[0];
     _headImage.image = [Utils loadImage:attachment.key];
 }
+
 
 @end

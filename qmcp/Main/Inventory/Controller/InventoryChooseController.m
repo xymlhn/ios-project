@@ -30,7 +30,7 @@
 @implementation InventoryChooseController
 
 
-+ (instancetype) doneBlock:(void(^)(NSMutableArray *commodies))block{
++ (instancetype) doneBlock:(void(^)(NSMutableArray *commodies,float price))block{
     InventoryChooseController *vc = [[InventoryChooseController alloc] init];
     vc.doneBlock = block;
     return vc;
@@ -86,12 +86,12 @@
  *
  *  @return 总价格
  */
--(NSString *)p_calculatePrice{
+-(float)p_calculatePrice{
     float price = 0.0f;
     for (CommoditySnapshot *snapshot in _chooseCommodityList) {
         price += [snapshot.price floatValue];
     }
-    return [NSString stringWithFormat:@"总价: %g",price];
+    return price;
 }
 
 #pragma mark - Table view data source
@@ -124,6 +124,7 @@
             commodity.code = [[NSUUID UUID] UUIDString];
             [_chooseCommodityList addObject:commodity];
             _itemSnapshot.commodities = _chooseCommodityList;
+            _itemSnapshot.price = [self p_calculatePrice];
             if([_itemSnapshot saveToDB]){
                 [Utils showHudTipStr:@"添加服务成功"];
             }
@@ -167,6 +168,7 @@
         _currentCommoditySnapshot.code = [[NSUUID UUID] UUIDString];
         [_chooseCommodityList addObject:_currentCommoditySnapshot];
         _itemSnapshot.commodities = _chooseCommodityList;
+        _itemSnapshot.price = [self p_calculatePrice];
         [_itemSnapshot saveToDB];
     }
     else{
@@ -235,7 +237,7 @@
 //返回按钮监听
 - (BOOL)navigationShouldPopOnBackButton {
     if (self.doneBlock) {
-        self.doneBlock(_itemSnapshot.commodities);
+        self.doneBlock(_itemSnapshot.commodities,_itemSnapshot.price);
     }
     return YES;
 }

@@ -48,10 +48,10 @@
     _phoneValue.text = salesOrder.addressSnapshot.mobilePhone;
     _nameValue.text = salesOrder.addressSnapshot.contacts;
     _saleOrderCodeValue.text = salesOrder.code;
-    _saleOrderTotalValue.text = [NSString stringWithFormat:@"%f",salesOrder.totalAmount];
+    _saleOrderTotalValue.text = [NSString stringWithFormat:@"%.2lf   ",salesOrder.totalAmount];
     _saleOrderPayStatusValue.text = [EnumUtil payStatusString:salesOrder.paymentStatus];
     _saleOrderServiceValue.text = [salesOrder.commodityNames componentsJoinedByString:@","];
-    _agreePriceValue.text = salesOrder.agreementPrice;
+    _agreePriceValue.text = salesOrder.agreementPrice == nil ? @"待定" : salesOrder.agreementPrice;
     
     
     switch (salesOrder.type) {

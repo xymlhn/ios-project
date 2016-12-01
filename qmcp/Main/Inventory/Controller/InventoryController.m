@@ -95,6 +95,7 @@
                 itemSnapshot.code = item.code;
                 itemSnapshot.commodities = item.commodities;
                 itemSnapshot.attachments = item.attachments;
+                itemSnapshot.price = item.price;
                 break;
             case SaveTypeDelete:
                 for (Attachment *attachment in itemSnapshot.attachments) {

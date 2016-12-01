@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) NSString *itemSnapshotCode;
 
-@property (copy, nonatomic) void(^doneBlock)(NSMutableArray *commodies);
+@property (copy, nonatomic) void(^doneBlock)(NSMutableArray *commodies,float price);
 
-+ (instancetype) doneBlock:(void(^)(NSMutableArray *commodies))block;
++ (instancetype) doneBlock:(void(^)(NSMutableArray *commodies,float price))block;
 @end

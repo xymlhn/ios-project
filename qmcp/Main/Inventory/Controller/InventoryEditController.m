@@ -163,6 +163,7 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
                 _itemSnapshot.code = _inventoryEditView.qrText.text;
                 _itemSnapshot.remark = _inventoryEditView.remarkText.text;
                 _itemSnapshot.name = _inventoryEditView.goodNameText.text;
+
                 if([_itemSnapshot updateToDB]){
                     self.doneBlock(_itemSnapshot,SaveTypeUpdate);
                 }
@@ -223,8 +224,9 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
 #pragma mark - IBAction
 - (void)commodityViewClick:(UITapGestureRecognizer *)recognizer{
     __weak typeof(self) weakSelf = self;
-    InventoryChooseController *info = [InventoryChooseController doneBlock:^(NSMutableArray *commodies) {
+    InventoryChooseController *info = [InventoryChooseController doneBlock:^(NSMutableArray *commodies,float price) {
         weakSelf.itemSnapshot.commodities = commodies;
+        weakSelf.itemSnapshot.price = price;
         weakSelf.inventoryEditView.commodityLabel.text = [NSString stringWithFormat:@"已选服务 %lu 项",_itemSnapshot.commodities == nil? 0 : _itemSnapshot.commodities.count];
     }];
     info.itemSnapshotCode = _itemSnapshot.itemSnapshotCode;
@@ -232,8 +234,6 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
     [self.navigationController pushViewController:info animated:YES];
     
 }
-
-
 
 #pragma mark - UIImagePickerController
 

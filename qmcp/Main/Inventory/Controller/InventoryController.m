@@ -70,11 +70,11 @@
 
 #pragma mark - empty Table
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"default－portrait"];
+    return [UIImage imageNamed:@""];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
-    NSString *text = @"请添加物品";
+    NSString *text = @"清点列表\n对客户的物品进行状态记录及指定将要进行的处理\n点击左下角“新增物品”按钮开始清点";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     

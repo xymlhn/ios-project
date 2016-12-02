@@ -69,11 +69,11 @@
 
 #pragma mark - empty Table
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"default－portrait"];
+    return [UIImage imageNamed:@""];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
-    NSString *text = @"请添加步骤";
+    NSString *text = @"点击左上角按钮扫描任意物品的二维码\n或\n搜索订单号进行取件";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     

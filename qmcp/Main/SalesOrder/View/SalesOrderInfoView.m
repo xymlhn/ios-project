@@ -58,7 +58,7 @@
     
     switch (salesOrder.type) {
         case SalesOrderTypeOnsite:
-            [self initOnsiteBottomView];
+            [self initServiceBottomView];
             switch (_salesOrder.onSiteStatus) {
                 case OnSiteStatusNone:
                 case OnSiteStatusWaiting:

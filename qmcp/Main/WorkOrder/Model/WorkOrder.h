@@ -59,7 +59,6 @@ typedef NS_ENUM(NSInteger, OnSiteTimeStamp) {
 
 @property (nonatomic, copy) NSString *userId;
 
-
 @property (nonatomic, assign) WorkOrderType type;
 
 @property (nonatomic, assign) WorkOrderStatus status;

@@ -39,7 +39,7 @@
 
 -(void)initView{
     _tableView = [UITableView new];
-    _tableView.rowHeight = 80;
+    _tableView.rowHeight = 120;
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.separatorColor = [UIColor lineColor];
     _tableView.delegate = self;

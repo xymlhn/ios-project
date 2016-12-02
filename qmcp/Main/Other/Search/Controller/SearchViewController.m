@@ -51,11 +51,11 @@
 
 #pragma mark empty Table
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"default－portrait"];
+    return [UIImage imageNamed:@""];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
-    NSString *text = @"请添加步骤";
+    NSString *text = @"输入工单的编号、时间、客户信息\n或\n表单内容进行搜索";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     

@@ -12,11 +12,13 @@
 @interface WorkOrderCell ()
 
 @property(nonatomic,strong)UIImageView *typeImage;
-@property(nonatomic,strong)UILabel *codeText;
-@property(nonatomic,strong)UILabel *commodityNameText;
-@property(nonatomic,strong)UILabel *nameText;
-@property(nonatomic,strong)UILabel *phoneText;
-@property(nonatomic,strong)UIButton *grabBtn;
+@property(nonatomic,strong)UILabel *codeTitle;
+@property(nonatomic,strong)UILabel *codeValue;
+@property(nonatomic,strong)UILabel *appointmentTimeTitle;
+@property(nonatomic,strong)UILabel *appointmentTimeValue;
+@property(nonatomic,strong)UILabel *contactText;
+@property(nonatomic,strong)UILabel *progressText;
+@property(nonatomic,strong)UIButton *cameraBtn;
 
 @end
 @implementation WorkOrderCell
@@ -44,82 +46,80 @@
 
 
 -(void)initView{
-    static int border = 10;
     _typeImage = [UIImageView new];
     [self.contentView addSubview:_typeImage];
     
-    _commodityNameText = [UILabel new];
-    _commodityNameText.font = [UIFont systemFontOfSize:12];
-    [self.contentView addSubview:_commodityNameText];
+    _codeTitle = [UILabel new];
+    _codeTitle.font = [UIFont systemFontOfSize:kShisanpt];
+    _codeTitle.text = @"工单编号 ";
+    _codeTitle.textColor = [UIColor arrowColor];
+    [self addSubview:_codeTitle];
     
-    _codeText = [UILabel new];
-    _codeText.font = [UIFont systemFontOfSize:18];
-    [self.contentView addSubview:_codeText];
+    _codeValue = [UILabel new];
+    _codeValue.font = [UIFont systemFontOfSize:kShisanpt];
+    _codeValue.text = @"";
+    _codeValue.textColor = [UIColor secondTextColor];
+    [self.contentView addSubview:_codeValue];
     
-    _nameText = [UILabel new];
-    _nameText.font = [UIFont systemFontOfSize:10];
-    [self.contentView addSubview:_nameText];
+    _appointmentTimeTitle = [UILabel new];
+    _appointmentTimeTitle.font = [UIFont systemFontOfSize:kShisanpt];
+    _appointmentTimeTitle.text = @"预约时间 ";
+    _appointmentTimeTitle.textColor = [UIColor arrowColor];
+    [self addSubview:_appointmentTimeTitle];
     
-    _phoneText = [UILabel new];
-    _phoneText.font = [UIFont systemFontOfSize:10];
-    [self.contentView addSubview:_phoneText];
+    _appointmentTimeValue = [UILabel new];
+    _appointmentTimeValue.font = [UIFont systemFontOfSize:kShisanpt];
+    _appointmentTimeValue.text = @"";
+    _appointmentTimeValue.textColor = [UIColor secondTextColor];
+    [self.contentView addSubview:_appointmentTimeValue];
     
-    UILabel *userIcon = [UILabel new];
-    [userIcon setFont:[UIFont fontWithName:@"FontAwesome" size:15]];
-    userIcon.text = @"";
-    userIcon.textColor = [UIColor nameColor];
-    [self.contentView addSubview:userIcon];
+    _contactText = [UILabel new];
+    _contactText.font = [UIFont systemFontOfSize:kShisanpt];
+    _contactText.text = @"";
+    _contactText.textColor = [UIColor mainTextColor];
+    [self.contentView addSubview:_contactText];
     
-    UILabel *phoneIcon = [UILabel new];
-    [phoneIcon setFont:[UIFont fontWithName:@"FontAwesome" size:17]];
-    phoneIcon.text = @"";
-    phoneIcon.textColor = [UIColor nameColor];
-    [self.contentView addSubview:phoneIcon];
     
     [_typeImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@60);
-        make.height.equalTo(@60);
-        make.left.equalTo(self.contentView.mas_left).with.offset(border);
-        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
+        make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
+        make.top.equalTo(self.contentView.mas_top).with.offset(kPaddingTopWidth);
     }];
     
-    [_codeText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeImage.mas_right).with.offset(border);
+    [_codeTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_typeImage.mas_right).with.offset(kPaddingLeftWidth);
         make.top.equalTo(_typeImage.mas_top);
     }];
     
-    [_commodityNameText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeImage.mas_right).with.offset(border);
-        make.centerY.equalTo(self.contentView.mas_centerY);
-    }];
-    
-    [userIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_typeImage.mas_right).with.offset(border);
-        make.bottom.equalTo(_typeImage.mas_bottom);
-    }];
-    
-    [_nameText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(userIcon.mas_right).with.offset(5);
-        make.centerY.equalTo(userIcon.mas_centerY);
-    }];
-    
-    [phoneIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_nameText.mas_right).with.offset(border);
-        make.centerY.equalTo(userIcon.mas_centerY);
-    }];
-    
-    [_phoneText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(phoneIcon.mas_right).with.offset(5);
-        make.centerY.equalTo(phoneIcon.mas_centerY);
+    [_codeValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(_codeTitle.mas_right).with.offset(0);
+        make.top.equalTo(_codeTitle.mas_top);
     }];
 
+    [_appointmentTimeTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_typeImage.mas_right).with.offset(kPaddingLeftWidth);
+        make.top.equalTo(_codeTitle.mas_bottom);
+    }];
+    
+    [_appointmentTimeValue mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(_appointmentTimeTitle.mas_right).with.offset(0);
+        make.top.equalTo(_appointmentTimeTitle.mas_top);
+    }];
+    
+    [_contactText mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_appointmentTimeTitle.mas_bottom).with.offset(kPaddingLeftWidth);
+        make.left.equalTo(_appointmentTimeTitle.mas_left).with.offset(0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
+    }];
 }
 
 //重写属性的setter方法，给子控件赋值
 - (void)setWorkOrder:(WorkOrder *)workOrder
 {
     if(workOrder != nil){
-        _codeText.text = workOrder.code;
+        _codeValue.text = workOrder.code;
+        
         switch (workOrder.type) {
             case WorkOrderTypeOnsite:
                 _typeImage.image = [UIImage imageNamed:@"type_shangmen"];
@@ -132,11 +132,10 @@
         }
         
         if(workOrder.salesOrderSnapshot != nil){
-            _commodityNameText.text = [workOrder.salesOrderSnapshot.commodityNames componentsJoinedByString:@","];;
-            _codeText.text = workOrder.code;
-            if(workOrder.salesOrderSnapshot.addressSnapshot != nil){
-                _nameText.text = workOrder.salesOrderSnapshot.addressSnapshot.contacts;
-                _phoneText.text = workOrder.salesOrderSnapshot.addressSnapshot.mobilePhone;
+            _appointmentTimeValue.text = workOrder.salesOrderSnapshot.appointmentTime;
+            AddressSnapshot *address =workOrder.salesOrderSnapshot.addressSnapshot;
+            if(address != nil){
+                _contactText.text = [NSString stringWithFormat:@"%@     %@\n%@",address.contacts,address.mobilePhone,address.fullAddress];
             }
         }
     }

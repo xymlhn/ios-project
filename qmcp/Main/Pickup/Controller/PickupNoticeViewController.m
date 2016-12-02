@@ -53,11 +53,11 @@
 
 #pragma empty Table
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"default－portrait"];
+    return [UIImage imageNamed:@""];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
-    NSString *text = @"请添加步骤";
+    NSString *text = @"点击左上角按钮扫描物品的二维码\n或\n输入物品的二维码编码";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     

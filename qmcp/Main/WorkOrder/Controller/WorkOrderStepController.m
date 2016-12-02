@@ -96,11 +96,11 @@
 
 #pragma mark - empty Table
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"default－portrait"];
+    return [UIImage imageNamed:@""];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
-    NSString *text = @"请添加步骤";
+    NSString *text = @"步骤记录\n通过文字、图片、录音及视频向客户展示服务过程中的情况\n点击左下角“新增步骤”按钮开始记录第一个步骤";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     

@@ -30,12 +30,13 @@
     
 }
 
--(void)loadData{
-    
-}
-
 - (void)dissmiss{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)delBtnClick:(UIButton *)button{
+    [_chooseCommodityArr removeObjectAtIndex:button.tag];
+    [_chooseView.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -59,8 +60,5 @@
     return cell;
 }
 
--(void)delBtnClick:(UIButton *)button{
-    [_chooseCommodityArr removeObjectAtIndex:button.tag];
-    [_chooseView.tableView reloadData];
-}
+
 @end

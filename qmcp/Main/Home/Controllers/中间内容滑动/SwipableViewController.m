@@ -62,22 +62,22 @@
         };
         
         _viewPager.scrollView = ^(CGFloat offsetRatio, NSUInteger focusIndex, NSUInteger animationIndex) {
-//            UIButton *titleFrom = weakTitleBar.titleButtons[animationIndex];
-//            UIButton *titleTo = weakTitleBar.titleButtons[focusIndex];
+            UIButton *titleFrom = weakTitleBar.titleButtons[animationIndex];
+            UIButton *titleTo = weakTitleBar.titleButtons[focusIndex];
 //            CGFloat colorValue = (CGFloat)0x90 / (CGFloat)0xFF;
             
-//            [UIView transitionWithView:titleFrom duration:0.1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [UIView transitionWithView:titleFrom duration:0.1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
 //                [titleFrom setTitleColor:[UIColor colorWithRed:colorValue*(1-offsetRatio) green:colorValue blue:colorValue*(1-offsetRatio) alpha:1.0]
 //                                forState:UIControlStateNormal];
-//                titleFrom.transform = CGAffineTransformMakeScale(1 + 0.2 * offsetRatio, 1 + 0.2 * offsetRatio);
-//            } completion:nil];
-//            
-//            
-//            [UIView transitionWithView:titleTo duration:0.1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                titleFrom.transform = CGAffineTransformMakeScale(1 + 0.2 * offsetRatio, 1 + 0.2 * offsetRatio);
+            } completion:nil];
+            
+            
+            [UIView transitionWithView:titleTo duration:0.1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
 //                [titleTo setTitleColor:[UIColor colorWithRed:colorValue*offsetRatio green:colorValue blue:colorValue*offsetRatio alpha:1.0]
 //                              forState:UIControlStateNormal];
-//                titleTo.transform = CGAffineTransformMakeScale(1 + 0.2 * (1-offsetRatio), 1 + 0.2 * (1-offsetRatio));
-//            } completion:nil];
+                titleTo.transform = CGAffineTransformMakeScale(1 + 0.2 * (1-offsetRatio), 1 + 0.2 * (1-offsetRatio));
+            } completion:nil];
         };
         
         

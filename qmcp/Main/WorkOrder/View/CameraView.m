@@ -127,7 +127,7 @@
     }];
     
     [_midLabel mas_updateConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_cameraView.mas_bottom).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
         make.height.equalTo(@35);
     }];

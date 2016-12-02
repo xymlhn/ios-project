@@ -12,6 +12,8 @@
 
 @property(nonatomic,strong)UIImageView *typeImage;
 
+@property(nonatomic,strong)UIImageView *unreadImage;
+
 @property(nonatomic,strong)UILabel *codeText;
 
 @property(nonatomic,strong)UILabel *commodityNameText;

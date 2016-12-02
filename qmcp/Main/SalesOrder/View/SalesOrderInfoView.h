@@ -11,7 +11,6 @@
 @interface SalesOrderInfoView : BaseView
 
 @property (nonatomic,strong) UIScrollView *scrollView;
-@property (nonatomic,strong) UIView *containerView;
 @property (nonatomic,strong) UIView   *nameView;
 @property (nonatomic,strong) UILabel  *nameTitle;
 @property (nonatomic,strong) UILabel  *nameValue;

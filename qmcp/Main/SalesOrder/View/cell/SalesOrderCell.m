@@ -54,15 +54,20 @@
         _codeText.text = salesOrder.code;
         _appointmentTimeText.text = salesOrder.appointmentTime;
         [_grabBtn setTitle:@"接单" forState:UIControlStateNormal];
-        _inventoryImage.image = [UIImage imageNamed:salesOrder.signedFlag ?@"check_true":@"check_fail"];
-        _progressImage.image = [UIImage imageNamed:salesOrder.processingFlag ?@"progress_true":@"progress_fail"];
-        _payImage.image = [UIImage imageNamed:salesOrder.paidFlag ?@"pay_true":@"pay_fail"];
+        _inventoryImage.image = [UIImage imageNamed:salesOrder.signedFlag ?@"list_inentory_success":@"list_inentory_failed"];
+        _progressImage.image = [UIImage imageNamed:salesOrder.processingFlag ?@"list_progress_success":@"list_progress_failed"];
+        _payImage.image = [UIImage imageNamed:salesOrder.paidFlag ?@"list_pay_success":@"list_pay_failed"];
+        [_unreadImage setHidden:salesOrder.isRead];
     }
 }
 
 -(void)initView{
     _typeImage = [UIImageView new];
     [self.contentView addSubview:_typeImage];
+    
+    _unreadImage = [UIImageView new];
+    _unreadImage.image = [UIImage imageNamed:@"salesorder_new"];
+    [self.contentView addSubview:_unreadImage];
     
     UILabel *codeTitle = [UILabel new];
     codeTitle.font = [UIFont systemFontOfSize:kShisanpt];
@@ -110,6 +115,13 @@
     [_grabBtn setTitle:@"抢单" forState:UIControlStateNormal];
     [_grabBtn setHidden:YES];
     [self.contentView addSubview:_grabBtn];
+    
+    [_unreadImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@9);
+        make.height.equalTo(@10);
+        make.left.equalTo(self.contentView.mas_left).with.offset(13);
+        make.top.equalTo(self.contentView.mas_top).with.offset(17);
+    }];
     
     [_typeImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@40);

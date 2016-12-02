@@ -21,6 +21,7 @@
 
 @property (nonatomic, retain) SalesOrderInfoView *salesOrderInfoView;
 @property (nonatomic, strong) SalesOrder *salesOrder;
+@property (nonatomic, strong) UIButton *rightButton;
 @end
 
 @implementation SalesOrderInfoController
@@ -42,9 +43,15 @@
 }
 
 -(void)setupView{
-    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                            target:self
-                                                                                            action:@selector(rightBtnClick)];
+    UIImage *issueImage = [UIImage imageNamed:@"icon_complete"];
+    
+    self.rightButton = [UIButton new];
+    self.rightButton.frame = CGRectMake(0, 0, 15, 15);
+    [_rightButton setBackgroundImage:issueImage forState:UIControlStateNormal];
+    [_rightButton addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightButton];
+    
 }
 
 -(void)bindListener{
@@ -143,10 +150,9 @@
                     [weakSelf.salesOrder saveToDB];
                     break;
                 case OnSiteStatusOnRoute:
-                    [weakSelf.salesOrderInfoView.starBtn setHidden:YES];
                     weakSelf.salesOrder.onSiteStatus = OnSiteStatusArrived;
                     [weakSelf.salesOrder saveToDB];
-                    [self loadData];
+                    [weakSelf.salesOrderInfoView setSalesOrder:weakSelf.salesOrder];
                     break;
                 default:
                     break;
@@ -189,13 +195,14 @@
 
 #pragma mark - IBAction
 -(void)rightBtnClick{
+    [YCXMenu setTitleFont:[UIFont systemFontOfSize:kShisanpt]];
     [YCXMenu setTintColor:[UIColor blackColor]];
     [YCXMenu setSelectedColor:[UIColor redColor]];
     if ([YCXMenu isShow]){
         [YCXMenu dismissMenu];
     } else {
         NSArray *menuItems = @[[YCXMenuItem menuItem:@"完结订单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(completeClick)]];
-        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 0, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
+        [YCXMenu showMenuInView:self.navigationController.view fromRect:CGRectMake(self.view.frame.size.width - 50, 55, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
             NSLog(@"%@",item);
         }];
     }
@@ -230,6 +237,7 @@
             hub.detailsLabel.text = @"刷新成功";
             [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
+            tempSalesOrder.isRead = YES;
             weakSelf.salesOrder = tempSalesOrder;
             [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
             [weakSelf.salesOrderInfoView setSalesOrder:tempSalesOrder];

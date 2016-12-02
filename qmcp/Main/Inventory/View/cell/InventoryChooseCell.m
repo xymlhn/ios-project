@@ -37,13 +37,25 @@
 -(void)initView
 {
     _contentLabel = [UILabel new];
-    _contentLabel.font = [UIFont systemFontOfSize:20];
-    _contentLabel.textColor = [UIColor redColor];
+    _contentLabel.font = [UIFont systemFontOfSize:kShisipt];
+    _contentLabel.textColor = [UIColor mainTextColor];
     [self.contentView addSubview:_contentLabel];
+    
+    UILabel *arrow = [UILabel new];
+    [arrow setFont:[UIFont fontWithName:@"FontAwesome" size:20]];
+    arrow.text = @"";
+    arrow.textAlignment = NSTextAlignmentCenter;
+    arrow.textColor = [UIColor appBlueColor];
+    [self.contentView addSubview:arrow];
     
     [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-20);
+    }];
+    
+    [arrow mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(self.contentView.mas_centerY);
         make.right.equalTo(self.contentView.mas_right).with.offset(-kPaddingLeftWidth);
     }];
 }

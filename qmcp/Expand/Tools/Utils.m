@@ -94,22 +94,54 @@
     return image;
 }
 
++ (NSString *)timeInfoWithDateString:(NSString *)dateString {
+    // 把日期字符串格式化为日期对象
+    NSDate *date = [self stringToDate:dateString];
+    NSDate *curDate = [NSDate new];
+    NSTimeInterval time = -[date timeIntervalSinceDate:curDate];
+    NSTimeInterval retTime = 1.0;
+    // 小于一小时
+    if (time < 3600) {
+        retTime = time / 60;
+        retTime = retTime <= 0.0 ? 1.0 : retTime;
+        return [NSString stringWithFormat:@"%.0f分钟前", retTime];
+    }
+    // 小于一天，也就是今天
+    else if (time < 33600 * 24) {
+        retTime = time / 3600;
+        retTime = retTime <= 0.0 ? 1.0 : retTime;
+        return [NSString stringWithFormat:@"%.0f小时前", retTime];
+    }
+    // 昨天
+    else if (time < 33600 * 224 * 2) {
+        return @"昨天";
+    }else{
+        return dateString;
+    }
+}
+
 +(NSString *)formatDate:(NSDate *)date{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    return [dateFormatter stringFromDate:date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setLocale:[NSLocale currentLocale]];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *string = [df stringFromDate:date];
+    return string;
 }
 
 +(NSString *)formatDateWithoutTime:(NSDate *)date{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    return [dateFormatter stringFromDate:date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setLocale:[NSLocale currentLocale]];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    NSString *string = [df stringFromDate:date];
+    return string;
 }
 
-+(NSDate *)stringToDate:(NSString *)date{
-    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    return [fmt dateFromString:date];
++(NSDate *)stringToDate:(NSString *)string{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setLocale:[NSLocale currentLocale]];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [df dateFromString:string];
+    return date;
 }
 
 +(BOOL)saveImage:(UIImage *)image andName:(NSString *)name{

@@ -24,7 +24,7 @@
 
 -(void)setupView{
     _tableView = [UITableView new];
-    _tableView.rowHeight = 30;
+    _tableView.rowHeight = 45;
     _tableView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make){

@@ -178,10 +178,11 @@
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-    if (![_loginView.userNameText isFirstResponder] && ![_loginView.userNameText isFirstResponder]) {
+    if (![_loginView.userNameText isFirstResponder] && ![_loginView.passWordText isFirstResponder]) {
         return NO;
     }
     return YES;
 }
+
 
 @end

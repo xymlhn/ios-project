@@ -23,6 +23,12 @@
 
 @property (nonatomic, copy) NSString *appointmentTime;
 
+@property (nonatomic, copy) NSString *personInChargeName;
+
+@property (nonatomic, copy) NSString *personInChargeMobile;
+
+@property (nonatomic, copy) NSString *confirmTime;
+
 @property (nonatomic, assign) BOOL fixedPriceFlag;
 
 @property (nonatomic, assign) BOOL appointmentResult;

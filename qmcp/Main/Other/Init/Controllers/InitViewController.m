@@ -17,7 +17,7 @@
 
 -(void)setupView{
     UIImageView *imageView = [UIImageView new];
-    imageView.image=[UIImage imageNamed:@"start(1242x2208)"];
+    imageView.image=[UIImage imageNamed:@"start_page"];
     [self.view addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));

@@ -121,11 +121,11 @@
 - (NSMutableArray *)menuItems {
     
     if (!_menuItems) {
-        YCXMenuItem *salesToOrder = [YCXMenuItem menuItem:@"商家下单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(salesToOrderClick)];
-        YCXMenuItem *inventoryitem = [YCXMenuItem menuItem:@"清点物品" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(inventoryClick)];
-        YCXMenuItem *qritem = [YCXMenuItem menuItem:@"扫描接单" image:[UIImage imageNamed:@"menu_scan_icon"] target:self action:@selector(qrCodeClick)];
-        YCXMenuItem *completeitem = [YCXMenuItem menuItem:@"完成物品" image:[UIImage imageNamed:@"menu_notice_icon"] target:self action:@selector(completeClick)];
-        YCXMenuItem *pickupitem = [YCXMenuItem menuItem:@"客户取件" image:[UIImage imageNamed:@"menu_pick_icon"] target:self action:@selector(pickupClick)];
+        YCXMenuItem *salesToOrder = [YCXMenuItem menuItem:@"商家下单" image:[UIImage imageNamed:@"menu_business"] target:self action:@selector(salesToOrderClick)];
+        YCXMenuItem *inventoryitem = [YCXMenuItem menuItem:@"清点物品" image:[UIImage imageNamed:@"menu_inventory"] target:self action:@selector(inventoryClick)];
+        YCXMenuItem *qritem = [YCXMenuItem menuItem:@"扫描接单" image:[UIImage imageNamed:@"menu_scan"] target:self action:@selector(qrCodeClick)];
+        YCXMenuItem *completeitem = [YCXMenuItem menuItem:@"完成物品" image:[UIImage imageNamed:@"menu_notice"] target:self action:@selector(completeClick)];
+        YCXMenuItem *pickupitem = [YCXMenuItem menuItem:@"客户取件" image:[UIImage imageNamed:@"menu_pick"] target:self action:@selector(pickupClick)];
         _menuItems = [@[salesToOrder,inventoryitem,qritem,completeitem,pickupitem] mutableCopy];
     }
     return _menuItems;
@@ -152,7 +152,7 @@
 -(void)onClickMainRightButton{
 
     [YCXMenu setTintColor:[UIColor blackColor]];
-
+    [YCXMenu setTitleFont:[UIFont systemFontOfSize:kShisanpt]];
     [YCXMenu setSelectedColor:[UIColor redColor]];
     if ([YCXMenu isShow]){
         [YCXMenu dismissMenu];

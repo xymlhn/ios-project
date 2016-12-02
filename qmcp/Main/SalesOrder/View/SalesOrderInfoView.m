@@ -52,14 +52,14 @@
     _saleOrderServiceValue.text = [salesOrder.commodityNames componentsJoinedByString:@","];
     _agreePriceValue.text = salesOrder.agreementPrice == nil ? @"待定" : salesOrder.agreementPrice;
     
-    _inventoryImage.image = [UIImage imageNamed:salesOrder.signedFlag ? @"sales_check_success":@"sales_check_fail"];
+    _inventoryImage.image = [UIImage imageNamed:salesOrder.signedFlag ? @"sales_inventory_success":@"sales_inventory_fail"];
     _progressImage.image = [UIImage imageNamed:salesOrder.processingFlag ? @"sales_progress_success":@"sales_progress_fail"];
     _payImage.image = [UIImage imageNamed:salesOrder.paidFlag ? @"sales_pay_success":@"sales_pay_fail"];
     
     switch (salesOrder.type) {
         case SalesOrderTypeOnsite:
             [self initServiceBottomView];
-            switch (_salesOrder.onSiteStatus) {
+            switch (salesOrder.onSiteStatus) {
                 case OnSiteStatusNone:
                 case OnSiteStatusWaiting:
                 case OnSiteStatusNotDepart:

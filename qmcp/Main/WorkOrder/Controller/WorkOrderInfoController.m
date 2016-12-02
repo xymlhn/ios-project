@@ -127,13 +127,14 @@
 }
 
 -(void)rightBtnClick{
+    [YCXMenu setTitleFont:[UIFont systemFontOfSize:kShisanpt]];
     [YCXMenu setTintColor:[UIColor blackColor]];
     [YCXMenu setSelectedColor:[UIColor redColor]];
     if ([YCXMenu isShow]){
         [YCXMenu dismissMenu];
     } else {
         NSArray *menuItems = @[[YCXMenuItem menuItem:@"完结订单" image:[UIImage imageNamed:@"menu_order_icon"] target:self action:@selector(completeClick)]];
-        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(self.view.frame.size.width - 50, 0, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
+        [YCXMenu showMenuInView:self.navigationController.view fromRect:CGRectMake(self.view.frame.size.width - 50, 55, 50, 0) menuItems:menuItems selected:^(NSInteger index, YCXMenuItem *item) {
             NSLog(@"%@",item);
         }];
     }
@@ -159,38 +160,9 @@
 
 #pragma mark - func
 -(void)p_setInfo:(WorkOrder *)workOrder{
-    _infoView.remarkText.text = workOrder.salesOrderSnapshot.remark;
-    _infoView.serviceText.text = workOrder.salesOrderSnapshot.organizationName;
-    _infoView.appointmentTimeText.text = workOrder.salesOrderSnapshot.appointmentTime;
-    
-    _infoView.locationText.text = workOrder.salesOrderSnapshot.addressSnapshot.fullAddress;
-    _infoView.passwordText.text = workOrder.salesOrderSnapshot.addressSnapshot.mobilePhone;
-    _infoView.userNameText.text = workOrder.salesOrderSnapshot.addressSnapshot.contacts;
-    _infoView.codeContent.text = workOrder.code;
+
     _infoView.workOrder = workOrder;
-    switch (_workOrder.type) {
-        case WorkOrderTypeOnsite:
-            switch (_workOrder.onSiteStatus) {
-                case OnSiteStatusNone:
-                case OnSiteStatusWaiting:
-                case OnSiteStatusNotDepart:
-                    [_infoView.starBtn setTitle:@"出发" forState:UIControlStateNormal];
-                    break;
-                case OnSiteStatusOnRoute:
-                    [_infoView.starBtn setTitle:@"到达" forState:UIControlStateNormal];
-                    break;
-                default:
-                    [_infoView.starBtn setHidden:YES];
-                    break;
-            }
-            
-            break;
-        case WorkOrderTypeService:
-            [_infoView.starBtn setHidden:YES];
-            break;
-        default:
-            break;
-    }
+  
     
     
 }

@@ -121,7 +121,10 @@
             hub.detailsLabel.text = @"";
             [hub hideAnimated:YES];
             SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
+            salesOrder.isRead = YES;
+            tempSalesOrder.isRead = YES;
             [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
+            [weakSelf.tableView reloadData];
             SalesOrderInfoController *info = [SalesOrderInfoController doneBlock:^(NSString *code) {
                 [weakSelf.salesOrderList removeObject:salesOrder];
                 [weakSelf.tableView reloadData];

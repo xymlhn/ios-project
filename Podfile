@@ -24,4 +24,5 @@ target:qmcp do
     pod 'GTSDK'
     pod 'DZNEmptyDataSet'
     pod 'FLEX', :configurations => ['Debug']
+    pod 'IQKeyboardManager'
 end

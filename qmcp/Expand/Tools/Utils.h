@@ -147,4 +147,13 @@
  */
 + (UIImage *)imageWithColor:(UIColor *)color ;
 
+
+/**
+ 微信朋友圈时间格式
+
+ @param dateString 时间字符串
+ @return 时间字符串
+ */
++ (NSString *)timeInfoWithDateString:(NSString *)dateString;
+
 @end

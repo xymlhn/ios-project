@@ -176,7 +176,7 @@
  */
 -(void)p_updateTimeStampWithWorkOrderCode:(NSString *)workOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在提交数据";
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_TIMESTAMP,workOrderCode];
@@ -227,7 +227,7 @@
  */
 - (void)p_postWorkOrderStepWithWorkOrder:(WorkOrder *)workOrder andStepArray:(NSArray *)steps{
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在上传工单步骤";
     
     NSDictionary *stepDict = @{@"steps":[WorkOrderStep mj_keyValuesArrayWithObjectArray:steps]};

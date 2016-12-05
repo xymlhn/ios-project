@@ -69,9 +69,6 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    newsViewCtl = [[WorkOrderListController alloc]  initWithStatus:WorkOrderStatusInProgress];
-    hotNewsViewCtl = [[WorkOrderListController alloc] initWithStatus:WorkOrderStatusCompleted];
-    
     grabViewCtl = [SalesOrderGrabListController new];
     bindViewCtl = [SalesOrderMineListController new];
  
@@ -86,6 +83,8 @@
         self.viewControllers = @[[self addNavigationItemForViewController:saleOrderSVC],
                                  [self addNavigationItemForViewController:help]];
     }else{
+        newsViewCtl = [[WorkOrderListController alloc]  initWithStatus:WorkOrderStatusInProgress];
+        hotNewsViewCtl = [[WorkOrderListController alloc] initWithStatus:WorkOrderStatusCompleted];
         _titles = @[@"订单",@"工单", @"我"];
         _images = @[@"tabbar-salesorder", @"tabbar-workorder", @"tabbar-me"];
         SwipableViewController *workOrderSVC = [[SwipableViewController alloc] initWithTitle:@"工单"
@@ -226,7 +225,7 @@
 }
 
 -(void)handleResult:(NSString *)result{
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"扫描中...";
     
     [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSString *error) {

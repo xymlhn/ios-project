@@ -132,7 +132,7 @@
 }
 
 -(void)handleResult:(NSString *)result{
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"扫描中...";
    
     [[WorkOrderManager getInstance] getWorkOrderByItemCode:result finishBlock:^(NSDictionary *obj, NSString *error) {

@@ -49,7 +49,7 @@
     
     _workOrderFormList = [NSMutableArray new];
     
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在获取表单数据";
     [[FormManager getInstance] getFormTemplateAndFormData:_code finishBlock:^(NSMutableArray *arr, NSString *error) {
         if (error == nil) {

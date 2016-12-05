@@ -121,7 +121,7 @@
     
     [_searchView.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在搜索";
     [[WorkOrderManager getInstance] searchWorkOrderWithString:string andCondition:condition finishBlock:^(NSDictionary *obj, NSString *error) {
         if(!error){

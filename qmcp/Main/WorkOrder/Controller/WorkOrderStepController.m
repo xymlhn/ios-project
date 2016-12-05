@@ -110,7 +110,7 @@
 #pragma mark - IBAction
 - (void)appendBtnClick:(UITapGestureRecognizer *)recognizer{
     WorkOrderStep *step = [WorkOrderStep new];
-    step.id = [[NSUUID UUID] UUIDString];
+    step.code = [[NSUUID UUID] UUIDString];
     long size = _workOrderStepList.count + 1;
     step.stepName = [NSString stringWithFormat:@"步骤%lu",size];
     if(_funcType == FuncTypeWorkOrder){
@@ -148,7 +148,7 @@
         [weakSelf.stepView.tableView reloadData];
     }];
     info.code = _code;
-    info.stepCode = worksStep.id;
+    info.stepCode = worksStep.code;
     info.type = orignalType;
     info.funcType = _funcType;
     info.hidesBottomBarWhenPushed = YES;

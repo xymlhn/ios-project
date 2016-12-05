@@ -16,7 +16,9 @@
 @property (nonatomic, strong) NSMutableArray<WorkOrder *> *workOrderList;
 @property (nonatomic, assign) WorkOrderStatus status;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) MBProgressHUD *hub;
+@property (nonatomic, weak) MBProgressHUD *hub;
+
+
 @end
 
 @implementation WorkOrderListController
@@ -37,6 +39,13 @@
     [self loadData];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    if(_status == WorkOrderStatusInProgress){
+        _hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        _hub.detailsLabel.text = @"正在加载工单";
+    }
+}
+
 -(void)initView{
     _tableView = [UITableView new];
     _tableView.rowHeight = 120;
@@ -55,7 +64,6 @@
 }
 
 -(void)loadData{
-    
     _workOrderList = [NSMutableArray new];
     _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [[WorkOrderManager getInstance] getWorkOrderByLastUpdateTime:[Config getWorkOrderTime]];
@@ -64,15 +72,19 @@
 
 #pragma mark - Notification
 - (void)workOrderUpdate:(NSNotification *)text{
+    __weak typeof(self) weakSelf = self;
     [_workOrderList removeAllObjects];
     [_tableView.mj_header endRefreshing];
-    
     switch (_status) {
         case WorkOrderStatusCompleted:
             [_workOrderList addObjectsFromArray:text.userInfo[@"failed"]];
             break;
         case WorkOrderStatusInProgress:
             [_workOrderList addObjectsFromArray:text.userInfo[@"progress"]];
+            weakSelf.hub.detailsLabel.text = [NSString stringWithFormat:@""];
+            weakSelf.hub.mode = MBProgressHUDModeCustomView;
+            weakSelf.hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-done"]];
+            [weakSelf.hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
             break;
         default:
             break;

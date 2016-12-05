@@ -123,7 +123,7 @@
     [_helpBtn addSubview:helpIcon];
     
     UILabel *helpText = [UILabel new];
-    helpText.font = [UIFont systemFontOfSize:12];
+    helpText.font = [UIFont systemFontOfSize:kShisipt];
     helpText.text = @"帮助";
     helpText.textColor = [UIColor mainTextColor];
     [_helpBtn addSubview:helpText];

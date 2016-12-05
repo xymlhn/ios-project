@@ -17,15 +17,42 @@
 #import "SalesOrderManager.h"
 #import "YCXMenu.h"
 #import "SalesOrderAgreePriceController.h"
+#import "AppManager.h"
 @interface SalesOrderInfoController ()
 
 @property (nonatomic, retain) SalesOrderInfoView *salesOrderInfoView;
 @property (nonatomic, strong) SalesOrder *salesOrder;
 @property (nonatomic, strong) UIButton *rightButton;
+@property (nonatomic,strong) NSMutableArray<NSString *> *tabIcon;
+@property (nonatomic,strong) NSMutableArray<NSString *> *tabLabel;
+
 @end
 
 @implementation SalesOrderInfoController
 
+
+-(NSMutableArray<NSString *> *)tabIcon{
+    if (_tabIcon == nil) {
+        
+        if ([[AppManager getInstance] getUser].cooperationMode == CooperationModeSingle) {
+             _tabIcon = [@[@"tab_step",@"tab_inventory",@"tab_form",@"tab_video",@"tab_refresh"] mutableCopy];
+        }else{
+            _tabIcon = [@[@"tab_inventory",@"tab_form",@"tab_video",@"tab_refresh"] mutableCopy];
+        }
+    }
+    return _tabIcon;
+}
+
+-(NSMutableArray<NSString *> *)tabLabel{
+    if(_tabLabel == nil){
+         if ([[AppManager getInstance] getUser].cooperationMode == CooperationModeSingle) {
+             _tabLabel = [@[@"步骤",@"清点",@"表单",@"摄像头",@"刷新"] mutableCopy];
+         }else{
+             _tabLabel = [@[@"清点",@"表单",@"摄像头",@"刷新"] mutableCopy];
+         }
+    }
+    return _tabLabel;
+}
 +(instancetype)doneBlock:(void (^)(NSString *))block{
     
     SalesOrderInfoController *vc = [[SalesOrderInfoController alloc] init];
@@ -76,7 +103,7 @@
     _salesOrderInfoView.agreeBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         __weak typeof(self) weakSelf = self;
         SalesOrderAgreePriceController *controller = [SalesOrderAgreePriceController doneBlock:^(NSString *price, NSString *remark) {
-            MBProgressHUD *hub = [Utils createHUD];
+            MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             hub.detailsLabel.text = @"正在提交数据";
             NSDictionary *dict = [price isEqualToString:@""]?@{@"remark":remark} : @{@"agreementPrice":price,@"remark":remark};
             NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERAGREEPRICE,_code];
@@ -86,7 +113,7 @@
                     [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
                     weakSelf.salesOrder.agreementPrice = price;
                     [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:weakSelf.salesOrder];
-                    [weakSelf.salesOrderInfoView setSalesOrder:weakSelf.salesOrder];
+                    [weakSelf loadData];
                 }else{
                     hub.mode = MBProgressHUDModeCustomView;
                     hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
@@ -105,33 +132,25 @@
 -(void)loadData{
     NSString *salesWhere = [NSString stringWithFormat:@"code = '%@'",_code];
     _salesOrder = [SalesOrder searchSingleWithWhere:salesWhere orderBy:nil];
-    _salesOrderInfoView.salesOrder = _salesOrder;
+    if(_salesOrder.signedFlag){
+        [self.tabIcon removeObject:@"tab_inventory"];
+        [self.tabLabel removeObject:@"清点"];
+    }
+    _salesOrderInfoView.tabIcon = self.tabIcon;
+    _salesOrderInfoView.tabLabel = self.tabLabel;
     [_salesOrderInfoView setSalesOrder:_salesOrder];
     
-    _salesOrderInfoView.stepBtn.userInteractionEnabled = YES;
-    [_salesOrderInfoView.stepBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stepBtnClick:)]];
-    
-    _salesOrderInfoView.cameraBtn.userInteractionEnabled = YES;
-    [_salesOrderInfoView.cameraBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraBtnClick:)]];
-    
-    _salesOrderInfoView.formBtn.userInteractionEnabled = YES;
-    [_salesOrderInfoView.formBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(formBtnClick:)]];
-    
-    _salesOrderInfoView.qrCodeBtn.userInteractionEnabled = YES;
-    [_salesOrderInfoView.qrCodeBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrCodeBtnClick:)]];
-    
-    _salesOrderInfoView.refreshBtn.userInteractionEnabled = YES;
-    [_salesOrderInfoView.refreshBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshBtnClick:)]];
-    
-    _salesOrderInfoView.inventoryBtn.userInteractionEnabled = YES;
-    [_salesOrderInfoView.inventoryBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inventoryBtnClick:)]];
+    [_salesOrderInfoView.tabView enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSLog ( @"frame: %@, bounds: %@" , NSStringFromCGRect (obj. frame), NSStringFromCGRect (obj. bounds ));
+        obj.userInteractionEnabled = YES;
+        [obj addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBtnClick:)]];
+    }];
     
 }
 
-
 -(void)p_updateTimeStampWithCode:(NSString *)_salesOrderCode andTimeStamp:(OnSiteTimeStamp)timeStamp andDate:(NSString *)time{
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在提交数据";
     
     NSDictionary *dict = @{@"timestamp":[NSNumber numberWithInt:timeStamp],@"value":time};
@@ -152,7 +171,7 @@
                 case OnSiteStatusOnRoute:
                     weakSelf.salesOrder.onSiteStatus = OnSiteStatusArrived;
                     [weakSelf.salesOrder saveToDB];
-                    [weakSelf.salesOrderInfoView setSalesOrder:weakSelf.salesOrder];
+                    [weakSelf loadData];
                     break;
                 default:
                     break;
@@ -170,7 +189,7 @@
 
 -(void)p_completeSalesOrder{
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在完成订单";
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERCOMPLETE,_code];
@@ -194,6 +213,90 @@
 }
 
 #pragma mark - IBAction
+
+-(void)tabBtnClick:(UITapGestureRecognizer *)recognizer{
+    NSString *tagStr = self.tabLabel[recognizer.view.tag];
+    __weak typeof(self) weakSelf = self;
+    if ([tagStr isEqualToString:@"步骤"]) {
+        WorkOrderStepController *info = [WorkOrderStepController new];
+        info.code = _code;
+        info.funcType = FuncTypeSalesOrder;
+        info.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:info animated:YES];
+    }else if ([tagStr isEqualToString:@"表单"]){
+        if(_salesOrder.type == SalesOrderTypeOnsite){
+            if(_salesOrder.onSiteStatus != OnSiteStatusArrived){
+                return;
+            }
+        }
+        WorkOrderFormsController *info = [WorkOrderFormsController new];
+        info.code = _code;
+        info.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:info animated:YES];
+    }else if ([tagStr isEqualToString:@"摄像头"]){
+        WorkOrderCameraController *info =[WorkOrderCameraController new];
+        info.code = _code;
+        info.funcType = FuncTypeSalesOrder;
+        info.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:info animated:YES];
+    }else if ([tagStr isEqualToString:@"刷新"]){
+        MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hub.detailsLabel.text = @"正在刷新";
+        
+        NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,_code];
+        [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+            if(!error){
+                hub.detailsLabel.text = @"刷新成功";
+                [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
+                SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
+                tempSalesOrder.isRead = YES;
+                weakSelf.salesOrder = tempSalesOrder;
+                [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
+                [weakSelf loadData];
+            }else{
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.detailsLabel.text = error;
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+            }
+            
+        }];
+    }else if ([tagStr isEqualToString:@"清点"]){
+        if(_salesOrder.signedFlag){
+            [Utils showHudTipStr:@"该订单已清点"];
+            return;
+        }
+        [InventoryManager getInstance].currentSalesOrderCode = _code;
+        SalesOrderSearchResult *ssr = [[InventoryManager getInstance] salesOrderChangeToSearchResult:_salesOrder];
+        [[InventoryManager getInstance] appendSalesOrderSearchResult:ssr];
+        MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hub.detailsLabel.text = @"正在获取清点信息";
+        
+        NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,_code];
+        [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
+            if(!error){
+                NSArray<CommoditySnapshot *> *commoditySnapshots = [CommoditySnapshot mj_objectArrayWithKeyValuesArray:obj];
+                ssr.commodityItemList = commoditySnapshots;
+                hub.detailsLabel.text = @"";
+                [hub hideAnimated:YES];
+                InventoryController *info = [InventoryController doneBlock:^(BOOL signFlag) {
+                    weakSelf.salesOrder.signedFlag = signFlag;
+                    [weakSelf.salesOrder updateToDB];
+                    [weakSelf loadData];
+                }];
+                info.salesOrderCode = _code;
+                info.hidesBottomBarWhenPushed = YES;
+                [weakSelf.navigationController pushViewController:info animated:YES];
+            }else{
+                hub.mode = MBProgressHUDModeCustomView;
+                hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
+                hub.detailsLabel.text = error;
+                [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
+            }
+            
+        }];
+    }
+}
 -(void)rightBtnClick{
     [YCXMenu setTitleFont:[UIFont systemFontOfSize:kShisanpt]];
     [YCXMenu setTintColor:[UIColor blackColor]];
@@ -226,102 +329,4 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(void)refreshBtnClick:(UITapGestureRecognizer *)recognizer{
-    __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabel.text = @"正在刷新";
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,_code];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        if(!error){
-            hub.detailsLabel.text = @"刷新成功";
-            [hub hideAnimated:YES afterDelay:kEndSucceedDelayTime];
-            SalesOrder *tempSalesOrder = [SalesOrder mj_objectWithKeyValues:obj];
-            tempSalesOrder.isRead = YES;
-            weakSelf.salesOrder = tempSalesOrder;
-            [[SalesOrderManager getInstance] saveOrUpdateSalesOrder:tempSalesOrder];
-            [weakSelf.salesOrderInfoView setSalesOrder:tempSalesOrder];
-        }else{
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabel.text = error;
-            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
-        }
-        
-    }];
-    
-}
-
--(void)inventoryBtnClick:(UITapGestureRecognizer *)recognizer{
-    if(_salesOrder.signedFlag){
-        [Utils showHudTipStr:@"该订单已清点"];
-        return;
-    }
-    __weak typeof(self) weakSelf = self;
-    [InventoryManager getInstance].currentSalesOrderCode = _code;
-    SalesOrderSearchResult *ssr = [[InventoryManager getInstance] salesOrderChangeToSearchResult:_salesOrder];
-    [[InventoryManager getInstance] appendSalesOrderSearchResult:ssr];
-    MBProgressHUD *hub = [Utils createHUD];
-    hub.detailsLabel.text = @"正在获取清点信息";
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERITEM,_code];
-    [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
-        if(!error){
-            NSArray<CommoditySnapshot *> *commoditySnapshots = [CommoditySnapshot mj_objectArrayWithKeyValuesArray:obj];
-            ssr.commodityItemList = commoditySnapshots;
-            hub.detailsLabel.text = @"";
-            [hub hideAnimated:YES];
-            InventoryController *info = [InventoryController doneBlock:^(BOOL signFlag) {
-                weakSelf.salesOrder.signedFlag = signFlag;
-            }];
-            info.salesOrderCode = _code;
-            info.hidesBottomBarWhenPushed = YES;
-            [weakSelf.navigationController pushViewController:info animated:YES];
-        }else{
-            hub.mode = MBProgressHUDModeCustomView;
-            hub.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD-error"]];
-            hub.detailsLabel.text = error;
-            [hub hideAnimated:YES afterDelay:kEndFailedDelayTime];
-        }
-        
-    }];
-}
-
--(void)stepBtnClick:(UITapGestureRecognizer *)recognizer{
-    WorkOrderStepController *info = [WorkOrderStepController new];
-    info.code = _code;
-    info.funcType = FuncTypeSalesOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
-- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer{
-    WorkOrderCameraController *info =[WorkOrderCameraController new];
-    info.code = _code;
-    info.funcType = FuncTypeSalesOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
-- (void)formBtnClick:(UITapGestureRecognizer *)recognizer{
-    if(_salesOrder.type == SalesOrderTypeOnsite){
-        if(_salesOrder.onSiteStatus != OnSiteStatusArrived){
-            return;
-        }
-    }
-    WorkOrderFormsController *info = [WorkOrderFormsController new];
-    info.code = _code;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
--(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer{
-    QrCodeIdentityController *controller = [QrCodeIdentityController new];
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    controller.qrCodeUrl = _salesOrder.qrCodeUrl;
-    controller.providesPresentationContextTransitionStyle = YES;
-    controller.definesPresentationContext = YES;
-    controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self.tabBarController presentViewController:controller animated:YES completion:nil];
-}
 @end

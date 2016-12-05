@@ -12,6 +12,6 @@
 
 + (NSString*)getPrimaryKey
 {
-    return @"id";
+    return @"code";
 }
 @end

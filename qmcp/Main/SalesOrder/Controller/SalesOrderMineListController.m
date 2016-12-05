@@ -55,7 +55,7 @@
 
 -(void)loadData{
     self.salesOrderList = [[SalesOrderManager getInstance] getAllSalesOrder];
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"加载中...";
     [[SalesOrderManager getInstance] getSalesOrderMineByLastUpdateTime:[Config getSalesOrderMineTime] finishBlock:^(NSMutableArray *arr, NSString *error) {
         if(error == nil){
@@ -113,7 +113,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SalesOrder *salesOrder = self.salesOrderList[indexPath.row];
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在获取订单详细信息";
     NSString *URLString = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,QMCPAPI_SALESORDERDETAIL,salesOrder.code];
     [HttpUtil get:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {

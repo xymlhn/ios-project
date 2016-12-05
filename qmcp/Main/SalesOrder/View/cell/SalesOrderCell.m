@@ -66,7 +66,7 @@
     [self.contentView addSubview:_typeImage];
     
     _unreadImage = [UIImageView new];
-    _unreadImage.image = [UIImage imageNamed:@"salesorder_new"];
+    _unreadImage.image = [UIImage imageNamed:@"red_point"];
     [self.contentView addSubview:_unreadImage];
     
     UILabel *codeTitle = [UILabel new];
@@ -116,18 +116,18 @@
     [_grabBtn setHidden:YES];
     [self.contentView addSubview:_grabBtn];
     
-    [_unreadImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@9);
-        make.height.equalTo(@10);
-        make.left.equalTo(self.contentView.mas_left).with.offset(13);
-        make.top.equalTo(self.contentView.mas_top).with.offset(17);
-    }];
-    
     [_typeImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@40);
         make.height.equalTo(@40);
         make.left.equalTo(self.contentView.mas_left).with.offset(kPaddingLeftWidth);
         make.top.equalTo(self.contentView.mas_top).with.offset(kPaddingTopWidth);
+    }];
+    
+    [_unreadImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@15);
+        make.height.equalTo(@15);
+        make.left.equalTo(_typeImage.mas_left).with.offset(-3);
+        make.top.equalTo(_typeImage.mas_top).with.offset(-3);
     }];
     
     [codeTitle mas_makeConstraints:^(MASConstraintMaker *make){

@@ -112,6 +112,9 @@ NSString * const kCommodityStepCache = @"commodityStepCache";
                         [order.salesOrderCommoditySnapshots enumerateObjectsUsingBlock:^(CommoditySnapshot * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
                             css.code = [NSUUID UUID].UUIDString;
                         }];
+                        [order.processDetail enumerateObjectsUsingBlock:^(WorkOrderStep * _Nonnull css, NSUInteger idx, BOOL * _Nonnull stop) {
+                            css.code = [NSUUID UUID].UUIDString;
+                        }];
                         order.userId = [[AppManager getInstance] getUser].userOpenId;
                         [order saveToDB];
                     }

@@ -94,7 +94,7 @@
 //商家下单
 -(void)p_businessSalesOrder{
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在下单";
     BusinessSalesOrder *businessSalesOrder = [[BusinessSalesOrder alloc] initWithName:_businessSalesOrderView.nameValue.text
                                                                                 phone:_businessSalesOrderView.phoneValue.text

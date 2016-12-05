@@ -77,7 +77,7 @@
         _scrollView.contentSize = [self contentSizeForImage:image];
     } else {
         if (![[SDWebImageManager sharedManager] cachedImageExistsForURL:_imageURL]) {
-            _HUD = [Utils createHUD];
+            _HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             _HUD.mode = MBProgressHUDModeAnnularDeterminate;
             [_HUD addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap)]];
         }

@@ -320,12 +320,8 @@
         attachment.workOrderStepCode = _stepCode;
         attachment.sort = 20;
         attachment.type = 10;
-        NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-        //当选择的类型是图片
-        if ([type isEqualToString:@"public.image"]){
-            UIImage *image = [Utils imageCompressForWidth:info[UIImagePickerControllerEditedImage] targetWidth:500.];
-            [Utils saveImage:image andName:attachment.key];
-        }
+        UIImage *image = [Utils imageCompressForWidth:info[UIImagePickerControllerOriginalImage] targetWidth:500.];
+        [Utils saveImage:image andName:attachment.key];
         [_attachments insertObject:attachment atIndex:0];
         [self p_updateStep];
         [_editView.collectionView reloadData];
@@ -378,7 +374,6 @@
         [alertController addAction: [UIAlertAction actionWithTitle: @"拍照" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             picker.delegate = self;
-            picker.allowsEditing = YES;
             if (![Helper checkCameraAuthorizationStatus]) {
                 return;
             }
@@ -388,7 +383,6 @@
         [alertController addAction: [UIAlertAction actionWithTitle: @"从相册选取" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             picker.delegate = self;
-            picker.allowsEditing = YES;//设置可编辑
             if (![Helper checkPhotoLibraryAuthorizationStatus]) {
                 return;
             }

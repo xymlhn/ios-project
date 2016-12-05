@@ -72,8 +72,7 @@ const static int databaseVersion = 0;
 
 //****************************控件外观设置****************************//
 -(void)p_setupAppearance{
-    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                NSFontAttributeName:[UIFont systemFontOfSize:kShiwupt]};
+    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -81,8 +80,6 @@ const static int databaseVersion = 0;
     [[UINavigationBar appearance] setBarTintColor:[UIColor appBlueColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     
-    UIImage *backButtonImage = [[UIImage imageNamed:@"icon_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
 

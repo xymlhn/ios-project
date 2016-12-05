@@ -103,17 +103,17 @@
     // 小于一小时
     if (time < 3600) {
         retTime = time / 60;
-        retTime = retTime <= 0.0 ? 1.0 : retTime;
-        return [NSString stringWithFormat:@"%.0f分钟前", retTime];
+        NSString *timeStr = retTime < 1.0 ? @"刚刚" : [NSString stringWithFormat:@"%.0f分钟前", retTime];
+        return timeStr;
     }
     // 小于一天，也就是今天
-    else if (time < 33600 * 24) {
+    else if (time < 3600 * 24) {
         retTime = time / 3600;
         retTime = retTime <= 0.0 ? 1.0 : retTime;
         return [NSString stringWithFormat:@"%.0f小时前", retTime];
     }
     // 昨天
-    else if (time < 33600 * 224 * 2) {
+    else if (time < 3600 * 24 * 2) {
         return @"昨天";
     }else{
         return dateString;

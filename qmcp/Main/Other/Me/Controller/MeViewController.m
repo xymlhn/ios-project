@@ -66,7 +66,7 @@
     __weak typeof(self) weakSelf = self;
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"登出后不会删除任何历史数据，下次登录依然可以使用本账号。"                                                                             message: nil                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
     [alertController addAction: [UIAlertAction actionWithTitle: @"退出登录" style: UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        MBProgressHUD *hub = [Utils createHUD];
+        MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hub.detailsLabel.text = @"登出中...";
         NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_LOGOUT];
         [HttpUtil post:URLString param:nil finish:^(NSDictionary *obj, NSString *error) {
@@ -113,7 +113,7 @@
 //上下班
 -(void)onWorkAction:(id)sender{
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     NSDictionary *dict = @{@"isOnWork":[NSNumber numberWithBool:[Config isWork]]};
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_ISONWORK];
     [HttpUtil post:URLString param:dict finish:^(NSDictionary *obj, NSString *error) {

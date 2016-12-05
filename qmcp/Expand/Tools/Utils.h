@@ -12,7 +12,6 @@
 
 @interface Utils : NSObject
 
-+ (MBProgressHUD *)createHUD;
 
 /**
  *  弹出一个二维码hub

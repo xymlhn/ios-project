@@ -68,7 +68,7 @@
 -(void)loadData{
     _cameraArr = [[CameraManager getInstance] getAllCameraData];
     __weak typeof(self) weakSelf = self;
-    MBProgressHUD *hub = [Utils createHUD];
+    MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hub.detailsLabel.text = @"正在获取摄像头";
     NSString *URLString  = [NSString stringWithFormat:@"%@%@%@", QMCPAPI_ADDRESS,
                             _funcType == FuncTypeWorkOrder ?QMCPAPI_WORKORDER_CURRENT_CAMERA : QMCPAPI_SALESORDER_CURRENT_CAMERA,

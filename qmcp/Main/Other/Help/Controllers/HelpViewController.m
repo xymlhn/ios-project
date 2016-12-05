@@ -34,7 +34,7 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
     }];
-    _hub = [Utils createHUD];
+    _hub = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     _hub.detailsLabel.text = @"正在加载";
     NSString *URLString = [NSString stringWithFormat:@"%@%@", QMCPAPI_ADDRESS,QMCPAPI_MANUAL];
     NSURL* url = [NSURL URLWithString:URLString];//创建URL

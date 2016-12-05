@@ -31,22 +31,20 @@
     [self setupBottomView];
     [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
-        make.bottom.mas_equalTo(_commodityView.mas_bottom).offset(kBottomHeight);
+        make.bottom.mas_equalTo(_commodityBottomLine.mas_bottom).offset(kBottomHeight);
     }];
     return self;
 }
 
 -(void)setupView{
-    UIView *qrView = [UIView new];
-    [_scrollView addSubview:qrView];
     
     UIView *qrLine = [UIView new];
     qrLine.backgroundColor = [UIColor lineColor];
-    [qrView addSubview:qrLine];
+    [_scrollView addSubview:qrLine];
     
     _qrBtn = [UIButton new];
     [_qrBtn setBackgroundImage:[UIImage imageNamed:@"qr_scan"] forState:UIControlStateNormal];
-    [qrView addSubview:_qrBtn];
+    [_scrollView addSubview:_qrBtn];
     
     _qrText = [UITextField new];
     _qrText.layer.borderColor= [UIColor lineColor].CGColor;
@@ -60,11 +58,11 @@
     _qrText.returnKeyType = UIReturnKeyNext;
     _qrText.leftViewMode = UITextFieldViewModeAlways;
      _qrText.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 0)];
-    [qrView addSubview:_qrText];
+    [_scrollView addSubview:_qrText];
     
     _lockBtn = [UIButton new];
     [_lockBtn setBackgroundImage:[UIImage imageNamed:@"qr_scan"] forState:UIControlStateNormal];
-    [qrView addSubview:_lockBtn];
+    [_scrollView addSubview:_lockBtn];
     
     _goodNameLabel = [UILabel new];
     _goodNameLabel.font = [UIFont systemFontOfSize:kShisanpt];
@@ -122,27 +120,23 @@
     [_colView addSubview:_photoCollectionView];
     
     [_photoCollectionView registerClass:[PhotoCell class] forCellWithReuseIdentifier:@"PhotoCell"];
-    
-    
-    _commodityView = [UIView new];
-    _commodityView.backgroundColor = [UIColor whiteColor];
-    [_scrollView addSubview:_commodityView];
+
     
     UIView *commodityLine = [UIView new];
     commodityLine.backgroundColor = [UIColor lineColor];
-    [_commodityView addSubview:commodityLine];
+    [_scrollView addSubview:commodityLine];
     
     _commodityLabel = [UILabel new];
     _commodityLabel.text = @"已选服务";
     _commodityLabel.font = [UIFont systemFontOfSize:kShisanpt];
     _commodityLabel.textColor = [UIColor mainTextColor];
-    [_commodityView addSubview:_commodityLabel];
+    [_scrollView addSubview:_commodityLabel];
     
     _addBtn = [UIView new];
     [_addBtn.layer setMasksToBounds:YES];
     [_addBtn.layer setCornerRadius:kBottomButtonCorner];
     _addBtn.backgroundColor = [UIColor appBlueColor];
-    [_commodityView addSubview:_addBtn];
+    [_scrollView addSubview:_addBtn];
     
     UILabel *addIcon = [UILabel new];
     [addIcon setFont:[UIFont fontWithName:@"FontAwesome" size:kFontAwesomeArrow]];
@@ -157,48 +151,42 @@
     _addLabel.textColor = [UIColor whiteColor];
     [_addBtn addSubview:_addLabel];
     
-    UIView *commodityBottomLine = [UIView new];
-    commodityBottomLine.backgroundColor = [UIColor lineColor];
-    [_commodityView addSubview:commodityBottomLine];
-    
-    [qrView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_scrollView.mas_top).with.offset(0);
-        make.left.equalTo(_scrollView.mas_left).with.offset(0);
-        make.right.equalTo(_scrollView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@76);
-    }];
+    _commodityBottomLine = [UIView new];
+    _commodityBottomLine.backgroundColor = [UIColor lineColor];
+    [_scrollView addSubview:_commodityBottomLine];
+
     
     [_qrBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(qrView.mas_centerY);
-        make.left.equalTo(qrView.mas_left).with.offset(20);
+        make.top.equalTo(_scrollView.mas_top).with.offset(20);
+        make.left.equalTo(_scrollView.mas_left).with.offset(20);
         make.width.equalTo(@36);
         make.height.equalTo(@36);
     }];
     
+    [_lockBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_scrollView.mas_top).with.offset(20);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
+        make.width.equalTo(@36);
+        make.height.equalTo(@36);
+        
+    }];
+    
     [_qrText mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(qrView.mas_centerY);
+        make.top.equalTo(_scrollView.mas_top).with.offset(20);
         make.left.equalTo(_qrBtn.mas_right).with.offset(20);
         make.right.equalTo(_lockBtn.mas_left).with.offset(-12);
         make.height.equalTo(@36);
     }];
     
-    [_lockBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(qrView.mas_centerY);
-        make.right.equalTo(_scrollView.mas_right).with.offset(-kPaddingLeftWidth);
-        make.width.equalTo(@36);
-        make.height.equalTo(@36);
-
-    }];
-    
     [qrLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(qrView.mas_bottom).with.offset(0);
-        make.left.equalTo(qrView.mas_left).with.offset(0);
-        make.right.equalTo(qrView.mas_right).with.offset(0);
+        make.top.equalTo(_qrText.mas_bottom).with.offset(20);
+        make.left.equalTo(_scrollView.mas_left).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.mas_equalTo(kLineHeight);
     }];
     
     [_goodNameLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(qrView.mas_bottom).with.offset(kPaddingTopWidth);
+        make.top.equalTo(qrLine.mas_bottom).with.offset(kPaddingTopWidth);
         make.left.equalTo(self.mas_left).with.offset(kPaddingLeftWidth);
     }];
     
@@ -231,7 +219,7 @@
     [_colView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_photoLabel.mas_bottom).with.offset(0);
         make.left.equalTo(_scrollView.mas_left).with.offset(0);
-        make.right.equalTo(_scrollView.mas_right).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(0);
         make.height.equalTo(collectionH);
     }];
     
@@ -243,21 +231,21 @@
         make.height.equalTo(collectionH);
     }];
     
-    [_commodityView mas_makeConstraints:^(MASConstraintMaker *make){
+    [commodityLine mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(_colView.mas_bottom).with.offset(5);
         make.left.equalTo(_scrollView.mas_left).with.offset(0);
-        make.right.equalTo(_scrollView.mas_right).with.offset(0);
-        make.height.mas_equalTo(@40);
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.height.mas_equalTo(kLineHeight);
     }];
 
     [_commodityLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_commodityView.mas_centerY);
-        make.left.equalTo(_commodityView.mas_left).with.offset(15);
+        make.top.equalTo(commodityLine.mas_bottom).with.offset(18);
+        make.left.equalTo(_scrollView.mas_left).with.offset(15);
     }];
     
     [_addBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(_commodityView.mas_centerY);
-        make.right.equalTo(_commodityView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.top.equalTo(commodityLine.mas_bottom).with.offset(9);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
         make.width.equalTo(@125);
         make.height.equalTo(@30);
     }];
@@ -272,16 +260,11 @@
         make.left.equalTo(addIcon.mas_right).with.offset(8);
     }];
     
-    [commodityLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(_commodityView.mas_top).with.offset(0);
-        make.left.equalTo(_commodityView.mas_left).with.offset(0);
-        make.right.equalTo(_commodityView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    [commodityBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(_commodityView.mas_bottom).with.offset(0);
-        make.left.equalTo(_commodityView.mas_left).with.offset(15);
-        make.right.equalTo(_commodityView.mas_right).with.offset(-kPaddingLeftWidth);
+   
+    [_commodityBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(_commodityLabel.mas_bottom).with.offset(19);
+        make.left.equalTo(_scrollView.mas_left).with.offset(15);
+        make.right.equalTo(self.mas_right).with.offset(-kPaddingLeftWidth);
         make.height.mas_equalTo(kLineHeight);
     }];
 }

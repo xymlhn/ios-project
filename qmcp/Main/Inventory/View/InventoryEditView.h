@@ -25,7 +25,7 @@
 @property (nonatomic,strong) UIView *addBtn;
 @property (nonatomic,strong) UILabel *addLabel;
 @property (nonatomic,strong) UILabel *commodityLabel;
-@property (nonatomic,strong) UIView *commodityView;
+@property (nonatomic,strong) UIView *commodityBottomLine;
 
 @property (nonatomic,strong)UIButton *delBtn;
 @property (nonatomic,strong)UIButton *saveBtn;

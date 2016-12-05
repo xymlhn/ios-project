@@ -101,7 +101,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     NSString *text = @"步骤记录\n通过文字、图片、录音及视频向客户展示服务过程中的情况\n点击左下角“新增步骤”按钮开始记录第一个步骤";
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:kShierpt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];

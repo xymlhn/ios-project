@@ -10,6 +10,13 @@
 
 @implementation WorkOrderInfoView
 
+-(NSMutableArray<UIImageView *> *)tabView{
+    if (_tabView == nil) {
+        _tabView = [NSMutableArray new];
+    }
+    return _tabView;
+}
+
 + (instancetype)viewInstance{
     WorkOrderInfoView *workOrderInfoView = [WorkOrderInfoView new];
     return workOrderInfoView;
@@ -35,8 +42,6 @@
         make.bottom.mas_equalTo(_starBtn.mas_bottom).offset(kBottomHeight);
     }];
 
-   
-    _view = self;
     return self;
 }
 
@@ -62,7 +67,7 @@
     
     switch (workOrder.type) {
         case WorkOrderTypeOnsite:
-            [self initOnsiteBottomView];
+            [self initServiceBottomView];
             switch (_workOrder.onSiteStatus) {
                 case OnSiteStatusNone:
                 case OnSiteStatusWaiting:
@@ -80,7 +85,7 @@
             
             break;
         case WorkOrderTypeService:
-            [self initOnsiteBottomView];
+            [self initServiceBottomView];
             [_starBtn setHidden:YES];
             [self p_updateConstraints];
             break;
@@ -566,194 +571,15 @@
     }];
 }
 
--(void)initOnsiteBottomView{
-    UIView *bottomView = [UIView new];
-    bottomView.backgroundColor = [UIColor whiteColor];
-    [self addSubview:bottomView];
-    
-    UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
-    [bottomView addSubview:codeBottomLine];
-    
-    _qrCodeBtn = [UILabel new];
-    [_qrCodeBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _qrCodeBtn.text = @"";
-    _qrCodeBtn.textColor = [UIColor nameColor];
-    _qrCodeBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_qrCodeBtn];
-    
-    UILabel *qrCodeLabel = [UILabel new];
-    qrCodeLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    qrCodeLabel.text = @"身份";
-    qrCodeLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:qrCodeLabel];
-    
-    _stepBtn = [UILabel new];
-    [_stepBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _stepBtn.text = @"";
-    _stepBtn.textColor = [UIColor nameColor];
-    _stepBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_stepBtn];
-    
-    UILabel *addLabel = [UILabel new];
-    addLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    addLabel.text = @"步骤";
-    addLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:addLabel];
-    
-    _formBtn = [UILabel new];
-    [_formBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _formBtn.text = @"";
-    _formBtn.textColor = [UIColor nameColor];
-    _formBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_formBtn];
-    
-    UILabel *formLabel = [UILabel new];
-    formLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    formLabel.text = @"表单";
-    formLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:formLabel];
-    
-    _saveBtn = [UILabel new];
-    [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _saveBtn.text = @"";
-    _saveBtn.textAlignment = NSTextAlignmentCenter;
-    _saveBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_saveBtn];
-    
-    UILabel *saveLabel = [UILabel new];
-    saveLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    saveLabel.text = @"保存";
-    saveLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:saveLabel];
-    
-    UILabel *inventoryLabel = [UILabel new];
-    inventoryLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    inventoryLabel.text = @"清点";
-    inventoryLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:inventoryLabel];
-    
-    [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@50);
-    }];
-    
-    [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(bottomView.mas_top).with.offset(0);
-        make.left.equalTo(bottomView.mas_left).with.offset(0);
-        make.right.equalTo(bottomView.mas_right).with.offset(0);
-        make.height.mas_equalTo(kLineHeight);
-    }];
-    
-    [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(bottomView).with.offset(0);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
-    
-    [formLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_formBtn.mas_bottom);
-        make.centerX.equalTo(_formBtn.mas_centerX);
-    }];
-    
-    [_formBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_stepBtn);
-        make.left.equalTo(_stepBtn.mas_right);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
-    [addLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_stepBtn.mas_bottom);
-        make.centerX.equalTo(_stepBtn.mas_centerX);
-    }];
-    
-    [_qrCodeBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_stepBtn);
-        make.left.equalTo(_formBtn.mas_right);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
-    
-    [qrCodeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_qrCodeBtn.mas_bottom);
-        make.centerX.equalTo(_qrCodeBtn.mas_centerX);
-    }];
-    
-    
-    [saveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_saveBtn.mas_bottom);
-        make.centerX.equalTo(_saveBtn.mas_centerX);
-    }];
-    
-    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_qrCodeBtn);
-        make.left.equalTo(_qrCodeBtn.mas_right);
-        make.right.equalTo(bottomView);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
-    
-    
-}
 
 -(void)initServiceBottomView{
     UIView *bottomView = [UIView new];
-    bottomView.backgroundColor = [UIColor whiteColor];
+    bottomView.backgroundColor = [UIColor colorWithRed:244.0/255 green:244.0/255 blue:244.0/255 alpha:1.0];
     [self addSubview:bottomView];
     
     UIView *codeBottomLine = [UIView new];
-    codeBottomLine.backgroundColor = [UIColor grayColor];
+    codeBottomLine.backgroundColor = [UIColor lineColor];
     [bottomView addSubview:codeBottomLine];
-    
-    _cameraBtn = [UILabel new];
-    [_cameraBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _cameraBtn.text = @"";
-    _cameraBtn.textColor = [UIColor nameColor];
-    _cameraBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_cameraBtn];
-    
-    UILabel *qrCodeLabel = [UILabel new];
-    qrCodeLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    qrCodeLabel.text = @"摄像头";
-    qrCodeLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:qrCodeLabel];
-    
-    _stepBtn = [UILabel new];
-    [_stepBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _stepBtn.text = @"";
-    _stepBtn.textColor = [UIColor nameColor];
-    _stepBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_stepBtn];
-    
-    UILabel *addLabel = [UILabel new];
-    addLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    addLabel.text = @"步骤";
-    addLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:addLabel];
-    
-    _formBtn = [UILabel new];
-    [_formBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _formBtn.text = @"";
-    _formBtn.textColor = [UIColor nameColor];
-    _formBtn.textAlignment = NSTextAlignmentCenter;
-    [bottomView addSubview:_formBtn];
-    
-    UILabel *formLabel = [UILabel new];
-    formLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    formLabel.text = @"表单";
-    formLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:formLabel];
-    
-    _saveBtn = [UILabel new];
-    [_saveBtn setFont:[UIFont fontWithName:@"FontAwesome" size:30]];
-    _saveBtn.text = @"";
-    _saveBtn.textAlignment = NSTextAlignmentCenter;
-    _saveBtn.textColor = [UIColor nameColor];
-    [bottomView addSubview:_saveBtn];
-    
-    UILabel *saveLabel = [UILabel new];
-    saveLabel.font = [UIFont systemFontOfSize:12];//采用系统默认文字设置大小
-    saveLabel.text = @"保存";
-    saveLabel.textColor = [UIColor blackColor];
-    [bottomView addSubview:saveLabel];
     
     
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make){
@@ -770,48 +596,49 @@
         make.height.mas_equalTo(kLineHeight);
     }];
     
-    [_stepBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(bottomView).with.offset(0);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
-    
-    [formLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_formBtn.mas_bottom);
-        make.centerX.equalTo(_formBtn.mas_centerX);
-    }];
-    
-    [_formBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_stepBtn);
-        make.left.equalTo(_stepBtn.mas_right);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
-    [addLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_stepBtn.mas_bottom);
-        make.centerX.equalTo(_stepBtn.mas_centerX);
-    }];
-    
-    [_cameraBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_stepBtn);
-        make.left.equalTo(_formBtn.mas_right);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
-    
-    [qrCodeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_cameraBtn.mas_bottom);
-        make.centerX.equalTo(_cameraBtn.mas_centerX);
-    }];
-    
-    [saveLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_saveBtn.mas_bottom);
-        make.centerX.equalTo(_saveBtn.mas_centerX);
-    }];
-    
-    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.equalTo(_cameraBtn);
-        make.left.equalTo(_cameraBtn.mas_right);
-        make.right.equalTo(bottomView);
-        make.top.equalTo(bottomView.mas_top).offset(3);
-    }];
+    for (int i = 0; i < self.tabIcon.count; i++) {
+        
+        UIImageView *imageBtn = [UIImageView new];
+        [imageBtn setContentMode:UIViewContentModeScaleAspectFit];
+        imageBtn.image = [UIImage imageNamed:self.tabIcon[i]];
+        imageBtn.tag = i;
+        [bottomView addSubview:imageBtn];
+        [self.tabView addObject:imageBtn];
+        
+        UILabel *label = [UILabel new];
+        label.font = [UIFont systemFontOfSize:kJiupt];
+        label.text = self.tabLabel[i];
+        label.textColor = [UIColor appBlueColor];
+        [bottomView addSubview:label];
+        
+        if (i == 0) {
+            [imageBtn mas_makeConstraints:^(MASConstraintMaker *make){
+                make.left.equalTo(bottomView).with.offset(0);
+                make.top.equalTo(bottomView.mas_top).offset(6);
+            }];
+        }else if (i == self.tabIcon.count  - 1){
+            
+            [imageBtn mas_makeConstraints:^(MASConstraintMaker *make){
+                make.width.equalTo(self.tabView[i-1]);
+                make.left.equalTo(self.tabView[i-1].mas_right);
+                make.right.equalTo(bottomView);
+                make.top.equalTo(bottomView.mas_top).offset(6);
+            }];
+            
+        }else{
+            [imageBtn mas_makeConstraints:^(MASConstraintMaker *make){
+                make.left.equalTo(self.tabView[i-1].mas_right).with.offset(0);
+                make.width.equalTo(self.tabView[i - 1]);
+                make.top.equalTo(bottomView.mas_top).offset(6);
+            }];
+            
+        }
+        
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(bottomView.mas_bottom).with.offset(-6);
+            make.centerX.equalTo(imageBtn.mas_centerX);
+        }];
+    }
     
 }
 

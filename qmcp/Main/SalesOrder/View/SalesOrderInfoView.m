@@ -702,7 +702,7 @@
         UILabel *label = [UILabel new];
         label.font = [UIFont systemFontOfSize:kJiupt];
         label.text = self.tabLabel[i];
-        label.textColor = [UIColor blackColor];
+        label.textColor = [UIColor appBlueColor];
         [bottomView addSubview:label];
         
         if (i == 0) {

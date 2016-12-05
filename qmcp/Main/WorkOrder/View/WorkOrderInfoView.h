@@ -58,14 +58,10 @@
 @property (nonatomic,strong) UILabel  *saleOrderRemarkValue;
 
 @property (nonatomic,strong) UIButton *starBtn;
+@property (nonatomic, strong) NSMutableArray<UIImageView *> *tabView;
+@property (nonatomic, strong) NSArray *tabIcon;
+@property (nonatomic, strong) NSArray *tabLabel;
 
-@property (nonatomic,strong ) UILabel     *stepBtn;
-@property (nonatomic,strong ) UILabel     *saveBtn;
-@property (nonatomic,strong ) UILabel     *formBtn;
-@property (nonatomic,strong ) UILabel     *cameraBtn;
-@property (nonatomic,strong ) UILabel     *qrCodeBtn;
-
-@property (nonatomic,strong) UIView *view;
 @property (nonatomic,strong) WorkOrder *workOrder;
 
 + (instancetype)viewInstance;

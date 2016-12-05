@@ -20,10 +20,26 @@
 @property (nonatomic,strong)WorkOrderInfoView *infoView;
 @property (nonatomic,copy)WorkOrder *workOrder;
 @property (nonatomic, retain) NSMutableArray *workOrderStepList;
+@property (nonatomic,strong) NSMutableArray<NSString *> *tabIcon;
+@property (nonatomic,strong) NSMutableArray<NSString *> *tabLabel;
 
 @end
 
 @implementation WorkOrderInfoController
+
+-(NSMutableArray<NSString *> *)tabIcon{
+    if (_tabIcon == nil) {
+        _tabIcon = [@[@"tab_step",@"tab_form",@"tab_video",@"tab_qr"] mutableCopy];
+    }
+    return _tabIcon;
+}
+
+-(NSMutableArray<NSString *> *)tabLabel{
+    if(_tabLabel == nil){
+        _tabLabel = [@[@"步骤",@"表单",@"摄像头",@"二维码"] mutableCopy];
+    }
+    return _tabLabel;
+}
 
 #pragma mark - BaseWorkOrderViewController
 -(void)loadView{
@@ -63,67 +79,52 @@
     _workOrder = [WorkOrder searchSingleWithWhere:workWhere orderBy:nil];
     NSString *where = [NSString stringWithFormat:@"workOrderCode = '%@'",_workOrderCode];
     _workOrderStepList = [WorkOrderStep searchWithWhere:where];
-    [self p_setInfo:_workOrder];
-    
-    _infoView.stepBtn.userInteractionEnabled = YES;
-    [_infoView.stepBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stepBtnClick:)]];
-    
-    _infoView.cameraBtn.userInteractionEnabled = YES;
-    [_infoView.cameraBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraBtnClick:)]];
-    
-    _infoView.formBtn.userInteractionEnabled = YES;
-    [_infoView.formBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(formBtnClick:)]];
-    
-    _infoView.qrCodeBtn.userInteractionEnabled = YES;
-    [_infoView.qrCodeBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(qrCodeBtnClick:)]];
-    
+    _infoView.tabIcon = self.tabIcon;
+    _infoView.tabLabel = self.tabLabel;
+    _infoView.workOrder = _workOrder;
+    [_infoView.tabView enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSLog ( @"frame: %@, bounds: %@" , NSStringFromCGRect (obj. frame), NSStringFromCGRect (obj. bounds ));
+        obj.userInteractionEnabled = YES;
+        [obj addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBtnClick:)]];
+    }];
 }
-
 
 #pragma mark - IBAction
 
--(void)stepBtnClick:(UITapGestureRecognizer *)recognizer{
+-(void)tabBtnClick:(UITapGestureRecognizer *)recognizer{
+    NSString *tagStr = self.tabLabel[recognizer.view.tag];
     if(_workOrder.type == WorkOrderTypeOnsite){
         if(_workOrder.onSiteStatus != OnSiteStatusArrived){
+            [Utils showHudTipStr:@"请先完成上门步骤"];
             return;
         }
     }
-    
-    WorkOrderStepController *info = [WorkOrderStepController new];
-    info.code = _workOrderCode;
-    info.funcType = FuncTypeWorkOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
-- (void)cameraBtnClick:(UITapGestureRecognizer *)recognizer{
-    WorkOrderCameraController *info =[WorkOrderCameraController new];
-    info.code = _workOrderCode;
-    info.funcType = FuncTypeWorkOrder;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
-- (void)formBtnClick:(UITapGestureRecognizer *)recognizer{
-    if(_workOrder.type == WorkOrderTypeOnsite){
-        if(_workOrder.onSiteStatus != OnSiteStatusArrived){
-            return;
-        }
+    if ([tagStr isEqualToString:@"步骤"]) {
+        WorkOrderStepController *info = [WorkOrderStepController new];
+        info.code = _workOrderCode;
+        info.funcType = FuncTypeWorkOrder;
+        info.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:info animated:YES];
+    }else if ([tagStr isEqualToString:@"表单"]){
+        WorkOrderFormsController *info =[WorkOrderFormsController new];
+        info.code = _workOrder.salesOrderSnapshot.code;;
+        info.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:info animated:YES];
+    }else if ([tagStr isEqualToString:@"摄像头"]){
+        WorkOrderCameraController *info =[WorkOrderCameraController new];
+        info.code = _workOrderCode;
+        info.funcType = FuncTypeWorkOrder;
+        info.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:info animated:YES];
+    }else if ([tagStr isEqualToString:@"二维码"]){
+        QrCodeIdentityController *controller = [QrCodeIdentityController new];
+        controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        controller.qrCodeUrl = _workOrder.qrCodeUrl;
+        controller.providesPresentationContextTransitionStyle = YES;
+        controller.definesPresentationContext = YES;
+        controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self.tabBarController presentViewController:controller animated:YES completion:nil];
     }
-    WorkOrderFormsController *info =[WorkOrderFormsController new];
-    info.code = _workOrder.salesOrderSnapshot.code;;
-    info.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:info animated:YES];
-}
-
--(void)qrCodeBtnClick:(UITapGestureRecognizer *)recognizer{
-    QrCodeIdentityController *controller = [QrCodeIdentityController new];
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    controller.qrCodeUrl = _workOrder.qrCodeUrl;
-    controller.providesPresentationContextTransitionStyle = YES;
-    controller.definesPresentationContext = YES;
-    controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self.tabBarController presentViewController:controller animated:YES completion:nil];
 }
 
 -(void)rightBtnClick{
@@ -159,13 +160,6 @@
 }
 
 #pragma mark - func
--(void)p_setInfo:(WorkOrder *)workOrder{
-
-    _infoView.workOrder = workOrder;
-  
-    
-    
-}
 
 /**
  *  更新工单时间戳

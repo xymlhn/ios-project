@@ -64,7 +64,6 @@
 
 @property (nonatomic, strong) NSMutableArray<UIImageView *> *tabView;
 @property (nonatomic, strong) NSArray *tabIcon;
-
 @property (nonatomic, strong) NSArray *tabLabel;
 
 @property (nonatomic, strong) SalesOrder *salesOrder;

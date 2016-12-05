@@ -308,13 +308,13 @@
         make.right.equalTo(bottomView.mas_right).with.offset(0);
         make.height.mas_equalTo(kLineHeight);
     }];
-    [_delBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_left).offset(kPaddingLeftWidth);
         make.right.equalTo(bottomView.mas_centerX).offset(-kPaddingLeftWidth/2);
         make.height.mas_equalTo(kBottomButtonHeight);
     }];
-    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make){
+    [_delBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_centerX).offset(kPaddingLeftWidth/2);
         make.right.equalTo(bottomView.mas_right).offset(-kPaddingLeftWidth);

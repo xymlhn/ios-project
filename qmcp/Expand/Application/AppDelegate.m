@@ -44,7 +44,7 @@ const static int databaseVersion = 0;
     int currentDataBaseVersion = [Config getDatabaseVersion];
     if(currentDataBaseVersion != databaseVersion){
         [self p_updateDataBase];
-        [Config setInitSetting];
+        [[AppManager getInstance] clearUserDataWhenLogout];
     }
     [Config setDatabaseVersion:databaseVersion];
     //个推

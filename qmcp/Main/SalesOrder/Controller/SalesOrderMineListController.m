@@ -25,6 +25,7 @@
     _tableView.rowHeight = 120;
     _tableView.separatorColor = [UIColor lineColor];
     _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];

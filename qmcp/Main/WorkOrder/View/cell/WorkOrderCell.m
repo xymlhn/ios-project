@@ -122,10 +122,10 @@
         
         switch (workOrder.type) {
             case WorkOrderTypeOnsite:
-                _typeImage.image = [UIImage imageNamed:@"type_shangmen"];
+                _typeImage.image = [UIImage imageNamed:@"workorder_type_onsite"];
                 break;
             case WorkOrderTypeService:
-                _typeImage.image = [UIImage imageNamed:@"type_daodian"];
+                _typeImage.image = [UIImage imageNamed:@"workorder_type_service"];
                 break;
             default:
                 break;

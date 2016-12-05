@@ -184,7 +184,7 @@
     
     [_lockBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(qrView.mas_centerY);
-        make.right.equalTo(qrView.mas_right).with.offset(-kPaddingLeftWidth);
+        make.right.equalTo(_scrollView.mas_right).with.offset(-kPaddingLeftWidth);
         make.width.equalTo(@36);
         make.height.equalTo(@36);
 

@@ -39,13 +39,13 @@
         
         switch (salesOrder.type) {
             case SalesOrderTypeShop:
-                _typeImage.image = [UIImage imageNamed:@"type_daodian"];
+                _typeImage.image = [UIImage imageNamed:@"salesorder_type_shop"];
                 break;
             case SalesOrderTypeOnsite:
-                _typeImage.image = [UIImage imageNamed:@"type_shangmen"];
+                _typeImage.image = [UIImage imageNamed:@"salesorder_type_onsite"];
                 break;
             case SalesOrderTypeRemote:
-                _typeImage.image = [UIImage imageNamed:@"type_yuancheng"];
+                _typeImage.image = [UIImage imageNamed:@"salesorder_type_remote"];
                 break;
             default:
                 break;
@@ -116,6 +116,10 @@
     [_grabBtn setHidden:YES];
     [self.contentView addSubview:_grabBtn];
     
+    UIView *seperateView = [UIView new];
+    seperateView.backgroundColor = [UIColor colorWithHex:0xe5e5e5];
+    [self.contentView addSubview:seperateView];
+    
     [_typeImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@40);
         make.height.equalTo(@40);
@@ -185,5 +189,11 @@
         make.right.equalTo(self.contentView.mas_right).with.offset(-10);
     }];
     
+    [seperateView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.bottom.equalTo(self.contentView.mas_bottom);
+        make.left.equalTo(self.contentView.mas_left).with.offset(0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(0);
+        make.height.mas_equalTo(@8);
+    }];
 }
 @end

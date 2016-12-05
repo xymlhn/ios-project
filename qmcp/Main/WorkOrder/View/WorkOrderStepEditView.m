@@ -182,13 +182,13 @@
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_left).offset(kPaddingLeftWidth);
         make.right.equalTo(bottomView.mas_centerX).offset(-kPaddingLeftWidth/2);
-        make.height.equalTo(@30);
+        make.height.mas_equalTo(kBottomButtonHeight);
     }];
     [_delBtn mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(bottomView.mas_centerY);
         make.left.equalTo(bottomView.mas_centerX).offset(kPaddingLeftWidth/2);
         make.right.equalTo(bottomView.mas_right).offset(-kPaddingLeftWidth);
-        make.height.equalTo(@30);
+        make.height.mas_equalTo(kBottomButtonHeight);
     }];
 }
 

@@ -217,6 +217,12 @@
 -(void)tabBtnClick:(UITapGestureRecognizer *)recognizer{
     NSString *tagStr = self.tabLabel[recognizer.view.tag];
     __weak typeof(self) weakSelf = self;
+    if(_salesOrder.type == SalesOrderTypeOnsite){
+        if(_salesOrder.onSiteStatus != OnSiteStatusArrived){
+            [Utils showHudTipStr:@"请先完成上门步骤"];
+            return;
+        }
+    }
     if ([tagStr isEqualToString:@"步骤"]) {
         WorkOrderStepController *info = [WorkOrderStepController new];
         info.code = _code;
@@ -224,11 +230,6 @@
         info.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:info animated:YES];
     }else if ([tagStr isEqualToString:@"表单"]){
-        if(_salesOrder.type == SalesOrderTypeOnsite){
-            if(_salesOrder.onSiteStatus != OnSiteStatusArrived){
-                return;
-            }
-        }
         WorkOrderFormsController *info = [WorkOrderFormsController new];
         info.code = _code;
         info.hidesBottomBarWhenPushed = YES;

@@ -83,7 +83,7 @@
         }
     }
     _dataArray = [[WorkOrderManager getInstance] getCommodityByCommodityCode:dict];
-    NSString *stepWhere = [NSString stringWithFormat:@"id = '%@'",_stepCode];
+    NSString *stepWhere = [NSString stringWithFormat:@"code = '%@'",_stepCode];
     _step = [WorkOrderStep searchSingleWithWhere:stepWhere orderBy:nil];
     _attachments = [NSMutableArray new];
     [_attachments addObjectsFromArray:_step.attachments];

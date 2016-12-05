@@ -170,7 +170,7 @@
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
-        make.height.mas_equalTo(@44);
+        make.height.mas_equalTo(kBottomHeight);
     }];
     [codeBottomLine mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(bottomView.mas_top).with.offset(0);

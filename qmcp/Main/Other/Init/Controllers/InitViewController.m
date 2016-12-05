@@ -16,8 +16,10 @@
 @implementation InitViewController
 
 -(void)setupView{
+    self.view.backgroundColor = [UIColor whiteColor];
     UIImageView *imageView = [UIImageView new];
     imageView.image=[UIImage imageNamed:@"start_page"];
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
     [self.view addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));

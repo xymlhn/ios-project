@@ -282,6 +282,8 @@
                 InventoryController *info = [InventoryController doneBlock:^(BOOL signFlag) {
                     weakSelf.salesOrder.signedFlag = signFlag;
                     [weakSelf.salesOrder updateToDB];
+                    NSNotification * notice = [NSNotification notificationWithName:SalesOrderUpdateNotification object:nil userInfo:nil];
+                    [[NSNotificationCenter defaultCenter]postNotification:notice];
                     [weakSelf loadData];
                 }];
                 info.salesOrderCode = _code;
@@ -297,6 +299,7 @@
         }];
     }
 }
+
 -(void)rightBtnClick{
     [YCXMenu setTitleFont:[UIFont systemFontOfSize:kShisanpt]];
     [YCXMenu setTintColor:[UIColor blackColor]];

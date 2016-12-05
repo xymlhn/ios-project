@@ -391,7 +391,14 @@
         }]];
         [alertController addAction: [UIAlertAction actionWithTitle: @"取消" style: UIAlertActionStyleCancel handler:nil]];
         
-        [self presentViewController: alertController animated: YES completion: nil];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            [self presentViewController: alertController animated:YES completion: nil];
+        } else {
+            UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+            popPresenter.sourceView = _editView.collectionView;
+            popPresenter.sourceRect = _editView.collectionView.bounds;
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }
     
 }

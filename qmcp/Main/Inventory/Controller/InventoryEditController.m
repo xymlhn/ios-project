@@ -311,7 +311,15 @@ UICollectionViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDele
         }]];
         [alertController addAction: [UIAlertAction actionWithTitle: @"取消" style: UIAlertActionStyleCancel handler:nil]];
         
-        [self presentViewController: alertController animated: YES completion: nil];
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            [self presentViewController: alertController animated:YES completion: nil];
+        } else {
+            UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+            popPresenter.sourceView = _inventoryEditView.photoCollectionView;
+            popPresenter.sourceRect = _inventoryEditView.photoCollectionView.bounds;
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }
 }
 

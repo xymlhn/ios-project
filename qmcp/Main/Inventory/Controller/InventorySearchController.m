@@ -52,11 +52,11 @@
 
 #pragma empty - Table
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView{
-    return [UIImage imageNamed:@"default－portrait"];
+    return [UIImage imageNamed:@""];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
-    NSString *text = @"请添加步骤";
+    NSString *text = @"输入用户手机号码进行搜索";
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:kJiupt],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     

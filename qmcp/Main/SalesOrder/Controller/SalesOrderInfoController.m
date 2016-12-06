@@ -141,7 +141,6 @@
     [_salesOrderInfoView setSalesOrder:_salesOrder];
     
     [_salesOrderInfoView.tabView enumerateObjectsUsingBlock:^(UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSLog ( @"frame: %@, bounds: %@" , NSStringFromCGRect (obj. frame), NSStringFromCGRect (obj. bounds ));
         obj.userInteractionEnabled = YES;
         [obj addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBtnClick:)]];
     }];
